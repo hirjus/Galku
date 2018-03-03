@@ -1,0 +1,30 @@
+---
+title: "G alku"
+output: html_notebook
+---
+Data
+
+```{r Kirjastot}
+library(dbplyr)
+library(knitr)
+library(tidyverse)
+library(haven)
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+```
+Koitetaanpa lukea data. Onko yksinkertaisempaa tallentaa SPSS:ssa csv - muotoon?
+
+Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastauksia (esim. Espanja).
+```{r}
+#str(ISSP2012.data)
+FinISSP2012 <- filter(ISSP2012.data, C_ALPHAN == "FI")
+FinISSP2012 <- select(FinISSP2012, V5:V67, SEX, AGE)
+FinISSP2012 <- select(FinISSP2012, -(starts_with("ES")))
+head(FinISSP2012)
+```
+
+
+
+
