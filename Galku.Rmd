@@ -2,7 +2,16 @@
 title: "G alku"
 output: html_notebook
 ---
-Data
+Data:
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
+
+https://search.gesis.org/research_data/ZA5900 2012
+
+Muuttujakuvaukset ja muut tiedot (linkit?)
+http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
+
+Käyttöehdot:
+https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
 
 ```{r Kirjastot}
 library(dbplyr)
@@ -12,19 +21,52 @@ library(haven)
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
+library(furniture)
+library(ca)
+
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 ```
 Koitetaanpa lukea data. Onko yksinkertaisempaa tallentaa SPSS:ssa csv - muotoon?
 
 Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastauksia (esim. Espanja).
-```{r}
+```{r Suomen data, eval=FALSE, include=FALSE}
 #str(ISSP2012.data)
+# ei toistaiseksi käytetä Suomen koko dataa
 FinISSP2012 <- filter(ISSP2012.data, C_ALPHAN == "FI")
 FinISSP2012 <- select(FinISSP2012, V5:V67, SEX, AGE)
 FinISSP2012 <- select(FinISSP2012, -(starts_with("ES")))
 head(FinISSP2012)
 ```
 
+```{r FiSweHuDat1}
+#Valitaan Suomi, Ruotsi ja Unkari ja yksi kysymys
+FiSeHu2012d1 <- filter(ISSP2012.data, C_ALPHAN == "FI" | C_ALPHAN == "SE" | C_ALPHAN == "HU"  )
+#head(FiSeHu2012d1)
+FiSeHu2012d2 <- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
+#Poistetaan rivit, joissa puuttuvia tietoja
+FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & !is.na(V8) & !is.na(V9))
+```
+
+
+###Taulukko 1: Vastaukset kysymyksiin V5 - V9 (Suomi, Ruotsi ja Unkari)
+```{r Tau1}
+summary(FiSeHu2012d2)
+```
+
+###ToDo
+
+Puuttuvat tiedot pois. /ok, ehkä turha tehdä omaa dataa, na.rm =TRUE?
+Suoraan yksi frekvenssitaulukko; ehkä yksi maavertailugrafiikka myös?
+
+```{r EkaTaulukko1, eval=FALSE, include=FALSE}
+FiSeHuTau1 <- group_by(FiSeHu2012d2, C_ALPHAN)
+FiSeHuTau2 <- summarise(FiSeHuTau1,
+  count = n(),
+  ##
+                        
+)
+
+```
 
 
 
