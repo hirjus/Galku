@@ -17,6 +17,7 @@ https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archiv
 library(dbplyr)
 library(knitr)
 library(tidyverse)
+library(forcats)
 library(haven)
 library(lubridate)
 library(rmarkdown)
@@ -41,6 +42,7 @@ head(FinISSP2012)
 ```{r FiSweHuDat1}
 #Valitaan Suomi, Ruotsi ja Unkari ja yksi kysymys
 FiSeHu2012d1 <- filter(ISSP2012.data, C_ALPHAN == "FI" | C_ALPHAN == "SE" | C_ALPHAN == "HU"  )
+summary(FiSeHu2012d1)
 #head(FiSeHu2012d1)
 FiSeHu2012d2 <- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
 #Poistetaan rivit, joissa puuttuvia tietoja
@@ -51,6 +53,8 @@ FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & !is.
 ###Taulukko 1: Vastaukset kysymyksiin V5 - V9 (Suomi, Ruotsi ja Unkari)
 ```{r Tau1}
 summary(FiSeHu2012d2)
+str(FiSeHu2012d2)
+head(FiSeHu2012d2)
 ```
 
 ###ToDo
@@ -58,13 +62,19 @@ summary(FiSeHu2012d2)
 Puuttuvat tiedot pois. /ok, ehkä turha tehdä omaa dataa, na.rm =TRUE?
 Suoraan yksi frekvenssitaulukko; ehkä yksi maavertailugrafiikka myös?
 
-```{r EkaTaulukko1, eval=FALSE, include=FALSE}
-FiSeHuTau1 <- group_by(FiSeHu2012d2, C_ALPHAN)
-FiSeHuTau2 <- summarise(FiSeHuTau1,
-  count = n(),
-  ##
-                        
-)
+Frekvenssitaulokon luonti. Luokitellut muuttujat factoreiksi, pitäisikö tehdä jo datan luontivaiheessa? Huomaa erityisesti Espanjan(ES) poikkeava data" "Strongly agree" "Agree" "Neither agree nor disagree" ..."
+
+```{r EkaTaulukko1}
+# vastaus_koodi1 <- read.table("clipboard") - ei toimi??
+#test1 <- count(FiSeHu2012d2, V5) - ei toimi
+
+#Ehkä parempi?
+#FiSeHuTau1 <- group_by(FiSeHu2012d2, C_ALPHAN)
+#FiSeHuTau2 <- summarise(FiSeHuTau1,
+#  count = n(),
+#
+#)
+
 
 ```
 
