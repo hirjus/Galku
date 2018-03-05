@@ -24,6 +24,7 @@ library(rmarkdown)
 library(ggplot2)
 library(furniture)
 library(ca)
+library(rgl)
 
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 ```
