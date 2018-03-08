@@ -14,17 +14,20 @@ Käyttöehdot:
 https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
 
 ```{r Kirjastot}
-library(dbplyr)
+# pitääkö laittaa järjestykseen, vanhemmat ensin?
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
 library(knitr)
 library(tidyverse)
 library(forcats)
-library(haven)
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(ca)
-library(rgl)
+
+
 
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 ```
@@ -44,10 +47,12 @@ head(FinISSP2012)
 #Valitaan Suomi, Ruotsi ja Unkari ja yksi kysymys
 FiSeHu2012d1 <- filter(ISSP2012.data, C_ALPHAN == "FI" | C_ALPHAN == "SE" | C_ALPHAN == "HU"  )
 summary(FiSeHu2012d1)
+
 #head(FiSeHu2012d1)
+ #perheeseen, työhön ja kotitöihin liittyviä kysymyksiä, Fi 23
 FiSeHu2012d2 <- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
 #Poistetaan rivit, joissa puuttuvia tietoja
-FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & !is.na(V8) & !is.na(V9))
+#FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & !is.na(V8) & !is.na(V9))
 ```
 
 
@@ -56,6 +61,9 @@ FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & !is.
 summary(FiSeHu2012d2)
 str(FiSeHu2012d2)
 head(FiSeHu2012d2)
+
+#rajataan kysymykseen V6 "Working mom - preschool child is likely to suffer", 1-5 sa - sd
+FiSeHu2012d3 <- select(FiSeHu2012d2, C_ALPHAN, V6)
 ```
 
 ###ToDo
@@ -65,6 +73,7 @@ Suoraan yksi frekvenssitaulukko; ehkä yksi maavertailugrafiikka myös?
 
 Frekvenssitaulokon luonti. Luokitellut muuttujat factoreiksi, pitäisikö tehdä jo datan luontivaiheessa? Huomaa erityisesti Espanjan(ES) poikkeava data" "Strongly agree" "Agree" "Neither agree nor disagree" ..."
 Seuraava ei toimi alkuunkaan.
+Ei näin! Ensin kuntoon data, faktoreita ja nimiä.
 
 ```{r EkaTaulukko1}
 # vastaus_koodi1 <- read.table("clipboard") - ei toimi??
@@ -81,5 +90,19 @@ Seuraava ei toimi alkuunkaan.
 
 ```
 
+vaihtoehto,koodi,lyhenne
+Täysin samaa mieltä,1,ts
+Samaa mieltä,2,s
+En samaa enkä eri mieltä,3,ese
+Eri mieltä,4, e
+Täysin eri mieltä,5,te
+En osaa sanoa,8,eos
+Nämä kuvien selityksiin, ei sotkemaan kuvia.
 
+Kysymys 23, V5 - V9 datassa
+a) Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallisen suhteen kuin äiti, joka ei käy työssä 
+b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä 
+c) Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö 
+d) On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat ensisijaisesti kodin ja lapsia 
+e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen 
 

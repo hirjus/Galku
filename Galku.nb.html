@@ -179,46 +179,22 @@ $(document).ready(function () {
 <p>Käyttöehdot: <a href="https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/" class="uri">https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkYnBseXIpXG5saWJyYXJ5KGtuaXRyKVxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
-<pre class="r"><code>library(dbplyr)
-library(knitr)
-library(tidyverse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzMwbS0tIFx1MDAxYlsxbUF0dGFjaGluZyBwYWNrYWdlc1x1MDAxYlsyMm0gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHRpZHl2ZXJzZSAxLjIuMCAtLVx1MDAxYlszOW1cblx1MDAxYlszMG1cdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bWdncGxvdDJcdTAwMWJbMzBtIDIuMi4xICAgICBcdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bXJlYWRyICBcdTAwMWJbMzBtIDEuMS4xXG5cdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bXRpYmJsZSBcdTAwMWJbMzBtIDEuNC4yICAgICBcdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bXB1cnJyICBcdTAwMWJbMzBtIDAuMi40XG5cdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bXRpZHlyICBcdTAwMWJbMzBtIDAuNy4yICAgICBcdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bWRwbHlyICBcdTAwMWJbMzBtIDAuNy40XG5cdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bWdncGxvdDJcdTAwMWJbMzBtIDIuMi4xICAgICBcdTAwMWJbMzJtdlx1MDAxYlszMG0gXHUwMDFiWzM0bXN0cmluZ3JcdTAwMWJbMzBtIDEuMi4wXHUwMDFiWzM5bVxucGFja2FnZSCRdGliYmxlkiB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDMuNC4zXHUwMDFiWzMwbS0tIFx1MDAxYlsxbUNvbmZsaWN0c1x1MDAxYlsyMm0gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHRpZHl2ZXJzZV9jb25mbGljdHMoKSAtLVxuXHUwMDFiWzMxbXhcdTAwMWJbMzBtIFx1MDAxYlszNG1kcGx5clx1MDAxYlszMG06Olx1MDAxYlszMm1maWx0ZXIoKVx1MDAxYlszMG0gbWFza3MgXHUwMDFiWzM0bXN0YXRzXHUwMDFiWzMwbTo6ZmlsdGVyKClcblx1MDAxYlszMW14XHUwMDFiWzMwbSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzBtOjpcdTAwMWJbMzJtaWRlbnQoKVx1MDAxYlszMG0gIG1hc2tzIFx1MDAxYlszNG1kYnBseXJcdTAwMWJbMzBtOjppZGVudCgpXG5cdTAwMWJbMzFteFx1MDAxYlszMG0gXHUwMDFiWzM0bWRwbHlyXHUwMDFiWzMwbTo6XHUwMDFiWzMybWxhZygpXHUwMDFiWzMwbSAgICBtYXNrcyBcdTAwMWJbMzRtc3RhdHNcdTAwMWJbMzBtOjpsYWcoKVxuXHUwMDFiWzMxbXhcdTAwMWJbMzBtIFx1MDAxYlszNG1kcGx5clx1MDAxYlszMG06Olx1MDAxYlszMm1zcWwoKVx1MDAxYlszMG0gICAgbWFza3MgXHUwMDFiWzM0bWRicGx5clx1MDAxYlszMG06OnNxbCgpXHUwMDFiWzM5bVxuIn0= -->
-<pre><code>[30m-- [1mAttaching packages[22m --------------------------------------- tidyverse 1.2.0 --[39m
-[30m[32mv[30m [34mggplot2[30m 2.2.1     [32mv[30m [34mreadr  [30m 1.1.1
-[32mv[30m [34mtibble [30m 1.4.2     [32mv[30m [34mpurrr  [30m 0.2.4
-[32mv[30m [34mtidyr  [30m 0.7.2     [32mv[30m [34mdplyr  [30m 0.7.4
-[32mv[30m [34mggplot2[30m 2.2.1     [32mv[30m [34mstringr[30m 1.2.0[39m
-package 㤼㸱tibble㤼㸲 was built under R version 3.4.3[30m-- [1mConflicts[22m ------------------------------------------ tidyverse_conflicts() --
-[31mx[30m [34mdplyr[30m::[32mfilter()[30m masks [34mstats[30m::filter()
-[31mx[30m [34mdplyr[30m::[32mident()[30m  masks [34mdbplyr[30m::ident()
-[31mx[30m [34mdplyr[30m::[32mlag()[30m    masks [34mstats[30m::lag()
-[31mx[30m [34mdplyr[30m::[32msql()[30m    masks [34mdbplyr[30m::sql()[39m</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShmb3JjYXRzKVxubGlicmFyeShoYXZlbilcbmxpYnJhcnkobHVicmlkYXRlKVxuYGBgIn0= -->
-<pre class="r"><code>library(forcats)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBwaXTDpMOka8O2IGxhaXR0YWEgasOkcmplc3R5a3NlZW4sIHZhbmhlbW1hdCBlbnNpbj9cbmxpYnJhcnkocmdsKVxubGlicmFyeShjYSlcbmxpYnJhcnkoaGF2ZW4pXG5saWJyYXJ5KGRwbHlyKVxubGlicmFyeShrbml0cilcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeShmb3JjYXRzKVxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KHJtYXJrZG93bilcbmxpYnJhcnkoZ2dwbG90MilcbmxpYnJhcnkoZnVybml0dXJlKVxuXG5cblxuSVNTUDIwMTIuZGF0YSA8LSByZWFkX3Nwc3MoXCJkYXRhL1pBNTkwMF92NC0wLTAuc2F2XCIpXG5gYGAifQ== -->
+<pre class="r"><code># pitääkö laittaa järjestykseen, vanhemmat ensin?
+library(rgl)
+library(ca)
 library(haven)
-library(lubridate)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog46S847ixbHVicmlkYXRl46S847iyXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOOkvOO4sXBhY2thZ2U6YmFzZeOkvOO4sjpcblxuICAgIGRhdGVcbiJ9 -->
-<pre><code>
-Attaching package: 㤼㸱lubridate㤼㸲
-
-The following object is masked from 㤼㸱package:base㤼㸲:
-
-    date</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShybWFya2Rvd24pXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KGZ1cm5pdHVyZSlcbmBgYCJ9 -->
-<pre class="r"><code>library(rmarkdown)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(forcats)
+library(lubridate)
+library(rmarkdown)
 library(ggplot2)
-library(furniture)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoicGFja2FnZSCRZnVybml0dXJlkiB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDMuNC4zZnVybml0dXJlIDEuNy4zOiBsZWFybiBtb3JlIGF0IHR5c29uYmFycmV0dC5jb21cbiJ9 -->
-<pre><code>package 㤼㸱furniture㤼㸲 was built under R version 3.4.3furniture 1.7.3: learn more at tysonbarrett.com</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShjYSlcbklTU1AyMDEyLmRhdGEgPC0gcmVhZF9zcHNzKFwiZGF0YS9aQTU5MDBfdjQtMC0wLnNhdlwiKVxuYGBgIn0= -->
-<pre class="r"><code>library(ca)
+library(furniture)
+
+
+
 ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -229,24 +205,14 @@ ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ZhbGl0YWFuIFN1b21pLCBSdW90c2kgamEgVW5rYXJpIGphIHlrc2kga3lzeW15c1xuRmlTZUh1MjAxMmQxIDwtIGZpbHRlcihJU1NQMjAxMi5kYXRhLCBDX0FMUEhBTiA9PSBcIkZJXCIgfCBDX0FMUEhBTiA9PSBcIlNFXCIgfCBDX0FMUEhBTiA9PSBcIkhVXCIgIClcbnN1bW1hcnkoRmlTZUh1MjAxMmQxKVxuI2hlYWQoRmlTZUh1MjAxMmQxKVxuRmlTZUh1MjAxMmQyIDwtIHNlbGVjdChGaVNlSHUyMDEyZDEsIENfQUxQSEFOLFY1LCBWNiwgVjcsIFY4LCBWOSlcbiNQb2lzdGV0YWFuIHJpdml0LCBqb2lzc2EgcHV1dHR1dmlhIHRpZXRvamFcbkZpU2VIdTIwMTJkMiA8LSBmaWx0ZXIoRmlTZUh1MjAxMmQyLCAhaXMubmEoVjUpICYgIWlzLm5hKFY2KSAmICFpcy5uYShWNykgJiAhaXMubmEoVjgpICYgIWlzLm5hKFY5KSlcbmBgYCJ9 -->
-<pre class="r"><code>#Valitaan Suomi, Ruotsi ja Unkari ja yksi kysymys
-FiSeHu2012d1 &lt;- filter(ISSP2012.data, C_ALPHAN == &quot;FI&quot; | C_ALPHAN == &quot;SE&quot; | C_ALPHAN == &quot;HU&quot;  )
-summary(FiSeHu2012d1)
-#head(FiSeHu2012d1)
-FiSeHu2012d2 &lt;- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
-#Poistetaan rivit, joissa puuttuvia tietoja
-FiSeHu2012d2 &lt;- filter(FiSeHu2012d2, !is.na(V5) &amp; !is.na(V6) &amp; !is.na(V7) &amp; !is.na(V8) &amp; !is.na(V9))</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="taulukko-1-vastaukset-kysymyksiin-v5---v9-suomi-ruotsi-ja-unkari" class="section level3">
 <h3>Taulukko 1: Vastaukset kysymyksiin V5 - V9 (Suomi, Ruotsi ja Unkari)</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShGaVNlSHUyMDEyZDIpXG5cbmBgYCJ9 -->
-<pre class="r"><code>summary(FiSeHu2012d2)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShGaVNlSHUyMDEyZDIpXG5gYGAifQ== -->
+<pre class="r"><code>summary(FiSeHu2012d2)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiICAgQ19BTFBIQU4gICAgICAgICAgICAgICBWNSAgICAgICAgICAgICAgVjYgICAgICAgICAgICAgIFY3ICAgICAgICAgICAgICBWOCAgICAgICBcbiBMZW5ndGg6MjY4MiAgICAgICAgTWluLiAgIDoxLjAwMCAgIE1pbi4gICA6MS4wMDAgICBNaW4uICAgOjEuMDAwICAgTWluLiAgIDoxLjAwMCAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIDFzdCBRdS46MS4wMDAgICAxc3QgUXUuOjIuMDAwICAgMXN0IFF1LjoyLjAwMCAgIDFzdCBRdS46Mi4wMDAgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNZWRpYW4gOjIuMDAwICAgTWVkaWFuIDo0LjAwMCAgIE1lZGlhbiA6NC4wMDAgICBNZWRpYW4gOjMuMDAwICBcbiAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDoyLjA5MSAgIE1lYW4gICA6My4zMjIgICBNZWFuICAgOjMuNDY3ICAgTWVhbiAgIDozLjA0NSAgXG4gICAgICAgICAgICAgICAgICAgIDNyZCBRdS46My4wMDAgICAzcmQgUXUuOjQuMDAwICAgM3JkIFF1Ljo1LjAwMCAgIDNyZCBRdS46NC4wMDAgIFxuICAgICAgICAgICAgICAgICAgICBNYXguICAgOjUuMDAwICAgTWF4LiAgIDo1LjAwMCAgIE1heC4gICA6NS4wMDAgICBNYXguICAgOjUuMDAwICBcbiAgICAgICBWOSAgICAgICBcbiBNaW4uICAgOjEuMDAwICBcbiAxc3QgUXUuOjIuMDAwICBcbiBNZWRpYW4gOjMuMDAwICBcbiBNZWFuICAgOjIuOTY4ICBcbiAzcmQgUXUuOjQuMDAwICBcbiBNYXguICAgOjUuMDAwICBcbiJ9 -->
 <pre><code>   C_ALPHAN               V5              V6              V7              V8       
@@ -264,29 +230,83 @@ FiSeHu2012d2 &lt;- filter(FiSeHu2012d2, !is.na(V5) &amp; !is.na(V6) &amp; !is.na
  3rd Qu.:4.000  
  Max.   :5.000  </code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKEZpU2VIdTIwMTJkMilcbmBgYCJ9 -->
+<pre class="r"><code>str(FiSeHu2012d2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQ2xhc3NlcyDigJh0YmxfZGbigJksIOKAmHRibOKAmSBhbmQgJ2RhdGEuZnJhbWUnOlx0MjY4MiBvYnMuIG9mICA2IHZhcmlhYmxlczpcbiAkIENfQUxQSEFOOiBhdG9taWMgIEZJIEZJIEZJIEZJIC4uLlxuICAuLi0gYXR0cigqLCBcImxhYmVsXCIpPSBjaHIgXCJDb3VudHJ5IFByZWZpeCBJU08gMzE2NiBDb2RlIC0gYWxwaGFudW1lcmljXCJcbiAgLi4tIGF0dHIoKiwgXCJmb3JtYXQuc3Bzc1wiKT0gY2hyIFwiQTIwXCJcbiAgLi4tIGF0dHIoKiwgXCJkaXNwbGF5X3dpZHRoXCIpPSBpbnQgMjJcbiAkIFY1ICAgICAgOkNsYXNzICdsYWJlbGxlZCcgIGF0b21pYyBbMToyNjgyXSAyIDUgMSAxIDEgNCAyIDEgMSAxIC4uLlxuICAuLiAuLi0gYXR0cigqLCBcImxhYmVsXCIpPSBjaHIgXCJRMWEgV29ya2luZyBtb206IHdhcm0gcmVsYXRpb25zaGlwIHdpdGggY2hpbGRyZW4gYXMgYSBub3Qgd29ya2luZyBtb21cIlxuICAuLiAuLi0gYXR0cigqLCBcImZvcm1hdC5zcHNzXCIpPSBjaHIgXCJGMS4wXCJcbiAgLi4gLi4tIGF0dHIoKiwgXCJsYWJlbHNcIik9IE5hbWVkIG51bSBbMTo4XSAwIDEgMiAzIDQgNSA4IDlcbiAgLi4gLi4gLi4tIGF0dHIoKiwgXCJuYW1lc1wiKT0gY2hyIFsxOjhdIFwiTkFQOiBFU1wiIFwiU3Ryb25nbHkgYWdyZWVcIiBcIkFncmVlXCIgXCJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZVwiIC4uLlxuICQgVjYgICAgICA6Q2xhc3MgJ2xhYmVsbGVkJyAgYXRvbWljIFsxOjI2ODJdIDQgMSA1IDUgNSAyIDIgMyA0IDUgLi4uXG4gIC4uIC4uLSBhdHRyKCosIFwibGFiZWxcIik9IGNociBcIlExYiBXb3JraW5nIG1vbTogUHJlc2Nob29sIGNoaWxkIGlzIGxpa2VseSB0byBzdWZmZXJcIlxuICAuLiAuLi0gYXR0cigqLCBcImZvcm1hdC5zcHNzXCIpPSBjaHIgXCJGMS4wXCJcbiAgLi4gLi4tIGF0dHIoKiwgXCJsYWJlbHNcIik9IE5hbWVkIG51bSBbMTo4XSAwIDEgMiAzIDQgNSA4IDlcbiAgLi4gLi4gLi4tIGF0dHIoKiwgXCJuYW1lc1wiKT0gY2hyIFsxOjhdIFwiTkFQOiBFU1wiIFwiU3Ryb25nbHkgYWdyZWVcIiBcIkFncmVlXCIgXCJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZVwiIC4uLlxuICQgVjcgICAgICA6Q2xhc3MgJ2xhYmVsbGVkJyAgYXRvbWljIFsxOjI2ODJdIDQgNCA1IDUgNSA0IDIgNCA1IDQgLi4uXG4gIC4uIC4uLSBhdHRyKCosIFwibGFiZWxcIik9IGNociBcIlExYyBXb3JraW5nIHdvbWFuOiBGYW1pbHkgbGlmZSBzdWZmZXJzIHdoZW4gd29tYW4gaGFzIGZ1bGwtdGltZSBqb2JcIlxuICAuLiAuLi0gYXR0cigqLCBcImZvcm1hdC5zcHNzXCIpPSBjaHIgXCJGMS4wXCJcbiAgLi4gLi4tIGF0dHIoKiwgXCJsYWJlbHNcIik9IE5hbWVkIG51bSBbMTo4XSAwIDEgMiAzIDQgNSA4IDlcbiAgLi4gLi4gLi4tIGF0dHIoKiwgXCJuYW1lc1wiKT0gY2hyIFsxOjhdIFwiTkFQOiBFU1wiIFwiU3Ryb25nbHkgYWdyZWVcIiBcIkFncmVlXCIgXCJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZVwiIC4uLlxuICQgVjggICAgICA6Q2xhc3MgJ2xhYmVsbGVkJyAgYXRvbWljIFsxOjI2ODJdIDQgMyA1IDQgMiAxIDMgNCAzIDQgLi4uXG4gIC4uIC4uLSBhdHRyKCosIFwibGFiZWxcIik9IGNociBcIlExZCBXb3JraW5nIHdvbWFuOiBXaGF0IHdvbWVuIHJlYWxseSB3YW50IGlzIGhvbWUgYW5kIGtpZHNcIlxuICAuLiAuLi0gYXR0cigqLCBcImZvcm1hdC5zcHNzXCIpPSBjaHIgXCJGMS4wXCJcbiAgLi4gLi4tIGF0dHIoKiwgXCJsYWJlbHNcIik9IE5hbWVkIG51bSBbMTo4XSAwIDEgMiAzIDQgNSA4IDlcbiAgLi4gLi4gLi4tIGF0dHIoKiwgXCJuYW1lc1wiKT0gY2hyIFsxOjhdIFwiTkFQOiBFU1wiIFwiU3Ryb25nbHkgYWdyZWVcIiBcIkFncmVlXCIgXCJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZVwiIC4uLlxuICQgVjkgICAgICA6Q2xhc3MgJ2xhYmVsbGVkJyAgYXRvbWljIFsxOjI2ODJdIDIgNCAyIDUgMyAyIDQgMyA0IDQgLi4uXG4gIC4uIC4uLSBhdHRyKCosIFwibGFiZWxcIik9IGNociBcIlExZSBXb3JraW5nIHdvbWFuOiBCZWluZyBob3VzZXdpZmUgaXMgYXMgZnVsZmlsbGluZyBhcyB3b3JraW5nIGZvciBwYXlcIlxuICAuLiAuLi0gYXR0cigqLCBcImZvcm1hdC5zcHNzXCIpPSBjaHIgXCJGMS4wXCJcbiAgLi4gLi4tIGF0dHIoKiwgXCJsYWJlbHNcIik9IE5hbWVkIG51bSBbMTo4XSAwIDEgMiAzIDQgNSA4IDlcbiAgLi4gLi4gLi4tIGF0dHIoKiwgXCJuYW1lc1wiKT0gY2hyIFsxOjhdIFwiTkFQOiBFU1wiIFwiU3Ryb25nbHkgYWdyZWVcIiBcIkFncmVlXCIgXCJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZVwiIC4uLlxuIC0gYXR0cigqLCBcIm5vdGVzXCIpPSBjaHIgIFwiZG9jdW1lbnQgUGxhbiBGaWxlOiAvVXNlcnMvbWFyY2ljL0Rlc2t0b3Avb2xkL0dQUzIwMTEgc2FtcGxpbmcvSVNTUDIwMTMuc2FtcGxpbmdcIiBcIiAgICAgICAgIC5jc3BsYW5cIiBcIiAgICAgICAgIFdlaWdodCBWYXJpYWJsZTogU2FtcGxlV2VpZ2h0X0ZpbmFsX1wiIFwiICAgICAgICAgU3RhZ2UgMVwiIC4uLlxuIn0= -->
+<pre><code>Classes ‘tbl_df’, ‘tbl’ and 'data.frame':   2682 obs. of  6 variables:
+ $ C_ALPHAN: atomic  FI FI FI FI ...
+  ..- attr(*, &quot;label&quot;)= chr &quot;Country Prefix ISO 3166 Code - alphanumeric&quot;
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;A20&quot;
+  ..- attr(*, &quot;display_width&quot;)= int 22
+ $ V5      :Class 'labelled'  atomic [1:2682] 2 5 1 1 1 4 2 1 1 1 ...
+  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1a Working mom: warm relationship with children as a not working mom&quot;
+  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
+  .. ..- attr(*, &quot;labels&quot;)= Named num [1:8] 0 1 2 3 4 5 8 9
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:8] &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
+ $ V6      :Class 'labelled'  atomic [1:2682] 4 1 5 5 5 2 2 3 4 5 ...
+  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1b Working mom: Preschool child is likely to suffer&quot;
+  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
+  .. ..- attr(*, &quot;labels&quot;)= Named num [1:8] 0 1 2 3 4 5 8 9
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:8] &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
+ $ V7      :Class 'labelled'  atomic [1:2682] 4 4 5 5 5 4 2 4 5 4 ...
+  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1c Working woman: Family life suffers when woman has full-time job&quot;
+  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
+  .. ..- attr(*, &quot;labels&quot;)= Named num [1:8] 0 1 2 3 4 5 8 9
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:8] &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
+ $ V8      :Class 'labelled'  atomic [1:2682] 4 3 5 4 2 1 3 4 3 4 ...
+  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1d Working woman: What women really want is home and kids&quot;
+  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
+  .. ..- attr(*, &quot;labels&quot;)= Named num [1:8] 0 1 2 3 4 5 8 9
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:8] &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
+ $ V9      :Class 'labelled'  atomic [1:2682] 2 4 2 5 3 2 4 3 4 4 ...
+  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1e Working woman: Being housewife is as fulfilling as working for pay&quot;
+  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
+  .. ..- attr(*, &quot;labels&quot;)= Named num [1:8] 0 1 2 3 4 5 8 9
+  .. .. ..- attr(*, &quot;names&quot;)= chr [1:8] &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
+ - attr(*, &quot;notes&quot;)= chr  &quot;document Plan File: /Users/marcic/Desktop/old/GPS2011 sampling/ISSP2013.sampling&quot; &quot;         .csplan&quot; &quot;         Weight Variable: SampleWeight_Final_&quot; &quot;         Stage 1&quot; ...</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChGaVNlSHUyMDEyZDIpXG5gYGAifQ== -->
+<pre class="r"><code>head(FiSeHu2012d2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJ1Mld6MHZETUJUSHMzYWIzY0F4MFpPbjRHVUhSMEhCWDd2WXNpbUtvNHhOeEp2RUxkc0tOUmxwUmIzNUozdjJZRTEvdkdLekNTTHpJaXUwNzV2WGw5ZThUd292L2M3dGZ2VzJpaERTa0Y3VWtLWkxLUzFDQlZSRWxjZytJNlJ2U2xHV2R6MjJ5UXZ0L1BJWEN1bTFLSWVGa3N2YVN1enAyMkpyMWRQQS9LTEtIcm1ubmk5VFJ0a01pTWxtUVhZam53VytadUhVN2l6TVhtTGtnZnBwdVVicVhIUHNYZ3VmRGRKaGJSQUl6aWJlQ3lZVFFTbk10TDhNdGgzcUJsTXFrZ2pNdU1BajEvOGFiblR5NDQwc3FSTFlhQlBXQ1BCd3lybFBtN2h0dDNZZHU0bXYrcTNPVlZQUXNkbkVUbGZxTkx6aWNFeVkvMFNGSEh5bzFRMDk0a04xNERSaW9CNGRKUlBTVGFvcldMZStzVUF4L3BBV0xuZGI5UENmN1VRUkN2b1IvRGxJcXEydjRQOGRmSUNsd0FhWUFIY0ZmNW53QVpZQ080Tmw1UDByK0V1QnZ6Q21PaUlCTWNkQ05rUUZDeHdEalBhZDNlMWQyQTQwK1p1RFRCMW02aWhUeDVrNlVScFRSZkFuRTFydmVoVHlLaDloR0w2aitTNjJ4bWVCeTFsMEJJZ09KeVZsM1FXaE9Jclg1SEV2S2lqMkpkZDZxc3Q1blN1ekJDY095aVl1eTdZNVJnZC9nbHgzdkd4ekpsd1dBRG5wOWMyQUJ3VGlxa1B1Z1NjdUNIMThBdlJubGI1L0NRQUEifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["C_ALPHAN"],"name":[1],"type":["chr"],"align":["left"]},{"label":["V5"],"name":[2],"type":["S3: labelled"],"align":["right"]},{"label":["V6"],"name":[3],"type":["S3: labelled"],"align":["right"]},{"label":["V7"],"name":[4],"type":["S3: labelled"],"align":["right"]},{"label":["V8"],"name":[5],"type":["S3: labelled"],"align":["right"]},{"label":["V9"],"name":[6],"type":["S3: labelled"],"align":["right"]}],"data":[{"1":"FI","2":"2","3":"4","4":"4","5":"4","6":"2"},{"1":"FI","2":"5","3":"1","4":"4","5":"3","6":"4"},{"1":"FI","2":"1","3":"5","4":"5","5":"5","6":"2"},{"1":"FI","2":"1","3":"5","4":"5","5":"4","6":"5"},{"1":"FI","2":"1","3":"5","4":"5","5":"2","6":"3"},{"1":"FI","2":"4","3":"2","4":"4","5":"1","6":"2"}],"options":{"columns":{"min":{},"max":[10],"total":[6]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="todo" class="section level3">
 <h3>ToDo</h3>
 <p>Puuttuvat tiedot pois. /ok, ehkä turha tehdä omaa dataa, na.rm =TRUE? Suoraan yksi frekvenssitaulukko; ehkä yksi maavertailugrafiikka myös?</p>
-<p>Frekvenssitaulokon luonti. Luokitellut muuttujat factoreiksi, pitäisikö tehdä jo datan luontivaiheessa? Huomaa erityisesti Espanjan(ES) poikkeava data&quot; “Strongly agree” “Agree” “Neither agree nor disagree” …&quot; Seuraava ei toimi alkuunkaan.</p>
+<p>Frekvenssitaulokon luonti. Luokitellut muuttujat factoreiksi, pitäisikö tehdä jo datan luontivaiheessa? Huomaa erityisesti Espanjan(ES) poikkeava data&quot; “Strongly agree” “Agree” “Neither agree nor disagree” …&quot; Seuraava ei toimi alkuunkaan. Ei näin! Ensin kuntoon data, faktoreita ja nimiä.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdDEgPC0gZmFjdG9yKEZpU2VIdTIwMTJkMixWNiwgbGV2ZWxzID0gdmFzdGF1c19sZXZlbHMpXG5cbmBgYCJ9 -->
-<pre class="r"><code>test1 &lt;- factor(FiSeHu2012d2,V6, levels = vastaus_levels)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB2YXN0YXVzX2tvb2RpMSA8LSByZWFkLnRhYmxlKFwiY2xpcGJvYXJkXCIpIC0gZWkgdG9pbWk/P1xuI3Rlc3QxIDwtIGNvdW50KEZpU2VIdTIwMTJkMiwgVjUpIC0gZWkgdG9pbWlcblxuI0Voa8OkIHBhcmVtcGk/XG4jRmlTZUh1VGF1MSA8LSBncm91cF9ieShGaVNlSHUyMDEyZDIsIENfQUxQSEFOKVxuI0ZpU2VIdVRhdTIgPC0gc3VtbWFyaXNlKEZpU2VIdVRhdTEsXG4jICBjb3VudCA9IG4oKSxcbiNcbiMpXG4jdmFzdGF1c19sZXZlbHMgPC0gYyhcInRzXCIsXCJzXCIsXCJlc2VcIixcImVcIixcInRlXCIsXCJlb3NcIilcbiN0ZXN0MSA8LSBmYWN0b3IoRmlTZUh1MjAxMmQyLFY2LCBsZXZlbHMgPSB2YXN0YXVzX2xldmVscylcblxuYGBgIn0= -->
+<pre class="r"><code># vastaus_koodi1 &lt;- read.table(&quot;clipboard&quot;) - ei toimi??
+#test1 &lt;- count(FiSeHu2012d2, V5) - ei toimi
+
+#Ehkä parempi?
+#FiSeHuTau1 &lt;- group_by(FiSeHu2012d2, C_ALPHAN)
+#FiSeHuTau2 &lt;- summarise(FiSeHuTau1,
+#  count = n(),
+#
+#)
+#vastaus_levels &lt;- c(&quot;ts&quot;,&quot;s&quot;,&quot;ese&quot;,&quot;e&quot;,&quot;te&quot;,&quot;eos&quot;)
+#test1 &lt;- factor(FiSeHu2012d2,V6, levels = vastaus_levels)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZmFjdG9yKEZpU2VIdTIwMTJkMiwgVjYsIGxldmVscyA9IHZhc3RhdXNfbGV2ZWxzKSA6IFxuICBvYmplY3QgJ1Y2JyBub3QgZm91bmRcbiJ9 -->
-<pre><code>Error in factor(FiSeHu2012d2, V6, levels = vastaus_levels) : 
-  object 'V6' not found</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>vaihtoehto,koodi,lyhenne Täysin samaa mieltä,1,ts Samaa mieltä,2,s En samaa enkä eri mieltä,3,ese Eri mieltä,4, e Täysin eri mieltä,5,te En osaa sanoa,8,eos Nämä kuvien selityksiin, ei sotkemaan kuvia.</p>
+<p>Kysymys 23, V5 - V9 datassa a) Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallisen suhteen kuin äiti, joka ei käy työssä b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä c) Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö d) On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat ensisijaisesti kodin ja lapsia e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkcgYWxrdSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpEYXRhOg0KSVNTUCBSZXNlYXJjaCBHcm91cCAoMjAxNik6IEludGVybmF0aW9uYWwgU29jaWFsIFN1cnZleSBQcm9ncmFtbWU6IEZhbWlseSBhbmQgQ2hhbmdpbmcgR2VuZGVyIFJvbGVzIElWIC0gSVNTUCAyMDEyLiBHRVNJUyBEYXRhIEFyY2hpdmUsIENvbG9nbmUuIFpBNTkwMCBEYXRhIGZpbGUgVmVyc2lvbiA0LjAuMCwgZG9pOjEwLjQyMzIvMS4xMjY2MQ0KDQpodHRwczovL3NlYXJjaC5nZXNpcy5vcmcvcmVzZWFyY2hfZGF0YS9aQTU5MDAgMjAxMg0KDQpNdXV0dHVqYWt1dmF1a3NldCBqYSBtdXV0IHRpZWRvdCAobGlua2l0PykNCmh0dHA6Ly96YWNhdC5nZXNpcy5vcmcvd2Vidmlldy9pbmRleC5qc3A/b2JqZWN0PWh0dHA6Ly96YWNhdC5nZXNpcy5vcmcvb2JqL2ZTdHVkeS9aQTU5MDANCg0KS8OkeXR0w7ZlaGRvdDoNCmh0dHBzOi8vd3d3Lmdlc2lzLm9yZy9lbi9zZXJ2aWNlcy9kYXRhLWFuYWx5c2lzL21vcmUtZGF0YS10by1hbmFseXplL2RhdGEtYXJjaGl2ZS1zZXJ2aWNlLw0KDQpgYGB7ciBLaXJqYXN0b3R9DQpsaWJyYXJ5KGRicGx5cikNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkoZm9yY2F0cykNCmxpYnJhcnkoaGF2ZW4pDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkocm1hcmtkb3duKQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeShmdXJuaXR1cmUpDQpsaWJyYXJ5KGNhKQ0KbGlicmFyeShyZ2wpDQoNCklTU1AyMDEyLmRhdGEgPC0gcmVhZF9zcHNzKCJkYXRhL1pBNTkwMF92NC0wLTAuc2F2IikNCmBgYA0KS29pdGV0YWFucGEgbHVrZWEgZGF0YS4gT25rbyB5a3NpbmtlcnRhaXNlbXBhYSB0YWxsZW50YWEgU1BTUzpzc2EgY3N2IC0gbXVvdG9vbj8NCg0KSGllbWFuIHR1dGtpc2tlbHVhIC0gU3VvbWVuIGRhdGEuIFJhamF0YWFuIGFpbmVpc3RvYSwgc2llbGzDpCBvbiBtYWFrb2h0YWlzaWEgdmFzdGF1a3NpYSAoZXNpbS4gRXNwYW5qYSkuDQpgYGB7ciBTdW9tZW4gZGF0YSwgZXZhbD1GQUxTRSwgaW5jbHVkZT1GQUxTRX0NCiNzdHIoSVNTUDIwMTIuZGF0YSkNCiMgZWkgdG9pc3RhaXNla3NpIGvDpHl0ZXTDpCBTdW9tZW4ga29rbyBkYXRhYQ0KRmluSVNTUDIwMTIgPC0gZmlsdGVyKElTU1AyMDEyLmRhdGEsIENfQUxQSEFOID09ICJGSSIpDQpGaW5JU1NQMjAxMiA8LSBzZWxlY3QoRmluSVNTUDIwMTIsIFY1OlY2NywgU0VYLCBBR0UpDQpGaW5JU1NQMjAxMiA8LSBzZWxlY3QoRmluSVNTUDIwMTIsIC0oc3RhcnRzX3dpdGgoIkVTIikpKQ0KaGVhZChGaW5JU1NQMjAxMikNCmBgYA0KDQpgYGB7ciBGaVN3ZUh1RGF0MX0NCiNWYWxpdGFhbiBTdW9taSwgUnVvdHNpIGphIFVua2FyaSBqYSB5a3NpIGt5c3lteXMNCkZpU2VIdTIwMTJkMSA8LSBmaWx0ZXIoSVNTUDIwMTIuZGF0YSwgQ19BTFBIQU4gPT0gIkZJIiB8IENfQUxQSEFOID09ICJTRSIgfCBDX0FMUEhBTiA9PSAiSFUiICApDQpzdW1tYXJ5KEZpU2VIdTIwMTJkMSkNCiNoZWFkKEZpU2VIdTIwMTJkMSkNCkZpU2VIdTIwMTJkMiA8LSBzZWxlY3QoRmlTZUh1MjAxMmQxLCBDX0FMUEhBTixWNSwgVjYsIFY3LCBWOCwgVjkpDQojUG9pc3RldGFhbiByaXZpdCwgam9pc3NhIHB1dXR0dXZpYSB0aWV0b2phDQpGaVNlSHUyMDEyZDIgPC0gZmlsdGVyKEZpU2VIdTIwMTJkMiwgIWlzLm5hKFY1KSAmICFpcy5uYShWNikgJiAhaXMubmEoVjcpICYgIWlzLm5hKFY4KSAmICFpcy5uYShWOSkpDQpgYGANCg0KDQojIyNUYXVsdWtrbyAxOiBWYXN0YXVrc2V0IGt5c3lteWtzaWluIFY1IC0gVjkgKFN1b21pLCBSdW90c2kgamEgVW5rYXJpKQ0KYGBge3IgVGF1MX0NCnN1bW1hcnkoRmlTZUh1MjAxMmQyKQ0Kc3RyKEZpU2VIdTIwMTJkMikNCmhlYWQoRmlTZUh1MjAxMmQyKQ0KYGBgDQoNCiMjI1RvRG8NCg0KUHV1dHR1dmF0IHRpZWRvdCBwb2lzLiAvb2ssIGVoa8OkIHR1cmhhIHRlaGTDpCBvbWFhIGRhdGFhLCBuYS5ybSA9VFJVRT8NClN1b3JhYW4geWtzaSBmcmVrdmVuc3NpdGF1bHVra287IGVoa8OkIHlrc2kgbWFhdmVydGFpbHVncmFmaWlra2EgbXnDtnM/DQoNCkZyZWt2ZW5zc2l0YXVsb2tvbiBsdW9udGkuIEx1b2tpdGVsbHV0IG11dXR0dWphdCBmYWN0b3JlaWtzaSwgcGl0w6Rpc2lrw7YgdGVoZMOkIGpvIGRhdGFuIGx1b250aXZhaWhlZXNzYT8gSHVvbWFhIGVyaXR5aXNlc3RpIEVzcGFuamFuKEVTKSBwb2lra2VhdmEgZGF0YSIgIlN0cm9uZ2x5IGFncmVlIiAiQWdyZWUiICJOZWl0aGVyIGFncmVlIG5vciBkaXNhZ3JlZSIgLi4uIg0KU2V1cmFhdmEgZWkgdG9pbWkgYWxrdXVua2Fhbi4NCg0KYGBge3IgRWthVGF1bHVra28xfQ0KIyB2YXN0YXVzX2tvb2RpMSA8LSByZWFkLnRhYmxlKCJjbGlwYm9hcmQiKSAtIGVpIHRvaW1pPz8NCiN0ZXN0MSA8LSBjb3VudChGaVNlSHUyMDEyZDIsIFY1KSAtIGVpIHRvaW1pDQoNCiNFaGvDpCBwYXJlbXBpPw0KI0ZpU2VIdVRhdTEgPC0gZ3JvdXBfYnkoRmlTZUh1MjAxMmQyLCBDX0FMUEhBTikNCiNGaVNlSHVUYXUyIDwtIHN1bW1hcmlzZShGaVNlSHVUYXUxLA0KIyAgY291bnQgPSBuKCksDQojDQojKQ0KI3Zhc3RhdXNfbGV2ZWxzIDwtIGMoInRzIiwicyIsImVzZSIsImUiLCJ0ZSIsImVvcyIpDQojdGVzdDEgPC0gZmFjdG9yKEZpU2VIdTIwMTJkMixWNiwgbGV2ZWxzID0gdmFzdGF1c19sZXZlbHMpDQoNCmBgYA0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkcgYWxrdSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpEYXRhOg0KSVNTUCBSZXNlYXJjaCBHcm91cCAoMjAxNik6IEludGVybmF0aW9uYWwgU29jaWFsIFN1cnZleSBQcm9ncmFtbWU6IEZhbWlseSBhbmQgQ2hhbmdpbmcgR2VuZGVyIFJvbGVzIElWIC0gSVNTUCAyMDEyLiBHRVNJUyBEYXRhIEFyY2hpdmUsIENvbG9nbmUuIFpBNTkwMCBEYXRhIGZpbGUgVmVyc2lvbiA0LjAuMCwgZG9pOjEwLjQyMzIvMS4xMjY2MQ0KDQpodHRwczovL3NlYXJjaC5nZXNpcy5vcmcvcmVzZWFyY2hfZGF0YS9aQTU5MDAgMjAxMg0KDQpNdXV0dHVqYWt1dmF1a3NldCBqYSBtdXV0IHRpZWRvdCAobGlua2l0PykNCmh0dHA6Ly96YWNhdC5nZXNpcy5vcmcvd2Vidmlldy9pbmRleC5qc3A/b2JqZWN0PWh0dHA6Ly96YWNhdC5nZXNpcy5vcmcvb2JqL2ZTdHVkeS9aQTU5MDANCg0KS8OkeXR0w7ZlaGRvdDoNCmh0dHBzOi8vd3d3Lmdlc2lzLm9yZy9lbi9zZXJ2aWNlcy9kYXRhLWFuYWx5c2lzL21vcmUtZGF0YS10by1hbmFseXplL2RhdGEtYXJjaGl2ZS1zZXJ2aWNlLw0KDQpgYGB7ciBLaXJqYXN0b3R9DQojIHBpdMOkw6Rrw7YgbGFpdHRhYSBqw6RyamVzdHlrc2VlbiwgdmFuaGVtbWF0IGVuc2luPw0KbGlicmFyeShyZ2wpDQpsaWJyYXJ5KGNhKQ0KbGlicmFyeShoYXZlbikNCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGZvcmNhdHMpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkocm1hcmtkb3duKQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeShmdXJuaXR1cmUpDQoNCg0KDQpJU1NQMjAxMi5kYXRhIDwtIHJlYWRfc3BzcygiZGF0YS9aQTU5MDBfdjQtMC0wLnNhdiIpDQpgYGANCktvaXRldGFhbnBhIGx1a2VhIGRhdGEuIE9ua28geWtzaW5rZXJ0YWlzZW1wYWEgdGFsbGVudGFhIFNQU1M6c3NhIGNzdiAtIG11b3Rvb24/DQoNCkhpZW1hbiB0dXRraXNrZWx1YSAtIFN1b21lbiBkYXRhLiBSYWphdGFhbiBhaW5laXN0b2EsIHNpZWxsw6Qgb24gbWFha29odGFpc2lhIHZhc3RhdWtzaWEgKGVzaW0uIEVzcGFuamEpLg0KYGBge3IgU3VvbWVuIGRhdGEsIGV2YWw9RkFMU0UsIGluY2x1ZGU9RkFMU0V9DQojc3RyKElTU1AyMDEyLmRhdGEpDQojIGVpIHRvaXN0YWlzZWtzaSBrw6R5dGV0w6QgU3VvbWVuIGtva28gZGF0YWENCkZpbklTU1AyMDEyIDwtIGZpbHRlcihJU1NQMjAxMi5kYXRhLCBDX0FMUEhBTiA9PSAiRkkiKQ0KRmluSVNTUDIwMTIgPC0gc2VsZWN0KEZpbklTU1AyMDEyLCBWNTpWNjcsIFNFWCwgQUdFKQ0KRmluSVNTUDIwMTIgPC0gc2VsZWN0KEZpbklTU1AyMDEyLCAtKHN0YXJ0c193aXRoKCJFUyIpKSkNCmhlYWQoRmluSVNTUDIwMTIpDQpgYGANCg0KYGBge3IgRmlTd2VIdURhdDF9DQojVmFsaXRhYW4gU3VvbWksIFJ1b3RzaSBqYSBVbmthcmkgamEgeWtzaSBreXN5bXlzDQpGaVNlSHUyMDEyZDEgPC0gZmlsdGVyKElTU1AyMDEyLmRhdGEsIENfQUxQSEFOID09ICJGSSIgfCBDX0FMUEhBTiA9PSAiU0UiIHwgQ19BTFBIQU4gPT0gIkhVIiAgKQ0Kc3VtbWFyeShGaVNlSHUyMDEyZDEpDQoNCiNoZWFkKEZpU2VIdTIwMTJkMSkNCiAjcGVyaGVlc2VlbiwgdHnDtmjDtm4gamEga290aXTDtmloaW4gbGlpdHR5dmnDpCBreXN5bXlrc2nDpCwgRmkgMjMNCkZpU2VIdTIwMTJkMiA8LSBzZWxlY3QoRmlTZUh1MjAxMmQxLCBDX0FMUEhBTixWNSwgVjYsIFY3LCBWOCwgVjkpDQojUG9pc3RldGFhbiByaXZpdCwgam9pc3NhIHB1dXR0dXZpYSB0aWV0b2phDQojRmlTZUh1MjAxMmQyIDwtIGZpbHRlcihGaVNlSHUyMDEyZDIsICFpcy5uYShWNSkgJiAhaXMubmEoVjYpICYgIWlzLm5hKFY3KSAmICFpcy5uYShWOCkgJiAhaXMubmEoVjkpKQ0KYGBgDQoNCg0KIyMjVGF1bHVra28gMTogVmFzdGF1a3NldCBreXN5bXlrc2lpbiBWNSAtIFY5IChTdW9taSwgUnVvdHNpIGphIFVua2FyaSkNCmBgYHtyIFRhdTF9DQpzdW1tYXJ5KEZpU2VIdTIwMTJkMikNCnN0cihGaVNlSHUyMDEyZDIpDQpoZWFkKEZpU2VIdTIwMTJkMikNCg0KI3JhamF0YWFuIGt5c3lteWtzZWVuIFY2ICJXb3JraW5nIG1vbSAtIHByZXNjaG9vbCBjaGlsZCBpcyBsaWtlbHkgdG8gc3VmZmVyIiwgMS01IHNhIC0gc2QNCkZpU2VIdTIwMTJkMyA8LSBzZWxlY3QoRmlTZUh1MjAxMmQyLCBDX0FMUEhBTiwgVjYpDQpgYGANCg0KIyMjVG9Ebw0KDQpQdXV0dHV2YXQgdGllZG90IHBvaXMuIC9vaywgZWhrw6QgdHVyaGEgdGVoZMOkIG9tYWEgZGF0YWEsIG5hLnJtID1UUlVFPw0KU3VvcmFhbiB5a3NpIGZyZWt2ZW5zc2l0YXVsdWtrbzsgZWhrw6QgeWtzaSBtYWF2ZXJ0YWlsdWdyYWZpaWtrYSBtecO2cz8NCg0KRnJla3ZlbnNzaXRhdWxva29uIGx1b250aS4gTHVva2l0ZWxsdXQgbXV1dHR1amF0IGZhY3RvcmVpa3NpLCBwaXTDpGlzaWvDtiB0ZWhkw6Qgam8gZGF0YW4gbHVvbnRpdmFpaGVlc3NhPyBIdW9tYWEgZXJpdHlpc2VzdGkgRXNwYW5qYW4oRVMpIHBvaWtrZWF2YSBkYXRhIiAiU3Ryb25nbHkgYWdyZWUiICJBZ3JlZSIgIk5laXRoZXIgYWdyZWUgbm9yIGRpc2FncmVlIiAuLi4iDQpTZXVyYWF2YSBlaSB0b2ltaSBhbGt1dW5rYWFuLg0KRWkgbsOkaW4hIEVuc2luIGt1bnRvb24gZGF0YSwgZmFrdG9yZWl0YSBqYSBuaW1pw6QuDQoNCmBgYHtyIEVrYVRhdWx1a2tvMX0NCiMgdmFzdGF1c19rb29kaTEgPC0gcmVhZC50YWJsZSgiY2xpcGJvYXJkIikgLSBlaSB0b2ltaT8/DQojdGVzdDEgPC0gY291bnQoRmlTZUh1MjAxMmQyLCBWNSkgLSBlaSB0b2ltaQ0KDQojRWhrw6QgcGFyZW1waT8NCiNGaVNlSHVUYXUxIDwtIGdyb3VwX2J5KEZpU2VIdTIwMTJkMiwgQ19BTFBIQU4pDQojRmlTZUh1VGF1MiA8LSBzdW1tYXJpc2UoRmlTZUh1VGF1MSwNCiMgIGNvdW50ID0gbigpLA0KIw0KIykNCiN2YXN0YXVzX2xldmVscyA8LSBjKCJ0cyIsInMiLCJlc2UiLCJlIiwidGUiLCJlb3MiKQ0KI3Rlc3QxIDwtIGZhY3RvcihGaVNlSHUyMDEyZDIsVjYsIGxldmVscyA9IHZhc3RhdXNfbGV2ZWxzKQ0KDQpgYGANCg0KdmFpaHRvZWh0byxrb29kaSxseWhlbm5lDQpUw6R5c2luIHNhbWFhIG1pZWx0w6QsMSx0cw0KU2FtYWEgbWllbHTDpCwyLHMNCkVuIHNhbWFhIGVua8OkIGVyaSBtaWVsdMOkLDMsZXNlDQpFcmkgbWllbHTDpCw0LCBlDQpUw6R5c2luIGVyaSBtaWVsdMOkLDUsdGUNCkVuIG9zYWEgc2Fub2EsOCxlb3MNCk7DpG3DpCBrdXZpZW4gc2VsaXR5a3NpaW4sIGVpIHNvdGtlbWFhbiBrdXZpYS4NCg0KS3lzeW15cyAyMywgVjUgLSBWOSBkYXRhc3NhDQphKSBUecO2c3PDpGvDpHl2w6Qgw6RpdGkgcHlzdHl5IGx1b21hYW4gbGFwc2lpbnNhIGFpdmFuIHlodMOkIGzDpG1waW3DpG4gamEgdHVydmFsbGlzZW4gc3VodGVlbiBrdWluIMOkaXRpLCBqb2thIGVpIGvDpHkgdHnDtnNzw6QgDQpiKSBBbGxlIGtvdWx1aWvDpGluZW4gbGFwc2kgdG9kZW5uw6Rrw7Zpc2VzdGkga8OkcnNpaSwgam9zIGjDpG5lbiDDpGl0aW5zw6Qga8OkeSB0ecO2c3PDpCANCmMpIEthaWtlbiBrYWlra2lhYW4gcGVyaGUtZWzDpG3DpCBrw6Ryc2lpLCBrdW4gbmFpc2VsbGEgb24ga29rb3DDpGl2w6R0ecO2IA0KZCkgT24gaHl2w6Qga8OkeWTDpCB0w7Zpc3PDpCBtdXR0YSB0b3NpYXNpYXNzYSB1c2VpbW1hdCBuYWlzZXQgaGFsdWF2YXQgZW5zaXNpamFpc2VzdGkga29kaW4gamEgbGFwc2lhIA0KZSkgS290aXJvdXZhbmEgb2xlbWluZW4gb24gYWl2YW4geWh0w6QgYW50b2lzYWEga3VpbiBhbnNpb3R5w7ZuIHRla2VtaW5lbiANCg0K</div>
 
 
 
