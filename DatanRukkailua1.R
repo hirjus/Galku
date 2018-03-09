@@ -80,13 +80,33 @@ test2$maa %xt% test2$V6
 #copypastella taulukko!
 read <- read.table("clipboard")
 colnames(read) <- c("1", "2", "3", "4", "5")
-ca(read)
-plot(ca(read), map = "symmetric", mass = c(TRUE,TRUE))
-plot(ca(read), map = "rowprincipal", mass = c(TRUE,TRUE))
-plot(ca(read), map = "colprincipal", mass = c(TRUE,TRUE))
+SimpleCA1 <- ca(read)
+
+read
+
+plot(SimpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
+plot(SimpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
+plot(SimpleCA1, map = "rowgreen", mass = c(TRUE,TRUE))
+plot(SimpleCA1, map = "colprincipal", mass = c(TRUE,TRUE))
+plot(SimpleCA1, map = "colgreen", mass = c(TRUE,TRUE))
+str(SimpleCA1)
+#rowgreen:Rows in principal coordinates and columns in standard
+#coordinates times the square root of the mass CA-juttu JSS-lehdessä 2007
+
+plot(SimpleCA1, map = "symmetric", mass = c(TRUE,TRUE), contrib = "absolute")
+plot(SimpleCA1, map = "symmetric", mass = c(TRUE,TRUE), contrib = "relative")
+
+#ei toimi, kun suurin mahdollinen on 2
+#plot3d(ca(read,nd=3))
+
+
 X11()
 read
 str(read)
+
+print(SimpleCA1)
+summary(SimpleCA1, scree = TRUE, rows=TRUE, columns=TRUE)
+
 #MG ...day1.r
 # row profiles
 read.pro <- read / rowSums(read) 
