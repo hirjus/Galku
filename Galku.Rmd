@@ -1,17 +1,18 @@
 ---
-title: "G alku"
-output: html_notebook
+title: "G Luku 1 yksinkertainen korrespondenssianalyysi"
+output:
+  pdf_document: default
+  html_notebook: default
 ---
-Data:
-ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
 
-https://search.gesis.org/research_data/ZA5900 2012
+Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometristä analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, mutta koordinaatiston tulkinnassa voidaan lähteä siitä, että suhteellisesti kaukana toisistaan olevat pisteet ovat kaukana myös alkuperäisessä datassa.
+ 
+#### ToDo1:
+(@) Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
+(@) Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti
+(@) Sanallinen kuvaus CA-ratkaisusta (painotettu PCA, optimaalinen MDS, kaikki on suhteellista)
+(@) Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
 
-Muuttujakuvaukset ja muut tiedot (linkit?)
-http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
-
-Käyttöehdot:
-https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
 
 ```{r Kirjastot}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
@@ -21,19 +22,41 @@ library(haven)
 library(dplyr)
 library(knitr)
 library(tidyverse)
-library(forcats)
+#library(forcats) latautuu haven-paketissa
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
 
-
-
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 ```
+## Data
+
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
+
+https://search.gesis.org/research_data/ZA5900 2012
+
+Muuttujakuvaukset ja muut tiedot (linkit?)
+http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
+
+Suomenkielinen lomake, linkki.
+
+Käyttöehdot:
+https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
+
+
 Koitetaanpa lukea data. Onko yksinkertaisempaa tallentaa SPSS:ssa csv - muotoon?
 
-Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastauksia (esim. Espanja).
+Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastausvaihtoehtoja (esim. Espanja).
+```{r Data1}
+
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+# puuttuvat tiedot NA, pitäisi koodata 9 jos haluaa analysoida
+# mietittavä, miten fiksusti ca-paketin inputiksi - hyväksyy table, df, matrix
+# ensin deskriptiiviset tarkastelut
+# puuttuvat pois - havaintojen määrä vaihtelee mutta ei haitanne
+```
+
+
 ```{r Suomen data, eval=FALSE, include=FALSE}
 #str(ISSP2012.data)
 # ei toistaiseksi käytetä Suomen koko dataa
@@ -49,7 +72,7 @@ FiSeHu2012d1 <- filter(ISSP2012.data, C_ALPHAN == "FI" | C_ALPHAN == "SE" | C_AL
 summary(FiSeHu2012d1)
 
 #head(FiSeHu2012d1)
- #perheeseen, työhön ja kotitöihin liittyviä kysymyksiä, Fi 23
+ #perheeseen, työhön ja kotitöihin liittyviä kysymyksiä, Fi-lomakkeella kysymys 23
 FiSeHu2012d2 <- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
 #Poistetaan rivit, joissa puuttuvia tietoja
 #FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & #!is.na(V8) & !is.na(V9))
@@ -67,7 +90,7 @@ head(FiSeHu2012d2)
 FiSeHu2012d3 <- select(FiSeHu2012d2, C_ALPHAN, V6)
 ```
 
-###ToDo
+###ToDo2
 
 Puuttuvat tiedot pois. /ok, ehkä turha tehdä omaa dataa, na.rm =TRUE?
 Suoraan yksi frekvenssitaulukko; ehkä yksi maavertailugrafiikka myös?
@@ -106,4 +129,3 @@ b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy
 c) Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö 
 d) On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat ensisijaisesti kodin ja lapsia 
 e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen 
-

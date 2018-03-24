@@ -1,5 +1,5 @@
 # Datan peruskäsittelyä 5.3.2018
-# library(rlang) - tämä ottaa käyttään tuon namespace  rlanginä
+# library(rlang) - tämä ottaa käyttöön tuon namespace  rlanginä
 library(rgl)
 library(ca)
 library(haven)
@@ -10,7 +10,7 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(forcats)
+#library(forcats) tarpeeton, tulee havenissa
 sessionInfo()
 
 
@@ -19,12 +19,13 @@ str(FiSeHu2012d2)
 test1 <- select(FiSeHu2012d2,C_ALPHAN, V6)
 
 test1$V6 <- factor(test1$V6, exclude = NULL)
-test1$C_ALPHAN <- factor(test1$C_ALPHAN)  
+test1$maa <- factor(test1$C_ALPHAN)  
 str(test1)
 summary(test1)
 # NA näillä kolmella muuttujassa V6 134, havaintoja 3243
 # 3243-134 = 3109 /ok zacatin kanssa! Eos vastauksia (8) ei yhtään.
 #tutkitaan puuttuvat
+
 
 #Huom! Kun NA on yksi faktoriarvo, niin sepä ei putoa pois helposti!
 test1$V6
@@ -44,8 +45,8 @@ summary(test2)
 
 #taulukoita printattuina
 #eka - puuttuvat mukana
-test1 %>% table1(V6, splitby = ~C_ALPHAN, test = TRUE) #puuttuvat vastaukset mukana
-test1 %>% table1(C_ALPHAN, splitby = ~V6, test = TRUE) #puuttuvat eivät mukana
+test1 %>% table1(V6, splitby = ~maa, test = TRUE) #puuttuvat vastaukset mukana
+test1 %>% table1(maa, splitby = ~V6, test = TRUE) #puuttuvat eivät mukana
 
 #toka - puuttuvat mukana
 test1 %>% tableX(V6,C_ALPHAN)
@@ -71,7 +72,7 @@ str(test3)
 class(test2)
 # mitä ihmettä tämä tekee? test3 <- as.data.frame.matrix(test2)
 #test3<-as.data.frame(test2) - ei toimi
-#ca(test3) - ei toimi
+ca(test3) #- ei toimi - miksi?
 test2$maa %xt% test2$V6
 
 #CA vaatii df:n, matriisin jne inputiksi, auttaisiko as.data.frame?
