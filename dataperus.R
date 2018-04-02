@@ -5,6 +5,7 @@
 #ISSP2012test.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 #lasketaan puuttuvia
-str(ISSP2012.data) %>% count(V5)
-
+#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+ISSP2012.data %>% count(V50)
+ISSP2012.data$V50 
 

@@ -67,18 +67,54 @@ test2 %>% tableX(V6,maa,type = "count")
 test2 %>% table1(maa, splitby = ~V6, test = TRUE, row_wise = TRUE,output = "markdown")
 test2 %>% table1(maa, splitby = ~V6, test = TRUE,type="full", row_wise = FALSE,output = "markdown", caption = ots1)
 
-#CA-inputiksi
+
+# jotain tapahtuu...
+test3 <- as.data.frame(test2 %>% tableX(V6,maa,type = "cell_perc"))
 str(test3)
+test3
+
+
+# samoin tässä...
+test4 <- as.data.frame(test2 %>% tableX(V6,maa,type = "count"))
+str(test4)
+#mutta pieleen menee test3 ja test4! df on rakenteeltaan väärä.
+
+#Viides yritys
+test5 <- test2$V6 %xt% test2$maa #tulos lista - ei toimi
+
+
+#CA-inputiksi
+str(test2)
 class(test2)
-# mitä ihmettä tämä tekee? test3 <- as.data.frame.matrix(test2)
-#test3<-as.data.frame(test2) - ei toimi
-ca(test3) #- ei toimi - miksi?
-test2$maa %xt% test2$V6
 
-#CA vaatii df:n, matriisin jne inputiksi, auttaisiko as.data.frame?
-#freq_t = table(maa = )
+simpleCA2 <- ca(~V6 + maa,test3) #Tämä toimii! Mutta tulokset vähän outoja - täysin pielessä
+X11()
+plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE))
 
+simpleCA3 <- ca(~V6 + maa,test4) # tämäkin toimii
+
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE))
+
+#kuudes yritys - test2 on df ja 
+#C_ALPHAN         V6      maa      
+#Length:3109        1:295   FI:1110  
+#Class :character   2:600   HU: 997  
+#Mode  :character   3:593   SE:1002  
+#                   4:889            
+#                   5:732
+
+#toimii - mutta onko rowprincipal-kuvassa järkeä?
+simpleCA6 <- ca(~V6 + maa,test2) 
+
+simpleCA6
+X11()
+plot(simpleCA6, map = "symmetric", mass = c(TRUE,TRUE))
+plot(simpleCA6, map = "rowprincipal", mass = c(TRUE,TRUE))
+plot(simpleCA6, map = "colprincipal", mass = c(TRUE,TRUE))
+# näyttäisi ihan samalta kuin SimpleCA1, rivit ja sarakkeet vain vaihdettu
 #copypastella taulukko!
+
+
 read <- read.table("clipboard")
 colnames(read) <- c("1", "2", "3", "4", "5")
 SimpleCA1 <- ca(read)

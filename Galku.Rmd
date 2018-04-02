@@ -46,7 +46,7 @@ https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archiv
 
 Koitetaanpa lukea data. Onko yksinkertaisempaa tallentaa SPSS:ssa csv - muotoon?
 
-Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastausvaihtoehtoja (esim. Espanja).
+Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastausvaihtoehtoja (esim. Espanja, Unkari jne. ). Rajattaneen myös Eurooppaan ja samankaltaisiin maihin (Kanada, USA, Turkki, Uusi Seelanti, Australia, Japani, Etelä-Korea)
 ```{r Data1}
 
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
