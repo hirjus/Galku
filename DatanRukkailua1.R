@@ -113,8 +113,55 @@ plot(simpleCA6, map = "rowprincipal", mass = c(TRUE,TRUE))
 plot(simpleCA6, map = "colprincipal", mass = c(TRUE,TRUE))
 # näyttäisi ihan samalta kuin SimpleCA1, rivit ja sarakkeet vain vaihdettu
 #copypastella taulukko!
+names(simpleCA6)
+print(simpleCA6)
+(sum(simpleCA6$colmass)) # 1
+(sum(simpleCA6$rowmass)) # 1
+summary(simpleCA6)
+
+#rakennetaan taulukko
+
+(taulu1 <- (simpleCA6$N))
+class(taulu1)
+colnames(taulu1) <- c("FI", "HU", "SE")
+rownames(taulu1) <- c("1","2","3","4","5")
+taulu1
+#(taulu1_rs <- rowSums(taulu1))
+#taulu1 <- cbind(taulu1_rs[ 2,1:5]) ei toimi!!
+
+# rivillä 65 on jo ratkaisu
+taulu2 <- test2 %>% tableX(V6,maa,type = "cell_perc")
+str(taulu2)
+barplot(table(taulu2), main = "eka")
+hist(table(taulu2), main = "toka")
+#https://stackoverflow.com/questions/9563368/create-stacked-barplot-where-each-stack-is-scaled-to-sum-to
+#ohje ggplot2 vaatii df:n, ja datan long-formaatissa
+# eu ihan loistava vielä ole
+taulu2_df <- as.data.frame(taulu2)
+taulu2_df
+ggplot(taulu2_df, aes(x = maa, y=Freq, fill = V6)) # no joo
+X11()
+ggplot(taulu2_df, aes(x = maa, y=V6, fill = Freq))
+library(scales)
+#toinen kokeilu - frekvenssitaulu - nyt onnistuu!
+
+library(reshape2)
+#taulu1 <- rowSums(taulu1) ei onnistu
+taulu1
+taulu1_df <- as.data.frame(taulu1)
+str(taulu1_df)
+taulu1_df$riviprof <- rowSums(taulu1_df)
+#mutate(taulu1_df, avg =rowsum())
+taulu1b_df <- melt(cbind(taulu1_df, ind = rownames(taulu1_df)), id.vars = c('ind'))
+taulu1b_df
+ggplot(taulu1b_df, aes(x = variable, y = value, fill = ind)) +
+         geom_bar(position = "fill", stat ="identity") +
+         scale_y_continuous(labels = percent_format()) # no joo
+X11()
 
 
+
+###data leikepöydältä ###
 read <- read.table("clipboard")
 colnames(read) <- c("1", "2", "3", "4", "5")
 SimpleCA1 <- ca(read)
