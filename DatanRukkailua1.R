@@ -65,8 +65,31 @@ test2 %>% tableF(V6,splitby = maa) # ei kovin hyvä
 test2 %>% tableX(V6,maa,type = "cell_perc")
 test2 %>% tableX(V6,maa,type = "count")
 test2 %>% table1(maa, splitby = ~V6, test = TRUE, row_wise = TRUE,output = "markdown")
-test2 %>% table1(maa, splitby = ~V6, test = TRUE,type="full", row_wise = FALSE,output = "markdown", caption = ots1)
+test2 %>% table1(V6, splitby = ~maa, test = TRUE, type = "full",row_wise = FALSE,output = "markdown")
+test2 %>% table1(maa, splitby = ~V6, test = TRUE,type = "full", row_wise = FALSE,output = "markdown", caption = ots1)
+#miks ei toimi?
+#test2 %>% table1(V6, splitby = ~maa, test = FALSE, type="count", row_wise = TRUE,output = "markdown")
 
+#4.4.2018 siistin taulkun yritystä
+
+#toimii - vaati MiKTexiin booktabs - paketin
+test2 %>% table1(maa, splitby = ~V6, test = TRUE,
+                 type = "full", row_wise = FALSE,output = "latex", caption = ots1)
+test2
+
+test2 %>% 
+  table1(maa, splitby = ~V6, test=FALSE, 
+                 type = "full", row_wise = FALSE, output = "latex2", caption = ots1)
+#saisiko näille siistin muotoilu? tämä on ihan hassu
+test2 %>% 
+  tableX(V6,maa,type = "cell_perc") %>%
+  as.data.frame() %>%
+  table1(maa, splitby = ~V6, test=FALSE, 
+          row_wise = FALSE, output = "latex2", caption = ots1)
+  
+
+
+test2 %>% tableX(V6,maa,type = "count")
 
 # jotain tapahtuu...
 test3 <- as.data.frame(test2 %>% tableX(V6,maa,type = "cell_perc"))
