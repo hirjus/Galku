@@ -27,8 +27,11 @@ summary(test1)
 #tutkitaan puuttuvat
 
 
-#Huom! Kun NA on yksi faktoriarvo, niin sepä ei putoa pois helposti!
-test1$V6
+#Huom1! Kun NA on yksi faktoriarvo, niin sepä ei putoa pois helposti!
+#Huom2 Kun faktoroidaan järjestysasteikon muuttuja ja mukana on puuttuvia tietoja, muuttuja koodautuu
+#nominaaliasteikolle. Niin pitääkin, koska yksi arvo on NA. Vai voisiko olla niin, että ordinaaliasteikko ja siiinä
+#puuttuvia havaintoja? Ei merkitysta CA:ssa, mutta muuten kyllä. Kts. opk 7.4.2018.
+str(test1$V6)
 levels(test1$V6)
 tasot_1<-c(1,2,3,4,5)
 # puuttuvat pois - miksi eivät häivy?
@@ -38,7 +41,28 @@ test2$V6 <- factor(test2$V6)
 test2$maa <- factor(test2$C_ALPHAN)  
 str(test2)
 summary(test2)
+plot(test1$V6)
+plot(test2$V6)
+plot(ISSP2012.data$V6)
+summary(ISSP2012.data$V6) # maksimi 5, NA 4203
+str(ISSP2012.data$V6)
+#Class 'labelled'  atomic [1:61754] 2 2 3 2 3 2 3 2 2 2 ...
+#..- attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+#..- attr(*, "format.spss")= chr "F1.0"
+#..- attr(*, "labels")= Named num [1:8] 0 1 2 3 4 5 8 9
+#.. ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
 
+#objektin tiedot
+typeof(ISSP2012.data$V6) # double
+class(ISSP2012.data$V6) # labelled
+storage.mode(ISSP2012.data$V6) # double
+length(ISSP2012.data$V6) # 61754
+attributes(ISSP2012.data$V6) # label(kysymys), format.spss, class, labels - täällä tieto koodauksesta!
+
+attributes(ISSP2012.data$V6.labels)
+
+
+select(ISSP2012.data,C_ALPHAN, V6) %>% filter(C_ALPHAN == "ES") %>% count(V6) # eli metatiedoissa kerrotaan, että Espanjalla on oma sarake
 
 #http://zacat.gesis.org/webview/ voi tarkistaa - tähän kysymykseen vastauksia (pl. puuttuvat) on 3109
 #on suodatettu pois kaikki, jossa NA tämän setin kysymyksissä! 
