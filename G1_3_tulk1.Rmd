@@ -1,0 +1,19 @@
+
+## Data
+```{r Kirjastot}
+# pitääkö laittaa järjestykseen, vanhemmat ensin?
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+#library(forcats) latautuu haven-paketissa
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+```
+## Tulkinnan perusteita
+
+Tässä syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, ja siksi se oletusarvoisesti piirretään. Milloin voi käyttää vaihtoehtoisia esitystapoja?

@@ -1,0 +1,189 @@
+
+## Data
+
+Ladataan käytettävät paketit:
+```{r Kirjastot}
+# pitääkö laittaa järjestykseen, vanhemmat ensin?
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+#library(forcats) latautuu haven-paketissa
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+# ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon
+
+```
+Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometristä analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, mutta koordinaatiston tulkinnassa voidaan lähteä siitä, että suhteellisesti kaukana toisistaan olevat pisteet ovat kaukana myös alkuperäisessä datassa.
+ 
+#### 
+(@) Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Pitää perustella rajaukset ja kertoa miten ne tehdään.
+(@) Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
+
+(@) Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
+
+(@)Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
+(@) Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
+
+(@) Tulkinnan syventäminen
+
+## Data
+
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
+
+https://search.gesis.org/research_data/ZA5900 2012
+
+Muuttujakuvaukset ja muut tiedot (linkit?)
+http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
+
+Suomenkielinen lomake (ZA5900_q_fi-fi.pdf), https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661
+
+Käyttöehdot:
+https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
+
+Tiedonkeruumenetelmä ja otoskoko:
+https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661
+Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).
+
+
+edit: aineiston kuvailua voi ja kannattaakin jatokssa tarkentaa, ja laittaa se liitteeksi. Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen tässä vain aineiston tärkeimmät rajaukset. 
+
+## Aineiston rajaaminen
+
+Ainestossa (jatkossa ISSP2012) on kyselytutkimusen tulokset 41 maasta. Lisäksi aineistossa on runsaasti demografisia ja muita taustatietoja. R-koodista selviää käytetty versio (SPSS-tiedoston nimi) ja rajauksessa käytetyt muuttujat.
+
+###Rajaukset
+
+(@) Eurooppa ja samankaltaiset maat (28)
+
+Bulgaria, Czech Republic, Denmark, Finnland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia Slovenia, Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal 
+
+Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
+
+(@) Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms. Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Nämä maat jätetään pois ainakin aluksi, vertailukelpoisuuden vuoksi.
+
+(@) kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan nämä otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
+```{r rajaukset}
+# kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
+#two country code variables based on the ISO Code 3166. One identifies
+#countries as a whole, the other one possible subsamples, such as East and West Germany. The cross
+#tabulations shown in this Variable Report are based on a third, alphanumerical country code variable,
+#which also identifies subsamples."
+#V3 - Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)
+# V3 erot valituissa maissa
+# 5601 BE-FLA-Belgium/ Flanders
+# 5602 BE-WAL-Belgium/ Wallonia
+# 5603 BE-BRU-Belgium/ Brussels
+# 27601 DE-W-Germany-West
+# 27602 DE-E-Germany-East
+# 62001 PT-Portugal 2012: first fieldwork round (main sample)
+# 62002 PT-Portugal 2012: second fieldwork round (complementary sample)
+# Myös tämä on erikoinen, näyttää olevan vakio kun V4 = 826:
+# 82601 GB-GBN-Great Britain
+# Portugalissa ainestoa täydennettiin, koska siinä oli puutteita. Jako ei siis ole oleellinen,
+# mutta muuut ovat.
+# Maat:
+# 36 AU-Australia
+# 40 AT-Austria
+# 56 BE-Belgium
+# 100 BG-Bulgaria
+# 124 CA-Canada
+# 191 HR-Croatia
+# 203 CZ-Czech Republic
+# 208 DK-Denmark
+# 246 FI-Finland
+# 250 FR-France
+# 276 DE-Germany
+# 348 HU-Hungary
+# 352 IS-Iceland
+# 372 IE-Ireland
+# 428 LV-Latvia
+# 440 LT-Lithuania
+# 528 NL-Netherlands
+# 578 NO-Norway
+# 616 PL-Poland
+# 620 PT-Portugal
+# 643 RU-Russia
+# 703 SK-Slovakia
+# 705 SI-Slovenia
+# 724 ES-Spain
+# 752 SE-Sweden
+# 756 CH-Switzerland
+# 826 GB-Great Britain and/or United Kingdom
+# 840 US-United States
+
+#valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
+incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+                    528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+#str(ISSP2012.data) #61754 obs. of  420 variables
+ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
+str(ISSP2012jh1.data) #37816 obs. of  420 variables
+#V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim. ES_V5 
+#ja muutkin Espanjan kysymykset (kaikki?)
+#$ V5      :Class 'labelled'  atomic [1:37816] 5 1 2 2 1 NA 2 4 2 2 ...
+#  .. ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
+#  .. ..- attr(*, "format.spss")= chr "F1.0"
+#  .. ..- attr(*, "labels")= Named num [1:8] 0 1 2 3 4 5 8 9
+#  .. .. ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
+# $ ES_V5   :Class 'labelled'  atomic [1:37816] NA NA NA NA NA NA NA NA NA NA ...
+#  .. ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
+#  .. ..- attr(*, "format.spss")= chr "F1.0"
+#  .. ..- attr(*, "display_width")= int 4
+#  .. ..- attr(*, "labels")= Named num [1:7] 0 1 2 3 4 8 9
+#  .. .. ..- attr(*, "names")= chr [1:7] "NAP: other countries" "Strongly agree" "Agree" "Disagree" ...
+#HU_V18
+#V18$label
+attr(ISSP2012jh1.data$V5,'labels')
+attr(ISSP2012jh1.data$ES_V5,'labels')
+```
+
+Yllä esimerkiksi muuttujan V5 metatiedot. Perusvaihtoehdot ovat 1 - 5, ja joillain mailla on vaihtoehtona ollut myös "Can't choose", muilla taas on vain puuttuva tieto (No answer, 9).
+
+Espanjan aineiston metatiedot muuttujulla ES_V5 taas ovat
+```{r espanja1}
+attr(ISSP2012jh1.data$ES_V5,'labels')
+temp1 <- ISSP2012jh1.data %>% filter(V4 == 724) %>% select(ES_V5, C_ALPHAN)
+#str(temp1)
+temp1$ES_V5 <- factor(temp1$ES_V5 )
+summary(temp1)
+#typeof(ISSP2012jh1.data)
+#class(ISSP2012jh1.data)
+#storage.mode(ISSP2012jh1.data)
+#attributes(ISSP2012jh1.data)
+
+```
+Datassa ei ole eroteltu vastausvaihtoehtoa "Can't choose" (8) ja "No answer" (9), ne on (luultavasti) yhdistetty ja koodattu puuttuviksi havainnoiksi. Dokumentaatiosta selviää (s.13), että vaihtoehdon 8 on valinnut 30 ja loput neljä "puuttuvaa tietoa" ovat erävastauskatoa (tai kieltäytymistä tms.).
+
+Muiden kuin Espanjan vastaukset kysymykseen V5 jakautuvat näin:
+```{r muut1}
+temp2 <- ISSP2012jh1.data %>% filter(!(V4 == 724)) %>% select(V5, C_ALPHAN)
+                                     
+#str(temp1)
+temp2$V5 <- factor(temp2$V5 )
+temp2$maa <-  factor(temp2$C_ALPHAN)
+summary(temp2)
+temp2 %>% tableX(V5,maa,type = "count")
+
+```
+
+Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.
+
+###Poikkeavat kysymyset
+
+Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat (em.dok, s. 48)
+
+Islannissa kysymykseen V28 (Consider a couple who both work full-time and now have a new born child. One of them stops working for some time to care for their child. Do you think there should be paid leave available and, if so, for how long?) on tarjolla oma vastausvaihtoehto ((97) "Yes, but don't know how many months"). Kysymyseen "V29 - Q9 Paid leave: Who should pay ja V30(Paid leave: How to divide between parents) Bulgarian kysely on poikkeava (0 NAP (code 0,98 in V28), s. 91).
+
+Hollannin vastausvaihtoehdoissa kysymykseen V35 (Elderly people: Provider of domestic help) on oma variantti "5 Empoyers", jonka kuitenkin on valinnut vain 6 vastajaa (0,5 %).
+
+V39, V40, V41, V42, V43, V44, V45, V46, V47, V48, V50, V51, V52, V53, V54: paljon poikkeamia, aika vaikeaselkoisia kysymyksiä. Näitä ehkä pitää tutkailla...
+V55 (Life in general: How happy on the whole) ok.
+
+V56-57 poikkeamia, V58 (Health status) ok
+V59 "ketjutettu kysymys", samoin V60-V64.
+s. 174 - puolison koulutus...

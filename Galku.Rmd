@@ -43,41 +43,21 @@ Suomenkielinen lomake, linkki.
 Käyttöehdot:
 https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
 
+edit: aineiston kuvailua voi ja kannattaakin jatokssa tarkentaa, ja laittaa se liitteeksi. Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen tässä vain aineiston tärkeimmät rajaukset.
 
-Koitetaanpa lukea data. Onko yksinkertaisempaa tallentaa SPSS:ssa csv - muotoon?
+## Aineiston rajaaminen
 
-Hieman tutkiskelua - Suomen data. Rajataan aineistoa, siellä on maakohtaisia vastausvaihtoehtoja (esim. Espanja, Unkari jne. ). Rajattaneen myös Eurooppaan ja samankaltaisiin maihin (Kanada, USA, Turkki, Uusi Seelanti, Australia, Japani, Etelä-Korea)
-```{r Data1}
+Ainestossa (jatkossa ISSP2012) on kyselytutkimusen tulokset 41 maasta. Lisäksi aineistossa on runsaasti demografisia ja muita taustatietoja. R-koodista selviää käytetty versio (SPSS-tiedoston nimi) ja rajauksessa käytetyt muuttujat.
+
+
+
+
+
+```{r Data1, eval=FALSE, include=FALSE}
 
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
-# puuttuvat tiedot NA, pitäisi koodata 9 jos haluaa analysoida
-# mietittavä, miten fiksusti ca-paketin inputiksi - hyväksyy table, df, matrix
-# ensin deskriptiiviset tarkastelut
-# puuttuvat pois - havaintojen määrä vaihtelee mutta ei haitanne
-```
+# puuttuvat tiedot NA - selvitettävä onko ISSP12 - datassa jossain tarkempi kuvaus (on joissain #laajempi koodaus)
 
-
-```{r Suomen data, eval=FALSE, include=FALSE}
-#str(ISSP2012.data)
-# ei toistaiseksi käytetä Suomen koko dataa
-FinISSP2012 <- filter(ISSP2012.data, C_ALPHAN == "FI")
-FinISSP2012 <- select(FinISSP2012, V5:V67, SEX, AGE)
-FinISSP2012 <- select(FinISSP2012, -(starts_with("ES")))
-head(FinISSP2012)
-```
-
-```{r FiSweHuDat1}
-#Valitaan Suomi, Ruotsi ja Unkari ja yksi kysymys
-FiSeHu2012d1 <- filter(ISSP2012.data, C_ALPHAN == "FI" | C_ALPHAN == "SE" | C_ALPHAN == "HU"  )
-summary(FiSeHu2012d1)
-
-#head(FiSeHu2012d1)
- #perheeseen, työhön ja kotitöihin liittyviä kysymyksiä, Fi-lomakkeella kysymys 23
-FiSeHu2012d2 <- select(FiSeHu2012d1, C_ALPHAN,V5, V6, V7, V8, V9)
-#Poistetaan rivit, joissa puuttuvia tietoja
-#FiSeHu2012d2 <- filter(FiSeHu2012d2, !is.na(V5) & !is.na(V6) & !is.na(V7) & #!is.na(V8) & !is.na(V9))
-#Hyvä esimerkki siitä, mitä pulmia tulee kun puuttuvat havainnot jätetään pois - #havaintojen määrä on milloin mitäkin!
-```
 
 
 ###Taulukko 1: Vastaukset kysymyksiin V5 - V9 (Suomi, Ruotsi ja Unkari)

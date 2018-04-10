@@ -1,0 +1,28 @@
+
+## Data
+```{r Kirjastot}
+# pitääkö laittaa järjestykseen, vanhemmat ensin?
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+#library(forcats) latautuu haven-paketissa
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+```
+## Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
+
+Tässä esitellään yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutamia maita ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+
+Toiseksi riippumattomuushypoteesi ja $chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen.
+
+$chi^2$ - etäisyys, yhteys hajontaa eli inertiaan ca-terminologiassa.
+
+Dimensioiden vähentämisen idea.
+
+Ensimmäinen symmetrinen kartta, tulkinnat ja yksinkertaisimmat perussäännöt ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteiden, mutta ei muut.
+

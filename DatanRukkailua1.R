@@ -62,7 +62,8 @@ attributes(ISSP2012.data$V6) # label(kysymys), format.spss, class, labels - t채�
 attributes(ISSP2012.data$V6.labels)
 
 
-select(ISSP2012.data,C_ALPHAN, V6) %>% filter(C_ALPHAN == "ES") %>% count(V6) # eli metatiedoissa kerrotaan, ett채 Espanjalla on oma sarake
+select(ISSP2012.data,C_ALPHAN, V6) %>% filter(C_ALPHAN == "ES") %>% count(V6) # eli metatiedoissa kerrotaan, 
+#ett채 Espanjalla on oma sarake
 
 #http://zacat.gesis.org/webview/ voi tarkistaa - t채h채n kysymykseen vastauksia (pl. puuttuvat) on 3109
 #on suodatettu pois kaikki, jossa NA t채m채n setin kysymyksiss채! 
