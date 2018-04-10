@@ -1,7 +1,11 @@
-
-## Data
-```{r Kirjastot}
-# pit‰‰kˆ laittaa j‰rjestykseen, vanhemmat ensin?
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+## Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
+```{r }
+# pit√§√§k√∂ laittaa j√§rjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
 library(haven)
@@ -14,15 +18,14 @@ library(rmarkdown)
 library(ggplot2)
 library(furniture)
 ```
-## Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 
-T‰ss‰ esitell‰‰n yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutamia maita ristiintaulukoituna. Johdatteluna aiheeseen esitell‰‰n ca-k‰sitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+T√§ss√§ esitell√§√§n yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutamia maita ristiintaulukoituna. Johdatteluna aiheeseen esitell√§√§n ca-k√§sitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
 
-Toiseksi riippumattomuushypoteesi ja $chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todenn‰kˆisyyten‰ reunajakauman suhteen.
+Toiseksi riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todenn√§k√∂isyyten√§ reunajakauman suhteen.
 
-$chi^2$ - et‰isyys, yhteys hajontaa eli inertiaan ca-terminologiassa.
+$\chi^2$ - et√§isyys, yhteys hajontaa eli inertiaan ca-terminologiassa.
 
-Dimensioiden v‰hent‰misen idea.
+Dimensioiden v√§hent√§misen idea.
 
-Ensimm‰inen symmetrinen kartta, tulkinnat ja yksinkertaisimmat peruss‰‰nnˆt ("mit‰ on oikealla ja vasemmalla"). Jos pisteet ovat alkuper‰isess‰ "pilvess‰" kaukana toisistaan, ne ovat sit‰ myˆs projektiossa. Kartta, mutta et‰isyyksill‰ ei suoraa tulkintaa paitsi eteisyyksin‰ origoon. Rivipisteiden suhteelliset et‰isyydet, samoin sarakepisteiden, mutta ei muut.
+Ensimm√§inen symmetrinen kartta, tulkinnat ja yksinkertaisimmat peruss√§√§nn√∂t ("mit√§ on oikealla ja vasemmalla"). Jos pisteet ovat alkuper√§isess√§ "pilvess√§" kaukana toisistaan, ne ovat sit√§ my√∂s projektiossa. Kartta, mutta et√§isyyksill√§ ei suoraa tulkintaa paitsi eteisyyksinll√§ origoon. Rivipisteiden suhteelliset et√§isyydet, samoin sarakepisteiden, mutta ei muut.
 

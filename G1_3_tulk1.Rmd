@@ -1,7 +1,7 @@
 
-## Data
-```{r Kirjastot}
-# pit‰‰kˆ laittaa j‰rjestykseen, vanhemmat ensin?
+## Tulkinnan perusteita
+```{r }
+# pit√§√§k√∂ laittaa j√§rjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
 library(haven)
@@ -14,6 +14,6 @@ library(rmarkdown)
 library(ggplot2)
 library(furniture)
 ```
-## Tulkinnan perusteita
 
-T‰ss‰ syvennet‰‰n esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleens‰ paras vaihtoehto, ja siksi se oletusarvoisesti piirret‰‰n. Milloin voi k‰ytt‰‰ vaihtoehtoisia esitystapoja?
+
+Luvussa syvennet√§√§n esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleens√§ paras vaihtoehto, siksi se oletusarvoisesti esitet√§√§nkin. Milloin voi k√§ytt√§√§ vaihtoehtoisia esitystapoja?
