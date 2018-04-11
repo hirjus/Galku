@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: 9.4.2018
+date: 10.4.2018
 author: Jussi Hirvonen
 documentclass: article
 output: 
@@ -22,6 +22,11 @@ output:
     fig_height: 6 # takaako aps=1?
     #code_folding: show
 ---
+Kommentteja:
+
+@ edit: oma kommentti, ei varsinaista tekstiä
+@ kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
+@ bib-formaatin viitetietokantaa tullaan kokeilemaan
 
 
 ***

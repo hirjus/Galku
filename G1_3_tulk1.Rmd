@@ -1,6 +1,6 @@
 
-## Tulkinnan perusteita
-```{r }
+# Tulkinnan perusteita
+```{r paketit_g13}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
@@ -13,7 +13,34 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
+# lisätty 10.4.2018
+library(scales)
+library(reshape2)
 ```
 
 
-Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja?
+Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? *Ydinluku*.
+
+Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ratkaisun dimensiot jne.
+
+
+
+# Yksinkertaisen korrespondenssianalyysin laajennuksia
+
+Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai "jakamisen". Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla eri maiden vastausksia useampaan ryhmään.
+
+Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ryhmien sisäisiä (within groups - between groups) eroja hieman. Teknisesti yksinkertaista korrespondenssianalyysiä sovelletaan muokattuun matriisiin. Datamatriisi rakennetaan useammasta alimatriisista, joko "pinoamalla" osamatriiseja (stacked matrices) tai muodostamalla symmetrinen lohkomatriisi (ABBA).
+
+Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
+
+## Lisämuuttujat: ikäluokka ja sukupuoli
+
+Luodaan aineistoon ikä- ja sukupuolimuuttujat
+```{r}
+
+```
+
+
+## ABBA
+
+## Päällekkäiset matriisit (stacked matices)

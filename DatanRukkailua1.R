@@ -95,7 +95,7 @@ test2 %>% table1(maa, splitby = ~V6, test = TRUE,type = "full", row_wise = FALSE
 #miks ei toimi?
 #test2 %>% table1(V6, splitby = ~maa, test = FALSE, type="count", row_wise = TRUE,output = "markdown")
 
-#4.4.2018 siistin taulkun yritystä
+#4.4.2018 siistin taulukon yritystä
 
 #toimii - vaati MiKTexiin booktabs - paketin
 test2 %>% table1(maa, splitby = ~V6, test = TRUE,
@@ -196,6 +196,7 @@ library(scales)
 library(reshape2)
 #taulu1 <- rowSums(taulu1) ei onnistu
 taulu1
+taulu1_df
 taulu1_df <- as.data.frame(taulu1)
 str(taulu1_df)
 taulu1_df$riviprof <- rowSums(taulu1_df)
