@@ -130,6 +130,14 @@ Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusie
 # 756 CH-Switzerland
 # 826 GB-Great Britain and/or United Kingdom
 # 840 US-United States
+#
+# Belgian ja Saksan alueet:
+#  V3
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
@@ -140,8 +148,10 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #length((ISSP2012jh1.data))
 #names(ISSP2012jh1.data)
 #str(ISSP2012jh1.data) #37816 obs. of  420 variables
-#V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim. ES_V5 
-#ja muutkin Espanjan kysymykset (kaikki?)
+#
+#EDIT: tiivistä, nämä ovat vain kokeiluja ja datan kaivelua (15.4.2018)
+#
+# V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim.  #  ES_V5 muutkin Espanjan kysymykset (kaikki?)
 #$ V5      :Class 'labelled'  atomic [1:37816] 5 1 2 2 1 NA 2 4 2 2 ...
 #  .. ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
 #  .. ..- attr(*, "format.spss")= chr "F1.0"
