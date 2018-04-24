@@ -1,5 +1,7 @@
 #paketit: paketit.R
 
+sessionInfo()
+
 # siivous - pois tilapäistiedostoja aika ajoin (temp, test, apu)
 # jatkossa objektien nimeen joku tunniste: df jne
 
@@ -30,11 +32,14 @@ temp3 %>% tableX(V3,V3, type = "count") # molemmat muuttujat samat
 
 
 
-typeof(ISSP2012.data$V4)
-class(ISSP2012.data$V4)
-storage.mode(ISSP2012.data$V4)
-length(ISSP2012.data$V4)
-attributes(ISSP2012.data$V4)
+typeof(ISSP2012.data)
+class(ISSP2012.data)
+storage.mode(ISSP2012.data)
+length(ISSP2012.data)
+attributes(ISSP2012.data) # notes, names
+get_label(ISSP2012.data) # variable labels
+get_labels(ISSP2012.data) # value labels
+ISSP2012.data$V3
 
 tail(temp3)
 head(temp3)

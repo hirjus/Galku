@@ -13,3 +13,4 @@ library(furniture)
 library(likert)
 
 #r-skriptelillä riittää, kun ajaa tämän
+sessionInfo()
