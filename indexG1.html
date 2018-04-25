@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fi" xml:lang="fi">
 
 <head>
 
@@ -137,7 +137,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">G Luku 1 Yksinkertainen korrespondenssianalyysi</h1>
 <h4 class="author"><em>Jussi Hirvonen</em></h4>
-<h4 class="date"><em>10.4.2018</em></h4>
+<h4 class="date"><em>25.4.2018</em></h4>
 
 </div>
 
@@ -163,8 +163,17 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p>Kommentteja:</p>
-<p>@ edit: oma kommentti, ei varsinaista tekstiä @ kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa @ bib-formaatin viitetietokantaa tullaan kokeilemaan</p>
+<p>Kommentteja ja versionhallintaa:</p>
+<ul>
+<li>edit: oma kommentti, ei varsinaista tekstiä</li>
+<li>kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa</li>
+<li>bib-formaatin viitetietokantaa tullaan kokeilemaan</li>
+<li>kuvasuhde (aspect ratio) edelleen epäselvä juttu!</li>
+<li>Datan käsittely ja hallinta +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.5.18)</li>
+<li>faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä</li>
+<li><p>pidetään muuttujien ja tiedosojen nimeäminen selkeänä, tarkistetaan aika ajoin</p></li>
+<li><p>Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.5.18)</p></li>
+</ul>
 <hr />
 <div id="data" class="section level1">
 <h1><span class="header-section-number">1</span> Data</h1>
@@ -184,17 +193,16 @@ library(dplyr)</code></pre>
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(knitr)
 library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages -------------------------------------------------------------------------------------------------- tidyverse 1.2.0 --</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.0 --</code></pre>
 <pre><code>## v ggplot2 2.2.1     v readr   1.1.1
 ## v tibble  1.4.2     v purrr   0.2.4
 ## v tidyr   0.7.2     v stringr 1.2.0
 ## v ggplot2 2.2.1     v forcats 0.2.0</code></pre>
 <pre><code>## Warning: package 'tibble' was built under R version 3.4.3</code></pre>
-<pre><code>## -- Conflicts ----------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>#library(forcats) latautuu haven-paketissa
-library(lubridate)</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
 <pre><code>## 
 ## Attaching package: 'lubridate'</code></pre>
 <pre><code>## The following object is masked from 'package:base':
@@ -204,31 +212,89 @@ library(lubridate)</code></pre>
 library(ggplot2)
 library(furniture)</code></pre>
 <pre><code>## Warning: package 'furniture' was built under R version 3.4.4</code></pre>
-<pre><code>## furniture 1.7.3: learn more at tysonbarrett.com</code></pre>
-<pre class="r"><code># ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon</code></pre>
-<p>Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien – taulukon rivien ja sarakkeiden – riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan “koordinaatiston” tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, mutta koordinaatiston tulkinnassa voidaan lähteä siitä, että suhteellisesti kaukana toisistaan olevat pisteet ovat kaukana myös alkuperäisessä datassa.</p>
+<pre><code>## furniture 1.7.6: learn more at tysonbarrett.com</code></pre>
+<pre class="r"><code>library(likert)</code></pre>
+<pre><code>## Warning: package 'likert' was built under R version 3.4.4</code></pre>
+<pre><code>## Loading required package: xtable</code></pre>
+<pre><code>## 
+## Attaching package: 'likert'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     recode</code></pre>
+<pre class="r"><code>library(scales)   # ggplot2 - kuvalle</code></pre>
+<pre><code>## 
+## Attaching package: 'scales'</code></pre>
+<pre><code>## The following object is masked from 'package:purrr':
+## 
+##     discard</code></pre>
+<pre><code>## The following object is masked from 'package:readr':
+## 
+##     col_factor</code></pre>
+<pre class="r"><code>library(reshape2) # ggplot2 - kuvalle</code></pre>
+<pre><code>## 
+## Attaching package: 'reshape2'</code></pre>
+<pre><code>## The following object is masked from 'package:tidyr':
+## 
+##     smiths</code></pre>
+<pre class="r"><code># ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon?
+sessionInfo()</code></pre>
+<pre><code>## R version 3.4.2 (2017-09-28)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United Kingdom.1252 
+## [2] LC_CTYPE=English_United Kingdom.1252   
+## [3] LC_MONETARY=English_United Kingdom.1252
+## [4] LC_NUMERIC=C                           
+## [5] LC_TIME=English_United Kingdom.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] reshape2_1.4.2  scales_0.5.0    likert_1.3.5    xtable_1.8-2   
+##  [5] furniture_1.7.6 rmarkdown_1.7   lubridate_1.7.1 forcats_0.2.0  
+##  [9] stringr_1.2.0   purrr_0.2.4     readr_1.1.1     tidyr_0.7.2    
+## [13] tibble_1.4.2    ggplot2_2.2.1   tidyverse_1.2.0 knitr_1.17     
+## [17] dplyr_0.7.4     haven_1.1.0     ca_0.70         rgl_0.98.1     
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.13     lattice_0.20-35  assertthat_0.2.0 rprojroot_1.2   
+##  [5] digest_0.6.12    psych_1.7.8      mime_0.5         R6_2.2.2        
+##  [9] cellranger_1.1.0 plyr_1.8.4       backports_1.1.1  evaluate_0.10.1 
+## [13] httr_1.3.1       pillar_1.2.1     rlang_0.2.0      lazyeval_0.2.1  
+## [17] readxl_1.0.0     rstudioapi_0.7   foreign_0.8-69   htmlwidgets_0.9 
+## [21] munsell_0.4.3    shiny_1.0.5      broom_0.4.2      compiler_3.4.2  
+## [25] httpuv_1.3.5     modelr_0.1.1     pkgconfig_2.0.1  mnormt_1.5-5    
+## [29] htmltools_0.3.6  gridExtra_2.3    crayon_1.3.4     grid_3.4.2      
+## [33] nlme_3.1-131     jsonlite_1.5     gtable_0.2.0     magrittr_1.5    
+## [37] cli_1.0.0        stringi_1.1.5    bindrcpp_0.2     xml2_1.1.1      
+## [41] tools_3.4.2      glue_1.2.0       hms_0.3          parallel_3.4.2  
+## [45] yaml_2.1.14      colorspace_1.3-2 rvest_0.3.2      bindr_0.1.1</code></pre>
+<p>Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien – taulukon rivien ja sarakkeiden – riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan “koordinaatiston” tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan “katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla” (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä “pistepilvessä”.</p>
 <div id="luvun-1-tavoitteet" class="section level2">
 <h2><span class="header-section-number">1.1</span> Luvun 1 tavoitteet</h2>
-<ol class="example" style="list-style-type: decimal">
+<ol style="list-style-type: decimal">
 <li>Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Perustella rajaukset ja kertoa miten ne tehdään.</li>
 <li><p>Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta</p></li>
 <li><p>Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)</p></li>
-</ol>
-<p>(@)Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)</p>
-<ol start="4" class="example" style="list-style-type: decimal">
+<li><p>Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)</p></li>
 <li><p>Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.</p></li>
-<li><p>Tulkinnan syventäminen</p></li>
+<li><p>Tulkinnan syventäminen - “kaikki selitetätään”</p></li>
 </ol>
 </div>
 <div id="perhe-ja-muuttuvat-sukupuoliroolit---isspn-kyselytutkimuksen-data-2012" class="section level2">
 <h2><span class="header-section-number">1.2</span> Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012</h2>
-<p>Hieman historiaa, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.</p>
+<p>Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.</p>
 <p>ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, <a href="doi:10.4232/1.12661" class="uri">doi:10.4232/1.12661</a></p>
-<p>[Aineistot] <a href="https://search.gesis.org/research_data/ZA5900" class="uri">https://search.gesis.org/research_data/ZA5900</a> 2012</p>
-<p>[Muuttujakuvaukset ja muut tiedot] <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a></p>
-<p>[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] <a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661</a></p>
-<p>[Käyttöehdot:] <a href="https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/" class="uri">https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/</a></p>
-<p>[Tiedonkeruumenetelmä ja otoskoko:] <a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661</a> Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).</p>
+<p>[Aineistot] (<a href="https://search.gesis.org/research_data/ZA5900" class="uri">https://search.gesis.org/research_data/ZA5900</a>) 2012</p>
+<p>[Muuttujakuvaukset ja muut tiedot] (<a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>)</p>
+<p>[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] (<a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661</a>)</p>
+<p>[Käyttöehdot:] (<a href="https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/" class="uri">https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/</a>)</p>
+<p>[Tiedonkeruumenetelmä ja otoskoko:] (<a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e&amp;doi=10.4232/1.12661</a>) Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).</p>
 <p>edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi. Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset.</p>
 </div>
 <div id="aineiston-rajaaminen" class="section level2">
@@ -245,7 +311,10 @@ library(furniture)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms. Esimerkiksi Espanjan datassa on jätetty pois neutraali “en samaa enkä eri mieltä” - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös.</p></li>
 <li><p>kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita…).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.</p></li>
-<li><p>Datan hallinta</p></li>
+</ol>
+<p><strong>edit:</strong> Tähän täsmennetään miten puuttuvia tietoja käsitellään.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Datan hallinta</li>
 </ol>
 <p>Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.</p>
 <p>Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.</p>
@@ -296,18 +365,36 @@ library(furniture)</code></pre>
 # 756 CH-Switzerland
 # 826 GB-Great Britain and/or United Kingdom
 # 840 US-United States
+#
+# Belgian ja Saksan alueet:
+#  V3
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
 incl_countries &lt;- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
                     528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
-ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;)
+ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;, user_na = TRUE)
+#
+# lisäys 25.4.2018 user_na
+# &quot;If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA&quot;
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+#
+#
 #str(ISSP2012.data) #61754 obs. of  420 variables
 ISSP2012jh1.data &lt;- filter(ISSP2012.data, V4 %in% incl_countries)
 #length((ISSP2012jh1.data))
 #names(ISSP2012jh1.data)
 #str(ISSP2012jh1.data) #37816 obs. of  420 variables
-#V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim. ES_V5 
-#ja muutkin Espanjan kysymykset (kaikki?)
+#
+#EDIT: tiivistä, nämä ovat vain kokeiluja ja datan kaivelua (15.4.2018)
+#
+# V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim.  #  ES_V5 muutkin Espanjan kysymykset (kaikki?)
 #$ V5      :Class 'labelled'  atomic [1:37816] 5 1 2 2 1 NA 2 4 2 2 ...
 #  .. ..- attr(*, &quot;label&quot;)= chr &quot;Q1a Working mom: warm relationship with children as a not working mom&quot;
 #  .. ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
@@ -336,12 +423,13 @@ ISSP2012jh1.data &lt;- filter(ISSP2012.data, V4 %in% incl_countries)
 #str(temp1)
 temp1$ES_V6 &lt;- factor(temp1$ES_V6 )
 summary(temp1)</code></pre>
-<pre><code>##   ES_V6        C_ALPHAN        
-##  1   : 195   Length:2595       
-##  2   :1117   Class :character  
-##  3   : 898   Mode  :character  
-##  4   : 278                     
-##  NA's: 107</code></pre>
+<pre><code>##  ES_V6      C_ALPHAN        
+##  1: 195   Length:2595       
+##  2:1117   Class :character  
+##  3: 898   Mode  :character  
+##  4: 278                     
+##  8:  91                     
+##  9:  16</code></pre>
 <pre class="r"><code>#typeof(ISSP2012jh1.data)
 #class(ISSP2012jh1.data)
 #storage.mode(ISSP2012jh1.data)
@@ -349,6 +437,7 @@ summary(temp1)</code></pre>
 </div>
 <div id="puuttuvat-tiedot-eravastauskato" class="section level2">
 <h2><span class="header-section-number">1.5</span> Puuttuvat tiedot (erävastauskato)</h2>
+<p><strong>EDIT</strong> tämä muuttuu kun puuttuvissa on tarkentava tieto mukana. Tuskin käytetään, joten tekstiä voi reipppaasti supistaa. (25.4.18)</p>
 <p>Datassa ei ole eroteltu vastausvaihtoehtoa “Can’t choose” (8) ja “No answer” (9), ne on (luultavasti) yhdistetty ja koodattu puuttuviksi havainnoiksi. Dokumentaatiosta selviää (s.13), että vaihtoehdon 8 on valinnut 30 ja loput neljä “puuttuvaa tietoa” ovat erävastauskatoa (tai kieltäytymistä tms.). Jokaisen kysymyksen vastauksista löytyy aineiston dokumentaatiossa taulukko, joissa puuttuva tieto on eritelty tarkemmin.</p>
 <p>Muiden kuin Espanjan vastaukset kysymykseen V6 jakautuvat näin:</p>
 <pre class="r"><code>temp2 &lt;- ISSP2012jh1.data %&gt;% filter(!(V4 == 724)) %&gt;% select(V6, C_ALPHAN)
@@ -357,14 +446,14 @@ summary(temp1)</code></pre>
 temp2$V5 &lt;- factor(temp2$V6 )
 temp2$maa &lt;-  factor(temp2$C_ALPHAN)
 summary(temp2)</code></pre>
-<pre><code>##        V6          C_ALPHAN            V5            maa       
-##  Min.   :1.000   Length:35221       1   :2881   FR     : 2409  
-##  1st Qu.:2.000   Class :character   2   :9019   BE     : 2202  
-##  Median :3.000   Mode  :character   3   :6829   CZ     : 1804  
-##  Mean   :3.181                      4   :9576   DE     : 1766  
-##  3rd Qu.:4.000                      5   :5675   AU     : 1612  
-##  Max.   :5.000                      NA's:1241   RU     : 1525  
-##  NA's   :1241                                   (Other):23903</code></pre>
+<pre><code>##        V6          C_ALPHAN         V5            maa       
+##  Min.   :1.000   Length:35221       1:2881   FR     : 2409  
+##  1st Qu.:2.000   Class :character   2:9019   BE     : 2202  
+##  Median :3.000   Mode  :character   3:6829   CZ     : 1804  
+##  Mean   :3.181                      4:9576   DE     : 1766  
+##  3rd Qu.:4.000                      5:5675   AU     : 1612  
+##  Max.   :5.000                      8: 875   RU     : 1525  
+##  NA's   :1241                       9: 366   (Other):23903</code></pre>
 <pre class="r"><code>temp2 %&gt;% tableX(V6,maa,type = &quot;count&quot;)</code></pre>
 <pre><code>##          maa
 ## V6        AT   AU   BE   BG   CA  CH   CZ   DE   DK   FI   FR   GB-GBN
@@ -398,18 +487,19 @@ summary(temp2)</code></pre>
 <p>NAP ja NAV määritellään</p>
 <p>“GESIS adds ‘Not applicable’(NAP) codes for questions that have filters. NAP indicates that only a subsample and not all of respondents were asked. Also in the case of country spesific variables, all the other countries are coded NAP.</p>
 <p>GESIS adds ‘Not available’ for variables, which in singe countries may not have been conducted for whatever reason.&quot;</p>
+<p><strong>EDIT:</strong> Puuttuneisuuden lyhyttä kuvailua, ja rajausten vaikutus havaintojen lukumäärään muutamaan taulukkoon. Voi siirtää liitteisiin (25.4.2018)</p>
 <pre class="r"><code>#Tähän lisätään erävastauskadon kuvailua - 10.4.2018
 #Nyt edetään esimerkkin, jossa mukana kuusi maata ja kysymys V6 - palataan kun aineistoa laajennettaan.</code></pre>
-<div id="poikkeavat-kysymyset" class="section level3">
-<h3><span class="header-section-number">1.5.1</span> Poikkeavat kysymyset</h3>
+<div id="poikkeavat-kysymykset" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Poikkeavat kysymykset</h3>
 <p>Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto “en osaa sanoa”, ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto. SPSS-aineistossa nämä kaikki on koodattu puuttuviksi havainnoiksi.</p>
 <p>Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).</p>
-<p>edit: nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.</p>
+<p><strong>edit:</strong> nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.</p>
 <p>Islannissa kysymykseen V28 (Consider a couple who both work full-time and now have a new born child. One of them stops working for some time to care for their child. Do you think there should be paid leave available and, if so, for how long?) on tarjolla oma vastausvaihtoehto ((97) “Yes, but don’t know how many months”). Kysymyseen “V29 - Q9 Paid leave: Who should pay ja V30(Paid leave: How to divide between parents) Bulgarian kysely on poikkeava (0 NAP (code 0,98 in V28), s. 91).</p>
 <p>Hollannin vastausvaihtoehdoissa kysymykseen V35 (Elderly people: Provider of domestic help) on oma variantti “5 Empoyers”, jonka kuitenkin on valinnut vain 6 vastajaa (0,5 %).</p>
 <p>V39, V40, V41, V42, V43, V44, V45, V46, V47, V48, V50, V51, V52, V53, V54: paljon poikkeamia, aika vaikeaselkoisia kysymyksiä. Näitä ehkä pitää tutkailla… V55 (Life in general: How happy on the whole) ok.</p>
 <p>V56-57 poikkeamia, V58 (Health status) ok V59 “ketjutettu kysymys”, samoin V60-V64. s. 174 - puolison koulutus…</p>
-<p>edit:täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.</p>
+<p><strong>edit:</strong> täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.</p>
 <hr />
 </div>
 </div>
@@ -433,8 +523,15 @@ summary(temp2)</code></pre>
 </ol>
 <pre class="r"><code>#vähän hankalaa jos Rmd-tiedoston 'scope' vaatii aina kaiken ajamisen joka tiedostossa!
 incl_esim1 &lt;- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
-ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;) # Alkuperäinen data
-#str(ISSP2012.data) #61754 obs. of  420 variables
+ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;, user_na = TRUE) # Alkuperäinen data
+#
+# lisäys 25.4.2018 user_na
+# &quot;If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA&quot;
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+# str(ISSP2012.data) 
+#61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
 #
 # kuusi maata
 ISSP2012esim1.dat &lt;- filter(ISSP2012.data, V4 %in% incl_esim1) 
@@ -464,7 +561,7 @@ ISSP2012esim1.dat %&gt;% table1(C_ALPHAN, splitby = V6)</code></pre>
 ##     FI    47 (5.8%)   188 (9.7%)  149 (10.9%) 423 (19.9%) 303 (15.9%)
 ##     HU    219 (27%)   288 (14.9%) 225 (16.5%) 190 (8.9%)  75 (3.9%)  
 ## ----------------------------------------------------------------------</code></pre>
-<p>Havaintojen lukumäärät voi tarkistaa [täältä] <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>) .</p>
+<p>Havaintojen lukumäärät voi tarkistaa [täältä] (<a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>) .</p>
 <p>Tehdään aineistoon muutama muutos, jotta sen käsittely on helpompaa.</p>
 <pre class="r"><code># muutetaan muuttujia faktoreiksi
 #
@@ -516,8 +613,29 @@ ISSP2012esim1.dat %&gt;% tableX(maa, V6, type = &quot;count&quot;)</code></pre>
 ##   FI    0.58 2.31  1.83  5.19  3.72  13.63 
 ##   HU    2.69 3.54  2.76  2.33  0.92  12.24 
 ##   Total 9.95 23.76 16.79 26.10 23.41 100.00</code></pre>
+<pre class="r"><code>ISSP2012esim1.dat %&gt;% tableX(maa,V6,type = &quot;row_perc&quot;)</code></pre>
+<pre><code>##      V6
+## maa   ts    s     ese   e     te    Total 
+##   BE  9.49  22.40 21.76 27.42 18.93 100.00
+##   BG  12.81 42.89 22.26 20.63 1.41  100.00
+##   DE  9.63  21.88 11.55 31.39 25.55 100.00
+##   DK  5.04  17.15 10.95 16.71 50.14 100.00
+##   FI  4.23  16.94 13.42 38.11 27.30 100.00
+##   HU  21.97 28.89 22.57 19.06 7.52  100.00
+##   All 9.95  23.76 16.79 26.10 23.41 100.00</code></pre>
+<pre class="r"><code>ISSP2012esim1.dat %&gt;% tableX(maa,V6,type = &quot;col_perc&quot;)</code></pre>
+<pre><code>##        V6
+## maa     ts     s      ese    e      te     All   
+##   BE    23.58  23.31  32.04  25.98  19.99  24.72 
+##   BG    14.57  20.41  15.00  8.94   0.68   11.31 
+##   DE    20.37  19.38  14.48  25.32  22.98  21.05 
+##   DK    8.64   12.30  11.12  10.92  36.52  17.05 
+##   FI    5.80   9.72   10.90  19.91  15.90  13.63 
+##   HU    27.04  14.88  16.46  8.94   3.93   12.24 
+##   Total 100.00 100.00 100.00 100.00 100.00 100.00</code></pre>
 <p>Taulukoissa on kuuden maan vastausten jakauma kysymykseen “Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä”. Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan (“Total”“) keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen (”Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).</p>
-<p>edit: pitäisikö havainnollistaa riviprofiilien ja sarakeprofiilien esittelyllä erikseen?</p>
+<p><strong>EDIT:</strong> Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.</p>
+<p><strong>edit:</strong> pitäisikö myös riviprofiileja havainnollistaa kuvalla?</p>
 <pre class="r"><code>#tauluG121 &lt;- ISSP2012esim1.dat %&gt;% tableX(maa, V6, type = &quot;count&quot;)
 #str(tauluG121)
 #apu1 &lt;- (tauluG121[-7, -6])
@@ -547,12 +665,13 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 #apu1b_df</code></pre>
 <p>Ensimmäinen korrespondenssianalyysi</p>
 <pre class="r"><code>#simpleCA1 &lt;- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
-#symmetrinen kartta
+#symmetrinen kartta - asp=1 - optio ei toimi?
 plot(simpleCA1, map = &quot;symmetric&quot;, mass = c(TRUE,TRUE))</code></pre>
 <p><img src="data:image/png;base64,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" width="576" /></p>
 <pre class="r"><code>#asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = &quot;rowprincipal&quot;, mass = c(TRUE,TRUE))</code></pre>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIAAAASACAMAAACwdsZoAAABR1BMVEUAAAAAADoAAGYAALYAANsAAP8AOjoAOmYAOpAAOv8AZrYAZv86AAA6AGY6AP86OgA6Ojo6OmY6Ov86ZmY6ZpA6ZrY6Zv86kNs6kP9mAABmADpmAP9mOgBmOjpmOmZmOv9mZjpmZmZmZpBmkJBmkLZmkNtmkP9mtttmtv+QOgCQOv+QZgCQZjqQZmaQZv+QkGaQkJCQkLaQtraQttuQtv+Q29uQ2/+2ZgC2Zjq2Zv+2kDq2kGa2kJC2kLa2kP+2tpC2tra2ttu225C227a229u22/+2///bkDrbkGbbkP/btmbbtpDbtrbbtv/b27bb29vb2//b/9vb////AAD/ADr/AGb/OgD/Ojr/Omb/OpD/ZgD/Zjr/ZpD/Zrb/kDr/kJD/kLb/kNv/tmb/tpD/ttv/tv//25D/27b/29v/2////7b//9v///+bRMszAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO3d/Xvc5n3g66F3abkuN5YbOa7W0maZaGspUbtbO8d0VqfH9DmylUqO5NUkTpw0bsPEpKTh///zAeYNmBdSxAwG3wfAfV9XwuGQgwHJRx/jHYNzgCCD6BkA+kuAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaAgDACBIQRICCMAAFhBAgII0BAGAECwggQEEaA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" width="576" /></p>
+<pre class="r"><code>#str(simpleCA1)</code></pre>
 </div>
 <div id="korrespondenssianalyysin-kasitteet" class="section level2">
 <h2><span class="header-section-number">2.2</span> Korrespondenssianalyysin käsitteet</h2>
@@ -561,27 +680,26 @@ plot(simpleCA1, map = &quot;rowprincipal&quot;, mass = c(TRUE,TRUE))</code></pre
 <li><p>Massat</p></li>
 <li><p>Profiilien etäisyydet</p></li>
 </ol>
+<p><strong>EDIT:</strong> kaavaliitteessä (LaTeX) on kirjoiteltu valmiiksi - en vielä lisää (25.8.18)</p>
 <hr />
 <hr />
 </div>
 </div>
 <div id="tulkinnan-perusteita" class="section level1">
 <h1><span class="header-section-number">3</span> Tulkinnan perusteita</h1>
-<pre class="r"><code># pitääkö laittaa järjestykseen, vanhemmat ensin?
-library(rgl)
+<pre class="r"><code>library(rgl)
 library(ca)
 library(haven)
 library(dplyr)
 library(knitr)
 library(tidyverse)
-#library(forcats) latautuu haven-paketissa
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-# lisätty 10.4.2018
-library(scales)
-library(reshape2)</code></pre>
+library(likert)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva</code></pre>
 <p>Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? <em>Ydinluku</em>.</p>
 <p>Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ratkaisun dimensiot jne.</p>
 </div>

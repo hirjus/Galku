@@ -79,7 +79,7 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 
 3. kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
 
-*edit:* Tähän täsmennetään miten puuttuvia tietoja käsitellään.
+**edit:** Tähän täsmennetään miten puuttuvia tietoja käsitellään.
 
 4. Datan hallinta
 
@@ -150,7 +150,8 @@ incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352,
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
 #
 # lisäys 25.4.2018 user_na
-# "If TRUE variables with user defined missing will be read into labelled_spss objects. # If FALSE, the default, user-defined missings will be converted to NA"
+# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
 #
@@ -198,6 +199,8 @@ summary(temp1)
 ```
 ##Puuttuvat tiedot (erävastauskato)
 
+**EDIT** tämä muuttuu kun puuttuvissa on tarkentava tieto mukana. Tuskin käytetään, joten tekstiä voi reipppaasti supistaa. (25.4.18)
+
 Datassa ei ole eroteltu vastausvaihtoehtoa "Can't choose" (8) ja "No answer" (9), ne on (luultavasti) yhdistetty ja koodattu puuttuviksi havainnoiksi. Dokumentaatiosta selviää (s.13), että vaihtoehdon 8 on valinnut 30 ja loput neljä "puuttuvaa tietoa" ovat erävastauskatoa (tai kieltäytymistä tms.). Jokaisen kysymyksen vastauksista löytyy aineiston dokumentaatiossa taulukko, joissa puuttuva tieto on eritelty tarkemmin.
 
 
@@ -228,6 +231,7 @@ NAP ja NAV määritellään
 
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
 
+**EDIT:** Puuttuneisuuden lyhyttä kuvailua, ja rajausten vaikutus havaintojen lukumäärään muutamaan taulukkoon. Voi siirtää liitteisiin (25.4.2018)
 
 ```{r puuttuvat1}
 #Tähän lisätään erävastauskadon kuvailua - 10.4.2018
@@ -243,7 +247,7 @@ Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jol
 
 Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
 
-edit: nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
+**edit:** nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 Islannissa kysymykseen V28 (Consider a couple who both work full-time and now have a new born child. One of them stops working for some time to care for their child. Do you think there should be paid leave available and, if so, for how long?) on tarjolla oma vastausvaihtoehto ((97) "Yes, but don't know how many months"). Kysymyseen "V29 - Q9 Paid leave: Who should pay ja V30(Paid leave: How to divide between parents) Bulgarian kysely on poikkeava (0 NAP (code 0,98 in V28), s. 91).
 
@@ -256,4 +260,4 @@ V56-57 poikkeamia, V58 (Health status) ok
 V59 "ketjutettu kysymys", samoin V60-V64.
 s. 174 - puolison koulutus...
 
-edit:täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
+**edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.

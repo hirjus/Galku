@@ -49,8 +49,15 @@ Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - t�
 ```{r esim1data}
 #vähän hankalaa jos Rmd-tiedoston 'scope' vaatii aina kaiken ajamisen joka tiedostossa!
 incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data
-#str(ISSP2012.data) #61754 obs. of  420 variables
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alkuperäinen data
+#
+# lisäys 25.4.2018 user_na
+# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA"
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+# str(ISSP2012.data) 
+#61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
 #
 # kuusi maata
 ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
@@ -68,7 +75,7 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 #str(ISSP2012esim1.dat) #8143 obs. of  6 variables
 ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6)
 ```
-Havaintojen lukumäärät voi tarkistaa [täältä] http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
+Havaintojen lukumäärät voi tarkistaa [täältä] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
 
 Tehdään aineistoon muutama muutos, jotta sen käsittely on helpompaa.
 ```{r}
@@ -104,14 +111,20 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 
 ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
 ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
+ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
 
 ```
-Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %). 
+Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
+
+**EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
+
 ```{r EkaCA, include=FALSE}
 simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
+#tämä ajetaan jotta saadaan hieno kuva piirrettyä
 ```
 
-edit: pitäisikö havainnollistaa riviprofiilien ja sarakeprofiilien esittelyllä erikseen?
+**edit:** pitäisikö myös riviprofiileja havainnollistaa kuvalla?
 
 ```{r g1_2_kuva1}
 #tauluG121 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
@@ -161,6 +174,8 @@ plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 2. Massat
 
 3. Profiilien etäisyydet
+
+**EDIT:** kaavaliitteessä (LaTeX) on kirjoiteltu valmiiksi - en vielä lisää (25.8.18)
 
 
 
