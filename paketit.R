@@ -1,5 +1,5 @@
 # Paketit - onko järjestyksellä väliä?
-# 14.4.2018
+# 25.4.2018
 library(rgl)
 library(ca)
 library(haven)
@@ -11,6 +11,7 @@ library(rmarkdown)
 library(ggplot2)
 library(furniture)
 library(likert)
-
-#r-skriptelillä riittää, kun ajaa tämän
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+#r-skripteillä riittää, kun ajaa tämän
 sessionInfo()

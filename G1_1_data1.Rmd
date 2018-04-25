@@ -10,7 +10,7 @@ output:
 # Data
 
 Ladataan käytettävät paketit:
-```{r }
+```{r paketit_g11}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
@@ -18,43 +18,46 @@ library(haven)
 library(dplyr)
 library(knitr)
 library(tidyverse)
-#library(forcats) latautuu haven-paketissa
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-# ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon
+library(likert)
+library(scales)   # ggplot2 - kuvalle
+library(reshape2) # ggplot2 - kuvalle
+# ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon?
+sessionInfo()
 
 ```
-Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, mutta koordinaatiston tulkinnassa voidaan lähteä siitä, että suhteellisesti kaukana toisistaan olevat pisteet ovat kaukana myös alkuperäisessä datassa.
+Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä "pistepilvessä".
  
 ## Luvun 1 tavoitteet
-(@) Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Perustella rajaukset ja kertoa miten ne tehdään.
-(@) Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
+1. Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Perustella rajaukset ja kertoa miten ne tehdään.
+2. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
 
-(@) Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
+3. Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
 
-(@)Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
+4. Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
 
-(@) Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
+5.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
 
-(@) Tulkinnan syventäminen
+6. Tulkinnan syventäminen - "kaikki selitetätään"
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 
-Hieman historiaa, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
+Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
 
 ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
 
-[Aineistot] https://search.gesis.org/research_data/ZA5900 2012
+[Aineistot] (https://search.gesis.org/research_data/ZA5900) 2012
 
-[Muuttujakuvaukset ja muut tiedot] http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
+[Muuttujakuvaukset ja muut tiedot] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
 
-[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661
+[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 
-[Käyttöehdot:] https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/
+[Käyttöehdot:] (https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
 
-[Tiedonkeruumenetelmä ja otoskoko:] https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661
+[Tiedonkeruumenetelmä ja otoskoko:] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).
 
 
@@ -75,6 +78,8 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms. Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös.
 
 3. kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
+
+*edit:* Tähän täsmennetään miten puuttuvia tietoja käsitellään.
 
 4. Datan hallinta
 
@@ -142,7 +147,14 @@ Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusie
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
                     528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
+#
+# lisäys 25.4.2018 user_na
+# "If TRUE variables with user defined missing will be read into labelled_spss objects. # If FALSE, the default, user-defined missings will be converted to NA"
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+#
+#
 #str(ISSP2012.data) #61754 obs. of  420 variables
 ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #length((ISSP2012jh1.data))

@@ -12,12 +12,12 @@ library(haven)
 library(dplyr)
 library(knitr)
 library(tidyverse)
-#library(forcats) latautuu haven-paketissa
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-#LISÄÄ TARVITTAESSA NÄMÄ! ggplot-kuva tarvitsee
+library(likert)
+#LISÄÄ TARVITTAESSA NÄMÄ! ggplot-kuva tarvitsee - laitoin skriptiin paketit.R 25.4.2018
 library(scales)
 library(reshape2)
 ```
@@ -144,13 +144,12 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 Ensimmäinen korrespondenssianalyysi
 ```{r ekaCA}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
-#symmetrinen kartta
+#symmetrinen kartta - asp=1 - optio ei toimi?
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 
 #asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
-
-
+#str(simpleCA1)
 
 ```
 

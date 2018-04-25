@@ -1,21 +1,19 @@
 
 # Tulkinnan perusteita
 ```{r paketit_g13}
-# pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
 library(haven)
 library(dplyr)
 library(knitr)
 library(tidyverse)
-#library(forcats) latautuu haven-paketissa
 library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-# lisätty 10.4.2018
-library(scales)
-library(reshape2)
+library(likert)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
 ```
 
 

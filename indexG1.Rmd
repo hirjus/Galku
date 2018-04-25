@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: 24.4.2018
+date: 25.4.2018
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -11,7 +11,7 @@ output:
     toc_depth: 2
     fig_caption: true
     fig_width: 6
-    fig_height: 6 # takaako aps=1? Ei takaa!
+    fig_height: 6 # takaako asp=1? Ei takaa!
     #code_folding: show
   html_document:
     theme: cosmo
@@ -23,11 +23,18 @@ output:
     fig_height: 6 # takaako aps=1?
     code_folding: hide
 ---
-Kommentteja:
+Kommentteja ja versionhallintaa:
 
-@ edit: oma kommentti, ei varsinaista tekstiä
-@ kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
-@ bib-formaatin viitetietokantaa tullaan kokeilemaan
+* edit: oma kommentti, ei varsinaista tekstiä
+* kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
+* bib-formaatin viitetietokantaa tullaan kokeilemaan
+* kuvasuhde (aspect ratio) edelleen epäselvä juttu!
+* Datan käsittely ja hallinta
+  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE 
+  + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
+  + pidetään muuttujien ja tiedosojen nimeäminen selkeänä, tarkistetaan aika ajoin
+  
+
 
 
 ***
