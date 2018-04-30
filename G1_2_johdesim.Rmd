@@ -149,11 +149,23 @@ apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat ="identity") +
          scale_y_continuous(labels = percent_format()) 
-#str(apu2_df)
-#apu2_df
-#apu1_df
-#apu1b_df
+
 ```
+Riviprofiilit
+```{r g1_2_kuva2}
+# riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
+apu2_df <- as.data.frame(apu1)
+apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
+apu2_df
+#muokataan 'long data' - muotoon
+apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
+
+ggplot(apu2b_df, aes(x = variable, y = value, fill = ind)) +
+         geom_bar(position = "fill", stat ="identity") +
+         scale_y_continuous(labels = percent_format()) 
+```
+
+
 Ensimmäinen korrespondenssianalyysi
 ```{r ekaCA}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
