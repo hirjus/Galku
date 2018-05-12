@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 ```{r paketit_g12, include=FALSE}
@@ -135,6 +135,7 @@ simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
 #(rowSums(apu1))
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
+##https://stackoverflow.com/questions/9563368/create-stacked-barplot-where-each-stack-is-scaled-to-sum-to
 #
 # käytetään ca - tuloksia
 apu1 <- (simpleCA1$N)
@@ -152,31 +153,57 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 
 ```
 Riviprofiilit
-```{r g1_2_kuva2}
+```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
+# kokeillaan vähän simppelimmin
 apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 apu2_df
-#muokataan 'long data' - muotoon
-apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
-
-ggplot(apu2b_df, aes(x = variable, y = value, fill = ind)) +
-         geom_bar(position = "fill", stat ="identity") +
-         scale_y_continuous(labels = percent_format()) 
+#str(apu2_df)
+#typeof(apu2_df) # what is it?
+#class(apu2_df) # what is it? (sorry)
+#storage.mode(apu2_df) # what is it? (very sorry)
+#length(apu2_df) # how long is it? What about two dimensional objects?
+#attributes(apu2_df) 
+apu2_perc <- apply(apu2_df,1,function(x){x/sum(x)})
+apu2_perc
+##muokataan 'long data' - muotoon
+#apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
+#
+#
+#ggplot(apu2b_df, aes(x = variable, y = value, fill = ind)) +
+#         geom_bar(position = "fill", stat ="identity") +
+#         #coord_flip() +
+#         scale_y_continuous(labels = percent_format()) 
 ```
+
 
 
 Ensimmäinen korrespondenssianalyysi
 ```{r ekaCA}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
-#symmetrinen kartta - asp=1 - optio ei toimi?
+#symmetrinen kartta - asp=1 - optio ei toimi? Tilapäinen fiksi alla (12.5.2018)
+
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 
 #asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 #str(simpleCA1)
+#kuvasuhde saadaan tilapäisesti ratkaistua omalla tulostusikkunalla komentoriviltä X11() ja #tulostuskomento samoin
 
 ```
+Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
+
+
+![Alt text]1CAmap_sy.pdf
+
+Ja toinen tapa
+```{r}
+#include_graphics[width=8]{1CAmap_sy.pdf}
+
+```
+
+
 
 
 ## Korrespondenssianalyysin käsitteet
