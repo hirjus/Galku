@@ -124,7 +124,7 @@ simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
 #tämä ajetaan jotta saadaan hieno kuva piirrettyä
 ```
 
-**edit:** pitäisikö myös riviprofiileja havainnollistaa kuvalla?
+**edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
 
 ```{r g1_2_kuva1}
 #tauluG121 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
@@ -152,7 +152,7 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          scale_y_continuous(labels = percent_format()) 
 
 ```
-Riviprofiilit
+Riviprofiilit ovat vielä tekemättä vailla valmiita (13.5.2018)
 ```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
 # kokeillaan vähän simppelimmin
@@ -180,7 +180,7 @@ apu2_perc
 
 
 Ensimmäinen korrespondenssianalyysi
-```{r ekaCA}
+```{r ekaCA }
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
 #symmetrinen kartta - asp=1 - optio ei toimi? Tilapäinen fiksi alla (12.5.2018)
 
@@ -189,18 +189,19 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 #asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 #str(simpleCA1)
-#kuvasuhde saadaan tilapäisesti ratkaistua omalla tulostusikkunalla komentoriviltä X11() ja #tulostuskomento samoin
-
+# kuvasuhde saadaan tilapäisesti ratkaistua omalla tulostusikkunalla komentoriviltä X11() ja #tulostuskomento samoin
+# mutta tästä tulee hankaluuksia jatkossa. Jos näin pitää tehdä, parempi tulostaa kuva pdf-ajurilla suoraan, ei tallentaa # grafiikkaikkunasta. Se on viimeinen konsti. (13.5.2018)
 ```
 Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 
-
-![Alt text]1CAmap_sy.pdf
+Kuvatiedosto suoraan markdownilla
+![Alt text](1CAmap_sy.pdf)
 
 Ja toinen tapa
-```{r}
-#include_graphics[width=8]{1CAmap_sy.pdf}
-
+```{r out.width = "100px" out.hight = "100px"}
+img_path <- "1CAmap_sy.pdf"
+include_graphics(img_path)
+# knitr-funktio, "document format agnostic""
 ```
 
 

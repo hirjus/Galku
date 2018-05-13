@@ -1,16 +1,11 @@
----
-output: 
-  html_document: 
-    fig_caption: yes
-    fig_height: 6
-    fig_width: 6
-    number_sections: yes
----
+
 
 # Data
 
-Ladataan käytettävät paketit:
-```{r paketit_g11}
+**edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018)
+
+Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi.
+```{r paketit_g11, include=FALSE}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
 library(ca)
