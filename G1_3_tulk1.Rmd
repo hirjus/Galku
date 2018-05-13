@@ -1,6 +1,6 @@
 
 # Tulkinnan perusteita
-```{r paketit_g13}
+```{r paketit_g13, include=FALSE}
 library(rgl)
 library(ca)
 library(haven)

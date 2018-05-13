@@ -179,7 +179,7 @@ apu2_perc
 
 
 
-Ensimmäinen korrespondenssianalyysi
+Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 ```{r ekaCA}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
 #symmetrinen kartta - asp=1 - optio ei toimi? Tilapäinen fiksi alla (12.5.2018)
@@ -197,13 +197,14 @@ plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 
 Kuvatiedosto suoraan markdownilla
-![Alt text](1CAmap_sy.pdf)
+![Alt text](img/1CAmap_sy.pdf)
 
 Ja toinen tapa
-```{r kuvatdsto1, out.width = "5", fig.asp = 1 }
-img_path <- "1CAmap_sy.pdf"
+```{r kuvatdsto1}
+img_path <- "img/1CAmap_sy.pdf"
 include_graphics(img_path)
-# knitr-funktio, "document format agnostic""
+# knitr-funktio, "document format agnostic"
+# mutta parametriarvot (out.width = "4", fig.asp = 1 ) tuottavat pandoc error 43, Illegal unit of measure (pt inserted)
 ```
 
 

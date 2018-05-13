@@ -5,23 +5,23 @@ author: Jussi Hirvonen
 documentclass: article
 lang: fi
 output: 
-  pdf_document:
-    toc: true
-    number_sections: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 4
-    fig_height: 4 # takaako asp=1? Ei takaa!
-    #code_folding: show
   html_document:
     theme: cosmo
     toc: true
     number_sections: true
     toc_depth: 2
     fig_caption: true
-    fig_width: 4 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
-    fig_height: 4 # takaako aps=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
+    fig_width: 4.5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
+    fig_height: 4.5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 4.5
+    fig_height: 4.5 # takaako asp=1? Ei takaa! Mutta aika lähellä
+    #code_folding: show
 ---
 Kommentteja ja versionhallintaa:
 
@@ -30,11 +30,11 @@ Kommentteja ja versionhallintaa:
 * bib-formaatin viitetietokantaa tullaan kokeilemaan
 * kuvasuhde (aspect ratio) edelleen epäselvä juttu!
 * Datan käsittely ja hallinta
-  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.5.18)
+  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.4.18)
   + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
   + pidetään muuttujien ja tiedosojen nimeäminen selkeänä, tarkistetaan aika ajoin
   
-* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.5.18)
+* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18)
   
 
 
