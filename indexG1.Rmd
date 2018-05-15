@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: 25.4.2018
+date: 15.5.2018
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -11,16 +11,16 @@ output:
     number_sections: true
     toc_depth: 2
     fig_caption: true
-    fig_width: 4.5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
-    fig_height: 4.5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
+    fig_width: 5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
+    fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
   pdf_document:
     toc: true
     number_sections: true
     toc_depth: 2
     fig_caption: true
-    fig_width: 4.5
-    fig_height: 4.5 # takaako asp=1? Ei takaa! Mutta aika lähellä
+    fig_width: 5
+    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
     #code_folding: show
 ---
 Kommentteja ja versionhallintaa:
@@ -28,17 +28,20 @@ Kommentteja ja versionhallintaa:
 * edit: oma kommentti, ei varsinaista tekstiä
 * kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
 * bib-formaatin viitetietokantaa tullaan kokeilemaan
-* kuvasuhde (aspect ratio) edelleen epäselvä juttu!
+* kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa olevan ok.
 * Datan käsittely ja hallinta
   +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.4.18)
   + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
-  + pidetään muuttujien ja tiedosojen nimeäminen selkeänä, tarkistetaan aika ajoin
+  + pidetään muuttujien ja tiedostojen nimeäminen selkeänä, tarkistetaan aika ajoin
   
-* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18)
+* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva riviprofiileista puuttu vielä (15.5.2018)
+* Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html on helpompi lukea, kun koodi on oletuksena piilossa
+* PDF-tulosteessa koodi pääsääntöisesti näkyy toistaiseksi
+* kokeiluja CA-karttojen tulostamiseen (a) suoraan koodilla ja (b) r-grafiikkaikkunasta tallennetun pdf-kuvan avlla. Paras toistaiseksi (a), jätin kokeilu näkyviin. Analyysit R:n grafiikkaikkunassa, jotta asp=1, ja tulkintaa varten voi tallentaa PDF-muodossa.
+* rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, kaavat, määritelmät
+* tehdään käsitetaulukko (kirjoittamista varten)
+ 
   
-
-
-
 ***
   
 ```{r child = "G1_1_data1.Rmd"}

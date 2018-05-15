@@ -130,6 +130,10 @@ str(test4)
 #Viides yritys
 test5 <- test2$V6 %xt% test2$maa #tulos lista - ei toimi
 
+# 15.5.2018 jatketaan taulukoita
+ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6, test=TRUE)
+ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6, row_wise = FALSE,test=TRUE)
+
 
 #CA-inputiksi
 str(test2)

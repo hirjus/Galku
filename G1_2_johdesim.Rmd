@@ -1,8 +1,4 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
+
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 ```{r paketit_g12, include=FALSE}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
@@ -22,15 +18,24 @@ library(scales)
 library(reshape2)
 ```
 
+**jäsennystä**  
+
 Tässä esitellään yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutamia maita ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+
+Taulukoita kannattaa tarkastella ensin rivien (kuva puuttuu) ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitamme hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
+
 
 Toiseksi riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen.
 
-$\chi^2$ - etäisyys, yhteys hajontaa eli inertiaan ca-terminologiassa.
+$\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
-Dimensioiden vähentämisen idea.
+Dimensioiden vähentämisen idea, joka ei pienessä taulossa ole ihan ilmeinen.
 
-Ensimmäinen symmetrinen kartta, tulkinnat ja yksinkertaisimmat perussäännöt ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteiden, mutta ei muut.
+**Ensimmäinen symmetrinen kartta**
+
+Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet.
+
+Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien.
 
 ## Äiti työssä
 
@@ -73,9 +78,9 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 #poistetaan havainnot, joissa puuttuvia tietoja
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 #str(ISSP2012esim1.dat) #8143 obs. of  6 variables
-ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6)
+#ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6) table1 tuottaa siitejä outputeja esim. LateX-formaatilla, mutta muuten vähän optioita
 ```
-Havaintojen lukumäärät voi tarkistaa [täältä] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
+
 
 Tehdään aineistoon muutama muutos, jotta sen käsittely on helpompaa.
 ```{r}
@@ -110,7 +115,6 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 # Taulkoidaan data
 
 ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
 ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
 ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
 
@@ -152,21 +156,21 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          scale_y_continuous(labels = percent_format()) 
 
 ```
-Riviprofiilit ovat vielä tekemättä vailla valmiita (13.5.2018)
+Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.5.2018).
 ```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
 # kokeillaan vähän simppelimmin
-apu2_df <- as.data.frame(apu1)
-apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
-apu2_df
-#str(apu2_df)
-#typeof(apu2_df) # what is it?
-#class(apu2_df) # what is it? (sorry)
-#storage.mode(apu2_df) # what is it? (very sorry)
-#length(apu2_df) # how long is it? What about two dimensional objects?
-#attributes(apu2_df) 
-apu2_perc <- apply(apu2_df,1,function(x){x/sum(x)})
-apu2_perc
+#apu2_df <- as.data.frame(apu1)
+#apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
+
+## str(apu2_df)
+## typeof(apu2_df) # what is it?
+## class(apu2_df) # what is it? (sorry)
+## storage.mode(apu2_df) # what is it? (very sorry)
+## length(apu2_df) # how long is it? What about two dimensional objects?
+## attributes(apu2_df) 
+
+
 ##muokataan 'long data' - muotoon
 #apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
 #
@@ -180,19 +184,31 @@ apu2_perc
 
 
 Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
-```{r ekaCA}
-#simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan siinä!
-#symmetrinen kartta - asp=1 - optio ei toimi? Tilapäinen fiksi alla (12.5.2018)
 
-plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
+Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
+```{r suhtfrek1}
+ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+
+```
+
+
+
+```{r ekaCA }
+#simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
+#symmetrinen kartta
+
+plot(simpleCA1, map = "symmetric" )
 
 #asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 #str(simpleCA1)
-# kuvasuhde saadaan tilapäisesti ratkaistua omalla tulostusikkunalla komentoriviltä X11() ja #tulostuskomento samoin
-# mutta tästä tulee hankaluuksia jatkossa. Jos näin pitää tehdä, parempi tulostaa kuva pdf-ajurilla suoraan, ei tallentaa # grafiikkaikkunasta. Se on viimeinen konsti. (13.5.2018)
-
-#näitä kokeiln chunk-optioissa mutta ei toimineet out.width = "6", out.hight = "6" (13.5.2018), vaan pdf-konversiossa #pandoc failed with error 43
+# 13.5.2018 
+# kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
+# grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu 
+# näin tekemään.
+# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") (13.5.2018), vaan pdf-konversiossa 
+# pandoc failed with error 43
+# 
 ```
 Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 

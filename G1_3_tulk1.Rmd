@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # Tulkinnan perusteita
 ```{r paketit_g13, include=FALSE}
@@ -31,14 +36,45 @@ Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ry
 
 Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
 
+## Täydentävät muuttujat (supplementary points)
+
+**edit** Piste sinne piirretään, mutta muuttujassa on se tieto. Täydentävät pisteet kuulostaa huonolta.
+
+Ref:CAip ss 89, HY2017_MCA
+
+Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin profiileihin (riveihin ja sarakkeisiin). Sopii tarinaan, dimensioiden tulkinta ei ollut esimerkissä kovin kirkas. 
+
+Active point, aktiivinen piste
+
+Täydentävä piste
+
+
+
 ## Lisämuuttujat: ikäluokka ja sukupuoli
+
+Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
 
 Luodaan aineistoon ikä- ja sukupuolimuuttujat
 ```{r}
 
 ```
-
-
-## ABBA
-
 ## Päällekkäiset matriisit (stacked matices)
+
+Concatenated tables (yhdistetyt taulut tai matriisit): (a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan"). 
+
+
+
+## Matched matrices
+
+Ref:CAip ss. 177, HY2017_MCA 
+
+Edellisen menetelmän variantti, jossa ryhmien väliset ja sisäiset erot saadaan esiin. Inertian jakaminen.
+Samanlaisten rivien ja sarakkeiden kaksi samankokoista taulua, esimerkiksi sukupuolivaikutusten arviointi. Alkuperäinen taulukko jaetaan kahdeksi tauluksi sukupuolen mukaan. Matriisien yhdistäminen (concatenation) riveittäin tai sarakkeittain ei näytä optimaalisesti mm - matriisien eroja.
+
+Ryhmien välisen ja ryhmien sisäinen inertian erottaminen, **ABBA** on yksi ratkaisu (ABBA matrix, teknisesti block circulanMat matrix).
+
+Luokittelu voi olla myös kahden indikaattorimuuttujan avulla jako neljään taulukkoon (esim. miehet vs. naiset länsieuroopassa verratuna samaan asetelmaan itä-Euroopassa). Samaa ideaa laajennetaan.
+
+Esimerkkinä "Attitudes to women working in 2012".
+
+
