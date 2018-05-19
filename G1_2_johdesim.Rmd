@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 ```{r paketit_g12, include=FALSE}
@@ -16,6 +21,7 @@ library(likert)
 #LISÄÄ TARVITTAESSA NÄMÄ! ggplot-kuva tarvitsee - laitoin skriptiin paketit.R 25.4.2018
 library(scales)
 library(reshape2)
+#library(printr) #19.5.2018 uusi kokeilu (taulukot, matriisit)
 ```
 
 **jäsennystä**  
@@ -187,7 +193,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r suhtfrek1}
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+tau1 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+knitr::kable(tau1, digits = 2, caption = "A table produced by printr.")
 
 ```
 
