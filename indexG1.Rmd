@@ -25,7 +25,7 @@ output:
 ---
 Kommentteja ja versionhallintaa:
 
-* edit: oma kommentti, ei varsinaista tekstiä
+* **edit:** oma kommentti, ei varsinaista tekstiä
 * kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
 * bib-formaatin viitetietokantaa tullaan kokeilemaan
 * kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa olevan ok.

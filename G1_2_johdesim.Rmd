@@ -21,7 +21,7 @@ library(likert)
 #LISÄÄ TARVITTAESSA NÄMÄ! ggplot-kuva tarvitsee - laitoin skriptiin paketit.R 25.4.2018
 library(scales)
 library(reshape2)
-#library(printr) #19.5.2018 uusi kokeilu (taulukot, matriisit)
+library(printr) #19.5.2018 
 ```
 
 **jäsennystä**  
@@ -163,7 +163,7 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 
 ```
 Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.5.2018).
-```{r g1_2_kuva2, echo=TRUE}
+```{r g1_2_kuva2, eval=FALSE, include=FALSE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
 # kokeillaan vähän simppelimmin
 #apu2_df <- as.data.frame(apu1)
@@ -193,9 +193,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r suhtfrek1}
-tau1 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
-knitr::kable(tau1, digits = 2, caption = "A table produced by printr.")
-
+tau1 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+kable(tau1,digits = 2, caption = "Taulukko N: kysymyksen V6 vastaukset maittain (%)")
 ```
 
 
@@ -204,10 +203,9 @@ knitr::kable(tau1, digits = 2, caption = "A table produced by printr.")
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
-plot(simpleCA1, map = "symmetric" )
+plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE), main = "Lapsi kärsii jos äiti on töissä")
 
-#asymmetrinen kartta - rivit pc ja sarakkeet sc
-plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
+
 #str(simpleCA1)
 # 13.5.2018 
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
@@ -219,15 +217,17 @@ plot(simpleCA1, map = "rowprincipal", mass = c(TRUE,TRUE))
 ```
 Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 
-Kuvatiedosto suoraan markdownilla
-![Alt text](img/1CAmap_sy.pdf)
 
 Ja toinen tapa
-```{r kuvatdsto1}
+```{r kuvatdsto1, eval=FALSE, include=FALSE}
+#tämä toimii
 img_path <- "img/1CAmap_sy.pdf"
 include_graphics(img_path)
 # knitr-funktio, "document format agnostic"
 # mutta parametriarvot (out.width = "4", fig.asp = 1 ) tuottavat pandoc error 43, Illegal unit of measure (pt inserted)
+#Kuvatiedosto suoraan markdownilla
+#![Alt text](img/1CAmap_sy.pdf) - toimii mutta kohdistus väärä, kuva valuu ulos oikealta
+
 ```
 
 

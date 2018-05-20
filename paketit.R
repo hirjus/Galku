@@ -13,5 +13,6 @@ library(furniture)
 library(likert)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 #r-skripteillä riittää, kun ajaa tämän
 sessionInfo()

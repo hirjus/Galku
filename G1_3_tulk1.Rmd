@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
 # Tulkinnan perusteita
 ```{r paketit_g13, include=FALSE}
@@ -19,13 +14,59 @@ library(furniture)
 library(likert)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
+library(printr)
 ```
-
-
 Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? *Ydinluku*.
 
 Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ratkaisun dimensiot jne.
 
+Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa ja sarakeprofiilit standardikoordinaateissa.
+
+@ Sarakkeet ideaalipisteinä, edustavat kuvittellisia maita joissa kaikki ovat vastanneet vain yhdellä tavalla.
+@ Sarakepisteet kaukana origosta, koska skaalattu
+@ Rivipisteet kasautuneet keskiarvopisteen ympärille
+@ Rivi-ja sarakepisteiden suhteelliset sijannit samat kuin symmetrisessä kuvassa
+@ Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
+
+```{r G1_3_asymm1}
+#asymmetrinen kartta - rivit pc ja sarakkeet sc
+plot(simpleCA1, map = "rowprincipal", 
+     mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
+
+```
+Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaatistoa, ja niiden yhteys.
+
+@ Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
+
+Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
+     
+```{r G1_3_asymm2}
+# asymmetrinen kartta - rivit pc ja sarakkeet sc
+# sarakkeet vektorikuvina
+plot(simpleCA1, map = "rowprincipal", 
+     arrows = c(FALSE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
+
+```
+
+Tärkein havainto on sarakkeen "Eri mieltä" (e) ja toisen ulottuvuuden yhteys. Myös sarake "täysin samaa mieltä" (ts) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä.
+
+```{r G1_3_symm_contrib1}
+plot(simpleCA1, map = "symmetric",
+     contrib= c("relative", "relative"),
+     mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä - suhteelliset kontribuutiot" )
+
+```
+
+Kuvaan voidaan myös lisätä värisävy kuvaamaan rivi- ja sarakepisteiden kontribuutioita (suhteellisia tai absoluuttisia). Belgina ja Saksan kontribuutiot ovat pieniä. Tätä pitää vähän pureksia.
+
+```{r G1_3_castats1}
+# CA:n numeeriset tulokset
+summary(simpleCA1)
+
+```
 
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia
