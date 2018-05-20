@@ -16,17 +16,21 @@ library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr)
 ```
-Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? *Ydinluku*.
+Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? **Ydinluku**.
 
 Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ratkaisun dimensiot jne.
 
 Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa ja sarakeprofiilit standardikoordinaateissa.
 
-@ Sarakkeet ideaalipisteinä, edustavat kuvittellisia maita joissa kaikki ovat vastanneet vain yhdellä tavalla.
-@ Sarakepisteet kaukana origosta, koska skaalattu
-@ Rivipisteet kasautuneet keskiarvopisteen ympärille
-@ Rivi-ja sarakepisteiden suhteelliset sijannit samat kuin symmetrisessä kuvassa
-@ Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
+(@) Sarakkeet ideaalipisteinä, edustavat kuvittellisia maita joissa kaikki ovat vastanneet vain yhdellä tavalla.
+
+(@) Sarakepisteet kaukana origosta, koska skaalattu
+
+(@) Rivipisteet kasautuneet keskiarvopisteen ympärille
+
+(@) Rivi-ja sarakepisteiden suhteelliset sijannit samat kuin symmetrisessä kuvassa
+
+(@) Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
 
 ```{r G1_3_asymm1}
 #asymmetrinen kartta - rivit pc ja sarakkeet sc
