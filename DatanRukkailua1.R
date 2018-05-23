@@ -263,7 +263,7 @@ read.norm <- sweep(read.pro, 2, sqrt(read.mean), "/")
 texts3d(read.norm[,1], read.norm[,2], read.norm[,3], text=rownames(read), col="blue", font=2)
 
 #22.5.2018 maa2 - muuttuja
-# on faktori, joten pitää tehdä uudelleen!
+# 
 #  5601     BE-FLA-Belgium/ Flanders
 #  5602     BE-WAL-Belgium/ Wallonia
 #  5603     BE-BRU-Belgium/ Brussels
@@ -405,5 +405,23 @@ test6 %>% tableX(AGE, age_cat, type = "count")
 # 102   0   0    0    0    0    1    1    
 # Total 952 1211 1377 1546 1522 1535 8143 
 
-# kolmas muuttuja ag : ikäluokka ja sukupuoli
+# kolmas muuttuja ag : ikäluokka ja sukupuoli - onpa hankalaa! (23.5.2018)
+test6 <- ISSP2012esim1.dat
+head(test6)
+# tämä kikka ei toimi
+# test6$ga <- 6*(test6$SEX-1) + test6$age_cat
+test6 <- mutate(test6, ga = ifelse(((age_cat == "1")&(sp == "m")), "m1",
+                            ifelse(((age_cat == "2")&(sp == "m")), "m2",
+                            ifelse(((age_cat == "3")&(sp == "m")), "m3",
+                            ifelse(((age_cat == "4")&(sp == "m")), "m4",
+                            ifelse(((age_cat == "5")&(sp == "m")), "m5",
+                            ifelse(((age_cat == "6")&(sp == "m")), "m6",
+                            ifelse(((age_cat == "1")&(sp == "f")), "f1",
+                            ifelse(((age_cat == "2")&(sp == "f")), "f2",
+                            ifelse(((age_cat == "3")&(sp == "f")), "f3",
+                            ifelse(((age_cat == "4")&(sp == "f")), "f4",
+                            ifelse(((age_cat == "5")&(sp == "f")), "f5", "f6"))))))))))))
+test6%>% tableX(maa,ga,type = "count")
+#TOIMII!
+
 

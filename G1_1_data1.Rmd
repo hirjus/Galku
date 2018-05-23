@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 
 # Data
@@ -153,6 +158,7 @@ Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusie
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
                     528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
+#str(ISSP2012.data)
 #
 # lisäys 25.4.2018 user_na
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
@@ -214,10 +220,13 @@ temp2 <- ISSP2012jh1.data %>% filter(!(V4 == 724)) %>% select(V6, C_ALPHAN)
 #str(temp1)
 temp2$V5 <- factor(temp2$V6 )
 temp2$maa <-  factor(temp2$C_ALPHAN)
-summary(temp2)
+#summary(temp2)
+#str(taulu1)
 taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
-kable(taulu1,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
-
+taulu1a <- taulu1[ ,1:14]
+kable(taulu1a,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+taulu1b <- taulu1[ ,15:28]
+kable(taulu1b,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
 ```
 
 Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.

@@ -1,0 +1,199 @@
+
+```{r G1_4_paketit, include=FALSE}
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+library(likert)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+```
+
+# Yksinkertaisen korrespondenssianalyysin laajennuksia
+
+Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai "jakamisen". Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla eri maiden vastausksia useampaan ryhmään.
+
+Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ryhmien sisäisiä (within groups - between groups) eroja hieman. Teknisesti yksinkertaista korrespondenssianalyysiä sovelletaan muokattuun matriisiin. Datamatriisi rakennetaan useammasta alimatriisista, joko "pinoamalla" osamatriiseja (stacked matrices) tai muodostamalla symmetrinen lohkomatriisi (ABBA).
+
+Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
+
+** EDIT: ** Lisätäänkö muuttujat tässä, vai Data-luvussa? Lisätään aluksi tässä. Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu.
+
+Toinen pulma: milloin laajennetaan dataa useampaan maahan?
+
+```{r G1_4_CAlaaj1Data}
+#valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin - TÄSSÄ KAIKKI MAAT
+#incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+#                    528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
+#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
+#
+# lisäys 25.4.2018 user_na
+# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA"
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+#
+#
+#str(ISSP2012.data) #61754 obs. of  420 variables
+#ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
+#
+# Luodaan samanniminen data kuin edellisissä esimerkeissä, lisätään siihen uudet muuttujat.
+incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
+ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alkuperäinen data
+#
+# lisäys 25.4.2018 user_na
+# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
+# If FALSE, the default, user-defined missings will be # converted to NA"
+# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
+#
+# str(ISSP2012.data) 
+#61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
+#
+# kuusi maata
+ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
+#str(ISSP2012esim1.dat) #8557 obs. of  420 variables
+#
+# mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
+# SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
+#
+ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
+
+#str(ISSP2012esim1.dat) #8557 obs. of  6 variables
+#
+#poistetaan havainnot, joissa puuttuvia tietoja
+ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
+#str(ISSP2012esim1.dat) 8143 havaintoa, 6 muuttujaa
+# sp (sukupuoli) m = 1, f = 2
+sp_labels <- c("m","f")
+# 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri, 4 = eri mieltä, 5 = täysin eri mieltä
+vastaus_labels <- c("ts","s","ese","e","te")
+
+# Faktoreiksi
+ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
+ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
+ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
+#Tähän loppuu datan luonti
+
+```
+**EDIT:** Uudet muuttujat omana pätkänä
+
+```{r G1_4_maa2}
+# 23.5.2018 maa2 - muuttuja
+# 
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
+ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3, 
+                  levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
+                  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
+
+#head(test6)
+#str(test6$maa2)
+taulu41 <- ISSP2012esim1.dat %>% tableX(maa,maa2,type = "count")
+kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositus")
+
+```
+
+Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
+
+
+```{r G1_4_agecat}
+#age_cat
+#AGE 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
+#summary(ISSP2012esim1.dat$AGE)
+#hist(ISSP2012esim1.dat$AGE)
+ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(AGE %in% 15:25, "1",
+                        ifelse(AGE %in% 26:35, "2",
+                        ifelse(AGE %in% 36:45, "3",
+                        ifelse(AGE %in% 46:55, "4",
+                        ifelse(AGE %in% 56:65, "5", "6"))))))
+ISSP2012esim1.dat$age_cat <- factor(ISSP2012esim1.dat$age_cat)
+
+#test6 %>% tableX(AGE, age_cat, type = "count") aika iso taulukko, voi tarkistaa että muunnos ok.
+taulu42 <- ISSP2012esim1.dat %>% tableX(maa,age_cat,type = "count")
+kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
+
+taulu43 <- ISSP2012esim1.dat %>% tableX(maa,age_cat,type = "cell_perc")
+kable(taulu43,digits = 2, caption = "age_cat: suhteelliset frekvenssit")
+
+```
+
+Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat) varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
+
+```{r G1_4_ga}
+# ei kovin siisti
+
+ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga = ifelse(((age_cat == "1")&(sp == "m")), "m1",
+                            ifelse(((age_cat == "2")&(sp == "m")), "m2",
+                            ifelse(((age_cat == "3")&(sp == "m")), "m3",
+                            ifelse(((age_cat == "4")&(sp == "m")), "m4",
+                            ifelse(((age_cat == "5")&(sp == "m")), "m5",
+                            ifelse(((age_cat == "6")&(sp == "m")), "m6",
+                            ifelse(((age_cat == "1")&(sp == "f")), "f1",
+                            ifelse(((age_cat == "2")&(sp == "f")), "f2",
+                            ifelse(((age_cat == "3")&(sp == "f")), "f3",
+                            ifelse(((age_cat == "4")&(sp == "f")), "f4",
+                            ifelse(((age_cat == "5")&(sp == "f")), "f5", "f6"))))))))))))
+taulu44 <- ISSP2012esim1.dat %>% tableX(maa,ga,type = "count")
+kable(taulu44,digits = 2, caption = "Ikäluokka ja sukupuoli ga")
+
+taulu45 <- ISSP2012esim1.dat %>% tableX(maa,ga,type = "cell_perc")
+kable(taulu45,digits = 2, caption = "ga: suhteelliset frekvenssit")
+
+
+```
+
+
+
+## Täydentävät muuttujat (supplementary points)
+
+**edit** Piste sinne piirretään, mutta muuttujassa on se tieto. Täydentävät pisteet kuulostaa huonolta.
+
+Ref:CAip ss 89, HY2017_MCA
+
+Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin profiileihin (riveihin ja sarakkeisiin). Sopii tarinaan, dimensioiden tulkinta ei ollut esimerkissä kovin kirkas. 
+
+Active point, aktiivinen piste (aktiivinen havainto tai muuttuja)
+
+Täydentävä piste (täydentävä havainto)
+
+
+
+
+## Lisämuuttujat: ikäluokka ja sukupuoli
+
+Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
+
+Luodaan aineistoon ikä- ja sukupuolimuuttujat
+```{r}
+
+```
+## Päällekkäiset matriisit (stacked matices)
+
+Concatenated tables (yhdistetyt taulut tai matriisit): (a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan"). 
+
+
+
+## Matched matrices
+
+Ref:CAip ss. 177, HY2017_MCA 
+
+Edellisen menetelmän variantti, jossa ryhmien väliset ja sisäiset erot saadaan esiin. Inertian jakaminen.
+Samanlaisten rivien ja sarakkeiden kaksi samankokoista taulua, esimerkiksi sukupuolivaikutusten arviointi. Alkuperäinen taulukko jaetaan kahdeksi tauluksi sukupuolen mukaan. Matriisien yhdistäminen (concatenation) riveittäin tai sarakkeittain ei näytä optimaalisesti mm - matriisien eroja.
+
+Ryhmien välisen ja ryhmien sisäinen inertian erottaminen, **ABBA** on yksi ratkaisu (ABBA matrix, teknisesti block circulanMat matrix).
+
+Luokittelu voi olla myös kahden indikaattorimuuttujan avulla jako neljään taulukkoon (esim. miehet vs. naiset länsieuroopassa verratuna samaan asetelmaan itä-Euroopassa). Samaa ideaa laajennetaan.
+
+Esimerkkinä "Attitudes to women working in 2012".
+
+

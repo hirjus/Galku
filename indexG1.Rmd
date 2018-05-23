@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: 20.5.2018
+date: 24.5.2018
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -41,7 +41,7 @@ Kommentteja ja versionhallintaa:
 * rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, kaavat, määritelmät
 * tehdään käsitetaulukko (kirjoittamista varten)
 * 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
-* lisätään dataan toinen maa-muuttuja 
+* 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat ja iän ja sukupuolen vuorovaikutusmuuttuja ga.
  
   
 ***
@@ -61,3 +61,7 @@ Kommentteja ja versionhallintaa:
 ```
 
 ***
+```{r child = "G1_4_CAlaaj1.Rmd"}
+
+```
+
