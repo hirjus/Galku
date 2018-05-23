@@ -41,6 +41,7 @@ Kommentteja ja versionhallintaa:
 * rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, kaavat, määritelmät
 * tehdään käsitetaulukko (kirjoittamista varten)
 * 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
+* lisätään dataan toinen maa-muuttuja 
  
   
 ***

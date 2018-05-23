@@ -10,7 +10,10 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-#library(forcats) tarpeeton, tulee havenissa
+library(likert)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 sessionInfo()
 
 
@@ -139,6 +142,8 @@ ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6, row_wise = FALSE,test=TRUE)
 str(test2)
 class(test2)
 
+test
+
 simpleCA2 <- ca(~V6 + maa,test3) #Tämä toimii! Mutta tulokset vähän outoja - täysin pielessä
 X11()
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE))
@@ -256,4 +261,52 @@ read.norm <- sweep(read.pro, 2, sqrt(read.mean), "/")
 
 # add the points to the 3D scatterplot
 texts3d(read.norm[,1], read.norm[,2], read.norm[,3], text=rownames(read), col="blue", font=2)
+
+#22.5.2018 maa2 - muuttuja
+# on faktori, joten pitää tehdä uudelleen!
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
+test6 <- ISSP2012esim1.dat
+str(test6)
+test6$maa2 <- factor(test6$V3, 
+                  levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
+                  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
+head(test6)
+test6 %>% tableX(maa,maa2,type = "count")
+str(test6$maa2)
+# ensimmäinen versio
+# maa2
+# maa     100 208  246  348 5601 5602 5603 27601 27602 Total
+# BE    0   0    0    0   1012 490  511  0     0     2013 
+# BG    921 0    0    0   0    0    0    0     0     921  
+# DE    0   0    0    0   0    0    0    1167  547   1714 
+# DK    0   1388 0    0   0    0    0    0     0     1388 
+# FI    0   0    1110 0   0    0    0    0     0     1110 
+# HU    0   0    0    997 0    0    0    0     0     997  
+# Total 921 1388 1110 997 1012 490  511  1167  547   8143 
+
+#toinen versio
+# maa2
+# maa     BG  DK   FI   HU  bF   bW  bB  dW   dE  Total
+# BE    0   0    0    0   1012 490 511 0    0   2013 
+# BG    921 0    0    0   0    0   0   0    0   921  
+# DE    0   0    0    0   0    0   0   1167 547 1714 
+# DK    0   1388 0    0   0    0   0   0    0   1388 
+# FI    0   0    1110 0   0    0   0   0    0   1110 
+# HU    0   0    0    997 0    0   0   0    0   997  
+# Total 921 1388 1110 997 1012 490 511 1167 547 8143 
+
+str(test6$maa2)
+str(test6$maa)
+#Ok - toimii 
+# ikä ja sukupuoli - interaktio 23.5.2018
+
+#age_cat
+#ag
+
+
+> 
 

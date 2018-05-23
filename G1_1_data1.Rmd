@@ -215,7 +215,8 @@ temp2 <- ISSP2012jh1.data %>% filter(!(V4 == 724)) %>% select(V6, C_ALPHAN)
 temp2$V5 <- factor(temp2$V6 )
 temp2$maa <-  factor(temp2$C_ALPHAN)
 summary(temp2)
-temp2 %>% tableX(V6,maa,type = "count")
+taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
+kable(taulu1,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
 
 ```
 

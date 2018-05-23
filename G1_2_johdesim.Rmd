@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 ```{r paketit_g12, include=FALSE}
@@ -84,7 +79,7 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 #poistetaan havainnot, joissa puuttuvia tietoja
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 #str(ISSP2012esim1.dat) #8143 obs. of  6 variables
-#ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6) table1 tuottaa siitejä outputeja esim. LateX-formaatilla, mutta muuten vähän optioita
+#ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6) table1 tuottaa siitejä outputeja esim. #LateX-formaatilla, mutta muuten vähän optioita
 ```
 
 
@@ -104,6 +99,14 @@ ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 #
+# toinen maa-muuttuja, jossa Saksan ja Belgian jako
+#  V3
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
+#
 #tsekkauksia
 #ISSP2012esim1.dat %>% tableX(maa,V6,type = "count")
 #summary(ISSP2012esim1.dat$sp)
@@ -120,9 +123,13 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 
 # Taulkoidaan data
 
-ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
+taulu2 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
+taulu3 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
+taulu4 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
+kable(taulu2,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+kable(taulu3,digits = 2, caption = "Kysymyksen V6 vastaukset, riviprosentit")
+kable(taulu4,digits = 2, caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
+
 
 ```
 Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
@@ -193,8 +200,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r suhtfrek1}
-tau1 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
-kable(tau1,digits = 2, caption = "Taulukko N: kysymyksen V6 vastaukset maittain (%)")
+taulu5 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+kable(taulu5,digits = 2, caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```
 
 
