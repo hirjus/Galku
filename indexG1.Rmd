@@ -42,6 +42,7 @@ Kommentteja ja versionhallintaa:
 * tehdään käsitetaulukko (kirjoittamista varten)
 * 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
 * 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat ja iän ja sukupuolen vuorovaikutusmuuttuja ga.
+* 24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit  täydentävinä (passiivisina)
  
   
 ***

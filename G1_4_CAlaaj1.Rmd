@@ -103,6 +103,97 @@ kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositu
 
 ```
 
+
+
+
+## Täydentävät muuttujat (supplementary points)
+
+**edit** Piste sinne piirretään, mutta muuttujassa on se tieto. Täydentävät pisteet kuulostaa huonolta.
+
+Ref:CAip ss 89, HY2017_MCA
+
+Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin profiileihin (riveihin ja sarakkeisiin). 
+
+**EDIT** Lisätään Belgian ja Saksan aluejako täydentäviksi riveiksi. Sopii tarinaan, dimensioiden tulkinta ei ollut esimerkissä kovin kirkas. Viite CAip:n lukuun, jossa vain todetaan että maita ei ole järkevää painottaa (massa) otoskoolla, vaan vakioidaan (jotenkin) sama (suhteellinen) massa kaikille. Samalla oikaistaan myös naisten yliedustus aineistossa.
+
+Active point, aktiivinen piste (aktiivinen havainto tai muuttuja).
+
+Täydentävä piste (täydentävä havainto).
+
+Täydentävien muuttujien kolme käyttötapaa:
+
+- sisällöllisesti tutkimusongelman kannalta poikkeava tai erilainen rivi tai sarake
+- outlayerit, poikkeava havainto jolla pieni massa (esimerkissä uusi sarakemuuttuja, jossa kovin vähän havaintoja)
+- osaryhmät
+
+```{r G1_4_suppoints_BeDe}
+#kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
+# Belgian ja Sakasan jako lisäpisteinä 24.5.2018
+#head(ISSP2012esim1.dat)
+suppointCA1 <- ca(~maa2 + V6,ISSP2012esim1.dat)
+plot(suppointCA1, main = "Belgian ja Saksan ositteet")
+#kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
+#summary(suppointCA1)
+#print(suppointCA1)
+#str(suppointCA1)
+#
+#Käännetään kuva
+
+suppointCA1b <- suppointCA1
+suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
+suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
+suppointCA1b$rowcoord
+suppointCA1b$colcoord
+plot(suppointCA1b, main = "Belgian ja Saksan ositteet")
+# Miten lisärivit? (24.5.2018)
+# Luetaan data tauluksi - ei toimi, char-table
+# yritetään uudestaan table-funktiolla
+# data maa2-muuttujalla
+suppoint1_df1 <- select(ISSP2012esim1.dat, maa2,V6)
+str(suppoint1_df1)
+head(suppoint1_df1)
+suppoint1_tab1 <- table(suppoint1_df1$maa2, suppoint1_df1$V6)
+suppoint1_tab1
+#plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
+#
+# Saksan ja Belgian summarivit
+#
+suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
+suppoint2_df <- select(suppoint2_df, maa, V6)
+#head(suppoint2_df)
+#tail(suppoint2_df)
+#str(suppoint2_df)
+#suppoint2_df
+suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$V6)
+#suppoint2_tab1
+suppoint2_tab1 <- suppoint2_tab1[-2,]
+# kömpelösti kolme kertaa
+suppoint2_tab1 <- suppoint2_tab1[-3,]
+suppoint2_tab1 <- suppoint2_tab1[-3,]
+suppoint2_tab1 <- suppoint2_tab1[-3,]
+#suppoint2_tab1
+
+#lisätään rivit maa2-muuttujan taulukkoon
+
+suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
+#suppoint1_tab1
+suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
+#käännetään kuva
+suppointCA2b <- suppointCA2
+suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
+suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
+
+plot(suppointCA2b, main = "Passiiviset pisteet DE ja BE" )
+
+
+```
+
+Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
+
+## Lisämuuttujat: ikäluokka ja sukupuoli
+
+Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
+
 Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
 
 
@@ -153,30 +244,6 @@ kable(taulu45,digits = 2, caption = "ga: suhteelliset frekvenssit")
 ```
 
 
-
-## Täydentävät muuttujat (supplementary points)
-
-**edit** Piste sinne piirretään, mutta muuttujassa on se tieto. Täydentävät pisteet kuulostaa huonolta.
-
-Ref:CAip ss 89, HY2017_MCA
-
-Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin profiileihin (riveihin ja sarakkeisiin). Sopii tarinaan, dimensioiden tulkinta ei ollut esimerkissä kovin kirkas. 
-
-Active point, aktiivinen piste (aktiivinen havainto tai muuttuja)
-
-Täydentävä piste (täydentävä havainto)
-
-
-
-
-## Lisämuuttujat: ikäluokka ja sukupuoli
-
-Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
-
-Luodaan aineistoon ikä- ja sukupuolimuuttujat
-```{r}
-
-```
 ## Päällekkäiset matriisit (stacked matices)
 
 Concatenated tables (yhdistetyt taulut tai matriisit): (a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan"). 
