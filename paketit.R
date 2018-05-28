@@ -14,5 +14,6 @@ library(likert)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+library(stargazer) # 28.5.2018 taulukoiden yms. tulostietojen siistiin tulostukseen
 #r-skripteillä riittää, kun ajaa tämän
-sessionInfo()
+#sessionInfo()
