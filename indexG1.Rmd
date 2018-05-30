@@ -1,10 +1,18 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: 24.5.2018
+date: 30.5.2018
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
 output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 5
+    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
+    #code_folding: show
   html_document:
     theme: cosmo
     toc: true
@@ -14,14 +22,6 @@ output:
     fig_width: 5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
     fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
-  pdf_document:
-    toc: true
-    number_sections: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 5
-    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
-    #code_folding: show
 ---
 Kommentteja ja versionhallintaa:
 

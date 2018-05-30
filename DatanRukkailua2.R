@@ -68,6 +68,12 @@ str(star1)
 
 star2 <- summary(SimpleCA1)
 str(star2)
+#oletuksena LaTexia, 
 stargazer(star2$scree)
 stargazer(star2$rows)
 stargazer(star2$columns)
+# tämäpä onkin isohko asia. Bookdown taitaa olla se paras ratkaisu. Kirjoitustyö html-tulostuksella, 
+# ja sitten vasta pdf-formatointiin
+# rmarkdown::pandoc_version() # ‘1.19.2.1’ -> ‘2.2.1’
+
+
