@@ -1,0 +1,42 @@
+---
+title: "Käsitteet"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+lang: fi
+---
+
+```{r}
+library(tidyverse)
+library(knitr)
+```
+
+# Käsitteet
+
+1.8.2018
+
+Kerätään käsitteet yhteen dataframeen, taulukon tai taulkoiden luontia varten.
+
+```{r kasitteet1}
+consepts_fi <- c("massa", "profiili", "kontrasti", "modaliteetit", "attraktio",
+               "repulsio", "barysentrinen", "ekvivalenssi jakauman suhteen" )
+consepts_en <- c("mass", "profile","contrast","modalities","attraction",
+                 "repulsion","barycentric", "distributional equivalence" )
+
+consepts_meaning <- c("massa, havaintojen lukumäärä", "profiili,jotain", "ääripäät",
+                      "luokittelumuuttujan arvo tai arvot", "vetovoima", "työntövoima", "painotettu keskiarvo", 
+                      "jakauman ekvivalenssi on tärkein periaate")
+
+# luodaan df concepts1
+consepts1.df <- data_frame(consepts_fi,consepts_en,consepts_meaning)
+
+#%>%
+#  arrange(Term) %>% # i.e. alphabetical order by Term
+#  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
+kable(consepts1.df, booktab=T)
+
+```
+
+Ed Berryn [esimerkin](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/) mukaan
+
