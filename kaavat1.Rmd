@@ -6,8 +6,8 @@ documentclass: article
 lang: fi
 site: bookdown::bookdown_site
 output:
-  bookdown::html_book:
-  bookdown::pdf_book:
+    bookdown::pdf_book:
+    bookdown::html_book:
     keep_tex: yes
 ---
 # Kaavat ja matemattiset merkinnät
@@ -125,6 +125,18 @@ Merkitään edellisten analyysien kuuden maan ja viiden vastausvaihtoehdon taulu
 $\boldsymbol{ B}_{I^{`}  J}$, voimme muodostaa yhdistetyn matriisin
 
 **drawmatrix - kaavoja**
+
+Kokeillaan, toimivatko (5.8.2018).
+
+Tämä ei toimi: jokaisen rivin alusta poistettu "takakeno".
+begin{equation}
+left(
+drawmatrix A_{\hspace{0.5 mm}\vspace{0.5 mm}i}
+drawmatrix B^{-1}
+right)
+drawmatrix C
+end{equation}
+
 
 Miten päällekkäisten matriisien ympärille saisi sulut?
 

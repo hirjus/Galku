@@ -1,0 +1,446 @@
+\documentclass[finnish,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Kaavat bookdown-paketilla},
+            pdfauthor={Jussi Hirvonen},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=finnish]{babel}
+\else
+  \usepackage{polyglossia}
+  \setmainlanguage[]{finnish}
+\fi
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Kaavat bookdown-paketilla}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jussi Hirvonen}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{13.6.2018 (tulostettu 4.8.2018, pikku lisäyksiä)}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{kaavat-ja-matemattiset-merkinnat}{%
+\section{Kaavat ja matemattiset
+merkinnät}\label{kaavat-ja-matemattiset-merkinnat}}
+
+bookdown vaatii alkuun ``first or second level heading'', eli yksi tai
+kaksi risuaitaa. Virheilmoitus tulee Pandocilta.
+
+Ladataan paketit. Herjali tästä YAML-frontmatterissa
+(\#bookdown::html\_book: ). Ei toimi html-tulostus, ja välillä toimii.
+Onpa hankalaa.
+
+Kaavat on esitettävä bookdown-paketin määrityksillä. Viittausnimien on
+oltava yksikäsitteisiä koko dokumentissa, jos käytetään ``merge and
+knit'' menetelmää. Jos taas jokainen lapsidokumentti on ``itsenäinen''
+(``knit and merge''), tämä koskee vain kyseistä dokumenttia (kts.
+Bookdown - webkirja).
+
+\hypertarget{kahden-luokittelumuuttuja-taulukko}{%
+\subsection{Kahden luokittelumuuttuja
+taulukko}\label{kahden-luokittelumuuttuja-taulukko}}
+
+Kahden luokittelumuuttujan riippuvuutta voidaan testata \(\chi^{2}\) -
+testillä. Testisuure saadaan laskemalla yhteen jokaisen solun
+havaittujen ja odotetettujen (riippumattomuushypoteesi) frekvenssien
+erotukset muodossa
+
+\begin{equation}
+  \chi^{2} = \frac{(havaittu - odotettu)^2} {odotettu}
+    \label{eq:khii21}
+\end{equation}
+
+Tämä voidaan esittää ca:han sopivammalla tavalla parilla muunnoksella,
+jolloin saamme riveittäin vastaavat termit rivisummalla painotettuna:
+
+\begin{equation}
+  rivisumma \times \frac{(havaittu \: riviprofiili - odotettu \: riviprofiili)^2} {odotettu \: riviprofiili}
+    \label{eq:khii22}
+\end{equation}
+
+Kun jaamme nämä tekijät havaintojen kokonaismäärällä \(n\), rivisumma
+muuntuu rivin massaksi, ja niiden summa muotoon \(\frac{\chi^{2}}{n}\).
+
+\begin{equation}
+ \frac{\chi^{2}}{n} = \phi^{2}
+  \label{eq:inert1}
+ \end{equation}
+
+Tunnusluku \(\phi^{2}\) on korrespondenssianalyysissä kokonaisinertia
+(total inertia). Se kuvaa, kuinka paljon varianssia taulukossa on ja on
+riippumaton havaintojen lukumäärästä. Tilastotieteessä tunnusluvulla on
+useita vaihtoehtoisia nimiä (esim. mean square contingency coefficient),
+ja sen neliöjuurta kutsutaan \(\phi\) - kertoimeksi.
+
+Tässä siirrytään kahden luokittelumuuttujan taulukosta suhteellisten
+frekvenssien taulukkoon, ja pieni pohdinta taulukoista yleensä olisi
+paikallaan. Kaavojen \eqref{eq:khii21} ja \eqref{eq:khii22} yhteyden pitäisi
+olla selkeä. Frekvenssitaulukossa (jossa kaikki taulukon luvut on jaettu
+havaintojen lukumäärällä n) riviprofiilien 1 ja 3 (euklidinen) etäisyys
+on \begin{equation}
+ \sqrt{(p_{11} - p_{31})^2 + (p_{12} - p_{32})^2 + (p_{13} - _{33})^2+ (p_{14} - _{34})^2+ (p_{15} - _{35})^2}
+ \end{equation}
+
+Rivien \(\chi^{2}\) - etäisyys on painotettu euklidinen etäisyys, jossa
+painoina ovat riviprofiilin odotetut arvot. Ne ovat
+riippumattomuushypoteesin mukaisesti riviprofiilien keskiarvoprofiilin
+vastaavat alkioit \(r_{i}\) . \begin{equation}
+ \sqrt{\frac{(p_{11} - p_{31})^2} { r_{1}} + \dots + \frac{(p_{15} - p_{35})^2} {r_{5}}}
+\end{equation}
+
+Inertia voidaa esittää rivien ja \texttt{keskiarvorivin} (sentroidin)
+\[\chi^{2}\] -etäisyyksien neliöiden painotettuna summana, jossa
+painoina ovat rivien massat \(m_{i}\) ja summa lasketaan yli rivien
+\({i}\). \begin{equation}
+ \phi^{2} = \sum_{i} (massa \: m_{i}) \times (profiilin \: i \: \chi^{2} - etaisyys \: sentroidista)^{2}
+\end{equation}
+
+Kaavat.tex - dokumentissa on tässä kohdassa testailtu R:n furniture -
+paketin taulukoita latex- ja latex2 - output-formaateilla. Ne voi
+liittää LateX-dokumenttiin, jossa on käytössä paketti booktabs.
+Bookdownissa luultavasti tämä on tarpeeton, kable riittänee.
+
+\hypertarget{matriisit-ja-niiden-havainnollistaminen}{%
+\subsection{Matriisit ja niiden
+havainnollistaminen}\label{matriisit-ja-niiden-havainnollistaminen}}
+
+Tämä toimii, drawmatrixin voi varmaan unohtaa?
+
+\begin{equation}
+A = \begin{bmatrix} 
+    a_{11} & a_{12} & \dots \\
+    \vdots & \ddots & \\
+    a_{K1} &        & a_{KK} 
+    \end{bmatrix}
+\end{equation}
+
+Ehkäpä ABBA onnistuu paremmin tällä notaatiolla?
+
+\begin{equation}
+A = \begin{bmatrix} 
+    A_{11} & B_{12}  \\
+    B_{21} & B_{22} 
+    \end{bmatrix}
+\end{equation}
+
+\textbf{drawmatrix - kaavoja - ei ole kokeiltu}
+
+Yksinkertainen korrespondenssianalyysi on kahden luokittelumuuttujan
+määrittelmän frekvenssitaulukon analyysiä. Taulukon rivit ovat
+havaintoyksiköiden (individuals, havaintoyksikkö) aggregoituja summia,
+sarakkeet muuttujia.
+
+Analyysissä osa riveistä tai sarakkeista voidaan jättää pois ratkaisun
+laskennasta ns. passiviisiksi, ja esittää kartalla täydentävinä pisteinä
+(supplementary points). Ne eivät vaikuta ratkaisuun, eli teknisesti
+niiden massa on nolla, mutta pisteiden esityksen (projektion) tarkkuus
+voidaan arvioida. Täydentävien profiilien on kuintenkin oltava
+yhteismitallisia taulukon datan kanssa. Mikä tahansa ei käy (kts. CAinP,
+vast.luku). Pinotut tai yhdistetyt matriisit (``stacked matrices'').
+Yksinkertainen korrespondenssianalyysi on kahden luokittelumuuttujan
+määrittämän taulukon (kontingenssitaulukko) analyysiä, mutta
+tutkimusasetelmaa voi melko helposti muuttaa useamman muuttujan
+analyysiksi. Menetelmän matemaattinen perusta ja ratkaisualgoritmi (SVD)
+toimivat, tulkinta vain muuttuu. Itse asiassa menetelmän yleisyys tekee
+sen vääränkin käytön mahdolliseksi.
+
+Yksinkertaisin laajennus on lisätä alkuperäisen taulukon alle toinen
+taulukko. Rivit ovat esimerkissä maittan summattuja vastauksia, ja
+niiden alle voidaan lisätä joku toinen luokittelumuuttuja. Havaintojen
+määrä yhditetyssä (``pinotussa'' ) taulussa kaksinkertaistuu. Miksi tämä
+ei ei vaikuta tuloksiin vääristävästi??
+
+Merkitään edellisten analyysien kuuden maan ja viiden vastausvaihtoehdon
+taulukkoa matriisilla \(\boldsymbol{ A}_{I J}\), missä \(I\) on rivien
+ja \(J\) sarakkeiden lukumäärä. Taulukoidaan ikäluokan (1 - 6) ja
+sukupuolen (\(f\) = nainen, \(m\) = mies) vuorovaikutusmuuttuja
+(\(f1,\dots , f6\) ja \(m1,\dots , m6\)) samojen vastausvaihtoehtojen
+kanssa. Jos tätä taulukkoa merkitään matriisilla
+\(\boldsymbol{ B}_{I^{`} J}\), voimme muodostaa yhdistetyn matriisin
+
+\textbf{drawmatrix - kaavoja}
+
+Kokeillaan, toimivatko (5.8.2018).
+
+\begin{equation}
+\left(
+\drawmatrix A_{\hspace{0.5 mm}\vspace{0.5 mm}i}
+\drawmatrix B^{-1}
+\right)
+\drawmatrix C
+\end{equation}
+
+Miten päällekkäisten matriisien ympärille saisi sulut?
+
+Rivien lukumäärä on molemmissa matriiseissa sama, koska luokkia sattuu
+olemaan kuusi sekä maa- että ikä- ja sukupuoli - luokittelumuuttujissa.
+Kun matriisit ovat dimensioiltaan ja myös muuttujien sisällön kannalta
+samankaltaiset, niitä kutsutaan yhteensopiviksi (``matched matrix'').
+Tällöin yksinkertaista korrespondenssianalyyisä voi soveltaa
+tutkimusongelmaan, jossa halutaan erotella jonkun ryhmän sisäinen
+vaihtelu ryhmien välisiestä vaihtelusta. (Greenacren ehdottama ABBA -
+analyysi).
+
+\textbf{drawmatrix - kaavoja}
+
+ABBA on erityistapaus yleisemmästä moniulotteisen taulukon (multiway
+table) analyysistä, jossa useita kahden muuttujan taulukoita
+``pinotaan'' päällekkäin ja rinnakkain. Voimme ottaa yhden kysymyksen
+vastausten lisäksi analyysiin mukaan useamman kysymyksen vastaukset
+laajentamalla kahden päällekkäisen matriisin taulukkoa oikealle.
+
+Teknisesti analyysi on yksinkertainen korrespondenssianalyysi, miten
+tämä tulkitaan?
+
+\textbf{drawmatrix - kaavoja}
+
+\hypertarget{korrespondenssianalyysin-perusyhtalot-ja-kaavat}{%
+\subsection{Korrespondenssianalyysin perusyhtälöt ja
+kaavat}\label{korrespondenssianalyysin-perusyhtalot-ja-kaavat}}
+
+\textbf{viitetiedot puuttuvat kaavoista}
+
+Tässä lähteenä Greenacren kirja (ca in practice) ja sen liite Theory of
+CA. Muistiinpanoja löytyy, joissa viitataan myös Biplots in practice -
+kirjaan. Kevään 2017 kurssin luentokalvoja on myös käytetty. Lisäillään
+vielä käsitteitä LeRouxin ja Rouanetin kirjasta.
+
+Datamatriisilla \(\boldsymbol{N}\) on \(I\) riviä ja \(J\) sarakketta
+(\(I x J\) ). Alkiot ovat ei-negatiivisia (eli nollat sallittuja) ja
+samassa mitta-asteikossa. Jos mitta-asteikko on intervalli- tai
+suhdeasteikko, mittayksiköiden on oltava samoja (esim. euroja, metrejä).
+Taulukon alkioiden summa on \(\sum_{i} \sum_{j}n_{ij} = n\), missä
+\(i = 1, \dots , I\) ja \(j = 1, \dots , J\). GDA-kirjassa on
+tarkennettu tätä vaatimusta ei-negatiivisuudesta.
+
+Korrespondenssimatriisi \(\boldsymbol{P}\) saadaan jakamalla matriisin
+\(\boldsymbol{N}\) alkiot niiden summalla \(n\) . Merkitään matriisin
+\(\boldsymbol{P}\) rivisummien vektoria \(\boldsymbol{r}\) (=
+\((r_{1}, \dots, r_{I})\)) ja sarakesummien vektoria \(\boldsymbol{c}\)
+(= \((c_{1}, \dots, c_{J})\)). Niitä vastaavat diagonaalimatriisit ovat
+\(\boldsymbol{D_r}\) ja \(\boldsymbol{D_c}\).
+
+Korrespondenssianalyysin perusrakenne (algoritmi?) on tämä.
+Singulaariarvohajoitelma (singular value decomposition) tuottaa
+ratkaisun kun sitä sovelletaan standardoituun residuaalimatriisiin
+\(\boldsymbol{S}\).
+
+\begin{equation}
+\boldsymbol{S} = \boldsymbol{D_r}^{-1/2}(\boldsymbol{P} - \boldsymbol{r}\boldsymbol{c}^T)\boldsymbol{D_c}^{-1/2} \label{A}
+\end{equation}
+
+Residuaalimatriisi voidaan esittää myös ns. kontingenssi-suhdelukujen
+(contingency ratio) avulla.
+
+\[
+\boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} = \left( \frac{p_{ij}} {r_{i} c{j}} \right)
+\]
+
+\[ 
+\boldsymbol{S} = \boldsymbol{D_r}^{1/2} (\boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} - \boldsymbol{1}\boldsymbol{1}^{T} ) \boldsymbol{D_c}^{-1/2}  \;\;\; .
+\]
+
+Toinen esitystapa on hyödyllinen, kun tarkastellaan CA:n yhteyksiä
+muihin läheisiin menetelmiin (log ratio analysis of compositional data,
+moniulotteinen skaalaus (?), lineaarinen diskriminanttianalyysi,
+kanoninen korrelaatioanalyysi, pääkomponettianalyysi, kaksoiskuvat,
+yleensä SVD-perusteiset dimensioden vähentämisen menetelmät).
+
+\[
+s_{ij} = \frac{p_{ij}-r_{i}c_{j}} { \sqrt{r_{i}c_{j} } }
+\]
+
+ja toinen \[
+s_{ij} = \sqrt{r_{i}} \left( \frac{p_{ij}}{r_{i}c_{j}} \right) \sqrt{c_{j}} \;\;\; .
+\]
+
+Mitäköhän tuosta pitäisi nähdä? Selitykset löytyvät em.
+teorialiitteestä.
+
+Singulaariarvohajoitelma (singular value decomposition, SVD) matriisille
+\(\boldsymbol{S}\) on
+
+\[ 
+\boldsymbol{S} = \boldsymbol{U} \boldsymbol{D_{\alpha}} \boldsymbol{V}^{T}
+\]
+
+missä \(\boldsymbol{D_{\alpha}}\) on diagonaalimatriisi, jonka alkiot
+ovat singulaariarvot suuruusjärjestyksessä
+\(\alpha_{1}\geq \alpha_{1} \geq \hdots\)
+
+Matriisit \(\boldsymbol{U}\) ja \(\boldsymbol{V}\) ovat ortogonaalisia
+singulaarivektoreiden matriiseja. Singulaariarvohajoitelman merkitys
+dimensioiden vähentämiselle perustuu Eckart - Young - teoreemaan.
+Teoreema (30-luvulta?) kertoo, että saamme pienimmän neliösumman \(m\) -
+ulotteisen approksimaation matriisille \(\boldsymbol{S}\) (CAinP, ss.
+244) matriisien \(\boldsymbol{U}\) ja \(\boldsymbol{V}\) ensimmäisten
+sarakkeiden ja ensimmäisten singulaariarvojen avulla.
+
+\[
+\boldsymbol{S}_{(m)} = \boldsymbol{U}_{(m)} \boldsymbol{D}_{\alpha(m)} \boldsymbol{V}_{(m)}^{T}
+\]
+
+Korrrespondenssianalyysin ratkaisualgoritmissa tätä tulosta on
+muokattava niin, että rivien ja sarakkeiden massat huomioidaan pienimmän
+neliösumman approksimaatiossa painoina.
+
+Näin saadaan standardikoordinaatit ja principal-koordinaatit riveille ja
+sarakkeille.
+
+Rivien standardikoordinaatit \begin{equation}
+\boldsymbol{\Phi} = \boldsymbol{D_r}^{-\frac{1}{2}} \boldsymbol{U} \label{B} 
+\end{equation}
+
+Sarakkeiden standardikoordinaatit \begin{equation}
+ \boldsymbol{\Gamma} = \boldsymbol{D_c}^{-\frac{1}{2}} \boldsymbol{V} \label{C}
+\end{equation}
+
+Rivien principal-koordinaatit \begin{equation}
+ \boldsymbol{F} =   \boldsymbol{D_r}^{-\frac{1}{2}} \boldsymbol{U}  \boldsymbol{D_{\alpha}} = \boldsymbol{\Phi} \boldsymbol{D_{\alpha}} \label{D}
+\end{equation}
+
+Sarakkeiden principal-koordinaatit \begin{equation}
+ \boldsymbol{G}  = \boldsymbol{D_c}^{-\frac{1}{2}} \boldsymbol{V} \boldsymbol{D_{\alpha}} = \boldsymbol{\Gamma}  \boldsymbol{D_{\alpha}} \label{E}
+\end{equation}
+
+Pääakseleiden inertiat (principal inertias) \(\lambda_{k}\)
+
+\begin{equation}
+\lambda_{k} = \alpha_{k}^2, k = 1,\dots,K,
+K = min \{ I-1, J-1 \}
+\end{equation}
+
+Bilineaarinen korresepondenssimalli
+
+Korrespondenssimatriisi \(\boldsymbol{P}\) voidaan esittää matriisi- ja
+alkiomuodossa ns. palautuskaavana (reconstitution formula).
+
+\begin{equation}
+\boldsymbol{P} = \boldsymbol{D}_{r} \left( \boldsymbol{1}\boldsymbol{1}^{T} + \boldsymbol{\Phi}\boldsymbol{D}_{\lambda}^{\frac {1}{2}}\boldsymbol{\Gamma}^{T}\right)\boldsymbol{D}_{c}
+\end{equation}
+
+\begin{equation}
+p_ {ij}= r_{i}c_{j} \left(1 + \sum_{k=1}^{K} \sqrt{\lambda_{k}} \phi_{ik} \gamma_{jk} \right)
+\end{equation}
+
+Tässä viitataan s. 101 (13.4), 109 (14.9), ja 109-110 (14.10 ja 14.11).
+Palautuskavoilla on monta esitystapaa bilineaarisessa mallissa.
+
+Rivien ja sarakkeiden riippuvuus ja transitioyhtälöt. ss. 244, 108-109
+skalaariversiot.
+
+Pääkoordinaatit standardikoordinaattien funktiona (ns. barysentrinen
+ominaisuus - barycentric relationships)
+
+\begin{equation}
+\boldsymbol{F} = \boldsymbol{D}_{r}^{-1} \boldsymbol{P}\boldsymbol{\Gamma}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{G} = \boldsymbol{D}_{c}^{-1} \boldsymbol{P}^{T}\boldsymbol{\Phi}
+\end{equation}
+
+Pääkoordinaatit pääkoordinaattien funktiointa:
+
+\begin{equation}
+\boldsymbol{F} = \boldsymbol{D}_{r}^{-1} \boldsymbol{P}\boldsymbol{G}\boldsymbol{D}_{\lambda}^{-\frac{1}{2}}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{G} = \boldsymbol{D}_{c}^{-1} \boldsymbol{P}^{T}\boldsymbol{F}\boldsymbol{D}_{\lambda}^{-\frac{1}{2}}
+\end{equation}
+
+Yhtälöt (9) ja (10) esittävät profiilipisteet ideaalipisteiden (vertex
+points) painotettuina keskiarvoina, painoina profiilin elementit.
+Asymmetriset kartat (rivien tai sarakkeiden suhteen) perustuvat näihin
+yhtälöihin. Yhtälöiden (11) ja (12) kahdet pääkoordinaatit ovat perusta
+symmetrisille kartoille. Myös niitä yhdistää barisentrinen painotetun
+keskiarvon riippuvuus, mutta mukana ovat skaalaustekijät
+\(\frac{1}{\sqrt{\lambda_{i}}}\). Ne ovat jokaisessa dimensiossa eri
+suuruisia.
+
+Kokeillaan vielä kaavaviitteitä: kaavojen \eqref{eq:khii21} ja
+\eqref{eq:khii22} yhteyden pitäisi olla selkeä.
+
+
+\end{document}

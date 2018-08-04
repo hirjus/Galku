@@ -103,6 +103,15 @@ Pinotut tai yhdistetyt matriisit (``stacked matrices’’). Yksinkertainen korr
 <p>Merkitään edellisten analyysien kuuden maan ja viiden vastausvaihtoehdon taulukkoa matriisilla <span class="math inline">\(\boldsymbol{ A}_{I J}\)</span>, missä <span class="math inline">\(I\)</span> on rivien ja <span class="math inline">\(J\)</span> sarakkeiden lukumäärä. Taulukoidaan ikäluokan (1 - 6) ja sukupuolen (<span class="math inline">\(f\)</span> = nainen, <span class="math inline">\(m\)</span> = mies) vuorovaikutusmuuttuja (<span class="math inline">\(f1,\dots , f6\)</span> ja <span class="math inline">\(m1,\dots , m6\)</span>) samojen vastausvaihtoehtojen kanssa. Jos tätä taulukkoa merkitään matriisilla
 <span class="math inline">\(\boldsymbol{ B}_{I^{`} J}\)</span>, voimme muodostaa yhdistetyn matriisin</p>
 <p><strong>drawmatrix - kaavoja</strong></p>
+<p>Kokeillaan, toimivatko (5.8.2018).</p>
+<p>Tämä ei toimi: jokaisen rivin alusta poistettu “takakeno”.
+begin{equation}
+left(
+drawmatrix A_{i}
+drawmatrix B^{-1}
+right)
+drawmatrix C
+end{equation}</p>
 <p>Miten päällekkäisten matriisien ympärille saisi sulut?</p>
 <p>Rivien lukumäärä on molemmissa matriiseissa sama, koska luokkia sattuu olemaan kuusi sekä maa- että ikä- ja sukupuoli - luokittelumuuttujissa. Kun matriisit ovat dimensioiltaan ja myös muuttujien sisällön kannalta samankaltaiset, niitä kutsutaan yhteensopiviksi (``matched matrix’’). Tällöin yksinkertaista korrespondenssianalyyisä voi soveltaa tutkimusongelmaan, jossa halutaan erotella jonkun ryhmän sisäinen vaihtelu ryhmien välisiestä vaihtelusta. (Greenacren ehdottama ABBA - analyysi).</p>
 <p><strong>drawmatrix - kaavoja</strong></p>
