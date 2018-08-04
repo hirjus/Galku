@@ -17,8 +17,8 @@ library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 library(stargazer) # 28.5.2018 taulukoiden yms. tulostietojen siistiin tulostukseen
 #
 #Uusia 13.6.2018
-#library(bookdown)
-#library(tinytex)
+library(bookdown)
+library(tinytex)
 #
 #r-skripteillä riittää, kun ajaa tämän
 #sessionInfo()

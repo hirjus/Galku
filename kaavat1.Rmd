@@ -1,14 +1,21 @@
 ---
 title: "Kaavat bookdown-paketilla"
-date: 13.6.2018
+date: 13.6.2018 (tulostettu 4.8.2018, pikku lisäyksiä)
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
 site: bookdown::bookdown_site
 output:
+  bookdown::html_book:
   bookdown::pdf_book:
     keep_tex: yes
 ---
+# Kaavat ja matemattiset merkinnät
+
+bookdown vaatii alkuun "first or second level heading", eli yksi tai kaksi risuaitaa. Virheilmoitus tulee Pandocilta.
+
+Ladataan paketit. Herjali tästä YAML-frontmatterissa (#bookdown::html_book: ). Ei toimi html-tulostus, ja välillä toimii. Onpa hankalaa.
+
 ```{r include=FALSE}
 library(rgl)
 library(ca)
@@ -30,7 +37,6 @@ library(tinytex)
 ```
 
 
-# Kaavat ja matemattiset merkinnät
 
 Kaavat on esitettävä bookdown-paketin määrityksillä. Viittausnimien on oltava yksikäsitteisiä koko dokumentissa, jos käytetään "merge and knit" menetelmää. Jos taas jokainen lapsidokumentti on "itsenäinen" ("knit and merge"), tämä koskee vain kyseistä dokumenttia (kts. Bookdown - webkirja).
 
@@ -61,28 +67,52 @@ Tunnusluku $\phi^{2}$ on korrespondenssianalyysissä kokonaisinertia (total iner
 
 Tässä siirrytään kahden luokittelumuuttujan taulukosta suhteellisten frekvenssien taulukkoon, ja pieni pohdinta taulukoista yleensä olisi paikallaan. Kaavojen \@ref(eq:khii21) ja \@ref(eq:khii22) yhteyden pitäisi olla selkeä.
 Frekvenssitaulukossa (jossa kaikki taulukon luvut on jaettu havaintojen lukumäärällä n) riviprofiilien 1 ja 3  (euklidinen) etäisyys on 
- \[
+ \begin{equation}
  \sqrt{(p_{11} - p_{31})^2 + (p_{12} - p_{32})^2 + (p_{13} - _{33})^2+ (p_{14} - _{34})^2+ (p_{15} - _{35})^2}
- \]
+ \end{equation}
  
  
  Rivien $\chi^{2}$ - etäisyys on painotettu euklidinen etäisyys, jossa painoina ovat riviprofiilin odotetut arvot. Ne ovat riippumattomuushypoteesin mukaisesti riviprofiilien keskiarvoprofiilin vastaavat alkioit $r_{i}$ .
-\[
+\begin{equation}
  \sqrt{\frac{(p_{11} - p_{31})^2} { r_{1}} + \dots + \frac{(p_{15} - p_{35})^2} {r_{5}}}
-\]
+\end{equation}
 
 Inertia voidaa esittää rivien ja ``keskiarvorivin `` (sentroidin) $$\chi^{2}$$ -etäisyyksien neliöiden painotettuna summana, jossa painoina ovat rivien massat $m_{i}$ ja summa lasketaan yli rivien ${i}$.
-\[
+\begin{equation}
  \phi^{2} = \sum_{i} (massa \: m_{i}) \times (profiilin \: i \: \chi^{2} - etaisyys \: sentroidista)^{2}
-\]
+\end{equation}
 
 Kaavat.tex - dokumentissa on tässä kohdassa testailtu R:n furniture - paketin taulukoita latex- ja latex2 - output-formaateilla. Ne voi liittää LateX-dokumenttiin, jossa on käytössä paketti booktabs. Bookdownissa luultavasti tämä on tarpeeton, kable riittänee.
 
 ## Matriisit ja niiden havainnollistaminen
 
-Näissä ei ole vielä numeroita ja viitetietoa. Ei kutoudu rmd-tiedostosta, mutta tekee tex-tiedoston ja siitä saa luotua pdf - tiedoston. drawmatrix - paketti ei ihan tunnu toimivan, toistaiseksi ei mukana.
+```{r}
 
-**drawmatrix - kaavoja**
+```
+
+Tämä toimii, drawmatrixin voi varmaan unohtaa?
+
+\begin{equation}
+A = \begin{bmatrix} 
+    a_{11} & a_{12} & \dots \\
+    \vdots & \ddots & \\
+    a_{K1} &        & a_{KK} 
+    \end{bmatrix}
+\end{equation}
+
+Ehkäpä ABBA onnistuu paremmin tällä notaatiolla?
+
+\begin{equation}
+A = \begin{bmatrix} 
+    A_{11} & B_{12}  \\
+    B_{21} & B_{22} 
+    \end{bmatrix}
+\end{equation}
+
+
+
+
+**drawmatrix - kaavoja - ei ole kokeiltu**
 
 Yksinkertainen korrespondenssianalyysi on kahden luokittelumuuttujan määrittelmän frekvenssitaulukon analyysiä. Taulukon rivit ovat havaintoyksiköiden (individuals, havaintoyksikkö) aggregoituja summia, sarakkeet muuttujia.
 
