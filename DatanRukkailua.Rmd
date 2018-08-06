@@ -36,15 +36,15 @@ str(star2)
 ```
 
 
-Stargazer-paketilla CA-tuloksia, mutta eivät kulje html-tiedostoon asti.
+Stargazer-paketilla CA-tuloksia, mutta eivät kulje html-tiedostoon asti.Ei toimi oikein mitenkään (2.7.2018)?
 
 ```{r tahti1, results = "asis"}
 #star1 <- print(simpleCA1)
 #str(star1)
 
 
-stargazer(star2$scree, type="html")
-stargazer(star2$rows, type="html")
-stargazer(star2$columns, type="html")
+#stargazer(star2$scree, type="text")
+#stargazer(star2$rows, type="html")
+stargazer(star2$columns, header=FALSE, type='latex')
 ```
 
