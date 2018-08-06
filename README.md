@@ -16,4 +16,8 @@ Koodia on helpompi ja turvallisempaa muokkailla täällä ja siirtää vasta sitten c
 
 **4.8.2018**
 
-kaavat1.Rmd - lisättiin muutama matriisiyhtälö. Dramatrix-pakettia (LaTeX) ei ole vielä kokeilu bookdown-ympäristössä.
+kaavat1.Rmd - lisättiin muutama matriisiyhtälö. Drawmatrix-pakettia (LaTeX) ei ole vielä kokeilu bookdown-ympäristössä.
+
+**8.8.2018**
+
+Drawmatrix ei toiminut. Palataan asiaan, jos on tarve. Tägätään versioksi 1, ja tehdään dev-haara siistimistä varten.
