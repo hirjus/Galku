@@ -1,4 +1,4 @@
-﻿# Galku
+# Galku
 
 Ensimmäiset Rmarkdown - dokumentit. Vain Rmd- ja nb.html-tiedostot.
 
@@ -21,3 +21,7 @@ kaavat1.Rmd - lisättiin muutama matriisiyhtälö. Drawmatrix-pakettia (LaTeX) e
 **8.8.2018**
 
 Drawmatrix ei toiminut. Palataan asiaan, jos on tarve. Tägätään versioksi 1, ja tehdään dev-haara siistimistä varten.
+
+**8.8.2019**
+
+Järjestellään tekstipätkiä.

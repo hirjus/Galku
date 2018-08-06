@@ -402,7 +402,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">G Luku 1 Yksinkertainen korrespondenssianalyysi</h1>
 <h4 class="author"><em>Jussi Hirvonen</em></h4>
-<h4 class="date"><em>versio 30.5.2018, tulostettu 2018-08-06</em></h4>
+<h4 class="date"><em>versio 1.01, tulostettu 2018-08-06</em></h4>
 
 </div>
 
@@ -448,27 +448,23 @@ $(document).ready(function () {
 <li>23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat ja iän ja sukupuolen vuorovaikutusmuuttuja ga.</li>
 <li>24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit täydentävinä (passiivisina)</li>
 </ul>
-<p><strong>6.8.2018</strong></p>
+<p><strong>6.8.2018 versio 1.0</strong></p>
 <p><strong>Siistitään tämä versio.</strong></p>
 <hr />
 <div id="data" class="section level1">
 <h1><span class="header-section-number">1</span> Data</h1>
 <p><strong>edit</strong> tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018)</p>
 <p>Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi.</p>
-<p>Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien – taulukon rivien ja sarakkeiden – riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan “koordinaatiston” tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan “katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla” (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä “pistepilvessä”.</p>
-<p><strong>edit:</strong> Tässä on kehiteltävää, mainittava ainakin dimensioden vähentäminen CA:n ja muiden vastaavien menetelmien ydintavoitteena (“the essence”).</p>
 <div id="luvun-1-tavoitteet" class="section level2">
 <h2><span class="header-section-number">1.1</span> Luvun 1 tavoitteet</h2>
+<p><strong>Datan esittely ja kuvailut - ehkä myös oma kappale muista mahdollisista lähestymistavoista aineiston analyysissä (deskriptiiviset, todennäköisyysteoriaan eksplisiittisesti perustuvat kuten MFA)</strong></p>
 <ol style="list-style-type: decimal">
-<li>Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Perustella rajaukset ja kertoa miten ne tehdään.</li>
-<li><p>Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta</p></li>
-<li><p>Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)</p></li>
-<li><p>Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)</p></li>
-<li><p>Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.</p></li>
-<li><p>Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely</p></li>
+<li><p>Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla</p></li>
+<li><p>CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin</p></li>
+<li><p>Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet</p></li>
+<li><p>Laadukkaan ja hyvin dokumentoidun aineiston edut</p></li>
+<li><p>Tärkeä rajaus: CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (ekologia ja biologia, arkeologia, kielen tutkimus)</p></li>
 </ol>
-<p>Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Teen käsiteluettelon, ja kirjoitan kaavat yms. toistaiseksi omaan dokumenttiin (LaTeX).</p>
-<p>Keskeiset lähteet: MG:n “Correspondence analysis in practice”, “Biplots in practice”, HY:n 2017 kurssin materiaali ja laskuharjoitukset. Näissä kaikissa on käytetty samaa dataa esimerkeissä. Lisäksi perusasioiden esittelyssä MG &amp; Blasius artikkelikokoelma (“vihreä kirja”), joissain kohdin Lerouxin ja Romanetin teos. Pitää miettiä viittamiskäytäntöjä.</p>
 </div>
 <div id="perhe-ja-muuttuvat-sukupuoliroolit---isspn-kyselytutkimuksen-data-2012" class="section level2">
 <h2><span class="header-section-number">1.2</span> Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012</h2>
@@ -945,12 +941,24 @@ kable(taulu1b,digits = 2, caption = &quot;Kysymyksen V6 vastaukset maittain&quot
 <p>Taulukoita kannattaa tarkastella ensin rivien (kuva puuttuu) ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitamme hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).</p>
 <p>Toiseksi riippumattomuushypoteesi ja <span class="math inline">\(\chi^2\)</span> - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen.</p>
 <p><span class="math inline">\(\chi^2\)</span> - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.</p>
-<p>Dimensioiden vähentämisen idea, joka ei pienessä taulossa ole ihan ilmeinen.</p>
+<p>Dimensioiden vähentämisen idea (“the essence”), joka ei pienessä taulossa ole ihan ilmeinen.</p>
+<p>Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien – taulukon rivien ja sarakkeiden – riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan “koordinaatiston” tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan “katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla” (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä “pistepilvessä”.</p>
+<p><strong>Vanha lista:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta</p></li>
+<li><p>Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)</p></li>
+<li><p>Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)</p></li>
+<li><p>Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.</p></li>
+<li><p>Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely</p></li>
+</ol>
+<p>Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Teen käsiteluettelon, ja kirjoitan kaavat yms. toistaiseksi omaan dokumenttiin (LaTeX).</p>
+<p>Keskeiset lähteet: MG:n “Correspondence analysis in practice”, “Biplots in practice”, HY:n 2017 kurssin materiaali ja laskuharjoitukset. Näissä kaikissa on käytetty samaa dataa esimerkeissä. Lisäksi perusasioiden esittelyssä MG &amp; Blasius artikkelikokoelma (“vihreä kirja”), joissain kohdin Lerouxin ja Romanetin teos.</p>
 <p><strong>Ensimmäinen symmetrinen kartta</strong></p>
 <p>Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta (“mitä on oikealla ja vasemmalla”). Jos pisteet ovat alkuperäisessä “pilvessä” kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet.</p>
 <p>Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien.</p>
 <div id="aiti-tyossa" class="section level2">
 <h2><span class="header-section-number">2.1</span> Äiti työssä</h2>
+<p><strong>xyz</strong> Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi kysymys.</p>
 <p>Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - täysin eri mieltä) seuraaviin kysymyksiin (suomenkielinen lomake, kysymys 23):</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallisen suhteen kuin äiti, joka ei käy työssä</p></li>
