@@ -91,31 +91,31 @@ Merkitään matriisin <span class="math inline">\(\boldsymbol{P}\)</span> rivisu
 \boldsymbol{S} = \boldsymbol{D_r}^{-1/2}(\boldsymbol{P} - \boldsymbol{r}\boldsymbol{c}^T)\boldsymbol{D_c}^{-1/2} \label{A}
 \end{equation}\]</span></p>
 <p>Residuaalimatriisi voidaan esittää myös ns. kontingenssi-suhdelukujen (contingency ratio) avulla.</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 \boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} = \left( \frac{p_{ij}} {r_{i} c{j}} \right)
-\]</span></p>
-<p><span class="math display">\[ 
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
 \boldsymbol{S} = \boldsymbol{D_r}^{1/2} (\boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} - \boldsymbol{1}\boldsymbol{1}^{T} ) \boldsymbol{D_c}^{-1/2}  \;\;\; .
-\]</span></p>
+\end{equation}\]</span></p>
 <p>Toinen esitystapa on hyödyllinen, kun tarkastellaan CA:n yhteyksiä muihin läheisiin menetelmiin (log ratio analysis of compositional data, moniulotteinen skaalaus (?), lineaarinen diskriminanttianalyysi, kanoninen korrelaatioanalyysi, pääkomponettianalyysi, kaksoiskuvat, yleensä SVD-perusteiset dimensioden vähentämisen menetelmät).</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 s_{ij} = \frac{p_{ij}-r_{i}c_{j}} { \sqrt{r_{i}c_{j} } }
-\]</span></p>
+\end{equation}\]</span></p>
 <p>ja toinen
-<span class="math display">\[
+<span class="math display">\[\begin{equation}
 s_{ij} = \sqrt{r_{i}} \left( \frac{p_{ij}}{r_{i}c_{j}} \right) \sqrt{c_{j}} \;\;\; .
-\]</span></p>
+\end{equation}\]</span></p>
 <p>Mitäköhän tuosta pitäisi nähdä? Selitykset löytyvät em. teorialiitteestä.</p>
 <p>Singulaariarvohajoitelma (singular value decomposition, SVD) matriisille <span class="math inline">\(\boldsymbol{S}\)</span> on</p>
-<p><span class="math display">\[ 
+<p><span class="math display">\[\begin{equation} 
 \boldsymbol{S} = \boldsymbol{U} \boldsymbol{D_{\alpha}} \boldsymbol{V}^{T}
-\]</span></p>
-<p>missä <span class="math inline">\(\boldsymbol{D_{\alpha}}\)</span> on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä <span class="math inline">\(\alpha_{1}\geq \alpha_{1} \geq \hdots\)</span></p>
+\end{equation}\]</span></p>
+<p>missä <span class="math inline">\(\boldsymbol{D_{\alpha}}\)</span> on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä <span class="math inline">\(\alpha_{1}\geq \alpha_{1} \geq \hdots\)</span>. Eikö <span class="math inline">\(\hdots ...\)</span> toimi html-tulostuksessa, PDF-tulostuksessa näyttää toimivan!</p>
 <p>Matriisit <span class="math inline">\(\boldsymbol{U}\)</span> ja <span class="math inline">\(\boldsymbol{V}\)</span> ovat ortogonaalisia singulaarivektoreiden matriiseja. Singulaariarvohajoitelman merkitys dimensioiden vähentämiselle perustuu Eckart - Young - teoreemaan. Teoreema (30-luvulta?) kertoo, että saamme pienimmän neliösumman <span class="math inline">\(m\)</span> - ulotteisen approksimaation matriisille <span class="math inline">\(\boldsymbol{S}\)</span> (CAinP, ss. 244) matriisien
 <span class="math inline">\(\boldsymbol{U}\)</span> ja <span class="math inline">\(\boldsymbol{V}\)</span> ensimmäisten sarakkeiden ja ensimmäisten singulaariarvojen avulla.</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 \boldsymbol{S}_{(m)} = \boldsymbol{U}_{(m)} \boldsymbol{D}_{\alpha(m)} \boldsymbol{V}_{(m)}^{T}
-\]</span></p>
+\end{equation}\]</span></p>
 <p>Korrrespondenssianalyysin ratkaisualgoritmissa tätä tulosta on muokattava niin, että rivien ja sarakkeiden massat huomioidaan pienimmän neliösumman approksimaatiossa painoina.</p>
 <p>Näin saadaan standardikoordinaatit ja principal-koordinaatit riveille ja sarakkeille.</p>
 <p>Rivien standardikoordinaatit

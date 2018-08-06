@@ -170,42 +170,42 @@ Korrespondenssianalyysin perusrakenne (algoritmi?) on tämä. Singulaariarvohajo
 
 Residuaalimatriisi voidaan esittää myös ns. kontingenssi-suhdelukujen (contingency ratio) avulla.
 
-\[
+\begin{equation}
 \boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} = \left( \frac{p_{ij}} {r_{i} c{j}} \right)
-\]
+\end{equation}
 
-\[ 
+\begin{equation}
 \boldsymbol{S} = \boldsymbol{D_r}^{1/2} (\boldsymbol{D_r}^{-1} \boldsymbol{P} \boldsymbol{D_c}^{-1} - \boldsymbol{1}\boldsymbol{1}^{T} ) \boldsymbol{D_c}^{-1/2}  \;\;\; .
-\]
+\end{equation}
 
 Toinen esitystapa on hyödyllinen, kun tarkastellaan CA:n yhteyksiä muihin läheisiin menetelmiin (log ratio analysis of compositional data, moniulotteinen skaalaus (?), lineaarinen diskriminanttianalyysi, kanoninen korrelaatioanalyysi, pääkomponettianalyysi, kaksoiskuvat, yleensä SVD-perusteiset dimensioden vähentämisen menetelmät).
 
  
-\[
+\begin{equation}
 s_{ij} = \frac{p_{ij}-r_{i}c_{j}} { \sqrt{r_{i}c_{j} } }
-\]
+\end{equation}
 
 ja toinen
-\[
+\begin{equation}
 s_{ij} = \sqrt{r_{i}} \left( \frac{p_{ij}}{r_{i}c_{j}} \right) \sqrt{c_{j}} \;\;\; .
-\]
+\end{equation}
 
 Mitäköhän tuosta pitäisi nähdä? Selitykset löytyvät em. teorialiitteestä.
 
 Singulaariarvohajoitelma (singular value decomposition, SVD) matriisille $\boldsymbol{S}$ on
 
-\[ 
+\begin{equation} 
 \boldsymbol{S} = \boldsymbol{U} \boldsymbol{D_{\alpha}} \boldsymbol{V}^{T}
-\]
+\end{equation}
 
-missä $\boldsymbol{D_{\alpha}}$ on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä $\alpha_{1}\geq \alpha_{1} \geq \hdots$
+missä $\boldsymbol{D_{\alpha}}$ on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä $\alpha_{1}\geq \alpha_{1} \geq \hdots$. Eikö $\hdots ...$ toimi html-tulostuksessa, PDF-tulostuksessa näyttää toimivan!
 
 Matriisit $\boldsymbol{U}$ ja $\boldsymbol{V}$ ovat ortogonaalisia singulaarivektoreiden matriiseja. Singulaariarvohajoitelman merkitys dimensioiden vähentämiselle perustuu Eckart - Young - teoreemaan. Teoreema (30-luvulta?) kertoo, että saamme pienimmän neliösumman $m$ - ulotteisen approksimaation matriisille $\boldsymbol{S}$ (CAinP, ss. 244) matriisien 
 $\boldsymbol{U}$ ja $\boldsymbol{V}$ ensimmäisten sarakkeiden ja ensimmäisten singulaariarvojen avulla.
 
-\[
+\begin{equation}
 \boldsymbol{S}_{(m)} = \boldsymbol{U}_{(m)} \boldsymbol{D}_{\alpha(m)} \boldsymbol{V}_{(m)}^{T}
-\] 
+\end{equation} 
 
 Korrrespondenssianalyysin ratkaisualgoritmissa tätä tulosta on muokattava niin, että rivien ja sarakkeiden massat huomioidaan pienimmän neliösumman approksimaatiossa painoina.
 
