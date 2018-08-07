@@ -245,6 +245,7 @@ kable(taulu45,digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 ```
 
+**zxy** (7.8.2018) **DatanRukkailua2.R** parempi versio näistä muunnoksista.
 
 ## Päällekkäiset matriisit (stacked matices)
 

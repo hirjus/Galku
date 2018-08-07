@@ -34,10 +34,13 @@ summary(test1)
 #Huom2 Kun faktoroidaan järjestysasteikon muuttuja ja mukana on puuttuvia tietoja, muuttuja koodautuu
 #nominaaliasteikolle. Niin pitääkin, koska yksi arvo on NA. Vai voisiko olla niin, että ordinaaliasteikko ja siiinä
 #puuttuvia havaintoja? Ei merkitysta CA:ssa, mutta muuten kyllä. Kts. opk 7.4.2018.
+
 str(test1$V6)
 levels(test1$V6)
 tasot_1<-c(1,2,3,4,5)
+
 # puuttuvat pois - miksi eivät häivy?
+
 test2 <- select(FiSeHu2012d2,C_ALPHAN, V6)
 test2 <- filter(test2, !is.na(V6))
 test2$V6 <- factor(test2$V6)
@@ -56,6 +59,7 @@ str(ISSP2012.data$V6)
 #.. ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
 
 #objektin tiedot
+
 typeof(ISSP2012.data$V6) # double
 class(ISSP2012.data$V6) # labelled
 storage.mode(ISSP2012.data$V6) # double
@@ -65,9 +69,9 @@ attributes(ISSP2012.data$V6) # label(kysymys), format.spss, class, labels - tä�
 attributes(ISSP2012.data$V6.labels)
 
 
-select(ISSP2012.data,C_ALPHAN, V6) %>% filter(C_ALPHAN == "ES") %>% count(V6) # eli metatiedoissa kerrotaan, 
-#että Espanjalla on oma sarake
-
+select(ISSP2012.data,C_ALPHAN, V6) %>% filter(C_ALPHAN == "ES") %>% count(V6) 
+# Metatiedoissa kerrotaan, että Espanjalla on oma sarake
+#
 #http://zacat.gesis.org/webview/ voi tarkistaa - tähän kysymykseen vastauksia (pl. puuttuvat) on 3109
 #on suodatettu pois kaikki, jossa NA tämän setin kysymyksissä! 
 
