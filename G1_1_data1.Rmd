@@ -233,9 +233,11 @@ temp2$maa <-  factor(temp2$C_ALPHAN)
 #str(taulu1)
 taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
 taulu1a <- taulu1[ ,1:14]
-kable(taulu1a,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset maittain")
 taulu1b <- taulu1[ ,15:28]
-kable(taulu1b,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+knitr::kable(taulu1b,digits = 2, , booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset maittain")
 ```
 
 Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.

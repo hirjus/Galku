@@ -29,3 +29,5 @@ Järjestellään tekstipätkiä.
 **7.8.2018**
 
 Lisättiin gitignore-tiedosto.
+
+Data-osuus editoitu, versio 1.02.

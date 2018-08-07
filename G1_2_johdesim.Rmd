@@ -1,9 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 ```{r paketit_g12, include=FALSE}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
@@ -60,7 +54,10 @@ Keskeiset lähteet: MG:n "Correspondence analysis in practice", "Biplots in prac
 
 Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet.
 
-Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien.
+Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien. 
+**zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä. MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
+
+**zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
 
 ## Äiti työssä
 
@@ -109,7 +106,9 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 ```
 
 
-Tehdään aineistoon muutama muutos, jotta sen käsittely on helpompaa.
+Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa. 
+**zxy** Faktoreita ei ordinaaliasteikolla, vaikka ilman puuttuvia näin voisi tehdä. Miten ordinaaliasteikon faktori toimii, jos on puuttuvia mukana? Tämä ohitus/ratkaisu pitää perustella.
+
 ```{r}
 # muutetaan muuttujia faktoreiksi
 #
@@ -152,9 +151,12 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
 taulu3 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
 taulu4 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
-kable(taulu2,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
-kable(taulu3,digits = 2, caption = "Kysymyksen V6 vastaukset, riviprosentit")
-kable(taulu4,digits = 2, caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
+knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset maittain")
+knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset, riviprosentit")
+knitr::kable(taulu4,digits = 2, booktabs = TRUE,
+             caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
 
 
 ```
@@ -228,7 +230,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r suhtfrek1}
 taulu5 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
-kable(taulu5,digits = 2, caption = "Kysymyksen V6 vastaukset maittain (%)")
+knitr::kable(taulu5,digits = 2, booktabs = TRUE,
+             caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```
 
 
@@ -273,9 +276,11 @@ include_graphics(img_path)
 
 2. Massat
 
-3. Profiilien etäisyydet
+3. Profiilien etäisyydet (khii2)
 
-**EDIT:** kaavaliitteessä (LaTeX) on kirjoiteltu valmiiksi - en vielä lisää (25.8.18)
+**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, en nyt (7.8.18) löydä MG-sitaattia.
+
+
 
 
 
