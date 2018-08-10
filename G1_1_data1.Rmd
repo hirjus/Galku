@@ -53,20 +53,22 @@ sessionInfo()
 
 Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
 
-ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661 **tämä doi-linkki ei toimi**
 
-[Aineistot] (https://search.gesis.org/research_data/ZA5900) 2012
+[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 2012 **toimii - ja viitetieto tuossa edellä!**
 
-[Muuttujakuvaukset ja muut tiedot] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
+[Muuttujakuvaukset ja muut tiedot](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
 
-[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e)
 
-[Käyttöehdot:] (https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
+[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 
-[Tiedonkeruumenetelmä ja otoskoko:] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
+[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
+
+[Tiedonkeruumenetelmä ja otoskoko:](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).
 
-Havaintojen lukumäärät voi tarkistaa [täältä] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
+Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
 
 
 edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi(?- tuskinpa). Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. 
@@ -236,7 +238,7 @@ taulu1a <- taulu1[ ,1:14]
 knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset maittain")
 taulu1b <- taulu1[ ,15:28]
-knitr::kable(taulu1b,digits = 2, , booktabs = TRUE, 
+knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset maittain")
 ```
 
@@ -254,18 +256,24 @@ NAP ja NAV määritellään
 
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
 
+**zxy** **Miten nämä tarkemmat tiedot (7, 8, 9 saadaan näkyviin?)**
+
 **EDIT:** Puuttuneisuuden lyhyttä kuvailua, ja rajausten vaikutus havaintojen lukumäärään muutamaan taulukkoon. Voi siirtää liitteisiin (25.4.2018)
 
 Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
 
 ###Poikkeavat kysymykset
 
+**zxy** Myös maakohtaiset erot, ja niiden vaikutus aineiston rajaamiseen
+
+**zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
+
 **edit:** nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 
 **edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
 
-Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto. SPSS-aineistossa nämä kaikki on koodattu puuttuviksi havainnoiksi.
+Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. **Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto.** Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
 
 Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
 

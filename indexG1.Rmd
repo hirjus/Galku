@@ -1,10 +1,10 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.02, tulostettu `r Sys.Date()` "
+date: "versio 1.04, tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
-output: 
+output:
   pdf_document:
     toc: true
     number_sections: true
@@ -33,7 +33,7 @@ Kommentteja ja versionhallintaa:
   +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.4.18)
   + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
   + pidetään muuttujien ja tiedostojen nimeäminen selkeänä, tarkistetaan aika ajoin
-  
+
 * Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva riviprofiileista puuttu vielä (15.5.2018)
 * Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html on helpompi lukea, kun koodi on oletuksena piilossa
 * PDF-tulosteessa koodi pääsääntöisesti näkyy toistaiseksi
@@ -47,21 +47,21 @@ Kommentteja ja versionhallintaa:
 **6.8.2018 versio 1.0**
 
 **Siistitään tämä versio.**
- 
-  
+
+
 ***
-  
+
 ```{r child = "G1_1_data1.Rmd"}
 ```
-  
+
 ***
-  
+
 ```{r child = "G1_2_johdesim.Rmd"}
 ```
 
 ***
 ***
-  
+
 ```{r child = "G1_3_tulk1.Rmd"}
 ```
 
@@ -69,4 +69,3 @@ Kommentteja ja versionhallintaa:
 ```{r child = "G1_4_CAlaaj1.Rmd"}
 
 ```
-

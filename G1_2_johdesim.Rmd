@@ -29,7 +29,7 @@ Toiseksi riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huom
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
-Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole ihan ilmeinen.
+Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole ihan ilmeinen. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana (karttana).
 
 Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä "pistepilvessä".
 
@@ -61,7 +61,12 @@ Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepiste
 
 ## Äiti työssä
 
-**xyz** Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi kysymys.
+**zxy** Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi kysymys.
+
+**zxy** Suhde data-lukuun, siellä pitäisi esitellä aineisto sisällöllisesti. Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
+
+**zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b) kuviin ja taulukoihin.
+
 
 Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - täysin eri mieltä) seuraaviin kysymyksiin (suomenkielinen lomake, kysymys 23):
 
@@ -106,7 +111,8 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 ```
 
 
-Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa. 
+Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
+
 **zxy** Faktoreita ei ordinaaliasteikolla, vaikka ilman puuttuvia näin voisi tehdä. Miten ordinaaliasteikon faktori toimii, jos on puuttuvia mukana? Tämä ohitus/ratkaisu pitää perustella.
 
 ```{r}
@@ -146,26 +152,43 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 # attributes(ISSP2012esim1.dat$V6) # does it have any metadata?
 # str(ISSP2012esim1.dat) #8143 obs. of  8 variables
 
-# Taulkoidaan data
+```
+**Taulukot ja kuvat omina koodilohkoina**
 
+**Frekvenssitaulukko**
+
+```{r simpeCAfrekTa1}
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
-taulu3 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
-taulu4 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset maittain")
+```
+
+**Riviprosentit**
+
+```{r simpeCArprosTa1}
+taulu3 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
+
 knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset, riviprosentit")
+```
+
+**Sarakeprosentit**
+
+```{r simpeCAcprosTa1}
+taulu4 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
+
 knitr::kable(taulu4,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
-
-
 ```
+
+
+
 
 Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
 
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
 
-```{r EkaCA, include=FALSE}
+```{r EkaCA}
 simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
 #tämä ajetaan jotta saadaan hieno kuva piirrettyä
 ```
@@ -228,19 +251,19 @@ Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.
 Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
-```{r suhtfrek1}
+```{r simpleCArelfrekTa1}
 taulu5 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```
 
+**zxy** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
 
-
-```{r ekaCA }
+```{r simpleCAmap1, fig.cap= "V6: lapsi kärsii jos äiti on töissä", fig.asp = 1 }
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
-plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE), main = "Lapsi kärsii jos äiti on töissä")
+plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 
 
 #str(simpleCA1)
@@ -255,7 +278,7 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE), main = "Lapsi kärsii jo
 Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 
 
-Ja toinen tapa
+Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Ei esitetä tässä.
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}
 #tämä toimii
 img_path <- "img/1CAmap_sy.pdf"
