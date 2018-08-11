@@ -18,23 +18,33 @@ library(knitr)
 
 Kerätään käsitteet yhteen dataframeen, taulukon tai taulkoiden luontia varten.
 
-```{r kasitteet1}
+```{r kasitteet1Tau1, fig.cap="Korrespondenssianalyysin käsitteet"}
 consepts_fi <- c("massa", "profiili", "kontrasti", "modaliteetit", "attraktio",
-               "repulsio", "barysentrinen", "ekvivalenssi jakauman suhteen" )
+               "repulsio", "barysentrinen", "ekvivalenssi jakauman suhteen",
+               "pääkoordinaatit", "standardikoordinaatit", "inertia")
 consepts_en <- c("mass", "profile","contrast","modalities","attraction",
-                 "repulsion","barycentric", "distributional equivalence" )
+                 "repulsion","barycentric", "distributional equivalence",
+                 "principal coordinates", "stardard coordinates", "inertia"
+                 )
 
 consepts_meaning <- c("massa, havaintojen lukumäärä", "profiili,jotain", "ääripäät",
-                      "luokittelumuuttujan arvo tai arvot", "vetovoima", "työntövoima", "painotettu keskiarvo", 
-                      "jakauman ekvivalenssi on tärkein periaate")
+                      "luokittelumuuttujan arvo tai arvot", "vetovoima", "työntövoima", 
+                      "painotettu keskiarvo","jakauman ekvivalenssi on tärkein periaate",
+                      "skaalaus a", "skaalaus b", "hajonnan tunnusluku")
+#consepts_remark <- c("absoluuttinen tai suhteellinen", "rivin/sarakkeen havaintojen suhteellinen     #jakauma","ääripäät","luokittelumuuttujan arvo tai arvot", "vetovoima", "työntövoima", 
+#                      "painotettu keskiarvo","jakauman ekvivalenssi on tärkein periaate",
+#                      "skaalaus a", "skaalaus b", "hajonnan tunnusluku")
+## Ei hyvä idea, taulukosta tulee liian leveä. Selitykset tekstiin, ei taulukkoon ängettyinä
 
 # luodaan df concepts1
 consepts1.df <- data_frame(consepts_fi,consepts_en,consepts_meaning)
+cols_concepts <- c("käsite","käsite englanniksi","merkitys")
+colnames(consepts1.df) <- cols_concepts
 
 #%>%
 #  arrange(Term) %>% # i.e. alphabetical order by Term
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
-kable(consepts1.df, booktab=T)
+knitr::kable(consepts1.df, booktab=TRUE)
 
 ```
 
