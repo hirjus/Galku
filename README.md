@@ -33,3 +33,5 @@ Lisättiin gitignore-tiedosto.
 Data-osuus editoitu, versio 1.02.
 
 **10.8.2018** hieman lisää korjailuja data-osuuteen, versio 1.03. Editoitiin lukuun 3 asti, versio 1.04.
+
+**12.8.2018** versio 1.05, kaikkia yksinkertaisen CA:n kuvia ja taulukoita ei muutettu "boodown-muotoon".

@@ -1,15 +1,8 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
-
 # Data
 
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018)
 
-Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi.
+Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi (05.2018).
 ```{r paketit_g11, include=FALSE}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
