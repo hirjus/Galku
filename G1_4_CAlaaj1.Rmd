@@ -108,7 +108,7 @@ kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositu
 
 ## Täydentävät muuttujat (supplementary points)
 
-**edit** Piste sinne piirretään, mutta muuttujassa on se tieto. Täydentävät pisteet kuulostaa huonolta.
+**zxy** Piste sinne piirretään, mutta muuttujassa on se tieto. "Täydentävät piste"" kuulostaa huonolta. Lisämuuttujat, havainnot?
 
 Ref:CAip ss 89, HY2017_MCA
 
@@ -192,7 +192,9 @@ Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroide
 
 ## Lisämuuttujat: ikäluokka ja sukupuoli
 
-Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
+**zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
+
+**zxy** "Taulokon käsite" vaatii oman kappaleen. Yhteys havaintojen/yksilöiden pilveen ja muuttujien pilveen.
 
 Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
 
@@ -243,6 +245,7 @@ kable(taulu45,digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 ```
 
+**zxy** (7.8.2018) **DatanRukkailua2.R** parempi versio näistä muunnoksista.
 
 ## Päällekkäiset matriisit (stacked matices)
 

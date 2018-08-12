@@ -2,7 +2,7 @@
 
 sessionInfo()
 
-# siivous - pois tilapäistiedostoja aika ajoin (temp, test, apu)
+# siivous - pois tilapÃ¤istiedostoja aika ajoin (temp, test, apu)
 # jatkossa objektien nimeen joku tunniste: df jne
 
 #rm(test1, test2, test3, test4, test5, temp1, temp2, temp3)
@@ -12,22 +12,22 @@ sessionInfo()
 #aineiston valinnan tarkistuksia 9.4.2018
 #data input
 #puuttuvat tiedot NA -> 9 jo lukuvaiheessa ?
-#ei ehkä, sillä sitten ne ovat numeroita!
+#ei ehkÃ¤, sill? sitten ne ovat numeroita!
 #lasketaan puuttuvia
 #ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
-# tärkeä näyttää tuo versio ZA5900_v4-0-0!
+# t?rke? n?ytt?? tuo versio ZA5900_v4-0-0!
 
 str(ISSP2012.data$V50 )
-ISSP2012.data %>% count(V50) # 14.4.2018 mitä tämä tekee ?
+ISSP2012.data %>% count(V50) # 14.4.2018 mit? t?m? tekee ?
 ISSP2012.data$V50 
 summary(ISSP2012.data$V4)
 temp3 <- filter(ISSP2012.data, V4 == 826) %>% select(V3,V4, C_ALPHAN)
 temp3 <- filter(temp3, V3 == 82601)
 
-#tsekataan vielä GB
+#tsekataan vielÃ¤ GB
 # V3 == 62002 V4 == 826 
 
-#perustaulukoita brittidatalla (ei muuttujia vielä)
+#perustaulukoita brittidatalla (ei muuttujia viel?)
 temp3 %>% tableX(V3,V3, type = "count") # molemmat muuttujat samat
 
 
@@ -55,15 +55,15 @@ str(temp3) # 950
 #V3        V4        C_ALPHAN
 #<dbl+lbl> <dbl+lbl> <chr>   
 #  27601     276       DE      
-#  27601     276       DE Länsi
+#  27601     276       DE L?nsi
 #....
-#  27602     276       DE  Itä    
+#  27602     276       DE  It?    
 #  27602     276       DE  
 #
 temp1 <- select(ISSP2012.data,V3,V4, C_ALPHAN) %>% filter(C_ALPHAN == "BE") #|(C_ALPHAN == "DE")) #Belgia ja Saksa
 select(ISSP2012.data,V3,V4, C_ALPHAN) %>% filter(C_ALPHAN == "DE") %>% tableX(V3, C_ALPHAN)
 
-#maakoodauksen selvittelyä 14.4.2018
+#maakoodauksen selvittelyÃ¤ 14.4.2018
 # filter(C_ALPHAN == "BE") # mukaan kaikki V3-koodit 5601, 5602 ja 5603, V4 = 56
 
 temp1 %>% tableX(V3, C_ALPHAN)
@@ -82,7 +82,7 @@ temp1 %>% tableX(V3, C_ALPHAN)
 # 27602 558  558  
 # Total 1766 1766 
 
-#aluejaon nimi on muuttjuan V3 labelissa
+#aluejaon nimi on muuttujuan V3 labelissa
 temp1$V3
 #  V3
 # 5601                                        BE-FLA-Belgium/ Flanders
@@ -95,8 +95,8 @@ temp1$V3
 
 temp1 <- select(ISSP2012.data,V3,V4, C_ALPHAN, V6) %>% filter((C_ALPHAN == "BE") |(C_ALPHAN == "DE"))
 
-# luokittelumuuttujat faktoreiksi _ HÄMÄRÄÄ! (15.4.2018)
-temp1$V3 <- as_factor(temp1,V3) # forcats - paketin funktio, näköjään vain yksi kerrallaan
+# luokittelumuuttujat faktoreiksi _ HÃ„MÃ„RÃ„! (15.4.2018)
+temp1$V3 <- as_factor(temp1,V3) # forcats - paketin funktio, nÃ¤kÃ¶jÃ¤Ã¤n vain yksi kerrallaan
 #,temp1$V4,temp1$C_ALPHAN,temp1$V6
 str(temp1)
 

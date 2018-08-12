@@ -2,7 +2,7 @@
 # 
 # 1. Interaktio/vuorovaikutusmuuttujat ovat uusia luokitteluja. Miten ne saisi tehtyä
 # elegantisti?
-# case_when, mutate with group_by(maa, )
+# case_when, mutate with group_by(maa, ) tämä tehty!
 #
 # 2. Muut muuttjat ja/tai maat, milloin mukaan ja mitä esitellään taulukkomuodossa 
 # tai kuvina.
@@ -184,9 +184,9 @@ stargazer(star2$columns)
 # rmarkdown::pandoc_version() # ‘1.19.2.1’ -> ‘2.2.1’ (29.5.2018)
 # R-versio 3.5.0 (vaikuttaako uusi Pandoc?) suosittelee asentamaan tinytex - paketin (29.5.2018)
 
-# 5.2 knittr::kable
+# 5.2 knittr::kable TÄMÄ PERUSJUTTU BOOKDOWN - julkaisussa! (7.8.2018)
 
-# 5.3 kableExtra (?)
+# 5.3 kableExtra (?) - ei oteta käyttöön tässä vaiheessa (7.8.2018)
 
 
 # 5.4 xtable

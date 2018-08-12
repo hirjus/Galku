@@ -1,15 +1,8 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
-
 # Data
 
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018)
 
-Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi.
+Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi (05.2018).
 ```{r paketit_g11, include=FALSE}
 # pitääkö laittaa järjestykseen, vanhemmat ensin?
 library(rgl)
@@ -29,55 +22,59 @@ library(reshape2) # ggplot2 - kuvalle
 sessionInfo()
 
 ```
-Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä "pistepilvessä".
 
-**edit:** Tässä on kehiteltävää, mainittava ainakin dimensioden vähentäminen CA:n ja muiden vastaavien menetelmien ydintavoitteena ("the essence"). 
 
- 
 ## Luvun 1 tavoitteet
 
-1. Data - tässä tiiviimmin, aineiston kuvailu tarkemmin liitteeseen. Perustella rajaukset ja kertoa miten ne tehdään.
-2. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
+**Datan esittely ja kuvailut - ehkä myös oma kappale muista mahdollisista lähestymistavoista aineiston analyysissä (deskriptiiviset, todennäköisyysteoriaan eksplisiittisesti perustuvat kuten MFA)**
 
-3. Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
 
-4. Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
 
-5.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
+1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla
 
-6. Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely
+2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin
 
-Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Teen käsiteluettelon, ja kirjoitan kaavat yms. toistaiseksi omaan dokumenttiin (LaTeX).
+3. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
 
-Keskeiset lähteet: MG:n "Correspondence analysis in practice", "Biplots in practice", HY:n 2017 kurssin materiaali ja laskuharjoitukset. Näissä kaikissa on käytetty samaa dataa esimerkeissä. Lisäksi perusasioiden esittelyssä MG & Blasius artikkelikokoelma ("vihreä kirja"), joissain kohdin Lerouxin ja Romanetin teos. Pitää miettiä viittamiskäytäntöjä.
+4. Laadukkaan ja hyvin dokumentoidun aineiston edut
+
+5. Tärkeä rajaus: CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (ekologia ja biologia, arkeologia, kielen tutkimus)
+
+ 
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 
 Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
 
-ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661 **tämä doi-linkki ei toimi**
 
-[Aineistot] (https://search.gesis.org/research_data/ZA5900) 2012
+[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 2012 **toimii - ja viitetieto tuossa edellä!**
 
-[Muuttujakuvaukset ja muut tiedot] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
+[Muuttujakuvaukset ja muut tiedot](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
 
-[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e)
 
-[Käyttöehdot:] (https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
+[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 
-[Tiedonkeruumenetelmä ja otoskoko:] (https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
+[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
+
+[Tiedonkeruumenetelmä ja otoskoko:](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
 Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).
 
-Havaintojen lukumäärät voi tarkistaa [täältä] (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
+Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
 
 
-edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi. Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. 
+edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi(?- tuskinpa). Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. 
 
 ## Aineiston rajaaminen
 
+**zxy** Aineiston kuvailu omana osanaan (7.8.2018)
+
 Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäksi aineistossa on runsaasti demografisia ja muita taustatietoja. R-koodista selviää käytetty versio (SPSS-tiedoston nimi) ja rajauksessa käytetyt muuttujat.
 
-##Rajaukset
+**Rajaukset**
+
+**zxy** Miksi Espanja roikkuu mukana, ja Unkari? Pudoteaan ne elegantisti heti alussa, erilaisia kysymyksiä. **Aika iso ongelma datassa!** 
 
 1. Eurooppa ja samankaltaiset maat (28)
 
@@ -87,15 +84,16 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 
 2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms. Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös.
 
-3. kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
+3. kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon. **zxy** Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).
 
 **edit:** Tähän täsmennetään miten puuttuvia tietoja käsitellään.
 
-4. Datan hallinta
+4. Datan hallinta **liittyy reproducible research- periaatteeseen**
 
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
+
 
 ```{r rajaukset}
 # kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
@@ -208,7 +206,13 @@ summary(temp1)
 #attributes(ISSP2012jh1.data)
 
 ```
-##Puuttuvat tiedot (erävastauskato)
+
+##Puuttuvat tiedot
+
+**zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
+
+Yksikkövastauskato on (onko?) otettu huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. **Viittet**
+
 
 Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, mutta toistaiseksi sitä ei käytetä.
 
@@ -224,9 +228,11 @@ temp2$maa <-  factor(temp2$C_ALPHAN)
 #str(taulu1)
 taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
 taulu1a <- taulu1[ ,1:14]
-kable(taulu1a,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset maittain")
 taulu1b <- taulu1[ ,15:28]
-kable(taulu1b,digits = 2, caption = "Kysymyksen V6 vastaukset maittain")
+knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
+             caption = "Kysymyksen V6 vastaukset maittain")
 ```
 
 Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.
@@ -243,18 +249,24 @@ NAP ja NAV määritellään
 
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
 
+**zxy** **Miten nämä tarkemmat tiedot (7, 8, 9 saadaan näkyviin?)**
+
 **EDIT:** Puuttuneisuuden lyhyttä kuvailua, ja rajausten vaikutus havaintojen lukumäärään muutamaan taulukkoon. Voi siirtää liitteisiin (25.4.2018)
 
 Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
 
 ###Poikkeavat kysymykset
 
+**zxy** Myös maakohtaiset erot, ja niiden vaikutus aineiston rajaamiseen
+
+**zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
+
 **edit:** nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 
 **edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
 
-Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto. SPSS-aineistossa nämä kaikki on koodattu puuttuviksi havainnoiksi.
+Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. **Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto.** Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
 
 Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
 
