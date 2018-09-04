@@ -77,3 +77,4 @@ summary(simpleCA1)
 ```
 
 
+**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun.
