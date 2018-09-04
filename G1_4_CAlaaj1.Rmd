@@ -24,7 +24,7 @@ Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ry
 
 Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
 
-** EDIT: ** Lisätäänkö muuttujat tässä, vai Data-luvussa? Lisätään aluksi tässä. Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu.
+** EDIT: ** Lisätäänkö muuttujat tässä, vai Data-luvussa? Lisätään tässä. Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu.
 
 Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 
@@ -82,6 +82,7 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 #Tähän loppuu datan luonti
 
 ```
+
 **EDIT:** Uudet muuttujat omana pätkänä
 
 ```{r G1_4_maa2}
@@ -103,7 +104,7 @@ kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositu
 
 ```
 
-
+**zxy** Edellä pelkkä tarkistus, tuloksen voi kopsata koodilohkoon kun homma on hoidettu.
 
 
 ## Täydentävät muuttujat (supplementary points)
@@ -130,6 +131,8 @@ Täydentävien muuttujien kolme käyttötapaa:
 #kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
 #head(ISSP2012esim1.dat)
+
+# HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa2 + V6,ISSP2012esim1.dat)
 plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 #kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
@@ -194,7 +197,6 @@ Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroide
 
 **zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
 
-**zxy** "Taulokon käsite" vaatii oman kappaleen. Yhteys havaintojen/yksilöiden pilveen ja muuttujien pilveen.
 
 Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
 

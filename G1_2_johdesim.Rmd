@@ -25,7 +25,25 @@ Tässä esitellään yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutam
 Taulukoita kannattaa tarkastella ensin rivien (kuva puuttuu) ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitamme hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
 
 
-Toiseksi riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen.
+Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen. **zxy** Tämä puuttuu kaavoista!
+
+**zxy**
+
+**Tarvitaanko käsitteellistä täsmentämistä, tai selkiinnyttämistä?**
+
+1. Taulukon käsite
+
+Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai havaintoyksiköiden pilveä ja muuttujien pilvelä (nominaaliasteikko). Taulukot saadaan yksinkertaisen CA:n tapauksessa aggregoimalla "cloud of individuals". 
+**#V** MOOC, LeReoux
+
+2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"), frekvenssitaulu, ristiintaulukointi
+- dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt. "data ei löydy kadulta", ja vaikka siitä ei ole epäilystäkään ISSP-datan tapauksessa, niin siitäkin jatketaan eteenpäin.
+
+3. Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
+
+3. CA:ssa hämäävä juttu (Blasius, "vizualisation - verkkokirja") rivien ja sarakkeiden **tekninen**
+symmetria. 
+
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
@@ -45,7 +63,7 @@ Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan ri
 
 5. Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely
 
-Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Teen käsiteluettelon, ja kirjoitan kaavat yms. toistaiseksi omaan dokumenttiin (LaTeX).
+Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Käsittteistä oma Rmd (ja Excel jos osoittautuu kätevämmäksi), kaavaliite Dispo-repossa ja myös Rmd-muodossa. **edit** Kaavaliitteessä pieniä eroja, ja tekstiä on LateX-versiossa enemmän.
 
 Keskeiset lähteet: MG:n "Correspondence analysis in practice", "Biplots in practice", HY:n 2017 kurssin materiaali ja laskuharjoitukset. Näissä kaikissa on käytetty samaa dataa esimerkeissä. Lisäksi perusasioiden esittelyssä MG & Blasius artikkelikokoelma ("vihreä kirja"), joissain kohdin Lerouxin ja Romanetin teos.
 
@@ -56,6 +74,8 @@ Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkup
 
 Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien. 
 **zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä. MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
+
+**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa käännetty näin englanniksi ransk. termi,tätä itsekin nykyään käyttävät), rivien ja sarakkeiden "correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
 
 **zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
 
@@ -78,7 +98,11 @@ Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - t�
 
 (d) On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat ensisijaisesti kodin ja lapsia 
 
-(e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen 
+(e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen
+
+**zxy** Tässä koodilohkossa esimerkki helposti toistettavasta tutkimuksesta: alkuperäisestä datasta liikkeelle. user_na = true - jutun voi mainita, ja viitata koodiliitteeseen. Alaviitteeksi, sillä ei analysoida tarkemmin?
+
+**zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
 ```{r esim1data}
 #vähän hankalaa jos Rmd-tiedoston 'scope' vaatii aina kaiken ajamisen joka tiedostossa!
@@ -113,7 +137,9 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 
 Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
 
-**zxy** Faktoreita ei ordinaaliasteikolla, vaikka ilman puuttuvia näin voisi tehdä. Miten ordinaaliasteikon faktori toimii, jos on puuttuvia mukana? Tämä ohitus/ratkaisu pitää perustella.
+**zxy** Faktoreita ei ordinaaliasteikolla, vaikka ilman puuttuvia näin voisi tehdä.(Miten ordinaaliasteikon faktori toimii, jos on puuttuvia mukana?) Tämä ohitus/ratkaisu pitää perustella. **Lienee täysin harmiton**, otetaan järjestys käyttöön jos tarvitaan. Toistaiseksi ei ole tarvittu (4.9.18).
+
+**zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
 ```{r}
 # muutetaan muuttujia faktoreiksi
@@ -194,6 +220,7 @@ simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
 ```
 
 **edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
+**zxy** Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen Bookdownissa. Ei taida onnistua? (4.9.18)
 
 ```{r g1_2_kuva1}
 #tauluG121 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
@@ -221,7 +248,11 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          scale_y_continuous(labels = percent_format()) 
 
 ```
+
+**zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
+
 Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.5.2018).
+
 ```{r g1_2_kuva2, eval=FALSE, include=FALSE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
 # kokeillaan vähän simppelimmin
@@ -247,8 +278,16 @@ Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.
 ```
 
 
+**Graafinen analyysi ja R**
+
+Käytänön neuvoja data-analyysiin, kuulunee tekstiin, vai meneekö "ohjelmistoympäristö" -liitteeseen? Tärkeä juttu!
+
+Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
+grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu näin tekemään (13.5.2018 ). Tämä voi olla järkevä tapa analyysivaiheessa? Teksti kopsattu alla olevasta koodilohkosta.
 
 Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
+
+**zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r simpleCArelfrekTa1}
@@ -301,7 +340,7 @@ include_graphics(img_path)
 
 3. Profiilien etäisyydet (khii2)
 
-**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, en nyt (7.8.18) löydä MG-sitaattia.
+**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite muistiinpanoissa. **#V** Tässäkin CAiP - kirja hyvä apu, ja MG2017HY-luentokalvot.
 
 
 
