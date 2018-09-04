@@ -1,6 +1,9 @@
 # Data
 
-**edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018)
+**edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018).
+**edit** capaper - dokumentissa parempi uusi jäsentely (4.9.2018)
+**edit** ISSP-datan perustietoa dokumentissa ISSP_data1.docx (4.9.2018)
+**edit** koodilohkoja ei vielä siistitä, eikä nimetä capaper-vaatimusten mukaan.
 
 Ladattavat paketit omana r-skriptinä (paketit.R), ei listata tilan säästämiseksi (05.2018).
 ```{r paketit_g11, include=FALSE}
@@ -19,7 +22,7 @@ library(likert)
 library(scales)   # ggplot2 - kuvalle
 library(reshape2) # ggplot2 - kuvalle
 # ehkä viimeiseksi sessionInfo() ja tämä koodi piiloon?
-sessionInfo()
+#sessionInfo()
 
 ```
 
@@ -30,9 +33,10 @@ sessionInfo()
 
 
 
-1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla
+1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä johdantoluvussa.
+Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketissa.
 
-2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin
+2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin, siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. **V** Benzecri:"kun data menee miljoonaan suuntaan".
 
 3. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
 
@@ -46,45 +50,65 @@ sessionInfo()
 
 Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
 
+**edit** tässä järkevä viite ISSP - dataan
 ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661 **tämä doi-linkki ei toimi**
 
-[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 2012 **toimii - ja viitetieto tuossa edellä!**
+**Linkitys on hankalaa**
+* monta portaalia, joista pääsee monien organisaationimien taakse
+* tästä lyhyt selostus
+* tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeä **muuttujakuvaukset ja muut tiedot**
+* käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne kyllä säilyvät, tai jäljille pääsee.
 
-[Muuttujakuvaukset ja muut tiedot](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900)
+[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 2012 **toimii - ja viitetieto tuossa edellä!** **V**
 
-[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e)
+[Muuttujakuvaukset ja muut tiedot](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) **OK - täältä löytyy oikeastaan kaikki!**
 
-[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) **vie vain aineiston dokumentoinnin etusivulle**
 
-[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
+[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661) **vie vain aineiston dokumentoinnin etusivulle**
 
-[Tiedonkeruumenetelmä ja otoskoko:](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661)
-Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ).
+[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/) **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
+
+[Tiedonkeruumenetelmä ja otoskoko:](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661) **
+Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ). 
+
+**Vie tutkimushankkeen "kotisivulle"** ZA5900: International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012
 
 Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
-
+**Vie aineiston dokumentointisivustoon, jossa helppo navigoida** zacat.gesis.org.
 
 edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi(?- tuskinpa). Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. 
 
 ## Aineiston rajaaminen
 
-**zxy** Aineiston kuvailu omana osanaan (7.8.2018)
+**zxy** Aineiston kuvailu omana osanaan (7.8.2018).
+**zxy** capaper - dokumentissa uusi jäsentely (4.9.2018)
 
 Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäksi aineistossa on runsaasti demografisia ja muita taustatietoja. R-koodista selviää käytetty versio (SPSS-tiedoston nimi) ja rajauksessa käytetyt muuttujat.
 
 **Rajaukset**
 
-**zxy** Miksi Espanja roikkuu mukana, ja Unkari? Pudoteaan ne elegantisti heti alussa, erilaisia kysymyksiä. **Aika iso ongelma datassa!** 
+**zxy** Aineiston luonne: maakohtaisesti eri tavoin kerätty data, jossa pyritään yhtenäisiin käytäntöihin ja tietosisältöihin. Silti myös substanssikysymyksissä eroja, isoja ja pienempiä. Näin vain on, en pohdi miksi. Ei ole mitenkään ainutlaatuista. Aineiston editoinnissa ja tiedonkeruun suunnittelussa on nähty paljon vaivaa vertailukelpoisuuden vuoksi. Tästä esimerkkejä, esim. "mitä puoluetta äänestit".
 
-1. Eurooppa ja samankaltaiset maat (28)
+
+**1. Eurooppa ja samankaltaiset maat (28)**
 
 Bulgaria, Czech Republic, Denmark, Finnland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia Slovenia, Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal 
 
 Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
 
-2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms. Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös.
+**2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms.** 
 
-3. kaikki havainnot, joissa on puuttuvia tietoja. Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon. **zxy** Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).
+**zxy** Näitä poikkeuksia on paljon... pitänee perustella, tai vähentää maita. Valitaan muuttujat ja tarkistetaan, ikävä kyllä!
+
+Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös. Unkari voi silti olla mukana yksinkertaisessa esimerkissä, jatkosta pois?
+
+**3. kaikki havainnot, joissa on puuttuvia tietoja.** 
+"listwise deletion"
+
+Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
+
+**zxy** Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).
 
 **edit:** Tähän täsmennetään miten puuttuvia tietoja käsitellään.
 
@@ -93,6 +117,12 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
+
+Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelmaan ISSP2012.dat. Tästä lähdetää; yleensä seuraavaksi valitaan maat, sitten muuttujat.
+
+**edit** kuva tai taulukko rajaamisista? Vai voiko dokumentoida R-koodiin kommentteina?
+ 
+**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa?
 
 
 ```{r rajaukset}
@@ -171,25 +201,14 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #names(ISSP2012jh1.data)
 #str(ISSP2012jh1.data) #37816 obs. of  420 variables
 #
-#EDIT: tiivistä, nämä ovat vain kokeiluja ja datan kaivelua (15.4.2018)
-#
-# V5 - V67 kysymyksiä, joillain mailla omat vastaukset joihinkin omina muuttujina, esim.  #  ES_V5 muutkin Espanjan kysymykset (kaikki?)
-#$ V5      :Class 'labelled'  atomic [1:37816] 5 1 2 2 1 NA 2 4 2 2 ...
-#  .. ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
-#  .. ..- attr(*, "format.spss")= chr "F1.0"
-#  .. ..- attr(*, "labels")= Named num [1:8] 0 1 2 3 4 5 8 9
-#  .. .. ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
-# $ ES_V5   :Class 'labelled'  atomic [1:37816] NA NA NA NA NA NA NA NA NA NA ...
-#  .. ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
-#  .. ..- attr(*, "format.spss")= chr "F1.0"
-#  .. ..- attr(*, "display_width")= int 4
-#  .. ..- attr(*, "labels")= Named num [1:7] 0 1 2 3 4 8 9
-#  .. .. ..- attr(*, "names")= chr [1:7] "NAP: other countries" "Strongly agree" "Agree" "Disagree" ...
-#HU_V18
 #V18$label
 #attr(ISSP2012jh1.data$V6,'labels')
 #attr(ISSP2012jh1.data$ES_V6,'labels')
 ```
+
+
+
+**edit** tämä tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.
 
 Yllä esimerkiksi muuttujan V6 metatiedot. Perusvaihtoehdot ovat 1 - 5, ja joillain mailla on vaihtoehtona ollut myös "Can't choose", muilla taas on vain puuttuva tieto (No answer, 9).
 
@@ -207,6 +226,7 @@ summary(temp1)
 
 ```
 
+
 ##Puuttuvat tiedot
 
 **zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
@@ -216,6 +236,15 @@ Yksikkövastauskato on (onko?) otettu huomioon, kun kyselyn toteuttaja on editoi
 
 Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, mutta toistaiseksi sitä ei käytetä.
 
+**zxy** *tämä taulukko väärässä luvussa!**
+
+Mutta kun yksinkertaisesta kuuden maan aineistosta siirrytään laajempaan (vain yhden kysymyksen) ca-analyysiin, tämä paikallaan.
+
+
+
+**zxy** tässä voi kommentoida (a) puuttuneisuutta (vastauskatoa tähän kysymykseen) ja myös (b) otoskokoja. Prosentteja, jakaumia!
+
+**edit** miten taulukko siististi bookdownissa?
 
 Muiden kuin Espanjan vastaukset kysymykseen V6 jakautuvat näin:
 ```{r muut1}
@@ -255,7 +284,13 @@ GESIS adds 'Not available' for variables, which in singe countries may  not have
 
 Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
 
-###Poikkeavat kysymykset
+## Substanssimuuttujat, taustamuuttujat, muut
+
+**zxy** muuttujien kuvaukset. 
+
+**zxy** tässä myös maakohtaisen poikkeavat kysymykset, joita riittää aika lailla.
+
+**zxy** HUOM! Dataa ei ole kerätty vain kansainvälisiin vertailuhihin! Sitä voi ja ehkä pitäisikin analysoida maa kerrallaan, ja vertailla näitä tuloksia. (**#V** Blasiuksen artikkeli, jossa arvioidaan yhden ISSP-tutkimuksen vertailukelpoisuutta. Kysymykset eivät kovin hyvin näytä toimivan samalla tavalla eri maissa.)
 
 **zxy** Myös maakohtaiset erot, ja niiden vaikutus aineiston rajaamiseen
 
@@ -281,3 +316,5 @@ V55 (Life in general: How happy on the whole) ok.
 V56-57 poikkeamia, V58 (Health status) ok
 V59 "ketjutettu kysymys", samoin V60-V64.
 s. 174 - puolison koulutus...
+
+** edit ** Nämä muistiinpanot on tehty, kun upottiin dokumentointiin aika syvälle... Kätevimmin selviää, kun katsoo mistä muuttujista on datassa "maaversio" (esim. ES_V6).
