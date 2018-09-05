@@ -35,4 +35,4 @@ Data-osuus editoitu, versio 1.02.
 **10.8.2018** hieman lisää korjailuja data-osuuteen, versio 1.03. Editoitiin lukuun 3 asti, versio 1.04.
 
 
-**4.9.2018** versio 1.1, viimeisimmät korjailut ja hieman poistoja. Historia jää näkyviin. Kaikkia yksinkertaisen CA:n kuvia ja taulukoita ei muutettu "bookdown-muotoon".
+**4.9.2018** versio 1.1, viimeisimmät korjailut ja hieman poistoja. Historia jää näkyviin. Kaikkia yksinkertaisen CA:n kuvia ja taulukoita ei muutettu "bookdown-muotoon". Lisättiin 5.9. html-tulosteen indexG1.html lisäksi indexG1.pdf, vanhat versiot ark-hakemistossa.
