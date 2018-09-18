@@ -126,6 +126,7 @@ Täydentävien muuttujien kolme käyttötapaa:
 - sisällöllisesti tutkimusongelman kannalta poikkeava tai erilainen rivi tai sarake
 - outlayerit, poikkeava havainto jolla pieni massa (esimerkissä uusi sarakemuuttuja, jossa kovin vähän havaintoja)
 - osaryhmät
+**EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 ```{r G1_4_suppoints_BeDe}
 #kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
@@ -192,6 +193,25 @@ plot(suppointCA2b, main = "Passiiviset pisteet DE ja BE" )
 ```
 
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
+
+Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
+
+```{r G1_4_BeDe_asymmContrib1}
+plot(suppointCA1b, map = "rowgreen",
+     contrib= c("absolute", "absolute"),
+     mass = c(TRUE,TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Saksan ja Belgian alueet - asymmetrinen kartta 1" )
+```
+
+Tulostetaan numeeriset taulukot.
+
+```{r G1_4_castats1}
+summary(suppointCA1b)
+```
+
+
+
 
 ## Lisämuuttujat: ikäluokka ja sukupuoli
 

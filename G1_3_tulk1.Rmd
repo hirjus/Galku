@@ -40,6 +40,7 @@ plot(simpleCA1, map = "rowprincipal",
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
 
 ```
+
 Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaatistoa, ja niiden yhteys.
 
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
@@ -65,6 +66,8 @@ plot(simpleCA1, map = "rowgreen",
      main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2" )
 
 ```
+
+
 Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa.
 
 Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen kontribuutioon (voi olla myös suhteellinen kontribuutio).
