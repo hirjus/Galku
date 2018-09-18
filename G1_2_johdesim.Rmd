@@ -241,25 +241,21 @@ apu1_df <- as.data.frame(apu1)
 #lasketan rivien reunajakauma
 apu1_df$ka_sarake <- rowSums(apu1_df)
 #muokataan 'long data' - muotoon
-apu1_df
-temp1 <- cbind(apu1_df, ind = rownames(apu1_df))
-temp1
 apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat ="identity") +
          scale_y_continuous(labels = percent_format()) 
-apu1b_df
+#apu1b_df
 ```
 
 **zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
 Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
 
-```{r g1_2_kuva2, eval=FALSE, include=FALSE}
+```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
-# uusi yritys 18.9.2018
-# kokeillaan vähän simppelimmin
+# uusi yritys 18.9.2018 - näyttäisi toimivan !
 apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 
