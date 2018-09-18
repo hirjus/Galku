@@ -241,40 +241,54 @@ apu1_df <- as.data.frame(apu1)
 #lasketan rivien reunajakauma
 apu1_df$ka_sarake <- rowSums(apu1_df)
 #muokataan 'long data' - muotoon
+apu1_df
+temp1 <- cbind(apu1_df, ind = rownames(apu1_df))
+temp1
 apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat ="identity") +
          scale_y_continuous(labels = percent_format()) 
-
+apu1b_df
 ```
 
 **zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
-Riviprofiilien kuvat eivät onnistu ovat vielä tekemättä vailla valmiita (15.5.2018).
+Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
 
 ```{r g1_2_kuva2, eval=FALSE, include=FALSE}
 # riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
+# uusi yritys 18.9.2018
 # kokeillaan vähän simppelimmin
-#apu2_df <- as.data.frame(apu1)
-#apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
+apu2_df <- as.data.frame(apu1)
+apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 
-## str(apu2_df)
+#apu2_df
+
+#str(apu2_df)
 ## typeof(apu2_df) # what is it?
 ## class(apu2_df) # what is it? (sorry)
 ## storage.mode(apu2_df) # what is it? (very sorry)
-## length(apu2_df) # how long is it? What about two dimensional objects?
-## attributes(apu2_df) 
+## length(apu2_df) # how long is it? What about two dimensional 
+## objects?
+# attributes(apu2_df) 
 
-
+# temp1 <- cbind(apu2_df, ind = rownames(apu2_df))
+# temp1
 ##muokataan 'long data' - muotoon
-#apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
+apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
+#apu2b_df
 #
 #
-#ggplot(apu2b_df, aes(x = variable, y = value, fill = ind)) +
-#         geom_bar(position = "fill", stat ="identity") +
-#         #coord_flip() +
-#         scale_y_continuous(labels = percent_format()) 
+#ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
+#       geom_bar(position = "fill", stat ="identity") +
+#       #coord_flip() +
+#        scale_x_continuous(labels = percent_format()) 
+#versio2 # perkele, tämä toimii! 18.9.2018
+ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
+       geom_bar(position = "fill", stat ="identity") +
+       coord_flip() +
+        scale_y_continuous(labels = percent_format()) 
 ```
 
 
