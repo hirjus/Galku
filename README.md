@@ -37,5 +37,6 @@ Data-osuus editoitu, versio 1.02.
 
 **4.9.2018** versio 1.1, viimeisimmät korjailut ja hieman poistoja. Historia jää näkyviin. Kaikkia yksinkertaisen CA:n kuvia ja taulukoita ei muutettu "bookdown-muotoon". Lisättiin 5.9. html-tulosteen indexG1.html lisäksi indexG1.pdf, vanhat versiot ark-hakemistossa.
 
-**18.9.2018** Versio 1.2
+**19.9.2018** Versio 1.2
 Korvataan mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ensimmäinen "pinottu taulu".
+Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from default branch" pudotusvalikosta).
