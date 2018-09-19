@@ -246,7 +246,7 @@ kable(taulu43,digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat) varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
 
 ```{r G1_4_ga}
-# ei kovin siisti
+# ei kovin siisti - alla siistimpi, jossa luodaan ga2
 
 ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga = ifelse(((age_cat == "1")&(sp == "m")), "m1",
                             ifelse(((age_cat == "2")&(sp == "m")), "m2",
@@ -268,7 +268,34 @@ kable(taulu45,digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 ```
 
-**zxy** (7.8.2018) **DatanRukkailua2.R** parempi versio näistä muunnoksista.
+**zxy** (7.8.2018) **DatanRukkailua2.R** parempi versio näistä muunnoksista. Otetaan tässä käyttöön (19.9.2018).
+
+
+```{r G1_4_ga2}
+# case_when: ikä ja sukupuoli
+ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga2 = case_when((age_cat == "1")&(sp == "m") ~ "m1",
+                                       (age_cat == "2")&(sp == "m") ~ "m2",
+                                       (age_cat == "3")&(sp == "m") ~ "m3",
+                                       (age_cat == "4")&(sp == "m") ~ "m4",
+                                       (age_cat == "5")&(sp == "m") ~ "m5",
+                                       (age_cat == "6")&(sp == "m") ~ "m6",
+                                       (age_cat == "1")&(sp == "f") ~ "f1",
+                                       (age_cat == "2")&(sp == "f") ~ "f2",
+                                       (age_cat == "3")&(sp == "f") ~ "f3",
+                                       (age_cat == "4")&(sp == "f") ~ "f4",
+                                       (age_cat == "4")&(sp == "f") ~ "f4",
+                                       (age_cat == "5")&(sp == "f") ~ "f5",
+                                       (age_cat == "6")&(sp == "f") ~ "f6",
+                                       TRUE ~ "missing"
+                                  ))
+ISSP2012esim1.dat %>% tableX(ga,ga2) # toimii oikein!
+#str(test7$ga)
+str(ISSP2012esim1.dat$ga)
+# ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
+str(ISSP2012esim1.dat)
+```
+
+
 
 ## Päällekkäiset matriisit (stacked matices)
 
