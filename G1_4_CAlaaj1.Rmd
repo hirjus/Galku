@@ -197,6 +197,7 @@ Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroide
 Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
 
 ```{r G1_4_BeDe_asymmContrib1}
+#X11()
 plot(suppointCA1b, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
