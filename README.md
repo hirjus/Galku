@@ -41,5 +41,9 @@ Data-osuus editoitu, versio 1.02.
 Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from default branch" pudotusvalikosta).
 
 18.9.2018: riviprofiilikuva, pari uutta karttaa (Saksan ja Belgian jako).
-19.9.2018: Lisättiin uusi versio jäsennyksestä (ca_jasennysJH190918.pdf), ja galku-tuloste indexG1.pdf.
-19.9.2018 Korvataan mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ensimmäiset "pinotut taulut/yhdistetyty taulut" (concatenated/stacked tables).
+19.9.2018: Lisättiin uusi versio jäsennyksestä
+ (ca_jasennysJH190918.pdf), ja galku-tuloste indexG1.pdf.
+
+19.9.2018 Korvattu mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ikä-sukupuoli-maa - muuuttuja. Kaksi karttaa lisätty. Kartoista myös pdf-versiot Galku-img - hakemistoon.
+
+Tekemättä:ensimmäiset "pinotut taulut/yhdistetyty taulut" (concatenated/stacked tables).

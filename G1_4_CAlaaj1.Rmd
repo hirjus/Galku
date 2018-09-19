@@ -289,17 +289,60 @@ ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga2 = case_when((age_cat == "1")&
                                        TRUE ~ "missing"
                                   ))
 ISSP2012esim1.dat %>% tableX(ga,ga2) # toimii oikein!
-#str(test7$ga)
+# muuttujien tarkistuksia 19.9.2018
 str(ISSP2012esim1.dat$ga)
+str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
-str(ISSP2012esim1.dat)
+#str(ISSP2012esim1.dat)
+
+#Tulostetaan taulukkoina ga2 - muuttuja.
+taulu46 <- ISSP2012esim1.dat %>% tableX(maa,ga2,type = "count")
+kable(taulu46,digits = 2, caption = "Ikäluokka ja sukupuoli ga2")
+
+taulu47 <- ISSP2012esim1.dat %>% tableX(maa,ga2,type = "cell_perc")
+kable(taulu47,digits = 2, caption = "ga2: suhteelliset frekvenssit")
+
+
 ```
 
+**edit** Vain tarkistuksiin, toisen voi poistaa (19.9.2018)!
 
+CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus. Miten tästä kannattaisi jatkaa? Maa ja ga-muuttuja?
+
+```{r ga1CA1}
+gaTestCA1 <- ca(~ga2 + V6,ISSP2012esim1.dat)
+plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli")
+```
+
+**zxy** Ei kovin kiinnostava, mutta voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+
+```{r maaga1}
+# Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
+# Yleensä ei yhdysvaikuksissa mennä yli kolmen luokittelumuuttujan, ja tässäkin vain maiden pieni lukumää
+# tekee tarkastelun aika helpoksi.
+
+ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, maaga = paste(maa, ga2, sep = ""))
+
+ISSP2012esim1.dat %>% tableX(maa, maaga) # taitaa toimia?
+
+str(ISSP2012esim1.dat$maaga)
+
+
+```
+
+**TARKISTA**
+```{r maagaCA1}
+maagaTestCA1 <- ca(~maaga + V6,ISSP2012esim1.dat)
+par("cex"= 0.7)
+plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain")
+```
+
+Aika ahdasta kuvassa jo on.
 
 ## Päällekkäiset matriisit (stacked matices)
 
 Ref:CAip, CA_Week2.pdf (kalvot MCA-kurssilta 2017)
+
 
 Concatenated tables (yhdistetyt taulut tai matriisit): (a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan").
 
