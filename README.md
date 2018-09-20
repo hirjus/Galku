@@ -37,5 +37,13 @@ Data-osuus editoitu, versio 1.02.
 
 **4.9.2018** versio 1.1, viimeisimmät korjailut ja hieman poistoja. Historia jää näkyviin. Kaikkia yksinkertaisen CA:n kuvia ja taulukoita ei muutettu "bookdown-muotoon". Lisättiin 5.9. html-tulosteen indexG1.html lisäksi indexG1.pdf, vanhat versiot ark-hakemistossa.
 
-**18.9.2018** Versio 1.2
-Korvataan mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ensimmäinen "pinottu taulu".
+**19.9.2018** Versio 1.2 työn alla
+Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from default branch" pudotusvalikosta).
+
+18.9.2018: riviprofiilikuva, pari uutta karttaa (Saksan ja Belgian jako).
+19.9.2018: Lisättiin uusi versio jäsennyksestä
+ (ca_jasennysJH190918.pdf), ja galku-tuloste indexG1.pdf.
+
+19.9.2018 Korvattu mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ikä-sukupuoli-maa - muuuttuja. Kaksi karttaa lisätty. Kartoista myös pdf-versiot Galku-img - hakemistoon.
+
+**20.9.2018** Jätetään pinotut ja liitetyt taulut seuraavaan versioon. Laajempi data kannattaa ottaa käyttöön tässä, johdattelee MCA-teemoihin. Tägätään versio 1.2.

@@ -21,7 +21,8 @@
 
 # 1. Interaktiomuuttujien luonti
 #
-# Muista tarkistaa, että solufrekvenssit eivät liian pieniä!
+# Muista tarkistaa, että solufrekvenssit eivät liian pieniä! - tähän r-koodipätkä!
+# Jatketaan hommaa 19.9.2018
 
 test6 <- ISSP2012esim1.dat
 head(test6)
@@ -43,8 +44,8 @@ test6%>% tableX(maa,ga,type = "count")
 # https://dplyr.tidyverse.org/articles/window-functions.html
 
 #test7 <- ISSP2012esim1.dat
-#test7 %>% group_by(maa, age_cat, sp) ei taida onnistua tällä
-# case_when
+
+# case_when: ikä ja sukupuoli
 test7 <- mutate(test7, ga2 = case_when((age_cat == "1")&(sp == "m") ~ "m1",
                                        (age_cat == "2")&(sp == "m") ~ "m2",
                                        (age_cat == "3")&(sp == "m") ~ "m3",

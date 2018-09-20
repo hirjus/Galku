@@ -59,6 +59,7 @@ plot(simpleCA1, map = "rowprincipal",
 Tärkein havainto on sarakkeen "Eri mieltä" (e) ja toisen ulottuvuuden yhteys. Myös sarake "täysin samaa mieltä" (ts) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä.
 
 ```{r G1_3_asymm_contrib1}
+#X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
@@ -68,7 +69,7 @@ plot(simpleCA1, map = "rowgreen",
 ```
 
 
-Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa.
+Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
 
 Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen kontribuutioon (voi olla myös suhteellinen kontribuutio).
 
