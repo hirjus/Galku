@@ -46,4 +46,4 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 
 19.9.2018 Korvattu mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ikä-sukupuoli-maa - muuuttuja. Kaksi karttaa lisätty. Kartoista myös pdf-versiot Galku-img - hakemistoon.
 
-Tekemättä:ensimmäiset "pinotut taulut/yhdistetyty taulut" (concatenated/stacked tables).
+**20.9.2018** Jätetään pinotut ja liitetyt taulut seuraavaan versioon. Laajempi data kannattaa ottaa käyttöön tässä, johdattelee MCA-teemoihin. Tägätään versio 1.2.
