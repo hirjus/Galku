@@ -223,10 +223,17 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 **edit** * tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.** Poistetaan, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd)
 
 
-```{r dataprop1}
+```{r dataprop1, eval=FALSE, include=FALSE}
 #datatiedoston ominaisuuksia 1
 str(ISSP2012jh1.data$V5)
-str(ISSP2012jh1.data)
+
+#tarpeetonta testailua 24.9.2018
+test1 <- is.na(ISSP2012jh1.data$V5)
+missV5 <- ISSP2012jh1.data[test1,]
+head(missV5)
+str(missV5)
+hist(missV5$V5)
+summary(missV5$V5)
 #puuttuvan tiedon tarkempi koodaus
 attr(ISSP2012jh1.data$ES_V5,'labels')
 attr(ISSP2012jh1.data$V5,'na_values')
@@ -317,12 +324,14 @@ Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
 
 **zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
 
-**edit:** nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia. Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
+**edit:** **nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia.** Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 
 **edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
 
-Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä. **Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto.** Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
+Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä.
+
+**Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto.** Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
 
 Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
 
