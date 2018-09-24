@@ -70,7 +70,7 @@ Kommentteja ja versionhallintaa:
 
 ***
 
-```{r child = "G1_1_data1.Rmd"}
+```{r child = "G1_1_data2.Rmd"}
 ```
 
 ***
