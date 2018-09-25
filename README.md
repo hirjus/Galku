@@ -47,3 +47,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 19.9.2018 Korvattu mutkikas if-lause case_when-lauseella, ikä-sukupuoli-vuorovaikutusmuuttuja, ikä-sukupuoli-maa - muuuttuja. Kaksi karttaa lisätty. Kartoista myös pdf-versiot Galku-img - hakemistoon.
 
 **20.9.2018** Jätetään pinotut ja liitetyt taulut seuraavaan versioon. Laajempi data kannattaa ottaa käyttöön tässä, johdattelee MCA-teemoihin. Tägätään versio 1.2.
+
+**25.9.2018** Jätetään SPSS-tiedoston puuttuvien vastausten tarkempi koodaus (haven-paketin read_spps-funktion user_na = TRUE - parametri) pois. Perustelu: tätä ei aiota tarkemmin analysoida. Maiden välillä on näissä puuttuvien tietojen tarkemmassa koodauksessa myös usein eroja. Muutettiin vastausvaihtoehtojen labelit (S,s,?, e, E). Siistittiin koodia datan alkukäsittelyssä. Pudotetaan Espanja pois isommasta datasta, mutta pidetään toistaiseksi Unkari.

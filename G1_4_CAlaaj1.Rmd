@@ -24,7 +24,7 @@ Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ry
 
 Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
 
-** EDIT: ** Lisätäänkö muuttujat tässä, vai Data-luvussa? Lisätään tässä. Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu.
+** EDIT: ** Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu. Aineisto laajennetaan myöhemmin?
 
 Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 
@@ -34,19 +34,12 @@ Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 #                    528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
 #ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
 #
-# lisäys 25.4.2018 user_na
-# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
-# If FALSE, the default, user-defined missings will be # converted to NA"
-# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
-#
-#
-#
 #str(ISSP2012.data) #61754 obs. of  420 variables
 #ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #
 # Luodaan samanniminen data kuin edellisissä esimerkeissä, lisätään siihen uudet muuttujat.
 incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
-ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alkuperäinen data
+ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
 #
 # lisäys 25.4.2018 user_na
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
@@ -57,6 +50,7 @@ ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alku
 #61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
 #
 # kuusi maata
+
 ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
 #str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
@@ -73,13 +67,12 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f")
 # 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri, 4 = eri mieltä, 5 = täysin eri mieltä
-vastaus_labels <- c("ts","s","ese","e","te")
+vastaus_labels <- c("S","s","?","e","E")
 
 # Faktoreiksi
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
-#Tähän loppuu datan luonti
 
 ```
 
@@ -99,8 +92,8 @@ ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3,
 
 #head(test6)
 #str(test6$maa2)
-taulu41 <- ISSP2012esim1.dat %>% tableX(maa,maa2,type = "count")
-kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositus")
+#taulu41 <- ISSP2012esim1.dat %>% tableX(maa,maa2,type = "count") - tarkistus uudelle muuttujan luontikoodille
+#kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositus")
 
 ```
 
@@ -245,7 +238,7 @@ kable(taulu43,digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 
 Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat) varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
 
-```{r G1_4_ga}
+```{r G1_4_ga, eval=FALSE, include=FALSE}
 # ei kovin siisti - alla siistimpi, jossa luodaan ga2
 
 ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga = ifelse(((age_cat == "1")&(sp == "m")), "m1",
@@ -288,9 +281,9 @@ ISSP2012esim1.dat <- mutate(ISSP2012esim1.dat, ga2 = case_when((age_cat == "1")&
                                        (age_cat == "6")&(sp == "f") ~ "f6",
                                        TRUE ~ "missing"
                                   ))
-ISSP2012esim1.dat %>% tableX(ga,ga2) # toimii oikein!
+#ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
 # muuttujien tarkistuksia 19.9.2018
-str(ISSP2012esim1.dat$ga)
+#str(ISSP2012esim1.dat$ga)
 str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
 #str(ISSP2012esim1.dat)
@@ -315,6 +308,8 @@ plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli")
 ```
 
 **zxy** Ei kovin kiinnostava, mutta voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+
+**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla). **pisteet voisi yhdistää?**
 
 ```{r maaga1}
 # Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.

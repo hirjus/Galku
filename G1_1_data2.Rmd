@@ -137,7 +137,7 @@ Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelma
 **zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa?
 
 
-```{r rajaukset}
+```{r rajaukset1}
 # kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
 #two country code variables based on the ISO Code 3166. One identifies
 #countries as a whole, the other one possible subsamples, such as East and West Germany. The cross
@@ -180,7 +180,6 @@ Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelma
 # 643 RU-Russia
 # 703 SK-Slovakia
 # 705 SI-Slovenia
-# 724 ES-Spain
 # 752 SE-Sweden
 # 756 CH-Switzerland
 # 826 GB-Great Britain and/or United Kingdom
@@ -195,23 +194,31 @@ Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelma
 # 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
+# Espjana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia #vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois.
+
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
-                    528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
-#str(ISSP2012.data)
+                    528, 578, 616, 620, 643, 703, 705, 752, 756, 826, 840)
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+str(ISSP2012.data)
 #
-# lisäys 25.4.2018 user_na
+# lisäys 25.4.2018 user_na / 25.9.2018 jäteään pois. Tietoa ei käytetä, ja koodauksissa on myös
+# eroja maiden välillä.
+# Muutetaan R-datatiedossa ordinaali- ja nominaaliasteikon muuttuja haven-paketin as_factor - funktiolla faktoreiksi.
+# R:n faktorityypin muuttujille voidaan tarvittaessa määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
-# If FALSE, the default, user-defined missings will be # converted to NA"
+# If FALSE, the default, user-defined missings will be converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
 #
 #
-#str(ISSP2012.data) #61754 obs. of  420 variables
+#str(ISSP2012.data) #61754 obs. of  420 variables 
 ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #length((ISSP2012jh1.data))
-#names(ISSP2012jh1.data)
-#str(ISSP2012jh1.data) #37816 obs. of  420 variables
+names(ISSP2012jh1.data)
+#str(ISSP2012jh1.data) #37816 obs. of  420 variables jos Espanja mukana, nyt 35221 obs. of  420 variables
+#str(ISSP2012jh1.data)
+#Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois, #niiden arvo muilla mailla on "NA" (puuttuva tieto)
+#summary(ISSP2012jh1.data$ES_V5)
 #
 #V18$label
 #attr(ISSP2012jh1.data$V6,'labels')
@@ -220,7 +227,10 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 
 
 
-**edit** * tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.** Poistetaan, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd)
+**edit** * tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.** 
+
+**Siistitään, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd)**
+**ISSP2012jh1.data - 27 maata. Turhia muuttujia (=kaikki), mutta valitaan tästä aina analyyseissä käytettävät muuttujat**
 
 
 ```{r dataprop1, eval=FALSE, include=FALSE}
@@ -246,7 +256,7 @@ attr(ISSP2012jh1.data,'names')
 typeof(ISSP2012jh1.data)
 class(ISSP2012jh1.data)
 #storage.mode(ISSP2012jh1.data)
-attributes(ISSP2012jh1.data)
+#attributes(ISSP2012jh1.data)
 
 #ISSP2012jh1.data
 ```
@@ -289,6 +299,8 @@ taulu1b <- taulu1[ ,15:28]
 knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset maittain")
 ```
+
+Koko aineistossa (valitut 27 maata) kysymyksen V6 vastauksista puuttuvia tietoja on 3,5 prosenttia (1241/35221).
 
 **zxy 24.9.2018 Tällaisia eroja löytyy, ohitetaan mutta mainitaan. Pitäisikö (a) pudottaa kaikki joilla puuttuvia joissain muuttujissa vai (b) yhdistää NA ja eos?**
 
