@@ -49,3 +49,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **20.9.2018** Jätetään pinotut ja liitetyt taulut seuraavaan versioon. Laajempi data kannattaa ottaa käyttöön tässä, johdattelee MCA-teemoihin. Tägätään versio 1.2.
 
 **25.9.2018** Jätetään SPSS-tiedoston puuttuvien vastausten tarkempi koodaus (haven-paketin read_spps-funktion user_na = TRUE - parametri) pois. Perustelu: tätä ei aiota tarkemmin analysoida. Maiden välillä on näissä puuttuvien tietojen tarkemmassa koodauksessa myös usein eroja. Muutettiin vastausvaihtoehtojen labelit (S,s,?, e, E). Siistittiin koodia datan alkukäsittelyssä. Pudotetaan Espanja pois isommasta datasta, mutta pidetään toistaiseksi Unkari.
+
+**26.9.2018** Jatkettiin siivoilua, yksi rmd-tiedosto lisää viimeiseksi osaksi. R-datan eri analyyseissä käytettäviä tiedostoja muutama lisää r-koodiin. Tarpeetonta koodia (esim. ikä-sp - vuorovaikutusmuuttujan erilaiset luontiskriptit) pois.
