@@ -322,7 +322,8 @@ str(ISSP2012esim2.dat)
 ```{r maagaCA1}
 
 maagaTestCA1 <- ca(~maaga + V6,ISSP2012esim2.dat)
-par("cex"= 0.7)
+# par("cex"= 0.5, "offset" = 0.5) ei toimi
+par("cex"= 0.5)
 plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain")
 str(maagaTestCA1)
 # lisätään maapisteet frekvenssitaulukkoon maagaTestCA1$N (26.9.18)? Aika hankalaa...
