@@ -165,7 +165,7 @@ suppoint2_df <- select(suppoint2_df, maa, V6)
 #str(suppoint2_df)
 #suppoint2_df
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$V6)
-suppoint2_tab1
+#suppoint2_tab1
 suppoint2_tab1 <- suppoint2_tab1[-2,]
 # kömpelösti kolme kertaa
 suppoint2_tab1 <- suppoint2_tab1[-3,]
@@ -292,12 +292,17 @@ CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus. Miten tästä 
 ```{r ga1CA1}
 gaTestCA1 <- ca(~ga + V6,ISSP2012esim2.dat)
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli")
-              
+summary(gaTestCA1)              
 ```
 
 **zxy** Ei kovin kiinnostava, mutta voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
 
-**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla). **pisteet voisi yhdistää? (29.9.18**
+**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla? Järjestys ei toimi, jotain muuta pelissä?
+
+
+**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla). **pisteet voisi yhdistää? (29.9.18)** 
+
+
 
 ```{r maaga1}
 # Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
@@ -309,7 +314,7 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 ISSP2012esim2.dat %>% tableX(maa, maaga) # taitaa toimia?
 
 #head(ISSP2012esim2.dat)
-str(ISSP2012esim2.dat)
+#str(ISSP2012esim2.dat)
 
 ```
 
@@ -328,6 +333,7 @@ str(maagaTestCA1)
 ```{r maagaCA2}
 # Miten maa-rivit täydentäviksi riveiksi?
 # Miten labelit hieman lähemmäkis pistettä?
+
 
 
 ```
