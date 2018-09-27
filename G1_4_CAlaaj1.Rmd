@@ -29,43 +29,37 @@ Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupu
 Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 
 ```{r G1_4_CAlaaj1Data}
-#valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin - TÄSSÄ KAIKKI MAAT
-#incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
-#                    528, 578, 616, 620, 643, 703, 705, 724, 752, 756, 826, 840)
-#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE)
-#
-#str(ISSP2012.data) #61754 obs. of  420 variables
-#ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
-#
-# Luodaan samanniminen data kuin edellisissä esimerkeissä, lisätään siihen uudet muuttujat.
+
+# Saksan ja Belgian aluejako - täydentävät pisteet
 
 ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
-#
-# lisäys 25.4.2018 user_na
-# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
-# If FALSE, the default, user-defined missings will be # converted to NA"
-# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
-#
-# str(ISSP2012.data) 
-#61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
+
+str(ISSP2012esim1.data) 
+#61754 obs. of  420 variables
 #
 # kuusi maata
+
 incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
 ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
+
 #str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
 #
+
 ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
 
 #str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
 #poistetaan havainnot, joissa puuttuvia tietoja
+
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
+
 #str(ISSP2012esim1.dat) #8143 havaintoa, 6 muuttujaa
-#
+#8557-8143 = 414 havaintoa vähemmän
+
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f")
 #
@@ -79,7 +73,8 @@ vastaus_labels <- c("S","s","?","e","E")
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitäisikö lisätä levels? Luodaan uusi muuttuja, ei tarvitse.
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels? Ei uutta muuttujaa, toimii silti.
-
+#str(ISSP2012esim1.dat)
+#str(ISSP2012esim1.dat$sp)
 ```
 
 **EDIT:** Uudet muuttujat omana pätkänä
@@ -98,9 +93,9 @@ ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3,
                   levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
                   labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
 
-#head(test6)
-#str(test6$maa2)
-#taulu41 <- ISSP2012esim1.dat %>% tableX(maa,maa2,type = "count") - tarkistus uudelle muuttujan luontikoodille
+#head(ISSP2012esim1.dat)
+#str(ISSP2012esim1.dat$maa2)
+#taulu41 <- ISSP2012esim1.dat %>% tableX(maa,maa2,type = "count") # Tarkistus maa2-muuttujalle
 #kable(taulu41,digits = 2, caption = "Uusi muuttuja maa2: Belgian ja Saksan ositus")
 
 ```

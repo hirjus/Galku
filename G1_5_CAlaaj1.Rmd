@@ -18,6 +18,18 @@ library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 2
 
 **ZXY** Tässä laajennetaan data isommaksi aineistoksi, lisää maita.
+```{r G1_5_CAlaaj1_datAll}
+#valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin - TÄSSÄ KAIKKI MAAT (27, ei Espanjaa)
+#incl_countriesALL <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+#                    528, 578, 616, 620, 643, 703, 705, 752, 756, 826, 840)
+#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") # (user_na = TRUE pois 27.9.18)
+#
+#str(ISSP2012.data) #61754 obs. of  420 variables
+#ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countriesALL)
+#
+
+```
+
 
 
 ## Päällekkäiset matriisit (stacked matices)
