@@ -34,7 +34,7 @@ Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 
 ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
 
-str(ISSP2012esim1.data) 
+#str(ISSP2012esim1.data) 
 #61754 obs. of  420 variables
 #
 # kuusi maata
@@ -328,7 +328,7 @@ str(maagaTestCA1)
 ```{r maagaCA2}
 # Miten maa-rivit täydentäviksi riveiksi?
 # Miten labelit hieman lähemmäkis pistettä?
-ISSP2012esim2.dat
+
 
 ```
 
