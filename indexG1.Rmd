@@ -5,6 +5,14 @@ author: Jussi Hirvonen
 documentclass: article
 lang: fi
 output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 5
+    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
+    #code_folding: show
   html_document:
     theme: cosmo
     toc: true
@@ -14,14 +22,6 @@ output:
     fig_width: 5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
     fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
-  pdf_document:
-    toc: true
-    number_sections: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 5
-    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
-    #code_folding: show
 ---
 Kommentteja ja versionhallintaa:
 
@@ -54,16 +54,22 @@ Kommentteja ja versionhallintaa:
 
 **25.9.2018 siistitään datan käsittelyä; ei huomioida puuttuvan tiedon tarkempaa koodausta (read_spss - funktion user_na = TRUE  asetus)**
 
-**zxy muistilista:**
+**1.10.2018** Versio 1.2
+
+Uusi jakso yksinkertaisen CA:n laajennuksille, joissa otetaan analyysiin useampia muuttujia "pinoamalla" ja/tai yhdistämällä taulkoita. Tässä jaksossa otetaan myös käyttöön isompi aineisto (enemmän maita ja muuttujia). Siisti koodipätkä täydentävien muuttujien lisäämiseen.
+
+**Muistilista:**
 
 1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu Bookdown-demo - dokumentissa. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
 
 2. Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja ottaa capaper-dokkariin include_graphics - funktiolla.
 
-3. Puuttuvia tai mahdollisesti lisättäviä taulukoita
+3. Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion tuloksista suoraan)
 
  - khii2 - etäisyydet riveille ja sarakkeille?
  - massoilla painotetut khii2-etäisyyden keskiarvorivistä/sarakkeesta?
+
+4. Kuvissa vielä hiottavaa, pdf-kuvia lisäilty img-hakemistoon.
  
  **V** MG & Blasius, "vihreä kirja": contirbutions to inertia
  

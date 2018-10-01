@@ -75,9 +75,11 @@ ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitä
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels? Ei uutta muuttujaa, toimii silti.
 #str(ISSP2012esim1.dat)
 #str(ISSP2012esim1.dat$sp)
+#summary(ISSP2012esim1.dat)
+#ISSP2012esim1.dat %>% tableX(sp, V6, type = "row_perc")
 ```
 
-**EDIT:** Uudet muuttujat omana pätkänä
+**EDIT:** Uudet muuttujat omassa koodilohkossa pätkänä
 
 ```{r G1_4_maa2}
 # 23.5.2018 maa2 - muuttuja
@@ -184,8 +186,16 @@ suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
 suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
 
 plot(suppointCA2b, main = "Passiiviset pisteet DE ja BE" )
-
-
+# ca- output
+#names(suppointCA2b)
+#str(suppointCA2b)
+#str(suppointCA2b$rowcoord)
+#uppointCA2b
+#suppointCA2b$rowcoord
+#apply(suppointCA2b$rowcoord, 2, sum)
+#suppointCA2b$rowdist
+#suppointCA2b$coldist
+summary(suppointCA2b)
 ```
 
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
@@ -248,7 +258,7 @@ Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuo
 
 
 
-**zxy** (7.8.2018) **DatanRukkailua2.R** parempi versio näistä muunnoksista. Otetaan tässä käyttöön (19.9.2018).
+**zxy** Siistimmät versioit muuttujien luonnista (case_when - rakenne) (19.9.2018).
 
 
 ```{r G1_4_ga2}
@@ -287,7 +297,7 @@ kable(taulu47,digits = 2, caption = "ga2: suhteelliset frekvenssit")
 
 **edit** Vain tarkistuksiin, toisen voi poistaa (19.9.2018)!
 
-CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus. Miten tästä kannattaisi jatkaa? Maa ja ga-muuttuja?
+CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
 ```{r ga1CA1}
 gaTestCA1 <- ca(~ga + V6,ISSP2012esim2.dat)
@@ -311,32 +321,82 @@ summary(gaTestCA1)
 
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
-ISSP2012esim2.dat %>% tableX(maa, maaga) # taitaa toimia?
+ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
 
 #head(ISSP2012esim2.dat)
 #str(ISSP2012esim2.dat)
 
 ```
 
-**TARKISTA - ja maat voisi lisätä täydentävinä pisteinä? (26.9.2018)** 
+**TARKISTA - ja maat voisi lisätä täydentävinä pisteinä (26.9.2018)** 
 ```{r maagaCA1}
 
 maagaTestCA1 <- ca(~maaga + V6,ISSP2012esim2.dat)
 # par("cex"= 0.5, "offset" = 0.5) ei toimi
 par("cex"= 0.5)
-plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain")
-str(maagaTestCA1)
+plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "offset" = 0.5)
+#str(maagaTestCA1)
 # lisätään maapisteet frekvenssitaulukkoon maagaTestCA1$N (26.9.18)? Aika hankalaa...
-#maagaTestCA1$N
+# maagaTestCA1$N
 #maagaTestCA1$rownames
+ISSP2012esim2.dat %>% tableX(maaga, V6) # aika pieniä frekvenssejä soluissa!
+
 ```
 ```{r maagaCA2}
-# Miten maa-rivit täydentäviksi riveiksi?
-# Miten labelit hieman lähemmäkis pistettä?
+# Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
+# Miten labelit hieman lähemmäkis pistettä? offset-jotenkin toimii...
+
+# rakennetaan taulukko, jossa alimpina riveinä "maa-rivit"
+# otetaan karttaan mukaan täydentävinä pisteinä
+# karttaa on helpompi tulkita, kun nähdään miten ikä-sukupuoli-ryhmät sijatsevat keskiarvonsa ympärillä
+
+#ikäluokka - sukupuoli ja maa - maaga-muuttuja
+testTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$V6)
+#dim(testTab1) #72 riviä,  5 saraketta
+
+
+# maa-rivit
+testTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$V6)
+#testTab_sr
+
+testTab1 <- rbind(testTab1,testTab_sr)
+#dim(testTab1)
+#dim(testTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
+
+spCAmaaga1 <- ca(testTab1[,1:5], suprow = 73:78)
+#X11()
+par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2 - maat täydentävinä pisteinä"
+                    )
+#par()
+
+#asymmetrinen kartta
+#X11()
+#par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+#plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot) - liian tukkoinen kuva",
+#                  map = "rowgreen", 
+#                  contrib= c("absolute", "absolute"),
+#                  mass = c(TRUE,TRUE),
+#                  arrows = c(FALSE,TRUE)
+#                  )
+#numeeriset tulokset
+summary(spCAmaaga1)
 
 
 
 ```
 
-Aika ahdasta kuvassa jo on. 
+
+Kuvissa on aika ahdasta. Kuvan voisi rajata johonkin alueeseen erityisesti oikea yläosa on täynnä pisteitä. Maiden täydentävät pisteet ovat ikäluokka-sukupuoli - luokkien keskiarvopisteitä. Maiden väliset erot dominoivat, mutta maiden välillä on isoja eroja.
+
+Kartan herkkyyttä joillekin pienen massan rivipisteille pitää tutkia tarkemmin.
+
+Vertailu voi tehdä
+
+1. maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
+
+2. maiden välillä
+
+a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
+b. mikä on niiden järjestys
 

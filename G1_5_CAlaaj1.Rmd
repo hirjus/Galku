@@ -1,4 +1,4 @@
-```{r G1_4_paketit, include=FALSE}
+```{r G1_5_paketit, include=FALSE}
 library(rgl)
 library(ca)
 library(haven)
