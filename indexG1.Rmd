@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.2, tulostettu `r Sys.Date()` "
+date: "versio 1.3, tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -52,16 +52,24 @@ Kommentteja ja versionhallintaa:
 
 **puuttuva riviprofiilikuva, siistimmät interaktiomuuttujien koodaukset, ensimmäinen "pinottu taulu" - analyysi -> 19.9.2018 versio 1.2**
 
-**zxy muistilista:**
+**25.9.2018 siistitään datan käsittelyä; ei huomioida puuttuvan tiedon tarkempaa koodausta (read_spss - funktion user_na = TRUE  asetus)**
+
+**1.10.2018** Versio 1.2
+
+Uusi jakso yksinkertaisen CA:n laajennuksille, joissa otetaan analyysiin useampia muuttujia "pinoamalla" ja/tai yhdistämällä taulkoita. Tässä jaksossa otetaan myös käyttöön isompi aineisto (enemmän maita ja muuttujia). Siisti koodipätkä täydentävien muuttujien lisäämiseen.
+
+**Muistilista:**
 
 1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu Bookdown-demo - dokumentissa. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
 
 2. Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja ottaa capaper-dokkariin include_graphics - funktiolla.
 
-3. Puuttuvia tai mahdollisesti lisättäviä taulukoita
+3. Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion tuloksista suoraan)
 
  - khii2 - etäisyydet riveille ja sarakkeille?
  - massoilla painotetut khii2-etäisyyden keskiarvorivistä/sarakkeesta?
+
+4. Kuvissa vielä hiottavaa, pdf-kuvia lisäilty img-hakemistoon.
  
  **V** MG & Blasius, "vihreä kirja": contirbutions to inertia
  
@@ -70,7 +78,7 @@ Kommentteja ja versionhallintaa:
 
 ***
 
-```{r child = "G1_1_data1.Rmd"}
+```{r child = "G1_1_data2.Rmd"}
 ```
 
 ***
@@ -79,12 +87,16 @@ Kommentteja ja versionhallintaa:
 ```
 
 ***
-***
 
 ```{r child = "G1_3_tulk1.Rmd"}
 ```
 
 ***
 ```{r child = "G1_4_CAlaaj1.Rmd"}
+
+```
+
+***
+```{r child = "G1_5_CAlaaj1.Rmd"}
 
 ```

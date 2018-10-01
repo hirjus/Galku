@@ -104,12 +104,11 @@ Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - t�
 
 **zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
-```{r esim1data}
-#vähän hankalaa jos Rmd-tiedoston 'scope' vaatii aina kaiken ajamisen joka tiedostossa!
-incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alkuperäinen data
+```{r esim1data1}
+# Alkuperäinen data (poistetaan user_na =TRUE 25.9.2018)
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") 
 #
-# lisäys 25.4.2018 user_na
+# user_na - parametri haven-paketin read_spss - funktiossa:
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
 # If FALSE, the default, user-defined missings will be # converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
@@ -117,7 +116,10 @@ ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav", user_na = TRUE) # Alkuperä
 # str(ISSP2012.data) 
 #61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
 #
-# kuusi maata
+
+# Yksi kysymys ja kuusi maata
+incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
+
 ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
 #str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
@@ -128,33 +130,32 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 
 #str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
-#poistetaan havainnot, joissa puuttuvia tietoja
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012esim1.dat) #8143 obs. of  6 variables
-#ISSP2012esim1.dat %>% table1(C_ALPHAN, splitby = V6) table1 tuottaa siitejä outputeja esim. #LateX-formaatilla, mutta muuten vähän optioita
+
 ```
 
 
-Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
+**zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
 
-**zxy** Faktoreita ei ordinaaliasteikolla, vaikka ilman puuttuvia näin voisi tehdä.(Miten ordinaaliasteikon faktori toimii, jos on puuttuvia mukana?) Tämä ohitus/ratkaisu pitää perustella. **Lienee täysin harmiton**, otetaan järjestys käyttöön jos tarvitaan. Toistaiseksi ei ole tarvittu (4.9.18).
+
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
-```{r}
+```{r esim1data2}
+
 # muutetaan muuttujia faktoreiksi
 #
 # Luokittelumuuttujien tasoille labelit
 #
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f")
-# 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri, 4 = eri mieltä, 5 = täysin eri mieltä
-vastaus_labels <- c("ts","s","ese","e","te")
+# S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
+vastaus_labels <- c("S","s","?","e","E")
 
 # Faktoreiksi
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
+
 #
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
@@ -165,12 +166,16 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 # 27602     DE-E-Germany-East
 #
 #tsekkauksia
-#ISSP2012esim1.dat %>% tableX(maa,V6,type = "count")
+ISSP2012esim1.dat %>% tableX(maa,V6,type = "count") # 400 missing
+ISSP2012esim1.dat %>% tableX(maa,AGE,type = "count") # 12 missing (7 BE, 5 DE)
+ISSP2012esim1.dat %>% tableX(maa,SEX ,type= "count") # 9 missing (BE)
+# 400 + 12 + 9 = 421
+# 8557- 421 = 8136
 #summary(ISSP2012esim1.dat$sp)
-#
+ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
 #Apuvälineitä - lisätietoa muuttujista
 # kun faktoroidaan V6, niin metadata katoaa?
-#
+str(ISSP2012esim1.dat)
 # typeof(ISSP2012esim1.dat$V6) # what is it?
 # class(ISSP2012esim1.dat$V6) # what is it? (sorry)
 # storage.mode(ISSP2012esim1.dat$V6) # what is it? (very sorry)
@@ -178,8 +183,21 @@ ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 # attributes(ISSP2012esim1.dat$V6) # does it have any metadata?
 # str(ISSP2012esim1.dat) #8143 obs. of  8 variables
 
+
 ```
+Poistetaan havainnot, joissa puuttuvia tietoja
+```{r esim1data3}
+#poistetaan havainnot, joissa puuttuvia tietoja
+ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
+#str(ISSP2012esim1.dat) 
+# 8143 obs. of  6 variables
+# muutamalla havainnolla on useampi puuttuva tieto kolmessa muuttujassa (8143-8136 = 7) 
+
+```
+
+
 **Taulukot ja kuvat omina koodilohkoina**
+
 
 **Frekvenssitaulukko**
 
@@ -210,7 +228,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 
 
 
-Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja on melko paljon (N=8143). Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
+Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja 8143. Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
 
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
 
@@ -223,19 +241,14 @@ simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
 **zxy** Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen Bookdownissa. Ei taida onnistua? (4.9.18)
 
 ```{r g1_2_kuva1}
-#tauluG121 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
-#str(tauluG121)
-#apu1 <- (tauluG121[-7, -6])
-#str(apu1)
-#apu1
-#(rowSums(apu1))
+
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
 ##https://stackoverflow.com/questions/9563368/create-stacked-barplot-where-each-stack-is-scaled-to-sum-to
 #
 # käytetään ca - tuloksia
 apu1 <- (simpleCA1$N)
-colnames(apu1) <- c("ts", "s", "ese", "e", "te")
+colnames(apu1) <- c("S", "s", "?", "e", "E")
 rownames(apu1) <- c("BE", "BG", "DE", "DK", "FI", "HU")
 apu1_df <- as.data.frame(apu1)
 #lasketan rivien reunajakauma
@@ -254,8 +267,7 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
 
 ```{r g1_2_kuva2, echo=TRUE}
-# riviprofiilit ja keskiarvorivi - aika väärin piirretty 30.4.2018
-# uusi yritys 18.9.2018 - näyttäisi toimivan !
+# riviprofiilit ja keskiarvorivi -  18.9.2018
 apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 
