@@ -259,7 +259,7 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #
 #Muuttjien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
-names(ISSP2012jh1.data)
+#names(ISSP2012jh1.data)
 str(ISSP2012jh1.data$V18)
 #
 #
@@ -282,6 +282,8 @@ ISSP2012jh1.data$V18
 
 
 ```{r dataprop1, eval=FALSE, include=FALSE}
+# Datan selailua  - metadataa
+#
 #datatiedoston ominaisuuksia 1
 str(ISSP2012jh1.data$V5)
 
@@ -293,7 +295,7 @@ str(missV5)
 hist(missV5$V5)
 summary(missV5$V5)
 #puuttuvan tiedon tarkempi koodaus
-attr(ISSP2012jh1.data$ES_V5,'labels')
+attr(ISSP2012jh1.data$V5,'labels')
 attr(ISSP2012jh1.data$V5,'na_values')
 
 # Tästä näkyvät maakohtaiset substanssimuuttujat helposti!
@@ -303,21 +305,20 @@ attr(ISSP2012jh1.data,'names')
 #hist(ISSP2012jh1.data$DEGREE)
 typeof(ISSP2012jh1.data)
 class(ISSP2012jh1.data)
-#storage.mode(ISSP2012jh1.data)
-#attributes(ISSP2012jh1.data)
+storage.mode(ISSP2012jh1.data)
+attributes(ISSP2012jh1.data)
 
-#ISSP2012jh1.data
 ```
 
 
-##Puuttuvat tiedot
+## Puuttuvat tiedot
 
 **zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
 
 Yksikkövastauskato on (onko?) otettu huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. **Viittet**
 
 
-Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, mutta toistaiseksi sitä ei käytetä.
+Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa halutessaan luettua R-dataan.
 
 **zxy Miten puuttuneisuus kannattaa kuvailla? Löytyy dokumentaatiosta!**
 
@@ -327,29 +328,35 @@ Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, mutta toista
 - demog
 - muut?
 
-**Puuttuneisuus muuttujassa V6 (esimerkki):**
+**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):**
 
 
 ```{r muut1}
-temp2 <- ISSP2012jh1.data %>% filter(!(V4 == 724)) # Espanja pois
+temp2 <- ISSP2012jh1.data
                                      
 #str(temp2)
-temp2$V5 <- factor(temp2$V6 )
+
+temp2$Q1b <- factor(temp2$V6 )
 temp2$maa <-  factor(temp2$C_ALPHAN)
+
 #summary(temp2)
 #str(taulu1)
 taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
 taulu1a <- taulu1[ ,1:14]
 knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen V6 vastaukset maittain")
+             caption = "Kysymyksen Q1b vastaukset maittain")
 taulu1b <- taulu1[ ,15:28]
 knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen V6 vastaukset maittain")
+             caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
-Koko aineistossa (valitut 27 maata) kysymyksen V6 vastauksista puuttuvia tietoja on 3,5 prosenttia (1241/35221).
+Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1241/35221).
 
-**zxy 24.9.2018 Tällaisia eroja löytyy, ohitetaan mutta mainitaan. Pitäisikö (a) pudottaa kaikki joilla puuttuvia joissain muuttujissa vai (b) yhdistää NA ja eos?**
+**Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
+
+Puuttuvien tietojen tarkempi koodaus ISSP-datassa:
+
+(zxy 24.9.2018 Tällaisia eroja löytyy, ohitetaan mutta mainitaan. Pitäisikö (a) pudottaa kaikki joilla puuttuvia joissain muuttujissa vai (b) yhdistää NA ja eos?)
 
 Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.
 
@@ -365,13 +372,12 @@ NAP ja NAV määritellään
 
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
 
-**zxy** **Miten nämä tarkemmat tiedot (7, 8, 9 saadaan näkyviin?)**
 
-**EDIT:** Puuttuneisuuden lyhyttä kuvailua, ja rajausten vaikutus havaintojen lukumäärään muutamaan taulukkoon. Voi siirtää liitteisiin (25.4.2018)
-
-Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
+** (3.10.2018) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
 
 ## Substanssimuuttujat, taustamuuttujat, muut
+
+**zxy** capaper - lukuun.
 
 **zxy** muuttujien kuvaukset. 
 
@@ -383,14 +389,16 @@ Lyhyt taulukko, jossa maittain ja muuttujittain puuttuneiden tietojen osuus.
 
 **zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
 
-**edit:** **nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia.** Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
+**edit:** **nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia ensimmäistä kertää.**
+
+Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 
 **edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
 
 Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä.
 
-**Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto.** Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
+Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto. Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
 
 Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
 
@@ -406,4 +414,4 @@ V56-57 poikkeamia, V58 (Health status) ok
 V59 "ketjutettu kysymys", samoin V60-V64.
 s. 174 - puolison koulutus...
 
-** edit ** Nämä muistiinpanot on tehty, kun upottiin dokumentointiin aika syvälle... Kätevimmin selviää, kun katsoo mistä muuttujista on datassa "maaversio" (esim. ES_V6).
+
