@@ -51,6 +51,8 @@ Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole
 
 Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä "pistepilvessä".
 
+Akseleiden tulkinta "ääripäiden" kautta ("kontrasti" ?). Huom "ääripää" ei välttämättä Likert-asteikolla tarkoita "äärimielipidettä", vaan se voi tarkoittaa myös selvää tai varmaa mielipidettä.(3.10.18).
+
 **Vanha lista:**
 
 1. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
@@ -59,18 +61,15 @@ Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan ri
 
 3. Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
 
-4.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. Niihin palataan kaksoiskuva-jaksossa.
+4.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. CA-kartta kaksoiskuvana (ts. informaatio voidaan palauttaa, skalaaritulo)? 
 
 5. Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely
 
 Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Käsittteistä oma Rmd (ja Excel jos osoittautuu kätevämmäksi), kaavaliite Dispo-repossa ja myös Rmd-muodossa. **edit** Kaavaliitteessä pieniä eroja, ja tekstiä on LateX-versiossa enemmän.
 
-Keskeiset lähteet: MG:n "Correspondence analysis in practice", "Biplots in practice", HY:n 2017 kurssin materiaali ja laskuharjoitukset. Näissä kaikissa on käytetty samaa dataa esimerkeissä. Lisäksi perusasioiden esittelyssä MG & Blasius artikkelikokoelma ("vihreä kirja"), joissain kohdin Lerouxin ja Romanetin teos.
-
-
 **Ensimmäinen symmetrinen kartta**
 
-Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet.
+Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat prosentit akseleilla?
 
 Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien. 
 **zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä. MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
@@ -88,7 +87,7 @@ Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepiste
 **zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b) kuviin ja taulukoihin.
 
 
-Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - täysin eri mieltä) seuraaviin kysymyksiin (suomenkielinen lomake, kysymys 23):
+Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1) (1-5 Likert, täysin samaa mieltä - täysin eri mieltä) seuraaviin kysymyksiin (suomenkielinen lomake, kysymys 23): **Käytänkö muuttujanimenä Q1b vai V6? Jälkimmäinen lyhyempi, ja tätä muuttujaa käytetään. Toisaalta kun faktoroidaan, pitää tehdä uusi muuttuja, muuten metadata häviää** (3.10.2018)
 
 (a) Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallisen suhteen kuin äiti, joka ei käy työssä 
 
@@ -107,11 +106,6 @@ Aineisto muuttujat V5-V9 ovat vastauksia (1-5 Likert, täysin samaa mieltä - t�
 ```{r esim1data1}
 # Alkuperäinen data (poistetaan user_na =TRUE 25.9.2018)
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") 
-#
-# user_na - parametri haven-paketin read_spss - funktiossa:
-# "If TRUE variables with user defined missing will be read into labelled_spss objects. 
-# If FALSE, the default, user-defined missings will be # converted to NA"
-# https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
 # str(ISSP2012.data) 
 #61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
@@ -155,7 +149,7 @@ vastaus_labels <- c("S","s","?","e","E")
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
 ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
-
+str(ISSP2012esim1.dat$V6)
 #
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3

@@ -168,6 +168,12 @@ ISSP2012jh1.data osajoukko edellisestä
 
 ISSP2012jh1.dat, ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin.
 
+Paras tehdä vaan niin, että kaksi täyttä df-tiedostoa ISSP2012.data ja tarvittaessa *jh1.data, *jh2.data jne.
+
+Rajaukset ja muutokset ISSPesim1.dat ja vaiheittain *esim2.dat jne.
+
+Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
+
 **zxy** pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
 
 
@@ -414,4 +420,7 @@ V56-57 poikkeamia, V58 (Health status) ok
 V59 "ketjutettu kysymys", samoin V60-V64.
 s. 174 - puolison koulutus...
 
+**Muuttujat, kysymykset: miten viitata?**
+
+SPSS-datassa muuttujat on nimetty V1,...,V67. Metadatassa taas kerrotaan kysymys, esim. V6 on vastaus kysymykseen Q1b. Suomenkielisessä lomakkeessa ensimmäinen kysymyspatteri Q1 on kysymys 23. 23b:Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. Miten kysymyksiin kannattaa viitata?
 
