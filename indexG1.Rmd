@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.3, tulostettu `r Sys.Date()` "
+date: "versio 1.4, tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -23,7 +23,7 @@ output:
     fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
 ---
-Kommentteja ja versionhallintaa:
+Kommentteja ja versionhallintaa, hstoriaa:
 
 * **edit:** oma kommentti, ei varsinaista tekstiä
 * kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
@@ -54,11 +54,17 @@ Kommentteja ja versionhallintaa:
 
 **25.9.2018 siistitään datan käsittelyä; ei huomioida puuttuvan tiedon tarkempaa koodausta (read_spss - funktion user_na = TRUE  asetus)**
 
-**1.10.2018** Versio 1.2
+**1.10.2018** Versio 1.3
+
+Muutokset tarkemmin Readme.md - tiedostossa.
 
 Uusi jakso yksinkertaisen CA:n laajennuksille, joissa otetaan analyysiin useampia muuttujia "pinoamalla" ja/tai yhdistämällä taulkoita. Tässä jaksossa otetaan myös käyttöön isompi aineisto (enemmän maita ja muuttujia). Siisti koodipätkä täydentävien muuttujien lisäämiseen.
 
-**Muistilista:**
+**3.10.2018** Versio 1.4
+
+Siistitään pois turhat datan listaukset. Aineiston rajaaminen selkeäksi. Ensin kuusi maata, sitten 27 (Espanja pois). Valitaan myös muuttujat, jotta käsiteltävän datan listaukset ovat järkevämpiä. Aineistossa esim. Espanjan ja muutaman Unkarin poikkeavien vastausvaihtoehtojen vastaukset ovat omina muuttujina, ja niiden arvo muille havainnoille on NAP (Not applicaple). Samoin paljon maakohtaisia muuttujia, esim. koulutustaso. Mukaan otetaan vain kv-vertailuihin kelpaavat muuttujat, muutama sellainen on myös aineistoon rakennettu. Jätetään pois kaikki perhesuhteisiin liittyvät kysymykset (esim. kotitöiden jakaminen) ja taustatiedot (esim. rahankäyttö, puolison eri tiedot jne.), koska muuten jouduttaisiin miettimään miten näiden osalta käsitellään perheettömiä. Muutamia muuttujia otetaan mukaan (lasten lkm jne.).
+
+**Muistilista:** (historiaa)
 
 1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu Bookdown-demo - dokumentissa. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
 

@@ -58,7 +58,12 @@ Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketis
 
 Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
 
-www.issp.org, www.gesis.org : mistä on kysymys
+**Tärkeät linkit**
+
+www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista, joissa aineistoja on käytetty.
+
+www.gesis.org - tutkimuksen "sihteeristö", dokumentaatio ja datat.
+
 data ja dokumentaatio (selattavissa): zacat.gesis.org
 
 **edit** tässä järkevä viite ISSP - dataan
@@ -105,9 +110,11 @@ Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäks
 
 **1. Eurooppa ja samankaltaiset maat (28)**
 
-Bulgaria, Czech Republic, Denmark, Finnland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia Slovenia, Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal 
+Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia Slovenia,,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal 
 
 Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
+
+
 
 **2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms.** 
 
@@ -115,8 +122,18 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 
 Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös. Unkari voi silti olla mukana yksinkertaisessa esimerkissä, jatkosta pois?
 
+**zxy** Näistä jätetään pois Espanja ja ehkä myös Unkari (eri vastausvaihtoehdot V18 - V20). No olkoon Unkari mukana toistaiseksi. Jos noita vastauksia käytetään, tämä pitää muistaa.
+
+
 **3. kaikki havainnot, joissa on puuttuvia tietoja.** 
-"listwise deletion"
+
+Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainnot pois, joissa joku tieto puuttuu. Rajataan kuitenkin tätä vaikutusta niin, että sitä sovelletaan vain käytettäviin muuttujiin.
+
+Johdattelevassa esimerkissä on vain muutama muuttuja, ei ongelma.
+
+Isomman 27 (tai 26 jos Unkari pudotetaan) maan aineistossa on tarkoitus ottaa myös useita muuttujia analyysiin. Vaikutus on suurempi.
+
+"listwise deletion".
 
 Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
 
@@ -124,17 +141,41 @@ Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea mene
 
 **edit:** Tähän täsmennetään miten puuttuvia tietoja käsitellään.
 
+
 4. Datan hallinta **liittyy reproducible research- periaatteeseen**
+
+
 
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
-Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelmaan ISSP2012.dat. Tästä lähdetää; yleensä seuraavaksi valitaan maat, sitten muuttujat.
+**zxy 3.10.18** 
+
+Aineistoon luetaan käytettävät muuttujat, ja suodatetaan sitten puuttuvat havainnot pois. 
+
+Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelmaan ISSP2012.dat.
+
+Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. Siksi polku 
+
+SPSS -> ISSP2012.data -> (valitaaan maat ja muuttujat) ISSP2012.dat -> pudotetaan havainnot joissa puuttuvia tietoja -> muunnokset ja uudet muuttujat -> ISSP2012esim.dat
+on pidettävä selkeänä. Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
+
+Nyt on pientä epäselvyyttä.
+
+ISSP2012.data df jossa alkuperäinen SPSS-data
+ISSP2012jh1.data osajoukko edellisestä
+
+ISSP2012jh1.dat, ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin.
+
+**zxy** pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
+
+
 
 **edit** kuva tai taulukko rajaamisista? Vai voiko dokumentoida R-koodiin kommentteina?
  
-**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa?
+**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Vai pitäisikö koodin kommentointi kirjoitta englanniksi? Mietitään myöhemmin, tuskin voi olla kaksikielinen.
+
 
 
 ```{r rajaukset1}
@@ -194,12 +235,14 @@ Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelma
 # 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
-# Espjana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia #vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois.
+# Espjana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
+# Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois.
 
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
                     528, 578, 616, 620, 643, 703, 705, 752, 756, 826, 840)
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
-str(ISSP2012.data)
+
+#str(ISSP2012.data)
 #
 # lisäys 25.4.2018 user_na / 25.9.2018 jäteään pois. Tietoa ei käytetä, ja koodauksissa on myös
 # eroja maiden välillä.
@@ -209,20 +252,25 @@ str(ISSP2012.data)
 # If FALSE, the default, user-defined missings will be converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
-#
+# TÄMÄN VOI SELITTÄÄ TÄSSÄ JA JÄTTÄÄ POIS LOPPUKOODISTA. (3.10.2018)
 #
 #str(ISSP2012.data) #61754 obs. of  420 variables 
 ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
-#length((ISSP2012jh1.data))
+#
+#Muuttjien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
+#
 names(ISSP2012jh1.data)
+str(ISSP2012jh1.data$V18)
+#
+#
 #str(ISSP2012jh1.data) #37816 obs. of  420 variables jos Espanja mukana, nyt 35221 obs. of  420 variables
 #str(ISSP2012jh1.data)
-#Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois, #niiden arvo muilla mailla on "NA" (puuttuva tieto)
-#summary(ISSP2012jh1.data$ES_V5)
+#Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois. Muiden maiden havainnossa arvo on 'NAP' 
+#Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, ja vertailukelpoiset muuttujat on konstruoitu niistä.
 #
-#V18$label
+summary(ISSP2012jh1.data$V18)
+ISSP2012jh1.data$V18
 #attr(ISSP2012jh1.data$V6,'labels')
-#attr(ISSP2012jh1.data$ES_V6,'labels')
 ```
 
 
@@ -230,7 +278,7 @@ names(ISSP2012jh1.data)
 **edit** * tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.** 
 
 **Siistitään, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd)**
-**ISSP2012jh1.data - 27 maata. Turhia muuttujia (=kaikki), mutta valitaan tästä aina analyyseissä käytettävät muuttujat**
+**ISSP2012jh1.data - 27 maata. Kaikki muuttujat, valitaan tästä aina analyyseissä käytettävät muuttujat**
 
 
 ```{r dataprop1, eval=FALSE, include=FALSE}
@@ -274,19 +322,18 @@ Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, mutta toista
 **zxy Miten puuttuneisuus kannattaa kuvailla? Löytyy dokumentaatiosta!**
 
 1. Kuvaillaan vain mukaanotettavan datan osalta
+
 - subst
 - demog
 - muut?
 
-**edit** miten taulukko siististi bookdownissa?
+**Puuttuneisuus muuttujassa V6 (esimerkki):**
 
-**zxy** Unkarilla poikkeavat vastausvaihtoehdot kysymyksessä Q5, jos sitä ei käytetä niin olkoon HU mukana!
 
-Muiden kuin Espanjan vastaukset kysymykseen V6 jakautuvat näin:
 ```{r muut1}
 temp2 <- ISSP2012jh1.data %>% filter(!(V4 == 724)) # Espanja pois
                                      
-str(temp2)
+#str(temp2)
 temp2$V5 <- factor(temp2$V6 )
 temp2$maa <-  factor(temp2$C_ALPHAN)
 #summary(temp2)
