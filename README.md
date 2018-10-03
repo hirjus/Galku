@@ -53,3 +53,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **26.9.2018** Jatkettiin siivoilua, yksi rmd-tiedosto lisää viimeiseksi osaksi. R-datan eri analyyseissä käytettäviä tiedostoja muutama lisää r-koodiin. Tarpeetonta koodia (esim. ikä-sp - vuorovaikutusmuuttujan erilaiset luontiskriptit) pois.
 
 **1.10.2018** Versio 1.3, ikä-sukupuoli-maa - luokittelumuuttuja ja maakeskiarvot täydentävinä pisteinä. Kuvien yksityiskohdissa on vielä korjailtavaa (labeleiden etäisyys pisteistä jne.). Tägätään versio 1.2 -> 1.3.
+
+**3.10.2018** Siistitään versio 1.3 versioksi 1.4. Datan rajaaminen ja käsittely R-koodissa, tiedostojen nimeäminen, maiden ja muuttujien valinnat (kaksi aineistoa, iso ja pieni). Poistetaan turhia ja pitkiä muuttuja- yms. listauksia.
