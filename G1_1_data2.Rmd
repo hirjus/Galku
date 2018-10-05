@@ -182,9 +182,14 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
  
 **zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Vai pitäisikö koodin kommentointi kirjoitta englanniksi? Mietitään myöhemmin, tuskin voi olla kaksikielinen.
 
+**ISSP2012jh1.data** - 27 maata. Kaikki muuttujat, tästä valitaan muuttujat. Tehdäänkö osa uusista muuttujista (ika, sp, jne) jo tässä vaiheessa? Ei vielä, vasta yksinkertaisen ca:n laajennusluvussa kun laajempi data otetaan käyttöön?
 
+**DATA RAJAAMISTA - maat(5.10.2018)**
 
-```{r rajaukset1}
+```{r datasel_country1}
+#
+# MAAT - muuttujat koodilohkossa datasel_vars1
+#
 # kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
 #two country code variables based on the ISO Code 3166. One identifies
 #countries as a whole, the other one possible subsamples, such as East and West Germany. The cross
@@ -266,7 +271,7 @@ ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
 #Muuttjien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
 #names(ISSP2012jh1.data)
-str(ISSP2012jh1.data$V18)
+#str(ISSP2012jh1.data)
 #
 #
 #str(ISSP2012jh1.data) #37816 obs. of  420 variables jos Espanja mukana, nyt 35221 obs. of  420 variables
@@ -274,50 +279,97 @@ str(ISSP2012jh1.data$V18)
 #Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois. Muiden maiden havainnossa arvo on 'NAP' 
 #Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, ja vertailukelpoiset muuttujat on konstruoitu niistä.
 #
-summary(ISSP2012jh1.data$V18)
-ISSP2012jh1.data$V18
-#attr(ISSP2012jh1.data$V6,'labels')
+#
+#
+attributes(ISSP2012jh1.data$V6,'labels')
 ```
 
 
 
-**edit** * tarpeetonta ja vähän sekavaa, mutta jääköön toistaiseksi.** 
-
-**Siistitään, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd)**
-**ISSP2012jh1.data - 27 maata. Kaikki muuttujat, valitaan tästä aina analyyseissä käytettävät muuttujat**
 
 
-```{r dataprop1, eval=FALSE, include=FALSE}
+
+
+
+
+
+
+```{r dataprop1, echo=TRUE}
 # Datan selailua  - metadataa
 #
 #datatiedoston ominaisuuksia 1
 str(ISSP2012jh1.data$V5)
 
-#tarpeetonta testailua 24.9.2018
-test1 <- is.na(ISSP2012jh1.data$V5)
-missV5 <- ISSP2012jh1.data[test1,]
-head(missV5)
-str(missV5)
-hist(missV5$V5)
-summary(missV5$V5)
-#puuttuvan tiedon tarkempi koodaus
-attr(ISSP2012jh1.data$V5,'labels')
-attr(ISSP2012jh1.data$V5,'na_values')
+# tarpeetonta testailua 24.9.2018 - puuttuvien havaintojen kaivelua (TÄMÄ VASTA KUN MUUTTUJAT ON VALITTU)
+#
+# test1 <- is.na(ISSP2012jh1.data$V5)
+# missV5 <- ISSP2012jh1.data[test1,]
+# head(missV5)
+# str(missV5)
+# hist(missV5$V5)
+# summary(missV5$V5)
+# puuttuvan tiedon tarkempi koodaus - jos olisi user_na=TRUE read_spss-komenossa
+# attr(ISSP2012jh1.data$V5,'labels')
+# attr(ISSP2012jh1.data$V5,'na_values')
 
 # Tästä näkyvät maakohtaiset substanssimuuttujat helposti!
-attr(ISSP2012jh1.data,'names')
+# attr(ISSP2012jh1.data,'names')
 
-#hist(ISSP2012jh1.data$V5) #kätevä mutta ei lopulliseen käyttöön
-#hist(ISSP2012jh1.data$DEGREE)
+# hist(ISSP2012jh1.data$V5) #kätevä mutta ei lopulliseen käyttöön
+# hist(ISSP2012jh1.data$DEGREE)
+#
+# PERUSKOMENNOT DATATIEDOSTOSON TUTKIMISEEN
 typeof(ISSP2012jh1.data)
 class(ISSP2012jh1.data)
 storage.mode(ISSP2012jh1.data)
-attributes(ISSP2012jh1.data)
+#attributes(ISSP2012jh1.data)
+#
+# tiedoston metadata : muuttujat V1, V2 ja DOI
+#
+ISSP2012jh1.data[1:3,1:3]
+attributes(ISSP2012jh1.data, 'notes')
+attributes(ISSP2012jh1.data, 'names')
+```
 
+**DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
+
+**TODO** Pois "perhe-, puoliso- yms." muuttujat
+
+```{r datasel_vars1}
+
+# metadata
+metavars1 <- c("V1", "V2", "DOI")
+#temp <- select(ISSP2012jh1.data, metavars1)
+
+#str(temp)
+
+# substanssimuuttujat - haastatteluaineisto
+substvars1 <- c("V3","V4","C_ALPHAN","V5",
+  "V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16",
+  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
+  "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
+  "V46", "V47", "V48", "V49", "V50", "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59",
+  "V60", "V61", "V62", "V63", "V64", "V65", "V65a","V66", "V67", "SEX", "BIRTH","AGE", "EDUCYRS"
+  )
+# Q6/V21 "Ideal number of children for a family" 
+# Q7a-Q7f monivalintakysymyksiä lasten vaikutuksesta elämään,V23 - V27
+childvars <-c ("V22", "V23","V24","V25","V26","V27")
+# demografiset muuttujat
+demogvars1 <- c()
+# muut taustamuuttujat
+othervars1 <- c()
+str(metavars1)
+jhvars1 <- c(metavars1,substvars1,demogvars1,othervars1)
+jhvars1
+temp <- select(ISSP2012jh1.data, jhvars1)
+str(temp)
 ```
 
 
+
 ## Puuttuvat tiedot
+
+**zxy** Kun muuttujat on valittu, voi lyhyesti vilkaista puuttuneisuutta. Muuten asia käsitellään aina, kun muuttujia otetaan mukaan analyysiin. Tai voi sen tässäkin ehkä esitellä, kerralla? Muuttujat voisi luetella laskevassa järjestyksessä puuttuneisuuden mukaan?
 
 **zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
 
@@ -334,7 +386,7 @@ Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa h
 - demog
 - muut?
 
-**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):**
+**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Tämän voisi siirtää esimerkki-lukuun?
 
 
 ```{r muut1}
@@ -342,8 +394,8 @@ temp2 <- ISSP2012jh1.data
                                      
 #str(temp2)
 
-temp2$Q1b <- factor(temp2$V6 )
-temp2$maa <-  factor(temp2$C_ALPHAN)
+temp2$Q1b <- as_factor(temp2$V6 )
+temp2$maa <-  as_factor(temp2$C_ALPHAN)
 
 #summary(temp2)
 #str(taulu1)
