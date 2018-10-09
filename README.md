@@ -55,3 +55,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **1.10.2018** Versio 1.3, ikä-sukupuoli-maa - luokittelumuuttuja ja maakeskiarvot täydentävinä pisteinä. Kuvien yksityiskohdissa on vielä korjailtavaa (labeleiden etäisyys pisteistä jne.). Tägätään versio 1.2 -> 1.3.
 
 **3.10.2018** Siistitään versio 1.3 versioksi 1.4. Datan rajaaminen ja käsittely R-koodissa, tiedostojen nimeäminen, maiden ja muuttujien valinnat (kaksi aineistoa, iso ja pieni). Poistetaan turhia ja pitkiä muuttuja- yms. listauksia.
+
+**9.10.2018** Datan ja muuttujien valinta tehty. Espanja ja Iso-Britannia pois isosta aineistosta, briteiltä puuttuu tieto TOPBOT (oma arvio asemasta yhteiskunnan hierarkiassa) ja haluan aineistoon yhden sosioekonomisen muuttujan. Espanjan vastausvaihtoehdot poikkeavat substanssikysymyksissä.

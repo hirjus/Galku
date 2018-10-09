@@ -234,7 +234,7 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 # 705 SI-Slovenia
 # 752 SE-Sweden
 # 756 CH-Switzerland
-# 826 GB-Great Britain and/or United Kingdom
+# 826 GB-Great Britain and/or United Kingdom - jätetään pois, jotta saadaan TOPBOT (top-bottom self-placement) -muuttuja mukaan.(9.10.18)
 # 840 US-United States
 #
 # Belgian ja Saksan alueet:
@@ -247,10 +247,10 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
 # Espjana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
-# Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois.
+# Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois. Iso-Britannia, koska TOPBOT-muuttuja puuttuu maan tiedoista.
 
 incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
-                    528, 578, 616, 620, 643, 703, 705, 752, 756, 826, 840)
+                    528, 578, 616, 620, 643, 703, 705, 752, 756, 840)
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 #str(ISSP2012.data)
@@ -267,27 +267,20 @@ ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 #
 #str(ISSP2012.data) #61754 obs. of  420 variables 
 ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
+#str(ISSP2012jh1.data) 34271 obs. of  420 variables - Iso-Britannia ja Espanja  
 #
 #Muuttjien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
 #names(ISSP2012jh1.data)
-#str(ISSP2012jh1.data)
-#
-#
-#str(ISSP2012jh1.data) #37816 obs. of  420 variables jos Espanja mukana, nyt 35221 obs. of  420 variables
-#str(ISSP2012jh1.data)
 #Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois. Muiden maiden havainnossa arvo on 'NAP' 
 #Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, ja vertailukelpoiset muuttujat on konstruoitu niistä.
-#
-#
-#
-attributes(ISSP2012jh1.data$V6,'labels')
 ```
 
 
 
+**Data-tiedoston tutkailua**
 
-
+Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on.
 
 
 
@@ -295,10 +288,10 @@ attributes(ISSP2012jh1.data$V6,'labels')
 
 
 ```{r dataprop1, echo=TRUE}
-# Datan selailua  - metadataa
+# Datan selailua (9.10.2018)
 #
 #datatiedoston ominaisuuksia 1
-str(ISSP2012jh1.data$V5)
+#str(ISSP2012jh1.data$V5)
 
 # tarpeetonta testailua 24.9.2018 - puuttuvien havaintojen kaivelua (TÄMÄ VASTA KUN MUUTTUJAT ON VALITTU)
 #
@@ -327,8 +320,7 @@ storage.mode(ISSP2012jh1.data)
 # tiedoston metadata : muuttujat V1, V2 ja DOI
 #
 ISSP2012jh1.data[1:3,1:3]
-attributes(ISSP2012jh1.data, 'notes')
-attributes(ISSP2012jh1.data, 'names')
+
 
 # muuttujat V12 ja V13 - eos ja muut puuttuvat (9.10.18)
 
@@ -337,9 +329,10 @@ select(ISSP2012jh1.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V12, type = "row
 select(ISSP2012jh1.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V13, type = "row_perc")
 ```
 
+Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää, siksi nämä kysymykset jätetään pois.
+
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
 
-**TODO** Pois "perhe-, puoliso- yms." muuttujat
 
 ```{r datasel_vars1}
 # Muuttujat on luokiteltu dokumentissa ZA5900_overview.pdf
@@ -348,15 +341,18 @@ select(ISSP2012jh1.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V13, type = "row
 # 
 #
 
-# metadata
-metavars1 <- c("V1", "V2", "DOI")
-#maakoodit ja maan kahden merkin tunnus
-countryvars1 <- c("V3","V4","C_ALPHAN")
-#temp <- select(ISSP2012jh1.data, metavars1)
+# METADATA
 
+metavars1 <- c("V1", "V2", "DOI")
+
+#MAA - maakoodit ja maan kahden merkin tunnus
+
+countryvars1 <- c("V3","V4","C_ALPHAN")
+
+#temp <- select(ISSP2012jh1.data, metavars1)
 #str(temp)
 
-# substanssimuuttujat - Attitudes towards family and gender roles
+# SUBSTANSSIMUUTTUJAT - Attitudes towards family and gender roles (7)
 #
 # Seitsemän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot
 #
@@ -376,29 +372,107 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 # Kysymysten Q3a ja Q3b (pitäisikö naisen olla töissä jos (a) alle kouluikäinen lapsi (b) nuorin lapsi koulussa)
 # vastauksissa on paljon "en osaaa sanoa" - valintoja. Muut vastaustvaihtoehdot ovat 1= kokopäivätyö, 2 = osa-aikatyö ja 
 # 3 = pysyä kotona. Eos-vastaus ei ole sama kuin "en samaa enkä eri mieltä" (ns. neutraali vaihtoehto), ja se pitäisi erotella
-# muista puuttuvan tiedon koodeista. Jäteään siis pois.
+# muista puuttuvan tiedon koodeista. Jätetään siis pois(kts. koodilohko dataprop1).
 
-substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16",
-  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
-  "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
-  "V46", "V47", "V48", "V49", "V50", "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59",
-  "V60", "V61", "V62", "V63", "V64", "V65", "V65a","V66", "V67", "SEX", "BIRTH","AGE", "EDUCYRS"
-  )
-# Q6/V21 "Ideal number of children for a family" 
-# Q7a-Q7f monivalintakysymyksiä lasten vaikutuksesta elämään,V23 - V27
-childvars <-c ("V22", "V23","V24","V25","V26","V27")
-# demografiset muuttujat
-demogvars1 <- c()
-# muut taustamuuttujat
-othervars1 <- c()
-str(metavars1)
-jhvars1 <- c(metavars1,substvars1,demogvars1,othervars1)
+substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11")
+
+# Nämä jäävät pois
+# "V12","V13","V14","V15","V16",  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
+# "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
+#  "V46", "V47", "V48", "V49", "V50", "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59",
+#  "V60", "V61", "V62", "V63", "V64", "V65", "V65a","V66", "V67"
+#
+
+# DEMOGRAFISET JA MUUT TAUSTAMUUTTUJAT (8)
+#
+# AGE, SEX
+#
+# DEGREE - Highest completed degree of education: Categories for international comparison. Since DEGREE is a slightly re-arranged subset of ISCED-97, 
+# instructions for actually coding ISCED-97 from nat-DEGR in your country can be used to support the coding of DEGREE. Eri maissa kysymykset muotoiltu eri tavoin, tässä tavoitteena
+# kv-vertailu.
+#
+# 0 No formal education
+# 1 Primary school (elementary school)
+# 2 Lower secondary (secondary completed does not allow entry to university: obligatory school)
+# 3 Upper secondary (programs that allow entry to university or programs that allow to entry other ISCED level 3 programs - designed to
+# prepare students for direct entry into the labour market)
+# 4 Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation)
+# 5 Lower level tertiary, first stage (also technical schools at a tertiary level)
+# 6 Upper level tertiary (Master, Dr.)
+# 9 No answer, CH: don't know
+# Yhdistetään ainakin 0 ja 1 .
+#
+# MAINSTAT - main status: Which of the following best describes your current situation?
+#
+# 1 In paid work
+# 2 Unemployed and looking for a job, HR: incl never had a job
+# 3 In education
+# 4 Apprentice or trainee
+# 5 Permanently sick or disabled
+# 6 Retired
+# 7 Domestic work
+# 8 In compulsory military service or community service
+# 9 Other
+# 99 No answer
+# Armeijassa tai yhdyskuntapalvelussa muutamia, muutamissa maissa. Voidaan sivuuttaa, vai pitääkö jättää pois? Kategoriassa 9 on enemmän väkeä, mutta ei sielläkään kovin paljon.
+# Yhdistetään 8 ja 9. Huom! Esim Puolassa ei yhtään eläkeläistä eikä kategoriaa 9, Saksassa ei ketään kategoriassa 9.
+# Eri maissa hieman erilaisia kysymyksiä.
+#
+# TOPBOT - Bottom self-placement (10 pt scale)
+# In our society, there are groups which tend to be towards the top and groups which tend to be towards the bottom. Below is a scale that runs
+# from the top to the bottom. Where would you put yourself on this scale?
+# Eri maissa hieman erilaisia kysymyksiä. HUOM! Tieto puuttuu Ison Britannian (GB_GBN) aineistosta.
+# Miten tätä voisi käyttää? Pudotetaan GB_GBN pois, saadaan edes yksi sosioekonominen muuttuja mukaan.
+# 
+# HHCHILDR - How many children in household: children between [school age] and 17 years of age
+# 0 No children
+# 1 One child
+# 2 2 children
+# 21 21 children
+# 96 NAP (Code 0 in HOMPOP)
+# 97 Refused
+# 99 No answer
+# koodataan dummymuuttujaksi lapsia (1) - ei lapsia (0)
+#
+# MARITAL - Legal partnership status 
+# What is your current legal marital status?
+# The aim of this variable is to measure the current 'legal' marital status '. PARTLIV - muuttujassa on 'de facto' - tilanteen tieto parisuhteesta
+#
+# 1 Married
+# 2 Civil partnership
+# 3 Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership)
+# 4 Divorced from spouse/ legally separated from civil partner
+# 5 Widowed/ civil partner died
+# 6 Never married/ never in a civil partnership, single
+# 7 Refused
+# 8 Don't know
+# 9 No answer
+#
+# URBRURAL - Place of living: urban - rural
+#
+# 1 A big city
+# 2 The suburbs or outskirts of a big city
+# 3 A town or a small city
+# 4 A country village
+# 5 A farm or home in the country
+# 7 Other answer
+# 9 No answer
+# 1 ja 2 vaihtelevat aika paljon maittain, parempi laskea yhteen. Unkarista puuttuu jostain syystä kokonaan vaihtoehto 5.  Vaihotehdon 7 on valinnut vain 4 vastaajaa Ranskasta.
+# Yhdistetään 1 ja 2 = city, 3 = town, rural= 4, 5, 7
+#
+
+bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL", "URBRURAL")
+
+#Valitaan muuttujat
+
+jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 jhvars1
-temp <- select(ISSP2012jh1.data, jhvars1)
+temp <- select(ISSP2012jh1.data, jhvars1) # KELPO TIEDOSTONIMI TÄHÄN! (9.10.18)
 str(temp)
+#summary(temp$C_ALPHAN)
 ```
 
-
+**TODO 9.10.18** Tarkista tiedostojen nimeämiset
 
 ## Puuttuvat tiedot
 
@@ -406,42 +480,44 @@ str(temp)
 
 **zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
 
-Yksikkövastauskato on (onko?) otettu huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. **Viittet**
+Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana
+painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
 
 
 Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa halutessaan luettua R-dataan.
 
 **zxy Miten puuttuneisuus kannattaa kuvailla? Löytyy dokumentaatiosta!**
 
-1. Kuvaillaan vain mukaanotettavan datan osalta
 
-- subst
-- demog
-- muut?
-
-**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Tämän voisi siirtää esimerkki-lukuun?
+**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Ehkä tarpeetonta.
 
 
 ```{r muut1}
-temp2 <- ISSP2012jh1.data
-                                     
-#str(temp2)
 
-temp2$Q1b <- as_factor(temp2$V6 )
-temp2$maa <-  as_factor(temp2$C_ALPHAN)
+#Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
 
-#summary(temp2)
+temp$Q1b <- as_factor(temp2$V6 )
+temp$maa <-  as_factor(temp2$C_ALPHAN)
+
+#summary(temp)
 #str(taulu1)
-taulu1 <- temp2 %>% tableX(V6,maa,type = "count")
-taulu1a <- taulu1[ ,1:14]
+taulu1 <- temp %>% tableX(V6,maa,type = "count")
+taulu1a <- taulu1[ ,1:13]
 knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen Q1b vastaukset maittain")
-taulu1b <- taulu1[ ,15:28]
+taulu1b <- taulu1[ ,14:27]
 knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
-Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1241/35221).
+Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
+
+```{r muut2}
+# Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?
+# 
+
+```
+
 
 **Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
 
@@ -481,6 +557,7 @@ GESIS adds 'Not available' for variables, which in singe countries may  not have
 **zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
 
 **edit:** **nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia ensimmäistä kertää.**
+**TÄMÄN PÄTKÄN VOI POISTAA - TURHAA**
 
 Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
