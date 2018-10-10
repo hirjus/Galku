@@ -429,7 +429,7 @@ substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11")
 # Yhdistetään 8 ja 9. Huom! Esim Puolassa ei yhtään eläkeläistä eikä kategoriaa 9, Saksassa ei ketään kategoriassa 9.
 # Eri maissa hieman erilaisia kysymyksiä.
 #
-# TOPBOT - Bottom self-placement (10 pt scale)
+# TOPBOT - Top-Bottom self-placement (10 pt scale)
 # In our society, there are groups which tend to be towards the top and groups which tend to be towards the bottom. Below is a scale that runs
 # from the top to the bottom. Where would you put yourself on this scale?
 # Eri maissa hieman erilaisia kysymyksiä. HUOM! Tieto puuttuu Ison Britannian (GB_GBN) aineistosta.
@@ -477,9 +477,10 @@ bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL",
 #Valitaan muuttujat
 
 jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
-jhvars1
+
+#jhvars1
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
-#str(ISSP2012jh1b.data) #34271 obs. of  21 variables
+str(ISSP2012jh1b.data) #34271 obs. of  21 variables
 #summary(ISSP2012jh1b.data$C_ALPHAN)
 ```
 
@@ -501,27 +502,57 @@ Q2a Both should contribute to household income
 Q2b Men’s job is earn money, women’s job household
 
 Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa. **TODO** Taulukot!
-```{r vartable1}
+```{r vartable1 fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
 # Muuttuja taulukkona
-head(ISSP2012jh1b.data)
-str(ISSP2012jh1b.data)
-
-attributes(ISSP2012jh1b.data)
-temp1 <- attr(ISSP2012jh1b.data$V5, 'label')
-temp1
+#head(ISSP2012jh1b.data)
+#str(ISSP2012jh1b.data)
+#
+#attributes(ISSP2012jh1b.data)
+#temp1 <- attr(ISSP2012jh1b.data$V5, 'label') #labelin saa luettua
+#temp1
 #attr(ISSP2012jh1b.data[,7:21], 'labels') # tuloksena NULL
-
 #temp1[1]
-str(temp1$names)
-ISSP2012jh1b.data$V6
-lapply(ISSP2012jh1b.data, class) # muuttujat joilla labeleita
+#str(temp1$names)
+#ISSP2012jh1b.data$V6
+#lapply(ISSP2012jh1b.data, class) # muuttujat joilla labeleita
 #labels(ISSP2012jh1b.data, which = c("V6","V7")) hämärä
-attr(ISSP2012.data, 'label')
+#str(substvars1)
+# Karkea tapa
+tabVarnames <- c(substvars1,bgvars1) # muuttujanimet muuttujille, ei maa- tai metamuuttujia
+#tabVarnames
+tabVarDesc <- c("Q1a Working mother can have warm relation with child",
+                "Q1b Pre-school child suffers through working mother",
+                "Q1c Family life suffers through working mother",
+                "Q1d Women’s preference: home and children",
+                "Q1e Being housewife is satisfying",
+                "Q2a Both should contribute to household income",
+                "Q2b Men’s job is earn money, women’s job household",
+                "Respondents age ",
+                "Respondents gender",
+                "Highest completed degree of education: Categories for international comparison",
+                "Main status: work, unemployed, in education...",
+                "Top-Bottom self-placement (10 pt scale)",
+                "How many children in household: children between [school age] and 17 years of age",
+                "Legal partnership status: married, civil partership...",
+                "Place of living: urban - rural"
+              )
+#tabVarDesc
+
+# Taulukko
+# luodaan df
+jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
+cols_jhVarTable1 <- c("muuttuja","lyhennetty kysymys")
+colnames(jhVarTable1.df) <- cols_jhVarTable1
+#jhVarTable1.df
+
+#  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
+knitr::kable(jhVarTable1.df, booktab=TRUE)
+
 ```
 
 
 
-Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta.
+Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset koodikirjassa (refworks-viite?)
 
 **TODO 9.10.18** Tarkista tiedostojen nimeämiset
 
