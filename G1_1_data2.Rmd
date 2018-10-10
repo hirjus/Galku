@@ -244,7 +244,7 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # 752 SE-Sweden
 # 756 CH-Switzerland
 # 826 GB-Great Britain and/or United Kingdom - jätetään pois, jotta saadaan TOPBOT (top-bottom self-placement) -muuttuja mukaan.(9.10.18)
-# 840 US-United States
+# 840 US-United States - jätetään pois, jotta saadaan TOPBOT (top-bottom self-placement) -muuttuja mukaan.(10.10.18)
 #
 # Belgian ja Saksan alueet:
 #  V3
@@ -255,7 +255,8 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
-# Espajana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
+# Espajana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on 
+# poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
 # Jos näitä muuttujia käytetään, Unkari on parempi jättää pois. Iso-Britannia pois, koska TOPBOT-muuttuja puuttuu maan tiedoista. 
 #
 # (25.4.2018) user_na  
@@ -271,16 +272,17 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 #str(ISSP2012.data)
 
-incl_countries26 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
-                    528, 578, 616, 620, 643, 703, 705, 752, 756, 840)
+incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+                    528, 578, 616, 620, 643, 703, 705, 752, 756)
 
 #str(ISSP2012.data)
-#str(ISSP2012.data) #61754 obs. of  420 variables 
+#str(ISSP2012.data) #61754 obs. of  420 variables - kaikki
 
-ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries26)
+ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 
 #head(ISSP2012jh1a.data)
-#str(ISSP2012jh1a.data) #34271 obs. of  420 variables - Iso-Britannia ja Espanja  
+#str(ISSP2012jh1a.data) #34271 obs. of  420 variables - Iso-Britannia ja Espanja pois (9.10.2018)
+#str(ISSP2012jh1a.data) # 32969 obs. of  420 variable - - Iso-Britannia, Espanja ja USA pois (10.10.2018)
 #
 #Muuttujien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
@@ -480,7 +482,7 @@ jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 
 #jhvars1
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
-str(ISSP2012jh1b.data) #34271 obs. of  21 variables
+str(ISSP2012jh1b.data) #32969 obs. of  21 variables
 #summary(ISSP2012jh1b.data$C_ALPHAN)
 ```
 
@@ -501,8 +503,9 @@ Q1e Being housewife is satisfying
 Q2a Both should contribute to household income
 Q2b Men’s job is earn money, women’s job household
 
-Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa. **TODO** Taulukot!
-```{r vartable1 fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
+Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa.
+
+```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
 # Muuttuja taulukkona
 #head(ISSP2012jh1b.data)
 #str(ISSP2012jh1b.data)
@@ -587,7 +590,7 @@ taulu1 <- temp %>% tableX(V6,maa,type = "count")
 taulu1a <- taulu1[ ,1:13]
 knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen Q1b vastaukset maittain")
-taulu1b <- taulu1[ ,14:27]
+taulu1b <- taulu1[ ,14:26]
 knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen Q1b vastaukset maittain")
 ```
@@ -595,6 +598,8 @@ knitr::kable(taulu1b,digits = 2, booktabs = TRUE,
 Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
 
 ```{r muut2}
+# Nämä tarkastelu jaksoon, jossa laajempi joukko muuttujia käyttöö
+
 # Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?
 # Taulukko kuten yllä, riveinä maat ja sarakkeina muuttujat, is.na -count?
 # Faktoreiksi, ja summary! Ei tarvita, kyllä R on muuttanut puuttuvat tiedot jo NA-arvoiksi.
@@ -624,13 +629,12 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 #str(test)
 #head(test)
 #test
-temp5 <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count")
-str(temp5)
-temp5
+#temp5 <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count")
+#str(temp5)
+#temp5
 #maat ja havaintojen lukumäärät
-temp6 <- temp5[,7]
-temp6
-
+#temp6 <- temp5[,7]
+#temp6
 
 ```
 
@@ -638,10 +642,32 @@ temp6
 
 ```{r muut3}
 # Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
+# Nämä taulukoinnit kuuluvat jaksoon, jossa lisämuuttujat otetaan käyttöön
+
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
+# puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "row_perc")
+#ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "row_perc") on jo ylempänä
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V8, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V9, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V10, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V11, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "row_perc")
+missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "row_perc")
+missAGE[,86:87]
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, DEGREE, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, MAINSTAT, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, HHCHILDR, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "row_perc")
+
 ```
-USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Mietitään myöhemmin **(10.10.18)**
+USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Jätetään USA pois**(10.10.18)**
+
+**ainoa ratkaisu taitaa olla se, että (a) katsotaan paljonko putoaa havaintoja jos "listwise deletion" ja (b) koodataan puuttuva tieto omaksi kategoriaksi**
+
 
 **Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
 

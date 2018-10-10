@@ -104,7 +104,7 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1) (1-
 **zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
 ```{r esim1data1}
-# Alkuperäinen data (poistetaan user_na =TRUE 25.9.2018)
+# Alkuperäinen data (ei käytetä user_na =TRUE 25.9.2018)
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") 
 #
 # str(ISSP2012.data) 
@@ -131,7 +131,6 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 **zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
 
 
-
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
 ```{r esim1data2}
@@ -148,8 +147,8 @@ vastaus_labels <- c("S","s","?","e","E")
 # Faktoreiksi
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
-ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
-str(ISSP2012esim1.dat$V6)
+ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
+str(ISSP2012esim1.dat$Q1b)
 #
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
@@ -159,12 +158,15 @@ str(ISSP2012esim1.dat$V6)
 # 27601     DE-W-Germany-West
 # 27602     DE-E-Germany-East
 #
-#tsekkauksia
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "count") # 400 missing
-ISSP2012esim1.dat %>% tableX(maa,AGE,type = "count") # 12 missing (7 BE, 5 DE)
-ISSP2012esim1.dat %>% tableX(maa,SEX ,type= "count") # 9 missing (BE)
-# 400 + 12 + 9 = 421
-# 8557- 421 = 8136
+# Tarkastuksia
+#
+#ISSP2012esim1.dat %>% tableX(maa,V6,type = "count") # 400 missing
+#ISSP2012esim1.dat %>% tableX(maa,AGE,type = "count") # 12 missing (7 BE, 5 DE)
+#ISSP2012esim1.dat %>% tableX(maa,SEX ,type= "count") # 9 missing (BE)
+# 
+# Jos yhdelläkään havainnolla ei puutu tietoja useammasta muuttujasta:
+#   400 + 12 + 9 = 421
+#   8557- 421 = 8136
 #summary(ISSP2012esim1.dat$sp)
 ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
 #Apuvälineitä - lisätietoa muuttujista
@@ -196,7 +198,7 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 **Frekvenssitaulukko**
 
 ```{r simpeCAfrekTa1}
-taulu2 <- ISSP2012esim1.dat %>% tableX(maa, V6, type = "count")
+taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset maittain")
 ```
@@ -204,7 +206,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 **Riviprosentit**
 
 ```{r simpeCArprosTa1}
-taulu3 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "row_perc")
+taulu3 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
 knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen V6 vastaukset, riviprosentit")
@@ -213,7 +215,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 **Sarakeprosentit**
 
 ```{r simpeCAcprosTa1}
-taulu4 <- ISSP2012esim1.dat %>% tableX(maa,V6,type = "col_perc")
+taulu4 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "col_perc")
 
 knitr::kable(taulu4,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
@@ -227,7 +229,7 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
 
 ```{r EkaCA}
-simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat)
+simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 #tämä ajetaan jotta saadaan hieno kuva piirrettyä
 ```
 
@@ -307,7 +309,7 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r simpleCArelfrekTa1}
-taulu5 <-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+taulu5 <-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```

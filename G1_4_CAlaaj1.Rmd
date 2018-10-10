@@ -68,11 +68,11 @@ sp_labels <- c("m","f")
 # 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri, 4 = eri mieltä, 5 = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
 
-# Faktoreiksi - onko ihan oikein? On(26.9.18)
+# Faktoreiksi - onko ihan oikein? On(26.9.18) - faktoroitu uudeksi muuttujaksi, vanhassa säilyvät metatiedot (10.10.18)
 
 ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
-ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitäisikö lisätä levels? Luodaan uusi muuttuja, ei tarvitse.
-ISSP2012esim1.dat$V6 <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels? Ei uutta muuttujaa, toimii silti.
+ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitäisikö lisätä levels?
+ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels?
 #str(ISSP2012esim1.dat)
 #str(ISSP2012esim1.dat$sp)
 #summary(ISSP2012esim1.dat)
@@ -132,7 +132,7 @@ Täydentävien muuttujien kolme käyttötapaa:
 #head(ISSP2012esim1.dat)
 
 # HUOM! Tässä ei vielä supp.points mukana!
-suppointCA1 <- ca(~maa2 + V6,ISSP2012esim1.dat)
+suppointCA1 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 #kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
 #summary(suppointCA1)
@@ -151,22 +151,22 @@ plot(suppointCA1b, main = "Belgian ja Saksan ositteet")
 # Luetaan data tauluksi - ei toimi, char-table
 # yritetään uudestaan table-funktiolla
 # data maa2-muuttujalla
-suppoint1_df1 <- select(ISSP2012esim1.dat, maa2,V6)
+suppoint1_df1 <- select(ISSP2012esim1.dat, maa2,Q1b)
 #str(suppoint1_df1)
 #head(suppoint1_df1)
-suppoint1_tab1 <- table(suppoint1_df1$maa2, suppoint1_df1$V6)
+suppoint1_tab1 <- table(suppoint1_df1$maa2, suppoint1_df1$Q1b)
 suppoint1_tab1
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
 #
 # Saksan ja Belgian summarivit
 #
 suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
-suppoint2_df <- select(suppoint2_df, maa, V6)
+suppoint2_df <- select(suppoint2_df, maa, Q1b)
 #head(suppoint2_df)
 #tail(suppoint2_df)
 #str(suppoint2_df)
 #suppoint2_df
-suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$V6)
+suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 #suppoint2_tab1
 suppoint2_tab1 <- suppoint2_tab1[-2,]
 # kömpelösti kolme kertaa
@@ -300,7 +300,7 @@ kable(taulu47,digits = 2, caption = "ga2: suhteelliset frekvenssit")
 CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
 ```{r ga1CA1}
-gaTestCA1 <- ca(~ga + V6,ISSP2012esim2.dat)
+gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli")
 summary(gaTestCA1)              
 ```
@@ -321,7 +321,7 @@ summary(gaTestCA1)
 
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
-ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
+#ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
 
 #head(ISSP2012esim2.dat)
 #str(ISSP2012esim2.dat)
@@ -331,7 +331,7 @@ ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
 **TARKISTA - ja maat voisi lisätä täydentävinä pisteinä (26.9.2018)** 
 ```{r maagaCA1}
 
-maagaTestCA1 <- ca(~maaga + V6,ISSP2012esim2.dat)
+maagaTestCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 # par("cex"= 0.5, "offset" = 0.5) ei toimi
 par("cex"= 0.5)
 plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "offset" = 0.5)
@@ -339,7 +339,7 @@ plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "o
 # lisätään maapisteet frekvenssitaulukkoon maagaTestCA1$N (26.9.18)? Aika hankalaa...
 # maagaTestCA1$N
 #maagaTestCA1$rownames
-ISSP2012esim2.dat %>% tableX(maaga, V6) # aika pieniä frekvenssejä soluissa!
+ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
 
 ```
 ```{r maagaCA2}
@@ -351,12 +351,12 @@ ISSP2012esim2.dat %>% tableX(maaga, V6) # aika pieniä frekvenssejä soluissa!
 # karttaa on helpompi tulkita, kun nähdään miten ikä-sukupuoli-ryhmät sijatsevat keskiarvonsa ympärillä
 
 #ikäluokka - sukupuoli ja maa - maaga-muuttuja
-testTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$V6)
+testTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
 #dim(testTab1) #72 riviä,  5 saraketta
 
 
 # maa-rivit
-testTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$V6)
+testTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$Q1b)
 #testTab_sr
 
 testTab1 <- rbind(testTab1,testTab_sr)
