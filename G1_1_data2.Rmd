@@ -165,28 +165,21 @@ Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metad
 SPSS -> ISSP2012.data -> (valitaaan maat ja muuttujat) ISSP2012.dat -> pudotetaan havainnot joissa puuttuvia tietoja -> muunnokset ja uudet muuttujat -> ISSP2012esim.dat
 on pidettävä selkeänä. Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
 
-Nyt on pientä epäselvyyttä.
+**10.10.18**
+
+**Tiedostonimistä 10.10.18**
 
 ISSP2012.data df jossa alkuperäinen SPSS-data
 ISSP2012jh1.data osajoukko edellisestä
+    ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.
 
-ISSP2012jh1.dat, ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin.
-
-Paras tehdä vaan niin, että kaksi täyttä df-tiedostoa ISSP2012.data ja tarvittaessa *jh1.data, *jh2.data jne.
-
-Rajaukset ja muutokset ISSPesim1.dat ja vaiheittain *esim2.dat jne.
-
-Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
-
-**zxy** pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
+ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin, mutta ei liikaa ja sopii myös Markdown-työskentelyyn. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi, näin on jo tehty paketeille (paketit.R)
 
 
+**zxy** Datan rajaaminen (maat. muuttujat) heti alussa, pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
 
-**edit** kuva tai taulukko rajaamisista? Vai voiko dokumentoida R-koodiin kommentteina?
  
-**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Vai pitäisikö koodin kommentointi kirjoitta englanniksi? Mietitään myöhemmin, tuskin voi olla kaksikielinen.
-
-**ISSP2012jh1.data** - 27 maata. Kaikki muuttujat, tästä valitaan muuttujat. Tehdäänkö osa uusista muuttujista (ika, sp, jne) jo tässä vaiheessa? Ei vielä, vasta yksinkertaisen ca:n laajennusluvussa kun laajempi data otetaan käyttöön?
+**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? 
 
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
@@ -204,7 +197,7 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 #
 # 1. Valitaan 26 maata -> ISSP2012jh1a.data
 #
-# MAAT - muuttujat koodilohkossa datasel_vars1
+# VALITAAN MAAT -> ISSP2012jh1a.data. Muuttujat koodilohkossa datasel_vars1
 #
 # kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
 #two country code variables based on the ISO Code 3166. One identifies
@@ -350,8 +343,9 @@ Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vas
 
 
 ```{r datasel_vars1}
-# 2. VALITAAN MUUTTUJAT  -> ISSP2012jh1b.data
-
+# 2. VALITAAN MUUTTUJAT  -> ISSP2012jh1b.data. Maat valittu koodilohkossa datasel_country1
+#
+#
 # Muuttujat on luokiteltu dokumentissa ZA5900_overview.pdf
 # https://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
 # Study Description -> Other Study Description -> Related Materials
