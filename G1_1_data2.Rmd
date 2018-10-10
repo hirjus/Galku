@@ -333,8 +333,8 @@ ISSP2012jh1a.data[1:3,1:3]
 # muuttujat V12 ja V13 - eos ja muut puuttuvat (9.10.18)
 
 
-select(ISSP2012jh1.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V12, type = "row_perc")
-select(ISSP2012jh1.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V13, type = "row_perc")
+select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V12, type = "row_perc")
+select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V13, type = "row_perc")
 ```
 
 Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää, siksi nämä kysymykset jätetään pois.
@@ -562,8 +562,7 @@ Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. 
 
 **zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
 
-Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana
-painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
+Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
 
 
 Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa halutessaan luettua R-dataan.
@@ -577,9 +576,10 @@ Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa h
 ```{r muut1}
 
 #Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
+temp <- ISSP2012jh1b.data
+temp$maa <-  as_factor(temp$C_ALPHAN)
+temp$Q1b <- as_factor(temp$V6 )
 
-temp$Q1b <- as_factor(temp2$V6 )
-temp$maa <-  as_factor(temp2$C_ALPHAN)
 
 #summary(temp)
 #str(taulu1)
@@ -596,10 +596,52 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 
 ```{r muut2}
 # Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?
-# 
+# Taulukko kuten yllä, riveinä maat ja sarakkeina muuttujat, is.na -count?
+# Faktoreiksi, ja summary! Ei tarvita, kyllä R on muuttanut puuttuvat tiedot jo NA-arvoiksi.
+#str(ISSP2012jh1b.data)
+#attributes(ISSP2012jh1b.data)
+#names(ISSP2012jh1b.data)
+
+#Faktoreiksi substanssi- ja taustamuuttujat TÄHÄN KELPO TIEDOSTONIMI
+#temp$maa <- as_factor(temp$C_ALPHAN)
+#temp$Q1a <- as_factor(temp$V5) #labels ainakin näihin
+#temp$Q1b <- as_factor(temp$V6)
+#temp$Q1c <- as_factor(temp$V7)
+#temp$Q1d <- as_factor(temp$V7)
+#temp$Q1e <- as_factor(temp$V7)
+#temp$Q2a <- as_factor(temp$V7)
+#temp$Q2b <- as_factor(temp$V7)
+#temp$sp <- as_factor(temp$SEX) # tähän levels, labels
+#temp$ika <- temp$AGE
+#temp$edu <- as_factor(temp$DEGREE)
+#temp$socstat<- as_factor(temp$MAINSTAT) 
+#temp$class <- as_factor(temp$TOPBOT) 
+#temp$nchild<- temp$HHCHILDR
+#temp$legstat <- as_factor(temp$MARITAL)  
+#temp$urb<- as_factor(temp$URBRURAL)
+
+#test <-summary(temp) 
+#str(test)
+#head(test)
+#test
+temp5 <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count")
+str(temp5)
+temp5
+#maat ja havaintojen lukumäärät
+temp6 <- temp5[,7]
+temp6
+
 
 ```
 
+**Puuttuvat tiedot ja "listwise deletion" - pientä pohdintaa...**
+
+```{r muut3}
+# Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
+```
+USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Mietitään myöhemmin **(10.10.18)**
 
 **Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
 
