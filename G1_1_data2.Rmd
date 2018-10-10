@@ -303,10 +303,6 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries26)
 Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on.
 
 
-
-
-
-
 ```{r dataprop1, echo=TRUE}
 # Datan selailua (9.10.2018)
 #
@@ -354,6 +350,8 @@ Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vas
 
 
 ```{r datasel_vars1}
+# 2. VALITAAN MUUTTUJAT  -> ISSP2012jh1b.data
+
 # Muuttujat on luokiteltu dokumentissa ZA5900_overview.pdf
 # https://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
 # Study Description -> Other Study Description -> Related Materials
@@ -486,9 +484,9 @@ bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL",
 
 jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 jhvars1
-temp <- select(ISSP2012jh1.data, jhvars1) # KELPO TIEDOSTONIMI TÄHÄN! (9.10.18)
-str(temp)
-#summary(temp$C_ALPHAN)
+ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
+#str(ISSP2012jh1b.data) #34271 obs. of  21 variables
+#summary(ISSP2012jh1b.data$C_ALPHAN)
 ```
 
 Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Seitsemä muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
@@ -509,6 +507,23 @@ Q2a Both should contribute to household income
 Q2b Men’s job is earn money, women’s job household
 
 Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa. **TODO** Taulukot!
+```{r vartable1}
+# Muuttuja taulukkona
+head(ISSP2012jh1b.data)
+str(ISSP2012jh1b.data)
+
+attributes(ISSP2012jh1b.data)
+temp1 <- attr(ISSP2012jh1b.data$V5, 'label')
+temp1
+#attr(ISSP2012jh1b.data[,7:21], 'labels') # tuloksena NULL
+
+#temp1[1]
+str(temp1$names)
+ISSP2012jh1b.data$V6
+lapply(ISSP2012jh1b.data, class) # muuttujat joilla labeleita
+#labels(ISSP2012jh1b.data, which = c("V6","V7")) hämärä
+attr(ISSP2012.data, 'label')
+```
 
 
 
