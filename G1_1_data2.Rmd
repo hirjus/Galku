@@ -33,6 +33,10 @@ library(reshape2) # ggplot2 - kuvalle
 
 **Datan esittely ja kuvailut - tämä luku täysin uusiksi (24.9.18)**
 
+**10.10.2018 maat ja muuttujat valittu.**
+
+**TODO** Miten tämä dokkari siistitään? Vanha teksti omiksi tägätyiksi pätkiksi?
+
 
 
 2012 data, muuttujaluokat (subst, demog.). Lisäksi maakohtaisia juttuja.
@@ -110,9 +114,9 @@ Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäks
 
 **1. Eurooppa ja samankaltaiset maat (28)**
 
-Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia Slovenia,,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal 
+Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal **(28)**
 
-Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
+**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
 
 
 
@@ -122,7 +126,9 @@ Pois jätettiin 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, 
 
 Esimerkiksi Espanjan datassa on jätetty pois neutraali "en samaa enkä eri mieltä" - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös. Unkari voi silti olla mukana yksinkertaisessa esimerkissä, jatkosta pois?
 
-**zxy** Näistä jätetään pois Espanja ja ehkä myös Unkari (eri vastausvaihtoehdot V18 - V20). No olkoon Unkari mukana toistaiseksi. Jos noita vastauksia käytetään, tämä pitää muistaa.
+**zxy** Näistä jätetään pois Espanja ja ehkä myös Unkari (eri vastausvaihtoehdot V18 - V20). Jos noita vastauksia käytetään, tämä pitää muistaa. Iso-Britannia pois, koska sosioekonominen muuttuja TOPBOT puuttuu kokonaan.
+
+**26 maata, johdattelevassa esimerkissa 6 maata** (10.10.18)
 
 
 **3. kaikki havainnot, joissa on puuttuvia tietoja.** 
@@ -131,9 +137,7 @@ Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainno
 
 Johdattelevassa esimerkissä on vain muutama muuttuja, ei ongelma.
 
-Isomman 27 (tai 26 jos Unkari pudotetaan) maan aineistossa on tarkoitus ottaa myös useita muuttujia analyysiin. Vaikutus on suurempi.
-
-"listwise deletion".
+Isomman 27 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan ja verrataan kuuden maan aineistoon. Yksinkertaisempaa olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18)
 
 Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
 
@@ -187,6 +191,18 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
 ```{r datasel_country1}
+# Aineiston rajaamisen kolme vaihetta (10.1018)
+# 
+# TIEDOSTOJEN NIMEÄMINEN
+#
+# R-datatiedostot .data - tarkenteella ovat osajoukkoja koko ISSP-datasta ISSP2012.data
+# R-datatiedostot .dat - tarkenteella: mukana alkuperäisten muuttujien muunnoksia (yleensä as_factor), alkuperäisissä muuttujissa mukana SPSS-tiedoston metadata
+#    Muutetaan R-datatiedossa ordinaali- ja nominaaliasteikon muuttuja haven-paketin as_factor - funktiolla faktoreiksi.
+#    R:n faktorityypin muuttujille voidaan tarvittaessa määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
+#       
+# R-datatiedostot joiden nimen loppuosa on muotoa *esim1.dat: käytetään analyyseissä
+#
+# 1. Valitaan 26 maata -> ISSP2012jh1a.data
 #
 # MAAT - muuttujat koodilohkossa datasel_vars1
 #
@@ -208,7 +224,7 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 # 82601 GB-GBN-Great Britain
 # Portugalissa ainestoa täydennettiin, koska siinä oli puutteita. Jako ei siis ole oleellinen,
 # mutta muuut ovat. Tähdellä merkityt maat valitaan johdattelevaan esimerkkiin.
-# Maat:
+# Maat (27, ei Espanjaa):
 # 36 AU-Australia
 # 40 AT-Austria
 # 56 BE-Belgium*
@@ -246,30 +262,34 @@ Luku 2 ISSP2012esim1.dat!? No ok, sitä dataa käytetään...
 # 27602     DE-E-Germany-East
 
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
-# Espjana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
-# Jos näitä muuttujia käytetään, on Unkarikin parempi jättää aineistosta pois. Iso-Britannia, koska TOPBOT-muuttuja puuttuu maan tiedoista.
-
-incl_countries <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
-                    528, 578, 616, 620, 643, 703, 705, 752, 756, 840)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
-
-#str(ISSP2012.data)
+# Espajana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
+# Jos näitä muuttujia käytetään, Unkari on parempi jättää pois. Iso-Britannia pois, koska TOPBOT-muuttuja puuttuu maan tiedoista. 
 #
-# lisäys 25.4.2018 user_na / 25.9.2018 jäteään pois. Tietoa ei käytetä, ja koodauksissa on myös
-# eroja maiden välillä.
-# Muutetaan R-datatiedossa ordinaali- ja nominaaliasteikon muuttuja haven-paketin as_factor - funktiolla faktoreiksi.
-# R:n faktorityypin muuttujille voidaan tarvittaessa määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
+# (25.4.2018) user_na  
+# haven-paketin read_spss - funktiolla voi r-tiedostoon lukea myös SPSS:n sallimat kolme (yleensä 7, 8, 9) tarkempaa koodia puuttuvalle tiedolle.
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
 # If FALSE, the default, user-defined missings will be converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
-# TÄMÄN VOI SELITTÄÄ TÄSSÄ JA JÄTTÄÄ POIS LOPPUKOODISTA. (3.10.2018)
-#
+# (25.9.2018) jäteään pois. Tietoa ei käytetä, koodauksissa on myös eroja maiden ja eri kysymyten välillä. Kaikki puuttuvat tiedot saavat R-tiedostossa arvon NA.
+# R-ohjelmiston "implisiittinen konversio" muuntaa monet muuttujat (esim. Likert-asteikon vastaukset 1,...,5) merkkijonomuuttujiksi.
+# 
+# 
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
+#str(ISSP2012.data)
+
+incl_countries26 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+                    528, 578, 616, 620, 643, 703, 705, 752, 756, 840)
+
+#str(ISSP2012.data)
 #str(ISSP2012.data) #61754 obs. of  420 variables 
-ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countries)
-#str(ISSP2012jh1.data) 34271 obs. of  420 variables - Iso-Britannia ja Espanja  
+
+ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries26)
+
+#head(ISSP2012jh1a.data)
+#str(ISSP2012jh1a.data) #34271 obs. of  420 variables - Iso-Britannia ja Espanja  
 #
-#Muuttjien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
+#Muuttujien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
 #names(ISSP2012jh1.data)
 #Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois. Muiden maiden havainnossa arvo on 'NAP' 
@@ -312,15 +332,14 @@ Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on.
 # hist(ISSP2012jh1.data$DEGREE)
 #
 # PERUSKOMENNOT DATATIEDOSTOSON TUTKIMISEEN
-typeof(ISSP2012jh1.data)
-class(ISSP2012jh1.data)
-storage.mode(ISSP2012jh1.data)
+typeof(ISSP2012jh1a.data)
+class(ISSP2012jh1a.data)
+storage.mode(ISSP2012jh1a.data)
 #attributes(ISSP2012jh1.data)
 #
 # tiedoston metadata : muuttujat V1, V2 ja DOI
 #
-ISSP2012jh1.data[1:3,1:3]
-
+ISSP2012jh1a.data[1:3,1:3]
 
 # muuttujat V12 ja V13 - eos ja muut puuttuvat (9.10.18)
 
@@ -471,6 +490,29 @@ temp <- select(ISSP2012jh1.data, jhvars1) # KELPO TIEDOSTONIMI TÄHÄN! (9.10.18
 str(temp)
 #summary(temp$C_ALPHAN)
 ```
+
+Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Seitsemä muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
+
+**Seitsemän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot**
+
+Vastausvaihtoehdot:
+
+1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 
+4 = eri mieltä, 5 = täysin eri mieltä
+
+Q1a Working mother can have warm relation with child
+Q1b Pre-school child suffers through working mother
+Q1c Family life suffers through working mother
+Q1d Women’s preference: home and children
+Q1e Being housewife is satisfying
+Q2a Both should contribute to household income
+Q2b Men’s job is earn money, women’s job household
+
+Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa. **TODO** Taulukot!
+
+
+
+Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta.
 
 **TODO 9.10.18** Tarkista tiedostojen nimeämiset
 
