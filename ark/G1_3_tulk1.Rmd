@@ -34,10 +34,7 @@ Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa j
 (@) Pisteiden koko kuvaa rivin tai sarakkeen massaa.
 
 ```{r G1_3_asymm1}
-
-# asymmetrinen kartta - rivit pc ja sarakkeet sc
-# HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
-
+#asymmetrinen kartta - rivit pc ja sarakkeet sc
 plot(simpleCA1, map = "rowprincipal", 
      mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
@@ -51,10 +48,8 @@ Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaati
 Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
      
 ```{r G1_3_asymm2}
-
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
-# HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1" )
@@ -75,8 +70,6 @@ plot(simpleCA1, map = "rowgreen",
 
 
 Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
-
-**Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
 Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen kontribuutioon (voi olla myös suhteellinen kontribuutio).
 

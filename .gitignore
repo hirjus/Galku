@@ -42,3 +42,4 @@ vignettes/*.pdf
 rsconnect/
 
 # maybe also tex-files?
+.Rproj.user

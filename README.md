@@ -53,3 +53,11 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **26.9.2018** Jatkettiin siivoilua, yksi rmd-tiedosto lisää viimeiseksi osaksi. R-datan eri analyyseissä käytettäviä tiedostoja muutama lisää r-koodiin. Tarpeetonta koodia (esim. ikä-sp - vuorovaikutusmuuttujan erilaiset luontiskriptit) pois.
 
 **1.10.2018** Versio 1.3, ikä-sukupuoli-maa - luokittelumuuttuja ja maakeskiarvot täydentävinä pisteinä. Kuvien yksityiskohdissa on vielä korjailtavaa (labeleiden etäisyys pisteistä jne.). Tägätään versio 1.2 -> 1.3.
+
+**3.10.2018** Siistitään versio 1.3 versioksi 1.4. Datan rajaaminen ja käsittely R-koodissa, tiedostojen nimeäminen, maiden ja muuttujien valinnat (kaksi aineistoa, iso ja pieni). Poistetaan turhia ja pitkiä muuttuja- yms. listauksia.
+
+**9.10.2018** Datan ja muuttujien valinta tehty. Espanja ja Iso-Britannia pois isosta aineistosta, briteiltä puuttuu tieto TOPBOT (oma arvio asemasta yhteiskunnan hierarkiassa) ja haluan aineistoon yhden sosioekonomisen muuttujan. Espanjan vastausvaihtoehdot poikkeavat substanssikysymyksissä.
+
+**10.10.2018** Myös USA pois, koska TOPBOT-muuttuja puuttuu. Data-luvussa taulukoitu kaikki 15 muuttujaa maittain, puuttuneisuuden arvioimiseksi. Nämä taulukot siirretään siihen lukuu, jossa aineistoa laajennettaan. Tarkistettu yksinkertaisen esimerkin koodi, faktoroinneissa luodaan aina uusi muuttuja. Vanhaan jäävät metatiedot talteen. Versio 1.4 alkaa olla valmis.
+
+**11.10.2018** Versio 1.4

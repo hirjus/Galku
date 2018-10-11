@@ -17,7 +17,7 @@ library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 2
 
-**ZXY** Tässä laajennetaan data isommaksi aineistoksi, lisää maita.
+**ZXY** Tässä laajennetaan data isommaksi aineistoksi, lisää maita. **TODO 10.10.18** Data-jaksosta koodia tänne!
 ```{r G1_5_CAlaaj1_datAll}
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin - TÄSSÄ KAIKKI MAAT (27, ei Espanjaa)
 #incl_countriesALL <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
