@@ -37,7 +37,7 @@ ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, 
 #str(ISSP2012esim1.data) 
 #61754 obs. of  420 variables
 #
-# kuusi maata
+# KUUSI MAATA
 
 incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
@@ -47,13 +47,14 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1)
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
-#
+
+# MUUTTUJAT
 
 ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
 
 #str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
-#poistetaan havainnot, joissa puuttuvia tietoja
+# Poistetaan havainnot, joissa puuttuvia tietoja
 
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 
@@ -127,19 +128,19 @@ Täydentävien muuttujien kolme käyttötapaa:
 **EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 ```{r G1_4_suppoints_BeDe}
-#kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
+# Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
 #head(ISSP2012esim1.dat)
 
 # HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
-plot(suppointCA1, main = "Belgian ja Saksan ositteet")
+#plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 #kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
 #summary(suppointCA1)
 #print(suppointCA1)
 #str(suppointCA1)
 #
-#Käännetään kuva
+# Käännetään kuva
 
 suppointCA1b <- suppointCA1
 suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
@@ -393,10 +394,11 @@ Kartan herkkyyttä joillekin pienen massan rivipisteille pitää tutkia tarkemmi
 
 Vertailu voi tehdä
 
-1. maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
+1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
 
-2. maiden välillä
+2.Maiden välillä
 
 a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
+
 b. mikä on niiden järjestys
 

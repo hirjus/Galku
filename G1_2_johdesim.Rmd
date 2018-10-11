@@ -168,7 +168,7 @@ str(ISSP2012esim1.dat$Q1b)
 #   400 + 12 + 9 = 421
 #   8557- 421 = 8136
 #summary(ISSP2012esim1.dat$sp)
-ISSP2012esim1.dat %>% tableX(maa,V6,type = "cell_perc")
+ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 #Apuvälineitä - lisätietoa muuttujista
 # kun faktoroidaan V6, niin metadata katoaa?
 str(ISSP2012esim1.dat)
@@ -200,7 +200,7 @@ ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.n
 ```{r simpeCAfrekTa1}
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen V6 vastaukset maittain")
+             caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
 **Riviprosentit**
@@ -209,7 +209,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 taulu3 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
 knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen V6 vastaukset, riviprosentit")
+             caption = "Kysymyksen Q1b vastaukset, riviprosentit")
 ```
 
 **Sarakeprosentit**
@@ -218,7 +218,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 taulu4 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "col_perc")
 
 knitr::kable(taulu4,digits = 2, booktabs = TRUE,
-             caption = "Kysymyksen V6 vastaukset, sarakeprosentit")
+             caption = "Kysymyksen Q1b vastaukset, sarakeprosentit")
 ```
 
 
@@ -307,6 +307,20 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
+```{r khii2dist1}
+# khii2 - etäisyyksien taulukko
+#str(simpleCA1)
+#simpleCA1$rowdist
+#str(simpleCA1$rowdist)
+#tablRowDist <- simpleCA1$rowdist
+#rownames(tablRowDist) <- simpleCA1$rownames
+simpleCA1$rowdist
+simpleCA1$coldist
+
+```
+
+**Rivien ja sarakkeiden khii2 - etäisyydet, siistimpi taulukko jos tarpeen (11.10.18)**
+
 Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
 ```{r simpleCArelfrekTa1}
 taulu5 <-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
@@ -332,10 +346,10 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 # pandoc failed with error 43
 # 
 ```
-Yritetään tuoda tähän pdf-muodossa kuvatiedosto, jossa kuvasuhde on oikea. Nämä toiminevat vain pdf-tulostuksessa.
 
 
-Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Ei esitetä tässä.
+Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Ei esitetä tässä. Nämä toiminevat vain pdf-tulostuksessa?
+
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}
 #tämä toimii
 img_path <- "img/1CAmap_sy.pdf"
@@ -358,7 +372,7 @@ include_graphics(img_path)
 
 3. Profiilien etäisyydet (khii2)
 
-**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite muistiinpanoissa. **#V** Tässäkin CAiP - kirja hyvä apu, ja MG2017HY-luentokalvot.
+**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
 
 
 
