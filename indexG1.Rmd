@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.4, tulostettu `r Sys.Date()` "
+date: "versio 1.5 dev, tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -23,26 +23,8 @@ output:
     fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
 ---
-Kommentteja ja versionhallintaa, hstoriaa:
 
-* **edit:** oma kommentti, ei varsinaista tekstiä
-* kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
-* bib-formaatin viitetietokantaa tullaan kokeilemaan
-* kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa olevan ok.
-* Datan käsittely ja hallinta
-  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.4.18)
-  + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
-  + pidetään muuttujien ja tiedostojen nimeäminen selkeänä, tarkistetaan aika ajoin
-
-* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva riviprofiileista puuttu vielä (15.5.2018)
-* Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html on helpompi lukea, kun koodi on oletuksena piilossa
-* PDF-tulosteessa koodi pääsääntöisesti näkyy toistaiseksi
-* kokeiluja CA-karttojen tulostamiseen (a) suoraan koodilla ja (b) r-grafiikkaikkunasta tallennetun pdf-kuvan avlla. Paras toistaiseksi (a), jätin kokeilu näkyviin. Analyysit R:n grafiikkaikkunassa, jotta asp=1, ja tulkintaa varten voi tallentaa PDF-muodossa.
-* rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, kaavat, määritelmät
-* tehdään käsitetaulukko (kirjoittamista varten)
-* 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
-* 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat ja iän ja sukupuolen vuorovaikutusmuuttuja ga.
-* 24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit  täydentävinä (passiivisina)
+**Versiot**
 
 **6.8.2018 versio 1.0**
 
@@ -77,7 +59,9 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
 
 - paperitulosteessa v1.3 kommentteja karttoihin ja ca:n numeerisiin tuloksiin, samoin muuttujalistauksiin.
 
-**Muistilista:** (historiaa)
+**11.10.2018 aloitetaan versio 1.5**
+
+**Muistilista:**
 
 1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu Bookdown-demo - dokumentissa. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
 
@@ -85,14 +69,34 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
 
 3. Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion tuloksista suoraan)
 
- - khii2 - etäisyydet riveille ja sarakkeille?
+ - khii2 - etäisyydet riveille ja sarakkeille - on tulostettu ilman muotoiluja (11.10.18)
  - massoilla painotetut khii2-etäisyyden keskiarvorivistä/sarakkeesta?
 
 4. Kuvissa vielä hiottavaa, pdf-kuvia lisäilty img-hakemistoon.
  
  **V** MG & Blasius, "vihreä kirja": contirbutions to inertia
- 
 
+**Historiaa ** (11.10.18)
+
+Vanhoja kommentteja
+
+* kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
+* bib-formaatin viitetietokantaa tullaan kokeilemaan
+* kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa olevan ok.
+* Datan käsittely ja hallinta
+  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion (haven) parametrilla USER_NA = TRUE (mutta tarkistettava!) (25.4.18)
+  + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
+  + pidetään muuttujien ja tiedostojen nimeäminen selkeänä, tarkistetaan aika ajoin
+
+* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva riviprofiileista puuttu vielä (15.5.2018)
+* Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html on helpompi lukea, kun koodi on oletuksena piilossa
+* PDF-tulosteessa koodi pääsääntöisesti näkyy toistaiseksi
+* kokeiluja CA-karttojen tulostamiseen (a) suoraan koodilla ja (b) r-grafiikkaikkunasta tallennetun pdf-kuvan avlla. Paras toistaiseksi (a), jätin kokeilu näkyviin. Analyysit R:n grafiikkaikkunassa, jotta asp=1, ja tulkintaa varten voi tallentaa PDF-muodossa.
+* rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, kaavat, määritelmät
+* tehdään käsitetaulukko (kirjoittamista varten)
+* 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
+* 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat ja iän ja sukupuolen vuorovaikutusmuuttuja ga.
+* 24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit  täydentävinä (passiivisina)
 
 
 ***
