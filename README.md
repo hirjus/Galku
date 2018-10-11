@@ -63,3 +63,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **11.10.2018** Versio 1.4
 
 **11.10.2018** Aloitetaan dev-haarassa versio 1.5. Siistitään tekstiä, siirretään laajemman aineiston puuttuvien havaintojen kuvailu sinne missä data otetaan käyttöön.
+
+**11.10.2018** Kysymyksiä taulukoina ja kyselylomakkeen kuva. Laajemman muuttujajoukon koodia ei vielä siirrettu "pinotut taulut" - jaksoon.

@@ -156,16 +156,12 @@ Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusie
 
 **zxy 3.10.18** 
 
-Aineistoon luetaan käytettävät muuttujat, ja suodatetaan sitten puuttuvat havainnot pois. 
+Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. 
 
-Tiedostojen nimeäminen: alkuperäinen data (spss-formaatti), luettuna R-ohjelmaan ISSP2012.dat.
+Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan selkeä (ja lyhyt jos mahdollista).
 
-Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. Siksi polku 
+Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
 
-SPSS -> ISSP2012.data -> (valitaaan maat ja muuttujat) ISSP2012.dat -> pudotetaan havainnot joissa puuttuvia tietoja -> muunnokset ja uudet muuttujat -> ISSP2012esim.dat
-on pidettävä selkeänä. Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
-
-**10.10.18**
 
 **Tiedostonimistä 10.10.18**
 
@@ -189,22 +185,20 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # TIEDOSTOJEN NIMEÄMINEN
 #
 # R-datatiedostot .data - tarkenteella ovat osajoukkoja koko ISSP-datasta ISSP2012.data
-# R-datatiedostot .dat - tarkenteella: mukana alkuperäisten muuttujien muunnoksia (yleensä as_factor), alkuperäisissä muuttujissa mukana SPSS-tiedoston metadata
-#    Muutetaan R-datatiedossa ordinaali- ja nominaaliasteikon muuttuja haven-paketin as_factor - funktiolla faktoreiksi.
-#    R:n faktorityypin muuttujille voidaan tarvittaessa määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
+# R-datatiedostot .dat - tarkenteella: mukana alkuperäisten muuttujien muunnoksia 
+# (yleensä as_factor), alkuperäisissä muuttujissa mukana SPSS-tiedoston metadata.
+# Muutetaan R-datatiedossa alunperin ordinaali- tai  nominaaliasteikon muuttuja haven-paketin
+# as_factor - funktiolla faktoreiksi. R:n faktorityypin muuttujille voidaan tarvittaessa 
+# määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
 #       
 # R-datatiedostot joiden nimen loppuosa on muotoa *esim1.dat: käytetään analyyseissä
 #
-# 1. Valitaan 26 maata -> ISSP2012jh1a.data
-#
-# VALITAAN MAAT -> ISSP2012jh1a.data. Muuttujat koodilohkossa datasel_vars1
+# 1. VALITAAN MAAT (25) -> ISSP2012jh1a.data. Muuttujat koodilohkossa datasel_vars1
 #
 # kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
-#two country code variables based on the ISO Code 3166. One identifies
-#countries as a whole, the other one possible subsamples, such as East and West Germany. The cross
-#tabulations shown in this Variable Report are based on a third, alphanumerical country code variable,
-#which also identifies subsamples."
-#V3 - Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)
+# ja C_ALPHAN on maan kaksimerkkinen tunnus.
+#
+# V3 - Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)
 # V3 erot valituissa maissa
 # 5601 BE-FLA-Belgium/ Flanders
 # 5602 BE-WAL-Belgium/ Wallonia
@@ -217,7 +211,9 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # 82601 GB-GBN-Great Britain
 # Portugalissa ainestoa täydennettiin, koska siinä oli puutteita. Jako ei siis ole oleellinen,
 # mutta muuut ovat. Tähdellä merkityt maat valitaan johdattelevaan esimerkkiin.
-# Maat (27, ei Espanjaa):
+#
+# Maat (27, ei Espanjaa).Myös US ja Great Britan jätettiin lopulta pois eli maita jää 25
+#
 # 36 AU-Australia
 # 40 AT-Austria
 # 56 BE-Belgium*
@@ -243,8 +239,9 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # 705 SI-Slovenia
 # 752 SE-Sweden
 # 756 CH-Switzerland
-# 826 GB-Great Britain and/or United Kingdom - jätetään pois, jotta saadaan TOPBOT (top-bottom self-placement) -muuttuja mukaan.(9.10.18)
-# 840 US-United States - jätetään pois, jotta saadaan TOPBOT (top-bottom self-placement) -muuttuja mukaan.(10.10.18)
+# 826 GB-Great Britain and/or United Kingdom - jätetään pois jotta saadaan TOPBOT 
+#                          -muuttuja mukaan (top-bottom self-placement) .(9.10.18)
+# 840 US-United States - jätetään pois, jotta saadaan TOPBOT-muuttuja mukaan.(10.10.18)
 #
 # Belgian ja Saksan alueet:
 #  V3
@@ -253,23 +250,27 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 #  5603     BE-BRU-Belgium/ Brussels
 # 27601     DE-W-Germany-West
 # 27602     DE-E-Germany-East
-
-#valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin
-# Espajana pois (724 ES-Spain)  - Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on 
-# poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). 
-# Jos näitä muuttujia käytetään, Unkari on parempi jättää pois. Iso-Britannia pois, koska TOPBOT-muuttuja puuttuu maan tiedoista. 
+#
+# Unkari (348) toistaiseksi mukana, mutta joissain kysymyksissä myös Unkarilla on 
+# poikkeavia vastausvaihtoehtoja(HU_V18, HU_V19,HU_V20). Jos näitä muuttujia käytetään, 
+# Unkari on parempi jättää pois. 
+# 
 #
 # (25.4.2018) user_na  
-# haven-paketin read_spss - funktiolla voi r-tiedostoon lukea myös SPSS:n sallimat kolme (yleensä 7, 8, 9) tarkempaa koodia puuttuvalle tiedolle.
+# haven-paketin read_spss - funktiolla voi r-tiedostoon lukea myös SPSS:n sallimat kolme 
+# (yleensä 7, 8, 9) tarkempaa koodia puuttuvalle tiedolle.
 # "If TRUE variables with user defined missing will be read into labelled_spss objects. 
 # If FALSE, the default, user-defined missings will be converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
-# (25.9.2018) jäteään pois. Tietoa ei käytetä, koodauksissa on myös eroja maiden ja eri kysymyten välillä. Kaikki puuttuvat tiedot saavat R-tiedostossa arvon NA.
-# R-ohjelmiston "implisiittinen konversio" muuntaa monet muuttujat (esim. Likert-asteikon vastaukset 1,...,5) merkkijonomuuttujiksi.
+# (25.9.2018) jäteään pois. Tietoa ei käytetä, koodauksissa on myös eroja maiden ja eri 
+# kysymysten välillä. Kaikki puuttuvat tiedot saavat R-tiedostossa arvon NA.
+# R-ohjelmiston "implisiittinen konversio" muuntaa monet muuttujat (esim. Likert-asteikon 
+# vastaukset 1,...,5) merkkijonomuuttujiksi.
 # 
-# 
+ 
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
+
 #str(ISSP2012.data)
 
 incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
@@ -287,8 +288,10 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 #Muuttujien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
 #
 #names(ISSP2012jh1.data)
-#Maakohtaiset muuttujat on aineistossa erotelut maatunnus-etuliitteellä (esimerkiksi ES_V7). Nämä muuttujat voi jättää pois. Muiden maiden havainnossa arvo on 'NAP' 
-#Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, ja vertailukelpoiset muuttujat on konstruoitu niistä.
+# Maakohtaiset muuttujat (kun on poikettu ISSP2012 - vastausvaihtoehdoista tms.) on aineistossa eroteltu 
+# maatunnus-etuliitteellä (esimerkiksi ES_V7).
+# Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, 
+# ja vertailukelpoiset muuttujat on konstruoitu niistä. Tämä kasvattaa uuttujien määrää (420).
 ```
 
 
@@ -339,7 +342,7 @@ select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V12, type = "ro
 select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %>% tableX(C_ALPHAN, V13, type = "row_perc")
 ```
 
-Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää, siksi nämä kysymykset jätetään pois.
+Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää, siksi nämä kysymykset jätetään pois. **Jos jätetään, pitää olla parempi perustelu (11.10.18)** Mietitään vielä, tässä vaihtoehto 4 "En osaa sanoa" on yhdistelmä "neutraalia keskimmäistä" ja "aitoa" mielipiteen puuttumista tms.
 
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
 
@@ -389,7 +392,8 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 
 substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11")
 
-# Nämä jäävät pois
+# Nämä jäävät pois:
+#
 # "V12","V13","V14","V15","V16",  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
 # "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
 #  "V46", "V47", "V48", "V49", "V50", "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59",
@@ -548,11 +552,41 @@ cols_jhVarTable1 <- c("muuttuja","lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
 #jhVarTable1.df
 
+# Suomalaiset pitkät kysymykset
+vastf1 <- c("Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
+            ja turvallisen suhteen kuin äiti, joka ei käy työssä")
+
+vastf2 <- c("Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä.")
+vastf3 <- c("Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö.")
+vastf4 <- c("On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat 
+            ensisijaisesti kodin ja lapsia.")
+
+vastf5 <- c("Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen.")
+vastf6 <- c("Sekä miehen että naisen tulee osallistua perheen toimeentulon hankkimiseen.")
+vastf7 <- c("Miehen tehtävä on ansaita rahaa; naisen tehtävä on huolehtia kodista ja perheestä.")
+
+tabVarDesc_fi <- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7)
+#tabVarDesc_fi
+tabVarnames_subst <- c(substvars1)
+jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi)
+cols_jhVarTable1 <- c("muuttuja","suomenkielisen lomakkeen kysymys")
+colnames(jhVarTable1_fi.df) <- cols_jhVarTable1
+
+
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
+# Lyhyet kysymykset englanniksi
 knitr::kable(jhVarTable1.df, booktab=TRUE)
 
+# Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
+knitr::kable(jhVarTable1_fi.df, booktab=TRUE)
 ```
 
+Kysymyslomakkeesta voisi ehkä näyttää myös kuvan?
+
+```{r suom_kys, out.width='50%', fig.align='center',fig.cap='Suomen lomake'}
+knitr::include_graphics('img/substvar_fi_Q1Q2.png')
+```
+```
 
 
 Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset koodikirjassa (refworks-viite?)
@@ -647,21 +681,21 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
 # puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "row_perc")
-#ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "row_perc") on jo ylempänä
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V8, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V9, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V10, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V11, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "row_perc")
-missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "count")
+#ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count") on jo ylempänä
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V8, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V9, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V10, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, V11, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "count")
+missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "count")
 missAGE[,86:87]
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, DEGREE, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, MAINSTAT, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, HHCHILDR, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "row_perc")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "row_perc")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, DEGREE, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, MAINSTAT, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, HHCHILDR, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
+ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
 
 ```
 USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Jätetään USA pois**(10.10.18)**
