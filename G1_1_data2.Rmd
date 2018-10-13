@@ -367,9 +367,9 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 #temp <- select(ISSP2012jh1.data, metavars1)
 #str(temp)
 
-# SUBSTANSSIMUUTTUJAT - Attitudes towards family and gender roles (7)
+# SUBSTANSSIMUUTTUJAT - Attitudes towards family and gender roles (9)
 #
-# Seitsemän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot
+# Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot Q1-Q2
 #
 # 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 
 # 4 = eri mieltä, 5 = täysin eri mieltä
@@ -383,11 +383,13 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 # Q2a Both should contribute to household income
 # Q2b Men’s job is earn money, women’s job household
 #
+# Q3a Should women work: Child under school age 
+# Q3b Should women work: Youngest kid at school
 #
-# Kysymysten Q3a ja Q3b (pitäisikö naisen olla töissä jos (a) alle kouluikäinen lapsi (b) nuorin lapsi koulussa)
-# vastauksissa on paljon "en osaaa sanoa" - valintoja. Muut vastaustvaihtoehdot ovat 1= kokopäivätyö, 2 = osa-aikatyö ja 
+#
+# Kysymysten Q3a ja Q3b  Muut vastaustvaihtoehdot ovat 1= kokopäivätyö, 2 = osa-aikatyö ja 
 # 3 = pysyä kotona. Eos-vastaus ei ole sama kuin "en samaa enkä eri mieltä" (ns. neutraali vaihtoehto), ja se pitäisi erotella
-# muista puuttuvan tiedon koodeista. Jätetään siis pois(kts. koodilohko dataprop1).
+# muista puuttuvan tiedon koodeista. Tässä kaikki kolme SPSS- tiedoston vaihtoehtoa ovat puuttuvia tietoja (NA)
 
 substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13")
 
