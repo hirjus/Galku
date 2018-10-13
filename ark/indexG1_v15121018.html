@@ -402,7 +402,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">G Luku 1 Yksinkertainen korrespondenssianalyysi</h1>
 <h4 class="author"><em>Jussi Hirvonen</em></h4>
-<h4 class="date"><em>versio 1.5 dev, tulostettu 2018-10-13</em></h4>
+<h4 class="date"><em>versio 1.5 dev, tulostettu 2018-10-11</em></h4>
 
 </div>
 
@@ -537,19 +537,20 @@ $(document).ready(function () {
 <p><strong>Rajaukset</strong></p>
 <p><strong>zxy</strong> Aineiston luonne: maakohtaisesti eri tavoin kerätty data, jossa pyritään yhtenäisiin käytäntöihin ja tietosisältöihin. Silti myös substanssikysymyksissä eroja, isoja ja pienempiä. Näin vain on, en pohdi miksi. Ei ole mitenkään ainutlaatuista. Aineiston editoinnissa ja tiedonkeruun suunnittelussa on nähty paljon vaivaa vertailukelpoisuuden vuoksi. Tästä esimerkkejä, esim. “mitä puoluetta äänestit”.</p>
 <p><strong>1. Eurooppa ja samankaltaiset maat (28)</strong></p>
-<p>Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal <strong>(28) - Espnaja, Great Britain, USA pois -&gt; 25 (11.10.18)</strong></p>
+<p>Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal <strong>(28)</strong></p>
 <p><strong>Pois 13:</strong> Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.</p>
 <p><strong>2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms.</strong></p>
-<p>Espanja ja Unkari(V18 - V20) ovat muuttaneet ISSP-kysymyksiä. Lähes kaikilla mailla on monissa hieman erialaisia muotoiluja.</p>
-<p>Lisäksi iso joukko tietoja on kerätty kansallisilla kysymysversioilla.</p>
-<p>Espanja pois, USA ja GB pois koska TOPBOT-muuttuja puuttuu (11.10.18)</p>
-<p><strong>25 maata, johdattelevassa esimerkissa 6 maata</strong> (11.10.18)</p>
+<p><strong>zxy</strong> Näitä poikkeuksia on paljon… pitänee perustella, tai vähentää maita. Valitaan muuttujat ja tarkistetaan, ikävä kyllä!</p>
+<p>Esimerkiksi Espanjan datassa on jätetty pois neutraali “en samaa enkä eri mieltä” - vaihtoehto, Unkarin datassa on omia versioita kysymyksistä jne. Espanja jätetään ainakin aluksi pois vertailukelpoisuuden vuoksi, Unkari ehkä myös. Unkari voi silti olla mukana yksinkertaisessa esimerkissä, jatkosta pois?</p>
+<p><strong>zxy</strong> Näistä jätetään pois Espanja ja ehkä myös Unkari (eri vastausvaihtoehdot V18 - V20). Jos noita vastauksia käytetään, tämä pitää muistaa. Iso-Britannia pois, koska sosioekonominen muuttuja TOPBOT puuttuu kokonaan.</p>
+<p><strong>26 maata, johdattelevassa esimerkissa 6 maata</strong> (10.10.18)</p>
 <p><strong>3. kaikki havainnot, joissa on puuttuvia tietoja.</strong></p>
 <p>Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainnot pois, joissa joku tieto puuttuu. Rajataan kuitenkin tätä vaikutusta niin, että sitä sovelletaan vain käytettäviin muuttujiin.</p>
-<p>Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma.</p>
-<p>Isomman 25 aineiston osalta tarkistetaan, mitä “listwise deletion” saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18).</p>
+<p>Johdattelevassa esimerkissä on vain muutama muuttuja, ei ongelma.</p>
+<p>Isomman 27 aineiston osalta tarkistetaan, mitä “listwise deletion” saa aikaan ja verrataan kuuden maan aineistoon. Yksinkertaisempaa olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18)</p>
 <p>Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita…).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.</p>
 <p><strong>zxy</strong> Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).</p>
+<p><strong>edit:</strong> Tähän täsmennetään miten puuttuvia tietoja käsitellään.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Datan hallinta <strong>liittyy reproducible research- periaatteeseen</strong></li>
 </ol>
@@ -560,7 +561,7 @@ $(document).ready(function () {
 <p>Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan selkeä (ja lyhyt jos mahdollista).</p>
 <p>Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.</p>
 <p><strong>Tiedostonimistä 10.10.18</strong></p>
-<p>ISSP2012.data (df) jossa alkuperäinen SPSS-data ISSP2012jh1.data osajoukko edellisestä ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana. <strong>huom</strong> tiedostonimessä ei kerrota R-tiedostotyyppiä (?), tulisi liikaa lyhenteitä.</p>
+<p>ISSP2012.data df jossa alkuperäinen SPSS-data ISSP2012jh1.data osajoukko edellisestä ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.</p>
 <p>ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin, mutta ei liikaa ja sopii myös Markdown-työskentelyyn. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi, näin on jo tehty paketeille (paketit.R)</p>
 <p><strong>zxy</strong> Datan rajaaminen (maat. muuttujat) heti alussa, pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.</p>
 <p><strong>zxy</strong> R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa?</p>
@@ -658,8 +659,8 @@ ISSP2012.data &lt;- read_spss(&quot;data/ZA5900_v4-0-0.sav&quot;) #luetaan alkup
 
 #str(ISSP2012.data)
 
-incl_countries25 &lt;- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 
-                      372, 428, 440, 528, 578, 616, 620, 643, 703, 705, 752, 756)
+incl_countries25 &lt;- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
+                    528, 578, 616, 620, 643, 703, 705, 752, 756)
 
 #str(ISSP2012.data)
 #str(ISSP2012.data) #61754 obs. of  420 variables - kaikki
@@ -667,17 +668,16 @@ incl_countries25 &lt;- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348,
 ISSP2012jh1a.data &lt;- filter(ISSP2012.data, V4 %in% incl_countries25)
 
 #head(ISSP2012jh1a.data)
-#str(ISSP2012jh1a.data) #34271 obs. of  420 variables, Espanja ja Iso-Britannia
-#                       pois (9.10.2018)
-#str(ISSP2012jh1a.data) # 32969 obs. of  420 variable, Espanja Iso-Britannia, 
-#                        USA pois (10.10.2018)
+#str(ISSP2012jh1a.data) #34271 obs. of  420 variables - Iso-Britannia ja Espanja pois (9.10.2018)
+#str(ISSP2012jh1a.data) # 32969 obs. of  420 variable - - Iso-Britannia, Espanja ja USA pois (10.10.2018)
 #
-#names(ISSP2012jh1.data) # muuttujen nimet
-# Maakohtaiset muuttujat (kun on poikettu ISSP2012 - vastausvaihtoehdoista tms.) 
-# on aineistossa eroteltu maatunnus-etuliitteellä (esimerkiksi ES_V7).
-# Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maa-
-# kohtaisilla lomakkeilla. Vertailukelpoiset muuttujat on konstruoitu niistä.
-# Muuttujia on 420, vain osa yhteisiä kaikille maille.</code></pre>
+#Muuttujien nimet (420) saa listattua names-funktiolla ja metadatan str-funktiolla
+#
+#names(ISSP2012jh1.data)
+# Maakohtaiset muuttujat (kun on poikettu ISSP2012 - vastausvaihtoehdoista tms.) on aineistossa eroteltu 
+# maatunnus-etuliitteellä (esimerkiksi ES_V7).
+# Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maakohtaisilla lomakkeilla, 
+# ja vertailukelpoiset muuttujat on konstruoitu niistä. Tämä kasvattaa uuttujien määrää (420).</code></pre>
 <p><strong>Data-tiedoston tutkailua</strong></p>
 <p>Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on.</p>
 <pre class="r"><code># Datan selailua (9.10.2018)
@@ -685,8 +685,7 @@ ISSP2012jh1a.data &lt;- filter(ISSP2012.data, V4 %in% incl_countries25)
 #datatiedoston ominaisuuksia 1
 #str(ISSP2012jh1.data$V5)
 
-# tarpeetonta testailua 24.9.2018 - puuttuvien havaintojen kaivelua
-# TÄMÄ VASTA KUN MUUTTUJAT ON VALITTU
+# tarpeetonta testailua 24.9.2018 - puuttuvien havaintojen kaivelua (TÄMÄ VASTA KUN MUUTTUJAT ON VALITTU)
 #
 # test1 &lt;- is.na(ISSP2012jh1.data$V5)
 # missV5 &lt;- ISSP2012jh1.data[test1,]
@@ -722,8 +721,68 @@ ISSP2012jh1a.data[1:3,1:3]</code></pre>
 ## 1 5900      4.0.0 (2016-11-23) doi:10.4232/1.12661
 ## 2 5900      4.0.0 (2016-11-23) doi:10.4232/1.12661
 ## 3 5900      4.0.0 (2016-11-23) doi:10.4232/1.12661</code></pre>
-<p>Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali “ei samaa eikä eri mieltä” puuttuu. “En osaa sanoa” - vaihtoehto kasvattaa puuttuvien havaintojen määrää. Näissä EOS merkitykseltään erilainen. Labels (W, w, H ja jotain eos-vaihtoehdolle).</p>
-<p>Ikä (AGE) on kokonaisluku (<strong>tarkista R-tyyppi 13.10.18</strong>), taustamuuttujissa on monenlaisia koodauksia. Yhdistellään ja luokitellaan uudelleen tarvittaessa.</p>
+<pre class="r"><code># muuttujat V12 ja V13 - eos ja muut puuttuvat (9.10.18)
+
+
+select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %&gt;% tableX(C_ALPHAN, V12, type = &quot;row_perc&quot;)</code></pre>
+<pre><code>##         V12
+## C_ALPHAN 1     2     3     Missing Total 
+##      AT  1.78  40.86 47.63 9.73    100.00
+##      AU  2.79  43.11 36.48 17.62   100.00
+##      BE  17.03 48.32 20.94 13.71   100.00
+##      BG  21.24 36.39 33.10 9.27    100.00
+##      CA  13.79 38.37 27.88 19.96   100.00
+##      CH  3.56  68.63 23.61 4.20    100.00
+##      CZ  14.36 40.96 36.92 7.76    100.00
+##      DE  12.12 56.12 16.76 15.01   100.00
+##      DK  34.28 50.46 5.13  10.12   100.00
+##      FI  27.16 42.95 14.09 15.80   100.00
+##      FR  12.08 52.72 23.08 12.12   100.00
+##      HR  30.70 43.60 22.70 3.00    100.00
+##      HU  16.40 47.53 33.79 2.27    100.00
+##      IE  10.37 45.93 25.43 18.27   100.00
+##      IS  29.52 51.88 6.40  12.20   100.00
+##      LT  10.78 51.64 28.56 9.01    100.00
+##      LV  10.10 45.60 42.10 2.20    100.00
+##      NL  5.32  57.11 25.48 12.09   100.00
+##      NO  29.16 49.24 11.15 10.46   100.00
+##      PL  12.29 25.83 54.80 7.09    100.00
+##      PT  23.68 54.95 18.58 2.80    100.00
+##      RU  11.54 50.30 30.56 7.61    100.00
+##      SE  21.79 53.87 10.19 14.15   100.00
+##      SI  31.04 45.26 17.31 6.38    100.00
+##      SK  19.68 38.21 33.33 8.78    100.00
+##      All 16.33 47.71 25.47 10.49   100.00</code></pre>
+<pre class="r"><code>select(ISSP2012jh1a.data, C_ALPHAN,V12,V13) %&gt;% tableX(C_ALPHAN, V13, type = &quot;row_perc&quot;)</code></pre>
+<pre><code>##         V13
+## C_ALPHAN 1     2     3     Missing Total 
+##      AT  21.49 54.91 11.42 12.18   100.00
+##      AU  21.40 59.80 1.74  17.06   100.00
+##      BE  38.87 42.73 2.77  15.62   100.00
+##      BG  42.87 34.10 14.16 8.87    100.00
+##      CA  41.46 34.77 3.70  20.06   100.00
+##      CH  10.99 77.36 7.52  4.12    100.00
+##      CZ  37.80 42.74 12.03 7.43    100.00
+##      DE  25.71 54.08 4.64  15.57   100.00
+##      DK  64.43 25.16 0.36  10.05   100.00
+##      FI  54.74 30.32 2.22  12.72   100.00
+##      FR  44.00 40.14 1.70  14.16   100.00
+##      HR  57.70 29.70 9.40  3.20    100.00
+##      HU  40.42 46.25 10.97 2.37    100.00
+##      IE  29.79 48.72 2.39  19.09   100.00
+##      IS  51.11 35.84 1.79  11.26   100.00
+##      LT  38.58 46.34 5.31  9.77    100.00
+##      LV  43.90 45.00 7.10  4.00    100.00
+##      NL  18.10 65.86 3.27  12.78   100.00
+##      NO  59.07 28.53 1.39  11.01   100.00
+##      PL  51.39 29.42 13.09 6.10    100.00
+##      PT  70.73 21.88 4.40  3.00    100.00
+##      RU  33.64 50.49 7.54  8.33    100.00
+##      SE  46.42 38.40 0.94  14.25   100.00
+##      SI  74.18 17.79 2.90  5.13    100.00
+##      SK  53.72 29.79 9.04  7.45    100.00
+##      All 41.73 42.13 5.35  10.78   100.00</code></pre>
+<p>Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali “ei samaa eikä eri mieltä” puuttuu. “En osaa sanoa” - vaihtoehto kasvattaa puuttuvien havaintojen määrää, siksi nämä kysymykset jätetään pois. <strong>Jos jätetään, pitää olla parempi perustelu (11.10.18)</strong> Mietitään vielä, tässä vaihtoehto 4 “En osaa sanoa” on yhdistelmä “neutraalia keskimmäistä” ja “aitoa” mielipiteen puuttumista tms.</p>
 <p><strong>DATAN RAJAAMISTA - MUUTTUJAT</strong> (5.10.2018)</p>
 <pre class="r"><code># 2. VALITAAN MUUTTUJAT  -&gt; ISSP2012jh1b.data. Maat valittu koodilohkossa datasel_country1
 #
@@ -767,11 +826,11 @@ countryvars1 &lt;- c(&quot;V3&quot;,&quot;V4&quot;,&quot;C_ALPHAN&quot;)
 # 3 = pysyä kotona. Eos-vastaus ei ole sama kuin &quot;en samaa enkä eri mieltä&quot; (ns. neutraali vaihtoehto), ja se pitäisi erotella
 # muista puuttuvan tiedon koodeista. Jätetään siis pois(kts. koodilohko dataprop1).
 
-substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,&quot;V9&quot;,&quot;V10&quot;,&quot;V11&quot;,&quot;V12&quot;,&quot;V13&quot;)
+substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,&quot;V9&quot;,&quot;V10&quot;,&quot;V11&quot;)
 
 # Nämä jäävät pois:
 #
-# &quot;V14&quot;,&quot;V15&quot;,&quot;V16&quot;,  &quot;V17&quot;,&quot;V18&quot;,&quot;HU_V18&quot;,&quot;V19&quot;,&quot;HU_V19&quot;,&quot;V20&quot;,&quot;HU_V20&quot;,&quot;V21&quot;,&quot;V28&quot;,&quot;V29&quot;,&quot;V30&quot;,&quot;V31&quot;,&quot;V32&quot;,&quot;V33&quot;,
+# &quot;V12&quot;,&quot;V13&quot;,&quot;V14&quot;,&quot;V15&quot;,&quot;V16&quot;,  &quot;V17&quot;,&quot;V18&quot;,&quot;HU_V18&quot;,&quot;V19&quot;,&quot;HU_V19&quot;,&quot;V20&quot;,&quot;HU_V20&quot;,&quot;V21&quot;,&quot;V28&quot;,&quot;V29&quot;,&quot;V30&quot;,&quot;V31&quot;,&quot;V32&quot;,&quot;V33&quot;,
 # &quot;V34&quot;, &quot;V35&quot;, &quot;V36&quot;, &quot;V37&quot;, &quot;V38&quot;, &quot;V39&quot;, &quot;V40&quot;, &quot;V41&quot;, &quot;V42&quot;, &quot;V43&quot;, &quot;V44&quot;, &quot;V45&quot;,
 #  &quot;V46&quot;, &quot;V47&quot;, &quot;V48&quot;, &quot;V49&quot;, &quot;V50&quot;, &quot;V51&quot;, &quot;V52&quot;, &quot;V53&quot;, &quot;V54&quot;, &quot;V55&quot;, &quot;V56&quot;, &quot;V57&quot;, &quot;V58&quot;, &quot;V59&quot;,
 #  &quot;V60&quot;, &quot;V61&quot;, &quot;V62&quot;, &quot;V63&quot;, &quot;V64&quot;, &quot;V65&quot;, &quot;V65a&quot;,&quot;V66&quot;, &quot;V67&quot;
@@ -781,8 +840,9 @@ substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,
 #
 # AGE, SEX
 #
-# DEGREE - Highest completed degree of education: Categories for international comparison. 
-# Slightly re-arranged subset of ISCED-97
+# DEGREE - Highest completed degree of education: Categories for international comparison. Since DEGREE is a slightly re-arranged subset of ISCED-97, 
+# instructions for actually coding ISCED-97 from nat-DEGR in your country can be used to support the coding of DEGREE. Eri maissa kysymykset muotoiltu eri tavoin, tässä tavoitteena
+# kv-vertailu.
 #
 # 0 No formal education
 # 1 Primary school (elementary school)
@@ -793,7 +853,7 @@ substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,
 # 5 Lower level tertiary, first stage (also technical schools at a tertiary level)
 # 6 Upper level tertiary (Master, Dr.)
 # 9 No answer, CH: don't know
-# Yhdistelyt?
+# Yhdistetään ainakin 0 ja 1 .
 #
 # MAINSTAT - main status: Which of the following best describes your current situation?
 #
@@ -807,20 +867,17 @@ substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,
 # 8 In compulsory military service or community service
 # 9 Other
 # 99 No answer
-# Armeijassa tai yhdyskuntapalvelussa muutamia, muutamissa maissa.Kategoriassa 9 
-# on hieman väkeä. Yhdistetään 8 ja 9. Huom! Esim Puolassa ei yhtään eläkeläistä
-# eikä kategoriaa 9, Saksassa ei ketään kategoriassa 9.
+# Armeijassa tai yhdyskuntapalvelussa muutamia, muutamissa maissa. Voidaan sivuuttaa, vai pitääkö jättää pois? Kategoriassa 9 on enemmän väkeä, mutta ei sielläkään kovin paljon.
+# Yhdistetään 8 ja 9. Huom! Esim Puolassa ei yhtään eläkeläistä eikä kategoriaa 9, Saksassa ei ketään kategoriassa 9.
+# Eri maissa hieman erilaisia kysymyksiä.
 #
 # TOPBOT - Top-Bottom self-placement (10 pt scale)
-#
-# &quot;In our society, there are groups which tend to be towards the top and groups 
-# which tend to be towards the bottom. Below is a scale that runs
-# from the top to the bottom. Where would you put yourself on this scale?&quot;
-# Eri maissa hieman erilaisia kysymyksiä. 
-#
-# HHCHILDR - How many children in household: children between [school age] and
-# 17 years of age
-#
+# In our society, there are groups which tend to be towards the top and groups which tend to be towards the bottom. Below is a scale that runs
+# from the top to the bottom. Where would you put yourself on this scale?
+# Eri maissa hieman erilaisia kysymyksiä. HUOM! Tieto puuttuu Ison Britannian (GB_GBN) aineistosta.
+# Miten tätä voisi käyttää? Pudotetaan GB_GBN pois, saadaan edes yksi sosioekonominen muuttuja mukaan.
+# 
+# HHCHILDR - How many children in household: children between [school age] and 17 years of age
 # 0 No children
 # 1 One child
 # 2 2 children
@@ -828,18 +885,15 @@ substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,
 # 96 NAP (Code 0 in HOMPOP)
 # 97 Refused
 # 99 No answer
-# koodataan dummymuuttujaksi lapsia (1) - ei lapsia (0) ?
+# koodataan dummymuuttujaksi lapsia (1) - ei lapsia (0)
 #
 # MARITAL - Legal partnership status 
-#
 # What is your current legal marital status?
-# The aim of this variable is to measure the current 'legal' marital status '. 
-# PARTLIV - muuttujassa on 'de facto' - tilanteen tieto parisuhteesta
+# The aim of this variable is to measure the current 'legal' marital status '. PARTLIV - muuttujassa on 'de facto' - tilanteen tieto parisuhteesta
 #
 # 1 Married
 # 2 Civil partnership
-# 3 Separated from spouse/ civil partner (still legally married/ still legally 
-#   in a civil partnership)
+# 3 Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership)
 # 4 Divorced from spouse/ legally separated from civil partner
 # 5 Widowed/ civil partner died
 # 6 Never married/ never in a civil partnership, single
@@ -856,8 +910,7 @@ substvars1 &lt;- c(&quot;V5&quot;, &quot;V6&quot;,&quot;V7&quot;,&quot;V8&quot;,
 # 5 A farm or home in the country
 # 7 Other answer
 # 9 No answer
-# 1 ja 2 vaihtelevat aika paljon maittain, parempi laskea yhteen. Unkarista puuttuu 
-# jostain syystä kokonaan vaihtoehto 5.  Vaihotehdon 7 on valinnut vain 4 vastaajaa Ranskasta.
+# 1 ja 2 vaihtelevat aika paljon maittain, parempi laskea yhteen. Unkarista puuttuu jostain syystä kokonaan vaihtoehto 5.  Vaihotehdon 7 on valinnut vain 4 vastaajaa Ranskasta.
 # Yhdistetään 1 ja 2 = city, 3 = town, rural= 4, 5, 7
 #
 
@@ -869,8 +922,8 @@ jhvars1 &lt;- c(metavars1,countryvars1, substvars1,bgvars1)
 
 #jhvars1
 ISSP2012jh1b.data &lt;- select(ISSP2012jh1a.data, jhvars1) 
-str(ISSP2012jh1b.data) #32969 obs. of  23 variables</code></pre>
-<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    32969 obs. of  23 variables:
+str(ISSP2012jh1b.data) #32969 obs. of  21 variables</code></pre>
+<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    32969 obs. of  21 variables:
 ##  $ V1      : 'labelled' num  5900 5900 5900 5900 5900 5900 5900 5900 5900 5900 ...
 ##   ..- attr(*, &quot;label&quot;)= chr &quot;GESIS Data Archive Study Number&quot;
 ##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F4.0&quot;
@@ -933,16 +986,6 @@ str(ISSP2012jh1b.data) #32969 obs. of  23 variables</code></pre>
 ##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
 ##   ..- attr(*, &quot;labels&quot;)= Named num  0 1 2 3 4 5 8 9
 ##   .. ..- attr(*, &quot;names&quot;)= chr  &quot;NAP: ES&quot; &quot;Strongly agree&quot; &quot;Agree&quot; &quot;Neither agree nor disagree&quot; ...
-##  $ V12     : 'labelled' num  3 NA NA 2 2 NA 2 NA 2 2 ...
-##   ..- attr(*, &quot;label&quot;)= chr &quot;Q3a Should women work: Child under school age&quot;
-##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
-##   ..- attr(*, &quot;labels&quot;)= Named num  1 2 3 6 8 9
-##   .. ..- attr(*, &quot;names&quot;)= chr  &quot;Work full-time&quot; &quot;Work part-time&quot; &quot;Stay at home&quot; &quot;TW: women should decide&quot; ...
-##  $ V13     : 'labelled' num  2 NA 2 1 2 NA 2 NA 2 2 ...
-##   ..- attr(*, &quot;label&quot;)= chr &quot;Q3b Should women work: Youngest kid at school&quot;
-##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
-##   ..- attr(*, &quot;labels&quot;)= Named num  1 2 3 6 8 9
-##   .. ..- attr(*, &quot;names&quot;)= chr  &quot;Work full-time&quot; &quot;Work part-time&quot; &quot;Stay at home&quot; &quot;TW: women should decide&quot; ...
 ##  $ SEX     : 'labelled' num  1 2 2 2 2 1 2 1 2 2 ...
 ##   ..- attr(*, &quot;label&quot;)= chr &quot;Sex of Respondent&quot;
 ##   ..- attr(*, &quot;format.spss&quot;)= chr &quot;F1.0&quot;
@@ -986,12 +1029,10 @@ str(ISSP2012jh1b.data) #32969 obs. of  23 variables</code></pre>
 ##  - attr(*, &quot;notes&quot;)= chr  &quot;document Plan File: /Users/marcic/Desktop/old/GPS2011 sampling/ISSP2013.sampling&quot; &quot;         .csplan&quot; &quot;         Weight Variable: SampleWeight_Final_&quot; &quot;         Stage 1&quot; ...</code></pre>
 <pre class="r"><code>#summary(ISSP2012jh1b.data$C_ALPHAN)</code></pre>
 <p>Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Seitsemä muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.</p>
-<p><strong>Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot</strong></p>
+<p><strong>Seitsemän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot</strong></p>
 <p>Vastausvaihtoehdot:</p>
 <p>1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 4 = eri mieltä, 5 = täysin eri mieltä</p>
 <p>Q1a Working mother can have warm relation with child Q1b Pre-school child suffers through working mother Q1c Family life suffers through working mother Q1d Women’s preference: home and children Q1e Being housewife is satisfying Q2a Both should contribute to household income Q2b Men’s job is earn money, women’s job household</p>
-<p>Vastausvaihtoehdot: “Work full-time” “Work part-time” “Stay at home” 1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä</p>
-<p>Q3a Should women work: Child under school age Q3b Should women work: Youngest kid at school</p>
 <p>Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa.</p>
 <pre class="r"><code># Muuttuja taulukkona
 #head(ISSP2012jh1b.data)
@@ -1017,8 +1058,6 @@ tabVarDesc &lt;- c(&quot;Q1a Working mother can have warm relation with child&qu
                 &quot;Q1e Being housewife is satisfying&quot;,
                 &quot;Q2a Both should contribute to household income&quot;,
                 &quot;Q2b Men’s job is earn money, women’s job household&quot;,
-                &quot;Q3a Should women work: Child under school age&quot;,
-                &quot;Q3b Should women work: Youngest kid at school&quot;,
                 &quot;Respondents age &quot;,
                 &quot;Respondents gender&quot;,
                 &quot;Highest completed degree of education: Categories for international comparison&quot;,
@@ -1049,12 +1088,8 @@ vastf4 &lt;- c(&quot;On hyvä käydä töissä mutta tosiasiassa useimmat naiset
 vastf5 &lt;- c(&quot;Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen.&quot;)
 vastf6 &lt;- c(&quot;Sekä miehen että naisen tulee osallistua perheen toimeentulon hankkimiseen.&quot;)
 vastf7 &lt;- c(&quot;Miehen tehtävä on ansaita rahaa; naisen tehtävä on huolehtia kodista ja perheestä.&quot;)
-vastf8 &lt;- c(&quot;Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
-            Kun perheessä on alle kouluikäinen lapsi&quot;)
-vastf9 &lt;- c(&quot;Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
-            Kun nuorin lapsi on aloittanut koulunkäynnin&quot;)
 
-tabVarDesc_fi &lt;- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7, vastf8,vastf9)
+tabVarDesc_fi &lt;- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7)
 #tabVarDesc_fi
 tabVarnames_subst &lt;- c(substvars1)
 jhVarTable1_fi.df &lt;- data_frame(tabVarnames_subst,tabVarDesc_fi)
@@ -1100,14 +1135,6 @@ knitr::kable(jhVarTable1.df, booktab=TRUE)</code></pre>
 <tr class="odd">
 <td align="left">V11</td>
 <td align="left">Q2b Men’s job is earn money, women’s job household</td>
-</tr>
-<tr class="even">
-<td align="left">V12</td>
-<td align="left">Q3a Should women work: Child under school age</td>
-</tr>
-<tr class="odd">
-<td align="left">V13</td>
-<td align="left">Q3b Should women work: Youngest kid at school</td>
 </tr>
 <tr class="even">
 <td align="left">SEX</td>
@@ -1189,25 +1216,8 @@ knitr::kable(jhVarTable1_fi.df, booktab=TRUE)</code></pre>
 <td align="left">V11</td>
 <td align="left">Miehen tehtävä on ansaita rahaa; naisen tehtävä on huolehtia kodista ja perheestä.</td>
 </tr>
-<tr class="even">
-<td align="left">V12</td>
-<td align="left">Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Kun perheessä on alle kouluikäinen lapsi</td>
-</tr>
-<tr class="even">
-<td align="left">V13</td>
-<td align="left">Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Kun nuorin lapsi on aloittanut koulunkäynnin</td>
-</tr>
 </tbody>
 </table>
-<p>Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (<strong>refworks-viite?</strong>).</p>
 <p>Kysymyslomakkeesta voisi ehkä näyttää myös kuvan?</p>
 <pre class="r"><code>knitr::include_graphics('img/substvar_fi_Q1Q2.png')</code></pre>
 <div class="figure" style="text-align: center">
@@ -1217,6 +1227,7 @@ Suomen lomake
 </p>
 </div>
 <p>```</p>
+<p>Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset koodikirjassa (refworks-viite?)</p>
 <p><strong>TODO 9.10.18</strong> Tarkista tiedostojen nimeämiset</p>
 </div>
 <div id="puuttuvat-tiedot" class="section level2">
@@ -1227,8 +1238,7 @@ Suomen lomake
 <p>Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa halutessaan luettua R-dataan.</p>
 <p><strong>zxy Miten puuttuneisuus kannattaa kuvailla? Löytyy dokumentaatiosta!</strong></p>
 <p><strong>Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):</strong> Ehkä tarpeetonta.</p>
-<pre class="r"><code># Miksi teksti on sinistä, ja oikean yläkulman painikkeet puuttuvat? (13.10.18)
-#Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
+<pre class="r"><code>#Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
 temp &lt;- ISSP2012jh1b.data
 temp$maa &lt;-  as_factor(temp$C_ALPHAN)
 temp$Q1b &lt;- as_factor(temp$V6 )
@@ -1555,8 +1565,93 @@ knitr::kable(taulu1b,digits = 2, booktabs = TRUE,
 <pre class="r"><code># Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
 # Nämä taulukoinnit kuuluvat jaksoon, jossa lisämuuttujat otetaan käyttöön
 
-# ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, TOPBOT, type = &quot;row_perc&quot;)
-# puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
+ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, TOPBOT, type = &quot;count&quot;)</code></pre>
+<pre><code>##         TOPBOT
+## C_ALPHAN 1   10  2   3    4    5    6    7    8    9   Missing Total
+##    AT    4   35  7   31   81   328  333  219  117  27  0       1182 
+##    AU    24  44  19  35   65   271  314  344  270  56  170     1612 
+##    BE    71  31  40  78   124  345  451  521  279  38  224     2202 
+##    BG    50  1   94  237  219  260  93   31   12   4   2       1003 
+##    CA    13  36  7   23   36   106  172  223  198  43  115     972  
+##    CH    4   15  11  41   100  255  246  261  225  36  43      1237 
+##    CZ    22  7   54  162  294  530  277  222  125  24  87      1804 
+##    DE    8   17  21  53   103  188  531  443  309  55  38      1766 
+##    DK    8   37  7   38   52   208  295  379  259  42  78      1403 
+##    FI    13  16  17  36   78   159  241  315  226  40  30      1171 
+##    FR    44  16  52  225  293  577  463  310  121  23  285     2409 
+##    HR    15  7   26  77   103  344  185  131  64   11  37      1000 
+##    HU    35  1   110 195  228  213  114  67   38   5   6       1012 
+##    IE    22  60  15  37   52   119  307  244  197  72  90      1215 
+##    IS    10  14  15  28   62   245  261  225  116  13  183     1172 
+##    LT    17  4   59  128  195  258  215  175  96   15  25      1187 
+##    LV    23  2   32  116  187  265  189  119  40   9   18      1000 
+##    NL    25  18  22  59   114  172  259  359  185  47  55      1315 
+##    NO    17  15  18  36   82   279  377  330  194  41  55      1444 
+##    PL    13  16  37  81   131  302  289  145  85   16  0       1115 
+##    PT    14  9   42  97   157  272  140  71   25   16  158     1001 
+##    RU    90  8   117 234  246  272  393  100  50   13  2       1525 
+##    SE    10  25  6   36   57   213  277  254  119  9   54      1060 
+##    SI    6   12  11  46   102  339  238  143  67   17  53      1034 
+##    SK    9   4   30  92   193  297  256  165  78   4   0       1128 
+##    Total 567 450 869 2221 3354 6817 6916 5796 3495 676 1808    32969</code></pre>
+<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, TOPBOT, type = &quot;row_perc&quot;)</code></pre>
+<pre><code>##         TOPBOT
+## C_ALPHAN 1    10   2     3     4     5     6     7     8     9    Missing
+##      AT  0.34 2.96 0.59  2.62  6.85  27.75 28.17 18.53 9.90  2.28 0.00   
+##      AU  1.49 2.73 1.18  2.17  4.03  16.81 19.48 21.34 16.75 3.47 10.55  
+##      BE  3.22 1.41 1.82  3.54  5.63  15.67 20.48 23.66 12.67 1.73 10.17  
+##      BG  4.99 0.10 9.37  23.63 21.83 25.92 9.27  3.09  1.20  0.40 0.20   
+##      CA  1.34 3.70 0.72  2.37  3.70  10.91 17.70 22.94 20.37 4.42 11.83  
+##      CH  0.32 1.21 0.89  3.31  8.08  20.61 19.89 21.10 18.19 2.91 3.48   
+##      CZ  1.22 0.39 2.99  8.98  16.30 29.38 15.35 12.31 6.93  1.33 4.82   
+##      DE  0.45 0.96 1.19  3.00  5.83  10.65 30.07 25.08 17.50 3.11 2.15   
+##      DK  0.57 2.64 0.50  2.71  3.71  14.83 21.03 27.01 18.46 2.99 5.56   
+##      FI  1.11 1.37 1.45  3.07  6.66  13.58 20.58 26.90 19.30 3.42 2.56   
+##      FR  1.83 0.66 2.16  9.34  12.16 23.95 19.22 12.87 5.02  0.95 11.83  
+##      HR  1.50 0.70 2.60  7.70  10.30 34.40 18.50 13.10 6.40  1.10 3.70   
+##      HU  3.46 0.10 10.87 19.27 22.53 21.05 11.26 6.62  3.75  0.49 0.59   
+##      IE  1.81 4.94 1.23  3.05  4.28  9.79  25.27 20.08 16.21 5.93 7.41   
+##      IS  0.85 1.19 1.28  2.39  5.29  20.90 22.27 19.20 9.90  1.11 15.61  
+##      LT  1.43 0.34 4.97  10.78 16.43 21.74 18.11 14.74 8.09  1.26 2.11   
+##      LV  2.30 0.20 3.20  11.60 18.70 26.50 18.90 11.90 4.00  0.90 1.80   
+##      NL  1.90 1.37 1.67  4.49  8.67  13.08 19.70 27.30 14.07 3.57 4.18   
+##      NO  1.18 1.04 1.25  2.49  5.68  19.32 26.11 22.85 13.43 2.84 3.81   
+##      PL  1.17 1.43 3.32  7.26  11.75 27.09 25.92 13.00 7.62  1.43 0.00   
+##      PT  1.40 0.90 4.20  9.69  15.68 27.17 13.99 7.09  2.50  1.60 15.78  
+##      RU  5.90 0.52 7.67  15.34 16.13 17.84 25.77 6.56  3.28  0.85 0.13   
+##      SE  0.94 2.36 0.57  3.40  5.38  20.09 26.13 23.96 11.23 0.85 5.09   
+##      SI  0.58 1.16 1.06  4.45  9.86  32.79 23.02 13.83 6.48  1.64 5.13   
+##      SK  0.80 0.35 2.66  8.16  17.11 26.33 22.70 14.63 6.91  0.35 0.00   
+##      All 1.72 1.36 2.64  6.74  10.17 20.68 20.98 17.58 10.60 2.05 5.48   
+##         TOPBOT
+## C_ALPHAN Total 
+##      AT  100.00
+##      AU  100.00
+##      BE  100.00
+##      BG  100.00
+##      CA  100.00
+##      CH  100.00
+##      CZ  100.00
+##      DE  100.00
+##      DK  100.00
+##      FI  100.00
+##      FR  100.00
+##      HR  100.00
+##      HU  100.00
+##      IE  100.00
+##      IS  100.00
+##      LT  100.00
+##      LV  100.00
+##      NL  100.00
+##      NO  100.00
+##      PL  100.00
+##      PT  100.00
+##      RU  100.00
+##      SE  100.00
+##      SI  100.00
+##      SK  100.00
+##      All 100.00</code></pre>
+<pre class="r"><code># puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
 ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V5, type = &quot;count&quot;)</code></pre>
 <pre><code>##         V5
 ## C_ALPHAN 1     2     3    4    5    Missing Total
@@ -1586,36 +1681,8 @@ ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V5, type = &quot;count&quot;)</code></
 ##    SI    428   436   71   63   9    27      1034 
 ##    SK    614   273   102  84   30   25      1128 
 ##    Total 11154 12408 3394 4101 1054 858     32969</code></pre>
-<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V6, type = &quot;count&quot;) #on jo ylempänä</code></pre>
-<pre><code>##         V6
-## C_ALPHAN 1    2    3    4    5    Missing Total
-##    AT    218  447  171  205  98   43      1182 
-##    AU    82   405  285  568  215  57      1612 
-##    BE    193  454  440  554  381  180     2202 
-##    BG    118  395  205  190  13   82      1003 
-##    CA    51   215  181  317  194  14      972  
-##    CH    89   431  222  365  112  18      1237 
-##    CZ    174  392  403  415  355  65      1804 
-##    DE    165  376  199  538  441  47      1766 
-##    DK    70   238  152  232  696  15      1403 
-##    FI    47   188  149  423  303  61      1171 
-##    FR    256  551  424  469  624  85      2409 
-##    HR    75   265  190  327  133  10      1000 
-##    HU    219  288  225  190  75   15      1012 
-##    IE    56   250  197  478  197  37      1215 
-##    IS    13   138  186  552  271  12      1172 
-##    LT    50   438  396  220  22   61      1187 
-##    LV    188  395  156  209  38   14      1000 
-##    NL    59   296  242  445  196  77      1315 
-##    NO    23   186  226  579  365  65      1444 
-##    PL    110  395  155  365  64   26      1115 
-##    PT    73   495  157  215  52   9       1001 
-##    RU    244  542  360  254  42   83      1525 
-##    SE    29   124  219  276  354  58      1060 
-##    SI    39   272  200  365  131  27      1034 
-##    SK    117  246  229  298  198  40      1128 
-##    Total 2758 8422 5969 9049 5570 1201    32969</code></pre>
-<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V7, type = &quot;count&quot;)</code></pre>
+<pre class="r"><code>#ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V6, type = &quot;count&quot;) on jo ylempänä
+ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V7, type = &quot;count&quot;)</code></pre>
 <pre><code>##         V7
 ## C_ALPHAN 1    2    3    4    5    Missing Total
 ##    AT    204  430  184  213  119  32      1182 
@@ -1760,64 +1827,6 @@ ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V5, type = &quot;count&quot;)</code></
 ##    SI    28   185  187  372  245  17      1034 
 ##    SK    258  348  300  153  62   7       1128 
 ##    Total 2712 5183 6128 9261 8957 728     32969</code></pre>
-<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V12, type = &quot;count&quot;)</code></pre>
-<pre><code>##         V12
-## C_ALPHAN 1    2     3    Missing Total
-##    AT    21   483   563  115     1182 
-##    AU    45   695   588  284     1612 
-##    BE    375  1064  461  302     2202 
-##    BG    213  365   332  93      1003 
-##    CA    134  373   271  194     972  
-##    CH    44   849   292  52      1237 
-##    CZ    259  739   666  140     1804 
-##    DE    214  991   296  265     1766 
-##    DK    481  708   72   142     1403 
-##    FI    318  503   165  185     1171 
-##    FR    291  1270  556  292     2409 
-##    HR    307  436   227  30      1000 
-##    HU    166  481   342  23      1012 
-##    IE    126  558   309  222     1215 
-##    IS    346  608   75   143     1172 
-##    LT    128  613   339  107     1187 
-##    LV    101  456   421  22      1000 
-##    NL    70   751   335  159     1315 
-##    NO    421  711   161  151     1444 
-##    PL    137  288   611  79      1115 
-##    PT    237  550   186  28      1001 
-##    RU    176  767   466  116     1525 
-##    SE    231  571   108  150     1060 
-##    SI    321  468   179  66      1034 
-##    SK    222  431   376  99      1128 
-##    Total 5384 15729 8397 3459    32969</code></pre>
-<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V13, type = &quot;count&quot;)</code></pre>
-<pre><code>##         V13
-## C_ALPHAN 1     2     3    Missing Total
-##    AT    254   649   135  144     1182 
-##    AU    345   964   28   275     1612 
-##    BE    856   941   61   344     2202 
-##    BG    430   342   142  89      1003 
-##    CA    403   338   36   195     972  
-##    CH    136   957   93   51      1237 
-##    CZ    682   771   217  134     1804 
-##    DE    454   955   82   275     1766 
-##    DK    904   353   5    141     1403 
-##    FI    641   355   26   149     1171 
-##    FR    1060  967   41   341     2409 
-##    HR    577   297   94   32      1000 
-##    HU    409   468   111  24      1012 
-##    IE    362   592   29   232     1215 
-##    IS    599   420   21   132     1172 
-##    LT    458   550   63   116     1187 
-##    LV    439   450   71   40      1000 
-##    NL    238   866   43   168     1315 
-##    NO    853   412   20   159     1444 
-##    PL    573   328   146  68      1115 
-##    PT    708   219   44   30      1001 
-##    RU    513   770   115  127     1525 
-##    SE    492   407   10   151     1060 
-##    SI    767   184   30   53      1034 
-##    SK    606   336   102  84      1128 
-##    Total 13759 13891 1765 3554    32969</code></pre>
 <pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, SEX, type = &quot;count&quot;)</code></pre>
 <pre><code>##         SEX
 ## C_ALPHAN 1     2     Missing Total
@@ -1935,35 +1944,6 @@ missAGE[,86:87]</code></pre>
 ##    SI    487   55   84   1   13   351  33   0 7   3       1034 
 ##    SK    569   74   36   1   36   367  27   0 7   11      1128 
 ##    Total 18020 1772 1770 191 1097 8044 1190 9 485 391     32969</code></pre>
-<pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, TOPBOT, type = &quot;count&quot;)</code></pre>
-<pre><code>##         TOPBOT
-## C_ALPHAN 1   10  2   3    4    5    6    7    8    9   Missing Total
-##    AT    4   35  7   31   81   328  333  219  117  27  0       1182 
-##    AU    24  44  19  35   65   271  314  344  270  56  170     1612 
-##    BE    71  31  40  78   124  345  451  521  279  38  224     2202 
-##    BG    50  1   94  237  219  260  93   31   12   4   2       1003 
-##    CA    13  36  7   23   36   106  172  223  198  43  115     972  
-##    CH    4   15  11  41   100  255  246  261  225  36  43      1237 
-##    CZ    22  7   54  162  294  530  277  222  125  24  87      1804 
-##    DE    8   17  21  53   103  188  531  443  309  55  38      1766 
-##    DK    8   37  7   38   52   208  295  379  259  42  78      1403 
-##    FI    13  16  17  36   78   159  241  315  226  40  30      1171 
-##    FR    44  16  52  225  293  577  463  310  121  23  285     2409 
-##    HR    15  7   26  77   103  344  185  131  64   11  37      1000 
-##    HU    35  1   110 195  228  213  114  67   38   5   6       1012 
-##    IE    22  60  15  37   52   119  307  244  197  72  90      1215 
-##    IS    10  14  15  28   62   245  261  225  116  13  183     1172 
-##    LT    17  4   59  128  195  258  215  175  96   15  25      1187 
-##    LV    23  2   32  116  187  265  189  119  40   9   18      1000 
-##    NL    25  18  22  59   114  172  259  359  185  47  55      1315 
-##    NO    17  15  18  36   82   279  377  330  194  41  55      1444 
-##    PL    13  16  37  81   131  302  289  145  85   16  0       1115 
-##    PT    14  9   42  97   157  272  140  71   25   16  158     1001 
-##    RU    90  8   117 234  246  272  393  100  50   13  2       1525 
-##    SE    10  25  6   36   57   213  277  254  119  9   54      1060 
-##    SI    6   12  11  46   102  339  238  143  67   17  53      1034 
-##    SK    9   4   30  92   193  297  256  165  78   4   0       1128 
-##    Total 567 450 869 2221 3354 6817 6916 5796 3495 676 1808    32969</code></pre>
 <pre class="r"><code>ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, HHCHILDR, type = &quot;count&quot;)</code></pre>
 <pre><code>##         HHCHILDR
 ## C_ALPHAN 0     1    18 2    21 3   4   5  6  7 8 Missing Total
@@ -2051,23 +2031,6 @@ missAGE[,86:87]</code></pre>
 ##    SI    147  101  199  240  344  3       1034 
 ##    SK    99   30   417  571  11   0       1128 
 ##    Total 8472 4423 9240 8662 1916 256     32969</code></pre>
-<pre class="r"><code>#Taulukko puuttuvista tiedosista 11.10.2018
-missQ1a &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V5, type = &quot;count&quot;)
-missQ1b &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V6, type = &quot;count&quot;)
-missQ1c &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V7, type = &quot;count&quot;)
-missQ1d &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V8, type = &quot;count&quot;)
-missQ1e &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V9, type = &quot;count&quot;)
-missQ2a &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V10, type = &quot;count&quot;)
-missQ2b &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, V11, type = &quot;count&quot;)
-missSP &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, SEX, type = &quot;count&quot;)
-missAGE &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, AGE, type = &quot;count&quot;)
-#missAGE[,86:87]
-missDEGREE &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, DEGREE, type = &quot;count&quot;)
-missMAINSTAT &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, MAINSTAT, type = &quot;count&quot;)
-missTOPBOT &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, TOPBOT, type = &quot;count&quot;)
-missHHCHILDR &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, HHCHILDR, type = &quot;count&quot;)
-missMARITAL &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, MARITAL, type = &quot;count&quot;)
-missURBRURAL &lt;- ISSP2012jh1b.data %&gt;% tableX(C_ALPHAN, URBRURAL, type = &quot;count&quot;)</code></pre>
 <p>USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Jätetään USA pois<strong>(10.10.18)</strong></p>
 <p><strong>ainoa ratkaisu taitaa olla se, että (a) katsotaan paljonko putoaa havaintoja jos “listwise deletion” ja (b) koodataan puuttuva tieto omaksi kategoriaksi</strong></p>
 <p><strong>Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) </strong></p>
