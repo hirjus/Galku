@@ -185,3 +185,34 @@ test1_df
 
 # PURRR map
 map(ISSP2012jh1b.data, ~sum(is.na(.)))
+
+# MUUTTUJAT FAKTOREIKSI
+#
+#Faktoreiksi substanssi- ja taustamuuttujat (paitsi AGE)
+str(ISSP2012jh1b.data$SEX)
+#Uusi datatiedosto
+ISSP2012jh1c.data <- ISSP2012jh1b.data
+# sp (sukupuoli) m = 1, f = 2
+sp_labels <- c("m","f")
+# S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
+vastaus_labels <- c("S","s","?","e","E")
+vastQ2_labels <- c(W,w,H)
+
+ISSP2012jh1c.data$maa <- as_factor(ISSP2012jh1c.data$C_ALPHAN)
+ISSP2012jh1c.data$Q1a <- as_factor(ISSP2012jh1c.data$V5, labels = vastaus_labels) #labels ainakin näihin
+ISSP2012jh1c.data$Q1b <- as_factor(ISSP2012jh1c.data$V6, labels = vastaus_labels)
+ISSP2012jh1c.data$Q1c <- as_factor(ISSP2012jh1c.data$V7, labels = vastaus_labels)
+ISSP2012jh1c.data$Q1d <- as_factor(ISSP2012jh1c.data$V8, labels = vastaus_labels)
+ISSP2012jh1c.data$Q1e <- as_factor(ISSP2012jh1c.data$V9, labels = vastaus_labels)
+ISSP2012jh1c.data$Q2a <- as_factor(ISSP2012jh1c.data$V10, labels = vastaus_labels)
+ISSP2012jh1c.data$Q2b <- as_factor(ISSP2012jh1c.data$V11, labels = vastaus_labels)
+ISSP2012jh1c.data$Q3a <- as_factor(ISSP2012jh1c.data$V12, labels = vastQ2_labels)
+ISSP2012jh1c.data$Q3b <- as_factor(ISSP2012jh1c.data$V13, labels = vastQ2_labels)
+ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, sp_labels) # tähän levels?, labels
+ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE # faktoriksi, saadaan NA mukaan. Käytetään luokiteltuna.
+ISSP2012jh1c.data$edu <- as_factor(ISSP2012jh1c.data$DEGREE)
+ISSP2012jh1c.data$mstat<- as_factor(ISSP2012jh1c.data$MAINSTAT) 
+ISSP2012jh1c.data$class <- as_factor(ISSP2012jh1c.data$TOPBOT) 
+ISSP2012jh1c.data$nchild<- ISSP2012jh1c.data$HHCHILDR
+ISSP2012jh1c.data$lstat <- as_factor(ISSP2012jh1c.data$MARITAL)  
+ISSP2012jh1c.data$urb<- as_factor(ISSP2012jh1c.data$URBRURAL)

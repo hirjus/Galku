@@ -669,11 +669,12 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 #temp$maa <- as_factor(temp$C_ALPHAN)
 #temp$Q1a <- as_factor(temp$V5) #labels ainakin näihin
 #temp$Q1b <- as_factor(temp$V6)
-#temp$Q1c <- as_factor(temp$V7)
-#temp$Q1d <- as_factor(temp$V7)
-#temp$Q1e <- as_factor(temp$V7)
-#temp$Q2a <- as_factor(temp$V7)
-#temp$Q2b <- as_factor(temp$V7)
+#temp$Q1c <- as_factor(temp$V8)
+#temp$Q1d <- as_factor(temp$V9)
+#temp$Q1e <- as_factor(temp$V10)
+#temp$Q2a <- as_factor(temp$V11)
+#temp$Q2b <- as_factor(temp$V12)
+#temp$Q2b <- as_factor(temp$V12)
 #temp$sp <- as_factor(temp$SEX) # tähän levels, labels
 #temp$ika <- temp$AGE
 #temp$edu <- as_factor(temp$DEGREE)
