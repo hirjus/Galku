@@ -154,13 +154,34 @@ str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 #    summarize(missing = count(is.na()) %>%
 #    ungroup() # if you use group_by, also use ungroup() to save heartache later
 substvars1
-test1_df <- filter(ISSP2012jh1b.data, (is.na(V5) | is.na(V6) | is.na(V7) 
+bgvars1
+test1_df <- filter(ISSP2012jh1b.data, ((is.na(V5) | is.na(V6) | is.na(V7) 
                                       | is.na(V8) | is.na(V9) | is.na(V10)
-                                      | is.na(V11) | is.na(V12) | is.na (V13)))
-test1
+                                      | is.na(V11) | is.na(V12) | is.na (V13)
+                                      | is.na(SEX) | is.na(AGE) 
+                                      | is.na(DEGREE) | is.na(MAINSTAT)
+                                      | is.na(TOPBOT) | is.na(HHCHILDR)
+                                      | is.na(MARITAL) | is.na(URBRURAL))))
+test1_df 
+# A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
+# A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
+9601/32969
+test1_df$V5
 tail(test1_df)
-#test1_df %>% group_by(C_ALPHAN)
-#            summarize(missing = count("V5","V6")) %>%
-#ungroup()
-summarise(test1_df)           
-            
+test1_df %>% group_by(C_ALPHAN) %>%
+           summarize(missing = sum(is.na("V5"))) %>%
+ungroup()
+test2 <- summary(test1_df, rm.na = "F")           
+str(test2)            
+head(test2)
+
+# sapply - not typestable
+sapply(test1_df, function(x) sum(is.na(x)))
+
+# toimii alkuperäisellä datalla
+sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
+
+test1_df
+
+# PURRR map
+map(ISSP2012jh1b.data, ~sum(is.na(.)))
