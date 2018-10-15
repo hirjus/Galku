@@ -148,3 +148,19 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 
 # R for DS
+# ei ollenkaan toimi! (13.10.18)
+#ISSP2012jh1b.data %>%
+#group_by(C_ALPHAN) %>%
+#    summarize(missing = count(is.na()) %>%
+#    ungroup() # if you use group_by, also use ungroup() to save heartache later
+substvars1
+test1_df <- filter(ISSP2012jh1b.data, (is.na(V5) | is.na(V6) | is.na(V7) 
+                                      | is.na(V8) | is.na(V9) | is.na(V10)
+                                      | is.na(V11) | is.na(V12) | is.na (V13)))
+test1
+tail(test1_df)
+#test1_df %>% group_by(C_ALPHAN)
+#            summarize(missing = count("V5","V6")) %>%
+#ungroup()
+summarise(test1_df)           
+            
