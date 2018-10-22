@@ -165,7 +165,7 @@ test1_df <- filter(ISSP2012jh1b.data, ((is.na(V5) | is.na(V6) | is.na(V7)
 test1_df 
 # A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
 # A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
-9601/32969
+# 9601/32969
 test1_df$V5
 tail(test1_df)
 test1_df %>% group_by(C_ALPHAN) %>%
@@ -174,19 +174,44 @@ ungroup()
 test2 <- summary(test1_df, rm.na = "F")           
 str(test2)            
 head(test2)
-
-# sapply - not typestable
-sapply(test1_df, function(x) sum(is.na(x)))
+#
+# https://sebastiansauer.github.io/sum-isna/
+#
+# 1. sapply - not typestable
+# sapply(test1_df, function(x) sum(is.na(x)))
 
 # toimii alkuperäisellä datalla
 sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
 
-test1_df
 
-# PURRR map
+
+# 2. PURRR map
 map(ISSP2012jh1b.data, ~sum(is.na(.)))
 
+# 3. dplyr
+
+ISSP2012jh1b.data %>%
+    select(everything()) %>% # muuttujien (sarakkeiden) valinta
+    summarise_all(funs((sum(is.na(.)))))
+
+# 4. Riveittäin - montako puuttuvaa tietoa havainnoittain (apply)
+
+temp1 <- apply(ISSP2012jh1b.data, MARGIN = 1, function(x) sum(is.na(x)))
+head(temp1)
+hist(temp1)
+str(temp1)
+summarise(temp1)
+
+# 5. Riveittäin - montako puuttuvaa tietoa havainnoittain (dplyr)
+# erittäin hidas!
+
+ISSP2012jh1b.data %>%
+    rowwise %>%
+    summarise(NA_per_row = sum(is.na(.)))
+
 # MUUTTUJAT FAKTOREIKSI
+#
+# HUOM! Onko puuttuvia tietoja (NA) mukana vai ei! Vaikuttaa faktorointiin.
 #
 #Faktoreiksi substanssi- ja taustamuuttujat (paitsi AGE)
 str(ISSP2012jh1b.data$SEX)
@@ -196,7 +221,7 @@ ISSP2012jh1c.data <- ISSP2012jh1b.data
 sp_labels <- c("m","f")
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
-vastQ2_labels <- c(W,w,H)
+vastQ2_labels <- c("W","w","H")
 
 ISSP2012jh1c.data$maa <- as_factor(ISSP2012jh1c.data$C_ALPHAN)
 ISSP2012jh1c.data$Q1a <- as_factor(ISSP2012jh1c.data$V5, labels = vastaus_labels) #labels ainakin näihin
