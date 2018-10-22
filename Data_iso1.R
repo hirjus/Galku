@@ -147,6 +147,14 @@ jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
 str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 
+# test1 <- is.na(ISSP2012jh1b.data)
+# head(test1) TRUE/FALSE - matriisi
+# str(test1)
+# test1 <- mutate_all(test1,count(.))
+
+head(test1)
+
+
 # R for DS
 # ei ollenkaan toimi! (13.10.18)
 #ISSP2012jh1b.data %>%
@@ -168,13 +176,16 @@ test1_df
 # A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
 # A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
 # 9601/32969
+# Tästä pitäisi saada taulukko aikaiseksi
+
 test1_df$V5
 tail(test1_df)
 
+
 # ei toimi 22.10.2018
-#test1_df %>% group_by(C_ALPHAN) %>%
-#           summarize_all(missing = sum(is.na(.))) %>%
-# ungroup()
+test1_df %>% group_by(C_ALPHAN) %>%
+           summarize_all(funs(sum(is.na(.))) %>%
+ungroup()
 # test2 <- summary(test1_df, rm.na = "F")           
 # str(test2)            
 # head(test2)
