@@ -35,16 +35,6 @@ library(reshape2) # ggplot2 - kuvalle
 
 **10.10.2018 maat ja muuttujat valittu.**
 
-**TODO** Miten tämä dokkari siistitään? Vanha teksti omiksi tägätyiksi pätkiksi?
-
-
-
-2012 data, muuttujaluokat (subst, demog.). Lisäksi maakohtaisia juttuja.
-
-
-
-
-
 1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä johdantoluvussa.
 Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketissa.
 
@@ -54,15 +44,17 @@ Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketis
 
 4. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-5. Tärkeä rajaus: CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (ekologia ja biologia, arkeologia, kielen tutkimus)
+5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (ekologia ja biologia, arkeologia, kielen tutkimus)
 
  
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 
-Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa.
+Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa. **luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
 
 **Tärkeät linkit**
+
+Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit Rmd-koodissa).
 
 www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista, joissa aineistoja on käytetty.
 
@@ -80,25 +72,26 @@ ISSP Research Group (2016): International Social Survey Programme: Family and Ch
 * tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeä **muuttujakuvaukset ja muut tiedot**
 * käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne kyllä säilyvät, tai jäljille pääsee.
 
-[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 2012 **toimii - ja viitetieto tuossa edellä!** **V**
+**Edit** Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoittelilla. Voi laittaa taulukon tärkeimmistä dokumenteista, tarvittaessa liitteeksi (tiedostonimet ja kuvaus). Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.
 
-[Muuttujakuvaukset ja muut tiedot](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) **OK - täältä löytyy oikeastaan kaikki!**
+[Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
+https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
 
-[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) **vie vain aineiston dokumentoinnin etusivulle**
+[Muuttujakuvaukset ja muut tiedot]
+(http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
+http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
+**OK - täältä löytyy oikeastaan kaikki!** Suomenkielinen lomake (ZA5900_q_fi-fi.pdf) löytyy helpoiten täältä, samoin muu dokumnetaati tiedostoina. Veppisivuilla kerrotaan, mitä ne dokumentit ovat.
 
-[Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661) **vie vain aineiston dokumentoinnin etusivulle**
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) **vie vain aineiston dokumentoinnin etusivulle** https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e
+
 
 [Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/) **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
 
-[Tiedonkeruumenetelmä ja otoskoko:](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e&doi=10.4232/1.12661) **
-Viimeisin Portugali 29.06.2014 - 31.01.2015, ensimmäinen Bulgaria 16.08.2011 - 20.09.2011. Suurin osa muista 2012-13, kuten Suomi (21.09.2012 - 07.12.2012 ). 
+Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
+http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900.
+**Dokumentointisivusto/katalogi, jossa helppo navigoida** zacat.gesis.org.
 
-**Vie tutkimushankkeen "kotisivulle"** ZA5900: International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012
-
-Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) .
-**Vie aineiston dokumentointisivustoon, jossa helppo navigoida** zacat.gesis.org.
-
-edit: aineiston kuvailua voi ja kannattaakin jatkossa tarkentaa, ja laittaa se liitteeksi(?- tuskinpa). Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. 
+Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain.
 
 ## Aineiston rajaaminen
 
@@ -111,20 +104,19 @@ Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäks
 
 **zxy** Aineiston luonne: maakohtaisesti eri tavoin kerätty data, jossa pyritään yhtenäisiin käytäntöihin ja tietosisältöihin. Silti myös substanssikysymyksissä eroja, isoja ja pienempiä. Näin vain on, en pohdi miksi. Ei ole mitenkään ainutlaatuista. Aineiston editoinnissa ja tiedonkeruun suunnittelussa on nähty paljon vaivaa vertailukelpoisuuden vuoksi. Tästä esimerkkejä, esim. "mitä puoluetta äänestit".
 
+Paremipi muotoilu: Varsinaiset substanssimuuttujat eli kyselylomakkeet on koitettu hioa mahdollisimman yhdenmukaisiksi. Silti pieniä eroja löytyy, ja isojakin (Espanja on pudottanut neutraalin "en samaa enkä eri mieltä" - vaihtoehdon pois, ja Unkarissakin on muutamat vastausvaihtoehdot valittu omalla tyylillä). Taustamuuttujissa on pyritty samaan, ja aineistoon on myös rakennettu kansainvälisesti vertailukelpoisia muuttujia kansallisesti kerätyistä tiedoista. Näitä ovat erityisesti tuloihin liittyvät tiedot, ja mone muutkin. Muuttujat jakautuvat substanssi- ja taustamuuttujiin, ja taustamuuttujista monet tiedot on kerätty kansallisiin ainiestossa maan kirjantunnisteella alkaviin muuttujiin.
+
 
 **1. Eurooppa ja samankaltaiset maat (28)**
 
+(**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.)
+
 Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal **(28) - Espnaja, Great Britain, USA pois -> 25 (11.10.18)**
 
-**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
 
 
 
 **2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms.** 
-
-Espanja ja Unkari(V18 - V20) ovat muuttaneet ISSP-kysymyksiä. Lähes kaikilla mailla on monissa hieman erialaisia muotoiluja.
-
-Lisäksi iso joukko tietoja on kerätty kansallisilla kysymysversioilla.
 
 Espanja pois, USA ja GB pois koska TOPBOT-muuttuja puuttuu (11.10.18)
 
@@ -137,9 +129,11 @@ Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainno
 
 Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma.
 
-Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18).
+Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18). Toisaalta CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää.
 
-Tämä rajaus on kyselytutkimuksessa ankara, tai oikeastaan kelvoton. Oikea menettely olisi imputoida jollain menetelmällä puuttuvat tiedot, mutta rajaan otantatutkimuksen menetelmät tutkielman ulkopuolelle (aiheesta löytyy artikkeleita...).Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa. Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana painomuuttujat, mutta ne soveltuvat vain jokaisen maan omaan aineistoon.
+Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa.
+
+Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, kts. monitoring report. Aika tyypillisiä, ei kauhean huonoja paitsi muutama.
 
 **zxy** Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).
 

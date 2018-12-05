@@ -85,6 +85,13 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
 
 5.12.2018
 
+5. Data-tiedostojen nimeäminen! 
+
+ISSP2012*.data - täysi aineisto
+ISSP2012*jh1.data - valikointia (maat, muuttujat)
+ISSP2012esim1, 2 jne, tarkenne .dat muunnettuja muuttujia, rajattuja aineistoja jne.
+
+
  
 **Historiaa ** (11.10.18)
 
