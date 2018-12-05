@@ -129,13 +129,14 @@ Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainno
 
 Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma.
 
-Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18). Toisaalta CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää.
+Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18). Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Kun kyselytutkimuksessa on mahdollista kieltäytä vastaamasta, on sekin tietysti vastaus.
+
+Toisaalta CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. Puuttuvat havainnot otetaan mukaan, niitä ei poisteta aineistosta.
 
 Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa.
 
 Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, kts. monitoring report. Aika tyypillisiä, ei kauhean huonoja paitsi muutama.
 
-**zxy** Tärkein rajaus esimerkkianalyyseissä, ja voidaan esitellä CA:n käyttö puuttuvien vastausten analysoinnissa (Likert-asteikkolla).
 
 
 
@@ -148,12 +149,14 @@ Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdoll
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
 **zxy 3.10.18** 
+R-spesifiä:
+R-koodissa tarkemmin, kaikki yksityiskohdat.
 
-Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. 
+Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. Siksi muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
 
 Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan selkeä (ja lyhyt jos mahdollista).
 
-Muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
+Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS (datan jakelutiedosto) sallii kolme koodia puuttuville tiedoille. Ne voi lukea R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detaljit R-koodissa (haven-paketin read_spss-funktion user_na -optio).
 
 
 **Tiedostonimistä 10.10.18**
@@ -181,9 +184,10 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # R-datatiedostot .data - tarkenteella ovat osajoukkoja koko ISSP-datasta ISSP2012.data
 # R-datatiedostot .dat - tarkenteella: mukana alkuperäisten muuttujien muunnoksia 
 # (yleensä as_factor), alkuperäisissä muuttujissa mukana SPSS-tiedoston metadata.
+
 # Muutetaan R-datatiedossa alunperin ordinaali- tai  nominaaliasteikon muuttuja haven-paketin
 # as_factor - funktiolla faktoreiksi. R:n faktorityypin muuttujille voidaan tarvittaessa 
-# määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018)
+# määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018). Muunnetun muuttujan rinnalla säilytetään alkuperäinen, koska SPSS-tiedoston metatiedot ovat siinä.
 #       
 # R-datatiedostot joiden nimen loppuosa on muotoa *esim1.dat: käytetään analyyseissä
 #
@@ -260,7 +264,8 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # (25.9.2018) jäteään pois. Tietoa ei käytetä, koodauksissa on myös eroja maiden ja eri 
 # kysymysten välillä. Kaikki puuttuvat tiedot saavat R-tiedostossa arvon NA.
 # R-ohjelmiston "implisiittinen konversio" muuntaa monet muuttujat (esim. Likert-asteikon 
-# vastaukset 1,...,5) merkkijonomuuttujiksi.
+# vastaukset 1,...,5) merkkijonomuuttujiksi. Faktoroiduille muuttujille määritellään eksplisiittisesti
+# tasot (levels) ja labelit (nimet, labels).
 # 
  
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
@@ -293,7 +298,7 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 
 **Data-tiedoston tutkailua**
 
-Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on.
+Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on. **Koodilohkon voi muuttaa kommenteiksi**
 
 
 ```{r dataprop1, echo=TRUE}
