@@ -61,3 +61,11 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **10.10.2018** Myös USA pois, koska TOPBOT-muuttuja puuttuu. Data-luvussa taulukoitu kaikki 15 muuttujaa maittain, puuttuneisuuden arvioimiseksi. Nämä taulukot siirretään siihen lukuu, jossa aineistoa laajennettaan. Tarkistettu yksinkertaisen esimerkin koodi, faktoroinneissa luodaan aina uusi muuttuja. Vanhaan jäävät metatiedot talteen. Versio 1.4 alkaa olla valmis.
 
 **11.10.2018** Versio 1.4
+
+**11.10.2018** Aloitetaan dev-haarassa versio 1.5. Siistitään tekstiä, siirretään laajemman aineiston puuttuvien havaintojen kuvailu sinne missä data otetaan käyttöön.
+
+**11.10.2018** Kysymyksiä taulukoina ja kyselylomakkeen kuva. Laajemman muuttujajoukon koodia ei vielä siirrettu "pinotut taulut" - jaksoon.
+
+**13.10.2018** Kaksi substanssimuuttujaa (V12, V13) mukaan, muuttujataulukoiden hiomista, tekstin ja koodin siistimistä.
+
+**5.12.2018** Versio 1.5 masteriin, ja uusi dev-haara.

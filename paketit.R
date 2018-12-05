@@ -21,4 +21,4 @@ library(bookdown)
 library(tinytex)
 #
 #r-skripteillä riittää, kun ajaa tämän
-#sessionInfo()
+sessionInfo()
