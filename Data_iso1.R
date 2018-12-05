@@ -177,6 +177,9 @@ test1_df
 # A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
 # 9601/32969
 # Tästä pitäisi saada taulukko aikaiseksi
+# Aika hyvä linkki na-arvojen käsittelystä
+# https://bookdown.org/lyzhang10/lzhang_r_tips_book/how-to-deal-with-nas.html
+#
 
 test1_df$V5
 tail(test1_df)
@@ -227,7 +230,7 @@ summarise(temp1)
 
 ISSP2012jh1b.data %>%
     rowwise %>%
-    summarise(NA_per_row = sum(is.na(.)))
+    summarise(NA_per_row = sum(is.na(.))
 
 # MUUTTUJAT FAKTOREIKSI
 #
