@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.5 dev, tulostettu `r Sys.Date()` "
+date: "versio 1.5 , tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
