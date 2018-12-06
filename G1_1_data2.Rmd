@@ -93,21 +93,28 @@ http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStud
 
 Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain.
 
-## Aineiston rajaaminen
+## Substanssimuuttujat, taustamuuttujat, muut
 
-**zxy** Aineiston kuvailu omana osanaan (7.8.2018).
+
 **zxy** capaper - dokumentissa uusi jäsentely (4.9.2018)
 
-Ainestossa (jatkossa ISSP2012) on kyselytutkimukseen tulokset 41 maasta. Lisäksi aineistossa on runsaasti demografisia ja muita taustatietoja. R-koodista selviää käytetty versio (SPSS-tiedoston nimi) ja rajauksessa käytetyt muuttujat.
-
-**Rajaukset**
 
 **zxy** Aineiston luonne: maakohtaisesti eri tavoin kerätty data, jossa pyritään yhtenäisiin käytäntöihin ja tietosisältöihin. Silti myös substanssikysymyksissä eroja, isoja ja pienempiä. Näin vain on, en pohdi miksi. Ei ole mitenkään ainutlaatuista. Aineiston editoinnissa ja tiedonkeruun suunnittelussa on nähty paljon vaivaa vertailukelpoisuuden vuoksi. Tästä esimerkkejä, esim. "mitä puoluetta äänestit".
+
+**zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
 
 Paremipi muotoilu: Varsinaiset substanssimuuttujat eli kyselylomakkeet on koitettu hioa mahdollisimman yhdenmukaisiksi. Silti pieniä eroja löytyy, ja isojakin (Espanja on pudottanut neutraalin "en samaa enkä eri mieltä" - vaihtoehdon pois, ja Unkarissakin on muutamat vastausvaihtoehdot valittu omalla tyylillä). Taustamuuttujissa on pyritty samaan, ja aineistoon on myös rakennettu kansainvälisesti vertailukelpoisia muuttujia kansallisesti kerätyistä tiedoista. Näitä ovat erityisesti tuloihin liittyvät tiedot, ja mone muutkin. Muuttujat jakautuvat substanssi- ja taustamuuttujiin, ja taustamuuttujista monet tiedot on kerätty kansallisiin ainiestossa maan kirjantunnisteella alkaviin muuttujiin.
 
 
-**1. Eurooppa ja samankaltaiset maat (28)**
+**zxy** HUOM! Dataa ei ole kerätty vain kansainvälisiin vertailuhihin! Sitä voi ja ehkä pitäisikin analysoida maa kerrallaan, ja vertailla näitä tuloksia. (**#V** Blasiuksen artikkeli, jossa arvioidaan yhden ISSP-tutkimuksen vertailukelpoisuutta. Kysymykset eivät kovin hyvin näytä toimivan samalla tavalla eri maissa.)
+
+
+
+## Aineiston rajaaminen
+
+
+
+**1. Eurooppa ja samankaltaiset maat (28 aluksi -> 25)**
 
 (**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.)
 
@@ -115,19 +122,16 @@ Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Irela
 
 
 
-
 **2. Maat joissa varsinaisissa tutkimuskysymyksissä on käytetty poikkeavia luokitituksia tms.** 
 
 Espanja pois, USA ja GB pois koska TOPBOT-muuttuja puuttuu (11.10.18)
 
-**25 maata, johdattelevassa esimerkissa 6 maata** (11.10.18)
 
 
 **3. kaikki havainnot, joissa on puuttuvia tietoja.** 
 
-Puuttuvia tietoja on yllättävän vähän. Jätetään silti kaikki ne havainnot pois, joissa joku tieto puuttuu. Rajataan kuitenkin tätä vaikutusta niin, että sitä sovelletaan vain käytettäviin muuttujiin.
 
-Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma.
+Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
 
 Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18). Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Kun kyselytutkimuksessa on mahdollista kieltäytä vastaamasta, on sekin tietysti vastaus.
 
@@ -221,7 +225,7 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # Portugalissa ainestoa täydennettiin, koska siinä oli puutteita. Jako ei siis ole oleellinen,
 # mutta muuut ovat. Tähdellä merkityt maat valitaan johdattelevaan esimerkkiin.
 #
-# Maat (27, ei Espanjaa).Myös US ja Great Britan jätettiin lopulta pois eli maita jää 25
+# Maat (25, ei Espanjaa).Myös USA ja Iso-Britannia pois, koska muuttuja TOPBOT puuttuu.
 #
 # 36 AU-Australia
 # 40 AT-Austria
@@ -354,10 +358,7 @@ attributes(ISSP2012jh1a.data) #kaikki tiedot
 ISSP2012jh1a.data[1:3,1:3]
 ```
 
-Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää. Näissä EOS merkitykseltään erilainen. Labels (W, w, H ja jotain eos-vaihtoehdolle). 
-
-
-Ikä (AGE) on kokonaisluku), taustamuuttujissa on monenlaisia koodauksia. Edellisen koodilohkon komennot ovat hyödyksi, kun muunnoksia tehdään, voi tarkistaa miten SPSS-data R-muotoon on muuntunut. haven-paketin read_spss on aika varma (6.12.18).
+Kolme ensimmäistä muuttujaa ovat datan metatietoja. 
 
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
 
@@ -412,7 +413,7 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 
 substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13")
 
-# Nämä jäävät pois:
+# Nämä yhteiset muuttujat pois (maaspesifien muuttujien lisäksi) :
 #
 # "V14","V15","V16",  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
 # "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
@@ -475,6 +476,7 @@ substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13")
 # Voisi koodata dummymuuttujaksi lapsia (1) - ei lapsia (0).
 # Ranskan datassa on erittäin iso osa puuttuvia tietoja ( "99"", n. 20 %), myös Austarlialla
 # aika paljon. Sama tilanne myös muissa perheen kokoon liittyvissä kysymyksissä.
+#
 #
 # MARITAL - Legal partnership status 
 #
@@ -658,7 +660,24 @@ Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta,
 
 3. Kun laajempi aineisto otetaan käyttöön, joudutaan pohtimaan miten puuttuvia havaintoja käsitellään. Jos kyse on selvistä virheistä (esim. haastateltavan ikä puuttu) havainnot jätetään pois, muuten mietitään. 
 
+**Miten puuttuvia tietoja (erävastuskato, havainnossa puuttu joku tieto) käsitellään?**
 
+
+1. Miksi tieto puuttuu, mitä "puuttuva tieto" tarkoittaa?
+
+Joissain kysymyksissä (V12, V13) puuttuvaksi tiedoksi kirjautuu vastaus ("en osaa sanoa") "ei vastausta" - vaihtoehdon lisäksi. Nämä mukaan.
+
+Ikä ja sukupuoli: ilmeinen virhe, joten jätetään havainnot pois (näitä ei ole paljon)
+
+2. Puuttuvien tietojen jakauma?
+
+Onko puuttuvia tietoja tasaisesti eri maissa, vai vaihteleeko niiden suhteellinen osuus?
+
+Onko joissain tai jossain maassa huomattava määrä puuttuvia tietoja?
+
+Onko puuttuvia tietoja paljon vai vähän?
+
+Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma. Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja "vihreä kirja").
 
 
 **Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Tässä vain siksi, että siisti esimerkki taulukosta.
@@ -744,6 +763,7 @@ Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018).
 
 # ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
 # puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
+
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "count")
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count") #on jo ylempänä
 ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "count")
@@ -782,20 +802,14 @@ missMARITAL <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
 missURBRURAL <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
 
 ```
-USA:n datassa ei ole muuttujaa TOPBOT, ja puuttuvien tietojen osuus on yli kymmenen prosenttia. USA:n voisi ehkä jättää pois, ja muuttaa tässä MISSING-arvon numeerikseksi 99.? Olisko ok? Tulee silti pulmia, joissain maissa puuttuvia tietoja on nolla tai ihan muutaman. Muiden 1-10 - asteikon muuttujia voi yhdistellä, mutta puuttuvaa tietoa on hankala yhdistää mihinkään. Ehkä tämä muuttuja jätetään pois? Jätetään USA pois**(10.10.18)**
 
-**ainoa ratkaisu taitaa olla se, että (a) katsotaan paljonko putoaa havaintoja jos "listwise deletion" ja (b) koodataan puuttuva tieto omaksi kategoriaksi**
+
 
 
 **Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
 
 Puuttuvien tietojen tarkempi koodaus ISSP-datassa:
 
-(zxy 24.9.2018 Tällaisia eroja löytyy, ohitetaan mutta mainitaan. Pitäisikö (a) pudottaa kaikki joilla puuttuvia joissain muuttujissa vai (b) yhdistää NA ja eos?)
-
-Esimerkiksi Ruotsin puuttuviksi tiedoiksi koodatuista 29 havainnosta 19 valitsi "can't choose"(8) ja 10 kieltäyti vastaamasta (9) tms. Dokumentti, s.12.
-
-Tarkastellaan aineston puuttuvia havaintoja hieman tarkemmin. Puuttuvat tiedot on koodattu aineistoon näin:
 0: Not applicapble (NAP), Not available (NAV)
 7: (97,997, 9997,...): Refused
 8: (98, 998, 9998,...): Don't know
@@ -810,47 +824,7 @@ GESIS adds 'Not available' for variables, which in singe countries may  not have
 
 ** (3.10.2018) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
 
-## Substanssimuuttujat, taustamuuttujat, muut
-
-**zxy** capaper - lukuun.
-
-**zxy** muuttujien kuvaukset. 
-
-**zxy** tässä myös maakohtaisen poikkeavat kysymykset, joita riittää aika lailla.
-
-**zxy** HUOM! Dataa ei ole kerätty vain kansainvälisiin vertailuhihin! Sitä voi ja ehkä pitäisikin analysoida maa kerrallaan, ja vertailla näitä tuloksia. (**#V** Blasiuksen artikkeli, jossa arvioidaan yhden ISSP-tutkimuksen vertailukelpoisuutta. Kysymykset eivät kovin hyvin näytä toimivan samalla tavalla eri maissa.)
-
-**zxy** Myös maakohtaiset erot, ja niiden vaikutus aineiston rajaamiseen
-
-**zxy** yksi kappale: Aineitoa on harmonisoitu, kysymyksiä hiottu, vertailukelpoisuuteen on pontevasti pyritty. Silti eroja löytyy, osa ymmärrettäviä (lisäkysymykset jne) ja osa ei (Espanja!). Tällaista on kansainvälisen kyselytutkimuksen data. 
-
-**edit:** **nämä merkinnät ovat muistiinpanoja, kun tarkemmin luin muuttujadokumenttia ensimmäistä kertää.**
-**TÄMÄN PÄTKÄN VOI POISTAA - TURHAA**
-
-Kysymyksissä on vaihtelua, ja tavallaan niin pitääkin olla kansainvälisessä kyselytutkimuksessa. Vastaajien on ymmärrettävä kysymyksen suurinpiirtein samalla tavalla. Kaikki on tarkasti dokumentoitu.
 
 
-**edit:** täsmennettävä, periaatteessa vastaukset on harmonisoitu. Joistain maista joku tieto puuttuu, jos sitä ei ole kysytty. Joissain tapauksissa kysymysten vaihtoehdot poikkeavat standardista.
 
-Aineistossa on ns. substanssimuuttujia 63 (V5 - V67). Suurin osa on kerätty jollain haastattelumenetelmällä, ja yleisin vastausvaihtoehto on viiden arvon Likert-skaala (1 = täysin samaa mieltä, samaa mieltä, en samaa enkä eri mieltä, eri mieltä, täysin eri mieltä =5). Eri maiden lomakkeissa on vaihtelua puuttuviksi tiedoiksi koodattujen muiden vastausten välillä.
-
-Esimerkikisi Suomen lomakkeessa on kuudes vaihtoehto "en osaa sanoa", ja lisäksi on koodattu vastaamisesta kieltäytyminen tai muuten puuttuva tieto. Ensimmäisessä aineiston rajauksessa nämä kaikki jätetään pois, käytetään "yleistä" puuttuvan tiedon määritelmää (eli joku noista em.).
-
-Espanjan lisäksi Unkarin osatutkimuksessa kysymyksen V18 V19 V20 vastausvaihtoehdot ovat poikkeavat siten, että keskimmäinen neutraali vaihtoehto on jätetty pois (em.dok, s. 48).
-
-
-Islannissa kysymykseen V28 (Consider a couple who both work full-time and now have a new born child. One of them stops working for some time to care for their child. Do you think there should be paid leave available and, if so, for how long?) on tarjolla oma vastausvaihtoehto ((97) "Yes, but don't know how many months"). Kysymyseen "V29 - Q9 Paid leave: Who should pay ja V30(Paid leave: How to divide between parents) Bulgarian kysely on poikkeava (0 NAP (code 0,98 in V28), s. 91).
-
-Hollannin vastausvaihtoehdoissa kysymykseen V35 (Elderly people: Provider of domestic help) on oma variantti "5 Empoyers", jonka kuitenkin on valinnut vain 6 vastajaa (0,5 %).
-
-V39, V40, V41, V42, V43, V44, V45, V46, V47, V48, V50, V51, V52, V53, V54: paljon poikkeamia, aika vaikeaselkoisia kysymyksiä. Näitä ehkä pitää tutkailla...
-V55 (Life in general: How happy on the whole) ok.
-
-V56-57 poikkeamia, V58 (Health status) ok
-V59 "ketjutettu kysymys", samoin V60-V64.
-s. 174 - puolison koulutus...
-
-**Muuttujat, kysymykset: miten viitata?**
-
-SPSS-datassa muuttujat on nimetty V1,...,V67. Metadatassa taas kerrotaan kysymys, esim. V6 on vastaus kysymykseen Q1b. Suomenkielisessä lomakkeessa ensimmäinen kysymyspatteri Q1 on kysymys 23. 23b:Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. Miten kysymyksiin kannattaa viitata?
 
