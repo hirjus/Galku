@@ -549,7 +549,7 @@ Vastausvaihtoehdot:
 
 Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa.
 
-```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
+```{r vartable1 fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
 # Muuttuja taulukkona
 #head(ISSP2012jh1b.data)
 #str(ISSP2012jh1b.data)
@@ -618,14 +618,16 @@ jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, suomenkielisen lomakkeen kysymys")
 colnames(jhVarTable1_fi.df) <- cols_jhVarTable1
 
-# TAULUKOT
+# TAULUKODEN TULOSTUS
 
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
-knitr::kable(jhVarTable1.df, booktab=TRUE)
+knitr::kable(jhVarTable1.df, booktab=TRUE,
+                fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
-knitr::kable(jhVarTable1_fi.df, booktab=TRUE)
+ knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
+              fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 ```
 
 Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
@@ -635,35 +637,37 @@ Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. 
 Bookdown-versiossa taulukot omiksi koodilohkoiksi, ja fig.caption - optiolla taulukon otsikko.
 
 
-
-Kysymyslomakkeen kuva, vai kuva liitteisiin? Liitteisiin.
+Kysymyslomakkeen kuva, vai kuva liitteisiin? **Liitteisiin.**
 
 ```{r suom_kys, out.width='50%', fig.align='center',fig.cap='Suomen lomake'}
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 ```
-```
 
+## Datan valinnan vaiheet ja puuttuvat tiedot**
 
-
-## Puuttuvat tiedot
-
-**zxy** Kun muuttujat on valittu, voi lyhyesti vilkaista puuttuneisuutta. Muuten asia käsitellään aina, kun muuttujia otetaan mukaan analyysiin. Tai voi sen tässäkin ehkä esitellä, kerralla? Muuttujat voisi luetella laskevassa järjestyksessä puuttuneisuuden mukaan?
-
-**zxy** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
+**ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
 
 Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
 
-
-Aineistossa on tarkempi kolmen luokan koodaus puuttuvalle tiedolle, ja sen saa halutessaan luettua R-dataan.
-
-**zxy Miten puuttuneisuus kannattaa kuvailla? Löytyy dokumentaatiosta!**
+Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta, myös puuttuvien tietojen tarkemman koodauksen. 
 
 
-**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Ehkä tarpeetonta.
+1. Valitaan 25 maata ja muuttujat
+
+2. Johdattelevissa esimerkeissä valitaan kuusi maata ja kolme muuttujaa. Jätetään pois kaikki havainnot (vastaukset) joissa on puuttuvia tietoja ("listwise deletion")
+
+3. Kun laajempi aineisto otetaan käyttöön, joudutaan pohtimaan miten puuttuvia havaintoja käsitellään. Jos kyse on selvistä virheistä (esim. haastateltavan ikä puuttu) havainnot jätetään pois, muuten mietitään. 
+
+
+
+
+**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Tässä vain siksi, että siisti esimerkki taulukosta.
+
+**Nämä koodilohkot siirtyvät**
 
 
 ```{r muut1old}
-# Miksi teksti on sinistä, ja oikean yläkulman painikkeet puuttuvat? (13.10.18)
+
 #Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
 temp <- ISSP2012jh1b.data
 temp$maa <-  as_factor(temp$C_ALPHAN)
@@ -681,10 +685,10 @@ knitr::kable(taulu1b,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
-Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
+Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
 
 ```{r muut2old}
-# Nämä tarkastelu jaksoon, jossa laajempi joukko muuttujia käyttöö
+# Nämä tarkastelu jaksoon, jossa laajempi joukko muuttujia käyttöön
 
 # Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?
 # Taulukko kuten yllä, riveinä maat ja sarakkeina muuttujat, is.na -count?
@@ -693,7 +697,12 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 #attributes(ISSP2012jh1b.data)
 #names(ISSP2012jh1b.data)
 
-#Faktoreiksi substanssi- ja taustamuuttujat TÄHÄN KELPO TIEDOSTONIMI
+# Faktoreiksi substanssi- ja taustamuuttujat TÄHÄN KELPO TIEDOSTONIMI
+# Huom! kun asetetaan eksplisiittisesti levels ja labels, se kannattaa tehdä sen 
+# jälkeen kun on päätetty miten puuttuvia havaintoja käsitellään
+
+# Johdattelevissa esimerkeissä yksi data-tiedosto pohjana, laajemmissa analyyseissä toinen.
+
 #temp$maa <- as_factor(temp$C_ALPHAN)
 #temp$Q1a <- as_factor(temp$V5) #labels ainakin näihin
 #temp$Q1b <- as_factor(temp$V6)
@@ -727,6 +736,7 @@ Koko aineistossa (valitut 27 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 
 **Puuttuvat tiedot ja "listwise deletion" - pientä pohdintaa...**
 
+Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018).
 
 ```{r muut3}
 # Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
