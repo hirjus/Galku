@@ -64,7 +64,7 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
 **11.10.2018 aloitetaan versio 1.5**
 - pieniä muutoksia ja kommentteja, aloitetaan uusi versio 1.51 5.12.2018
 
-**6.12.2018 **
+**6.12.2018 1.51**
 
 
 

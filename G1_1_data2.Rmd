@@ -521,7 +521,7 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 ```
 
-Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Seitsemä muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
+Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
 
 **Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot**
 
@@ -543,8 +543,8 @@ Q3a Should women work: Child under school age
 Q3b Should women work: Youngest kid at school
 
 Vastausvaihtoehdot: 
-"Work full-time" "Work part-time" "Stay at home"
-1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä
+"Work full-time" "Work part-time" "Stay at home", "Can't choose"
+1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä. 6 on Taiwanin oma vastausvaihtoehto, 8 = en osaa sanoa ja 9 = no answer.
 
 
 Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa.
@@ -566,8 +566,9 @@ Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommentei
 #str(substvars1)
 # Karkea tapa
 tabVarnames <- c(substvars1,bgvars1) # muuttujanimet muuttujille, ei maa- tai metamuuttujia
-#tabVarnames
-tabVarDesc <- c("Q1a Working mother can have warm relation with child",
+
+# Kysymysten lyhyet versiot englanniksi
+tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
                 "Q1b Pre-school child suffers through working mother",
                 "Q1c Family life suffers through working mother",
                 "Q1d Women’s preference: home and children",
@@ -590,34 +591,34 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child",
 # Taulukko
 # luodaan df
 jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
-cols_jhVarTable1 <- c("muuttuja","lyhennetty kysymys")
+cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
 #jhVarTable1.df
 
 # Suomalaiset pitkät kysymykset
-vastf1 <- c("Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
+vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
             ja turvallisen suhteen kuin äiti, joka ei käy työssä")
 
-vastf2 <- c("Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä.")
-vastf3 <- c("Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö.")
-vastf4 <- c("On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat 
+vastf2 <- c("Q1b Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä.")
+vastf3 <- c("Q1c Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö.")
+vastf4 <- c("Q1d On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat 
             ensisijaisesti kodin ja lapsia.")
-
-vastf5 <- c("Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen.")
-vastf6 <- c("Sekä miehen että naisen tulee osallistua perheen toimeentulon hankkimiseen.")
-vastf7 <- c("Miehen tehtävä on ansaita rahaa; naisen tehtävä on huolehtia kodista ja perheestä.")
-vastf8 <- c("Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
+vastf5 <- c("Q1e Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen.")
+vastf6 <- c("Q2a Sekä miehen että naisen tulee osallistua perheen toimeentulon hankkimiseen.")
+vastf7 <- c("Q2b Miehen tehtävä on ansaita rahaa; naisen tehtävä on huolehtia kodista ja perheestä.")
+vastf8 <- c("Q3a Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
             Kun perheessä on alle kouluikäinen lapsi")
-vastf9 <- c("Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
+vastf9 <- c("Q3b Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?
             Kun nuorin lapsi on aloittanut koulunkäynnin")
 
 tabVarDesc_fi <- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7, vastf8,vastf9)
 #tabVarDesc_fi
 tabVarnames_subst <- c(substvars1)
 jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi)
-cols_jhVarTable1 <- c("muuttuja","suomenkielisen lomakkeen kysymys")
+cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, suomenkielisen lomakkeen kysymys")
 colnames(jhVarTable1_fi.df) <- cols_jhVarTable1
 
+# TAULUKOT
 
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
@@ -627,10 +628,15 @@ knitr::kable(jhVarTable1.df, booktab=TRUE)
 knitr::kable(jhVarTable1_fi.df, booktab=TRUE)
 ```
 
-Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite?**).
+Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
+
+**TODO** (6.12.18) Taulukon voisi ehkä yhdistää, suomenkielinen pitkä kysymys englanninkielisen perään? Ehkä tarpeetonta, englanninkielisen lomakekkeen voi laittaa myös liitteeksi. Tässä pärjätään suomenkielisellä.
+
+Bookdown-versiossa taulukot omiksi koodilohkoiksi, ja fig.caption - optiolla taulukon otsikko.
 
 
-Kysymyslomakkeesta voisi ehkä näyttää myös kuvan?
+
+Kysymyslomakkeen kuva, vai kuva liitteisiin? Liitteisiin.
 
 ```{r suom_kys, out.width='50%', fig.align='center',fig.cap='Suomen lomake'}
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
@@ -638,7 +644,6 @@ knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 ```
 
 
-**TODO 9.10.18** Tarkista tiedostojen nimeämiset
 
 ## Puuttuvat tiedot
 
