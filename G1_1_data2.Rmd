@@ -161,10 +161,15 @@ Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS (
 
 **Tiedostonimistä 10.10.18**
 
+**6.12.18 TODO:**tarkista tiedostojen nimet
+
+ISSP2012*.data - täysi aineisto
+ISSP2012*jh1.data - valittu osa havainnoista (yleensä: maita) ja muuttujista
+ISSP2012esim1, 2 jne, tarkenne .dat muunnettuja muuttujia, rajattuja aineistoja jne.
+
 ISSP2012.data (df) jossa alkuperäinen SPSS-data
 ISSP2012jh1.data osajoukko edellisestä
-    ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.
-    **huom** tiedostonimessä ei kerrota R-tiedostotyyppiä (?), tulisi liikaa lyhenteitä.
+ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.
 
 ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin, mutta ei liikaa ja sopii myös Markdown-työskentelyyn. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi, näin on jo tehty paketeille (paketit.R)
 
@@ -172,7 +177,7 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 **zxy** Datan rajaaminen (maat. muuttujat) heti alussa, pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
 
  
-**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? 
+**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
 
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
@@ -187,7 +192,13 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 
 # Muutetaan R-datatiedossa alunperin ordinaali- tai  nominaaliasteikon muuttuja haven-paketin
 # as_factor - funktiolla faktoreiksi. R:n faktorityypin muuttujille voidaan tarvittaessa 
-# määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018). Muunnetun muuttujan rinnalla säilytetään alkuperäinen, koska SPSS-tiedoston metatiedot ovat siinä.
+# määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018). 
+# Luokittelumuuttujan tyyppi on datan lukemisen jälkeen yleensä merkkijono (char), vaikka se on koodattu 
+# kokonaisluvuksi. R:n ns. "implisiittinen konversio" muunta arvot merkkijoiksi, jos joukossa on puuttuvia
+# havaintoja (NA)
+#
+# Muunnetun muuttujan rinnalla säilytetään SPSS-tiedostosta luettu muuttja, metatiedot säilyvät 
+# alkuperäisessä.
 #       
 # R-datatiedostot joiden nimen loppuosa on muotoa *esim1.dat: käytetään analyyseissä
 #
@@ -261,12 +272,6 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # If FALSE, the default, user-defined missings will be converted to NA"
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
-# (25.9.2018) jäteään pois. Tietoa ei käytetä, koodauksissa on myös eroja maiden ja eri 
-# kysymysten välillä. Kaikki puuttuvat tiedot saavat R-tiedostossa arvon NA.
-# R-ohjelmiston "implisiittinen konversio" muuntaa monet muuttujat (esim. Likert-asteikon 
-# vastaukset 1,...,5) merkkijonomuuttujiksi. Faktoroiduille muuttujille määritellään eksplisiittisesti
-# tasot (levels) ja labelit (nimet, labels).
-# 
  
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 
@@ -286,7 +291,7 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 #str(ISSP2012jh1a.data) # 32969 obs. of  420 variable, Espanja Iso-Britannia, 
 #                        USA pois (10.10.2018)
 #
-#names(ISSP2012jh1.data) # muuttujen nimet
+# names(ISSP2012jh1.data) # muuttujen nimet
 # Maakohtaiset muuttujat (kun on poikettu ISSP2012 - vastausvaihtoehdoista tms.) 
 # on aineistossa eroteltu maatunnus-etuliitteellä (esimerkiksi ES_V7).
 # Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maa-
@@ -302,35 +307,47 @@ Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on. **Koodiloh
 
 
 ```{r dataprop1, echo=TRUE}
-# Datan selailua (9.10.2018)
+# Datan selailua (9.10.2018) - Tätä ei tarvita jatkossa
 #
-#datatiedoston ominaisuuksia 1
-#str(ISSP2012jh1.data$V5)
+# datatiedoston ominaisuuksia 1
+str(ISSP2012jh1a.data$V5)
+# 'haven_labelled' num [1:32969] 5 1 2 2 1 NA 2 4 2 2 ...
+# - attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
+# - attr(*, "format.spss")= chr "F1.0"
+# - attr(*, "labels")= Named num [1:8] 0 1 2 3 4 5 8 9
+#  ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
+#
+# puuttuvan tiedon tarkempi koodaus
+# attr(ISSP2012jh1a.data$V5,'labels')
+# jos user_na = TRUE, niin SPSS-tiedoston tarkempi kolmen luoka koodi tulisi mukaan
+# attr(ISSP2012jh1.data$V5,'na_values')
 
-# tarpeetonta testailua 24.9.2018 - puuttuvien havaintojen kaivelua
-# TÄMÄ VASTA KUN MUUTTUJAT ON VALITTU
+# Puuttuvat tiedot
 #
-# test1 <- is.na(ISSP2012jh1.data$V5)
-# missV5 <- ISSP2012jh1.data[test1,]
+# test1 <- is.na(ISSP2012jh1a.data$V5)
+# missV5 <- ISSP2012jh1a.data[test1,]
 # head(missV5)
 # str(missV5)
 # hist(missV5$V5)
 # summary(missV5$V5)
-# puuttuvan tiedon tarkempi koodaus - jos olisi user_na=TRUE read_spss-komenossa
-# attr(ISSP2012jh1.data$V5,'labels')
-# attr(ISSP2012jh1.data$V5,'na_values')
-
+#
 # Tästä näkyvät maakohtaiset substanssimuuttujat helposti!
 # attr(ISSP2012jh1.data,'names')
-
-# hist(ISSP2012jh1.data$V5) #kätevä mutta ei lopulliseen käyttöön
+#
+# hist(ISSP2012jh1.data$V5)
 # hist(ISSP2012jh1.data$DEGREE)
 #
-# PERUSKOMENNOT DATATIEDOSTOSON TUTKIMISEEN
+# NELJÄ KOMENTOA DATATIEDOSTOSON TUTKIMISEEN
 typeof(ISSP2012jh1a.data)
 class(ISSP2012jh1a.data)
 storage.mode(ISSP2012jh1a.data)
-#attributes(ISSP2012jh1.data)
+attributes(ISSP2012jh1a.data) #kaikki tiedot
+# str(ISSP2012jh1a.data$AGE)
+# numeerinen, labels 15, 16 jne
+#
+# summary(ISSP2012jh1a.data$AGE)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+#  15.00   36.00   50.00   49.52   63.00  102.00     134 
 #
 # tiedoston metadata : muuttujat V1, V2 ja DOI
 #
@@ -340,7 +357,7 @@ ISSP2012jh1a.data[1:3,1:3]
 Kolme ensimmäistä muuttujaa ovat datan metatietoja. Muuttujissa V12 ja V13 vastausvaihtoehdot ovat erilaiset, neutraali "ei samaa eikä eri mieltä" puuttuu. "En osaa sanoa" - vaihtoehto kasvattaa puuttuvien havaintojen määrää. Näissä EOS merkitykseltään erilainen. Labels (W, w, H ja jotain eos-vaihtoehdolle). 
 
 
-Ikä (AGE) on kokonaisluku (**tarkista R-tyyppi 13.10.18**), taustamuuttujissa on monenlaisia koodauksia. Yhdistellään ja luokitellaan uudelleen tarvittaessa.
+Ikä (AGE) on kokonaisluku), taustamuuttujissa on monenlaisia koodauksia. Edellisen koodilohkon komennot ovat hyödyksi, kun muunnoksia tehdään, voi tarkistaa miten SPSS-data R-muotoon on muuntunut. haven-paketin read_spss on aika varma (6.12.18).
 
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
 
@@ -363,9 +380,6 @@ metavars1 <- c("V1", "V2", "DOI")
 
 countryvars1 <- c("V3","V4","C_ALPHAN")
 
-#temp <- select(ISSP2012jh1.data, metavars1)
-#str(temp)
-
 # SUBSTANSSIMUUTTUJAT - Attitudes towards family and gender roles (9)
 #
 # Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot Q1-Q2
@@ -384,12 +398,13 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 #
 # Q3a Should women work: Child under school age 
 # Q3b Should women work: Youngest kid at school
+# 1= kokopäivätyö, 2 = osa-aikatyö, 3 = pysyä kotona, 8 = en osaa sanoa (can't choose), 9 = no answer
 #
+# Kysymysten Q3a ja Q3b  Muut vastaustvaihtoehdot ovat  Eos-vastaus ei ole sama kuin "en samaa enkä eri  mieltä" (ns. neutraali 
+# vaihtoehto), mutta kieltäytymisiä jne. (koodi 9) on aika vähän. Puuttuvat tiedot voi joko yhdistää eos-vastaukseen tai käsitellä omana
+# vastausvaihtoehtona. Koska (8 Can't choose, CA:can't choose+no answer, KR:don't know+refused, NL:don't know), niin yhdistetään?
+# (6.12.2018)
 #
-# Kysymysten Q3a ja Q3b  Muut vastaustvaihtoehdot ovat 1= kokopäivätyö, 2 = osa-aikatyö ja 
-# 3 = pysyä kotona. Eos-vastaus ei ole sama kuin "en samaa enkä eri mieltä" (ns. neutraali vaihtoehto), ja se pitäisi erotella
-# muista puuttuvan tiedon koodeista. Tässä kaikki kolme SPSS- tiedoston vaihtoehtoa ovat puuttuvia tietoja (NA)
-
 substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13")
 
 # Nämä jäävät pois:
