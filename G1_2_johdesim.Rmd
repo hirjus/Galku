@@ -120,6 +120,26 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 
 
 **zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
+```{r faktorintitesti1}
+# PUUTTUVAT TIEDOT JA as_factor
+#
+# forcats - paketin (tai haven-paketin?) as_factor-funktio - haven-paketissa (7.12.2018)
+# Compared to base R, this function creates levels in the order in which they appear, 
+# which will be the same on every platform. (Base R sorts in the current locale 
+# which can vary from place to place.)
+# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
+# https://haven.tidyverse.org/reference/as_factor.html
+str(ISSP2012esim1.dat$V6)
+summary(ISSP2012esim1.dat$V6)
+tempQ1b <- as_factor(ISSP2012esim1.dat$V6)
+# Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
+# - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+
+str(tempQ1b)
+head(tempQ1b)
+summary(tempQ1b)
+
+```
 
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
