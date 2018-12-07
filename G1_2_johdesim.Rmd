@@ -132,12 +132,29 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 str(ISSP2012esim1.dat$V6)
 summary(ISSP2012esim1.dat$V6)
 tempQ1b <- as_factor(ISSP2012esim1.dat$V6)
+
+str(tempQ1b)
+summary(tempQ1b)
+
 # Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
 # - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
 
-str(tempQ1b)
-head(tempQ1b)
-summary(tempQ1b)
+
+temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
+str(temp2Q1b)
+summary(temp2Q1b)
+
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+str(temp3Q1b)
+summary(temp3Q1b)
+
+temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
+str(temp4Q1b)
+summary(temp4Q1b)
+
+#str(tempQ1b)
+#head(tempQ1b)
+#summary(tempQ1b)
 
 ```
 
