@@ -143,15 +143,25 @@ summary(tempQ1b)
 temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
 str(temp2Q1b)
 summary(temp2Q1b)
+table (temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table (temp2Q1b) #otetaan NA-arvot mukaan
+head(temp2Q1b)
+attributes(temp2Q1b)
+
 
 temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
 str(temp3Q1b)
 summary(temp3Q1b)
+attributes(temp3Q1b)
+table (temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
 
 temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
 str(temp4Q1b)
 summary(temp4Q1b)
-
+attributes((temp4Q1b))
+summary(temp4Q1b)
+table (temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+temp4Q1b
 #str(tempQ1b)
 #head(tempQ1b)
 #summary(tempQ1b)

@@ -65,6 +65,7 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
 - pieniä muutoksia ja kommentteja, aloitetaan uusi versio 1.51 5.12.2018
 
 **6.12.2018 1.51**
+- as_factor - funktio käyttöön;  testaillaan miten toimii kun (a) user_na - arvoja ei lueta ja (b) puuttuvat ovat mukana.
 
 
 
