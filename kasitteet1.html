@@ -235,7 +235,7 @@ display: none;
 padding: 0 4px 0 4px;
 }
 .pagedtable .even {
-background-color: #fcfcfc;
+background-color: rgba(140, 140, 140, 0.1);
 }
 .pagedtable-padding-col {
 display: none;
@@ -1552,6 +1552,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -1559,14 +1562,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -1582,18 +1645,20 @@ $(document).ready(function () {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages ------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>## v ggplot2 3.1.0     v purrr   0.2.5
-## v tibble  1.4.2     v dplyr   0.7.7
+## v tibble  1.4.2     v dplyr   0.7.8
 ## v tidyr   0.8.2     v stringr 1.3.1
-## v readr   1.1.1     v forcats 0.3.0</code></pre>
+## v readr   1.3.0     v forcats 0.3.0</code></pre>
 <pre><code>## Warning: package 'ggplot2' was built under R version 3.5.1</code></pre>
 <pre><code>## Warning: package 'tidyr' was built under R version 3.5.1</code></pre>
+<pre><code>## Warning: package 'readr' was built under R version 3.5.1</code></pre>
 <pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
-<pre><code>## -- Conflicts ---------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(knitr)</code></pre>
+<pre><code>## Warning: package 'knitr' was built under R version 3.5.1</code></pre>
 <div id="kasitteet" class="section level1">
 <h1>Käsitteet</h1>
 <p>1.8.2018</p>
@@ -1623,7 +1688,7 @@ colnames(consepts1.df) &lt;- cols_concepts
 #%&gt;%
 #  arrange(Term) %&gt;% # i.e. alphabetical order by Term
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
-knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
+knitr::kable(arrange(consepts1.df, consepts_fi),booktab=TRUE )</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1634,14 +1699,24 @@ knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">massa</td>
-<td align="left">mass</td>
-<td align="left">massa, havaintojen lukumäärä</td>
+<td align="left">attraktio</td>
+<td align="left">attraction</td>
+<td align="left">vetovoima</td>
 </tr>
 <tr class="even">
-<td align="left">profiili</td>
-<td align="left">profile</td>
-<td align="left">profiili,jotain</td>
+<td align="left">barysentrinen</td>
+<td align="left">barycentric</td>
+<td align="left">painotettu keskiarvo</td>
+</tr>
+<tr class="odd">
+<td align="left">ekvivalenssi jakauman suhteen</td>
+<td align="left">distributional equivalence</td>
+<td align="left">jakauman ekvivalenssi on tärkein periaate</td>
+</tr>
+<tr class="even">
+<td align="left">inertia</td>
+<td align="left">inertia</td>
+<td align="left">hajonnan tunnusluku</td>
 </tr>
 <tr class="odd">
 <td align="left">kontrasti</td>
@@ -1649,14 +1724,24 @@ knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
 <td align="left">ääripäät</td>
 </tr>
 <tr class="even">
+<td align="left">massa</td>
+<td align="left">mass</td>
+<td align="left">massa, havaintojen lukumäärä</td>
+</tr>
+<tr class="odd">
 <td align="left">modaliteetit</td>
 <td align="left">modalities</td>
 <td align="left">luokittelumuuttujan arvo tai arvot</td>
 </tr>
+<tr class="even">
+<td align="left">pääkoordinaatit</td>
+<td align="left">principal coordinates</td>
+<td align="left">skaalaus a</td>
+</tr>
 <tr class="odd">
-<td align="left">attraktio</td>
-<td align="left">attraction</td>
-<td align="left">vetovoima</td>
+<td align="left">profiili</td>
+<td align="left">profile</td>
+<td align="left">profiili,jotain</td>
 </tr>
 <tr class="even">
 <td align="left">repulsio</td>
@@ -1664,32 +1749,13 @@ knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
 <td align="left">työntövoima</td>
 </tr>
 <tr class="odd">
-<td align="left">barysentrinen</td>
-<td align="left">barycentric</td>
-<td align="left">painotettu keskiarvo</td>
-</tr>
-<tr class="even">
-<td align="left">ekvivalenssi jakauman suhteen</td>
-<td align="left">distributional equivalence</td>
-<td align="left">jakauman ekvivalenssi on tärkein periaate</td>
-</tr>
-<tr class="odd">
-<td align="left">pääkoordinaatit</td>
-<td align="left">principal coordinates</td>
-<td align="left">skaalaus a</td>
-</tr>
-<tr class="even">
 <td align="left">standardikoordinaatit</td>
 <td align="left">stardard coordinates</td>
 <td align="left">skaalaus b</td>
 </tr>
-<tr class="odd">
-<td align="left">inertia</td>
-<td align="left">inertia</td>
-<td align="left">hajonnan tunnusluku</td>
-</tr>
 </tbody>
 </table>
+<pre class="r"><code>#knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
 <p>Ed Berryn <a href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/">esimerkin</a> mukaan</p>
 </div>
 

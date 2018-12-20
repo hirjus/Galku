@@ -1,6 +1,6 @@
 # Data_iso1.R 12.10.2018
 #
-# Kootaan G1_1_data2.Rmd - tiedostosta laajemma datana koodilohkot
+# Kootaan G1_1_data2.Rmd - tiedostosta laajemman datana koodilohkot
 #
 # Aja paketit-R !
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
@@ -147,10 +147,11 @@ jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
 str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 
-# test1 <- is.na(ISSP2012jh1b.data)
-# head(test1) TRUE/FALSE - matriisi
-# str(test1)
-# test1 <- mutate_all(test1,count(.))
+test1 <- is.na(ISSP2012jh1b.data)
+head(test1) #TRUE/FALSE - matriisi
+str(test1)
+class(test1)
+test1 <- mutate_all(test1,count(.)) # ei toimi matriisille!
 
 head(test1)
 

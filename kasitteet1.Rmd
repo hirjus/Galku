@@ -44,7 +44,8 @@ colnames(consepts1.df) <- cols_concepts
 #%>%
 #  arrange(Term) %>% # i.e. alphabetical order by Term
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
-knitr::kable(consepts1.df, booktab=TRUE)
+knitr::kable(arrange(consepts1.df, consepts_fi),booktab=TRUE )
+#knitr::kable(consepts1.df, booktab=TRUE)
 
 ```
 
