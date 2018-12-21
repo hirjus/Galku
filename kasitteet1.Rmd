@@ -51,3 +51,24 @@ knitr::kable(arrange(consepts1.df, consepts_fi),booktab=TRUE )
 
 Ed Berryn [esimerkin](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/) mukaan
 
+# Linkit ISSP-datan dokumetteihin (21.12.18)
+
+Data ja tärkeimmät dokumentit löytyvät GESIS - instituutin [data-palvelusta] (http://zacat.gesis.org).
+
+
+```{r ISSPdocsTable, fig.cap="ISSP 2012 - Family and Changing Gender Roles IV - dokumentit"}
+issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
+                  "Contents of ISSP 2012 module")
+issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot", 
+                  "tiedokeruun toteutus eri maissa", 
+                  "Maittain sovellettava kyselylomake", "substanssikysymykset taulukkona")
+issp_docfile <- c("ZA5900_cdb.pdf", "ZA5900_mr.pdf", "ZA5900_bq.pdf","ZA5900_overview.pdf")
+
+ISSPdocsT.df <- data_frame(issp_docname, issp_docdesc, issp_docfile)
+col_isspdocs <- c("dokumentti","sisältö","tiedosto")
+colnames(ISSPdocsT.df) <- col_isspdocs
+
+knitr::kable(ISSPdocsT.df, booktab=TRUE)
+
+```
+

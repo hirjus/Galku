@@ -1650,15 +1650,10 @@ $(document).ready(function () {
 ## v tibble  1.4.2     v dplyr   0.7.8
 ## v tidyr   0.8.2     v stringr 1.3.1
 ## v readr   1.3.0     v forcats 0.3.0</code></pre>
-<pre><code>## Warning: package 'ggplot2' was built under R version 3.5.1</code></pre>
-<pre><code>## Warning: package 'tidyr' was built under R version 3.5.1</code></pre>
-<pre><code>## Warning: package 'readr' was built under R version 3.5.1</code></pre>
-<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
 <pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(knitr)</code></pre>
-<pre><code>## Warning: package 'knitr' was built under R version 3.5.1</code></pre>
 <div id="kasitteet" class="section level1">
 <h1>Käsitteet</h1>
 <p>1.8.2018</p>
@@ -1757,6 +1752,53 @@ knitr::kable(arrange(consepts1.df, consepts_fi),booktab=TRUE )</code></pre>
 </table>
 <pre class="r"><code>#knitr::kable(consepts1.df, booktab=TRUE)</code></pre>
 <p>Ed Berryn <a href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/">esimerkin</a> mukaan</p>
+</div>
+<div id="linkit-issp-datan-dokumetteihin-21.12.18" class="section level1">
+<h1>Linkit ISSP-datan dokumetteihin (21.12.18)</h1>
+<p>Data ja tärkeimmät dokumentit löytyvät GESIS - instituutin [data-palvelusta] (<a href="http://zacat.gesis.org" class="uri">http://zacat.gesis.org</a>).</p>
+<pre class="r"><code>issp_docname &lt;- c(&quot;Variable Report&quot;, &quot;Study Monitoring Report&quot;,&quot;Basic Questionnaire&quot;, 
+                  &quot;Contents of ISSP 2012 module&quot;)
+issp_docdesc &lt;- c(&quot;Perusdokumentti, muuttujien kuvaukset ja taulukot&quot;, 
+                  &quot;tiedokeruun toteutus eri maissa&quot;, 
+                  &quot;Maittain sovellettava kyselylomake&quot;, &quot;substanssikysymykset taulukkona&quot;)
+issp_docfile &lt;- c(&quot;ZA5900_cdb.pdf&quot;, &quot;ZA5900_mr.pdf&quot;, &quot;ZA5900_bq.pdf&quot;,&quot;ZA5900_overview.pdf&quot;)
+
+ISSPdocsT.df &lt;- data_frame(issp_docname, issp_docdesc, issp_docfile)
+col_isspdocs &lt;- c(&quot;dokumentti&quot;,&quot;sisältö&quot;,&quot;tiedosto&quot;)
+colnames(ISSPdocsT.df) &lt;- col_isspdocs
+
+knitr::kable(ISSPdocsT.df, booktab=TRUE)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">dokumentti</th>
+<th align="left">sisältö</th>
+<th align="left">tiedosto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Variable Report</td>
+<td align="left">Perusdokumentti, muuttujien kuvaukset ja taulukot</td>
+<td align="left">ZA5900_cdb.pdf</td>
+</tr>
+<tr class="even">
+<td align="left">Study Monitoring Report</td>
+<td align="left">tiedokeruun toteutus eri maissa</td>
+<td align="left">ZA5900_mr.pdf</td>
+</tr>
+<tr class="odd">
+<td align="left">Basic Questionnaire</td>
+<td align="left">Maittain sovellettava kyselylomake</td>
+<td align="left">ZA5900_bq.pdf</td>
+</tr>
+<tr class="even">
+<td align="left">Contents of ISSP 2012 module</td>
+<td align="left">substanssikysymykset taulukkona</td>
+<td align="left">ZA5900_overview.pdf</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
