@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Data
 
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018).
@@ -629,7 +634,13 @@ knitr::kable(jhVarTable1.df, booktab=TRUE,
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
  knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
-              fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
+              fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
+# Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
+# monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
+
+# Kokeillaan taulukoiden yhdistämistä, jos aikaa jää. Ei luultavasti kannata, kun halutaan pdf- ja html-tulostus 
+# samalla koodilla.
+ 
 ```
 
 Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
