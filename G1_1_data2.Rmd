@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Data
 
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018).
@@ -97,6 +92,22 @@ http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStud
 **Dokumentointisivusto/katalogi, jossa helppo navigoida** zacat.gesis.org.
 
 Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain.
+
+```{r ISSPdocsTable, fig.cap="ISSP 2012 - Family and Changing Gender Roles IV - dokumentit"}
+issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
+                  "Contents of ISSP 2012 module")
+issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot", 
+                  "tiedokeruun toteutus eri maissa", 
+                  "Maittain sovellettava kyselylomake", "substanssikysymykset taulukkona")
+issp_docfile <- c("ZA5900_cdb.pdf", "ZA5900_mr.pdf", "ZA5900_bq.pdf","ZA5900_overview.pdf")
+
+ISSPdocsT.df <- data_frame(issp_docname, issp_docdesc, issp_docfile)
+col_isspdocs <- c("dokumentti","sisältö","tiedosto")
+colnames(ISSPdocsT.df) <- col_isspdocs
+
+knitr::kable(ISSPdocsT.df, booktab=TRUE)
+```
+
 
 ## Substanssimuuttujat, taustamuuttujat, muut
 
@@ -638,14 +649,13 @@ knitr::kable(jhVarTable1.df, booktab=TRUE,
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
 # monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
 
-# Kokeillaan taulukoiden yhdistämistä, jos aikaa jää. Ei luultavasti kannata, kun halutaan pdf- ja html-tulostus 
-# samalla koodilla.
+# Kokeillaan taulukoiden yhdistämistä, jos aikaa jää. Ei luultavasti kannata, kun halutaan pdf- ja 
+# html-tulostus samalla koodilla (26.12.18).
  
 ```
 
 Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
 
-**TODO** (6.12.18) Taulukon voisi ehkä yhdistää, suomenkielinen pitkä kysymys englanninkielisen perään? Ehkä tarpeetonta, englanninkielisen lomakekkeen voi laittaa myös liitteeksi. Tässä pärjätään suomenkielisellä.
 
 Bookdown-versiossa taulukot omiksi koodilohkoiksi, ja fig.caption - optiolla taulukon otsikko.
 
