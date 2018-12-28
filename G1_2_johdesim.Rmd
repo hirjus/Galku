@@ -179,9 +179,10 @@ str(temp4Q1b)
 #
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f")
+#sp_levels
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
-vastaus_levels1 <- c()
+#vastaus_levels1 <- c()
 
 # Faktoreiksi
 ISSP2012esim1.dat$maa <- as_factor(ISSP2012esim1.dat$C_ALPHAN)
