@@ -161,7 +161,7 @@ summary(temp4Q1b)
 attributes((temp4Q1b))
 summary(temp4Q1b)
 table (temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-temp4Q1b
+str(temp4Q1b)
 #str(tempQ1b)
 #head(tempQ1b)
 #summary(tempQ1b)
@@ -181,12 +181,16 @@ temp4Q1b
 sp_labels <- c("m","f")
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
+vastaus_levels1 <- c()
 
 # Faktoreiksi
 ISSP2012esim1.dat$maa <- as_factor(ISSP2012esim1.dat$C_ALPHAN)
 ISSP2012esim1.dat$sp <- as_factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
 ISSP2012esim1.dat$Q1b <- as_factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 str(ISSP2012esim1.dat$Q1b)
+levels(ISSP2012esim1.dat$Q1b)
+str(ISSP2012esim1.dat$sp)
+levels(ISSP2012esim1.dat$sp)
 #
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
@@ -221,7 +225,9 @@ str(ISSP2012esim1.dat)
 ```
 Poistetaan havainnot, joissa puuttuvia tietoja
 ```{r esim1data3}
-#poistetaan havainnot, joissa puuttuvia tietoja
+# poistetaan havainnot, joissa puuttuvia tietoja
+# taulukko on sekaisin (28.12.18) - pitäisikö lisätä !is.na(Q1b)?
+# V6 haven_labelled num, Q1b factor 8 levels
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 #str(ISSP2012esim1.dat) 
 # 8143 obs. of  6 variables

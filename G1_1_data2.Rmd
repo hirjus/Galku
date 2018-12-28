@@ -427,7 +427,7 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 # 
 #
 
-substvars1 <- c("V5", "V6","V7","V8","V9","V10","V11","V12","V13")
+substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13")
 
 # Nämä yhteiset muuttujat pois (maaspesifien muuttujien lisäksi) :
 #
@@ -567,7 +567,7 @@ Vastausvaihtoehdot:
 
 Kahdeksan demografista ja muuta taustamuuttujaa on kuvattu koodilohkon kommenteissa.
 
-```{r vartable1 fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
+```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
 # Muuttuja taulukkona
 #head(ISSP2012jh1b.data)
 #str(ISSP2012jh1b.data)
