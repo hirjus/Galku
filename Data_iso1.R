@@ -6,6 +6,13 @@
 ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 
 #str(ISSP2012.data)
+## str(apu2_df)
+## typeof(apu2_df) # what is it?
+## class(apu2_df) # what is it? (sorry)
+## storage.mode(apu2_df) # what is it? (very sorry)
+## length(apu2_df) # how long is it? What about two dimensional objects?
+## attributes(apu2_df) 
+
 
 incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 
                       372, 428, 440, 528, 578, 616, 620, 643, 703, 705, 752, 756)
@@ -15,7 +22,17 @@ incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 35
 
 # 25 MAATA
 
-ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
+# miten se meni? *.data koko aineisto, *.dat valikoitu? Vai onko vähän turhaa,
+# kun luodaa tässä? (11.1.19)
+
+#ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
+#str(ISSP2012jh1a.data)
+## typeof(apu2_df) # what is it?
+## class(apu2_df) # what is it? (sorry)
+## storage.mode(apu2_df) # what is it? (very sorry)
+## length(apu2_df) # how long is it? What about two dimensional objects?
+## attributes(apu2_df) 
+
 
 # MUUTTUJAT
 
@@ -142,6 +159,8 @@ bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL",
 #Valitaan muuttujat
 
 jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
+
+# ISO DATA - maat valittu (25), valitaan muuttuja
 
 #jhvars1
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
