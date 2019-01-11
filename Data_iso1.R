@@ -3,15 +3,11 @@
 # Kootaan G1_1_data2.Rmd - tiedostosta laajemman datana koodilohkot
 #
 # Aja paketit-R !
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 
-#str(ISSP2012.data)
-## str(apu2_df)
-## typeof(apu2_df) # what is it?
-## class(apu2_df) # what is it? (sorry)
-## storage.mode(apu2_df) # what is it? (very sorry)
-## length(apu2_df) # how long is it? What about two dimensional objects?
-## attributes(apu2_df) 
+# luetaan alkuperäinen data R- dataksi (df/tibble).
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+
+
 
 
 incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 
@@ -25,13 +21,31 @@ incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 35
 # miten se meni? *.data koko aineisto, *.dat valikoitu? Vai onko vähän turhaa,
 # kun luodaa tässä? (11.1.19)
 
-#ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
-#str(ISSP2012jh1a.data)
-## typeof(apu2_df) # what is it?
-## class(apu2_df) # what is it? (sorry)
-## storage.mode(apu2_df) # what is it? (very sorry)
-## length(apu2_df) # how long is it? What about two dimensional objects?
-## attributes(apu2_df) 
+ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
+
+str(ISSP2012jh1a.data)
+# Classes  ‘tbl_df’, ‘tbl’ and 'data.frame':	32969 obs. of  420 variables
+# typeof(ISSP2012jh1a.data) # what is it? - list
+# class(ISSP2012jh1a.data) # what is it? (sorry)
+# storage.mode(ISSP2012jh1a.data) # what is it? (very sorry) - list
+# length(ISSP2012jh1a.data) # how long is it? 420
+# What about two dimensional objects?
+# attributes(ISSP2012jh1a.data)
+
+# muuttajat haven_labelled, esimerkiksi V4 ja V6
+# 
+# $ V4      : 'haven_labelled' num  36 36 36 36 36 36 36 36 36 36 ...
+# ..- attr(*, "label")= chr "Country ISO 3166 Code (see V3 for codes for the sample)"
+# ..- attr(*, "format.spss")= chr "F3.0"
+# ..- attr(*, "labels")= Named num  32 36 40 56 100 124 152 156 158 191 ...
+#
+# $ V6      : 'haven_labelled' num  1 5 4 4 4 NA 4 3 4 3 ...
+# ..- attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+# ..- attr(*, "format.spss")= chr "F1.0"
+# ..- attr(*, "labels")= Named num  0 1 2 3 4 5 8 9
+# .. ..- attr(*, "names")= chr  "NAP: ES" "Strongly agree" "Agree" 
+#           "Neither agree nor disagree" ...
+
 
 
 # MUUTTUJAT
@@ -162,9 +176,16 @@ jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 
 # ISO DATA - maat valittu (25), valitaan muuttuja
 
-#jhvars1
 ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
-str(ISSP2012jh1b.data) #32969 obs. of  23 variables
+# str(ISSP2012jh1b.data) #32969 obs. of  23 variables
+# typeof(ISSP2012jh1b.data) # what is it?
+# class(ISSP2012jh1b.data) # what is it? (sorry)
+# storage.mode(ISSP2012jh1b.data) # what is it? (very sorry)
+# length(ISSP2012jh1b.data) # how long is it? What about two dimensional objects?
+# attributes(ISSP2012jh1b.data)
+
+
+# TAULUKOINTIA
 
 test1 <- is.na(ISSP2012jh1b.data)
 head(test1) #TRUE/FALSE - matriisi
@@ -206,15 +227,15 @@ tail(test1_df)
 
 
 # ei toimi 22.10.2018
-test1_df %>% group_by(C_ALPHAN) %>%
-           summarize_all(funs(sum(is.na(.))) %>%
-ungroup()
+# test1_df %>% group_by(C_ALPHAN) %>%
+#           summarize_all(funs(sum(is.na(.))) %>%
+#ungroup()
 # test2 <- summary(test1_df, rm.na = "F")           
 # str(test2)            
 # head(test2)
-test1_df %>%
-    select(everything()) %>%
-    summarise_all(funs(sum(is.na(.))))
+# test1_df %>%
+#   select(everything()) %>%
+#   summarise_all(funs(sum(is.na(.))))
 
 
 #
@@ -250,7 +271,7 @@ summarise(temp1)
 
 ISSP2012jh1b.data %>%
     rowwise %>%
-    summarise(NA_per_row = sum(is.na(.))
+    summarise(NA_per_row = sum(is.na(.)))
 
 # MUUTTUJAT FAKTOREIKSI
 #
