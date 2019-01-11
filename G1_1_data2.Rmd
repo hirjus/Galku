@@ -728,6 +728,7 @@ knitr::kable(taulu1b,digits = 2, booktabs = TRUE,
 Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
 
 ```{r muut2old}
+# TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019)
 # Nämä tarkastelu jaksoon, jossa laajempi joukko muuttujia käyttöön
 
 # Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?

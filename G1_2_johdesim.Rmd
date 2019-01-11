@@ -122,8 +122,9 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 **zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
 ```{r faktorintitesti1}
 # PUUTTUVAT TIEDOT JA as_factor
+# kopioitu Data_iso.1.R - skriptiin (11.1.2019)
 #
-# forcats - paketin (tai haven-paketin?) as_factor-funktio - haven-paketissa (7.12.2018)
+# forcats - paketin as_factor-funktio - haven-paketissa (7.12.2018)
 # Compared to base R, this function creates levels in the order in which they appear, 
 # which will be the same on every platform. (Base R sorts in the current locale 
 # which can vary from place to place.)

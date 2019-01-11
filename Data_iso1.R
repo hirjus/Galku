@@ -303,9 +303,55 @@ ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, labels = sp_labels) # t
 ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE
 ISSP2012jh1c.data$edu <- as_factor(ISSP2012jh1c.data$DEGREE)
 ISSP2012jh1c.data$mstat<- as_factor(ISSP2012jh1c.data$MAINSTAT) 
-ISSP2012jh1c.data$class <- as_factor(ISSP2012jh1c.data$TOPBOT) 
+ISSP2012jh1c.data$socstat <- as_factor(ISSP2012jh1c.data$TOPBOT) 
 ISSP2012jh1c.data$nchild<- ISSP2012jh1c.data$HHCHILDR
 ISSP2012jh1c.data$lstat <- as_factor(ISSP2012jh1c.data$MARITAL)  
 ISSP2012jh1c.data$urb<- as_factor(ISSP2012jh1c.data$URBRURAL)
 
 ISSP2012jh1c.data %>% tableX(SEX, sp, type = "count")
+summary(ISSP2012jh1c.data$SEX)
+levels(ISSP2012jh1c.data$SEX)
+summary(ISSP2012jh1c.data$sp)
+levels(ISSP2012jh1c.data$sp)
+labels(ISSP2012jh1c.data$sp) #HÄH?
+str(ISSP2012jh1c.data$sp)
+# Tässä pulma: vertaa summary(sp) ja levels(sp)
+
+# Kopsattu G1_2_johdesim.Rmd, rivi 133-
+#
+# forcats: as_factor-funktion parametrit (11.1.2019)
+#
+# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
+# https://haven.tidyverse.org/reference/as_factor.html
+
+
+
+temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
+str(temp2Q1b)
+summary(temp2Q1b)
+table (temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table (temp2Q1b) #otetaan NA-arvot mukaan
+head(temp2Q1b)
+attributes(temp2Q1b)
+
+
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+str(temp3Q1b)
+summary(temp3Q1b)
+attributes(temp3Q1b)
+table (temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+
+temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
+str(temp4Q1b)
+summary(temp4Q1b)
+attributes((temp4Q1b))
+summary(temp4Q1b)
+table (temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+str(temp4Q1b)
+#str(tempQ1b)
+#head(tempQ1b)
+#summary(tempQ1b)
+
+
+
+
