@@ -23,7 +23,7 @@ incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 35
 
 ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 
-str(ISSP2012jh1a.data)
+# str(ISSP2012jh1a.data)
 # Classes  ‘tbl_df’, ‘tbl’ and 'data.frame':	32969 obs. of  420 variables
 # typeof(ISSP2012jh1a.data) # what is it? - list
 # class(ISSP2012jh1a.data) # what is it? (sorry)
@@ -217,6 +217,7 @@ test1_df
 # A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
 # A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
 # 9601/32969
+#
 # Tästä pitäisi saada taulukko aikaiseksi
 # Aika hyvä linkki na-arvojen käsittelystä
 # https://bookdown.org/lyzhang10/lzhang_r_tips_book/how-to-deal-with-nas.html
@@ -245,8 +246,8 @@ tail(test1_df)
 # sapply(test1_df, function(x) sum(is.na(x)))
 
 # toimii alkuperäisellä datalla
-sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
-
+temp3 <- sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
+str(temp3)
 
 
 # 2. PURRR map
@@ -254,10 +255,10 @@ map(ISSP2012jh1b.data, ~sum(is.na(.)))
 
 # 3. dplyr
 
-ISSP2012jh1b.data %>%
+temp2 <- ISSP2012jh1b.data %>%
     select(everything()) %>% # muuttujien (sarakkeiden) valinta
     summarise_all(funs((sum(is.na(.)))))
-
+summarise(temp2)
 # 4. Riveittäin - montako puuttuvaa tietoa havainnoittain (apply)
 
 temp1 <- apply(ISSP2012jh1b.data, MARGIN = 1, function(x) sum(is.na(x)))
@@ -279,10 +280,11 @@ ISSP2012jh1b.data %>%
 #
 #Faktoreiksi substanssi- ja taustamuuttujat (paitsi AGE)
 str(ISSP2012jh1b.data$SEX)
+str(ISSP2012jh1b.data$AGE)
 #Uusi datatiedosto
 ISSP2012jh1c.data <- ISSP2012jh1b.data
 # sp (sukupuoli) m = 1, f = 2
-sp_labels <- c("m","f")
+sp_labels <- c("m","f") # TARKISTA! 1 < 2 mutta m > f
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
 vastQ2_labels <- c("W","w","H")
@@ -297,11 +299,13 @@ ISSP2012jh1c.data$Q2a <- as_factor(ISSP2012jh1c.data$V10, labels = vastaus_label
 ISSP2012jh1c.data$Q2b <- as_factor(ISSP2012jh1c.data$V11, labels = vastaus_labels)
 ISSP2012jh1c.data$Q3a <- as_factor(ISSP2012jh1c.data$V12, labels = vastQ2_labels)
 ISSP2012jh1c.data$Q3b <- as_factor(ISSP2012jh1c.data$V13, labels = vastQ2_labels)
-ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, sp_labels) # tähän levels?, labels
-ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE # faktoriksi, saadaan NA mukaan. Käytetään luokiteltuna.
+ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, labels = sp_labels) # tähän levels?, labels
+ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE
 ISSP2012jh1c.data$edu <- as_factor(ISSP2012jh1c.data$DEGREE)
 ISSP2012jh1c.data$mstat<- as_factor(ISSP2012jh1c.data$MAINSTAT) 
 ISSP2012jh1c.data$class <- as_factor(ISSP2012jh1c.data$TOPBOT) 
 ISSP2012jh1c.data$nchild<- ISSP2012jh1c.data$HHCHILDR
 ISSP2012jh1c.data$lstat <- as_factor(ISSP2012jh1c.data$MARITAL)  
 ISSP2012jh1c.data$urb<- as_factor(ISSP2012jh1c.data$URBRURAL)
+
+ISSP2012jh1c.data %>% tableX(SEX, sp, type = "count")
