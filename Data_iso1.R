@@ -189,6 +189,9 @@ summary(ISSP2012jh1b.data)
 
 # Jätetään pois havainnot, joissa tieto iästä (134) tai sukupuolesta (68)
 # puuttu.Virheellisiä tietoja luultavasti.
+
+# PERUSDATA - EI MUUNNOKSIA
+
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
 summary(ISSP2012jh1c.data)
 str(ISSP2012jh1c.data)
@@ -217,17 +220,25 @@ head(test1)
 #bgvars1
 
 # havainnot joissa puuttuvia tietoja
-test1_df <- filter(ISSP2012jh1b.data, ((is.na(V5) | is.na(V6) | is.na(V7) 
+MissingTest1_df <- filter(ISSP2012jh1c.data, ((is.na(V5) | is.na(V6) | is.na(V7) 
                                       | is.na(V8) | is.na(V9) | is.na(V10)
                                       | is.na(V11) | is.na(V12) | is.na (V13)
-                                      | is.na(SEX) | is.na(AGE) 
                                       | is.na(DEGREE) | is.na(MAINSTAT)
                                       | is.na(TOPBOT) | is.na(HHCHILDR)
                                       | is.na(MARITAL) | is.na(URBRURAL))))
-test1_df 
-# A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
-# A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
-# 9601/32969
+MissingTest1_df 
+# A tibble: 9,455 x 23
+# V1     V2     DOI    V3     V4     C_ALPHAN V5    V6    V7    V8    V9    V10  
+# <dbl+> <chr>  <chr>  <dbl+> <dbl+> <chr>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#
+# V11   V12   V13   SEX   AGE   DEGREE MAINSTAT TOPBOT HHCHILDR MARITAL URBRURAL
+# <dbl> <dbl> <dbl> <dbl> <dbl> <dbl+> <dbl+lb> <dbl+> <dbl+lb> <dbl+l> <dbl+lb>
+#
+# 32823-9455 = 23368, 28,8 prosentilla havainnoista on puuttuvia tietoja
+summary(MissingTest1_df)
+
+
+# 
 #
 # Tästä pitäisi saada taulukko aikaiseksi
 # Aika hyvä linkki na-arvojen käsittelystä
@@ -257,26 +268,32 @@ tail(test1_df)
 # sapply(test1_df, function(x) sum(is.na(x)))
 
 # toimii alkuperäisellä datalla
-temp3 <- sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
+temp3 <- sapply(ISSP2012jh1c.data, function(x) sum(is.na(x)))
 str(temp3)
-
+temp3
+print(temp3)
 
 # 2. PURRR map
-map(ISSP2012jh1b.data, ~sum(is.na(.)))
+temp4 <- map(ISSP2012jh1c.data, ~sum(is.na(.)))
+str(temp4)
 
 # 3. dplyr
 
-temp2 <- ISSP2012jh1b.data %>%
+temp2 <- ISSP2012jh1c.data %>%
     select(everything()) %>% # muuttujien (sarakkeiden) valinta
     summarise_all(funs((sum(is.na(.)))))
-summarise(temp2)
+temp22 <- select(temp2, V5:V13,DEGREE,MAINSTAT,TOPBOT,HHCHILDR,MARITAL,URBRURAL)
+temp22 %>%
+    mutate_all(funs(pros =./32823))
+print(temp22)
+
 # 4. Riveittäin - montako puuttuvaa tietoa havainnoittain (apply)
 
-temp1 <- apply(ISSP2012jh1b.data, MARGIN = 1, function(x) sum(is.na(x)))
-head(temp1)
-hist(temp1)
-str(temp1)
-summarise(temp1)
+# temp1 <- apply(ISSP2012jh1c.data, MARGIN = 1, function(x) sum(is.na(x)))
+# head(temp1)
+# hist(temp1)
+# str(temp1)
+# summary(temp1)
 
 # 5. Riveittäin - montako puuttuvaa tietoa havainnoittain (dplyr)
 # erittäin hidas!
@@ -285,15 +302,18 @@ summarise(temp1)
 #    rowwise %>%
 #    summarise(NA_per_row = sum(is.na(.)))
 
-# MUUTTUJAT FAKTOREIKSI
+# MUUTTUJAT FAKTOREIKSI - KERRALLA VAI VASTA LÄHEMPÄNÄ ANALYYSIÄ?
 #
 # HUOM! Onko puuttuvia tietoja (NA) mukana vai ei! Vaikuttaa faktorointiin.
 #
 #Faktoreiksi substanssi- ja taustamuuttujat (paitsi AGE)
-str(ISSP2012jh1b.data$SEX)
-str(ISSP2012jh1b.data$AGE)
+
+#Tai sitten faktorointi vasta lähempänä analyysiä? (21.1.2019)
+str(ISSP2012jh1c.data$SEX)
+str(ISSP2012jh1c.data$AGE)
+summary(ISSP2012jh1c.data$AGE)
 #Uusi datatiedosto
-ISSP2012jh1c.data <- ISSP2012jh1b.data
+ISSP2012jh1d.data <- ISSP2012jh1c.data
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f") # TARKISTA! 1 < 2 mutta m > f
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
