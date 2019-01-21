@@ -23,7 +23,7 @@ incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 35
 
 ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 
-# str(ISSP2012jh1a.data)
+#str(ISSP2012jh1a.data)
 # Classes  ‘tbl_df’, ‘tbl’ and 'data.frame':	32969 obs. of  420 variables
 # typeof(ISSP2012jh1a.data) # what is it? - list
 # class(ISSP2012jh1a.data) # what is it? (sorry)
@@ -183,6 +183,17 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 # storage.mode(ISSP2012jh1b.data) # what is it? (very sorry)
 # length(ISSP2012jh1b.data) # how long is it? What about two dimensional objects?
 # attributes(ISSP2012jh1b.data)
+summary(ISSP2012jh1b.data$V5)
+summary(ISSP2012jh1b.data$AGE)
+summary(ISSP2012jh1b.data)
+
+# Jätetään pois havainnot, joissa tieto iästä (134) tai sukupuolesta (68)
+# puuttu.Virheellisiä tietoja luultavasti.
+ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
+summary(ISSP2012jh1c.data)
+str(ISSP2012jh1c.data)
+# 32823 obs. of  23 variables, 32969-32823 = 146, 134+68 = 202
+
 
 
 # TAULUKOINTIA
@@ -270,9 +281,9 @@ summarise(temp1)
 # 5. Riveittäin - montako puuttuvaa tietoa havainnoittain (dplyr)
 # erittäin hidas!
 
-ISSP2012jh1b.data %>%
-    rowwise %>%
-    summarise(NA_per_row = sum(is.na(.)))
+#ISSP2012jh1b.data %>%
+#    rowwise %>%
+#    summarise(NA_per_row = sum(is.na(.)))
 
 # MUUTTUJAT FAKTOREIKSI
 #
