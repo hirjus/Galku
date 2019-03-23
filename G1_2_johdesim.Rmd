@@ -98,7 +98,7 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 ```{r esim1data1, eval=FALSE, include=FALSE}
 #
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) ja käytetään sitä - tämä "pimennetään" (23.3.2019)
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df), käytetään sitä (23.3.2019)
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
@@ -123,7 +123,7 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 ```
 
-Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1b.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
+Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
 
 ```{r esim1data2}
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) 
@@ -147,6 +147,7 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
 
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, !is.na(V6))
 ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+str(ISSP2012esim1.dat)
 
 ```
 
@@ -167,10 +168,11 @@ ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
 str(ISSP2012esim1.dat$V6)
 summary(ISSP2012esim1.dat$V6)
 temp1Q1b <- as_factor(ISSP2012esim1.dat$V6)
-table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+#table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
 table(temp1Q1b) # NA-arvoja ei mukaan
 str(temp1Q1b)
 summary(temp1Q1b)
+levels(temp1Q1b)
 
 # Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
 # - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
