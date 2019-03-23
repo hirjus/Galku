@@ -96,26 +96,46 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 **zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
-```{r esim1data1}
+```{r esim1data1, eval=FALSE, include=FALSE}
+#
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1b.data (df) ja käytetään sitä - tämä "pimennetään" (23.3.2019)
+# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
+# 25 maata
+#
+# VANHA VERSIO 
 # Alkuperäinen data
-
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") 
-
+#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 # Yksi kysymys ja kuusi maata
-incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
+# incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
-ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
-#str(ISSP2012esim1.dat) #8557 obs. of  420 variables
+# ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
+# str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
 #
-ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
+#  C_ALPHAN, V3,V4, V6, SEX, AGE) 
 
-#str(ISSP2012esim1.dat) #8557 obs. of  6 variables
+# str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
 
+```
+
+Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1b.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
+
+```{r esim1data2}
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1b.data (df) 
+# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa), 25 maata.
+
+# Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
+
+countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
+ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% countries_esim1)
+# str(ISSP2012esim1.dat)
+vars_esim1 <- c("C_ALPHAN", "V3", "V4", "V6", "SEX", "AGE") #kolme maamuuttujaa, kysymys Q1b
+ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
+str(ISSP2012esim1.dat) # 8557 obs. of  6 variables
 ```
 
 
@@ -132,10 +152,11 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 # https://haven.tidyverse.org/reference/as_factor.html
 str(ISSP2012esim1.dat$V6)
 summary(ISSP2012esim1.dat$V6)
-tempQ1b <- as_factor(ISSP2012esim1.dat$V6)
-
-str(tempQ1b)
-summary(tempQ1b)
+temp1Q1b <- as_factor(ISSP2012esim1.dat$V6)
+table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp1Q1b) # NA-arvoja ei mukaan
+str(temp1Q1b)
+summary(temp1Q1b)
 
 # Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
 # - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
@@ -144,28 +165,26 @@ summary(tempQ1b)
 temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
 str(temp2Q1b)
 summary(temp2Q1b)
-table (temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table (temp2Q1b) #otetaan NA-arvot mukaan
+table(temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp2Q1b) # NA-arvoja ei mukaan
 head(temp2Q1b)
 attributes(temp2Q1b)
 
 
-temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko?
 str(temp3Q1b)
 summary(temp3Q1b)
 attributes(temp3Q1b)
-table (temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp3Q1b) # NA-arvoja ei mukaan
 
 temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
 str(temp4Q1b)
 summary(temp4Q1b)
-attributes((temp4Q1b))
-summary(temp4Q1b)
-table (temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+attributes(temp4Q1b)
+table(temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp4Q1b) # NA-arvoja ei mukaan
 str(temp4Q1b)
-#str(tempQ1b)
-#head(tempQ1b)
-#summary(tempQ1b)
 
 ```
 
