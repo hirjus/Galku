@@ -98,9 +98,10 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 ```{r esim1data1, eval=FALSE, include=FALSE}
 #
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1b.data (df) ja käytetään sitä - tämä "pimennetään" (23.3.2019)
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) ja käytetään sitä - tämä "pimennetään" (23.3.2019)
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata
+# Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 #
 # VANHA VERSIO 
 # Alkuperäinen data
@@ -125,24 +126,37 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1b.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
 
 ```{r esim1data2}
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1b.data (df) 
-# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa), 25 maata.
-
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) 
+# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
+# 25 maata.
+# Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 # Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
 
 countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
-ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% countries_esim1)
+ISSP2012esim1.dat <- filter(ISSP2012jh1c.data, V4 %in% countries_esim1)
 # str(ISSP2012esim1.dat)
 vars_esim1 <- c("C_ALPHAN", "V3", "V4", "V6", "SEX", "AGE") #kolme maamuuttujaa, kysymys Q1b
 ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
-str(ISSP2012esim1.dat) # 8557 obs. of  6 variables
+# str(ISSP2012esim1.dat) 
+# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
+# summary(ISSP2012esim1.dat)
+# ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+
+# Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
+# 8542-399 = 8143
+
+ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, !is.na(V6))
+ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+
 ```
 
 
 **zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
 ```{r faktorintitesti1}
 # PUUTTUVAT TIEDOT JA as_factor
-# kopioitu Data_iso.1.R - skriptiin (11.1.2019)
+# kopioitu Data_iso.1.R - skriptiin (11.1.2019), jatketaan NA-vääntöä siellä. (23.3.2019)
+# 
+# Hyödyllistä katsoa, miten as_factor - funkitolla labelit kulkevat mukana! Ja levels on "väärin"!
 #
 # forcats - paketin as_factor-funktio - haven-paketissa (7.12.2018)
 # Compared to base R, this function creates levels in the order in which they appear, 
@@ -185,6 +199,8 @@ attributes(temp4Q1b)
 table(temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
 table(temp4Q1b) # NA-arvoja ei mukaan
 str(temp4Q1b)
+
+temp5Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
 
 ```
 

@@ -4,8 +4,10 @@
 **edit** capaper - dokumentissa parempi uusi jäsentely (4.9.2018)
 **edit** ISSP-datan perustietoa dokumentissa ISSP_data1.docx (4.9.2018)
 **edit** koodilohkoja ei vielä siistitä, eikä nimetä capaper-vaatimusten mukaan.
+**edit** Poistetaan aineistosta havainnot, joissa puuttuva tieto muuttujassa SEX tai AGE
 
 **edit 24.9.18 Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).**
+
 
 
 ```{r paketit_g11, include=FALSE}
@@ -163,8 +165,11 @@ Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on k
 4. Datan hallinta **liittyy reproducible research- periaatteeseen**
 
 
-
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
+
+1. Valitaan maat ja muuttujat
+
+2. Poistetaan havainnot, joissa puuttuva tieto sukupuolesta tai iästä (tai molemmista)
 
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
@@ -547,7 +552,7 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 # ISSP2012jh1b.data$V5 näyttää tarkemmin rakenteen
 #
 # glimpse(ISSP2012jh1b.data)
-
+# str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
 ```
 
 Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
@@ -855,8 +860,19 @@ NAP ja NAV määritellään
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
 
 
-** (3.10.2018) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
+** (23.3.2019) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
 
+```{r agesexmissing1}
+# Poistetaan aineistosta havainnot, joilla puuttuu jompi kumpi tai molemmat
+
+ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
+
+# str(ISSP2012jh1c.data)
+# 32823 obs. of  23 variables
+# str(ISSP2012jh1b.data)
+# 32969 obs. of  23 variables
+# 32969-32823 = 146
+```
 
 
 
