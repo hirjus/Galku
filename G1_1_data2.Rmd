@@ -311,7 +311,7 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 #str(ISSP2012jh1a.data) # 32969 obs. of  420 variable, Espanja Iso-Britannia, 
 #                        USA pois (10.10.2018)
 #
-# names(ISSP2012jh1.data) # muuttujen nimet
+# names() # muuttujen nimet
 # Maakohtaiset muuttujat (kun on poikettu ISSP2012 - vastausvaihtoehdoista tms.) 
 # on aineistossa eroteltu maatunnus-etuliitteellä (esimerkiksi ES_V7).
 # Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maa-
@@ -536,7 +536,18 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 
 # laaja aineisto - mukana havainnot joissa puuttuvia tietoja
 # hauska detalji URBRURAL - muuttujan metatiedoissa viite jonkun työaseman hakemistoon
-str(ISSP2012jh1b.data) #32969 obs. of  23 variables
+# str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
+# 
+# SUBSTANSSIMUUTTUJAT
+#
+# $ V5      : 'haven_labelled' num  5 1 2 2 1 NA 2 4 2 2 ...
+#  ..- attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
+#  ..- attr(*, "labels")= Named num  0 1 2 3 4 5 8 9
+#
+# ISSP2012jh1b.data$V5 näyttää tarkemmin rakenteen
+#
+# glimpse(ISSP2012jh1b.data)
+
 ```
 
 Metatietojen ja maa-muuttujien lisäksi aineistossa on viisitoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin.
@@ -729,7 +740,7 @@ Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 
 ```{r muut2old}
 # TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019)
-# Nämä tarkastelu jaksoon, jossa laajempi joukko muuttujia käyttöön
+# Nämä tarkastelujaksoon, jossa laajempi joukko muuttujia käyttöön
 
 # Puuttuvien tietojen (erävastauskato) tarkastelua 9.10.18 - mitä tässä voisi olla?
 # Taulukko kuten yllä, riveinä maat ja sarakkeina muuttujat, is.na -count?

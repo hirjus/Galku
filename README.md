@@ -72,4 +72,4 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 
 **27.12.2018** Versio 1.5.1
 
-**23.3.2019** Pieniä lisäyksiä ja korjauksia (kaava-dokkari, jotain muita)
+**23.3.2019** Pieniä lisäyksiä ja korjauksia (kaava-dokkari, jotain muita). Pikku editointeja datan valintaan.
