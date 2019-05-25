@@ -68,4 +68,11 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 
 **13.10.2018** Kaksi substanssimuuttujaa (V12, V13) mukaan, muuttujataulukoiden hiomista, tekstin ja koodin siistimistä.
 
-**5.12.2018** Versio 1.5 masteriin, ja uusi dev-haara.
+**5.12.2018** Versio 1.5 masteriin, ja uusi dev-haara. Muokataan versioksi 1.51
+
+**27.12.2018** Versio 1.5.1
+
+**23.3.2019** Pieniä lisäyksiä ja korjauksia (kaava-dokkari, jotain muita). Pikku editointeja datan valintaan.
+**23.3.2019** Johdattelevan esimerkin data, testaillaan faktorointia.
+
+**25.5.2019** Versio 1.5.1 masteriin ja dev-haaraan uusi versio 1.5.2. Paljon pieniä muutoksia, ei suurempia.

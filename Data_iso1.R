@@ -1,11 +1,14 @@
 # Data_iso1.R 12.10.2018
 #
-# Kootaan G1_1_data2.Rmd - tiedostosta laajemma datana koodilohkot
+# Kootaan G1_1_data2.Rmd - tiedostosta laajemman datana koodilohkot
 #
 # Aja paketit-R !
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 
-#str(ISSP2012.data)
+# luetaan alkuperäinen data R- dataksi (df/tibble).
+ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
+
+
+
 
 incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 
                       372, 428, 440, 528, 578, 616, 620, 643, 703, 705, 752, 756)
@@ -15,7 +18,35 @@ incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 35
 
 # 25 MAATA
 
+# miten se meni? *.data koko aineisto, *.dat valikoitu? Vai onko vähän turhaa,
+# kun luodaa tässä? (11.1.19)
+
 ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
+
+#str(ISSP2012jh1a.data)
+# Classes  ‘tbl_df’, ‘tbl’ and 'data.frame':	32969 obs. of  420 variables
+# typeof(ISSP2012jh1a.data) # what is it? - list
+# class(ISSP2012jh1a.data) # what is it? (sorry)
+# storage.mode(ISSP2012jh1a.data) # what is it? (very sorry) - list
+# length(ISSP2012jh1a.data) # how long is it? 420
+# What about two dimensional objects?
+# attributes(ISSP2012jh1a.data)
+
+# muuttajat haven_labelled, esimerkiksi V4 ja V6
+# 
+# $ V4      : 'haven_labelled' num  36 36 36 36 36 36 36 36 36 36 ...
+# ..- attr(*, "label")= chr "Country ISO 3166 Code (see V3 for codes for the sample)"
+# ..- attr(*, "format.spss")= chr "F3.0"
+# ..- attr(*, "labels")= Named num  32 36 40 56 100 124 152 156 158 191 ...
+#
+# $ V6      : 'haven_labelled' num  1 5 4 4 4 NA 4 3 4 3 ...
+# ..- attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+# ..- attr(*, "format.spss")= chr "F1.0"
+# ..- attr(*, "labels")= Named num  0 1 2 3 4 5 8 9
+# .. ..- attr(*, "names")= chr  "NAP: ES" "Strongly agree" "Agree" 
+#           "Neither agree nor disagree" ...
+
+
 
 # MUUTTUJAT
 
@@ -143,14 +174,38 @@ bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL",
 
 jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 
-#jhvars1
-ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
-str(ISSP2012jh1b.data) #32969 obs. of  23 variables
+# ISO DATA - maat valittu (25), valitaan muuttuja
 
-# test1 <- is.na(ISSP2012jh1b.data)
-# head(test1) TRUE/FALSE - matriisi
-# str(test1)
-# test1 <- mutate_all(test1,count(.))
+ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
+# str(ISSP2012jh1b.data) #32969 obs. of  23 variables
+# typeof(ISSP2012jh1b.data) # what is it?
+# class(ISSP2012jh1b.data) # what is it? (sorry)
+# storage.mode(ISSP2012jh1b.data) # what is it? (very sorry)
+# length(ISSP2012jh1b.data) # how long is it? What about two dimensional objects?
+# attributes(ISSP2012jh1b.data)
+summary(ISSP2012jh1b.data$V5)
+summary(ISSP2012jh1b.data$AGE)
+summary(ISSP2012jh1b.data)
+
+# Jätetään pois havainnot, joissa tieto iästä (134) tai sukupuolesta (68)
+# puuttu.Virheellisiä tietoja luultavasti.
+
+# PERUSDATA - EI MUUNNOKSIA
+
+ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
+summary(ISSP2012jh1c.data)
+str(ISSP2012jh1c.data)
+# 32823 obs. of  23 variables, 32969-32823 = 146, 134+68 = 202
+
+
+
+# TAULUKOINTIA
+
+test1 <- is.na(ISSP2012jh1b.data)
+head(test1) #TRUE/FALSE - matriisi
+str(test1)
+class(test1)
+test1 <- mutate_all(test1,count(.)) # ei toimi matriisille!
 
 head(test1)
 
@@ -165,17 +220,26 @@ head(test1)
 #bgvars1
 
 # havainnot joissa puuttuvia tietoja
-test1_df <- filter(ISSP2012jh1b.data, ((is.na(V5) | is.na(V6) | is.na(V7) 
+MissingTest1_df <- filter(ISSP2012jh1c.data, ((is.na(V5) | is.na(V6) | is.na(V7) 
                                       | is.na(V8) | is.na(V9) | is.na(V10)
                                       | is.na(V11) | is.na(V12) | is.na (V13)
-                                      | is.na(SEX) | is.na(AGE) 
                                       | is.na(DEGREE) | is.na(MAINSTAT)
                                       | is.na(TOPBOT) | is.na(HHCHILDR)
                                       | is.na(MARITAL) | is.na(URBRURAL))))
-test1_df 
-# A tibble: 7,443 x 23 eli 22,5 % havainnoista kun substvars1 puuttuvat
-# A tibble: 9,601 x 23 kun poistetaan puuttuvat myös bgvars1 29,1% !
-# 9601/32969
+MissingTest1_df 
+# A tibble: 9,455 x 23
+# V1     V2     DOI    V3     V4     C_ALPHAN V5    V6    V7    V8    V9    V10  
+# <dbl+> <chr>  <chr>  <dbl+> <dbl+> <chr>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#
+# V11   V12   V13   SEX   AGE   DEGREE MAINSTAT TOPBOT HHCHILDR MARITAL URBRURAL
+# <dbl> <dbl> <dbl> <dbl> <dbl> <dbl+> <dbl+lb> <dbl+> <dbl+lb> <dbl+l> <dbl+lb>
+#
+# 32823-9455 = 23368, 28,8 prosentilla havainnoista on puuttuvia tietoja
+summary(MissingTest1_df)
+
+
+# 
+#
 # Tästä pitäisi saada taulukko aikaiseksi
 # Aika hyvä linkki na-arvojen käsittelystä
 # https://bookdown.org/lyzhang10/lzhang_r_tips_book/how-to-deal-with-nas.html
@@ -186,15 +250,15 @@ tail(test1_df)
 
 
 # ei toimi 22.10.2018
-test1_df %>% group_by(C_ALPHAN) %>%
-           summarize_all(funs(sum(is.na(.))) %>%
-ungroup()
+# test1_df %>% group_by(C_ALPHAN) %>%
+#           summarize_all(funs(sum(is.na(.))) %>%
+#ungroup()
 # test2 <- summary(test1_df, rm.na = "F")           
 # str(test2)            
 # head(test2)
-test1_df %>%
-    select(everything()) %>%
-    summarise_all(funs(sum(is.na(.))))
+# test1_df %>%
+#   select(everything()) %>%
+#   summarise_all(funs(sum(is.na(.))))
 
 
 #
@@ -204,44 +268,54 @@ test1_df %>%
 # sapply(test1_df, function(x) sum(is.na(x)))
 
 # toimii alkuperäisellä datalla
-sapply(ISSP2012jh1b.data, function(x) sum(is.na(x)))
-
-
+temp3 <- sapply(ISSP2012jh1c.data, function(x) sum(is.na(x)))
+str(temp3)
+temp3
+print(temp3)
 
 # 2. PURRR map
-map(ISSP2012jh1b.data, ~sum(is.na(.)))
+temp4 <- map(ISSP2012jh1c.data, ~sum(is.na(.)))
+str(temp4)
 
 # 3. dplyr
 
-ISSP2012jh1b.data %>%
+temp2 <- ISSP2012jh1c.data %>%
     select(everything()) %>% # muuttujien (sarakkeiden) valinta
     summarise_all(funs((sum(is.na(.)))))
+temp22 <- select(temp2, V5:V13,DEGREE,MAINSTAT,TOPBOT,HHCHILDR,MARITAL,URBRURAL)
+temp22 %>%
+    mutate_all(funs(pros =./32823))
+print(temp22)
 
 # 4. Riveittäin - montako puuttuvaa tietoa havainnoittain (apply)
 
-temp1 <- apply(ISSP2012jh1b.data, MARGIN = 1, function(x) sum(is.na(x)))
-head(temp1)
-hist(temp1)
-str(temp1)
-summarise(temp1)
+# temp1 <- apply(ISSP2012jh1c.data, MARGIN = 1, function(x) sum(is.na(x)))
+# head(temp1)
+# hist(temp1)
+# str(temp1)
+# summary(temp1)
 
 # 5. Riveittäin - montako puuttuvaa tietoa havainnoittain (dplyr)
 # erittäin hidas!
 
-ISSP2012jh1b.data %>%
-    rowwise %>%
-    summarise(NA_per_row = sum(is.na(.))
+#ISSP2012jh1b.data %>%
+#    rowwise %>%
+#    summarise(NA_per_row = sum(is.na(.)))
 
-# MUUTTUJAT FAKTOREIKSI
+# MUUTTUJAT FAKTOREIKSI - KERRALLA VAI VASTA LÄHEMPÄNÄ ANALYYSIÄ?
 #
 # HUOM! Onko puuttuvia tietoja (NA) mukana vai ei! Vaikuttaa faktorointiin.
 #
 #Faktoreiksi substanssi- ja taustamuuttujat (paitsi AGE)
-str(ISSP2012jh1b.data$SEX)
+
+#Tai sitten faktorointi vasta lähempänä analyysiä? (21.1.2019)
+str(ISSP2012jh1c.data$SEX)
+str(ISSP2012jh1c.data$AGE)
+summary(ISSP2012jh1c.data$AGE)
 #Uusi datatiedosto
-ISSP2012jh1c.data <- ISSP2012jh1b.data
+ISSP2012jh1d.data <- ISSP2012jh1c.data
 # sp (sukupuoli) m = 1, f = 2
-sp_labels <- c("m","f")
+sp_labels <- c("m","f") # TARKISTA! 1 < 2 mutta m > f
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
 vastQ2_labels <- c("W","w","H")
@@ -256,11 +330,59 @@ ISSP2012jh1c.data$Q2a <- as_factor(ISSP2012jh1c.data$V10, labels = vastaus_label
 ISSP2012jh1c.data$Q2b <- as_factor(ISSP2012jh1c.data$V11, labels = vastaus_labels)
 ISSP2012jh1c.data$Q3a <- as_factor(ISSP2012jh1c.data$V12, labels = vastQ2_labels)
 ISSP2012jh1c.data$Q3b <- as_factor(ISSP2012jh1c.data$V13, labels = vastQ2_labels)
-ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, sp_labels) # tähän levels?, labels
-ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE # faktoriksi, saadaan NA mukaan. Käytetään luokiteltuna.
+ISSP2012jh1c.data$sp <- as_factor(ISSP2012jh1c.data$SEX, labels = sp_labels) # tähän levels?, labels
+ISSP2012jh1c.data$ika <- ISSP2012jh1c.data$AGE
 ISSP2012jh1c.data$edu <- as_factor(ISSP2012jh1c.data$DEGREE)
 ISSP2012jh1c.data$mstat<- as_factor(ISSP2012jh1c.data$MAINSTAT) 
-ISSP2012jh1c.data$class <- as_factor(ISSP2012jh1c.data$TOPBOT) 
+ISSP2012jh1c.data$socstat <- as_factor(ISSP2012jh1c.data$TOPBOT) 
 ISSP2012jh1c.data$nchild<- ISSP2012jh1c.data$HHCHILDR
 ISSP2012jh1c.data$lstat <- as_factor(ISSP2012jh1c.data$MARITAL)  
 ISSP2012jh1c.data$urb<- as_factor(ISSP2012jh1c.data$URBRURAL)
+
+ISSP2012jh1c.data %>% tableX(SEX, sp, type = "count")
+summary(ISSP2012jh1c.data$SEX)
+levels(ISSP2012jh1c.data$SEX)
+summary(ISSP2012jh1c.data$sp)
+levels(ISSP2012jh1c.data$sp)
+labels(ISSP2012jh1c.data$sp) #HÄH?
+str(ISSP2012jh1c.data$sp)
+# Tässä pulma: vertaa summary(sp) ja levels(sp)
+
+# Kopsattu G1_2_johdesim.Rmd, rivi 133-
+#
+# forcats: as_factor-funktion parametrit (11.1.2019)
+#
+# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
+# https://haven.tidyverse.org/reference/as_factor.html
+
+
+
+temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
+str(temp2Q1b)
+summary(temp2Q1b)
+table (temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table (temp2Q1b) #otetaan NA-arvot mukaan
+head(temp2Q1b)
+attributes(temp2Q1b)
+
+
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+str(temp3Q1b)
+summary(temp3Q1b)
+attributes(temp3Q1b)
+table (temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+
+temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
+str(temp4Q1b)
+summary(temp4Q1b)
+attributes((temp4Q1b))
+summary(temp4Q1b)
+table (temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+str(temp4Q1b)
+#str(tempQ1b)
+#head(tempQ1b)
+#summary(tempQ1b)
+
+
+
+

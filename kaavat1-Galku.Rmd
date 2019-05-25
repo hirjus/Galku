@@ -6,8 +6,8 @@ documentclass: article
 lang: fi
 site: bookdown::bookdown_site
 output:
-    bookdown::html_book:
     bookdown::pdf_book:
+    bookdown::html_book:
     keep_tex: yes
 ---
 # Kaavat ja matemattiset merkinnät
@@ -94,9 +94,11 @@ Tämä toimii, drawmatrixin voi varmaan unohtaa?
 
 \begin{equation}
 A = \begin{bmatrix} 
-    a_{11} & a_{12} & \dots \\
+    a_{11} & a_{12} & \dots & a_{1k}\\
     \vdots & \ddots & \\
-    a_{K1} &        & a_{KK} 
+    \\
+    \vdots \\
+    a_{n1} & \dots  & \dots & a_{nk} 
     \end{bmatrix}
 \end{equation}
 
@@ -105,11 +107,18 @@ Ehkäpä ABBA onnistuu paremmin tällä notaatiolla?
 \begin{equation}
 A = \begin{bmatrix} 
     A_{11} & B_{12}  \\
-    B_{21} & B_{22} 
+    B_{21} & A_{22} 
     \end{bmatrix}
 \end{equation}
 
+Pinottujen ja konkatenoitujen matriisien havainnollistaminen?
 
+\begin{equation}
+A = \begin{bmatrix} 
+    A_{maa, Q1a} & A_{maa, Q1b}  \\
+    B_{gage, Q1a} & B_{gage, Q1b} 
+    \end{bmatrix}
+\end{equation}
 
 
 **drawmatrix - kaavoja - ei ole kokeiltu**

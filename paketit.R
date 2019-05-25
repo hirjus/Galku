@@ -1,5 +1,5 @@
-# Paketit - onko järjestyksellä väliä?
-# 25.4.2018
+# Paketit 25.4.2018
+# Kolme ja ehkä neljäkin viimeistä turhia (11.1.2019)
 library(rgl)
 library(ca)
 library(haven)

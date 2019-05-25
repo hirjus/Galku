@@ -18,14 +18,15 @@ library(reshape2)
 library(printr) #19.5.2018 
 ```
 
-**jäsennystä**  
+**Vanhaa jäsennystä**  
 
-Tässä esitellään yksinkertainen esimerkki, yksi kysymys (esim. V6) ja muutamia maita ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+Yksinkertainen esimerkki, yksi kysymys (V6) ja kuusi maata ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
 
-Taulukoita kannattaa tarkastella ensin rivien (kuva puuttuu) ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitamme hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
+Taulukoita tarkastella ensin rivien ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitan hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
 
 
-Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen. **zxy** Tämä puuttuu kaavoista!
+Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen. 
+**zxy** Tämä puuttuu kaavoista!
 
 **zxy**
 
@@ -74,7 +75,7 @@ Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkup
 Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien. 
 **zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä. MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
 
-**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa käännetty näin englanniksi ransk. termi,tätä itsekin nykyään käyttävät), rivien ja sarakkeiden "correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
+**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden "correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
 
 **zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
 
@@ -87,68 +88,148 @@ Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepiste
 **zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b) kuviin ja taulukoihin.
 
 
-Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1) (1-5 Likert, täysin samaa mieltä - täysin eri mieltä) seuraaviin kysymyksiin (suomenkielinen lomake, kysymys 23): **Käytänkö muuttujanimenä Q1b vai V6? Jälkimmäinen lyhyempi, ja tätä muuttujaa käytetään. Toisaalta kun faktoroidaan, pitää tehdä uusi muuttuja, muuten metadata häviää** (3.10.2018)
+Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e, arvot 1-5, täysin samaa mieltä - täysin eri mieltä). 
 
-(a) Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallisen suhteen kuin äiti, joka ei käy työssä 
 
-(b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä
+(V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei vielä tee kuvista ahtaita kun sarakkeita ja rivejä on vähän. Pudotetaan tarvittaessa turha Q-kirjain pois. Alkuperäisessä muuttujassa metatieto säilyy varmemmin, ja tarkistuksia on helpompi tehdä.
 
-(c) Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö 
-
-(d) On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat ensisijaisesti kodin ja lapsia 
-
-(e) Kotirouvana oleminen on aivan yhtä antoisaa kuin ansiotyön tekeminen
-
-**zxy** Tässä koodilohkossa esimerkki helposti toistettavasta tutkimuksesta: alkuperäisestä datasta liikkeelle. user_na = true - jutun voi mainita, ja viitata koodiliitteeseen. Alaviitteeksi, sillä ei analysoida tarkemmin?
 
 **zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
-```{r esim1data1}
-# Alkuperäinen data (ei käytetä user_na =TRUE 25.9.2018)
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") 
+```{r esim1data1, eval=FALSE, include=FALSE}
 #
-# str(ISSP2012.data) 
-#61754 obs. of  420 variables ja 61754 obs. of  420 variables 25.4.18
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df), käytetään sitä (23.3.2019)
+# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
+# 25 maata
+# Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 #
+# VANHA VERSIO 
+# Alkuperäinen data
+#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 # Yksi kysymys ja kuusi maata
-incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
+# incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
-ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
-#str(ISSP2012esim1.dat) #8557 obs. of  420 variables
+# ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
+# str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
 #
-ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
+#  C_ALPHAN, V3,V4, V6, SEX, AGE) 
 
-#str(ISSP2012esim1.dat) #8557 obs. of  6 variables
+# str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
+
+```
+
+Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
+
+```{r esim1data2}
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) 
+# 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
+# 25 maata.
+# Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
+# Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
+
+countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
+ISSP2012esim1.dat <- filter(ISSP2012jh1c.data, V4 %in% countries_esim1)
+# str(ISSP2012esim1.dat)
+vars_esim1 <- c("C_ALPHAN", "V3", "V4", "V6", "SEX", "AGE") #kolme maamuuttujaa, kysymys Q1b
+ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
+# str(ISSP2012esim1.dat) 
+# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
+# summary(ISSP2012esim1.dat)
+# ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+
+# Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
+# 8542-399 = 8143
+
+ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, !is.na(V6))
+ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+str(ISSP2012esim1.dat)
 
 ```
 
 
 **zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
+```{r faktorintitesti1}
+# PUUTTUVAT TIEDOT JA as_factor
+# kopioitu Data_iso.1.R - skriptiin (11.1.2019), jatketaan NA-vääntöä siellä. (23.3.2019)
+# 
+# Hyödyllistä katsoa, miten as_factor - funkitolla labelit kulkevat mukana! Ja levels on "väärin"!
+#
+# forcats - paketin as_factor-funktio - haven-paketissa (7.12.2018)
+# Compared to base R, this function creates levels in the order in which they appear, 
+# which will be the same on every platform. (Base R sorts in the current locale 
+# which can vary from place to place.)
+# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
+# https://haven.tidyverse.org/reference/as_factor.html
+str(ISSP2012esim1.dat$V6)
+summary(ISSP2012esim1.dat$V6)
+temp1Q1b <- as_factor(ISSP2012esim1.dat$V6)
+#table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp1Q1b) # NA-arvoja ei mukaan
+str(temp1Q1b)
+summary(temp1Q1b)
+levels(temp1Q1b)
+
+# Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
+# - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+
+
+temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
+str(temp2Q1b)
+summary(temp2Q1b)
+table(temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp2Q1b) # NA-arvoja ei mukaan
+head(temp2Q1b)
+attributes(temp2Q1b)
+
+
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko?
+str(temp3Q1b)
+summary(temp3Q1b)
+attributes(temp3Q1b)
+table(temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp3Q1b) # NA-arvoja ei mukaan
+
+temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
+str(temp4Q1b)
+summary(temp4Q1b)
+attributes(temp4Q1b)
+table(temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(temp4Q1b) # NA-arvoja ei mukaan
+str(temp4Q1b)
+
+temp5Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+
+```
 
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
 ```{r esim1data2}
 
-# muutetaan muuttujia faktoreiksi
+# muutetaan muuttujia R:n factor-tyyppiin (luokittelumuuttuja)
 #
 # Luokittelumuuttujien tasoille labelit
 #
 # sp (sukupuoli) m = 1, f = 2
 sp_labels <- c("m","f")
+#sp_levels
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
 vastaus_labels <- c("S","s","?","e","E")
+#vastaus_levels1 <- c()
 
 # Faktoreiksi
-ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
-ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
-ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
+ISSP2012esim1.dat$maa <- as_factor(ISSP2012esim1.dat$C_ALPHAN)
+ISSP2012esim1.dat$sp <- as_factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
+ISSP2012esim1.dat$Q1b <- as_factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
 str(ISSP2012esim1.dat$Q1b)
+levels(ISSP2012esim1.dat$Q1b)
+str(ISSP2012esim1.dat$sp)
+levels(ISSP2012esim1.dat$sp)
 #
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
@@ -169,9 +250,9 @@ str(ISSP2012esim1.dat$Q1b)
 #   8557- 421 = 8136
 #summary(ISSP2012esim1.dat$sp)
 ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
-#Apuvälineitä - lisätietoa muuttujista
-# kun faktoroidaan V6, niin metadata katoaa?
+
 str(ISSP2012esim1.dat)
+#Apuvälineitä - lisätietoa muuttujista
 # typeof(ISSP2012esim1.dat$V6) # what is it?
 # class(ISSP2012esim1.dat$V6) # what is it? (sorry)
 # storage.mode(ISSP2012esim1.dat$V6) # what is it? (very sorry)
@@ -183,7 +264,9 @@ str(ISSP2012esim1.dat)
 ```
 Poistetaan havainnot, joissa puuttuvia tietoja
 ```{r esim1data3}
-#poistetaan havainnot, joissa puuttuvia tietoja
+# poistetaan havainnot, joissa puuttuvia tietoja
+# taulukko on sekaisin (28.12.18) - pitäisikö lisätä !is.na(Q1b)?
+# V6 haven_labelled num, Q1b factor 8 levels
 ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 #str(ISSP2012esim1.dat) 
 # 8143 obs. of  6 variables

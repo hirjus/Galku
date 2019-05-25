@@ -1,18 +1,10 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.5 , tulostettu `r Sys.Date()` "
+date: "versio 1.51 dev , tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
 output:
-  pdf_document:
-    toc: true
-    number_sections: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 5
-    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
-    #code_folding: show
   html_document:
     theme: cosmo
     toc: true
@@ -22,6 +14,14 @@ output:
     fig_width: 5 # nämä parametrit tuumissa, vaikuttavat vain r-generoituihin kuviin.
     fig_height: 5 # takaako asp=1? Ei! Ja eivät vaikuta muiden kuvien kokoon (esim. tiedostoista).
     code_folding: hide
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 5
+    fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
+    #code_folding: show
 ---
 
 **Versiot**
@@ -52,18 +52,25 @@ Datan valinta. Data-jaksossa aluksi, voi miettiä siirtääkö esimerkki-lukuun 
 
 **10.10.2018**
 
-Maiden ja muuttujien valinta. TOPBOT halutaan mukaan, joten USA ja GB on jätettävä pois. Muuttuja on kuitenkin hankala, usealla maalla puuttuva tieto yli 10 prosentissa, ja muutamalla nolla tai ihan muutamia. Pohditaan aikanaan.
-Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujajoukon deskriptiiviset tarkastelu. Taulukko muuttujakuvauksesta jää data-lukuun.
+Maiden ja muuttujien valinta. TOPBOT halutaan mukaan, joten USA ja GB on jätettävä pois. Muuttuja on kuitenkin hankala, usealla maalla puuttuva tieto yli 10 prosentissa, ja muutamalla nolla tai ihan muutamia. Pohditaan aikanaan. **5.112.18**Puuttuvat tiedot ovat puuttuvia, ei voi mitään. Jos vähän ja selviä virheitä (ikä, sukupuoli), voidaan pudottaa havainnot.Muuten mukaan, periaatteessa.
+
+Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujajoukon deskriptiiviset tarkastelu. Taulukko muuttujakuvauksesta jää data-lukuun. **5.12.18** Puuttuneisuuden taulukointia on, mutta siisti NA-taulukko puuttu.
 
 **11.10.2018 Versio 1.4**
 
 - paperitulosteessa v1.3 kommentteja karttoihin ja ca:n numeerisiin tuloksiin, samoin muuttujalistauksiin.
+- paperitulosteessa v1.4 samoin, ja puuttuneisuuden taulukointeja
 
 **11.10.2018 aloitetaan versio 1.5**
+- pieniä muutoksia ja kommentteja, aloitetaan uusi versio 1.51 5.12.2018
+
+**6.12.2018 1.51**
+- as_factor - funktio käyttöön;  testaillaan miten toimii kun (a) user_na - arvoja ei lueta ja (b) puuttuvat ovat mukana.
+
 
 **Muistilista:**
 
-1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu Bookdown-demo - dokumentissa. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
+1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". CA-tulokset on tulostettu siiteinä taulukoina Bookdown-demo - dokumentissa. Voi tulostaa myös ca-outputin. Ominaisarvojen taulukko keskeneräinen, samoin "scree plot" kuvana puuttuu.
 
 2. Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja ottaa capaper-dokkariin include_graphics - funktiolla.
 
@@ -73,9 +80,18 @@ Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman muuttujaj
  - massoilla painotetut khii2-etäisyyden keskiarvorivistä/sarakkeesta?
 
 4. Kuvissa vielä hiottavaa, pdf-kuvia lisäilty img-hakemistoon.
- 
- **V** MG & Blasius, "vihreä kirja": contirbutions to inertia
 
+5. Data-tiedostojen nimeäminen (27.12.18)
+
+**ISSP2012*.data** - täysi aineisto
+
+**ISSP2012*jh1.data** - valikoitu aineisto (maat, muuttujat)
+
+**ISSP2012*esim1.dat** - muuttujien muunnoksia ja uusia muuttujia; analyyseissä käytettävä data, tarkenne dat.
+
+6. kasitteet1.rmd - taulukko käsitteistä ja tärkeimmistä ISSP-dokumenteista
+
+ 
 **Historiaa ** (11.10.18)
 
 Vanhoja kommentteja
