@@ -74,3 +74,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 
 **23.3.2019** Pieniä lisäyksiä ja korjauksia (kaava-dokkari, jotain muita). Pikku editointeja datan valintaan.
 **23.3.2019** Johdattelevan esimerkin data, testaillaan faktorointia.
+
+**25.5.2019** Versio 1.5.1 masteriin ja dev-haaraan uusi versio 1.5.2. Paljon pieniä muutoksia, ei suurempia.
