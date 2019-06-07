@@ -185,24 +185,38 @@ table(temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
 table(temp2Q1b) # NA-arvoja ei mukaan
 head(temp2Q1b)
 attributes(temp2Q1b)
+levels(temp2Q1b)
 
 
-temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko?
+temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko? Eipä taida toimia tässä (6.6.2019)
 str(temp3Q1b)
 summary(temp3Q1b)
 attributes(temp3Q1b)
 table(temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
 table(temp3Q1b) # NA-arvoja ei mukaan
 
-temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
-str(temp4Q1b)
-summary(temp4Q1b)
-attributes(temp4Q1b)
-table(temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp4Q1b) # NA-arvoja ei mukaan
-str(temp4Q1b)
+ISSP2012esim1.dat$temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
+str(ISSP2012esim1.dat$temp4Q1b)
+summary(ISSP2012esim1.dat$temp4Q1b)
+attributes(ISSP2012esim1.dat$temp4Q1b)
+table(ISSP2012esim1.dat$temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
+table(ISSP2012esim1.dat$temp4Q1b) # NA-arvoja ei mukaan
+levels(ISSP2012esim1.dat$temp4Q1b)
+names(ISSP2012esim1.dat$temp4Q1b)
+str(ISSP2012esim1.dat)
+#TARKISTUKSET: summary ja levels
+# HUOM! Puuttuvat tiedot filtteröity pois, joten otetaan vain faktorit 1-5
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+    mutate(test1FakV6 =
+       recode(temp4Q1b,
+             `Strongly agree` = "S",
+             `Agree` = "s",
+             `Neither agree nor disagree` = "?",
+             `Disagree` = "e",
+             `Strongly disagree` = "s",
+             ))
 
-temp5Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
+
 
 ```
 
