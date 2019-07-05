@@ -207,7 +207,7 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
 ```{r datasel_country1}
-# Aineiston rajaamisen kolme vaihetta (10.1018)
+# Aineiston rajaamisen kolme vaihetta (10.2018)
 # 
 # TIEDOSTOJEN NIMEÄMINEN
 #
@@ -313,7 +313,7 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 #head(ISSP2012jh1a.data)
 #str(ISSP2012jh1a.data) #34271 obs. of  420 variables, Espanja ja Iso-Britannia
 #                       pois (9.10.2018)
-str(ISSP2012jh1a.data) # 32969 obs. of  420 variable, Espanja Iso-Britannia, 
+# str(ISSP2012jh1a.data) # 32969 obs. of  420 variable, Espanja Iso-Britannia, 
 #                        USA pois (10.10.2018)
 #
 # names() # muuttujen nimet
@@ -558,6 +558,10 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 #
 # glimpse(ISSP2012jh1b.data)
 str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
+
+# Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
+ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
+#str(ISSP2012jh1c.data) 32823 obs. of  23 variables
 ```
 
 Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin. Kahdeksan taustamuuttujaa.
@@ -728,7 +732,7 @@ Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mie
 ```{r muut1old}
 
 #Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
-temp <- ISSP2012jh1b.data
+temp <- ISSP2012jh1c.data
 temp$maa <-  as_factor(temp$C_ALPHAN)
 temp$Q1b <- as_factor(temp$V6 )
 
@@ -744,8 +748,8 @@ knitr::kable(taulu1b,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
-Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271).
-
+Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! Tutkippa tätä! On oikea määrä (5.7.2019, kts. treeni2\Data_iso1.R**
+,
 ```{r muut2old, eval=FALSE, include=FALSE}
 # TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019) - show nothing 23.3.2019
 # Nämä tarkastelujaksoon, jossa laajempi joukko muuttujia käyttöön
@@ -785,7 +789,7 @@ Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 #str(test)
 #head(test)
 #test
-#temp5 <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count")
+#temp5 <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V6, type = "count")
 #str(temp5)
 #temp5
 #maat ja havaintojen lukumäärät
@@ -802,45 +806,49 @@ Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018).
 # Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
 # Nämä taulukoinnit kuuluvat jaksoon, jossa lisämuuttujat otetaan käyttöön
 
-# ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
+# ISSP2012jh1.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
 # puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
 
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count") #on jo ylempänä
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V8, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V9, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V10, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V11, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V12, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, V13, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "count")
-missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "count")
-missAGE[,86:87]
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, DEGREE, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, MAINSTAT, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, HHCHILDR, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
-ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V5, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V6, type = "count") #on jo ylempänä
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V7, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V8, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V9, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V10, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V11, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V12, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, V13, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, SEX, type = "count")
+
+#Ehkä voi kurkistaa, missä ikä- ja sp-tieto puuttuu. Mutta ei nyt (5.7.2019)
+
+#missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "count")
+#missAGE[,86:87]
+
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, DEGREE, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, MAINSTAT, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, HHCHILDR, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
+ISSP2012jh1c.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
 
 #Taulukko puuttuvista tiedosista 11.10.2018
-missQ1a <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V5, type = "count")
-missQ1b <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V6, type = "count")
-missQ1c <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V7, type = "count")
-missQ1d <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V8, type = "count")
-missQ1e <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V9, type = "count")
-missQ2a <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V10, type = "count")
-missQ2b <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, V11, type = "count")
-missSP <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "count")
-missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "count")
+missQ1a <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V5, type = "count")
+missQ1b <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V6, type = "count")
+missQ1c <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V7, type = "count")
+missQ1d <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V8, type = "count")
+missQ1e <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V9, type = "count")
+missQ2a <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V10, type = "count")
+missQ2b <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, V11, type = "count")
+# missSP <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, SEX, type = "count")
+# missAGE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, AGE, type = "count")
 #missAGE[,86:87]
-missDEGREE <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, DEGREE, type = "count")
-missMAINSTAT <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, MAINSTAT, type = "count")
-missTOPBOT <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
-missHHCHILDR <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, HHCHILDR, type = "count")
-missMARITAL <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
-missURBRURAL <- ISSP2012jh1b.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
+missDEGREE <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, DEGREE, type = "count")
+missMAINSTAT <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, MAINSTAT, type = "count")
+missTOPBOT <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, TOPBOT, type = "count")
+missHHCHILDR <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, HHCHILDR, type = "count")
+missMARITAL <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, MARITAL, type = "count")
+missURBRURAL <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
 
 ```
 
@@ -864,18 +872,6 @@ GESIS adds 'Not available' for variables, which in singe countries may  not have
 
 
 ** (23.3.2019) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
-
-```{r agesexmissing1}
-# Poistetaan aineistosta havainnot, joilla puuttuu jompi kumpi tai molemmat
-
-ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
-
-# str(ISSP2012jh1c.data)
-# 32823 obs. of  23 variables
-# str(ISSP2012jh1b.data)
-# 32969 obs. of  23 variables
-# 32969-32823 = 146
-```
 
 
 

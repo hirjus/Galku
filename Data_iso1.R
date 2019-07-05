@@ -179,7 +179,7 @@ attributes(testISSP2012jh1b.data) # tällä metatiedot näkyviin
 head(testISSP2012jh1b.data)
 glimpse(testISSP2012jh1b.data)
 summary(testISSP2012jh1b.data$V6)
-summary(testISSP2012jh1b.data$AGE)
+strsummary(testISSP2012jh1b.data$AGE)
 summary(testISSP2012jh1b.data)
 
 # Jätetään pois havainnot, joissa tieto iästä (134) tai sukupuolesta (68)
@@ -323,9 +323,10 @@ summary(testISSP2012jh1c.data$AGE)
 # sp (sukupuoli) m = 1, f = 2
 # sp_labels <- c("m","f") # TARKISTA! 1 < 2 mutta m > f
 # S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
-vastaus_labels <- c("S","s","?","e","E")
-vastQ2_labels <- c("W","w","H")
+# vastaus_labels <- c("S","s","?","e","E") - ei tässä (5.7.19)
+# vastQ2_labels <- c("W","w","H") - eikö myös Can't choose mukaan)?
 
+# Tämä kopsataaan G1_data2 - tiedostoon, mutta ensin treeni2-projektiin 5.7.2019 - labes-juttu pois?
 ISSP2012jh1c.data$maa <- as_factor(ISSP2012jh1c.data$C_ALPHAN)
 ISSP2012jh1c.data$Q1a <- as_factor(ISSP2012jh1c.data$V5, labels = vastaus_labels) #labels ainakin näihin
 ISSP2012jh1c.data$Q1b <- as_factor(ISSP2012jh1c.data$V6, labels = vastaus_labels)
