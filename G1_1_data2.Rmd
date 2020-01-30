@@ -7,6 +7,7 @@
 **edit** Poistetaan aineistosta havainnot, joissa puuttuva tieto muuttujassa SEX tai AGE
 
 **edit 24.9.18 Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).**
+**edit 30.1.20** Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
 
 
 
@@ -136,7 +137,7 @@ Paremipi muotoilu: Varsinaiset substanssimuuttujat eli kyselylomakkeet on koitet
 
 (**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.)
 
-Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal **(28) - Espnaja, Great Britain, USA pois -> 25 (11.10.18)**
+Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain, Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States, Belgium, Hungary, Netherlands, Portugal **(28) - Espanja, Great Britain, USA pois -> 25 (11.10.18)**
 
 
 
@@ -298,17 +299,17 @@ ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnok
 # https://www.rdocumentation.org/packages/haven/versions/1.1.0/topics/read_spss
 #
  
-ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
+ISSP2012jh.data <- read_spss("data/ZA5900_v4-0-0.sav") #luetaan alkuperäinen data R- dataksi (df).
 
-#str(ISSP2012.data)
+#str(ISSP2012jh.data)
 
 incl_countries25 <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 
                       372, 428, 440, 528, 578, 616, 620, 643, 703, 705, 752, 756)
 
-#str(ISSP2012.data)
-#str(ISSP2012.data) #61754 obs. of  420 variables - kaikki
+#str(ISSP2012jh.data)
+#str(ISSP2012jh.data) #61754 obs. of  420 variables - kaikki
 
-ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
+ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 
 #head(ISSP2012jh1a.data)
 #str(ISSP2012jh1a.data) #34271 obs. of  420 variables, Espanja ja Iso-Britannia
@@ -322,10 +323,6 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 # Demografisissa ja muissa taustamuuttujissa suuri osa tiedoista on kerätty maa-
 # kohtaisilla lomakkeilla. Vertailukelpoiset muuttujat on konstruoitu niistä.
 # Muuttujia on 420, vain osa yhteisiä kaikille maille.
-# test1 <- filter(ISSP2012jh1a.data, 
-#    (is.na(V1) | is.na(V2) | is.na(DOI)| is.na(V3) |is.na(V4) | is.na(C_ALPHAN))) 
-#
-# Metadata ja maa-muuttujat ok, ei puuttuvia tietoja
 
 ```
 
@@ -334,55 +331,6 @@ ISSP2012jh1a.data <- filter(ISSP2012.data, V4 %in% incl_countries25)
 **Data-tiedoston tutkailua**
 
 Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on. **Koodilohkon voi muuttaa kommenteiksi**
-
-
-```{r dataprop1, eval=FALSE, include=FALSE}
-# Datan selailua (9.10.2018) - Tätä ei tarvita jatkossa
-#
-# datatiedoston ominaisuuksia 1
-# str(ISSP2012jh1a.data$V5)
-# 'haven_labelled' num [1:32969] 5 1 2 2 1 NA 2 4 2 2 ...
-# - attr(*, "label")= chr "Q1a Working mom: warm relationship with children as a not working mom"
-# - attr(*, "format.spss")= chr "F1.0"
-# - attr(*, "labels")= Named num [1:8] 0 1 2 3 4 5 8 9
-#  ..- attr(*, "names")= chr [1:8] "NAP: ES" "Strongly agree" "Agree" "Neither agree nor disagree" ...
-#
-# puuttuvan tiedon tarkempi koodaus
-# attr(ISSP2012jh1a.data$V5,'labels')
-# jos user_na = TRUE, niin SPSS-tiedoston tarkempi kolmen luoka koodi tulisi mukaan
-# attr(ISSP2012jh1.data$V5,'na_values')
-
-# Puuttuvat tiedot
-#
-# test1 <- is.na(ISSP2012jh1a.data$V5)
-# missV5 <- ISSP2012jh1a.data[test1,]
-# head(missV5)
-# str(missV5)
-# hist(missV5$V5)
-# summary(missV5$V5)
-#
-# Tästä näkyvät maakohtaiset substanssimuuttujat (muuttujan nimen alku C_ALPHAN)
-# attr(ISSP2012jh1.data,'names')
-#
-# hist(ISSP2012jh1.data$V5)
-# hist(ISSP2012jh1.data$DEGREE)
-#
-# NELJÄ KOMENTOA DATATIEDOSTOSON TUTKIMISEEN
-# typeof(ISSP2012jh1a.data)
-# class(ISSP2012jh1a.data)
-# storage.mode(ISSP2012jh1a.data)
-# attributes(ISSP2012jh1a.data) #kaikki tiedot
-# str(ISSP2012jh1a.data$AGE)
-# numeerinen, labels 15, 16 jne
-#
-# summary(ISSP2012jh1a.data$AGE)
-#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-#  15.00   36.00   50.00   49.52   63.00  102.00     134 
-#
-# tiedoston metadata : muuttujat V1, V2 ja DOI
-#
-# ISSP2012jh1a.data[1:3,1:3]
-```
 
 Kolme ensimmäistä muuttujaa ovat datan metatietoja. 
 
@@ -437,7 +385,7 @@ countryvars1 <- c("V3","V4","C_ALPHAN")
 # 
 #
 
-substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13")
+substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13") # 9 muuttujaa
 
 # Nämä yhteiset muuttujat pois (maaspesifien muuttujien lisäksi) :
 #
@@ -546,7 +494,7 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 
 # laaja aineisto - mukana havainnot joissa puuttuvia tietoja
 # hauska detalji URBRURAL - muuttujan metatiedoissa viite jonkun työaseman hakemistoon
-# str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
+str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
 # 
 # SUBSTANSSIMUUTTUJAT
 #
@@ -561,7 +509,9 @@ str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
 
 # Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012jh1c.data) 32823 obs. of  23 variables
+#str(ISSP2012jh1c.data) # 32823 obs. of  23 variables
+ISSP2012jh1c.data %>% summary()
+
 ```
 
 Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin. Kahdeksan taustamuuttujaa.
@@ -591,21 +541,8 @@ Vastausvaihtoehdot:
 
 
 ```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
-# Muuttuja taulukkona
-#head(ISSP2012jh1b.data)
-#str(ISSP2012jh1b.data)
-#
-#attributes(ISSP2012jh1b.data)
-#temp1 <- attr(ISSP2012jh1b.data$V5, 'label') #labelin saa luettua
-#temp1
-#attr(ISSP2012jh1b.data[,7:21], 'labels') # tuloksena NULL
-#temp1[1]
-#str(temp1$names)
-#ISSP2012jh1b.data$V6
-#lapply(ISSP2012jh1b.data, class) # muuttujat joilla labeleita
-#labels(ISSP2012jh1b.data, which = c("V6","V7")) hämärä
-#str(substvars1)
-# Karkea tapa
+# Muuttuja taulukkona - karkea tapa
+
 tabVarnames <- c(substvars1,bgvars1) # muuttujanimet muuttujille, ei maa- tai metamuuttujia
 
 # Kysymysten lyhyet versiot englanniksi
@@ -729,24 +666,7 @@ Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mie
 **Nämä koodilohkot siirtyvät**
 
 
-```{r muut1old}
 
-#Vähän vanhentunutta puuttuneisuuden (erävastauskato) kuvailua
-temp <- ISSP2012jh1c.data
-temp$maa <-  as_factor(temp$C_ALPHAN)
-temp$Q1b <- as_factor(temp$V6 )
-
-
-#summary(temp)
-#str(taulu1)
-taulu1 <- temp %>% tableX(V6,maa,type = "count")
-taulu1a <- taulu1[ ,1:13]
-knitr::kable(taulu1a,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen Q1b vastaukset maittain")
-taulu1b <- taulu1[ ,14:26]
-knitr::kable(taulu1b,digits = 2, booktabs = TRUE, 
-             caption = "Kysymyksen Q1b vastaukset maittain")
-```
 
 Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! Tutkippa tätä! On oikea määrä (5.7.2019, kts. treeni2\Data_iso1.R**
 ,
