@@ -401,9 +401,48 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
                )
 
 # Tarkistuksia 2
+
 ISSP2012jh1d.dat %>% 
     select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>% 
     summary()
+
+# Tarkistuksia 3
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1a,Q1am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1b,Q1bm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1c,Q1cm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1d,Q1dm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1e,Q1em)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q2a,Q2am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q2b,Q2bm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q3a,Q3am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q3b,Q3bm)
+
+ISSP2012jh1d.dat %>%  # tableX muotoilee taulukkoa!
+    tableX(Q3am,Q3a)
+ISSP2012jh1d.dat$Q3a %>% levels()
+ISSP2012jh1d.dat$Q3am %>% levels()
+
+
+
+
 
 
 

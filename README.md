@@ -79,3 +79,5 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 
 **5.6.2019** Aloitetaan dev-haarassa versio 1.5.2 ( ei vielä tägätty)
 **7.6.2019** Koko aineiston puuttuneisuuden taulukointikokeiluja
+**30.1.2019** Aloitettiin siistiminen ja editointi. Versio 1.5.2, treeni2-projekin
+datan luku, uusien muuttujien (R-faktorit) luonti ja muunnokset toimivat.

@@ -149,19 +149,22 @@ Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain, Irela
 Espanja pois, USA ja GB pois koska TOPBOT-muuttuja puuttuu (11.10.18)
 
 
-
 **3. kaikki havainnot, joissa on puuttuvia tietoja.** 
 
 
 Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
 
-Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Yksinkertaisinta olisi pudottaa kaikki havainnot, joissa on puuttuvia tietoja joissain valituissa (isommassa joukossa) muuttujia (10.10.18). Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Kun kyselytutkimuksessa on mahdollista kieltäytä vastaamasta, on sekin tietysti vastaus.
+Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Tämä erävastauskato ei ole tutkielman
+ydinaihe, mutta laajemman aineiston käytössä sitä ei voi ohittaa. Yksikkövastauskatoa
+ei käsitellä.
 
-Toisaalta CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. Puuttuvat havainnot otetaan mukaan, niitä ei poisteta aineistosta.
+CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. Puuttuvat havainnot otetaan mukaan, niitä ei poisteta aineistosta.
 
 Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa.
 
 Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, kts. monitoring report. Aika tyypillisiä, ei kauhean huonoja paitsi muutama.
+
+**edit** toistoa (30.1.20)
 
 
 
@@ -188,22 +191,22 @@ Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan 
 Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS (datan jakelutiedosto) sallii kolme koodia puuttuville tiedoille. Ne voi lukea R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detaljit R-koodissa (haven-paketin read_spss-funktion user_na -optio).
 
 
-**Tiedostonimistä 10.10.18**
+**Tiedostonimistä ** (10.10.18, 30.1.20)
 
-**6.12.18 TODO:**tarkista tiedostojen nimet
 
 ISSP2012*.data - täysi aineisto
-ISSP2012*jh1.data - valittu osa havainnoista (yleensä: maita) ja muuttujista
-ISSP2012esim1, 2 jne, tarkenne .dat muunnettuja muuttujia, rajattuja aineistoja jne.
+ISSP2012*jh1.data - valittu osa aineistosta (yleensä: maita) ja muuttujista
+ISSP2012*.jh1.dat - valittu osa aineistosta, luotu uusia muuttujia ja muunnettu muuttujia
+ISSP2012esim1, 2 jne, tarkenne .dat muunnettuja muuttujia, rajattuja aineistoja jne
 
 ISSP2012.data (df) jossa alkuperäinen SPSS-data
 ISSP2012jh1.data osajoukko edellisestä
 ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.
 
-ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Tästä tulee toistoa R-koodiin, mutta ei liikaa ja sopii myös Markdown-työskentelyyn. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi, näin on jo tehty paketeille (paketit.R)
+ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi,
+näin on jo tehty paketeille (paketit.R)
 
-
-**zxy** Datan rajaaminen (maat. muuttujat) heti alussa, pieni ristiriita eksploratiivisen data-analyysin perusidena kanssa? No oikeastaan ei, sillä 420 muuttujan aineisto on hieman työläs vaikkapa listauksissa. Muuttujien nimiä joutuu kaivelemaan pitkistä listauksista.
+Muuta: alkuperäinen muuttuja säilytetää, voi tarkistaa
 
  
 **zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
@@ -330,15 +333,8 @@ ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 ```
 
 
-
-**Data-tiedoston tutkailua**
-
-Koodilohkossa voi tarkastaa, mitä valittujen maiden koko datassa on. **Koodilohkon voi muuttaa kommenteiksi**
-
-Kolme ensimmäistä muuttujaa ovat datan metatietoja. 
-
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
-
+Kolme ensimmäistä muuttujaa ovat datan metatietoja.
 
 ```{r datasel_vars1}
 # 2. VALITAAN MUUTTUJAT  -> ISSP2012jh1b.data. Maat valittu koodilohkossa datasel_country1
@@ -512,7 +508,7 @@ str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
 
 # Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012jh1c.data) # 32823 obs. of  23 variables
+#str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
 ISSP2012jh1c.data %>% summary()
 
 ```
@@ -631,7 +627,7 @@ knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 
 ## Datan valinnan vaiheet ja puuttuvat tiedot**
 
-**ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskato on silti ongelma, vaihtelee kysymyksittäin, vaikka se ei kovin suuri olekaan.
+**ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskatoa analysoidaan, kun käytetään kaikkia valittuja muuttujia.
 
 Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
 
@@ -645,7 +641,7 @@ Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta,
 3. Kun laajempi aineisto otetaan käyttöön, joudutaan pohtimaan miten puuttuvia havaintoja käsitellään. Jos kyse on selvistä virheistä (esim. haastateltavan ikä puuttu) havainnot jätetään pois, muuten mietitään. 
 
 **Miten puuttuvia tietoja (erävastuskato, havainnossa puuttu joku tieto) käsitellään?**
-
+**edit** Tämä on vähän hämärää, ehkä pois? (30.1.20)
 
 1. Miksi tieto puuttuu, mitä "puuttuva tieto" tarkoittaa?
 
@@ -661,17 +657,12 @@ Onko joissain tai jossain maassa huomattava määrä puuttuvia tietoja?
 
 Onko puuttuvia tietoja paljon vai vähän?
 
-Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma. Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja "vihreä kirja").
+Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma.**edit** Mitäköhän tarkoittaa?
 
+Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja "vihreä kirja").
+**edit** Viite!
 
-**Puuttuneisuus muuttujassa V6 (kysymys Q1b) (esimerkki):** Tässä vain siksi, että siisti esimerkki taulukosta.
-
-**Nämä koodilohkot siirtyvät**
-
-
-
-
-Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! Tutkippa tätä! On oikea määrä (5.7.2019, kts. treeni2\Data_iso1.R**
+Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! On oikea määrä (5.7.2019, kts. treeni2\Data_iso1.R**
 ,
 ```{r muut2old, eval=FALSE, include=FALSE}
 # TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019) - show nothing 23.3.2019
@@ -721,13 +712,16 @@ Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 
 ```
 
-**Puuttuvat tiedot ja "listwise deletion" - pientä pohdintaa...**
 
-Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018).
+Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018). Ei tarvita,
+kun luodaan muuttuja jossa puuttuva tieto on mukana uutena luokittelumuuttujan
+arvona (30.1.20)
 
-```{r muut3}
+```{r muut3OLD, eval=FALSE, include=FALSE}
 # Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
 # Nämä taulukoinnit kuuluvat jaksoon, jossa lisämuuttujat otetaan käyttöön
+# TÄMÄ PASSIIVIKSEKSI KOODIKSI - Voi vilkaista jos on jotain käyttökelpoista
+# taulukointia tms. (30.1.20)
 
 # ISSP2012jh1.data %>% tableX(C_ALPHAN, TOPBOT, type = "row_perc")
 # puuttuvia tietoja yhteensä 3110/34271 9 prosenttia!
@@ -776,10 +770,6 @@ missURBRURAL <- ISSP2012jh1c.data %>% tableX(C_ALPHAN, URBRURAL, type = "count")
 ```
 
 
-
-
-**Puuttuvien tietojen tarkempaa koodausta ei enään mietitä (3.10.2018) **
-
 Puuttuvien tietojen tarkempi koodaus ISSP-datassa:
 
 0: Not applicapble (NAP), Not available (NAV)
@@ -792,10 +782,3 @@ NAP ja NAV määritellään
 "GESIS adds 'Not applicable'(NAP) codes for questions that have filters. NAP indicates that only a subsample and not all of respondents were asked. Also in the case of country spesific variables, all the other countries are coded NAP.
 
 GESIS adds 'Not available' for variables, which in singe countries may  not have been conducted for whatever reason."
-
-
-** (23.3.2019) Puuttuvien tietojen rajaava vaikutus raportoidaan, kun tietoja rajataan. Ei pohdita tämän enempää**
-
-
-
-

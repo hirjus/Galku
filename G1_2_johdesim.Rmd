@@ -98,14 +98,11 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 ```{r esim1data1, eval=FALSE, include=FALSE}
 #
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df), käytetään sitä (23.3.2019)
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1d.data
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 #
-# VANHA VERSIO 
-# Alkuperäinen data
-#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 # Yksi kysymys ja kuusi maata
 # incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
@@ -126,18 +123,21 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
 
 ```{r esim1data2}
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) 
+# UUSI DATA 30.1.20
+#
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
+# G1_1_data_fct1.Rmd-tiedostossa -> ISSP2012jh1d.dat (df) 
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata.
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 # Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
 
 countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
-ISSP2012esim1.dat <- filter(ISSP2012jh1c.data, V4 %in% countries_esim1)
-# str(ISSP2012esim1.dat)
-vars_esim1 <- c("C_ALPHAN", "V3", "V4", "V6", "SEX", "AGE") #kolme maamuuttujaa, kysymys Q1b
-ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
-# str(ISSP2012esim1.dat) 
+ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
+str(ISSP2012esim3.dat)
+vars_esim1 <- c("maa", "V3", "V4", "Q1b", "sp", "ika") #kolme maamuuttujaa, kysymys Q1b
+ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
+str(ISSP2012esim2.dat) 
 # 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
 # summary(ISSP2012esim1.dat)
 # ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
@@ -145,8 +145,9 @@ ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
 # Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
 # 8542-399 = 8143
 
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, !is.na(V6))
-ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+ISSP2012esim1.dat <- filter(ISSP2012esim2.dat, !is.na(Q1b))
+
+ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count") # No onpa outoa?
 str(ISSP2012esim1.dat)
 
 ```
