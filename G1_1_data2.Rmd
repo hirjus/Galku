@@ -7,7 +7,10 @@
 **edit** Poistetaan aineistosta havainnot, joissa puuttuva tieto muuttujassa SEX tai AGE
 
 **edit 24.9.18 Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).**
-**edit 30.1.20** Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
+
+**edit 30.1.20** 
+Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
+Uusi Rmd-tiedosto 
 
 
 

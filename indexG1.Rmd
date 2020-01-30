@@ -126,6 +126,11 @@ Vanhoja kommentteja
 
 ***
 
+```{r child = "G1_1_data_fct1.Rmd"}
+```
+
+***
+
 ```{r child = "G1_2_johdesim.Rmd"}
 ```
 
