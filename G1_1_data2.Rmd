@@ -404,8 +404,8 @@ substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13") # 9 muuttujaa
 # 0 No formal education
 # 1 Primary school (elementary school)
 # 2 Lower secondary (secondary completed does not allow entry to university: obligatory school)
-# 3 Upper secondary (programs that allow entry to university or programs that allow to entry other ISCED level 3 programs - designed to
-# prepare students for direct entry into the labour market)
+# 3 Upper secondary (programs that allow entry to university or programs that allow to entry 
+#   other ISCED level 3 programs - designed to prepare students for direct entry into the labour market)
 # 4 Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation)
 # 5 Lower level tertiary, first stage (also technical schools at a tertiary level)
 # 6 Upper level tertiary (Master, Dr.)
@@ -493,7 +493,7 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 
 # laaja aineisto - mukana havainnot joissa puuttuvia tietoja
 # hauska detalji URBRURAL - muuttujan metatiedoissa viite jonkun työaseman hakemistoon
-str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
+# str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
 # 
 # SUBSTANSSIMUUTTUJAT
 #
@@ -504,11 +504,11 @@ str(ISSP2012jh1b.data) #32969 obs. of  23 variables
 # ISSP2012jh1b.data$V5 näyttää tarkemmin rakenteen
 #
 # glimpse(ISSP2012jh1b.data)
-str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
+# str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
 
 # Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
+str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
 ISSP2012jh1c.data %>% summary()
 
 ```
@@ -625,7 +625,7 @@ Kysymyslomakkeen kuva, vai kuva liitteisiin? **Liitteisiin.**
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 ```
 
-## Datan valinnan vaiheet ja puuttuvat tiedot**
+## Datan valinnan vaiheet ja puuttuvat tiedot
 
 **ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskatoa analysoidaan, kun käytetään kaikkia valittuja muuttujia.
 
