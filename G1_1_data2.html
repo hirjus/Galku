@@ -925,7 +925,7 @@ str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146</code></
 ##  Max.   :21.0000   Max.   :6.000   Max.   :5.000  
 ##  NA&#39;s   :940       NA&#39;s   :434     NA&#39;s   :244</code></pre>
 <p>Metatietojen (3) ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin. Kahdeksan taustamuuttujaa.</p>
-<p><strong>Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot</strong></p>
+<p><strong>Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot</strong> <strong>edit</strong> tämä pätkä tuottaa virheilmoituksia (31-1-20), esim Error: unexpected symbol in “Q1a Working”</p>
 <p>Vastausvaihtoehdot:</p>
 <p>1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 4 = eri mieltä, 5 = täysin eri mieltä</p>
 <p>Q1a Working mother can have warm relation with child Q1b Pre-school child suffers through working mother Q1c Family life suffers through working mother Q1d Women’s preference: home and children Q1e Being housewife is satisfying Q2a Both should contribute to household income Q2b Men’s job is earn money, women’s job household</p>
@@ -933,7 +933,7 @@ str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146</code></
 <p>Vastausvaihtoehdot: “Work full-time” “Work part-time” “Stay at home”, “Can’t choose” 1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä. 6 on Taiwanin oma vastausvaihtoehto, 8 = en osaa sanoa ja 9 = no answer.</p>
 <pre class="r"><code># Muuttuja taulukkona - karkea tapa
 
-tabVarnames &lt;- c(substvars1,bgvars1) # muuttujanimet muuttujille, ei maa- tai metamuuttujia
+tabVarnames &lt;- c(substvars1,bgvars1) # muuttujanimet muuttujille
 
 # Kysymysten lyhyet versiot englanniksi
 tabVarDesc &lt;- c(&quot;Q1a Working mother can have warm relation with child &quot;,
@@ -990,6 +990,7 @@ colnames(jhVarTable1_fi.df) &lt;- cols_jhVarTable1
 
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
+
 knitr::kable(jhVarTable1.df, booktab=TRUE,
                 fig.cap=&quot;ISSP2012:Työelämä ja perhearvot - valitut muuttujat&quot;)</code></pre>
 <table>
@@ -1071,6 +1072,7 @@ knitr::kable(jhVarTable1.df, booktab=TRUE,
 </tbody>
 </table>
 <pre class="r"><code># Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
+
  knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
               fig.cap=&quot;ISSP2012: suomenkielisen lomakkeen kysymykset&quot;)</code></pre>
 <table>
@@ -1152,7 +1154,7 @@ Suomen lomake
 </div>
 </div>
 <div id="datan-valinnan-vaiheet-ja-puuttuvat-tiedot" class="section level2">
-<h2>Datan valinnan vaiheet ja puuttuvat tiedot**</h2>
+<h2>Datan valinnan vaiheet ja puuttuvat tiedot</h2>
 <p><strong>ks</strong> Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskatoa analysoidaan, kun käytetään kaikkia valittuja muuttujia.</p>
 <p>Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana painot mm. vastauskadon oikaiksemiseen <strong>Viittet - tekninen raportti</strong>. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.</p>
 <p>Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta, myös puuttuvien tietojen tarkemman koodauksen.</p>
@@ -1173,9 +1175,9 @@ Suomen lomake
 <p>Onko puuttuvia tietoja tasaisesti eri maissa, vai vaihteleeko niiden suhteellinen osuus?</p>
 <p>Onko joissain tai jossain maassa huomattava määrä puuttuvia tietoja?</p>
 <p>Onko puuttuvia tietoja paljon vai vähän?</p>
-<p>Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma.<strong>edit</strong> Mitäköhän tarkoittaa?</p>
+<p>Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma. <strong>edit</strong> Mitäköhän tarkoittaa?</p>
 <p>Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja “vihreä kirja”). <strong>edit</strong> Viite!</p>
-<p>Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! On oikea määrä (5.7.2019, kts. treeni2_iso1.R** ,</p>
+<p>Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). <strong>Huom:</strong> kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R</p>
 <p>Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018). Ei tarvita, kun luodaan muuttuja jossa puuttuva tieto on mukana uutena luokittelumuuttujan arvona (30.1.20)</p>
 <p>Puuttuvien tietojen tarkempi koodaus ISSP-datassa:</p>
 <p>0: Not applicapble (NAP), Not available (NAV) 7: (97,997, 9997,…): Refused 8: (98, 998, 9998,…): Don’t know 9: (99, 999, 9999,…): No answer</p>

@@ -99,7 +99,7 @@ http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStud
 
 Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain.
 
-```{r ISSPdocsTable, fig.cap="ISSP 2012 - Family and Changing Gender Roles IV - dokumentit"}
+```{r ISSPdocsTable, fig.cap="ISSP 2012: dokumentit"}
 issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
                   "Contents of ISSP 2012 module")
 issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot", 
@@ -330,6 +330,7 @@ ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 # kohtaisilla lomakkeilla. Vertailukelpoiset muuttujat on konstruoitu niistä.
 # Muuttujia on 420, vain osa yhteisiä kaikille maille.
 
+
 ```
 
 
@@ -337,6 +338,7 @@ ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 Kolme ensimmäistä muuttujaa ovat datan metatietoja.
 
 ```{r datasel_vars1}
+
 # 2. VALITAAN MUUTTUJAT  -> ISSP2012jh1b.data. Maat valittu koodilohkossa datasel_country1
 #
 #
@@ -513,9 +515,15 @@ ISSP2012jh1c.data %>% summary()
 
 ```
 
-Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin. Kahdeksan taustamuuttujaa.
+
+
+Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. 
+Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita 
+sukupuolirooleihin ja perhearvoihin.
+Kahdeksan taustamuuttujaa.
 
 **Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot**
+**edit** tämä pätkä tuottaa virheilmoituksia (31-1-20), esim Error: unexpected symbol in "Q1a Working"
 
 Vastausvaihtoehdot:
 
@@ -536,13 +544,15 @@ Q3b Should women work: Youngest kid at school
 
 Vastausvaihtoehdot: 
 "Work full-time" "Work part-time" "Stay at home", "Can't choose"
-1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä. 6 on Taiwanin oma vastausvaihtoehto, 8 = en osaa sanoa ja 9 = no answer.
+1 = W, 2 = w, 3 = H, NA = 6,8,9 ei tässä eriteltynä. 6 on Taiwanin oma 
+vastausvaihtoehto, 8 = en osaa sanoa ja 9 = no answer.
 
 
 ```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
+
 # Muuttuja taulukkona - karkea tapa
 
-tabVarnames <- c(substvars1,bgvars1) # muuttujanimet muuttujille, ei maa- tai metamuuttujia
+tabVarnames <- c(substvars1,bgvars1) # muuttujanimet muuttujille
 
 # Kysymysten lyhyet versiot englanniksi
 tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
@@ -599,53 +609,70 @@ colnames(jhVarTable1_fi.df) <- cols_jhVarTable1
 
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
+
 knitr::kable(jhVarTable1.df, booktab=TRUE,
                 fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
+
  knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
               fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
+ 
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
 # monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
 
 # Kokeillaan taulukoiden yhdistämistä, jos aikaa jää. Ei luultavasti kannata, kun halutaan pdf- ja 
 # html-tulostus samalla koodilla (26.12.18).
- 
+
 ```
 
-Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf, löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
-
+Tarkemmat kysymysten muotoilut poikkeavat tietysti hieman eri maiden välillä. 
+Suomen lomakkeet täydelliset kysymykset voi tarkista tiedostosta ZA5900_q_fi-fi.pdf,
+löytyy zcat-sivustolta. Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa 
+ZA5900_cdb.pdf (**refworks-viite pitäisi löytyä**, ja ISSP dokumentit kerrotaan luvun alussa).
 
 Bookdown-versiossa taulukot omiksi koodilohkoiksi, ja fig.caption - optiolla taulukon otsikko.
-
 
 Kysymyslomakkeen kuva, vai kuva liitteisiin? **Liitteisiin.**
 
 ```{r suom_kys, out.width='50%', fig.align='center',fig.cap='Suomen lomake'}
+
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
+
 ```
 
 ## Datan valinnan vaiheet ja puuttuvat tiedot
 
-**ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskatoa analysoidaan, kun käytetään kaikkia valittuja muuttujia.
+**ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. Yksikkövastauskato 
+(unit non-response), eräsvastauskato (item non-response). Mitä on raportoitava, 
+kun käytetään valmista aineistoa? Erävastauskatoa analysoidaan, kun käytetään kaikkia 
+valittuja muuttujia.
 
-Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**. Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
+Yksikkövastauskato on otettu vaihtelevasti huomioon, kun kyselyn toteuttaja on 
+editoinut ja tarkastanut datan. Eri maiden datassa on (mutta ei aina!) mukana 
+painot mm. vastauskadon oikaiksemiseen **Viittet - tekninen raportti**.
+Myös selaimella voi zcat-sivustolla tutkailla kysymyksittäin.
 
-Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta, myös puuttuvien tietojen tarkemman koodauksen. 
+Datakatalogi-dokumentista näkee vastausten jakauman jokaisen kysymyksen osalta, 
+myös puuttuvien tietojen tarkemman koodauksen. 
 
 
 1. Valitaan 25 maata ja muuttujat
 
-2. Johdattelevissa esimerkeissä valitaan kuusi maata ja kolme muuttujaa. Jätetään pois kaikki havainnot (vastaukset) joissa on puuttuvia tietoja ("listwise deletion")
+2. Johdattelevissa esimerkeissä valitaan kuusi maata ja kolme muuttujaa. Jätetään
+pois kaikki havainnot (vastaukset) joissa on puuttuvia tietoja ("listwise deletion")
 
-3. Kun laajempi aineisto otetaan käyttöön, joudutaan pohtimaan miten puuttuvia havaintoja käsitellään. Jos kyse on selvistä virheistä (esim. haastateltavan ikä puuttu) havainnot jätetään pois, muuten mietitään. 
+3. Kun laajempi aineisto otetaan käyttöön, joudutaan pohtimaan miten puuttuvia 
+havaintoja käsitellään. Jos kyse on selvistä virheistä (esim. haastateltavan 
+ikä puuttu) havainnot jätetään pois, muuten mietitään. 
 
 **Miten puuttuvia tietoja (erävastuskato, havainnossa puuttu joku tieto) käsitellään?**
 **edit** Tämä on vähän hämärää, ehkä pois? (30.1.20)
 
 1. Miksi tieto puuttuu, mitä "puuttuva tieto" tarkoittaa?
 
-Joissain kysymyksissä (V12, V13) puuttuvaksi tiedoksi kirjautuu vastaus ("en osaa sanoa") "ei vastausta" - vaihtoehdon lisäksi. Nämä mukaan.
+Joissain kysymyksissä (V12, V13) puuttuvaksi tiedoksi kirjautuu vastaus ("en osaa 
+sanoa") "ei vastausta" - vaihtoehdon lisäksi. Nämä mukaan.
 
 Ikä ja sukupuoli: ilmeinen virhe, joten jätetään havainnot pois (näitä ei ole paljon)
 
@@ -657,14 +684,19 @@ Onko joissain tai jossain maassa huomattava määrä puuttuvia tietoja?
 
 Onko puuttuvia tietoja paljon vai vähän?
 
-Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma.**edit** Mitäköhän tarkoittaa?
+Puuttuvat tiedot otetaan mukaan analyysiin, mutta tulkinnassa on pidettävä mielessä niiden jakauma.
+**edit** Mitäköhän tarkoittaa?
 
 Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja "vihreä kirja").
 **edit** Viite!
 
-Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista puuttuvia tietoja on 3,5 prosenttia (1219/34271). **Huom: kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! On oikea määrä (5.7.2019, kts. treeni2\Data_iso1.R**
-,
+Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista 
+puuttuvia tietoja on 3,5 prosenttia (1219/34271).
+**Huom:** kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! 
+On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R
+
 ```{r muut2old, eval=FALSE, include=FALSE}
+
 # TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019) - show nothing 23.3.2019
 # Nämä tarkastelujaksoon, jossa laajempi joukko muuttujia käyttöön
 
@@ -712,12 +744,12 @@ Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista pu
 
 ```
 
-
 Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018). Ei tarvita,
 kun luodaan muuttuja jossa puuttuva tieto on mukana uutena luokittelumuuttujan
 arvona (30.1.20)
 
 ```{r muut3OLD, eval=FALSE, include=FALSE}
+
 # Pohditaan hieman ovatko kaikki muuttujat käyttökelpoisia eli puuttuuko liikaa vastauksia
 # Nämä taulukoinnit kuuluvat jaksoon, jossa lisämuuttujat otetaan käyttöön
 # TÄMÄ PASSIIVIKSEKSI KOODIKSI - Voi vilkaista jos on jotain käyttökelpoista
