@@ -96,7 +96,7 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 **zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
 
-```{r esim1data1, eval=FALSE, include=FALSE}
+```{r esim1data1OLD, eval=FALSE, include=FALSE}
 #
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1d.data
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
@@ -122,7 +122,7 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
 
-```{r esim1data2}
+```{r esim1data1}
 # UUSI DATA 30.1.20
 #
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
@@ -132,120 +132,53 @@ Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.dat
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 # Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
 
+# Kuusi maata
+
 countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
 ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
 str(ISSP2012esim3.dat)
-vars_esim1 <- c("maa", "V3", "V4", "Q1b", "sp", "ika") #kolme maamuuttujaa, kysymys Q1b
-ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
-str(ISSP2012esim2.dat) 
-# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
-# summary(ISSP2012esim1.dat)
-# ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
 
-# Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
-# 8542-399 = 8143
+#neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
+
+vars_esim1 <- c("C_ALPHAN", "maa", "V3", "V4", "Q1b", "sp", "ika") 
+ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
+
+str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
+# C_ALPHAN: chr, maa: Factor w/ 25 
+
+# Poistetaan havainnot, joilla Q1b - muuttujassa puuttuva tieto 'NA'
 
 ISSP2012esim1.dat <- filter(ISSP2012esim2.dat, !is.na(Q1b))
 
-ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count") # No onpa outoa?
-str(ISSP2012esim1.dat)
+str(ISSP2012esim1.dat) # 8143 obs. of  6 variable
 
-```
-
-
-**zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
-```{r faktorintitesti1}
-# PUUTTUVAT TIEDOT JA as_factor
-# kopioitu Data_iso.1.R - skriptiin (11.1.2019), jatketaan NA-vääntöä siellä. (23.3.2019)
-# 
-# Hyödyllistä katsoa, miten as_factor - funkitolla labelit kulkevat mukana! Ja levels on "väärin"!
+# EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
 #
-# forcats - paketin as_factor-funktio - haven-paketissa (7.12.2018)
-# Compared to base R, this function creates levels in the order in which they appear, 
-# which will be the same on every platform. (Base R sorts in the current locale 
-# which can vary from place to place.)
-# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
-# https://haven.tidyverse.org/reference/as_factor.html
-str(ISSP2012esim1.dat$V6)
-summary(ISSP2012esim1.dat$V6)
-temp1Q1b <- as_factor(ISSP2012esim1.dat$V6)
-#table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp1Q1b) # NA-arvoja ei mukaan
-str(temp1Q1b)
-summary(temp1Q1b)
-attributes(temp1Q1b)
+# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
+#
+# Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
+# 8542-399 = 8143
 
-# Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
-# - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
+# Tyhjät "faktorilabelit" on poistettava
 
+ ISSP2012esim1.dat <- ISSP2012esim1.dat %>% 
+     mutate(maa = fct_drop(maa))
 
-temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
-str(temp2Q1b)
-summary(temp2Q1b)
-table(temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp2Q1b) # NA-arvoja ei mukaan
-head(temp2Q1b)
-attributes(temp2Q1b)
-levels(temp2Q1b)
-
-
-temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko? Eipä taida toimia tässä (6.6.2019)
-str(temp3Q1b)
-summary(temp3Q1b)
-attributes(temp3Q1b)
-table(temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp3Q1b) # NA-arvoja ei mukaan
-
-ISSP2012esim1.dat$temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
-str(ISSP2012esim1.dat$temp4Q1b)
-summary(ISSP2012esim1.dat$temp4Q1b)
-attributes(ISSP2012esim1.dat$temp4Q1b)
-table(ISSP2012esim1.dat$temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(ISSP2012esim1.dat$temp4Q1b) # NA-arvoja ei mukaan
-levels(ISSP2012esim1.dat$temp4Q1b)
-names(ISSP2012esim1.dat$temp4Q1b)
-str(ISSP2012esim1.dat)
-#TARKISTUKSET: summary ja levels
-# HUOM! Puuttuvat tiedot filtteröity pois, joten otetaan vain faktorit 1-5
-ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
-    mutate(test1FakV6 =
-       recode(temp4Q1b,
-             `Strongly agree` = "S",
-             `Agree` = "s",
-             `Neither agree nor disagree` = "?",
-             `Disagree` = "e",
-             `Strongly disagree` = "s",
-             ))
-
-
+ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
+fct_count(ISSP2012esim1.dat$Q1b)
+# fct_count(ISSP2012esim1.dat$sp)
+# fct_unique(ISSP2012esim1.dat$maa)
+# fct_count(ISSP2012esim1.dat$maa)
 
 ```
 
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
+
 ```{r esim1data2}
+# Taulukoita (31.1.2020)
 
-# muutetaan muuttujia R:n factor-tyyppiin (luokittelumuuttuja)
-#
-# Luokittelumuuttujien tasoille labelit
-#
-# sp (sukupuoli) m = 1, f = 2
-sp_labels <- c("m","f")
-#sp_levels
-# S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
-vastaus_labels <- c("S","s","?","e","E")
-#vastaus_levels1 <- c()
-
-# Faktoreiksi
-ISSP2012esim1.dat$maa <- as_factor(ISSP2012esim1.dat$C_ALPHAN)
-ISSP2012esim1.dat$sp <- as_factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
-ISSP2012esim1.dat$Q1b <- as_factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
-str(ISSP2012esim1.dat$Q1b)
-levels(ISSP2012esim1.dat$Q1b)
-str(ISSP2012esim1.dat$sp)
-levels(ISSP2012esim1.dat$sp)
-#
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
 #  5601     BE-FLA-Belgium/ Flanders
@@ -256,39 +189,24 @@ levels(ISSP2012esim1.dat$sp)
 #
 # Tarkastuksia
 #
-#ISSP2012esim1.dat %>% tableX(maa,V6,type = "count") # 400 missing
-#ISSP2012esim1.dat %>% tableX(maa,AGE,type = "count") # 12 missing (7 BE, 5 DE)
-#ISSP2012esim1.dat %>% tableX(maa,SEX ,type= "count") # 9 missing (BE)
-# 
-# Jos yhdelläkään havainnolla ei puutu tietoja useammasta muuttujasta:
-#   400 + 12 + 9 = 421
-#   8557- 421 = 8136
-#summary(ISSP2012esim1.dat$sp)
-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "count")
+ISSP2012esim1.dat %>% tableX(maa,ika,type = "count")
+ISSP2012esim1.dat %>% tableX(maa,sp ,type= "count")
 
-str(ISSP2012esim1.dat)
-#Apuvälineitä - lisätietoa muuttujista
-# typeof(ISSP2012esim1.dat$V6) # what is it?
-# class(ISSP2012esim1.dat$V6) # what is it? (sorry)
-# storage.mode(ISSP2012esim1.dat$V6) # what is it? (very sorry)
-# length(ISSP2012esim1.dat$V6) # how long is it? What about two dimensional objects?
-# attributes(ISSP2012esim1.dat$V6) # does it have any metadata?
-# str(ISSP2012esim1.dat) #8143 obs. of  8 variables
+# Riviprofiilit
 
+# ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
+ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
+
+# Kysymyksen Q1b vastaukset
+
+# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
+# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+
+# str(ISSP2012esim1.dat) # 8143 obs. of  7 variable, 
+# sama kuin vanhassa Galku-koodissa. 
 
 ```
-Poistetaan havainnot, joissa puuttuvia tietoja
-```{r esim1data3}
-# poistetaan havainnot, joissa puuttuvia tietoja
-# taulukko on sekaisin (28.12.18) - pitäisikö lisätä !is.na(Q1b)?
-# V6 haven_labelled num, Q1b factor 8 levels
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012esim1.dat) 
-# 8143 obs. of  6 variables
-# muutamalla havainnolla on useampi puuttuva tieto kolmessa muuttujassa (8143-8136 = 7) 
-
-```
-
 
 **Taulukot ja kuvat omina koodilohkoina**
 
@@ -440,9 +358,9 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
 # grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu 
 # näin tekemään.
-# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") (13.5.2018), vaan pdf-konversiossa 
-# pandoc failed with error 43
-# 
+# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") 
+# (13.5.2018), vaan pdf-konversiossa pandoc failed with error 43
+
 ```
 
 

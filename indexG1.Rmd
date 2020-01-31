@@ -27,7 +27,10 @@ output:
 **Versiot - vanha Galku - 5.6.2019 versio 1.5.1**
 
 Siivotaan datan käsittelyn koodilohkot, kopiodaan mahdollisesti hyödylliset 
-koodipätkät tiedostoon siivous1.R (30.1.2020)
+koodipätkät tiedostoon siivous1.R (30.1.2020).
+
+Uudet datan luku- ja muunnosskriptit (treeni2-projektista), korjaillaan virheitä
+ja editoidaan koodia.(31.1.2020)
 
 
 **6.8.2018 versio 1.0**

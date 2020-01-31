@@ -31,6 +31,11 @@ ISSP2012jh1d.dat$maa %>% fct_count() %>% kable()
 ISSP2012jh1d.dat$maa %>% summary()
 sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
 # C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
+#
+# Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa
+#
+# Huom2: kun dataa rajataan, on tarkistettava ja tarvittaessa poistettava
+# "tyhjät" R-factor - muuttujan "maa" luokat
 
 ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa)
 
