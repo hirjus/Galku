@@ -88,3 +88,7 @@ datan luku, uusien muuttujien (R-faktorit) luonti ja muunnokset toimivat.
 Johdatteleva esimerkki G1_2_johdesim.Rmd toimii ensimmäiseen CA-karttaan asti.
 HTML-tulostus toimii vain G1_1_data2.Rmd - tiedostolla (knit to html). Muut kolme
 voi ajaa RStudion Run all - komennolla.
+
+**1.2.2020** Versio 1.5.4 html-tulostus (knit to html RStudiossa) toimii, neljä
+ensimmäistä Rmd-tiedostoa ajetaan indexG1.html - tiedostoksi. Muut Rmd-tiedostot
+on disaploitu index.Rmd - tiedostossa.

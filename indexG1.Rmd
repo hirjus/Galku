@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.5.2 dev , tulostettu `r Sys.Date()` "
+date: "versio 1.5.4 dev , tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -139,15 +139,15 @@ Vanhoja kommentteja
 
 ***
 
-```{r child = "G1_3_tulk1.Rmd"}
+```{r child = "G1_3_tulk1.Rmd", eval = FALSE}
 ```
 
 ***
-```{r child = "G1_4_CAlaaj1.Rmd"}
+```{r child = "G1_4_CAlaaj1.Rmd",eval = FALSE}
 
 ```
 
 ***
-```{r child = "G1_5_CAlaaj1.Rmd"}
+```{r child = "G1_5_CAlaaj1.Rmd",eval = FALSE}
 
 ```

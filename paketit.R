@@ -1,5 +1,4 @@
-# Paketit 25.4.2018
-# Kolme ja ehkä neljäkin viimeistä turhia (11.1.2019)
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
 library(haven)
@@ -10,15 +9,18 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(likert)
+# library(likert) # ei käytetty(1.2.20)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
-library(stargazer) # 28.5.2018 taulukoiden yms. tulostietojen siistiin tulostukseen
-#
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
 #Uusia 13.6.2018
 library(bookdown)
 library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
 #
 #r-skripteillä riittää, kun ajaa tämän
 sessionInfo()

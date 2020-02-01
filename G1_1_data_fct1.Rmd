@@ -1,5 +1,36 @@
 ## Perusmuunnokest ISSP2012 - datalle
 
+```{r paketit_g11_fct, include=FALSE}
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
+# paketit.R - kopioidaan Rmd-tiedostojen alkuun
+
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+# library(likert) # ei käytetty(1.2.20)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+
+sessionInfo()
+
+```
+
 Datatiedosto on ISSP2012jh1.data, ja luokittelumuuttujat muunnetaan R:n 
 factor- muuttujaksi.
 
@@ -52,13 +83,15 @@ ISSP2012jh1d.dat %>% tableX(SEX,sp)
 ISSP2012jh1d.dat %>% tableX(sp1,sp)
 
 # vaihe 1.3 uudet "faktorilabelit"
-ISSP2012jh1d.dat %>%
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
     mutate(sp =
                fct_recode(sp,
                           "m" ="Male",
                           "f" = "Female")
             )
+
 # Tarkistuksia
+
 ISSP2012jh1d.dat$sp %>% fct_unique()
 ISSP2012jh1d.dat$sp %>% fct_count()
 ISSP2012jh1d.dat$sp %>% summary()
@@ -268,8 +301,6 @@ ISSP2012jh1d.dat$Q2am %>% fct_count()
 ISSP2012jh1d.dat$Q2bm %>% fct_count()
 ISSP2012jh1d.dat$Q3am %>% fct_count()
 ISSP2012jh1d.dat$Q3bm %>% fct_count()
-
-
 
 ```
 
