@@ -94,6 +94,6 @@ ensimmäistä Rmd-tiedostoa ajetaan indexG1.html - tiedostoksi. Muut Rmd-tiedost
 on disaploitu index.Rmd - tiedostossa.
 
 Versio 1.5.5 - G1_3_tulk1.Rmd toimii, html-tiedosto syntyy. CA-kuvat kääntyvät
-y-akselin ympäri (180 astetta), ja profiikuvissa maiden tunnukset ovat selvästi
+x-akselin ympäri (180 astetta), ja profiikuvissa maiden tunnukset ovat selvästi
 väärin. Uudessa datassa maa-faktorin järjestys on muuttunut, ja kuvat tehdään
 "käsityönä" CA-tulosobjenktin (SimpleCA1) tiedoista. Pieleen menee!
