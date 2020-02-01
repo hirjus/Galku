@@ -179,9 +179,29 @@ fct_count(ISSP2012esim1.dat$Q1b)
 # fct_count(ISSP2012esim1.dat$sp)
 # fct_unique(ISSP2012esim1.dat$maa)
 # fct_count(ISSP2012esim1.dat$maa)
+ISSP2012esim1.dat %>% tableX(maa, C_ALPHAN, type = "count")
+
+# Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
+# muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
+
+ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
+        mutate(maa2 =
+                fct_relevel(maa,
+                            "BE",
+                            "BG",
+                            "DE",
+                            "DK",
+                            "FI",
+                            "HU"))
+
+# Tarkistus
+ISSP2012esim1b.dat %>% tableX(maa,maa2, type = "count")
+ISSP2012esim1b.dat %>% tableX(maa2,C_ALPHAN, type = "count")
 
 ```
 
+Muutetaan R-faktorin "maa" järjestys samanlaiseksi alkuperäisen C_ALPAHN- muuttujan
+kanssa. Aluksi testausta varten, ISSP2012esim1b.dat. (1.2.20)
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
@@ -257,6 +277,10 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 ```{r EkaCA}
 simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 #tämä ajetaan jotta saadaan hieno kuva piirrettyä
+
+# Vaikuttaako maa- muuttujan järjestys? (1.2.20)
+simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1b.dat)
+
 ```
 
 **edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
@@ -284,6 +308,29 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 #apu1b_df
 ```
 
+Testaus: maa2, sama järjestys kuin C_ALPHA
+```{r g1_2_kuva1test}
+
+#mutkikas kuvan piirto - sarakeprofiilit vertailussa
+#ggplot vaatii df-rakenteen ja 'long data' - muotoon
+##https://stackoverflow.com/questions/9563368/create-stacked-barplot-where-each-stack-is-scaled-to-sum-to
+#
+# käytetään ca - tuloksia
+apu1test <- (simpleCA2$N)
+colnames(apu1test) <- c("S", "s", "?", "e", "E")
+rownames(apu1test) <- c("BE", "BG", "DE", "DK", "FI", "HU")
+apu1_dftest <- as.data.frame(apu1test)
+#lasketan rivien reunajakauma
+apu1_dftest$ka_sarake <- rowSums(apu1_dftest)
+#muokataan 'long data' - muotoon
+apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = c('ind'))
+
+ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
+         geom_bar(position = "fill", stat ="identity") +
+         scale_y_continuous(labels = percent_format()) 
+#apu1b_df
+```
+
 **zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
 Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
@@ -294,7 +341,6 @@ apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 
 #apu2_df
-
 #str(apu2_df)
 ## typeof(apu2_df) # what is it?
 ## class(apu2_df) # what is it? (sorry)
@@ -321,6 +367,39 @@ ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
         scale_y_continuous(labels = percent_format()) 
 ```
 
+Ja sama testaus kuin sarakeprofiilikuvilla
+
+```{r g1_2_kuva2test, echo=TRUE}
+# riviprofiilit ja keskiarvorivi -  18.9.2018
+apu2_dftest <- as.data.frame(apu1test)
+apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))
+
+#apu2_df
+#str(apu2_df)
+## typeof(apu2_df) # what is it?
+## class(apu2_df) # what is it? (sorry)
+## storage.mode(apu2_df) # what is it? (very sorry)
+## length(apu2_df) # how long is it? What about two dimensional 
+## objects?
+# attributes(apu2_df) 
+
+# temp1 <- cbind(apu2_df, ind = rownames(apu2_df))
+# temp1
+##muokataan 'long data' - muotoon
+apu2b_dftest <- melt(cbind(apu2_dftest, ind = rownames(apu2_dftest)), id.vars = c('ind'))
+#apu2b_df
+#
+#
+#ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
+#       geom_bar(position = "fill", stat ="identity") +
+#       #coord_flip() +
+#        scale_x_continuous(labels = percent_format()) 
+#versio2 # perkele, tämä toimii! 18.9.2018
+ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
+       geom_bar(position = "fill", stat ="identity") +
+       coord_flip() +
+        scale_y_continuous(labels = percent_format()) 
+```
 
 **Graafinen analyysi ja R**
 
@@ -360,7 +439,11 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
-plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
+plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - as_factor-järjestys")
+
+plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - C_ALPHAN-järjestys (aakkosjärj)")
 
 
 #str(simpleCA1)
