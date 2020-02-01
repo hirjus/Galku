@@ -1,6 +1,8 @@
 
 # Tulkinnan perusteita
+
 ```{r paketit_g13, include=FALSE}
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
 library(haven)
@@ -11,10 +13,22 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(likert)
+# library(likert) # ei käytetty(1.2.20)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
-library(printr)
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+#
+
+sessionInfo()
+
 ```
 Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? **Ydinluku**.
 
@@ -43,6 +57,10 @@ plot(simpleCA1, map = "rowprincipal",
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
 
 ```
+
+**HUOM (1.2.20)** Kuva on kääntynyt x-akselin ympäri? (1.2.20) Maat ovat eri järjestuksessä,
+johtuisiko siitä? Tarkista myös edellisen luvun rivi- ja sarakeprofiilikuvat, 
+niissä on muokkailtu taulukkoa...
 
 Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaatistoa, ja niiden yhteys.
 

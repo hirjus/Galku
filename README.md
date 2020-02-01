@@ -92,3 +92,8 @@ voi ajaa RStudion Run all - komennolla.
 **1.2.2020** Versio 1.5.4 html-tulostus (knit to html RStudiossa) toimii, neljä
 ensimmäistä Rmd-tiedostoa ajetaan indexG1.html - tiedostoksi. Muut Rmd-tiedostot
 on disaploitu index.Rmd - tiedostossa.
+
+Versio 1.5.5 - G1_3_tulk1.Rmd toimii, html-tiedosto syntyy. CA-kuvat kääntyvät
+y-akselin ympäri (180 astetta), ja profiikuvissa maiden tunnukset ovat selvästi
+väärin. Uudessa datassa maa-faktorin järjestys on muuttunut, ja kuvat tehdään
+"käsityönä" CA-tulosobjenktin (SimpleCA1) tiedoista. Pieleen menee!

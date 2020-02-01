@@ -473,15 +473,9 @@ ISSP2012jh1d.dat %>%
 
 ISSP2012jh1d.dat %>%  # tableX muotoilee taulukkoa!
     tableX(Q3am,Q3a)
+
 ISSP2012jh1d.dat$Q3a %>% levels()
 ISSP2012jh1d.dat$Q3am %>% levels()
-
-
-
-
-
-
-
 
 ```
 

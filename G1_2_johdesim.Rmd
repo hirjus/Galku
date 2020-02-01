@@ -106,9 +106,6 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 (V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei vielä tee kuvista ahtaita kun sarakkeita ja rivejä on vähän. Pudotetaan tarvittaessa turha Q-kirjain pois. Alkuperäisessä muuttujassa metatieto säilyy varmemmin, ja tarkistuksia on helpompi tehdä.
 
-
-**zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
-
 ```{r esim1data1OLD, eval=FALSE, include=FALSE}
 #
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1d.data
