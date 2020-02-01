@@ -76,3 +76,28 @@ Kokeillaan Githubin windows-klientillä dev-haaran päivitystä ("update from de
 **23.3.2019** Johdattelevan esimerkin data, testaillaan faktorointia.
 
 **25.5.2019** Versio 1.5.1 masteriin ja dev-haaraan uusi versio 1.5.2. Paljon pieniä muutoksia, ei suurempia.
+
+**5.6.2019** Aloitetaan dev-haarassa versio 1.5.2 ( ei vielä tägätty)
+
+**7.6.2019** Koko aineiston puuttuneisuuden taulukointikokeiluja
+
+**30.1.2020** Aloitettiin siistiminen ja editointi. Versio 1.5.2, treeni2-projekin
+datan luku, uusien muuttujien (R-faktorit) luonti ja muunnokset toimivat.
+
+**31.1.2020** Versio 1.5.3. Uudet faktoroinnit ja datan luontiskriptit toimivat.
+Johdatteleva esimerkki G1_2_johdesim.Rmd toimii ensimmäiseen CA-karttaan asti.
+HTML-tulostus toimii vain G1_1_data2.Rmd - tiedostolla (knit to html). Muut kolme
+voi ajaa RStudion Run all - komennolla.
+
+**1.2.2020** Versio 1.5.4 html-tulostus (knit to html RStudiossa) toimii, neljä
+ensimmäistä Rmd-tiedostoa ajetaan indexG1.html - tiedostoksi. Muut Rmd-tiedostot
+on disaploitu index.Rmd - tiedostossa.
+
+Versio 1.5.5 - G1_3_tulk1.Rmd toimii, html-tiedosto syntyy. CA-kuvat kääntyvät
+x-akselin ympäri (180 astetta), ja profiikuvissa maiden tunnukset ovat selvästi
+väärin. Uudessa datassa maa-faktorin järjestys on muuttunut, ja kuvat tehdään
+"käsityönä" CA-tulosobjenktin (SimpleCA1) tiedoista. Pieleen menee!
+
+Testattu, järjestys pitää muuttaa maa-faktorilla samaksi kuin alkuperäisellä
+C_ALPHAN - muuttujalla. Tämä korjaa pulmat, havainnollistettu testiaineistolla,
+ei vielä korjattu.

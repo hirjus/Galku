@@ -62,16 +62,16 @@ Kun jaamme nämä tekijät havaintojen kokonaismäärällä $n$, rivisumma muunt
  \frac{\chi^{2}}{n} = \phi^{2}
   (\#eq:inert1)
  \end{equation}
- 
+
 Tunnusluku $\phi^{2}$ on korrespondenssianalyysissä kokonaisinertia (total inertia). Se kuvaa, kuinka paljon varianssia taulukossa on ja on riippumaton havaintojen lukumäärästä. Tilastotieteessä tunnusluvulla on useita vaihtoehtoisia nimiä (esim. mean square contingency coefficient), ja sen neliöjuurta kutsutaan $\phi$ - kertoimeksi.
 
 Tässä siirrytään kahden luokittelumuuttujan taulukosta suhteellisten frekvenssien taulukkoon, ja pieni pohdinta taulukoista yleensä olisi paikallaan. Kaavojen \@ref(eq:khii21) ja \@ref(eq:khii22) yhteyden pitäisi olla selkeä.
-Frekvenssitaulukossa (jossa kaikki taulukon luvut on jaettu havaintojen lukumäärällä n) riviprofiilien 1 ja 3  (euklidinen) etäisyys on 
+Frekvenssitaulukossa (jossa kaikki taulukon luvut on jaettu havaintojen lukumäärällä n) riviprofiilien 1 ja 3  (euklidinen) etäisyys on
  \begin{equation}
  \sqrt{(p_{11} - p_{31})^2 + (p_{12} - p_{32})^2 + (p_{13} - _{33})^2+ (p_{14} - _{34})^2+ (p_{15} - _{35})^2}
  \end{equation}
- 
- 
+
+
  Rivien $\chi^{2}$ - etäisyys on painotettu euklidinen etäisyys, jossa painoina ovat riviprofiilin odotetut arvot. Ne ovat riippumattomuushypoteesin mukaisesti riviprofiilien keskiarvoprofiilin vastaavat alkioit $r_{i}$ .
 \begin{equation}
  \sqrt{\frac{(p_{11} - p_{31})^2} { r_{1}} + \dots + \frac{(p_{15} - p_{35})^2} {r_{5}}}
@@ -93,30 +93,30 @@ Kaavat.tex - dokumentissa on tässä kohdassa testailtu R:n furniture - paketin 
 Tämä toimii, drawmatrixin voi varmaan unohtaa?
 
 \begin{equation}
-A = \begin{bmatrix} 
+A = \begin{bmatrix}
     a_{11} & a_{12} & \dots & a_{1k}\\
     \vdots & \ddots & \\
     \\
     \vdots \\
-    a_{n1} & \dots  & \dots & a_{nk} 
+    a_{n1} & \dots  & \dots & a_{nk}
     \end{bmatrix}
 \end{equation}
 
 Ehkäpä ABBA onnistuu paremmin tällä notaatiolla?
 
 \begin{equation}
-A = \begin{bmatrix} 
+A = \begin{bmatrix}
     A_{11} & B_{12}  \\
-    B_{21} & A_{22} 
+    B_{21} & A_{22}
     \end{bmatrix}
 \end{equation}
 
 Pinottujen ja konkatenoitujen matriisien havainnollistaminen?
 
 \begin{equation}
-A = \begin{bmatrix} 
+A = \begin{bmatrix}
     A_{maa, Q1a} & A_{maa, Q1b}  \\
-    B_{gage, Q1a} & B_{gage, Q1b} 
+    B_{gage, Q1a} & B_{gage, Q1b}
     \end{bmatrix}
 \end{equation}
 
@@ -130,7 +130,7 @@ Pinotut tai yhdistetyt matriisit (``stacked matrices''). Yksinkertainen korrespo
 
 Yksinkertaisin laajennus on lisätä alkuperäisen taulukon alle toinen taulukko. Rivit ovat esimerkissä maittan summattuja vastauksia, ja niiden alle voidaan lisätä joku toinen luokittelumuuttuja. Havaintojen määrä yhditetyssä (``pinotussa'' ) taulussa kaksinkertaistuu. Miksi tämä ei ei vaikuta tuloksiin vääristävästi??
 
-Merkitään edellisten analyysien kuuden maan ja viiden vastausvaihtoehdon taulukkoa matriisilla $\boldsymbol{ A}_{I  J}$, missä $I$ on rivien ja $J$ sarakkeiden lukumäärä. Taulukoidaan ikäluokan (1 - 6) ja sukupuolen ($f$ = nainen, $m$ = mies) vuorovaikutusmuuttuja ($f1,\dots , f6$ ja $m1,\dots , m6$) samojen vastausvaihtoehtojen kanssa. Jos tätä taulukkoa merkitään matriisilla 
+Merkitään edellisten analyysien kuuden maan ja viiden vastausvaihtoehdon taulukkoa matriisilla $\boldsymbol{ A}_{I  J}$, missä $I$ on rivien ja $J$ sarakkeiden lukumäärä. Taulukoidaan ikäluokan (1 - 6) ja sukupuolen ($f$ = nainen, $m$ = mies) vuorovaikutusmuuttuja ($f1,\dots , f6$ ja $m1,\dots , m6$) samojen vastausvaihtoehtojen kanssa. Jos tätä taulukkoa merkitään matriisilla
 $\boldsymbol{ B}_{I^{`}  J}$, voimme muodostaa yhdistetyn matriisin
 
 **drawmatrix - kaavoja**
@@ -167,7 +167,7 @@ Tässä lähteenä Greenacren kirja (ca in practice) ja sen liite Theory of CA. 
 
 Datamatriisilla $\boldsymbol{N}$ on $I$ riviä ja $J$ sarakketta ($I x J$ ). Alkiot ovat ei-negatiivisia (eli nollat sallittuja) ja samassa mitta-asteikossa. Jos mitta-asteikko on intervalli- tai suhdeasteikko, mittayksiköiden on oltava samoja (esim. euroja, metrejä). Taulukon alkioiden summa on $\sum_{i} \sum_{j}n_{ij} = n$, missä $i = 1, \dots , I$ ja $j = 1, \dots , J$. GDA-kirjassa on tarkennettu tätä vaatimusta ei-negatiivisuudesta.
 
-Korrespondenssimatriisi  $\boldsymbol{P}$ saadaan jakamalla matriisin $\boldsymbol{N}$  alkiot niiden summalla $n$ . 
+Korrespondenssimatriisi  $\boldsymbol{P}$ saadaan jakamalla matriisin $\boldsymbol{N}$  alkiot niiden summalla $n$ .
 Merkitään matriisin  $\boldsymbol{P}$  rivisummien vektoria $\boldsymbol{r}$ (= $(r_{1}, \dots, r_{I})$) ja sarakesummien vektoria $\boldsymbol{c}$ (=
 $(c_{1}, \dots, c_{J})$).  Niitä vastaavat diagonaalimatriisit ovat $\boldsymbol{D_r}$ ja $\boldsymbol{D_c}$.
 
@@ -189,7 +189,7 @@ Residuaalimatriisi voidaan esittää myös ns. kontingenssi-suhdelukujen (contin
 
 Toinen esitystapa on hyödyllinen, kun tarkastellaan CA:n yhteyksiä muihin läheisiin menetelmiin (log ratio analysis of compositional data, moniulotteinen skaalaus (?), lineaarinen diskriminanttianalyysi, kanoninen korrelaatioanalyysi, pääkomponettianalyysi, kaksoiskuvat, yleensä SVD-perusteiset dimensioden vähentämisen menetelmät).
 
- 
+
 \begin{equation}
 s_{ij} = \frac{p_{ij}-r_{i}c_{j}} { \sqrt{r_{i}c_{j} } }
 \end{equation}
@@ -203,18 +203,18 @@ Mitäköhän tuosta pitäisi nähdä? Selitykset löytyvät em. teorialiitteest�
 
 Singulaariarvohajoitelma (singular value decomposition, SVD) matriisille $\boldsymbol{S}$ on
 
-\begin{equation} 
+\begin{equation}
 \boldsymbol{S} = \boldsymbol{U} \boldsymbol{D_{\alpha}} \boldsymbol{V}^{T}
 \end{equation}
 
-missä $\boldsymbol{D_{\alpha}}$ on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä $\alpha_{1}\geq \alpha_{1} \geq \hdots$. Eikö $\hdots ...$ toimi html-tulostuksessa, PDF-tulostuksessa näyttää toimivan!
+missä $\boldsymbol{D_{\alpha}}$ on diagonaalimatriisi, jonka alkiot ovat singulaariarvot suuruusjärjestyksessä $\alpha_{1}\geq \alpha_{1} \geq \cdots$. Eikö $\hdots ...$ toimi html-tulostuksessa, PDF-tulostuksessa näyttää toimivan!
 
-Matriisit $\boldsymbol{U}$ ja $\boldsymbol{V}$ ovat ortogonaalisia singulaarivektoreiden matriiseja. Singulaariarvohajoitelman merkitys dimensioiden vähentämiselle perustuu Eckart - Young - teoreemaan. Teoreema (30-luvulta?) kertoo, että saamme pienimmän neliösumman $m$ - ulotteisen approksimaation matriisille $\boldsymbol{S}$ (CAinP, ss. 244) matriisien 
+Matriisit $\boldsymbol{U}$ ja $\boldsymbol{V}$ ovat ortogonaalisia singulaarivektoreiden matriiseja. Singulaariarvohajoitelman merkitys dimensioiden vähentämiselle perustuu Eckart - Young - teoreemaan. Teoreema (30-luvulta?) kertoo, että saamme pienimmän neliösumman $m$ - ulotteisen approksimaation matriisille $\boldsymbol{S}$ (CAinP, ss. 244) matriisien
 $\boldsymbol{U}$ ja $\boldsymbol{V}$ ensimmäisten sarakkeiden ja ensimmäisten singulaariarvojen avulla.
 
 \begin{equation}
 \boldsymbol{S}_{(m)} = \boldsymbol{U}_{(m)} \boldsymbol{D}_{\alpha(m)} \boldsymbol{V}_{(m)}^{T}
-\end{equation} 
+\end{equation}
 
 Korrrespondenssianalyysin ratkaisualgoritmissa tätä tulosta on muokattava niin, että rivien ja sarakkeiden massat huomioidaan pienimmän neliösumman approksimaatiossa painoina.
 
@@ -222,7 +222,7 @@ Näin saadaan standardikoordinaatit ja principal-koordinaatit riveille ja sarakk
 
 Rivien standardikoordinaatit
 \begin{equation}
-\boldsymbol{\Phi} = \boldsymbol{D_r}^{-\frac{1}{2}} \boldsymbol{U} \label{B} 
+\boldsymbol{\Phi} = \boldsymbol{D_r}^{-\frac{1}{2}} \boldsymbol{U} \label{B}
 \end{equation}
 
 Sarakkeiden standardikoordinaatit
@@ -247,7 +247,7 @@ Pääakseleiden inertiat (principal inertias) $\lambda_{k}$
 K = min \{ I-1, J-1 \}
 \end{equation}
 
-Bilineaarinen korresepondenssimalli 
+Bilineaarinen korresepondenssimalli
 
 Korrespondenssimatriisi $\boldsymbol{P}$ voidaan esittää matriisi- ja alkiomuodossa ns. palautuskaavana (reconstitution formula).
 
@@ -285,8 +285,5 @@ Pääkoordinaatit pääkoordinaattien funktiointa:
 
 Yhtälöt (9) ja (10) esittävät profiilipisteet ideaalipisteiden (vertex points) painotettuina keskiarvoina, painoina profiilin elementit. Asymmetriset kartat (rivien tai sarakkeiden suhteen) perustuvat näihin yhtälöihin. Yhtälöiden (11) ja (12) kahdet pääkoordinaatit ovat perusta symmetrisille kartoille. Myös niitä yhdistää barisentrinen painotetun keskiarvon riippuvuus, mutta mukana ovat skaalaustekijät
  $\frac{1}{\sqrt{\lambda_{i}}}$. Ne ovat jokaisessa dimensiossa eri suuruisia.
- 
+
 Kokeillaan vielä kaavaviitteitä: kaavojen \@ref(eq:khii21) ja \@ref(eq:khii22) yhteyden pitäisi olla selkeä.
-
-
-

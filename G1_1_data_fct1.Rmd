@@ -1,0 +1,481 @@
+## Perusmuunnokest ISSP2012 - datalle
+
+```{r paketit_g11_fct, include=FALSE}
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
+# paketit.R - kopioidaan Rmd-tiedostojen alkuun
+
+library(rgl)
+library(ca)
+library(haven)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+library(rmarkdown)
+library(ggplot2)
+library(furniture)
+# library(likert) # ei käytetty(1.2.20)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+
+sessionInfo()
+
+```
+
+Datatiedosto on ISSP2012jh1.data, ja luokittelumuuttujat muunnetaan R:n 
+factor- muuttujaksi.
+
+Jokaisesta muuttujasta on kaksi versiota, toisessa puuttuvat tiedot ovat R:n 
+"NA"- arvoja ja toisessa "NA"-arvo on eksplisiittinen muuttuja ("missing").
+
+Substanssimuuttujien luokkien tunnukset ( faktorilabelit, levels?) muutetaan
+graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien 
+tunnuksia pohditaan, kun ne otetaan käyttöön.
+
+**TODO 30.1.2020** Tarkistukset, varmistukset jne.
+```{r fct-vaihe1}
+# VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
+
+# vaihe 1.1 haven_labelled ja chr -> as_factor
+
+ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
+    mutate(maa = as_factor(C_ALPHAN), # ei puuttuvia, ei tyhjiä leveleitä
+           sp1 = as_factor(SEX), # ei puuttuvia, tyhjä level "no answer" 999 
+         )
+
+# str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
+# attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
+
+#C_ALPHAN - maa - tarkistuksia
+
+ISSP2012jh1d.dat$maa %>% fct_unique()
+ISSP2012jh1d.dat$maa %>% fct_count() %>% kable()
+ISSP2012jh1d.dat$maa %>% summary()
+sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
+# C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
+#
+# Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa
+#
+# Huom2: kun dataa rajataan, on tarkistettava ja tarvittaessa poistettava
+# "tyhjät" R-factor - muuttujan "maa" luokat
+
+ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa)
+
+# vaihe 1.2 tyhjät luokat (levels) pois faktoreista
+
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(sp = fct_drop(sp1)
+    )
+# sp, sp1, SEX - tarkistuksia
+ISSP2012jh1d.dat$sp %>% fct_count()
+ISSP2012jh1d.dat$sp %>% fct_count()
+ISSP2012jh1d.dat %>% tableX(SEX,sp1)
+ISSP2012jh1d.dat %>% tableX(SEX,sp)
+ISSP2012jh1d.dat %>% tableX(sp1,sp)
+
+# vaihe 1.3 uudet "faktorilabelit"
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(sp =
+               fct_recode(sp,
+                          "m" ="Male",
+                          "f" = "Female")
+            )
+
+# Tarkistuksia
+
+ISSP2012jh1d.dat$sp %>% fct_unique()
+ISSP2012jh1d.dat$sp %>% fct_count()
+ISSP2012jh1d.dat$sp %>% summary()
+
+# AGE -> ika
+# AGE----
+ISSP2012jh1d.dat$ika <- ISSP2012jh1d.dat$AGE
+
+# Tarkistuksia
+attributes(ISSP2012jh1d.dat$ika) # tyhjä level "No answer
+
+ISSP2012jh1d.dat$ika %>% summary()
+
+ISSP2012jh1d.dat %>%
+tableC(AGE, ika,cor_type = "pearson", na.rm = FALSE, rounding = 5,
+       output = "text", booktabs = TRUE, caption = NULL, align = NULL,
+       float = "htb") %>% kable()
+
+ISSP2012jh1d.dat$ika %>% hist(main = "ISSP 2012: vastaajan ikä")
+str(ISSP2012jh1d.dat)
+
+```
+
+Vaihessa 2 luodaan samalla samalla periaatteella substanssi- ja taustamuuttujille
+kaksi R-factor- tyypin muuttujaa. Toisessa (esim. Q1a) puuttuva tieto on R-ohjelmiston
+sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi luokittelumuuttujan arvo("missing").
+
+```{r fct-vaihe21}
+# Substanssi- ja taustamuuttujat R-faktoreiksi
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(Q1a1 = as_factor(V5), #labels
+            Q1b1 = as_factor(V6), 
+            Q1c1 = as_factor(V7),
+            Q1d1 = as_factor(V8),
+            Q1e1 = as_factor(V9),
+            Q2a1 = as_factor(V10),
+            Q2b1 = as_factor(V11),
+            Q3a1 = as_factor(V12), #labels = vastQ3_labels (W,w,H)
+            Q3b1 = as_factor(V13), #labels = vastQ3_labels
+            edu1 = as_factor(DEGREE), 
+            msta1= as_factor(MAINSTAT), 
+            sosta1 = as_factor(TOPBOT), 
+            nchild1 = as_factor(HHCHILDR),
+            lifsta1 = as_factor(MARITAL),  
+            urbru1 = as_factor(URBRURAL)
+        
+    )
+
+# Muuttujat Q1a1...urbru1 ovat apumuuttujia, joissa on periaatteessa kaikki SPSS-
+# tiedostosta siirtyvä metatieto. Poikkeus on SPSS:n kolme tarkentavaa koodia 
+# puuttuvalle tiedolle, ne saisi mukaan read_spss - parametrin avulla (user_na=TRUE)
+# 
+
+# Tarkistusksia
+ISSP2012jh1d.dat %>% summary()
+
+# Substanssimuuttujat
+
+ISSP2012jh1d.dat$Q1a1 %>% fct_count()
+ISSP2012jh1d.dat$Q1b1 %>% fct_count()
+ISSP2012jh1d.dat$Q1c1 %>% fct_count()
+ISSP2012jh1d.dat$Q1d1 %>% fct_count()
+ISSP2012jh1d.dat$Q1e1 %>% fct_count()
+ISSP2012jh1d.dat$Q2a1 %>% fct_count()
+ISSP2012jh1d.dat$Q2b1 %>% fct_count()
+ISSP2012jh1d.dat$Q3a1 %>% fct_count()
+ISSP2012jh1d.dat$Q3b1 %>% fct_count()
+
+
+
+# Taustamuuttujat
+
+ISSP2012jh1d.dat$edu1 %>% fct_count()
+ISSP2012jh1d.dat$msta1 %>% fct_count()
+ISSP2012jh1d.dat$sosta1 %>% fct_count()
+ISSP2012jh1d.dat$nchild1 %>% fct_count()
+ISSP2012jh1d.dat$lifsta1 %>% fct_count()
+ISSP2012jh1d.dat$urbru1 %>% fct_count()
+
+
+```
+
+Taustamuuttujien luokitteluja (esim. luokkien yhdistäminen) pohditaan tarkemmin,
+kun muuttujat otetaan käyttöön.
+
+Poistetaan muuuttujista luokittelumuuttujien arvot, joissa ei ole havaintoja. Näitä
+tyhjiä luokkia siirtyy SPSS-tiedostosta haven_labelled -luokan tietohin.
+```{r fct-vaihe22}
+# Poistetaan tyhjät luokat muuttujista
+
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(Q1a = fct_drop(Q1a1),
+           Q1b = fct_drop(Q1b1), 
+           Q1c = fct_drop(Q1c1),
+           Q1d = fct_drop(Q1d1),
+           Q1e = fct_drop(Q1e1),
+           Q2a = fct_drop(Q2a1),
+           Q2b = fct_drop(Q2b1),
+           Q3a = fct_drop(Q3a1),
+           Q3b = fct_drop(Q3b1),
+           edu = fct_drop(edu1),
+           msta = fct_drop(msta1), 
+           sosta = fct_drop(sosta1), 
+           nchild = fct_drop(nchild1),
+           lifsta = fct_drop(lifsta1),  
+           urbru = fct_drop(urbru1)
+           
+    )
+# Tarkistuksia 1
+
+ISSP2012jh1d.dat %>% summary()
+ISSP2012jh1d.dat %>% 
+    select(Q1a, Q1b, Q1c, Q1d, Q1e,Q2a,Q2b,Q3a, Q3b) %>% 
+    str()
+ISSP2012jh1d.dat %>% 
+    select(Q1a1, Q1b1, Q1c1, Q1d1, Q1e1,Q2a1,Q2b1,Q3a1, Q3b1) %>% 
+    str()
+ISSP2012jh1d.dat %>% 
+    select(edu, msta, sosta, nchild,lifsta, urbru) %>% 
+    str()
+ISSP2012jh1d.dat %>% 
+    select(edu1, msta1, sosta1, nchild1,lifsta1, urbru1) %>% 
+    str()
+
+
+# Tarkistuksia 2
+
+ISSP2012jh1d.dat %>% tableX(Q1a,Q1a1)
+ISSP2012jh1d.dat %>% tableX(Q1b,Q1b1)
+ISSP2012jh1d.dat %>% tableX(Q1c,Q1c1)
+ISSP2012jh1d.dat %>% tableX(Q1d,Q1d1)
+ISSP2012jh1d.dat %>% tableX(Q1e,Q1e1)
+ISSP2012jh1d.dat %>% tableX(Q2a,Q2a1)
+ISSP2012jh1d.dat %>% tableX(Q2b,Q2b1)
+ISSP2012jh1d.dat %>% tableX(Q3a,Q3a1)
+ISSP2012jh1d.dat %>% tableX(Q3b,Q3b1)
+
+ISSP2012jh1d.dat %>% tableX(edu,edu1)
+ISSP2012jh1d.dat %>% tableX(msta,msta1)
+ISSP2012jh1d.dat %>% tableX(sosta,sosta1)
+ISSP2012jh1d.dat %>% tableX(nchild,nchild1)
+ISSP2012jh1d.dat %>% tableX(lifsta,lifsta1)
+ISSP2012jh1d.dat %>% tableX(urbru,urbru1)
+
+
+```
+
+Luodaan uusi muuttuja, jossa puuttuva tieto (NA) on mukana luokittelumuuttujan 
+uutena arvona ("missing").
+
+```{r fct-vaihe23}
+# Uusi muuttuja, jossa NA-arvot ovat mukana muuttujan uutena luokkana. Muuttujat
+# nimetään Q1a -> Q1am.
+
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(Q1am = fct_explicit_na(Q1a, na_level = "missing"),
+           Q1bm = fct_explicit_na(Q1b, na_level = "missing"),
+           Q1cm = fct_explicit_na(Q1c, na_level = "missing"),
+           Q1dm = fct_explicit_na(Q1d, na_level = "missing"),
+           Q1em = fct_explicit_na(Q1e, na_level = "missing"),
+           Q2am = fct_explicit_na(Q2a, na_level = "missing"),
+           Q2bm = fct_explicit_na(Q2b, na_level = "missing"),
+           Q3am = fct_explicit_na(Q3a, na_level = "missing"),
+           Q3bm = fct_explicit_na(Q3b, na_level = "missing"),
+           edum = fct_explicit_na(edu, na_level = "missing"),
+           mstam = fct_explicit_na(msta, na_level = "missing"),
+           sostam = fct_explicit_na(sosta, na_level = "missing"),
+           nchildm = fct_explicit_na(nchild, na_level = "missing"),
+           lifstam = fct_explicit_na(lifsta, na_level = "missing"),
+           urbrum = fct_explicit_na(urbru, na_level = "missing"),
+           )
+# Tarkistuksia
+
+ISSP2012jh1d.dat %>%
+    select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>%
+    summary()
+
+ISSP2012jh1d.dat %>%
+    select(edum,mstam, sostam,nchildm,lifstam, urbrum) %>%
+    summary()
+
+ISSP2012jh1d.dat %>%
+    select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>%
+    str()
+
+ISSP2012jh1d.dat %>%
+    select(edum,mstam, sostam,nchildm,lifstam, urbrum) %>%
+    str()
+
+# Taustamuuttuja, puuttuva tieto mukana
+
+ISSP2012jh1d.dat$edum %>% fct_count()
+ISSP2012jh1d.dat$mstam %>% fct_count()
+ISSP2012jh1d.dat$sostam %>% fct_count()
+ISSP2012jh1d.dat$nchildm %>% fct_count()
+ISSP2012jh1d.dat$lifstam %>% fct_count()
+ISSP2012jh1d.dat$urbrum %>% fct_count()
+
+# Substanssimuuttujat, puuttuva tieto mukana
+
+ISSP2012jh1d.dat$Q1am %>% fct_count()
+ISSP2012jh1d.dat$Q1bm %>% fct_count()
+ISSP2012jh1d.dat$Q1cm %>% fct_count()
+ISSP2012jh1d.dat$Q1dm %>% fct_count()
+ISSP2012jh1d.dat$Q1em %>% fct_count()
+ISSP2012jh1d.dat$Q2am %>% fct_count()
+ISSP2012jh1d.dat$Q2bm %>% fct_count()
+ISSP2012jh1d.dat$Q3am %>% fct_count()
+ISSP2012jh1d.dat$Q3bm %>% fct_count()
+
+```
+
+Lopuksi luodaan uuden "faktorilabelit" substanssimuuttujille. Graafisessa analyysissä kuviin on
+saatava mukaan kaikki oleellinen, mutta ei mitään sen lisäksi. Näitä muuttujan arvojen tunnuksia muokataan tarvittaessa.
+
+```{r fct-vaihe24}
+# Vaihe 2.4.1 
+
+# Viisi vastausvaihtoehtoa - ei eksplisiittistä NA-tietoa("missing")
+# Q3a - Q3b kolme vastausvaihtoehtoa
+
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(Q1a = fct_recode(Q1a,
+                        "S" ="Strongly agree",
+                        "s" = "Agree",
+                        "?" = "Neither agree nor disagree",
+                        "e" = "Disagree",
+                        "E"= "Strongly disagree"),
+            Q1b = fct_recode(Q1b,
+                      "S" ="Strongly agree",
+                      "s" = "Agree",
+                      "?" = "Neither agree nor disagree",
+                      "e" = "Disagree",
+                      "E"= "Strongly disagree"),
+           Q1c = fct_recode(Q1c,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree"),
+           Q1d = fct_recode(Q1d,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree"),
+           Q1e = fct_recode(Q1e,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree"),
+          Q2a = fct_recode(Q2a,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree" ),
+          Q2b = fct_recode(Q2b,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree"),
+          Q3a = fct_recode(Q3a,
+                          "W" = "Work full-time",
+                          "w" = "Work part-time",
+                          "H" = "Stay at home" ),
+          Q3b = fct_recode(Q3b,
+                           "W" = "Work full-time",
+                           "w" = "Work part-time",
+                           "H" = "Stay at home" )
+                        )
+
+
+# Tarkistuksia 1
+ISSP2012jh1d.dat %>% 
+    select(Q1a, Q1b, Q1c, Q1d, Q1e, Q2a, Q2b, Q3a, Q3b) %>% 
+    summary()
+
+
+# Vaihe 2.4.2 - muuttujassa eksplisiittinen NA-tieto
+ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
+    mutate(Q1am = fct_recode(Q1am,
+                            "S" ="Strongly agree",
+                            "s" = "Agree",
+                            "?" = "Neither agree nor disagree",
+                            "e" = "Disagree",
+                            "E" = "Strongly disagree",
+                            "P" = "missing"),
+           Q1bm =fct_recode(Q1bm,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree",
+                           "P" = "missing"),
+           Q1cm =fct_recode(Q1cm,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree",
+                           "P" = "missing"),
+           Q1dm =fct_recode(Q1dm,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree",
+                           "P" = "missing"),
+           Q1em =fct_recode(Q1em,
+                           "S" ="Strongly agree",
+                           "s" = "Agree",
+                           "?" = "Neither agree nor disagree",
+                           "e" = "Disagree",
+                           "E"= "Strongly disagree",
+                           "P" = "missing"),
+           Q2am =fct_recode(Q2am,
+                            "S" ="Strongly agree",
+                            "s" = "Agree",
+                            "?" = "Neither agree nor disagree",
+                            "e" = "Disagree",
+                            "E"= "Strongly disagree",
+                            "P" = "missing"),
+           Q2bm =fct_recode(Q2bm,
+                            "S" ="Strongly agree",
+                            "s" = "Agree",
+                            "?" = "Neither agree nor disagree",
+                            "e" = "Disagree",
+                            "E"= "Strongly disagree",
+                            "P" = "missing"),
+           Q3am = fct_recode(Q3am,
+                            "W" = "Work full-time",
+                            "w" = "Work part-time",
+                            "H" = "Stay at home",
+                            "P" = "missing"),
+           Q3bm = fct_recode(Q3bm,
+                            "W" = "Work full-time",
+                            "w" = "Work part-time",
+                            "H" = "Stay at home",
+                            "P" = "missing")
+               )
+
+# Tarkistuksia 2
+
+ISSP2012jh1d.dat %>% 
+    select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>% 
+    summary()
+
+# Tarkistuksia 3
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1a,Q1am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1b,Q1bm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1c,Q1cm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1d,Q1dm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q1e,Q1em)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q2a,Q2am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q2b,Q2bm)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q3a,Q3am)
+
+ISSP2012jh1d.dat %>% 
+    tableX(Q3b,Q3bm)
+
+ISSP2012jh1d.dat %>%  # tableX muotoilee taulukkoa!
+    tableX(Q3am,Q3a)
+
+ISSP2012jh1d.dat$Q3a %>% levels()
+ISSP2012jh1d.dat$Q3am %>% levels()
+
+```
+

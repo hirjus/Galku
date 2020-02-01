@@ -1,6 +1,9 @@
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
+
 ```{r paketit_g12, include=FALSE}
-# pitääkö laittaa järjestykseen, vanhemmat ensin?
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
+# paketit.R - kopioidaan Rmd-tiedostojen alkuun
+
 library(rgl)
 library(ca)
 library(haven)
@@ -11,11 +14,21 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(likert)
-#LISÄÄ TARVITTAESSA NÄMÄ! ggplot-kuva tarvitsee - laitoin skriptiin paketit.R 25.4.2018
-library(scales)
-library(reshape2)
-library(printr) #19.5.2018 
+# library(likert) # ei käytetty(1.2.20)
+library(scales) # G_1_2 - kuva
+library(reshape2)  # G_1_2 - kuva
+library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+
+sessionInfo()
+
 ```
 
 **Vanhaa jäsennystä**  
@@ -93,19 +106,13 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 (V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei vielä tee kuvista ahtaita kun sarakkeita ja rivejä on vähän. Pudotetaan tarvittaessa turha Q-kirjain pois. Alkuperäisessä muuttujassa metatieto säilyy varmemmin, ja tarkistuksia on helpompi tehdä.
 
-
-**zxy** koodilohkon loppu ehkä tarpeeton, tarkistettava!
-
-```{r esim1data1, eval=FALSE, include=FALSE}
+```{r esim1data1OLD, eval=FALSE, include=FALSE}
 #
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df), käytetään sitä (23.3.2019)
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1d.data
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 #
-# VANHA VERSIO 
-# Alkuperäinen data
-#ISSP2012.data <- read_spss("data/ZA5900_v4-0-0.sav")
 
 # Yksi kysymys ja kuusi maata
 # incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
@@ -125,112 +132,83 @@ Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e
 
 Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
 
-```{r esim1data2}
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa  -> ISSP2012jh1c.data (df) 
+```{r esim1data1}
+# UUSI DATA 30.1.20
+#
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
+# G1_1_data_fct1.Rmd-tiedostossa -> ISSP2012jh1d.dat (df) 
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata.
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 # Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
 
-countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
-ISSP2012esim1.dat <- filter(ISSP2012jh1c.data, V4 %in% countries_esim1)
-# str(ISSP2012esim1.dat)
-vars_esim1 <- c("C_ALPHAN", "V3", "V4", "V6", "SEX", "AGE") #kolme maamuuttujaa, kysymys Q1b
-ISSP2012esim1.dat <- select(ISSP2012esim1.dat, vars_esim1)
-# str(ISSP2012esim1.dat) 
-# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
-# summary(ISSP2012esim1.dat)
-# ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
+# Kuusi maata
 
+countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
+ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
+str(ISSP2012esim3.dat)
+
+#neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
+
+vars_esim1 <- c("C_ALPHAN", "maa", "V3", "V4", "Q1b", "sp", "ika") 
+ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
+
+str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
+# C_ALPHAN: chr, maa: Factor w/ 25 
+
+# Poistetaan havainnot, joilla Q1b - muuttujassa puuttuva tieto 'NA'
+
+ISSP2012esim1.dat <- filter(ISSP2012esim2.dat, !is.na(Q1b))
+
+str(ISSP2012esim1.dat) # 8143 obs. of  6 variable
+
+# EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
+#
+# 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
+#
 # Poistetaan havainnot joissa puuttuva tieto muuttujassa V6 (Q1b) n = 399
 # 8542-399 = 8143
 
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, !is.na(V6))
-ISSP2012esim1.dat %>% tableX(C_ALPHAN, V6, type = "count")
-str(ISSP2012esim1.dat)
+# Tyhjät "faktorilabelit" on poistettava
+
+ ISSP2012esim1.dat <- ISSP2012esim1.dat %>% 
+     mutate(maa = fct_drop(maa))
+
+ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
+fct_count(ISSP2012esim1.dat$Q1b)
+# fct_count(ISSP2012esim1.dat$sp)
+# fct_unique(ISSP2012esim1.dat$maa)
+# fct_count(ISSP2012esim1.dat$maa)
+ISSP2012esim1.dat %>% tableX(maa, C_ALPHAN, type = "count")
+
+# Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
+# muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
+
+ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
+        mutate(maa2 =
+                fct_relevel(maa,
+                            "BE",
+                            "BG",
+                            "DE",
+                            "DK",
+                            "FI",
+                            "HU"))
+
+# Tarkistus
+ISSP2012esim1b.dat %>% tableX(maa,maa2, type = "count")
+ISSP2012esim1b.dat %>% tableX(maa2,C_ALPHAN, type = "count")
 
 ```
 
-
-**zxy** Tehdään aineistoon muutama muutos (eli faktoreiksi, mutta ei järjestystä), jotta sen käsittely on helpompaa.
-```{r faktorintitesti1}
-# PUUTTUVAT TIEDOT JA as_factor
-# kopioitu Data_iso.1.R - skriptiin (11.1.2019), jatketaan NA-vääntöä siellä. (23.3.2019)
-# 
-# Hyödyllistä katsoa, miten as_factor - funkitolla labelit kulkevat mukana! Ja levels on "väärin"!
-#
-# forcats - paketin as_factor-funktio - haven-paketissa (7.12.2018)
-# Compared to base R, this function creates levels in the order in which they appear, 
-# which will be the same on every platform. (Base R sorts in the current locale 
-# which can vary from place to place.)
-# https://www.rdocumentation.org/packages/forcats/versions/0.3.0/topics/as_factor
-# https://haven.tidyverse.org/reference/as_factor.html
-str(ISSP2012esim1.dat$V6)
-summary(ISSP2012esim1.dat$V6)
-temp1Q1b <- as_factor(ISSP2012esim1.dat$V6)
-#table(temp1Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp1Q1b) # NA-arvoja ei mukaan
-str(temp1Q1b)
-summary(temp1Q1b)
-levels(temp1Q1b)
-
-# Factor w/ 8 levels "NAP: ES","Strongly agree",..: 4 3 4 5 4 4 5 4 3 4 ...
-# - attr(*, "label")= chr "Q1b Working mom: Preschool child is likely to suffer"
-
-
-temp2Q1b <- as_factor(ISSP2012esim1.dat$V6, "labels")
-str(temp2Q1b)
-summary(temp2Q1b)
-table(temp2Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp2Q1b) # NA-arvoja ei mukaan
-head(temp2Q1b)
-attributes(temp2Q1b)
-
-
-temp3Q1b <- as_factor(ISSP2012esim1.dat$V6, "values") # vain arvot, toimisko?
-str(temp3Q1b)
-summary(temp3Q1b)
-attributes(temp3Q1b)
-table(temp3Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp3Q1b) # NA-arvoja ei mukaan
-
-temp4Q1b <- as_factor(ISSP2012esim1.dat$V6, "both")
-str(temp4Q1b)
-summary(temp4Q1b)
-attributes(temp4Q1b)
-table(temp4Q1b, exclude=NULL) #otetaan NA-arvot mukaan
-table(temp4Q1b) # NA-arvoja ei mukaan
-str(temp4Q1b)
-
-temp5Q1b <- as_factor(ISSP2012esim1.dat$V6, "values")
-
-```
-
+Muutetaan R-faktorin "maa" järjestys samanlaiseksi alkuperäisen C_ALPAHN- muuttujan
+kanssa. Aluksi testausta varten, ISSP2012esim1b.dat. (1.2.20)
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
+
 ```{r esim1data2}
+# Taulukoita (31.1.2020)
 
-# muutetaan muuttujia R:n factor-tyyppiin (luokittelumuuttuja)
-#
-# Luokittelumuuttujien tasoille labelit
-#
-# sp (sukupuoli) m = 1, f = 2
-sp_labels <- c("m","f")
-#sp_levels
-# S = täysin samaa mieltä, s = samaa mieltä, ? = ei samaa eikä eri, e = eri mieltä, E = täysin eri mieltä
-vastaus_labels <- c("S","s","?","e","E")
-#vastaus_levels1 <- c()
-
-# Faktoreiksi
-ISSP2012esim1.dat$maa <- as_factor(ISSP2012esim1.dat$C_ALPHAN)
-ISSP2012esim1.dat$sp <- as_factor(ISSP2012esim1.dat$SEX, labels = sp_labels)
-ISSP2012esim1.dat$Q1b <- as_factor(ISSP2012esim1.dat$V6, labels = vastaus_labels)
-str(ISSP2012esim1.dat$Q1b)
-levels(ISSP2012esim1.dat$Q1b)
-str(ISSP2012esim1.dat$sp)
-levels(ISSP2012esim1.dat$sp)
-#
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
 #  5601     BE-FLA-Belgium/ Flanders
@@ -241,39 +219,24 @@ levels(ISSP2012esim1.dat$sp)
 #
 # Tarkastuksia
 #
-#ISSP2012esim1.dat %>% tableX(maa,V6,type = "count") # 400 missing
-#ISSP2012esim1.dat %>% tableX(maa,AGE,type = "count") # 12 missing (7 BE, 5 DE)
-#ISSP2012esim1.dat %>% tableX(maa,SEX ,type= "count") # 9 missing (BE)
-# 
-# Jos yhdelläkään havainnolla ei puutu tietoja useammasta muuttujasta:
-#   400 + 12 + 9 = 421
-#   8557- 421 = 8136
-#summary(ISSP2012esim1.dat$sp)
-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "count")
+ISSP2012esim1.dat %>% tableX(maa,ika,type = "count")
+ISSP2012esim1.dat %>% tableX(maa,sp ,type= "count")
 
-str(ISSP2012esim1.dat)
-#Apuvälineitä - lisätietoa muuttujista
-# typeof(ISSP2012esim1.dat$V6) # what is it?
-# class(ISSP2012esim1.dat$V6) # what is it? (sorry)
-# storage.mode(ISSP2012esim1.dat$V6) # what is it? (very sorry)
-# length(ISSP2012esim1.dat$V6) # how long is it? What about two dimensional objects?
-# attributes(ISSP2012esim1.dat$V6) # does it have any metadata?
-# str(ISSP2012esim1.dat) #8143 obs. of  8 variables
+# Riviprofiilit
 
+# ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
+ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
+
+# Kysymyksen Q1b vastaukset
+
+# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
+# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+
+# str(ISSP2012esim1.dat) # 8143 obs. of  7 variable, 
+# sama kuin vanhassa Galku-koodissa. 
 
 ```
-Poistetaan havainnot, joissa puuttuvia tietoja
-```{r esim1data3}
-# poistetaan havainnot, joissa puuttuvia tietoja
-# taulukko on sekaisin (28.12.18) - pitäisikö lisätä !is.na(Q1b)?
-# V6 haven_labelled num, Q1b factor 8 levels
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
-#str(ISSP2012esim1.dat) 
-# 8143 obs. of  6 variables
-# muutamalla havainnolla on useampi puuttuva tieto kolmessa muuttujassa (8143-8136 = 7) 
-
-```
-
 
 **Taulukot ja kuvat omina koodilohkoina**
 
@@ -314,6 +277,10 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 ```{r EkaCA}
 simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 #tämä ajetaan jotta saadaan hieno kuva piirrettyä
+
+# Vaikuttaako maa- muuttujan järjestys? (1.2.20)
+simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1b.dat)
+
 ```
 
 **edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
@@ -341,6 +308,29 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 #apu1b_df
 ```
 
+Testaus: maa2, sama järjestys kuin C_ALPHA
+```{r g1_2_kuva1test}
+
+#mutkikas kuvan piirto - sarakeprofiilit vertailussa
+#ggplot vaatii df-rakenteen ja 'long data' - muotoon
+##https://stackoverflow.com/questions/9563368/create-stacked-barplot-where-each-stack-is-scaled-to-sum-to
+#
+# käytetään ca - tuloksia
+apu1test <- (simpleCA2$N)
+colnames(apu1test) <- c("S", "s", "?", "e", "E")
+rownames(apu1test) <- c("BE", "BG", "DE", "DK", "FI", "HU")
+apu1_dftest <- as.data.frame(apu1test)
+#lasketan rivien reunajakauma
+apu1_dftest$ka_sarake <- rowSums(apu1_dftest)
+#muokataan 'long data' - muotoon
+apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = c('ind'))
+
+ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
+         geom_bar(position = "fill", stat ="identity") +
+         scale_y_continuous(labels = percent_format()) 
+#apu1b_df
+```
+
 **zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
 Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
@@ -351,7 +341,6 @@ apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 
 #apu2_df
-
 #str(apu2_df)
 ## typeof(apu2_df) # what is it?
 ## class(apu2_df) # what is it? (sorry)
@@ -378,6 +367,39 @@ ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
         scale_y_continuous(labels = percent_format()) 
 ```
 
+Ja sama testaus kuin sarakeprofiilikuvilla
+
+```{r g1_2_kuva2test, echo=TRUE}
+# riviprofiilit ja keskiarvorivi -  18.9.2018
+apu2_dftest <- as.data.frame(apu1test)
+apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))
+
+#apu2_df
+#str(apu2_df)
+## typeof(apu2_df) # what is it?
+## class(apu2_df) # what is it? (sorry)
+## storage.mode(apu2_df) # what is it? (very sorry)
+## length(apu2_df) # how long is it? What about two dimensional 
+## objects?
+# attributes(apu2_df) 
+
+# temp1 <- cbind(apu2_df, ind = rownames(apu2_df))
+# temp1
+##muokataan 'long data' - muotoon
+apu2b_dftest <- melt(cbind(apu2_dftest, ind = rownames(apu2_dftest)), id.vars = c('ind'))
+#apu2b_df
+#
+#
+#ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
+#       geom_bar(position = "fill", stat ="identity") +
+#       #coord_flip() +
+#        scale_x_continuous(labels = percent_format()) 
+#versio2 # perkele, tämä toimii! 18.9.2018
+ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
+       geom_bar(position = "fill", stat ="identity") +
+       coord_flip() +
+        scale_y_continuous(labels = percent_format()) 
+```
 
 **Graafinen analyysi ja R**
 
@@ -417,7 +439,11 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
-plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
+plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - as_factor-järjestys")
+
+plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - C_ALPHAN-järjestys (aakkosjärj)")
 
 
 #str(simpleCA1)
@@ -425,9 +451,9 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE))
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
 # grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu 
 # näin tekemään.
-# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") (13.5.2018), vaan pdf-konversiossa 
-# pandoc failed with error 43
-# 
+# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") 
+# (13.5.2018), vaan pdf-konversiossa pandoc failed with error 43
+
 ```
 
 
