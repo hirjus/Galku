@@ -184,8 +184,15 @@ ISSP2012esim1.dat %>% tableX(maa, C_ALPHAN, type = "count")
 # Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
 # muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
 
-ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
-        mutate(maa2 =
+# "väärässä järjestyksessä" oleva maa talteen, olisiko järjestys jossa ovat 
+# SPSS-datassa?
+
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(maa2 = maa)
+# maa samaan järjestukseen kuin C_ALPHAN - olisiko aakkosjärjestys?
+
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(maa =
                 fct_relevel(maa,
                             "BE",
                             "BG",
@@ -195,13 +202,12 @@ ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
                             "HU"))
 
 # Tarkistus
-ISSP2012esim1b.dat %>% tableX(maa,maa2, type = "count")
-ISSP2012esim1b.dat %>% tableX(maa2,C_ALPHAN, type = "count")
+ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count")
+ISSP2012esim1.dat %>% tableX(maa,C_ALPHAN, type = "count")
 
 ```
 
-Muutetaan R-faktorin "maa" järjestys samanlaiseksi alkuperäisen C_ALPAHN- muuttujan
-kanssa. Aluksi testausta varten, ISSP2012esim1b.dat. (1.2.20)
+
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
@@ -275,16 +281,22 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
 
 ```{r EkaCA}
-simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
-#tämä ajetaan jotta saadaan hieno kuva piirrettyä
+# CA tässä, jotta saadaan rivi- ja sarakeprofiilikuvat
 
-# Vaikuttaako maa- muuttujan järjestys? (1.2.20)
-simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1b.dat)
+simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
+
+# Maiden järjestys kääntää kuvan (1.2.20)
+
+simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 ```
 
-**edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
-**zxy** Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen Bookdownissa. Ei taida onnistua? (4.9.18)
+
+**TODO 2.2.20** 
+Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen 
+Bookdownissa. Ei taida onnistua? (4.9.18)
+
+Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla.
 
 ```{r g1_2_kuva1}
 
@@ -308,7 +320,8 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 #apu1b_df
 ```
 
-Testaus: maa2, sama järjestys kuin C_ALPHA
+Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
+
 ```{r g1_2_kuva1test}
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
@@ -328,12 +341,13 @@ apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = 
 ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat ="identity") +
          scale_y_continuous(labels = percent_format()) 
-#apu1b_df
+
 ```
 
-**zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
+**TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
-Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
+Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018).
+
 
 ```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
@@ -412,6 +426,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
+**Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
+
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
 #str(simpleCA1)
@@ -424,9 +440,10 @@ simpleCA1$coldist
 
 ```
 
-**Rivien ja sarakkeiden khii2 - etäisyydet, siistimpi taulukko jos tarpeen (11.10.18)**
 
-Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
+
+CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
+
 ```{r simpleCArelfrekTa1}
 taulu5 <-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
@@ -440,10 +457,12 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 #symmetrinen kartta
 
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - as_factor-järjestys")
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
+     sub = "maa-muuttuja järjestys C_ALPHAN")
 
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - C_ALPHAN-järjestys (aakkosjärj)")
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+     sub = "maa-muuttuja järjestys as_factor(C_ALPAN)")
 
 
 #str(simpleCA1)

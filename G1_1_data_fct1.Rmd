@@ -41,7 +41,11 @@ Substanssimuuttujien luokkien tunnukset ( faktorilabelit, levels?) muutetaan
 graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien 
 tunnuksia pohditaan, kun ne otetaan käyttöön.
 
-**TODO 30.1.2020** Tarkistukset, varmistukset jne.
+**TODO 30.1.20** Tarkistukset, varmistukset jne.
+
+**TODO2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
+samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
+
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
 

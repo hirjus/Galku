@@ -10,8 +10,7 @@
 
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
-Uusi Rmd-tiedosto 
-
+Uusi G1_1_data_fct1.Rmd tekee muunnokset.
 
 
 ```{r paketit_g11, include=FALSE}
