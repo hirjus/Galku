@@ -204,6 +204,7 @@ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
 # Tarkistus
 ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count")
 ISSP2012esim1.dat %>% tableX(maa,C_ALPHAN, type = "count")
+str(ISSP2012esim1.dat)
 
 ```
 
@@ -440,6 +441,14 @@ simpleCA1$coldist
 
 ```
 
+```{r khii2dist2}
+# Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
+# tietenkään(2.2.20)
+# simpleCA1$rowdist
+# simpleCA2$coldist
+# [1] 0.1579735 0.6309909 0.1750128 0.6340627 0.3477331 0.5504040
+# [1] 0.5246525 0.3248840 0.3078230 0.2721699 0.6271108
+```
 
 
 CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
