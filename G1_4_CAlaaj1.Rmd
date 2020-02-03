@@ -31,17 +31,21 @@ sessionInfo()
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 1
 
-Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai "jakamisen". Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla eri maiden vastausksia useampaan ryhmään.
+Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai "jakamisen". 
+Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla eri maiden 
+vastausksia useampaan ryhmään.
 
-Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ryhmien sisäisiä (within groups - between groups) eroja hieman. Teknisesti yksinkertaista korrespondenssianalyysiä sovelletaan muokattuun matriisiin. Datamatriisi rakennetaan useammasta alimatriisista, joko "pinoamalla" osamatriiseja (stacked matrices) tai muodostamalla symmetrinen lohkomatriisi (ABBA).
+Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai ryhmien 
+sisäisiä (within groups - between groups) eroja hieman. Teknisesti yksinkertaista 
+korrespondenssianalyysiä sovelletaan muokattuun matriisiin. 
+Datamatriisi rakennetaan useammasta alimatriisista, joko "pinoamalla" osamatriiseja 
+(stacked matrices) tai muodostamalla symmetrinen lohkomatriisi (ABBA).
 
-Lisätään esimerkkidataan uusia muuttujia, vastaajan luokitelut ikä ja sukupuoli.
+Nyt käytetään johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
+tehty.
 
-** EDIT: ** Koitetaan aina pitää alkuperäinen data mahdollisimman "lähellä", luodaan siis kaikki uudestaan. Tarketeena .data jos koko aineisto ja .dat jos rajattu. Aineisto laajennetaan myöhemmin?
-
-Toinen pulma: milloin laajennetaan dataa useampaan maahan?
-
-```{r G1_4_CAlaaj1Data}
+**tässä vanhaa koodia kaksi koodilohkoa**
+```{r G1_4_CAlaaj1DataOLD, eval=FALSE, include=FALSE}
 
 # Saksan ja Belgian aluejako - täydentävät pisteet
 
@@ -51,55 +55,60 @@ Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 #str(ISSP2012esim1.data) 
 #61754 obs. of  420 variables
 #
+# VAHAA KOODIA
+#
 # KUUSI MAATA
-
+#
 # incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
-ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
+# ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
 
-#str(ISSP2012esim1.dat) #8557 obs. of  420 variables
+# str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
 
 # MUUTTUJAT
 
-ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
+#ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
 
 #str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
 # Poistetaan havainnot, joissa puuttuvia tietoja
 
-ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
+#ISSP2012esim1.dat <- filter(ISSP2012esim1.dat, (!is.na(V6) & !is.na(SEX) & !is.na(AGE)))
 
 #str(ISSP2012esim1.dat) #8143 havaintoa, 6 muuttujaa
 #8557-8143 = 414 havaintoa vähemmän
 
 # sp (sukupuoli) m = 1, f = 2
-sp_labels <- c("m","f")
+#sp_labels <- c("m","f")
 #
 # vastausvaihtoehdot
 #
 # 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri, 4 = eri mieltä, 5 = täysin eri mieltä
-vastaus_labels <- c("S","s","?","e","E")
+# vastaus_labels <- c("S","s","?","e","E")
 
 # Faktoreiksi - onko ihan oikein? On(26.9.18) - faktoroitu uudeksi muuttujaksi, vanhassa säilyvät metatiedot (10.10.18)
 
-ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
-ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitäisikö lisätä levels?
-ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels?
+# ISSP2012esim1.dat$maa <- factor(ISSP2012esim1.dat$C_ALPHAN)
+#ISSP2012esim1.dat$sp <- factor(ISSP2012esim1.dat$SEX, labels = sp_labels) #pitäisikö lisätä levels?
+#ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #pitäisikö lisätä levels?
 #str(ISSP2012esim1.dat)
 #str(ISSP2012esim1.dat$sp)
 #summary(ISSP2012esim1.dat)
 #ISSP2012esim1.dat %>% tableX(sp, V6, type = "row_perc")
 ```
 
-**EDIT:** Uudet muuttujat omassa koodilohkossa pätkänä
+```{r G1_4_CAlaaj1Data}
+# Uusi data, luotu G1_2_johdesim.Rmd - jaksossa
+str(ISSP2012esim1.dat)
+```
 
-```{r G1_4_maa2}
+```{r G1_4_maa2OLD, eval=FALSE, include=FALSE}
 # HUOM! Nyt maa3 (3.2.20)
 
-# 23.5.2018 maa2 - muuttuja
+# 23.5.2018 maa2 - muuttuja / NYT maa3 (3.2.20)
 # ISO 3166 Code kansallisvaltiolle muuttujassa V4 (EI, V4 on whole nation states! 3.2.20)
 #
 # ISO 3166 Code V3 - maiden jaot
@@ -108,9 +117,9 @@ ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #
 #  5603     BE-BRU-Belgium/ Brussels
 # 27601     DE-W-Germany-West
 # 27602     DE-E-Germany-East
-ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3, 
-                  levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
-                  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
+# ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3, 
+#                  levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
+#                  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
 
 #head(ISSP2012esim1.dat)
 #str(ISSP2012esim1.dat$maa2)

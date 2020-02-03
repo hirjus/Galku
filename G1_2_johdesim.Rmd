@@ -150,7 +150,7 @@ str(ISSP2012esim3.dat)
 
 #neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
 
-vars_esim1 <- c("C_ALPHAN", "maa", "V3", "V4", "Q1b", "sp", "ika") 
+vars_esim1 <- c("C_ALPHAN", "V3", "maa",maa3, "Q1b", "sp", "ika") 
 ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
 
 str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
@@ -497,7 +497,7 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-     sub = "maa-muuttuja järjestys as_factor(C_ALPAN)")
+     sub = "maa-muuttuja järjestys as_factor(C_ALPHAN)")
 
 
 #str(simpleCA1)
