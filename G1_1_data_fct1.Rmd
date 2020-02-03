@@ -46,6 +46,9 @@ tunnuksia pohditaan, kun ne otetaan käyttöön.
 **TODO2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
 samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
 
+**TODO 3.2.20** Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
+G1_2_johdesim.Rmd
+
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
 
@@ -53,13 +56,25 @@ samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
 
 ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
     mutate(maa = as_factor(C_ALPHAN), # ei puuttuvia, ei tyhjiä leveleitä
+           maa3 = as_factor(V3),  # maakoodi, jossa aluejako joillan mailla
            sp1 = as_factor(SEX), # ei puuttuvia, tyhjä level "no answer" 999 
          )
 
-# str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
-# attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
+str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
+attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
 
-#C_ALPHAN - maa - tarkistuksia
+str(ISSP2012jh1d.dat$maa3) #"Country/ Sample ISO 3166 Code 
+                           #(see V4 for codes for whole nation states)"
+
+attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 25 levels
+
+
+# C_ALPHAN - maa - maa3 tarkistuksia
+
+# V3 
+# Pulma on järjestys. C_ALPHAN ("chr") on aakkosjärjestyksessä, kun luodaan 
+# maa = as_factor(C_ALPHAN) järjestys muuttuu (esiintymisjärjestys datassa?)
+# maa3 muunnetaan maakoodista (haven_labelled' num), jonka
 
 ISSP2012jh1d.dat$maa %>% fct_unique()
 ISSP2012jh1d.dat$maa %>% fct_count() %>% kable()
@@ -73,7 +88,9 @@ sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
 # "tyhjät" R-factor - muuttujan "maa" luokat
 
 ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa)
-
+ISSP2012jh1d.dat %>% tableX(V3, maa)
+str(ISSP2012jh1d.dat$C_ALPHAN)
+str(ISSP2012jh1d.dat$V3)
 # vaihe 1.2 tyhjät luokat (levels) pois faktoreista
 
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
