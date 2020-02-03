@@ -1,5 +1,6 @@
 
 ```{r G1_4_paketit, include=FALSE}
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
 library(haven)
@@ -10,10 +11,22 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(likert)
+# library(likert) # ei käytetty(1.2.20)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+#
+#r-skripteillä riittää, kun ajaa tämän
+sessionInfo()
+
 ```
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 1
@@ -32,14 +45,15 @@ Toinen pulma: milloin laajennetaan dataa useampaan maahan?
 
 # Saksan ja Belgian aluejako - täydentävät pisteet
 
-ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
+# EI KAI KOKO DATAA LUETA ALUSTA ALKAEN UUDESTAAN?? (2.2.20)
+# ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
 
 #str(ISSP2012esim1.data) 
 #61754 obs. of  420 variables
 #
 # KUUSI MAATA
 
-incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
+# incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
 ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
 
@@ -83,8 +97,10 @@ ISSP2012esim1.dat$Q1b <- factor(ISSP2012esim1.dat$V6, labels = vastaus_labels) #
 **EDIT:** Uudet muuttujat omassa koodilohkossa pätkänä
 
 ```{r G1_4_maa2}
+# HUOM! Nyt maa3 (3.2.20)
+
 # 23.5.2018 maa2 - muuttuja
-# ISO 3166 Code kansallisvaltiolle muuttujassa V4
+# ISO 3166 Code kansallisvaltiolle muuttujassa V4 (EI, V4 on whole nation states! 3.2.20)
 #
 # ISO 3166 Code V3 - maiden jaot
 #  5601     BE-FLA-Belgium/ Flanders

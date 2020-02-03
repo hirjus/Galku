@@ -184,11 +184,37 @@ ISSP2012esim1.dat %>% tableX(maa, C_ALPHAN, type = "count")
 # Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
 # muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
 
-# "väärässä järjestyksessä" oleva maa talteen, olisiko järjestys jossa ovat 
+# "Väärässä" järjestyksessä oleva maa talteen, olisiko järjestys jossa ovat 
 # SPSS-datassa?
 
+# Muutetaan R-faktoriksi tarkempi maa-koodi V3
+#
+# ISO 3166 Code V3 - maiden jaot
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
+
+
+
 ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
-        mutate(maa2 = maa)
+        mutate(maa2 = maa,
+               maa3 = as_factor(V3))
+# drop tyhjät?
+
+# uudet labelit?
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(fct_recode(maa3,
+                          ))
+
+# muutetaan R-faktoriksi tarkempi maa-koodi V3/maa3 (3.2.20)
+
+# Tähän pitäisi päästä
+# levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
+#  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
+
+
 # maa samaan järjestukseen kuin C_ALPHAN - olisiko aakkosjärjestys?
 
 ISSP2012esim1.dat <- ISSP2012esim1.dat %>%

@@ -35,7 +35,8 @@ ja editoidaan koodia.(31.1.2020)
 
 (2.2.20) Toimii johdattelevaan esimerkkiin asti, myös PDF-tulostus. Kuvien otsikot
 vähän mitä sattuu, ja ´profiilikuviin asti maa-muuttujan järjestys "väärä", ts. eri
-kuin vanhemmissa versoissa. Korjattava (**TODO 2.2.20**)
+kuin vanhemmissa versoissa. Korjattu, lisätään johdattelevan esimerkin dataan
+myös maakoodi jossa Saksan ja Belgian jako (V3). (**TODO 3.2.20**)
 
 **HISTORIAA**
 
