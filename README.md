@@ -101,3 +101,7 @@ väärin. Uudessa datassa maa-faktorin järjestys on muuttunut, ja kuvat tehdä�
 Testattu, järjestys pitää muuttaa maa-faktorilla samaksi kuin alkuperäisellä
 C_ALPHAN - muuttujalla. Tämä korjaa pulmat, havainnollistettu testiaineistolla,
 ei vielä korjattu.
+
+**4.2.2020** Versio 1.5.6: Galkun html- ja pdf-tulostus toimivat. Editoidaan
+hieman siitimmäksi, mutta ei turhaan hiota. Poistetaan tarpeetonta tekstiä,
+vanha koodi voi jäädä.

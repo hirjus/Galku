@@ -10,8 +10,7 @@
 
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
-Uusi Rmd-tiedosto 
-
+Uusi G1_1_data_fct1.Rmd tekee muunnokset.
 
 
 ```{r paketit_g11, include=FALSE}
@@ -587,11 +586,15 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
 #tabVarDesc
 
 # Taulukko
-# luodaan df
+
+# luodaan df - varoitus: data_frame() is deprecated, use tibble” (4.2.20)
+
 jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
-#jhVarTable1.df
+jhVarTable1.df
+
+
 
 # Suomalaiset pitkät kysymykset
 vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 

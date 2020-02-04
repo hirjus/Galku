@@ -150,7 +150,7 @@ str(ISSP2012esim3.dat)
 
 #neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
 
-vars_esim1 <- c("C_ALPHAN", "maa", "V3", "V4", "Q1b", "sp", "ika") 
+vars_esim1 <- c("C_ALPHAN", "V3", "maa","maa3", "Q1b", "sp", "ika") 
 ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
 
 str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
@@ -162,6 +162,23 @@ ISSP2012esim1.dat <- filter(ISSP2012esim2.dat, !is.na(Q1b))
 
 str(ISSP2012esim1.dat) # 8143 obs. of  6 variable
 
+# Tarkistuksia - miksi nämä eivät tulosta mitään? (3.2.20)
+
+fct_count(ISSP2012esim1.dat$sp) %>% table1()
+fct_count(ISSP2012esim1.dat$Q1b)
+fct_count(ISSP2012esim1.dat$maa)
+fct_count(ISSP2012esim1.dat$maa3)
+
+# Toimivat tarkistukset (3.2.20)
+summary(ISSP2012esim1.dat$sp)
+#sp: 3799 + 4344 = 8143
+summary(ISSP2012esim1.dat$Q1b)
+#  S      s      ?     e      E 
+# 810 + 1935 + 1367 + 2125 + 1906 = 8143
+
+summary(ISSP2012esim1.dat$maa)
+summary(ISSP2012esim1.dat$maa3)
+
 # EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
 #
 # 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
@@ -172,20 +189,73 @@ str(ISSP2012esim1.dat) # 8143 obs. of  6 variable
 # Tyhjät "faktorilabelit" on poistettava
 
  ISSP2012esim1.dat <- ISSP2012esim1.dat %>% 
-     mutate(maa = fct_drop(maa))
+     mutate(maa = fct_drop(maa),
+            maa3 = fct_drop(maa3)
+            )
+summary(ISSP2012esim1.dat$maa)
+summary(ISSP2012esim1.dat$maa3)
+
+str(ISSP2012esim1.dat$maa)
+attributes(ISSP2012esim1.dat$maa)
+
+str(ISSP2012esim1.dat$maa3)
+attributes(ISSP2012esim1.dat$maa3)
+
 
 ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 fct_count(ISSP2012esim1.dat$Q1b)
+
 # fct_count(ISSP2012esim1.dat$sp)
 # fct_unique(ISSP2012esim1.dat$maa)
 # fct_count(ISSP2012esim1.dat$maa)
 ISSP2012esim1.dat %>% tableX(maa, C_ALPHAN, type = "count")
 
+
+# maa3 - siistitään "faktorilabelit" kaksikirjaimisiksi
+#
+# ISO 3166 Code V3 - maiden jaot
+#  5601     BE-FLA-Belgium/ Flanders
+#  5602     BE-WAL-Belgium/ Wallonia
+#  5603     BE-BRU-Belgium/ Brussels
+# 27601     DE-W-Germany-West
+# 27602     DE-E-Germany-East
+# Tähän pitäisi päästä
+# levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
+#  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
+levels(ISSP2012esim1.dat$maa3)
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(maa3 =
+                fct_recode(maa3,
+                 "BG" = "BG-Bulgaria",
+                 "DK" = "DK-Denmark",
+                 "FI" = "FI-Finland",
+                 "HU" = "HU-Hungary",
+                 "bF" = "BE-FLA-Belgium/ Flanders",
+                 "bW" = "BE-WAL-Belgium/ Wallonia",
+                 "bB" = "BE-BRU-Belgium/ Brussels",
+                 "dW" = "DE-W-Germany-West",
+                 "dE" = "DE-E-Germany-East")
+               )
+# tarkistuksia
+levels(ISSP2012esim1.dat$maa3)
+str(ISSP2012esim1.dat$maa3) # 9 levels
+summary(ISSP2012esim1.dat$maa3)
+
+
+
+# TÄSSÄ TOISTOA! (4.2.20)
+
 # Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
 # muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
 
-ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
-        mutate(maa2 =
+# maa samaan järjestukseen kuin C_ALPHAN - olisiko aakkosjärjestys?
+# tämä vain siksi, että muuten  esimerkin ca-kartta "kääntyy"
+# "vanha" maa-muuttuja talteen - ei ehkä tarpeen? (4.2.20)
+
+ISSP2012esim1.dat$maa2 <- ISSP2012esim1.dat$maa
+
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(maa =
                 fct_relevel(maa,
                             "BE",
                             "BG",
@@ -195,13 +265,13 @@ ISSP2012esim1b.dat <- ISSP2012esim1.dat %>%
                             "HU"))
 
 # Tarkistus
-ISSP2012esim1b.dat %>% tableX(maa,maa2, type = "count")
-ISSP2012esim1b.dat %>% tableX(maa2,C_ALPHAN, type = "count")
+ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count") # alkuperäinen maa "katosi"! (4.2.20)
+ISSP2012esim1.dat %>% tableX(maa,C_ALPHAN, type = "count")
+str(ISSP2012esim1.dat)
 
 ```
 
-Muutetaan R-faktorin "maa" järjestys samanlaiseksi alkuperäisen C_ALPAHN- muuttujan
-kanssa. Aluksi testausta varten, ISSP2012esim1b.dat. (1.2.20)
+
 
 **zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
@@ -275,16 +345,22 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
 
 ```{r EkaCA}
-simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
-#tämä ajetaan jotta saadaan hieno kuva piirrettyä
+# CA tässä, jotta saadaan rivi- ja sarakeprofiilikuvat
 
-# Vaikuttaako maa- muuttujan järjestys? (1.2.20)
-simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1b.dat)
+simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
+
+# Maiden järjestys kääntää kuvan (1.2.20)
+
+simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 ```
 
-**edit:** Riviprofiileista tarvitaan myös kuva, mutta hiotaan myöhemmin (13.5.2018)
-**zxy** Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen Bookdownissa. Ei taida onnistua? (4.9.18)
+
+**TODO 2.2.20** 
+Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen 
+Bookdownissa. Ei taida onnistua? (4.9.18)
+
+Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla.
 
 ```{r g1_2_kuva1}
 
@@ -308,7 +384,8 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 #apu1b_df
 ```
 
-Testaus: maa2, sama järjestys kuin C_ALPHA
+Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
+
 ```{r g1_2_kuva1test}
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
@@ -328,12 +405,13 @@ apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = 
 ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat ="identity") +
          scale_y_continuous(labels = percent_format()) 
-#apu1b_df
+
 ```
 
-**zxy** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
+**TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
-Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018)
+Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018).
+
 
 ```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
@@ -412,6 +490,8 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
+**Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
+
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
 #str(simpleCA1)
@@ -424,9 +504,18 @@ simpleCA1$coldist
 
 ```
 
-**Rivien ja sarakkeiden khii2 - etäisyydet, siistimpi taulukko jos tarpeen (11.10.18)**
+```{r khii2dist2}
+# Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
+# tietenkään(2.2.20)
+# simpleCA1$rowdist
+# simpleCA2$coldist
+# [1] 0.1579735 0.6309909 0.1750128 0.6340627 0.3477331 0.5504040
+# [1] 0.5246525 0.3248840 0.3078230 0.2721699 0.6271108
+```
 
-Lähtökohta: suhteelliset frekvenssit (korrespondenssimatriisi P)
+
+CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
+
 ```{r simpleCArelfrekTa1}
 taulu5 <-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
@@ -440,10 +529,12 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 #symmetrinen kartta
 
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - as_factor-järjestys")
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
+     sub = "maa-muuttuja järjestys C_ALPHAN")
 
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta - C_ALPHAN-järjestys (aakkosjärj)")
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+     sub = "maa-muuttuja järjestys as_factor(C_ALPHAN)")
 
 
 #str(simpleCA1)

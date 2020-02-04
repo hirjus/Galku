@@ -19,7 +19,6 @@ library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 # library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
-
 #Uusia 13.6.2018
 library(bookdown)
 library(tinytex)
@@ -27,7 +26,7 @@ library(tinytex)
 library(assertthat)
 library(testthat)
 
-sessionInfo()
+# sessionInfo()
 
 ```
 
@@ -41,7 +40,14 @@ Substanssimuuttujien luokkien tunnukset ( faktorilabelit, levels?) muutetaan
 graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien 
 tunnuksia pohditaan, kun ne otetaan käyttöön.
 
-**TODO 30.1.2020** Tarkistukset, varmistukset jne.
+**TODO 30.1.20** Tarkistukset, varmistukset jne.
+
+**TODO2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
+samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
+
+**TODO 3.2.20** Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
+G1_2_johdesim.Rmd
+
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
 
@@ -49,33 +55,86 @@ tunnuksia pohditaan, kun ne otetaan käyttöön.
 
 ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
     mutate(maa = as_factor(C_ALPHAN), # ei puuttuvia, ei tyhjiä leveleitä
+           maa3 = as_factor(V3),  # maakoodi, jossa aluejako joillan mailla
            sp1 = as_factor(SEX), # ei puuttuvia, tyhjä level "no answer" 999 
          )
 
-# str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
-# attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
 
-#C_ALPHAN - maa - tarkistuksia
+# C_ALPHAN - maa - maa3 tarkistuksia
 
+# V3 
+# "Pulma" on järjestys. C_ALPHAN ("chr") on aakkosjärjestyksessä, kun luodaan 
+# maa = as_factor(C_ALPHAN) järjestys muuttuu (esiintymisjärjestys datassa?)
+# maa3 muunnetaan maakoodista (haven_labelled' num), jonka
+
+str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
+attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
 ISSP2012jh1d.dat$maa %>% fct_unique()
-ISSP2012jh1d.dat$maa %>% fct_count() %>% kable()
-ISSP2012jh1d.dat$maa %>% summary()
-sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
+ISSP2012jh1d.dat$maa %>% fct_count() # ei toimi?
+# sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
+ISSP2012jh1d.dat$maa %>% summary() # mukana vain valitut 25 maata
+
+str(ISSP2012jh1d.dat$maa3)  #"Country/ Sample ISO 3166 Code 
+                            #(see V4 for codes for whole nation states)"
+                            # 45 levels
+# str(ISSP2012jh1d.dat$V3)
+
+attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 45 levels
+sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
+ISSP2012jh1d.dat$maa3 %>% fct_unique()
+ISSP2012jh1d.dat$maa3 %>% fct_count()
+# Vain näissä on jaettu maan havainnot (3.2.20)
+#
+# [38] BE-FLA-Belgium/ Flanders                                       
+# [39] BE-WAL-Belgium/ Wallonia                                       
+# [40] BE-BRU-Belgium/ Brussels                                       
+# [41] DE-W-Germany-West                                              
+# [42] DE-E-Germany-East                                              
+# [43] PT-Portugal 2012: first fieldwork round (main sample)          
+# [44] PT-Portugal 2012: second fieldwork round (complementary sample)
+
+ISSP2012jh1d.dat$maa3 %>% fct_count() #miksi ei tulosta mitään? (3.2.2020)
+ISSP2012jh1d.dat$maa3 %>% summary() # 25 maata: havaintojen määrä, kaikki jos ei
+                                    # ositettu. Poisjätetyissä havaintoja 0.
+glimpse(ISSP2012jh1d.dat$maa3)
+head(ISSP2012jh1d.dat$maa3)
+
 # C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
 #
-# Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa
+# Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa.
 #
 # Huom2: kun dataa rajataan, on tarkistettava ja tarvittaessa poistettava
-# "tyhjät" R-factor - muuttujan "maa" luokat
+# "tyhjät" R-factor - muuttujan "maa" luokat (3.2.2020)
 
-ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa)
 
 # vaihe 1.2 tyhjät luokat (levels) pois faktoreista
 
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
-    mutate(sp = fct_drop(sp1)
-    )
+    mutate(sp = fct_drop(sp1),
+           maa3 = fct_drop(maa3))
+# Poistetaan maa3-muuttujan tyhjät luokat (3.2.20)
+
+#  maa3 - tarkistuksia
+
+str(ISSP2012jh1d.dat$maa3)  # 29 levels
+
+attributes(ISSP2012jh1d.dat$maa3) # 
+#sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
+ISSP2012jh1d.dat$maa3 %>% summary()
+ISSP2012jh1d.dat$maa3 %>% fct_unique()
+ISSP2012jh1d.dat$maa3 %>% fct_count() # miksi ei tulosta? Tulostaa komentoriviltä!
+
+str(ISSP2012jh1d.dat$C_ALPHAN)
+attributes(ISSP2012jh1d.dat$C_ALPHAN)
+
+
+ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa)
+ISSP2012jh1d.dat %>% tableX(C_ALPHAN, maa3)
+ISSP2012jh1d.dat %>% tableX(maa, maa3)
+ISSP2012jh1d.dat %>% tableX(V3, maa3)
+
 # sp, sp1, SEX - tarkistuksia
+
 ISSP2012jh1d.dat$sp %>% fct_count()
 ISSP2012jh1d.dat$sp %>% fct_count()
 ISSP2012jh1d.dat %>% tableX(SEX,sp1)
