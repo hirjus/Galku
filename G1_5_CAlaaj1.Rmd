@@ -1,4 +1,5 @@
 ```{r G1_5_paketit, include=FALSE}
+# Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
 library(haven)
@@ -9,16 +10,28 @@ library(lubridate)
 library(rmarkdown)
 library(ggplot2)
 library(furniture)
-library(likert)
+# library(likert) # ei käytetty(1.2.20)
 library(scales) # G_1_2 - kuva
 library(reshape2)  # G_1_2 - kuva
 library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
+# library(stargazer) # 28.5.2018 taulukoiden yms. tulostukseen,ei käytetty(1.2.20)
+
+#Uusia 13.6.2018
+library(bookdown)
+library(tinytex)
+# Uusia 1/2020
+library(assertthat)
+library(testthat)
+#
+#r-skripteillä riittää, kun ajaa tämän
+# sessionInfo()
 ```
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 2
 
 **ZXY** Tässä laajennetaan data isommaksi aineistoksi, lisää maita. **TODO 10.10.18** Data-jaksosta koodia tänne!
-```{r G1_5_CAlaaj1_datAll}
+```{r G1_5_CAlaaj1_datAllOLD}
+# VANHAA - DATA ON JO
 #valittavien maiden kolminumeroinen ISO 3166 - koodi vektoriin - TÄSSÄ KAIKKI MAAT (27, ei Espanjaa)
 #incl_countriesALL <- c(36, 40, 56,100, 124, 191, 203, 208, 246, 250, 276, 348, 352, 372, 428, 440,
 #                    528, 578, 616, 620, 643, 703, 705, 752, 756, 826, 840)
@@ -27,10 +40,14 @@ library(printr) #19.5.18 taulukoiden ja matriisien tulostukseen
 #str(ISSP2012.data) #61754 obs. of  420 variables
 #ISSP2012jh1.data <- filter(ISSP2012.data, V4 %in% incl_countriesALL)
 #
-
+str(ISSP2012jh1d.dat)
+ISSP2012jh1d.dat %>% summary()
 ```
 
+Data on valmiina, edellisen luvun ikäluokka, ikä-sukupuoli- muuttuja ja 
+ikä-sukupuoli- maa muuttujien luontia voi harkita.
 
+**edit** Tässä keskityttävä data-analyysin **tutkimusongelmiin**, johdantoa MCA-lukuun.
 
 ## Päällekkäiset matriisit (stacked matices)
 

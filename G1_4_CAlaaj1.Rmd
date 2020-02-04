@@ -128,14 +128,13 @@ str(ISSP2012esim1.dat)
 
 ```
 
-**zxy** Edellä pelkkä tarkistus, tuloksen voi kopsata koodilohkoon kun homma on hoidettu.
-
 
 ## Täydentävät muuttujat (supplementary points)
 
-**zxy** Piste sinne piirretään, mutta muuttujassa on se tieto. "Täydentävät piste"" kuulostaa huonolta. Lisämuuttujat, havainnot?
+**zxy** Piste sinne piirretään, mutta muuttujassa on se tieto. "Täydentävät piste"" 
+kuulostaa huonolta. Lisämuuttujat, havainnot?
 
-Ref:CAip ss 89, HY2017_MCA
+Viite:CAip ss 89, HY2017_MCA.
 
 Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin profiileihin (riveihin ja sarakkeisiin). 
 
@@ -172,11 +171,15 @@ suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
 suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
 suppointCA1b$rowcoord
 suppointCA1b$colcoord
-plot(suppointCA1b, main = "Belgian ja Saksan ositteet")
+plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
 # Miten lisärivit? (24.5.2018)
-# Luetaan data tauluksi - ei toimi, char-table
+# Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
 # yritetään uudestaan table-funktiolla
-# data maa3-muuttujalla
+# data maa3-muuttujassa
+
+# str(ISSP2012esim1.dat$maa3)
+attributes(ISSP2012esim1.dat$maa3)
+
 suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 #str(suppoint1_df1)
 #head(suppoint1_df1)
@@ -190,22 +193,27 @@ suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
 suppoint2_df <- select(suppoint2_df, maa, Q1b)
 #head(suppoint2_df)
 #tail(suppoint2_df)
-#str(suppoint2_df)
-#suppoint2_df
+str(suppoint2_df)
+attributes(suppoint2_df)
+
+suppoint2_df %>% table1() # miksi ei tulosta mitään (4.2.20)
+
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
-#suppoint2_tab1
+suppoint2_tab1
 suppoint2_tab1 <- suppoint2_tab1[-2,]
 # kömpelösti kolme kertaa
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
-#suppoint2_tab1
+
+suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
 
 #lisätään rivit maa2-muuttujan taulukkoon
 
 suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
-#suppoint1_tab1
+suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
+plot(suppointCA2, main = "Belgian ja Saksan ositteet ja maasummat")
 #käännetään kuva
 suppointCA2b <- suppointCA2
 suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
@@ -235,12 +243,26 @@ plot(suppointCA1b, map = "rowgreen",
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 1" )
+# Sama kuva, maasummat lisäpisteinä (4.2.20)
+plot(suppointCA2b, map = "rowgreen",
+     contrib= c("absolute", "absolute"),
+     mass = c(TRUE,TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 (maapisteet)" )
+
 ```
+
+Kaksi konrtibuutio-karttaa (MG:n keksintö) osoittavat, että tulkinnan hankaluuksista
+huolimatta symmetrinen kartta on usein selkeämpi. Molemmissa ideaalipisteet sijatsevat
+kaukana (vaikka ne on skaalattu hieman lähemmäs origoa), ja maapisteiden hajontaa
+on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE) peittyy läntisen Saksan 
+(dW) alle.
 
 Tulostetaan numeeriset taulukot.
 
 ```{r G1_4_castats1}
 summary(suppointCA1b)
+summary(suppointCA2b)
 ```
 
 
@@ -257,7 +279,7 @@ Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interak
 ```{r G1_4_agecat}
 # Iän ja sukupuolen vuorovaikutusmuuttujia 1
 #
-# Uusi R-data: ISSP2012esim2.dat
+# Uusi R-data: ISSP2012esim2.dat - MIKSI, TARVITAANKO? *esim1.dat kelpaisi?(4.2.20)
 #
 #age_cat
 #AGE 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
@@ -273,7 +295,12 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, 
 
 ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
         mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
+str(ISSP2012esim2.dat$age_cat)
+levels(ISSP2012esim2.dat$age_cat)
+ISSP2012esim2.dat$age_cat %>% summary()
+
 # Järjestetään
+
 ISSP2012esim2.dat <- ISSP2012esim2.dat %>% 
         mutate(age_cat =
                 fct_relevel(age_cat,
@@ -287,12 +314,21 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
     
 # Tarkistuksia
 
+# VANHA, POIS? (4.2.20)
 # test6 %>% tableX(AGE, age_cat, type = "count") aika iso taulukko, voi tarkistaa että muunnos ok.
-taulu42 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "count")
-kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
 
-taulu43 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "cell_perc")
-kable(taulu43,digits = 2, caption = "age_cat: suhteelliset frekvenssit")
+# taulu42 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "count")
+# kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
+#
+
+# UUdet taulukot (4.2.20) 
+ISSP2012esim2.dat %>% 
+    tableX(maa,age_cat,type = "count") %>%
+    kable(digits = 2, caption = "Ikäluokka age_cat")
+
+ISSP2012esim2.dat %>% 
+    tableX(maa,age_cat,type = "row_perc") %>%
+    kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 
 ```
 
@@ -304,6 +340,8 @@ Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuo
 
 
 ```{r G1_4_ga2}
+# MIKÄ ON ga2? (4.2.20)
+
 # case_when: ikä ja sukupuoli
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
                                        (age_cat == "2")&(sp == "m") ~ "m2",
@@ -320,19 +358,22 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(
                                        (age_cat == "6")&(sp == "f") ~ "f6",
                                        TRUE ~ "missing"
                                   ))
+
 #ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
 # muuttujien tarkistuksia 19.9.2018
-#str(ISSP2012esim1.dat$ga)
+str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
+str(ISSP2012esim2.dat)
 #str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
-#str(ISSP2012esim1.dat)
+# str(ISSP2012esim1.dat)
 
 #Tulostetaan taulukkoina ga2 - muuttuja.
-taulu46 <- ISSP2012esim2.dat %>% tableX(maa,ga,type = "count")
-kable(taulu46,digits = 2, caption = "Ikäluokka ja sukupuoli ga2")
 
-taulu47 <- ISSP2012esim2.dat %>% tableX(maa,ga,type = "cell_perc")
-kable(taulu47,digits = 2, caption = "ga2: suhteelliset frekvenssit")
+ISSP2012esim2.dat %>% tableX(maa,ga,type = "count") %>%
+kable(digits = 2, caption = "Ikäluokka ja sukupuoli ga")
+
+ISSP2012esim2.dat %>% tableX(maa,ga,type = "row_perc") %>%
+kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 
 ```
@@ -352,7 +393,7 @@ summary(gaTestCA1)
 **zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla? Järjestys ei toimi, jotain muuta pelissä?
 
 
-**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla). **pisteet voisi yhdistää? (29.9.18)** 
+**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). **pisteet voisi yhdistää? (29.9.18)** 
 
 
 
@@ -363,21 +404,23 @@ summary(gaTestCA1)
 
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
-#ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
+ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
 
 #head(ISSP2012esim2.dat)
-#str(ISSP2012esim2.dat)
+str(ISSP2012esim2.dat)
 
 ```
 
 **TARKISTA - ja maat voisi lisätä täydentävinä pisteinä (26.9.2018)** 
+
 ```{r maagaCA1}
 
 maagaTestCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
-# par("cex"= 0.5, "offset" = 0.5) ei toimi
+#par("cex"= 0.5, "offset" = 0.5) #ei toimi
 par("cex"= 0.5)
 plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "offset" = 0.5)
-#str(maagaTestCA1)
+# varoitus: "offset is not a graphical parameter"
+str(maagaTestCA1)
 # lisätään maapisteet frekvenssitaulukkoon maagaTestCA1$N (26.9.18)? Aika hankalaa...
 # maagaTestCA1$N
 #maagaTestCA1$rownames
@@ -407,7 +450,7 @@ testTab1 <- rbind(testTab1,testTab_sr)
 
 spCAmaaga1 <- ca(testTab1[,1:5], suprow = 73:78)
 #X11()
-par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+par("cex"= 0.75, "asp" = 1, "offset" = 0.5) # Tämä toimii! (4.2.20)
 plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2 - maat täydentävinä pisteinä"
                     )
 #par()
@@ -423,8 +466,6 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2 - ma
 #                  )
 #numeeriset tulokset
 summary(spCAmaaga1)
-
-
 
 ```
 

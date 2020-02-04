@@ -586,11 +586,15 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
 #tabVarDesc
 
 # Taulukko
-# luodaan df
+
+# luodaan df - varoitus: data_frame() is deprecated, use tibble” (4.2.20)
+
 jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
-#jhVarTable1.df
+jhVarTable1.df
+
+
 
 # Suomalaiset pitkät kysymykset
 vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
