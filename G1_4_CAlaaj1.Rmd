@@ -158,8 +158,8 @@ Täydentävien muuttujien kolme käyttötapaa:
 #head(ISSP2012esim1.dat)
 
 # HUOM! Tässä ei vielä supp.points mukana!
-suppointCA1 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
-#plot(suppointCA1, main = "Belgian ja Saksan ositteet")
+suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
+plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 #kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
 #summary(suppointCA1)
 #print(suppointCA1)
@@ -176,11 +176,11 @@ plot(suppointCA1b, main = "Belgian ja Saksan ositteet")
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table
 # yritetään uudestaan table-funktiolla
-# data maa2-muuttujalla
-suppoint1_df1 <- select(ISSP2012esim1.dat, maa2,Q1b)
+# data maa3-muuttujalla
+suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 #str(suppoint1_df1)
 #head(suppoint1_df1)
-suppoint1_tab1 <- table(suppoint1_df1$maa2, suppoint1_df1$Q1b)
+suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
 suppoint1_tab1
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
 #
@@ -264,14 +264,30 @@ Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interak
 #
 #summary(ISSP2012esim1.dat$AGE)
 #hist(ISSP2012esim1.dat$AGE)
-ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(AGE %in% 15:25, "1",
-                        ifelse(AGE %in% 26:35, "2",
-                        ifelse(AGE %in% 36:45, "3",
-                        ifelse(AGE %in% 46:55, "4",
-                        ifelse(AGE %in% 56:65, "5", "6"))))))
-ISSP2012esim2.dat$age_cat <- factor(ISSP2012esim2.dat$age_cat)
+ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, "1",
+                        ifelse(ika %in% 26:35, "2",
+                        ifelse(ika %in% 36:45, "3",
+                        ifelse(ika %in% 46:55, "4",
+                        ifelse(ika %in% 56:65, "5", "6"))))))
+#ISSP2012esim2.dat$age_cat <- factor(ISSP2012esim2.dat$age_cat) vanha 
 
-#test6 %>% tableX(AGE, age_cat, type = "count") aika iso taulukko, voi tarkistaa että muunnos ok.
+ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
+        mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
+# Järjestetään
+ISSP2012esim2.dat <- ISSP2012esim2.dat %>% 
+        mutate(age_cat =
+                fct_relevel(age_cat,
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6")
+               )
+    
+# Tarkistuksia
+
+# test6 %>% tableX(AGE, age_cat, type = "count") aika iso taulukko, voi tarkistaa että muunnos ok.
 taulu42 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "count")
 kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
 
