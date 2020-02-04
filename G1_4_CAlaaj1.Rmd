@@ -175,6 +175,7 @@ plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
 # yritetään uudestaan table-funktiolla
+
 # data maa3-muuttujassa
 
 # str(ISSP2012esim1.dat$maa3)
@@ -194,8 +195,10 @@ suppoint2_df <- select(suppoint2_df, maa, Q1b)
 #head(suppoint2_df)
 #tail(suppoint2_df)
 str(suppoint2_df)
-attributes(suppoint2_df)
-
+# attributes(suppoint2_df) # korvaa attr(x, which) tms. liian pitkä tulostus
+# attr(suppoint2_df, which = "class")
+# attr(suppoint2_df, which = "name")
+summary(suppoint2_df)
 suppoint2_df %>% table1() # miksi ei tulosta mitään (4.2.20)
 
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
