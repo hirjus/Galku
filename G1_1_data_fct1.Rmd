@@ -207,28 +207,26 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 # Tarkistusksia
 ISSP2012jh1d.dat %>% summary()
 
-# Substanssimuuttujat
+# Substanssimuuttujat - ristiintaulukoinnit riittävät (6.2.20)
 
-ISSP2012jh1d.dat$Q1a1 %>% fct_count()
-ISSP2012jh1d.dat$Q1b1 %>% fct_count()
-ISSP2012jh1d.dat$Q1c1 %>% fct_count()
-ISSP2012jh1d.dat$Q1d1 %>% fct_count()
-ISSP2012jh1d.dat$Q1e1 %>% fct_count()
-ISSP2012jh1d.dat$Q2a1 %>% fct_count()
-ISSP2012jh1d.dat$Q2b1 %>% fct_count()
-ISSP2012jh1d.dat$Q3a1 %>% fct_count()
-ISSP2012jh1d.dat$Q3b1 %>% fct_count()
+# ISSP2012jh1d.dat$Q1a1 %>% fct_count()
+# ISSP2012jh1d.dat$Q1b1 %>% fct_count()
+# ISSP2012jh1d.dat$Q1c1 %>% fct_count()
+# ISSP2012jh1d.dat$Q1d1 %>% fct_count()
+# ISSP2012jh1d.dat$Q1e1 %>% fct_count()
+# ISSP2012jh1d.dat$Q2a1 %>% fct_count()
+# ISSP2012jh1d.dat$Q2b1 %>% fct_count()
+# ISSP2012jh1d.dat$Q3a1 %>% fct_count()
+#ISSP2012jh1d.dat$Q3b1 %>% fct_count()
 
+# Taustamuuttujat - ristiintaulukoinnit riittävät (6.2.20)
 
-
-# Taustamuuttujat
-
-ISSP2012jh1d.dat$edu1 %>% fct_count()
-ISSP2012jh1d.dat$msta1 %>% fct_count()
-ISSP2012jh1d.dat$sosta1 %>% fct_count()
-ISSP2012jh1d.dat$nchild1 %>% fct_count()
-ISSP2012jh1d.dat$lifsta1 %>% fct_count()
-ISSP2012jh1d.dat$urbru1 %>% fct_count()
+# ISSP2012jh1d.dat$edu1 %>% fct_count()
+# ISSP2012jh1d.dat$msta1 %>% fct_count()
+# ISSP2012jh1d.dat$sosta1 %>% fct_count()
+# ISSP2012jh1d.dat$nchild1 %>% fct_count()
+# ISSP2012jh1d.dat$lifsta1 %>% fct_count()
+# ISSP2012jh1d.dat$urbru1 %>% fct_count()
 
 
 ```
@@ -276,24 +274,28 @@ ISSP2012jh1d.dat %>%
     str()
 
 
-# Tarkistuksia 2
+# Tarkistuksia 2 - ristiintaulukointi Q1a/Q1am riittää (6.2.20)
 
-ISSP2012jh1d.dat %>% tableX(Q1a,Q1a1)
-ISSP2012jh1d.dat %>% tableX(Q1b,Q1b1)
-ISSP2012jh1d.dat %>% tableX(Q1c,Q1c1)
-ISSP2012jh1d.dat %>% tableX(Q1d,Q1d1)
-ISSP2012jh1d.dat %>% tableX(Q1e,Q1e1)
-ISSP2012jh1d.dat %>% tableX(Q2a,Q2a1)
-ISSP2012jh1d.dat %>% tableX(Q2b,Q2b1)
-ISSP2012jh1d.dat %>% tableX(Q3a,Q3a1)
-ISSP2012jh1d.dat %>% tableX(Q3b,Q3b1)
+# Substanssimuuttujat
 
-ISSP2012jh1d.dat %>% tableX(edu,edu1)
-ISSP2012jh1d.dat %>% tableX(msta,msta1)
-ISSP2012jh1d.dat %>% tableX(sosta,sosta1)
-ISSP2012jh1d.dat %>% tableX(nchild,nchild1)
-ISSP2012jh1d.dat %>% tableX(lifsta,lifsta1)
-ISSP2012jh1d.dat %>% tableX(urbru,urbru1)
+# ISSP2012jh1d.dat %>% tableX(Q1a,Q1a1)
+# ISSP2012jh1d.dat %>% tableX(Q1b,Q1b1)
+# ISSP2012jh1d.dat %>% tableX(Q1c,Q1c1)
+# ISSP2012jh1d.dat %>% tableX(Q1d,Q1d1)
+# ISSP2012jh1d.dat %>% tableX(Q1e,Q1e1)
+# ISSP2012jh1d.dat %>% tableX(Q2a,Q2a1)
+# ISSP2012jh1d.dat %>% tableX(Q2b,Q2b1)
+# ISSP2012jh1d.dat %>% tableX(Q3a,Q3a1)
+# ISSP2012jh1d.dat %>% tableX(Q3b,Q3b1)
+
+# Taustamuuttujat
+
+# ISSP2012jh1d.dat %>% tableX(edu,edu1)
+# ISSP2012jh1d.dat %>% tableX(msta,msta1)
+# ISSP2012jh1d.dat %>% tableX(sosta,sosta1)
+# ISSP2012jh1d.dat %>% tableX(nchild,nchild1)
+# ISSP2012jh1d.dat %>% tableX(lifsta,lifsta1)
+# ISSP2012jh1d.dat %>% tableX(urbru,urbru1)
 
 
 ```
@@ -322,7 +324,7 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
            lifstam = fct_explicit_na(lifsta, na_level = "missing"),
            urbrum = fct_explicit_na(urbru, na_level = "missing"),
            )
-# Tarkistuksia
+# Tarkistuksia 3
 
 ISSP2012jh1d.dat %>%
     select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>%
@@ -340,26 +342,26 @@ ISSP2012jh1d.dat %>%
     select(edum,mstam, sostam,nchildm,lifstam, urbrum) %>%
     str()
 
-# Taustamuuttuja, puuttuva tieto mukana
+# Taustamuuttuja, puuttuva tieto mukana - ristiintaulkointi riittää (6.2.20)
 
-ISSP2012jh1d.dat$edum %>% fct_count()
-ISSP2012jh1d.dat$mstam %>% fct_count()
-ISSP2012jh1d.dat$sostam %>% fct_count()
-ISSP2012jh1d.dat$nchildm %>% fct_count()
-ISSP2012jh1d.dat$lifstam %>% fct_count()
-ISSP2012jh1d.dat$urbrum %>% fct_count()
+# ISSP2012jh1d.dat$edum %>% fct_count()
+# ISSP2012jh1d.dat$mstam %>% fct_count()
+# ISSP2012jh1d.dat$sostam %>% fct_count()
+# ISSP2012jh1d.dat$nchildm %>% fct_count()
+# ISSP2012jh1d.dat$lifstam %>% fct_count()
+# ISSP2012jh1d.dat$urbrum %>% fct_count()
 
-# Substanssimuuttujat, puuttuva tieto mukana
+# Substanssimuuttujat, puuttuva tieto mukana  - ristiintaulkointi riittää (6.2.20)
 
-ISSP2012jh1d.dat$Q1am %>% fct_count()
-ISSP2012jh1d.dat$Q1bm %>% fct_count()
-ISSP2012jh1d.dat$Q1cm %>% fct_count()
-ISSP2012jh1d.dat$Q1dm %>% fct_count()
-ISSP2012jh1d.dat$Q1em %>% fct_count()
-ISSP2012jh1d.dat$Q2am %>% fct_count()
-ISSP2012jh1d.dat$Q2bm %>% fct_count()
-ISSP2012jh1d.dat$Q3am %>% fct_count()
-ISSP2012jh1d.dat$Q3bm %>% fct_count()
+# ISSP2012jh1d.dat$Q1am %>% fct_count()
+# ISSP2012jh1d.dat$Q1bm %>% fct_count()
+# ISSP2012jh1d.dat$Q1cm %>% fct_count()
+# ISSP2012jh1d.dat$Q1dm %>% fct_count()
+# ISSP2012jh1d.dat$Q1em %>% fct_count()
+# ISSP2012jh1d.dat$Q2am %>% fct_count()
+# ISSP2012jh1d.dat$Q2bm %>% fct_count()
+# ISSP2012jh1d.dat$Q3am %>% fct_count()
+# ISSP2012jh1d.dat$Q3bm %>% fct_count()
 
 ```
 
@@ -495,13 +497,15 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
                             "P" = "missing")
                )
 
-# Tarkistuksia 2
+# Tarkistuksia 4
 
 ISSP2012jh1d.dat %>% 
     select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>% 
     summary()
 
-# Tarkistuksia 3
+# Tarkistuksia 5
+
+# Substanssimuuttuja
 
 ISSP2012jh1d.dat %>% 
     tableX(Q1a,Q1am)
@@ -535,6 +539,21 @@ ISSP2012jh1d.dat %>%  # tableX muotoilee taulukkoa!
 
 ISSP2012jh1d.dat$Q3a %>% levels()
 ISSP2012jh1d.dat$Q3am %>% levels()
+
+# Taustamuuttujat
+
+ISSP2012jh1d.dat %>% 
+    tableX(edu, edum)
+ISSP2012jh1d.dat %>% 
+    tableX(msta, mstam)
+ISSP2012jh1d.dat %>% 
+    tableX(sosta, sostam)
+ISSP2012jh1d.dat %>% 
+    tableX(nchild,nchildm)
+ISSP2012jh1d.dat %>% 
+    tableX(lifsta, lifstam)
+ISSP2012jh1d.dat %>% 
+    tableX(urbru, urbrum)
 
 ```
 

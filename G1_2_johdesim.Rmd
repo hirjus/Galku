@@ -534,7 +534,7 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-     sub = "maa-muuttuja järjestys as_factor(C_ALPHAN)")
+     sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
 
 
 #str(simpleCA1)
