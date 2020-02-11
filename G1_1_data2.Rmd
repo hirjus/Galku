@@ -3,10 +3,7 @@
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018).
 **edit** capaper - dokumentissa parempi uusi jäsentely (4.9.2018)
 **edit** ISSP-datan perustietoa dokumentissa ISSP_data1.docx (4.9.2018)
-**edit** koodilohkoja ei vielä siistitä, eikä nimetä capaper-vaatimusten mukaan.
-**edit** Poistetaan aineistosta havainnot, joissa puuttuva tieto muuttujassa SEX tai AGE
-
-**edit 24.9.18 Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).**
+**edit 24.9.18** Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).
 
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
@@ -40,7 +37,7 @@ library(tinytex)
 library(assertthat)
 library(testthat)
 
-sessionInfo()
+#sessionInfo()
 
 ```
 
@@ -146,7 +143,7 @@ Paremipi muotoilu: Varsinaiset substanssimuuttujat eli kyselylomakkeet on koitet
 
 
 
-**1. Eurooppa ja samankaltaiset maat (28 aluksi -> 25)**
+**1. Eurooppa ja samankaltaiset maat (25)**
 
 (**Pois 13:** Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina, Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.)
 
@@ -164,23 +161,16 @@ Espanja pois, USA ja GB pois koska TOPBOT-muuttuja puuttuu (11.10.18)
 
 Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
 
-Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Tämä erävastauskato ei ole tutkielman
-ydinaihe, mutta laajemman aineiston käytössä sitä ei voi ohittaa. Yksikkövastauskatoa
-ei käsitellä.
+Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. 
+Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Tämä erävastauskato 
+ei ole tutkielman ydinaihe, mutta laajemman aineiston käytössä sitä ei voi ohittaa. Yksikkövastauskatoa ei käsitellä.
 
 CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon (nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. Puuttuvat havainnot otetaan mukaan, niitä ei poisteta aineistosta.
 
-Yksittäisten vastausten puuttuminen eli erävastauskato ohitetaan aluksi, mutta siihen palataan. Korrespondenssianalyysiin on helppo ottaa mukaan myös puuttuvat tiedot, sillä data on luokitteluasteikon dataa.
-
-Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, kts. monitoring report. Aika tyypillisiä, ei kauhean huonoja paitsi muutama.
-
-**edit** toistoa (30.1.20)
-
-
+Yksikkövastauskato eli otokseen poimitut joita ei ole tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, kts. monitoring report.
 
 
 4. Datan hallinta **liittyy reproducible research- periaatteeseen**
-
 
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 
@@ -201,22 +191,16 @@ Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan 
 Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS (datan jakelutiedosto) sallii kolme koodia puuttuville tiedoille. Ne voi lukea R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detaljit R-koodissa (haven-paketin read_spss-funktion user_na -optio).
 
 
-**Tiedostonimistä ** (10.10.18, 30.1.20)
+**Tiedostonimistä ** (10.10.18, 30.1.20, 11.2.20)
 
 
-ISSP2012*.data - täysi aineisto
-ISSP2012*jh1.data - valittu osa aineistosta (yleensä: maita) ja muuttujista
-ISSP2012*.jh1.dat - valittu osa aineistosta, luotu uusia muuttujia ja muunnettu muuttujia
-ISSP2012esim1, 2 jne, tarkenne .dat muunnettuja muuttujia, rajattuja aineistoja jne
-
-ISSP2012.data (df) jossa alkuperäinen SPSS-data
-ISSP2012jh1.data osajoukko edellisestä
-ISSP2012jh1a.data - valitaan maat jne. Kerrottu alempana.
-
-ISSP2012esim1.dat edellisen osajoukkoja, joissa uusia muuttujia ja tyyppimuunnoksia. Nämä vaihtuvat analyysin vaihden mukaan, jotta polku olisi lyhyt. Jaksot erillisiä Rmd-tiedostoja, jokaisen alussa ladataan r-paketit ja data. Tallennetaan datan lukukoodi omaksi tiedostoksi,
-näin on jo tehty paketeille (paketit.R)
-
-Muuta: alkuperäinen muuttuja säilytetää, voi tarkistaa
+ISSP2012*.data - täysi aineisto, luetaan SPSS-tiedostosta
+ISSP2012*jh1.data - valittu osa aineistosta (maat, muuttujat)
+ISSP2012*.jh1.dat - valittu osa aineistosta, luotu uusia muuttujia ja muunnettu 
+                        muuttujia. Alkuperäiset muuttujat säilytetään, voi aina 
+                        tarkistaa ja verrata.
+ISSP2012esim1, 2 jne, tarkenne .dat rajattuja aineistoja joissa uusia muuttujia
+                        ja muuttujien nimiä. Näitä luodaan analyysin eri vaiheissa.
 
  
 **zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
@@ -231,13 +215,13 @@ Muuta: alkuperäinen muuttuja säilytetää, voi tarkistaa
 # R-datatiedostot .data - tarkenteella ovat osajoukkoja koko ISSP-datasta ISSP2012.data
 # R-datatiedostot .dat - tarkenteella: mukana alkuperäisten muuttujien muunnoksia 
 # (yleensä as_factor), alkuperäisissä muuttujissa mukana SPSS-tiedoston metadata.
-
-# Muutetaan R-datatiedossa alunperin ordinaali- tai  nominaaliasteikon muuttuja haven-paketin
+#
+# Luokittelumuuttujan tyyppi on datan lukemisen jälkeen yleensä merkkijono (char) 
+# ja haven_labelled. 
+#
+# Muutetaan R-datassa ordinaali- tai  nominaaliasteikon muuttujat haven-paketin 
 # as_factor - funktiolla faktoreiksi. R:n faktorityypin muuttujille voidaan tarvittaessa 
 # määritellä järjestys, toistaiseksi niin ei tehdä (25.9.2018). 
-# Luokittelumuuttujan tyyppi on datan lukemisen jälkeen yleensä merkkijono (char), vaikka se on koodattu 
-# kokonaisluvuksi. R:n ns. "implisiittinen konversio" muunta arvot merkkijoiksi, jos joukossa on puuttuvia
-# havaintoja (NA)
 #
 # Muunnetun muuttujan rinnalla säilytetään SPSS-tiedostosta luettu muuttja, metatiedot säilyvät 
 # alkuperäisessä.
@@ -246,8 +230,8 @@ Muuta: alkuperäinen muuttuja säilytetää, voi tarkistaa
 #
 # 1. VALITAAN MAAT (25) -> ISSP2012jh1a.data. Muuttujat koodilohkossa datasel_vars1
 #
-# kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko maan
-# ja C_ALPHAN on maan kaksimerkkinen tunnus.
+# kolme maa-muuttujaa datassa. V3 erottelee joidenkin maiden alueita, V4 on koko 
+# maan koodi ja C_ALPHAN on maan kaksimerkkinen tunnus.
 #
 # V3 - Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)
 # V3 erot valituissa maissa
@@ -263,7 +247,7 @@ Muuta: alkuperäinen muuttuja säilytetää, voi tarkistaa
 # Portugalissa ainestoa täydennettiin, koska siinä oli puutteita. Jako ei siis ole oleellinen,
 # mutta muuut ovat. Tähdellä merkityt maat valitaan johdattelevaan esimerkkiin.
 #
-# Maat (25, ei Espanjaa).Myös USA ja Iso-Britannia pois, koska muuttuja TOPBOT puuttuu.
+# Maat (25)
 #
 # 36 AU-Australia
 # 40 AT-Austria
@@ -340,7 +324,6 @@ ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 # kohtaisilla lomakkeilla. Vertailukelpoiset muuttujat on konstruoitu niistä.
 # Muuttujia on 420, vain osa yhteisiä kaikille maille.
 
-
 ```
 
 
@@ -400,10 +383,11 @@ substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13") # 9 muuttujaa
 
 # Nämä yhteiset muuttujat pois (maaspesifien muuttujien lisäksi) :
 #
-# "V14","V15","V16",  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21","V28","V29","V30","V31","V32","V33",
-# "V34", "V35", "V36", "V37", "V38", "V39", "V40", "V41", "V42", "V43", "V44", "V45",
-#  "V46", "V47", "V48", "V49", "V50", "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59",
-#  "V60", "V61", "V62", "V63", "V64", "V65", "V65a","V66", "V67"
+# "V14","V15","V16",  "V17","V18","HU_V18","V19","HU_V19","V20","HU_V20","V21",
+# "V28","V29","V30","V31","V32","V33",# "V34", "V35", "V36", "V37", "V38", "V39",
+# "V40", "V41", "V42", "V43", "V44", "V45", "V46", "V47", "V48", "V49", "V50", 
+# "V51", "V52", "V53", "V54", "V55", "V56", "V57", "V58", "V59", "V60", "V61", 
+# "V62", "V63", "V64", "V65", "V65a","V66", "V67"
 #
 #
 # DEMOGRAFISET JA MUUT TAUSTAMUUTTUJAT (8)
@@ -459,9 +443,9 @@ substvars1 <- c("V5","V6","V7","V8","V9","V10","V11","V12","V13") # 9 muuttujaa
 # 99 No answer
 #
 # Voisi koodata dummymuuttujaksi lapsia (1) - ei lapsia (0).
-# Ranskan datassa on erittäin iso osa puuttuvia tietoja ( "99"", n. 20 %), myös Austarlialla
-# aika paljon. Sama tilanne myös muissa perheen kokoon liittyvissä kysymyksissä.
-#
+# Ranskan datassa on erittäin iso osa puuttuvia tietoja ( "99"", n. 20 %), myös 
+# Austarlialla aika paljon. Sama tilanne myös muissa perheen kokoon liittyvissä 
+# kysymyksissä.
 #
 # MARITAL - Legal partnership status 
 #
@@ -519,7 +503,9 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, all_of(jhvars1))
 # str(ISSP2012jh1b.data) # 32969 obs. of  23 variables
 
 # Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
+
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
+
 str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
 # ISSP2012jh1c.data %>% summary() %>% kable()
 
@@ -527,13 +513,11 @@ str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
 
 
 
-Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. 
-Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita 
-sukupuolirooleihin ja perhearvoihin.
-Kahdeksan taustamuuttujaa.
+Metatietojen (3)  ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista 
+muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla 
+luodataan asenteita sukupuolirooleihin ja perhearvoihin. Taustamuuttujia on kahdeksan.
 
 **Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot**
-**edit** tämä pätkä tuottaa virheilmoituksia (31-1-20), esim Error: unexpected symbol in "Q1a Working"
 
 Vastausvaihtoehdot:
 
@@ -707,7 +691,7 @@ Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja "vihr
 Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista 
 puuttuvia tietoja on 3,5 prosenttia (1219/34271).
 **Huom:** kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! 
-On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R
+On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R).
 
 ```{r muut2old, eval=FALSE, include=FALSE}
 
@@ -758,9 +742,7 @@ On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R
 
 ```
 
-Lisätietoa puuttuuvien havaintojen pähkäilyyn, apumateriaalia (6.12.2018). Ei tarvita,
-kun luodaan muuttuja jossa puuttuva tieto on mukana uutena luokittelumuuttujan
-arvona (30.1.20)
+**edit** Vanhoja koodilohkoja, olkoon toistaiseksi mukana (11.2.20)
 
 ```{r muut3OLD, eval=FALSE, include=FALSE}
 

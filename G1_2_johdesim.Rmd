@@ -151,7 +151,7 @@ str(ISSP2012esim3.dat)
 #neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
 
 vars_esim1 <- c("C_ALPHAN", "V3", "maa","maa3", "Q1b", "sp", "ika") 
-ISSP2012esim2.dat <- select(ISSP2012esim3.dat, vars_esim1)
+ISSP2012esim2.dat <- select(ISSP2012esim3.dat, all_of(vars_esim1))
 
 str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
 # C_ALPHAN: chr, maa: Factor w/ 25 
@@ -251,7 +251,7 @@ summary(ISSP2012esim1.dat$maa3)
 # tämä vain siksi, että muuten  esimerkin ca-kartta "kääntyy"
 # "vanha" maa-muuttuja talteen - ei ehkä tarpeen? (4.2.20)
 
-ISSP2012esim1.dat$maa2 <- ISSP2012esim1.dat$maa
+ISSP2012esim1.dat$maa2 <- ISSP2012esim1.dat$maa # "alkuperäinen" maa talteen
 
 ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
         mutate(maa =
@@ -264,7 +264,7 @@ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
                             "HU"))
 
 # Tarkistus
-ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count") # alkuperäinen maa "katosi"! (4.2.20)
+ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count") 
 ISSP2012esim1.dat %>% tableX(maa,C_ALPHAN, type = "count")
 str(ISSP2012esim1.dat)
 
@@ -272,7 +272,7 @@ str(ISSP2012esim1.dat)
 
 
 
-**zxy** taulukot erotettava omiksi koodilohkoiksi bookdowniin.
+**TODO** Taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
 
 ```{r esim1data2}
@@ -351,6 +351,12 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 # Maiden järjestys kääntää kuvan (1.2.20)
 
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
+
+# Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi
+# EI TOIMI (11.2.20)
+# johdesim1_rowproc.tab <- as.numeric(taulu3)
+# johdesim1_rowproc.tab
+# simpleCA3 <- ca(johdesim1_rowproc.mat)
 
 ```
 
@@ -534,6 +540,9 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
      sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+     sub = "maiden massat vakioitu")
 
 
 #str(simpleCA1)
