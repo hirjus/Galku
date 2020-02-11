@@ -353,11 +353,20 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi
-# EI TOIMI (11.2.20)
+# TYYLIKKÄÄMPI RATKAISU TARVITAAN! (11.2.20)
 # johdesim1_rowproc.tab <- as.numeric(taulu3)
 # johdesim1_rowproc.tab
-# simpleCA3 <- ca(johdesim1_rowproc.mat)
 
+# simpleCA3 <- ca(read) # kuva img-hakemistossa (11.2.20)
+#        S	s	?	e	E
+#BE	9.49	22.40	21.76	27.42	18.93
+#BG	12.81	42.89	22.26	20.63	1.41
+#DE	9.63	21.88	11.55	31.39	25.55
+#DK	5.04	17.15	10.95	16.71	50.14
+#FI	4.23	16.94	13.42	38.11	27.30
+#HU	21.97	28.89	22.57	19.06	7.52
+# 
+# read <- read.table("clipboard")
 ```
 
 
@@ -540,9 +549,9 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
      sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
-plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-     sub = "maiden massat vakioitu")
+# plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
+#     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+#     sub = "maiden massat vakioitu")
 
 
 #str(simpleCA1)
