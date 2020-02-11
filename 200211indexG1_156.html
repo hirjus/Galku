@@ -453,7 +453,7 @@ summary {
 
 <h1 class="title toc-ignore">G Luku 1 Yksinkertainen korrespondenssianalyysi</h1>
 <h4 class="author">Jussi Hirvonen</h4>
-<h4 class="date">versio 1.5.6 dev , tulostettu 2020-02-06</h4>
+<h4 class="date">versio 1.5.6 dev , tulostettu 2020-02-11</h4>
 
 </div>
 
@@ -949,12 +949,9 @@ bgvars1 &lt;- c( &quot;SEX&quot;,&quot;AGE&quot;,&quot;DEGREE&quot;, &quot;MAINS
 jhvars1 &lt;- c(metavars1,countryvars1, substvars1,bgvars1)
 
 #jhvars1
-ISSP2012jh1b.data &lt;- select(ISSP2012jh1a.data, jhvars1) </code></pre>
-<pre><code>## Note: Using an external vector in selections is ambiguous.
-## i Use `all_of(jhvars1)` instead of `jhvars1` to silence this message.
-## i See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
-## This message is displayed once per session.</code></pre>
-<pre class="r"><code># laaja aineisto - mukana havainnot joissa puuttuvia tietoja
+ISSP2012jh1b.data &lt;- select(ISSP2012jh1a.data, all_of(jhvars1)) 
+
+# laaja aineisto - mukana havainnot joissa puuttuvia tietoja
 # hauska detalji URBRURAL - muuttujan metatiedoissa viite jonkun työaseman hakemistoon
 # str(ISSP2012jh1b.data) #32969 obs. of  23 variables 
 # 
@@ -1066,221 +1063,7 @@ str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146</code></
 ##   ..- attr(*, &quot;labels&quot;)= Named num  1 2 3 4 5 7 9
 ##   .. ..- attr(*, &quot;names&quot;)= chr  &quot;A big city&quot; &quot;The suburbs or outskirts of a big city&quot; &quot;A town or a small city&quot; &quot;A country village&quot; ...
 ##  - attr(*, &quot;notes&quot;)= chr  &quot;document Plan File: /Users/marcic/Desktop/old/GPS2011 sampling/ISSP2013.sampling&quot; &quot;         .csplan&quot; &quot;         Weight Variable: SampleWeight_Final_&quot; &quot;         Stage 1&quot; ...</code></pre>
-<pre class="r"><code>ISSP2012jh1c.data %&gt;% summary()</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="center">V1</th>
-<th align="center">V2</th>
-<th align="center">DOI</th>
-<th align="center">V3</th>
-<th align="center">V4</th>
-<th align="center">C_ALPHAN</th>
-<th align="center">V5</th>
-<th align="center">V6</th>
-<th align="center">V7</th>
-<th align="center">V8</th>
-<th align="center">V9</th>
-<th align="center">V10</th>
-<th align="center">V11</th>
-<th align="center">V12</th>
-<th align="center">V13</th>
-<th align="center">SEX</th>
-<th align="center">AGE</th>
-<th align="center">DEGREE</th>
-<th align="center">MAINSTAT</th>
-<th align="center">TOPBOT</th>
-<th align="center">HHCHILDR</th>
-<th align="center">MARITAL</th>
-<th align="center">URBRURAL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td align="center">Min. :5900</td>
-<td align="center">Length:32823</td>
-<td align="center">Length:32823</td>
-<td align="center">Min. : 36</td>
-<td align="center">Min. : 36.0</td>
-<td align="center">Length:32823</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. : 15.00</td>
-<td align="center">Min. :0.00</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. : 1.00</td>
-<td align="center">Min. : 0.0000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">1st Qu.:5900</td>
-<td align="center">Class :character</td>
-<td align="center">Class :character</td>
-<td align="center">1st Qu.: 208</td>
-<td align="center">1st Qu.:203.0</td>
-<td align="center">Class :character</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:3.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.: 36.00</td>
-<td align="center">1st Qu.:2.00</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.: 5.00</td>
-<td align="center">1st Qu.: 0.0000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:1.000</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">Median :5900</td>
-<td align="center">Mode :character</td>
-<td align="center">Mode :character</td>
-<td align="center">Median : 428</td>
-<td align="center">Median :276.0</td>
-<td align="center">Mode :character</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :4.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median : 50.00</td>
-<td align="center">Median :3.00</td>
-<td align="center">Median :1.000</td>
-<td align="center">Median : 6.00</td>
-<td align="center">Median : 0.0000</td>
-<td align="center">Median :1.000</td>
-<td align="center">Median :3.000</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">Mean :5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">Mean : 4063</td>
-<td align="center">Mean :362.1</td>
-<td align="center">NA</td>
-<td align="center">Mean :2.112</td>
-<td align="center">Mean :3.196</td>
-<td align="center">Mean :3.211</td>
-<td align="center">Mean :3.149</td>
-<td align="center">Mean :2.971</td>
-<td align="center">Mean :1.963</td>
-<td align="center">Mean :3.513</td>
-<td align="center">Mean :2.102</td>
-<td align="center">Mean :1.592</td>
-<td align="center">Mean :1.549</td>
-<td align="center">Mean : 49.52</td>
-<td align="center">Mean :3.55</td>
-<td align="center">Mean :2.887</td>
-<td align="center">Mean : 5.68</td>
-<td align="center">Mean : 0.3832</td>
-<td align="center">Mean :2.844</td>
-<td align="center">Mean :2.729</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">3rd Qu.:5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">3rd Qu.: 705</td>
-<td align="center">3rd Qu.:578.0</td>
-<td align="center">NA</td>
-<td align="center">3rd Qu.:3.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.:5.000</td>
-<td align="center">3rd Qu.:3.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.: 63.00</td>
-<td align="center">3rd Qu.:5.00</td>
-<td align="center">3rd Qu.:6.000</td>
-<td align="center">3rd Qu.: 7.00</td>
-<td align="center">3rd Qu.: 0.0000</td>
-<td align="center">3rd Qu.:5.000</td>
-<td align="center">3rd Qu.:4.000</td>
-</tr>
-<tr class="even">
-<td></td>
-<td align="center">Max. :5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">Max. :62002</td>
-<td align="center">Max. :756.0</td>
-<td align="center">NA</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :3.000</td>
-<td align="center">Max. :3.000</td>
-<td align="center">Max. :2.000</td>
-<td align="center">Max. :102.00</td>
-<td align="center">Max. :6.00</td>
-<td align="center">Max. :9.000</td>
-<td align="center">Max. :10.00</td>
-<td align="center">Max. :21.0000</td>
-<td align="center">Max. :6.000</td>
-<td align="center">Max. :5.000</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA’s :848</td>
-<td align="center">NA’s :1188</td>
-<td align="center">NA’s :1056</td>
-<td align="center">NA’s :2051</td>
-<td align="center">NA’s :2554</td>
-<td align="center">NA’s :683</td>
-<td align="center">NA’s :719</td>
-<td align="center">NA’s :3428</td>
-<td align="center">NA’s :3522</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA’s :308</td>
-<td align="center">NA’s :370</td>
-<td align="center">NA’s :1777</td>
-<td align="center">NA’s :940</td>
-<td align="center">NA’s :434</td>
-<td align="center">NA’s :244</td>
-</tr>
-</tbody>
-</table>
+<pre class="r"><code># ISSP2012jh1c.data %&gt;% summary() %&gt;% kable()</code></pre>
 <p>Metatietojen (3) ja maa-muuttujien (3) lisäksi aineistossa on seitsemäntoista muuttujaa. Yhdeksän muuttujaa ovat ns. substanssikysymysten vastauksia, joilla luodataan asenteita sukupuolirooleihin ja perhearvoihin. Kahdeksan taustamuuttujaa.</p>
 <p><strong>Yhdeksän kysymystä (lyhennetyt versiot, englanniksi), vastausvaihtoehdot</strong> <strong>edit</strong> tämä pätkä tuottaa virheilmoituksia (31-1-20), esim Error: unexpected symbol in “Q1a Working”</p>
 <p>Vastausvaihtoehdot:</p>
@@ -1320,86 +1103,11 @@ tabVarDesc &lt;- c(&quot;Q1a Working mother can have warm relation with child &q
 jhVarTable1.df &lt;- data_frame(tabVarnames,tabVarDesc)
 cols_jhVarTable1 &lt;- c(&quot;muuttuja&quot;,&quot;Kysymyksen tunnus, lyhennetty kysymys&quot;)
 colnames(jhVarTable1.df) &lt;- cols_jhVarTable1
-jhVarTable1.df</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">muuttuja</th>
-<th align="left">Kysymyksen tunnus, lyhennetty kysymys</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">V5</td>
-<td align="left">Q1a Working mother can have warm relation with child</td>
-</tr>
-<tr class="even">
-<td align="left">V6</td>
-<td align="left">Q1b Pre-school child suffers through working mother</td>
-</tr>
-<tr class="odd">
-<td align="left">V7</td>
-<td align="left">Q1c Family life suffers through working mother</td>
-</tr>
-<tr class="even">
-<td align="left">V8</td>
-<td align="left">Q1d Women’s preference: home and children</td>
-</tr>
-<tr class="odd">
-<td align="left">V9</td>
-<td align="left">Q1e Being housewife is satisfying</td>
-</tr>
-<tr class="even">
-<td align="left">V10</td>
-<td align="left">Q2a Both should contribute to household income</td>
-</tr>
-<tr class="odd">
-<td align="left">V11</td>
-<td align="left">Q2b Men’s job is earn money, women’s job household</td>
-</tr>
-<tr class="even">
-<td align="left">V12</td>
-<td align="left">Q3a Should women work: Child under school age</td>
-</tr>
-<tr class="odd">
-<td align="left">V13</td>
-<td align="left">Q3b Should women work: Youngest kid at school</td>
-</tr>
-<tr class="even">
-<td align="left">SEX</td>
-<td align="left">Respondents age</td>
-</tr>
-<tr class="odd">
-<td align="left">AGE</td>
-<td align="left">Respondents gender</td>
-</tr>
-<tr class="even">
-<td align="left">DEGREE</td>
-<td align="left">Highest completed degree of education: Categories for international comparison</td>
-</tr>
-<tr class="odd">
-<td align="left">MAINSTAT</td>
-<td align="left">Main status: work, unemployed, in education…</td>
-</tr>
-<tr class="even">
-<td align="left">TOPBOT</td>
-<td align="left">Top-Bottom self-placement (10 pt scale)</td>
-</tr>
-<tr class="odd">
-<td align="left">HHCHILDR</td>
-<td align="left">How many children in household: children between [school age] and 17 years of age</td>
-</tr>
-<tr class="even">
-<td align="left">MARITAL</td>
-<td align="left">Legal partnership status: married, civil partership…</td>
-</tr>
-<tr class="odd">
-<td align="left">URBRURAL</td>
-<td align="left">Place of living: urban - rural</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code># Suomalaiset pitkät kysymykset
+# jhVarTable1.df
+
+
+
+# Suomalaiset pitkät kysymykset
 vastf1 &lt;- c(&quot;Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
             ja turvallisen suhteen kuin äiti, joka ei käy työssä&quot;)
 
@@ -1651,20 +1359,9 @@ ISSP2012jh1d.dat &lt;- ISSP2012jh1c.data %&gt;%
 str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric</code></pre>
 <pre><code>##  Factor w/ 25 levels &quot;AU&quot;,&quot;AT&quot;,&quot;BG&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  - attr(*, &quot;label&quot;)= chr &quot;Country Prefix ISO 3166 Code - alphanumeric&quot;</code></pre>
-<pre class="r"><code>attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels</code></pre>
-<pre><code>## $levels
-##  [1] &quot;AU&quot; &quot;AT&quot; &quot;BG&quot; &quot;CA&quot; &quot;HR&quot; &quot;CZ&quot; &quot;DK&quot; &quot;FI&quot; &quot;FR&quot; &quot;HU&quot; &quot;IS&quot; &quot;IE&quot; &quot;LV&quot; &quot;LT&quot; &quot;NL&quot;
-## [16] &quot;NO&quot; &quot;PL&quot; &quot;RU&quot; &quot;SK&quot; &quot;SI&quot; &quot;SE&quot; &quot;CH&quot; &quot;BE&quot; &quot;DE&quot; &quot;PT&quot;
-## 
-## $class
-## [1] &quot;factor&quot;
-## 
-## $label
-## [1] &quot;Country Prefix ISO 3166 Code - alphanumeric&quot;</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa %&gt;% fct_unique()</code></pre>
-<pre><code>##  [1] AU AT BG CA HR CZ DK FI FR HU IS IE LV LT NL NO PL RU SK SI SE CH BE DE PT
-## 25 Levels: AU AT BG CA HR CZ DK FI FR HU IS IE LV LT NL NO PL RU SK SI ... PT</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa %&gt;% fct_count() # ei toimi?</code></pre>
+<pre class="r"><code># attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
+# ISSP2012jh1d.dat$maa %&gt;% fct_unique()
+ISSP2012jh1d.dat$maa %&gt;% fct_count() # ei toimi?</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1785,112 +1482,16 @@ ISSP2012jh1d.dat$maa %&gt;% summary() # mukana vain valitut 25 maata</code></pre
 <pre><code>##  Factor w/ 45 levels &quot;AR-Argentina&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
 ##  - attr(*, &quot;label&quot;)= chr &quot;Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)&quot;</code></pre>
 <pre class="r"><code>                            #(see V4 for codes for whole nation states)&quot;
-                            # 45 levels
-# str(ISSP2012jh1d.dat$V3)
-
-attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 45 levels</code></pre>
-<pre><code>## $levels
-##  [1] &quot;AR-Argentina&quot;                                                   
-##  [2] &quot;AU-Australia&quot;                                                   
-##  [3] &quot;AT-Austria&quot;                                                     
-##  [4] &quot;BG-Bulgaria&quot;                                                    
-##  [5] &quot;CA-Canada&quot;                                                      
-##  [6] &quot;CL-Chile&quot;                                                       
-##  [7] &quot;CN-China&quot;                                                       
-##  [8] &quot;TW-Taiwan&quot;                                                      
-##  [9] &quot;HR-Croatia&quot;                                                     
-## [10] &quot;CZ-Czech Republic&quot;                                              
-## [11] &quot;DK-Denmark&quot;                                                     
-## [12] &quot;FI-Finland&quot;                                                     
-## [13] &quot;FR-France&quot;                                                      
-## [14] &quot;HU-Hungary&quot;                                                     
-## [15] &quot;IS-Iceland&quot;                                                     
-## [16] &quot;IN-India&quot;                                                       
-## [17] &quot;IE-Ireland&quot;                                                     
-## [18] &quot;IL-Israel&quot;                                                      
-## [19] &quot;JP-Japan&quot;                                                       
-## [20] &quot;KR-Korea (South)&quot;                                               
-## [21] &quot;LV-Latvia&quot;                                                      
-## [22] &quot;LT-Lithuania&quot;                                                   
-## [23] &quot;MX-Mexico&quot;                                                      
-## [24] &quot;NL-Netherlands&quot;                                                 
-## [25] &quot;NO-Norway&quot;                                                      
-## [26] &quot;PH-Philippines&quot;                                                 
-## [27] &quot;PL-Poland&quot;                                                      
-## [28] &quot;RU-Russia&quot;                                                      
-## [29] &quot;SK-Slovakia&quot;                                                    
-## [30] &quot;SI-Slovenia&quot;                                                    
-## [31] &quot;ZA-South Africa&quot;                                                
-## [32] &quot;ES-Spain&quot;                                                       
-## [33] &quot;SE-Sweden&quot;                                                      
-## [34] &quot;CH-Switzerland&quot;                                                 
-## [35] &quot;TR-Turkey&quot;                                                      
-## [36] &quot;US-United States&quot;                                               
-## [37] &quot;VE-Venezuela&quot;                                                   
-## [38] &quot;BE-FLA-Belgium/ Flanders&quot;                                       
-## [39] &quot;BE-WAL-Belgium/ Wallonia&quot;                                       
-## [40] &quot;BE-BRU-Belgium/ Brussels&quot;                                       
-## [41] &quot;DE-W-Germany-West&quot;                                              
-## [42] &quot;DE-E-Germany-East&quot;                                              
-## [43] &quot;PT-Portugal 2012: first fieldwork round (main sample)&quot;          
-## [44] &quot;PT-Portugal 2012: second fieldwork round (complementary sample)&quot;
-## [45] &quot;GB-GBN-Great Britain&quot;                                           
-## 
-## $class
-## [1] &quot;factor&quot;
-## 
-## $label
-## [1] &quot;Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)&quot;</code></pre>
-<pre class="r"><code>sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)</code></pre>
-<pre><code>## [1] 0</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa3 %&gt;% fct_unique()</code></pre>
-<pre><code>##  [1] AR-Argentina                                                   
-##  [2] AU-Australia                                                   
-##  [3] AT-Austria                                                     
-##  [4] BG-Bulgaria                                                    
-##  [5] CA-Canada                                                      
-##  [6] CL-Chile                                                       
-##  [7] CN-China                                                       
-##  [8] TW-Taiwan                                                      
-##  [9] HR-Croatia                                                     
-## [10] CZ-Czech Republic                                              
-## [11] DK-Denmark                                                     
-## [12] FI-Finland                                                     
-## [13] FR-France                                                      
-## [14] HU-Hungary                                                     
-## [15] IS-Iceland                                                     
-## [16] IN-India                                                       
-## [17] IE-Ireland                                                     
-## [18] IL-Israel                                                      
-## [19] JP-Japan                                                       
-## [20] KR-Korea (South)                                               
-## [21] LV-Latvia                                                      
-## [22] LT-Lithuania                                                   
-## [23] MX-Mexico                                                      
-## [24] NL-Netherlands                                                 
-## [25] NO-Norway                                                      
-## [26] PH-Philippines                                                 
-## [27] PL-Poland                                                      
-## [28] RU-Russia                                                      
-## [29] SK-Slovakia                                                    
-## [30] SI-Slovenia                                                    
-## [31] ZA-South Africa                                                
-## [32] ES-Spain                                                       
-## [33] SE-Sweden                                                      
-## [34] CH-Switzerland                                                 
-## [35] TR-Turkey                                                      
-## [36] US-United States                                               
-## [37] VE-Venezuela                                                   
-## [38] BE-FLA-Belgium/ Flanders                                       
-## [39] BE-WAL-Belgium/ Wallonia                                       
-## [40] BE-BRU-Belgium/ Brussels                                       
-## [41] DE-W-Germany-West                                              
-## [42] DE-E-Germany-East                                              
-## [43] PT-Portugal 2012: first fieldwork round (main sample)          
-## [44] PT-Portugal 2012: second fieldwork round (complementary sample)
-## [45] GB-GBN-Great Britain                                           
-## 45 Levels: AR-Argentina AU-Australia AT-Austria BG-Bulgaria ... GB-GBN-Great Britain</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa3 %&gt;% fct_count()</code></pre>
+                            # 29 levels
+str(ISSP2012jh1d.dat$V3)</code></pre>
+<pre><code>##  &#39;haven_labelled&#39; num [1:32823] 36 36 36 36 36 36 36 36 36 36 ...
+##  - attr(*, &quot;label&quot;)= chr &quot;Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)&quot;
+##  - attr(*, &quot;labels&quot;)= Named num [1:45] 32 36 40 100 124 152 156 158 191 203 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:45] &quot;AR-Argentina&quot; &quot;AU-Australia&quot; &quot;AT-Austria&quot; &quot;BG-Bulgaria&quot; ...</code></pre>
+<pre class="r"><code># attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 29 levels
+# sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
+# ISSP2012jh1d.dat$maa3 %&gt;% fct_unique()
+ISSP2012jh1d.dat$maa3 %&gt;% fct_count()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -2091,297 +1692,13 @@ attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 45 levels</code></p
 # [43] PT-Portugal 2012: first fieldwork round (main sample)          
 # [44] PT-Portugal 2012: second fieldwork round (complementary sample)
 
-ISSP2012jh1d.dat$maa3 %&gt;% fct_count() #miksi ei tulosta mitään? (3.2.2020)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">f</th>
-<th align="right">n</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">AR-Argentina</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">AU-Australia</td>
-<td align="right">1557</td>
-</tr>
-<tr class="odd">
-<td align="left">AT-Austria</td>
-<td align="right">1182</td>
-</tr>
-<tr class="even">
-<td align="left">BG-Bulgaria</td>
-<td align="right">1003</td>
-</tr>
-<tr class="odd">
-<td align="left">CA-Canada</td>
-<td align="right">953</td>
-</tr>
-<tr class="even">
-<td align="left">CL-Chile</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">CN-China</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">TW-Taiwan</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">HR-Croatia</td>
-<td align="right">997</td>
-</tr>
-<tr class="even">
-<td align="left">CZ-Czech Republic</td>
-<td align="right">1804</td>
-</tr>
-<tr class="odd">
-<td align="left">DK-Denmark</td>
-<td align="right">1403</td>
-</tr>
-<tr class="even">
-<td align="left">FI-Finland</td>
-<td align="right">1171</td>
-</tr>
-<tr class="odd">
-<td align="left">FR-France</td>
-<td align="right">2409</td>
-</tr>
-<tr class="even">
-<td align="left">HU-Hungary</td>
-<td align="right">1012</td>
-</tr>
-<tr class="odd">
-<td align="left">IS-Iceland</td>
-<td align="right">1172</td>
-</tr>
-<tr class="even">
-<td align="left">IN-India</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">IE-Ireland</td>
-<td align="right">1166</td>
-</tr>
-<tr class="even">
-<td align="left">IL-Israel</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">JP-Japan</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">KR-Korea (South)</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">LV-Latvia</td>
-<td align="right">1000</td>
-</tr>
-<tr class="even">
-<td align="left">LT-Lithuania</td>
-<td align="right">1187</td>
-</tr>
-<tr class="odd">
-<td align="left">MX-Mexico</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">NL-Netherlands</td>
-<td align="right">1315</td>
-</tr>
-<tr class="odd">
-<td align="left">NO-Norway</td>
-<td align="right">1444</td>
-</tr>
-<tr class="even">
-<td align="left">PH-Philippines</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">PL-Poland</td>
-<td align="right">1115</td>
-</tr>
-<tr class="even">
-<td align="left">RU-Russia</td>
-<td align="right">1525</td>
-</tr>
-<tr class="odd">
-<td align="left">SK-Slovakia</td>
-<td align="right">1128</td>
-</tr>
-<tr class="even">
-<td align="left">SI-Slovenia</td>
-<td align="right">1034</td>
-</tr>
-<tr class="odd">
-<td align="left">ZA-South Africa</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">ES-Spain</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">SE-Sweden</td>
-<td align="right">1059</td>
-</tr>
-<tr class="even">
-<td align="left">CH-Switzerland</td>
-<td align="right">1237</td>
-</tr>
-<tr class="odd">
-<td align="left">TR-Turkey</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">US-United States</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">VE-Venezuela</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">BE-FLA-Belgium/ Flanders</td>
-<td align="right">1090</td>
-</tr>
-<tr class="odd">
-<td align="left">BE-WAL-Belgium/ Wallonia</td>
-<td align="right">543</td>
-</tr>
-<tr class="even">
-<td align="left">BE-BRU-Belgium/ Brussels</td>
-<td align="right">559</td>
-</tr>
-<tr class="odd">
-<td align="left">DE-W-Germany-West</td>
-<td align="right">1205</td>
-</tr>
-<tr class="even">
-<td align="left">DE-E-Germany-East</td>
-<td align="right">556</td>
-</tr>
-<tr class="odd">
-<td align="left">PT-Portugal 2012: first fieldwork round (main sample)</td>
-<td align="right">894</td>
-</tr>
-<tr class="even">
-<td align="left">PT-Portugal 2012: second fieldwork round (complementary sample)</td>
-<td align="right">103</td>
-</tr>
-<tr class="odd">
-<td align="left">GB-GBN-Great Britain</td>
-<td align="right">0</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>ISSP2012jh1d.dat$maa3 %&gt;% summary() # 25 maata: havaintojen määrä, kaikki jos ei</code></pre>
-<pre><code>##                                                    AR-Argentina 
-##                                                               0 
-##                                                    AU-Australia 
-##                                                            1557 
-##                                                      AT-Austria 
-##                                                            1182 
-##                                                     BG-Bulgaria 
-##                                                            1003 
-##                                                       CA-Canada 
-##                                                             953 
-##                                                        CL-Chile 
-##                                                               0 
-##                                                        CN-China 
-##                                                               0 
-##                                                       TW-Taiwan 
-##                                                               0 
-##                                                      HR-Croatia 
-##                                                             997 
-##                                               CZ-Czech Republic 
-##                                                            1804 
-##                                                      DK-Denmark 
-##                                                            1403 
-##                                                      FI-Finland 
-##                                                            1171 
-##                                                       FR-France 
-##                                                            2409 
-##                                                      HU-Hungary 
-##                                                            1012 
-##                                                      IS-Iceland 
-##                                                            1172 
-##                                                        IN-India 
-##                                                               0 
-##                                                      IE-Ireland 
-##                                                            1166 
-##                                                       IL-Israel 
-##                                                               0 
-##                                                        JP-Japan 
-##                                                               0 
-##                                                KR-Korea (South) 
-##                                                               0 
-##                                                       LV-Latvia 
-##                                                            1000 
-##                                                    LT-Lithuania 
-##                                                            1187 
-##                                                       MX-Mexico 
-##                                                               0 
-##                                                  NL-Netherlands 
-##                                                            1315 
-##                                                       NO-Norway 
-##                                                            1444 
-##                                                  PH-Philippines 
-##                                                               0 
-##                                                       PL-Poland 
-##                                                            1115 
-##                                                       RU-Russia 
-##                                                            1525 
-##                                                     SK-Slovakia 
-##                                                            1128 
-##                                                     SI-Slovenia 
-##                                                            1034 
-##                                                 ZA-South Africa 
-##                                                               0 
-##                                                        ES-Spain 
-##                                                               0 
-##                                                       SE-Sweden 
-##                                                            1059 
-##                                                  CH-Switzerland 
-##                                                            1237 
-##                                                       TR-Turkey 
-##                                                               0 
-##                                                US-United States 
-##                                                               0 
-##                                                    VE-Venezuela 
-##                                                               0 
-##                                        BE-FLA-Belgium/ Flanders 
-##                                                            1090 
-##                                        BE-WAL-Belgium/ Wallonia 
-##                                                             543 
-##                                        BE-BRU-Belgium/ Brussels 
-##                                                             559 
-##                                               DE-W-Germany-West 
-##                                                            1205 
-##                                               DE-E-Germany-East 
-##                                                             556 
-##           PT-Portugal 2012: first fieldwork round (main sample) 
-##                                                             894 
-## PT-Portugal 2012: second fieldwork round (complementary sample) 
-##                                                             103 
-##                                            GB-GBN-Great Britain 
-##                                                               0</code></pre>
-<pre class="r"><code>                                    # ositettu. Poisjätetyissä havaintoja 0.
-glimpse(ISSP2012jh1d.dat$maa3)</code></pre>
-<pre><code>##  Factor w/ 45 levels &quot;AR-Argentina&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
-##  - attr(*, &quot;label&quot;)= chr &quot;Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)&quot;</code></pre>
-<pre class="r"><code>head(ISSP2012jh1d.dat$maa3)</code></pre>
-<pre><code>## [1] AU-Australia AU-Australia AU-Australia AU-Australia AU-Australia
-## [6] AU-Australia
-## 45 Levels: AR-Argentina AU-Australia AT-Austria BG-Bulgaria ... GB-GBN-Great Britain</code></pre>
-<pre class="r"><code># C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
+# ISSP2012jh1d.dat$maa3 %&gt;% fct_count() #miksi ei tulosta mitään? (3.2.2020)
+# ISSP2012jh1d.dat$maa3 %&gt;% summary() # 25 maata: havaintojen määrä, kaikki jos ei
+                                    # ositettu. Poisjätetyissä havaintoja 0.
+# glimpse(ISSP2012jh1d.dat$maa3)
+# head(ISSP2012jh1d.dat$maa3)
+
+# C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
 #
 # Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa.
 #
@@ -2439,97 +1756,9 @@ str(ISSP2012jh1d.dat$maa3)  # 29 levels</code></pre>
 ## $label
 ## [1] &quot;Country/ Sample ISO 3166 Code (see V4 for codes for whole nation states)&quot;</code></pre>
 <pre class="r"><code>#sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
-ISSP2012jh1d.dat$maa3 %&gt;% summary()</code></pre>
-<pre><code>##                                                    AU-Australia 
-##                                                            1557 
-##                                                      AT-Austria 
-##                                                            1182 
-##                                                     BG-Bulgaria 
-##                                                            1003 
-##                                                       CA-Canada 
-##                                                             953 
-##                                                      HR-Croatia 
-##                                                             997 
-##                                               CZ-Czech Republic 
-##                                                            1804 
-##                                                      DK-Denmark 
-##                                                            1403 
-##                                                      FI-Finland 
-##                                                            1171 
-##                                                       FR-France 
-##                                                            2409 
-##                                                      HU-Hungary 
-##                                                            1012 
-##                                                      IS-Iceland 
-##                                                            1172 
-##                                                      IE-Ireland 
-##                                                            1166 
-##                                                       LV-Latvia 
-##                                                            1000 
-##                                                    LT-Lithuania 
-##                                                            1187 
-##                                                  NL-Netherlands 
-##                                                            1315 
-##                                                       NO-Norway 
-##                                                            1444 
-##                                                       PL-Poland 
-##                                                            1115 
-##                                                       RU-Russia 
-##                                                            1525 
-##                                                     SK-Slovakia 
-##                                                            1128 
-##                                                     SI-Slovenia 
-##                                                            1034 
-##                                                       SE-Sweden 
-##                                                            1059 
-##                                                  CH-Switzerland 
-##                                                            1237 
-##                                        BE-FLA-Belgium/ Flanders 
-##                                                            1090 
-##                                        BE-WAL-Belgium/ Wallonia 
-##                                                             543 
-##                                        BE-BRU-Belgium/ Brussels 
-##                                                             559 
-##                                               DE-W-Germany-West 
-##                                                            1205 
-##                                               DE-E-Germany-East 
-##                                                             556 
-##           PT-Portugal 2012: first fieldwork round (main sample) 
-##                                                             894 
-## PT-Portugal 2012: second fieldwork round (complementary sample) 
-##                                                             103</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa3 %&gt;% fct_unique()</code></pre>
-<pre><code>##  [1] AU-Australia                                                   
-##  [2] AT-Austria                                                     
-##  [3] BG-Bulgaria                                                    
-##  [4] CA-Canada                                                      
-##  [5] HR-Croatia                                                     
-##  [6] CZ-Czech Republic                                              
-##  [7] DK-Denmark                                                     
-##  [8] FI-Finland                                                     
-##  [9] FR-France                                                      
-## [10] HU-Hungary                                                     
-## [11] IS-Iceland                                                     
-## [12] IE-Ireland                                                     
-## [13] LV-Latvia                                                      
-## [14] LT-Lithuania                                                   
-## [15] NL-Netherlands                                                 
-## [16] NO-Norway                                                      
-## [17] PL-Poland                                                      
-## [18] RU-Russia                                                      
-## [19] SK-Slovakia                                                    
-## [20] SI-Slovenia                                                    
-## [21] SE-Sweden                                                      
-## [22] CH-Switzerland                                                 
-## [23] BE-FLA-Belgium/ Flanders                                       
-## [24] BE-WAL-Belgium/ Wallonia                                       
-## [25] BE-BRU-Belgium/ Brussels                                       
-## [26] DE-W-Germany-West                                              
-## [27] DE-E-Germany-East                                              
-## [28] PT-Portugal 2012: first fieldwork round (main sample)          
-## [29] PT-Portugal 2012: second fieldwork round (complementary sample)
-## 29 Levels: AU-Australia AT-Austria BG-Bulgaria CA-Canada ... PT-Portugal 2012: second fieldwork round (complementary sample)</code></pre>
-<pre class="r"><code>ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriviltä!</code></pre>
+# ISSP2012jh1d.dat$maa3 %&gt;% summary()
+# ISSP2012jh1d.dat$maa3 %&gt;% fct_unique()
+ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriviltä!</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -10536,71 +9765,8 @@ summary(ISSP2012esim1.dat$Q1b)</code></pre>
 <pre class="r"><code>#  S      s      ?     e      E 
 # 810 + 1935 + 1367 + 2125 + 1906 = 8143
 
-summary(ISSP2012esim1.dat$maa)</code></pre>
-<pre><code>##   AU   AT   BG   CA   HR   CZ   DK   FI   FR   HU   IS   IE   LV   LT   NL   NO 
-##    0    0  921    0    0    0 1388 1110    0  997    0    0    0    0    0    0 
-##   PL   RU   SK   SI   SE   CH   BE   DE   PT 
-##    0    0    0    0    0    0 2013 1714    0</code></pre>
-<pre class="r"><code>summary(ISSP2012esim1.dat$maa3)</code></pre>
-<pre><code>##                                                    AU-Australia 
-##                                                               0 
-##                                                      AT-Austria 
-##                                                               0 
-##                                                     BG-Bulgaria 
-##                                                             921 
-##                                                       CA-Canada 
-##                                                               0 
-##                                                      HR-Croatia 
-##                                                               0 
-##                                               CZ-Czech Republic 
-##                                                               0 
-##                                                      DK-Denmark 
-##                                                            1388 
-##                                                      FI-Finland 
-##                                                            1110 
-##                                                       FR-France 
-##                                                               0 
-##                                                      HU-Hungary 
-##                                                             997 
-##                                                      IS-Iceland 
-##                                                               0 
-##                                                      IE-Ireland 
-##                                                               0 
-##                                                       LV-Latvia 
-##                                                               0 
-##                                                    LT-Lithuania 
-##                                                               0 
-##                                                  NL-Netherlands 
-##                                                               0 
-##                                                       NO-Norway 
-##                                                               0 
-##                                                       PL-Poland 
-##                                                               0 
-##                                                       RU-Russia 
-##                                                               0 
-##                                                     SK-Slovakia 
-##                                                               0 
-##                                                     SI-Slovenia 
-##                                                               0 
-##                                                       SE-Sweden 
-##                                                               0 
-##                                                  CH-Switzerland 
-##                                                               0 
-##                                        BE-FLA-Belgium/ Flanders 
-##                                                            1012 
-##                                        BE-WAL-Belgium/ Wallonia 
-##                                                             490 
-##                                        BE-BRU-Belgium/ Brussels 
-##                                                             511 
-##                                               DE-W-Germany-West 
-##                                                            1167 
-##                                               DE-E-Germany-East 
-##                                                             547 
-##           PT-Portugal 2012: first fieldwork round (main sample) 
-##                                                               0 
-## PT-Portugal 2012: second fieldwork round (complementary sample) 
-##                                                               0</code></pre>
-<pre class="r"><code># EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
+
+# EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
 #
 # 8557 obs. ennen kuin sexagemissing poistettiin, nyt 8542, 8557-8542 = 15
 #
@@ -10613,6 +9779,7 @@ summary(ISSP2012esim1.dat$maa)</code></pre>
      mutate(maa = fct_drop(maa),
             maa3 = fct_drop(maa3)
             )
+
 summary(ISSP2012esim1.dat$maa)</code></pre>
 <pre><code>##   BG   DK   FI   HU   BE   DE 
 ##  921 1388 1110  997 2013 1714</code></pre>
@@ -10623,27 +9790,14 @@ summary(ISSP2012esim1.dat$maa)</code></pre>
 ##                      997                     1012                      490 
 ## BE-BRU-Belgium/ Brussels        DE-W-Germany-West        DE-E-Germany-East 
 ##                      511                     1167                      547</code></pre>
-<pre class="r"><code>str(ISSP2012esim1.dat$maa)</code></pre>
-<pre><code>##  Factor w/ 6 levels &quot;BG&quot;,&quot;DK&quot;,&quot;FI&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<pre class="r"><code>attributes(ISSP2012esim1.dat$maa)</code></pre>
-<pre><code>## $levels
-## [1] &quot;BG&quot; &quot;DK&quot; &quot;FI&quot; &quot;HU&quot; &quot;BE&quot; &quot;DE&quot;
-## 
-## $class
-## [1] &quot;factor&quot;</code></pre>
-<pre class="r"><code>str(ISSP2012esim1.dat$maa3)</code></pre>
-<pre><code>##  Factor w/ 9 levels &quot;BG-Bulgaria&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<pre class="r"><code>attributes(ISSP2012esim1.dat$maa3)</code></pre>
-<pre><code>## $levels
-## [1] &quot;BG-Bulgaria&quot;              &quot;DK-Denmark&quot;              
-## [3] &quot;FI-Finland&quot;               &quot;HU-Hungary&quot;              
-## [5] &quot;BE-FLA-Belgium/ Flanders&quot; &quot;BE-WAL-Belgium/ Wallonia&quot;
-## [7] &quot;BE-BRU-Belgium/ Brussels&quot; &quot;DE-W-Germany-West&quot;       
-## [9] &quot;DE-E-Germany-East&quot;       
-## 
-## $class
-## [1] &quot;factor&quot;</code></pre>
-<pre class="r"><code>ISSP2012esim1.dat %&gt;% tableX(maa, Q1b, type = &quot;count&quot;)</code></pre>
+<pre class="r"><code># str(ISSP2012esim1.dat$maa)
+# attributes(ISSP2012esim1.dat$maa)
+
+# str(ISSP2012esim1.dat$maa3)
+# attributes(ISSP2012esim1.dat$maa3)
+
+
+ISSP2012esim1.dat %&gt;% tableX(maa, Q1b, type = &quot;count&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -10876,9 +10030,8 @@ levels(ISSP2012esim1.dat$maa3)</code></pre>
 # tarkistuksia
 levels(ISSP2012esim1.dat$maa3)</code></pre>
 <pre><code>## [1] &quot;BG&quot; &quot;DK&quot; &quot;FI&quot; &quot;HU&quot; &quot;bF&quot; &quot;bW&quot; &quot;bB&quot; &quot;dW&quot; &quot;dE&quot;</code></pre>
-<pre class="r"><code>str(ISSP2012esim1.dat$maa3) # 9 levels</code></pre>
-<pre><code>##  Factor w/ 9 levels &quot;BG&quot;,&quot;DK&quot;,&quot;FI&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<pre class="r"><code>summary(ISSP2012esim1.dat$maa3)</code></pre>
+<pre class="r"><code># str(ISSP2012esim1.dat$maa3) # 9 levels
+summary(ISSP2012esim1.dat$maa3)</code></pre>
 <pre><code>##   BG   DK   FI   HU   bF   bW   bB   dW   dE 
 ##  921 1388 1110  997 1012  490  511 1167  547</code></pre>
 <pre class="r"><code># TÄSSÄ TOISTOA! (4.2.20)

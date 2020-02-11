@@ -27,7 +27,7 @@ library(tinytex)
 library(assertthat)
 library(testthat)
 
-sessionInfo()
+# sessionInfo()
 
 ```
 
@@ -176,8 +176,6 @@ summary(ISSP2012esim1.dat$Q1b)
 #  S      s      ?     e      E 
 # 810 + 1935 + 1367 + 2125 + 1906 = 8143
 
-summary(ISSP2012esim1.dat$maa)
-summary(ISSP2012esim1.dat$maa3)
 
 # EDELLINEN DATA - havaintojen määrät samat kuin uudella datalla (31.1.20)
 #
@@ -192,14 +190,15 @@ summary(ISSP2012esim1.dat$maa3)
      mutate(maa = fct_drop(maa),
             maa3 = fct_drop(maa3)
             )
+
 summary(ISSP2012esim1.dat$maa)
 summary(ISSP2012esim1.dat$maa3)
 
-str(ISSP2012esim1.dat$maa)
-attributes(ISSP2012esim1.dat$maa)
+# str(ISSP2012esim1.dat$maa)
+# attributes(ISSP2012esim1.dat$maa)
 
-str(ISSP2012esim1.dat$maa3)
-attributes(ISSP2012esim1.dat$maa3)
+# str(ISSP2012esim1.dat$maa3)
+# attributes(ISSP2012esim1.dat$maa3)
 
 
 ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
@@ -238,7 +237,7 @@ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
                )
 # tarkistuksia
 levels(ISSP2012esim1.dat$maa3)
-str(ISSP2012esim1.dat$maa3) # 9 levels
+# str(ISSP2012esim1.dat$maa3) # 9 levels
 summary(ISSP2012esim1.dat$maa3)
 
 
