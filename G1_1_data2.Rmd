@@ -501,7 +501,7 @@ bgvars1 <- c( "SEX","AGE","DEGREE", "MAINSTAT", "TOPBOT", "HHCHILDR", "MARITAL",
 jhvars1 <- c(metavars1,countryvars1, substvars1,bgvars1)
 
 #jhvars1
-ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1) 
+ISSP2012jh1b.data <- select(ISSP2012jh1a.data, all_of(jhvars1)) 
 
 # laaja aineisto - mukana havainnot joissa puuttuvia tietoja
 # hauska detalji URBRURAL - muuttujan metatiedoissa viite jonkun työaseman hakemistoon
@@ -521,7 +521,7 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, jhvars1)
 # Poistetaan havainnot, joissa ikä (AGE) tai sukupuolitieto puuttuu (5.7.2019)
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
 str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
-ISSP2012jh1c.data %>% summary()
+# ISSP2012jh1c.data %>% summary() %>% kable()
 
 ```
 
@@ -592,7 +592,7 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
 jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
-jhVarTable1.df
+# jhVarTable1.df
 
 
 

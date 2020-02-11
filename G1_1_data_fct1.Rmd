@@ -68,20 +68,20 @@ ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
 # maa3 muunnetaan maakoodista (haven_labelled' num), jonka
 
 str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
-attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
-ISSP2012jh1d.dat$maa %>% fct_unique()
+# attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
+# ISSP2012jh1d.dat$maa %>% fct_unique()
 ISSP2012jh1d.dat$maa %>% fct_count() # ei toimi?
 # sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
 ISSP2012jh1d.dat$maa %>% summary() # mukana vain valitut 25 maata
 
 str(ISSP2012jh1d.dat$maa3)  #"Country/ Sample ISO 3166 Code 
                             #(see V4 for codes for whole nation states)"
-                            # 45 levels
-# str(ISSP2012jh1d.dat$V3)
+                            # 29 levels
+str(ISSP2012jh1d.dat$V3)
 
-attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 45 levels
-sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
-ISSP2012jh1d.dat$maa3 %>% fct_unique()
+# attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 29 levels
+# sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
+# ISSP2012jh1d.dat$maa3 %>% fct_unique()
 ISSP2012jh1d.dat$maa3 %>% fct_count()
 # Vain näissä on jaettu maan havainnot (3.2.20)
 #
@@ -93,11 +93,11 @@ ISSP2012jh1d.dat$maa3 %>% fct_count()
 # [43] PT-Portugal 2012: first fieldwork round (main sample)          
 # [44] PT-Portugal 2012: second fieldwork round (complementary sample)
 
-ISSP2012jh1d.dat$maa3 %>% fct_count() #miksi ei tulosta mitään? (3.2.2020)
-ISSP2012jh1d.dat$maa3 %>% summary() # 25 maata: havaintojen määrä, kaikki jos ei
+# ISSP2012jh1d.dat$maa3 %>% fct_count() #miksi ei tulosta mitään? (3.2.2020)
+# ISSP2012jh1d.dat$maa3 %>% summary() # 25 maata: havaintojen määrä, kaikki jos ei
                                     # ositettu. Poisjätetyissä havaintoja 0.
-glimpse(ISSP2012jh1d.dat$maa3)
-head(ISSP2012jh1d.dat$maa3)
+# glimpse(ISSP2012jh1d.dat$maa3)
+# head(ISSP2012jh1d.dat$maa3)
 
 # C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
 #
@@ -120,8 +120,8 @@ str(ISSP2012jh1d.dat$maa3)  # 29 levels
 
 attributes(ISSP2012jh1d.dat$maa3) # 
 #sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
-ISSP2012jh1d.dat$maa3 %>% summary()
-ISSP2012jh1d.dat$maa3 %>% fct_unique()
+# ISSP2012jh1d.dat$maa3 %>% summary()
+# ISSP2012jh1d.dat$maa3 %>% fct_unique()
 ISSP2012jh1d.dat$maa3 %>% fct_count() # miksi ei tulosta? Tulostaa komentoriviltä!
 
 str(ISSP2012jh1d.dat$C_ALPHAN)
