@@ -87,7 +87,7 @@ plot(simpleCA1, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2" )
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)" )
 
 ```
 

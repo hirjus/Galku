@@ -232,7 +232,7 @@ plot(suppointCA2b, main = "Passiiviset pisteet DE ja BE" )
 #apply(suppointCA2b$rowcoord, 2, sum)
 #suppointCA2b$rowdist
 #suppointCA2b$coldist
-summary(suppointCA2b)
+# summary(suppointCA2b)
 ```
 
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
@@ -245,13 +245,17 @@ plot(suppointCA1b, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Saksan ja Belgian alueet - asymmetrinen kartta 1" )
+     main = "Saksan ja Belgian alueet - asymmetrinen kartta 1",
+     sub = "kontribuutiokartta (rowgreen)")
+
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
+
 plot(suppointCA2b, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 (maapisteet)" )
+     main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 (maapisteet)",
+     sub = "kontribuutiokartta (rowgreen)")
 
 ```
 

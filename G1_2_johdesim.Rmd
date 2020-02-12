@@ -300,6 +300,7 @@ ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
 # Kysymyksen Q1b vastaukset
 
 # ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
+
 # ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 
 # str(ISSP2012esim1.dat) # 8143 obs. of  7 variable, 
@@ -353,7 +354,7 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi
-# TYYLIKKÄÄMPI RATKAISU TARVITAAN! (11.2.20)
+# TYYLIKKÄÄMPI RATKAISU TARVITAAN! (11.2.20). MCA_Day2 - r-skriptistä löytyy (12.2.20)
 # johdesim1_rowproc.tab <- as.numeric(taulu3)
 # johdesim1_rowproc.tab
 
