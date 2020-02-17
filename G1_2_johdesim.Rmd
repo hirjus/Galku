@@ -290,7 +290,7 @@ str(ISSP2012esim1.dat)
 #
 ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "count")
 ISSP2012esim1.dat %>% tableX(maa,ika,type = "count")
-ISSP2012esim1.dat %>% tableX(maa,sp ,type= "count")
+# ISSP2012esim1.dat %>% tableX(maa,sp ,type= "count")
 
 # Riviprofiilit
 
@@ -358,6 +358,7 @@ simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 # johdesim1_rowproc.tab <- as.numeric(taulu3)
 # johdesim1_rowproc.tab
 
+# simpleCA3 <- ca(taulu3) taulu3 on chr-tyyppiä, ei toimi
 # simpleCA3 <- ca(read) # kuva img-hakemistossa (11.2.20)
 #        S	s	?	e	E
 #BE	9.49	22.40	21.76	27.42	18.93
