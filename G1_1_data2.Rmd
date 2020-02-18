@@ -576,9 +576,7 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
 jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
 colnames(jhVarTable1.df) <- cols_jhVarTable1
-# jhVarTable1.df
-
-
+# str(jhVarTable1.df)
 
 # Suomalaiset pitkät kysymykset
 vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 

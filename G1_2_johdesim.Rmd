@@ -349,7 +349,7 @@ Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen la
 
 simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 
-# Maiden järjestys kääntää kuvan (1.2.20)
+# Maiden järjestys kääntää kuvan (1.2.20) - esimerkkiä ei jatkossa tarvita (18.2.20)
 
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 

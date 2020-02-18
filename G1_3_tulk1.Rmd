@@ -58,10 +58,6 @@ plot(simpleCA1, map = "rowprincipal",
 
 ```
 
-**HUOM (1.2.20)** Kuva on kääntynyt x-akselin ympäri? (1.2.20) Maat ovat eri järjestuksessä,
-johtuisiko siitä? Tarkista myös edellisen luvun rivi- ja sarakeprofiilikuvat, 
-niissä on muokkailtu taulukkoa...
-
 Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaatistoa, ja niiden yhteys.
 
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
