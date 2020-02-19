@@ -338,11 +338,10 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 ```
 
 
-
-
 Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja 8143. Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
 
-**EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. Muiden pitää käyttää CA:ta.
+**EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. 
+Isommissa aineistoissa (enemmän muuttujia) ei onnistu.
 
 ```{r EkaCA}
 # CA tässä, jotta saadaan rivi- ja sarakeprofiilikuvat
@@ -488,7 +487,7 @@ apu2b_dftest <- melt(cbind(apu2_dftest, ind = rownames(apu2_dftest)), id.vars = 
 #       geom_bar(position = "fill", stat ="identity") +
 #       #coord_flip() +
 #        scale_x_continuous(labels = percent_format()) 
-#versio2 # perkele, tämä toimii! 18.9.2018
+#versio2 # toimii 18.9.2018
 ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
        geom_bar(position = "fill", stat ="identity") +
        coord_flip() +
@@ -507,6 +506,7 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
+**TODO 19.2.20** Siiti taulukko.
 
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
@@ -522,11 +522,17 @@ simpleCA1$coldist
 
 ```{r khii2dist2}
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
-# tietenkään(2.2.20)
-# simpleCA1$rowdist
-# simpleCA2$coldist
+# tietenkään, mutta rivit eri järjestyksessä (2.2.20).
+simpleCA1$rowdist
+simpleCA2$rowdist
 # [1] 0.1579735 0.6309909 0.1750128 0.6340627 0.3477331 0.5504040
+# [1] 0.6309909 0.6340627 0.3477331 0.5504040 0.1579735 0.1750128
+simpleCA1$coldist
+simpleCA2$coldist
+# sarekeilla khii2-etäisyydet samat ja samassa järjestyksessä
 # [1] 0.5246525 0.3248840 0.3078230 0.2721699 0.6271108
+# [1] 0.5246525 0.3248840 0.3078230 0.2721699 0.6271108
+
 ```
 
 
@@ -567,7 +573,9 @@ plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
 ```
 
 
-Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Ei esitetä tässä. Nämä toiminevat vain pdf-tulostuksessa?
+Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
+miettiä mikä on järkevää, dataa tutkaillessa piirretään useita kuvia. PDF-muodossa
+ne ovat skaalautuvia, kommentteja voi lisätä jne.
 
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}
 #tämä toimii

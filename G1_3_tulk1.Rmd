@@ -47,10 +47,11 @@ Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa j
 (@) Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
 (@) Pisteiden koko kuvaa rivin tai sarakkeen massaa.
 
-```{r G1_3_asymm1}
+```{r G1_3_asymm1, eval=FALSE, include=FALSE}
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+# Käytetään "nuoliversiota" (19.2.20)
 
 plot(simpleCA1, map = "rowprincipal", 
      mass = c(TRUE,TRUE),
@@ -75,7 +76,12 @@ plot(simpleCA1, map = "rowprincipal",
 
 ```
 
-Tärkein havainto on sarakkeen "Eri mieltä" (e) ja toisen ulottuvuuden yhteys. Myös sarake "täysin samaa mieltä" (ts) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä.
+Sarakkeen "Eri mieltä" (e) määrittää toisen ulottuvuuden, jonka voisi tulkita 
+erottelevan "maltilliset" mielipiteen tiukemmista. Sarake "täysin samaa mieltä" 
+(S) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä, mutta "täysin 
+eri mieltä" (E) on vasemmalla ja kolme vastausvaihtoehtoa oikealla. Kovin terävästi
+dimensiot eivät eroa toisistaan?
+
 
 ```{r G1_3_asymm_contrib1}
 #X11() komentoriville ja plot-komento
@@ -83,7 +89,8 @@ plot(simpleCA1, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)" )
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
+     sub = "sarakevektorin värin tummuus = kontribuutio")
 
 ```
 

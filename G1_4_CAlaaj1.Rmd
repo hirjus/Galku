@@ -100,8 +100,8 @@ tehty.
 #ISSP2012esim1.dat %>% tableX(sp, V6, type = "row_perc")
 ```
 
-```{r G1_4_CAlaaj1Data}
-# Uusi data, luotu G1_2_johdesim.Rmd - jaksossa
+```{r G1_4_CAlaaj1Data, eval=FALSE, include=FALSE}
+# Uusi data, luotu G1_2_johdesim.Rmd - jaksossa - ei kuvailuja enään tähän (19.2.20)
 str(ISSP2012esim1.dat)
 ```
 
@@ -222,7 +222,8 @@ suppointCA2b <- suppointCA2
 suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
 suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
 
-plot(suppointCA2b, main = "Passiiviset pisteet DE ja BE" )
+plot(suppointCA2b,main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
+     sub = "Passiiviset pisteet DE ja BE" )
 # ca- output
 #names(suppointCA2b)
 #str(suppointCA2b)
@@ -272,6 +273,14 @@ summary(suppointCA1b)
 summary(suppointCA2b)
 ```
 
+```{r G1_4_3d}
+# Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
+# Toimii, mutta siistittävä, samoin koko maajakoskripti!
+
+# suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
+# plot3d(suppointCA3, c(1,2,3))
+
+```
 
 
 
