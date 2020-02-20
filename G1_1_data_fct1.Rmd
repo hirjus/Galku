@@ -1,4 +1,4 @@
-## Perusmuunnokest ISSP2012 - datalle
+## Perusmuunnokset ISSP2012 - datalle
 
 ```{r paketit_g11_fct, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
@@ -70,7 +70,7 @@ ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
 str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
 # attributes(ISSP2012jh1d.dat$maa) # ei tyhiä levels-arvoja, 25 levels
 # ISSP2012jh1d.dat$maa %>% fct_unique()
-ISSP2012jh1d.dat$maa %>% fct_count() # ei toimi?
+# ISSP2012jh1d.dat$maa %>% fct_count() # summary kertoo samat tiedot (20.2.20)
 # sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
 ISSP2012jh1d.dat$maa %>% summary() # mukana vain valitut 25 maata
 
@@ -82,7 +82,7 @@ str(ISSP2012jh1d.dat$V3)
 # attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 29 levels
 # sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
 # ISSP2012jh1d.dat$maa3 %>% fct_unique()
-ISSP2012jh1d.dat$maa3 %>% fct_count()
+# ISSP2012jh1d.dat$maa3 %>% fct_count()
 # Vain näissä on jaettu maan havainnot (3.2.20)
 #
 # [38] BE-FLA-Belgium/ Flanders                                       
@@ -94,12 +94,15 @@ ISSP2012jh1d.dat$maa3 %>% fct_count()
 # [44] PT-Portugal 2012: second fieldwork round (complementary sample)
 
 # ISSP2012jh1d.dat$maa3 %>% fct_count() #miksi ei tulosta mitään? (3.2.2020)
-# ISSP2012jh1d.dat$maa3 %>% summary() # 25 maata: havaintojen määrä, kaikki jos ei
-                                    # ositettu. Poisjätetyissä havaintoja 0.
+
+# ISSP2012jh1d.dat$maa3 %>% summary() 
+# ISSP2012jh1d.dat$maa3 %>% fct_unique()
+# maa3: 25 maata, havaintojen määrä. Poisjätetyissä havaintoja 0.
 # glimpse(ISSP2012jh1d.dat$maa3)
 # head(ISSP2012jh1d.dat$maa3)
+# length(levels(ISSP2012jh1d.dat$maa3))
 
-# C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (21.2.20)
+# C_ALPHAN alkuperäinen järjestys, maa aakkosjärjestyssä  (2.2.20)
 #
 # Huom1: Myös merkkijonomuuttujaa C_ALPHAN tarvitaan jatkossa.
 #
@@ -116,7 +119,7 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 
 #  maa3 - tarkistuksia
 
-str(ISSP2012jh1d.dat$maa3)  # 29 levels
+# str(ISSP2012jh1d.dat$maa3)  # 29 levels
 
 attributes(ISSP2012jh1d.dat$maa3) # 
 #sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
@@ -205,7 +208,16 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 # 
 
 # Tarkistusksia
-ISSP2012jh1d.dat %>% summary()
+# ISSP2012jh1d.dat %>% summary()
+
+ISSP2012jh1d.dat %>% 
+    select(Q1a1, Q1b1, Q1c1,Q1d1,Q1e1, Q2a1, Q2b1, Q3a1,Q3b1) %>% 
+    summary()
+
+ISSP2012jh1d.dat %>% 
+    select(edu1,msta1, sosta1, nchild1, lifsta1, urbru1) %>% 
+    summary()
+
 
 # Substanssimuuttujat - ristiintaulukoinnit riittävät (6.2.20)
 
