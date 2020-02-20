@@ -33,7 +33,7 @@ library(testthat)
 
 **Vanhaa jäsennystä**  
 
-Yksinkertainen esimerkki, yksi kysymys (V6) ja kuusi maata ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+Yksinkertainen esimerkki, yksi kysymys (V6/Q1b) ja kuusi maata ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
 
 Taulukoita tarkastella ensin rivien ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitan hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
 
@@ -299,9 +299,11 @@ ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
 
 # Kysymyksen Q1b vastaukset
 
-# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
+ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
-# ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+# Kuuluu ehkä vasta seuraavaan jaksoon ? (20.2.20)
+
+ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
 # str(ISSP2012esim1.dat) # 8143 obs. of  7 variable, 
 # sama kuin vanhassa Galku-koodissa. 
@@ -314,6 +316,9 @@ ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
 **Frekvenssitaulukko**
 
 ```{r simpeCAfrekTa1}
+
+# Esimerkki - siisti tuloste (20.2.20)
+
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
              caption = "Kysymyksen Q1b vastaukset maittain")
@@ -348,17 +353,36 @@ Isommissa aineistoissa (enemmän muuttujia) ei onnistu.
 
 simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 
-# Maiden järjestys kääntää kuvan (1.2.20) - esimerkkiä ei jatkossa tarvita (18.2.20)
+# Maiden järjestys kääntää kuvan (1.2.20) - esimerkki on 
+# vähän kuriositeetti. Kartta voi tietysti "flipata" koordintaattien suhteen ainakin
+# neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
+# (18.2.20).
 
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
-# Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi
-# TYYLIKKÄÄMPI RATKAISU TARVITAAN! (11.2.20). MCA_Day2 - r-skriptistä löytyy (12.2.20)
-# johdesim1_rowproc.tab <- as.numeric(taulu3)
-# johdesim1_rowproc.tab
+# Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi, tässä
+# pikainen kokeilu (20.2.20)
+# Riviprosentit taulukoksi, nimet sarakkeille ja riveille (ei kovin robustia...)
+#
 
-# simpleCA3 <- ca(taulu3) taulu3 on chr-tyyppiä, ei toimi
-# simpleCA3 <- ca(read) # kuva img-hakemistossa (11.2.20)
+# Frekvenssitaulu simpleCA1$N
+
+# Riviprofiilitauluksi
+
+johdesim1_rowproc.tab <- simpleCA1$N / rowSums(simpleCA1$N)
+# print(johdesim1_rowproc.tab)
+# rowSums(johdesim1_rowproc.tab)
+# str(johdesim1_rowproc.tab)
+
+colnames(johdesim1_rowproc.tab)<-c("S" ,"s" ,"?","e", "E")
+row.names(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
+
+
+simpleCA3 <- ca(johdesim1_rowproc.tab)
+plot.ca(simpleCA3, main="Symmetrinen kartta",
+        sub = "massat kaikilla mailla 1 (riviprofiilidata)" )
+
+# Riviprosentit tarkistusta varten
 #        S	s	?	e	E
 #BE	9.49	22.40	21.76	27.42	18.93
 #BG	12.81	42.89	22.26	20.63	1.41
@@ -367,11 +391,17 @@ simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 #FI	4.23	16.94	13.42	38.11	27.30
 #HU	21.97	28.89	22.57	19.06	7.52
 # 
+# Ja datan saa leikepöydän kautta, jos on tarve pikatarkistuksiin
 # read <- read.table("clipboard")
+
 ```
 
 
+Symmetrinen kartta, jossa maiden painot vakioitu. CA-funktiolle lähtötiedoksi 
+riviprofiilit. **TODO 20.2.20** Siirrä seuraavaan lukuun!
+
 **TODO 2.2.20** 
+
 Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen 
 Bookdownissa. Ei taida onnistua? (4.9.18)
 

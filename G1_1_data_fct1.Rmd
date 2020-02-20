@@ -42,7 +42,7 @@ tunnuksia pohditaan, kun ne otetaan käyttöön.
 
 **TODO 30.1.20** Tarkistukset, varmistukset jne.
 
-**TODO2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
+**TODO 2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
 samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
 
 **TODO 3.2.20** Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
