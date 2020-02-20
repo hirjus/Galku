@@ -363,13 +363,11 @@ simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi, tässä
 # pikainen kokeilu (20.2.20)
 # Riviprosentit taulukoksi, nimet sarakkeille ja riveille (ei kovin robustia...)
-#
 
-# Frekvenssitaulu simpleCA1$N
-
-# Riviprofiilitauluksi
 
 johdesim1_rowproc.tab <- simpleCA1$N / rowSums(simpleCA1$N)
+
+# TARKISTUKSIA (20.2.20)
 # print(johdesim1_rowproc.tab)
 # rowSums(johdesim1_rowproc.tab)
 # str(johdesim1_rowproc.tab)
@@ -379,8 +377,8 @@ row.names(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
 
 
 simpleCA3 <- ca(johdesim1_rowproc.tab)
-plot.ca(simpleCA3, main="Symmetrinen kartta",
-        sub = "massat kaikilla mailla 1 (riviprofiilidata)" )
+
+# Kartta piirretään koodilohkossa simpleCAmap1
 
 # Riviprosentit tarkistusta varten
 #        S	s	?	e	E
@@ -576,7 +574,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 
 **zxy** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
 
-```{r simpleCAmap1, fig.cap= "V6: lapsi kärsii jos äiti on töissä", fig.asp = 1 }
+```{r simpleCAmap1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä", fig.asp = 1 }
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
@@ -587,9 +585,11 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
      sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
-# plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
-#     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-#     sub = "maiden massat vakioitu")
+
+
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
+main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+sub = "massat kaikilla mailla 1 (riviprofiilidata)")
 
 
 #str(simpleCA1)

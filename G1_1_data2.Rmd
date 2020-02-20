@@ -3,7 +3,8 @@
 **edit** tässä luvussa on paljon siistittävää, mutta data on ok. (13.5.2018).
 **edit** capaper - dokumentissa parempi uusi jäsentely (4.9.2018)
 **edit** ISSP-datan perustietoa dokumentissa ISSP_data1.docx (4.9.2018)
-**edit 24.9.18** Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> G1_1_data2.Rmd).
+**edit 24.9.18** Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> 
+G1_1_data2.Rmd).
 
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
