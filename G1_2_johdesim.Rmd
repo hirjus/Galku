@@ -244,7 +244,7 @@ summary(ISSP2012esim1.dat$maa3)
 
 # TÄSSÄ TOISTOA! (4.2.20)
 
-# Muutetaan muuttujan "maa" arvojen (levels) järjestys samaksi kuin alkuperäisen
+# Muutetaan muuttujien "maa" ja "maa3" arvojen (levels) järjestys samaksi kuin alkuperäisen
 # muuttujan C_ALPHAN. Helpomi verrata aikaisempiin tuloksiin.
 
 # maa samaan järjestukseen kuin C_ALPHAN - olisiko aakkosjärjestys?
@@ -262,6 +262,18 @@ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
                             "DK",
                             "FI",
                             "HU"))
+ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
+        mutate(maa3 =
+                fct_relevel(maa3,
+                        "bF",
+                        "bW",
+                        "bB",
+                        "BG",
+                        "dW",
+                        "dE",
+                        "DK",
+                        "FI",
+                        "HU"))
 
 # Tarkistus
 ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count") 
@@ -285,12 +297,28 @@ str(ISSP2012esim1.dat)
 #  5603     BE-BRU-Belgium/ Brussels
 # 27601     DE-W-Germany-West
 # 27602     DE-E-Germany-East
-#
+
 # Tarkastuksia
-#
-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "count")
-ISSP2012esim1.dat %>% tableX(maa,ika,type = "count")
-# ISSP2012esim1.dat %>% tableX(maa,sp ,type= "count")
+
+# nämä ehkä tarpeettomia - expect_equivalet testaa levelien
+# järjestyksen ja määrän (20.2.20)
+
+assert_that(length(levels(ISSP2012esim1.dat$maa)) == 6)
+assert_that(length(levels(ISSP2012esim1.dat$maa3)) == 9)
+assert_that(length(levels(ISSP2012esim1.dat$Q1b)) == 5)
+
+expect_equivalent(levels(ISSP2012esim1.dat$maa), 
+                  c("BE", "BG", "DE", "DK", "FI", "HU"))
+
+expect_equivalent(levels(ISSP2012esim1.dat$maa3), 
+                  c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU"))
+
+expect_equivalent(levels(ISSP2012esim1.dat$sp), c("m", "f"))
+
+expect_equivalent(levels(ISSP2012esim1.dat$Q1b), 
+                  c("S", "s", "?", "e", "E"))
+
+ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
 
 # Riviprofiilit
 
