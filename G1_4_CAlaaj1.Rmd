@@ -160,7 +160,9 @@ Täydentävien muuttujien kolme käyttötapaa:
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
 plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 
-#kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
+# VANHAA 21.2.20
+#
+#Jos kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
 #summary(suppointCA1)
 #print(suppointCA1)
 #str(suppointCA1)
@@ -168,27 +170,27 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 # Käännetään kuva - EI TARVITA ENÄÄN, maa3-muuttujan järjestys sama kuin 
 # maa- muuttujan (C_ALPHAN - järjestys)
 
-suppointCA1b <- suppointCA1
-suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
-suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
-suppointCA1b$rowcoord
-suppointCA1b$colcoord
-plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
+# suppointCA1b <- suppointCA1
+# suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
+# suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
+# suppointCA1b$rowcoord
+# suppointCA1b$colcoord
+# plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
 
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
 # yritetään uudestaan table-funktiolla
 
 # data maa3-muuttujassa
-
 # str(ISSP2012esim1.dat$maa3)
-attributes(ISSP2012esim1.dat$maa3)
+# attributes(ISSP2012esim1.dat$maa3)
 
 suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 #str(suppoint1_df1)
 #head(suppoint1_df1)
+str(suppoint1_tab1)
 suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
-suppoint1_tab1
+suppoint1_tab1 
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
 #
 # Saksan ja Belgian summarivit
@@ -201,11 +203,11 @@ str(suppoint2_df)
 # attributes(suppoint2_df) # korvaa attr(x, which) tms. liian pitkä tulostus
 # attr(suppoint2_df, which = "class")
 # attr(suppoint2_df, which = "name")
-summary(suppoint2_df)
+# summary(suppoint2_df)
 suppoint2_df %>% table1() # miksi ei tulosta mitään (4.2.20)
 
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
-suppoint2_tab1
+suppoint2_tab1 # tarkistus
 suppoint2_tab1 <- suppoint2_tab1[-2,]
 # kömpelösti kolme kertaa
 suppoint2_tab1 <- suppoint2_tab1[-3,]
@@ -214,19 +216,20 @@ suppoint2_tab1 <- suppoint2_tab1[-3,]
 
 suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
 
-#lisätään rivit maa2-muuttujan taulukkoon
+#lisätään rivit maa3-muuttujan taulukkoon
 
 suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
 suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
-plot(suppointCA2, main = "Belgian ja Saksan ositteet ja maasummat")
-#käännetään kuva
-suppointCA2b <- suppointCA2
-suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
-suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
-
-plot(suppointCA2b,main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
+plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
      sub = "Passiiviset pisteet DE ja BE" )
+# käännetään kuva VANHAA (21.2.20)
+# suppointCA2b <- suppointCA2
+# suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
+# suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
+
+# plot(suppointCA2b,main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
+#     sub = "Passiiviset pisteet DE ja BE" )
 # ca- output
 #names(suppointCA2b)
 #str(suppointCA2b)
@@ -246,21 +249,21 @@ Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta,
 
 ```{r G1_4_BeDe_asymmContrib1}
 #X11()
-plot(suppointCA1b, map = "rowgreen",
+plot(suppointCA2, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 1",
-     sub = "kontribuutiokartta (rowgreen)")
+     sub = "kontribuutiokartta (rowgreen, absolute)")
 
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
 
-plot(suppointCA2b, map = "rowgreen",
-     contrib= c("absolute", "absolute"),
+plot(suppointCA2, map = "rowgreen",
+     contrib= c("relative", "relative"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 (maapisteet)",
-     sub = "kontribuutiokartta (rowgreen)")
+     main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 ",
+     sub = "kontribuutiokartta (rowgreen,relative)")
 
 ```
 
@@ -273,7 +276,7 @@ on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE) peittyy läntisen S
 Tulostetaan numeeriset taulukot.
 
 ```{r G1_4_castats1}
-summary(suppointCA1b)
+# summary(suppointCA1b)
 summary(suppointCA2b)
 ```
 
@@ -281,8 +284,12 @@ summary(suppointCA2b)
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
 # Toimii, mutta siistittävä, samoin koko maajakoskripti!
 
-# suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
+suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
+# summary(suppointCA3) - virheilmoitus? (21.2.20)
+suppointCA3
 # plot3d(suppointCA3, c(1,2,3))
+
+# Hyödyllinen, mutta aika vaikea
 
 ```
 
@@ -360,7 +367,7 @@ Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuo
 
 
 ```{r G1_4_ga2}
-# MIKÄ ON ga2? (4.2.20)
+# ga - ikäluokka ja sukupuoli
 
 # case_when: ikä ja sukupuoli
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",

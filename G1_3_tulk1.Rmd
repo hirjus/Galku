@@ -109,6 +109,15 @@ summary(simpleCA1)
 # vertailun vuoksi numeeriset tulokset, kun maiden massat vakiot
 summary(simpleCA3)
 
+# Rivi- ja sarake-etäisyydet (keskiarvosta/sentroidista)
+
+simpleCA1$rownames
+simpleCA1$rowdist
+simpleCA3$rowdist
+
+simpleCA1$colnames
+simpleCA1$coldist
+simpleCA3$coldist
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
 CA-funktiolle on annettu dataksi riviprofiilit, joiden summat ovat ykkösiä.
