@@ -159,12 +159,14 @@ Täydentävien muuttujien kolme käyttötapaa:
 # HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
 plot(suppointCA1, main = "Belgian ja Saksan ositteet")
+
 #kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
 #summary(suppointCA1)
 #print(suppointCA1)
 #str(suppointCA1)
 #
-# Käännetään kuva
+# Käännetään kuva - EI TARVITA ENÄÄN, maa3-muuttujan järjestys sama kuin 
+# maa- muuttujan (C_ALPHAN - järjestys)
 
 suppointCA1b <- suppointCA1
 suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
@@ -172,6 +174,7 @@ suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
 suppointCA1b$rowcoord
 suppointCA1b$colcoord
 plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
+
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
 # yritetään uudestaan table-funktiolla
@@ -235,6 +238,7 @@ plot(suppointCA2b,main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
 #suppointCA2b$coldist
 # summary(suppointCA2b)
 ```
+Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mukana maiden jaot)
 
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
 

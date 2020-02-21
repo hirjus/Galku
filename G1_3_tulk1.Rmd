@@ -106,8 +106,20 @@ Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja väris
 # CA:n numeeriset tulokset
 summary(simpleCA1)
 
-```
+# vertailun vuoksi numeeriset tulokset, kun maiden massat vakiot
+summary(simpleCA3)
 
+```
+Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
+CA-funktiolle on annettu dataksi riviprofiilit, joiden summat ovat ykkösiä.
+
+**TODO** (21.2.20)
+
+Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+
+Huomioita: kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu mutta ei
+kovin radikaalisti. 
+Kvaliteetti, kontribuutiot?
 
 **zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun.
 

@@ -56,7 +56,7 @@ Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöide
 3. Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
 
 3. CA:ssa hämäävä juttu (Blasius, "vizualisation - verkkokirja") rivien ja sarakkeiden **tekninen**
-symmetria. 
+symmetria. No ei se nyt niin hämäävä ehkä ole, oleellinen juttu (21.2.20)
 
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
@@ -67,7 +67,7 @@ Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan ri
 
 Akseleiden tulkinta "ääripäiden" kautta ("kontrasti" ?). Huom "ääripää" ei välttämättä Likert-asteikolla tarkoita "äärimielipidettä", vaan se voi tarkoittaa myös selvää tai varmaa mielipidettä.(3.10.18).
 
-**Vanha lista:**
+**Vanha lista - tehty jo**
 
 1. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
 
@@ -396,7 +396,7 @@ simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 johdesim1_rowproc.tab <- simpleCA1$N / rowSums(simpleCA1$N)
 
 # TARKISTUKSIA (20.2.20)
-# print(johdesim1_rowproc.tab)
+# johdesim1_rowproc.tab
 # rowSums(johdesim1_rowproc.tab)
 # str(johdesim1_rowproc.tab)
 
@@ -423,8 +423,7 @@ simpleCA3 <- ca(johdesim1_rowproc.tab)
 ```
 
 
-Symmetrinen kartta, jossa maiden painot vakioitu. CA-funktiolle lähtötiedoksi 
-riviprofiilit. **TODO 20.2.20** Siirrä seuraavaan lukuun!
+
 
 **TODO 2.2.20** 
 
@@ -481,8 +480,6 @@ ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
 
 **TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
-Riviprofiilikuva toimii, mutta vaatii vielä viilausta (18.9.2018).
-
 
 ```{r g1_2_kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
@@ -502,14 +499,17 @@ apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 # temp1
 ##muokataan 'long data' - muotoon
 apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
-#apu2b_df
-#
+# str(apu2b_df)
+# glimpse(apu2b_df)
+
 #
 #ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
 #       geom_bar(position = "fill", stat ="identity") +
 #       #coord_flip() +
 #        scale_x_continuous(labels = percent_format()) 
-#versio2 # perkele, tämä toimii! 18.9.2018
+
+#versio2 toimii (18.9.2018)
+
 ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
        geom_bar(position = "fill", stat ="identity") +
        coord_flip() +
@@ -575,8 +575,9 @@ simpleCA1$rowdist
 simpleCA1$coldist
 
 ```
+**TODO**Rivi- ja sarake-etäisyydet (khii2) vaatisivat kommentin.
 
-```{r khii2dist2}
+```{r khii2dist2, eval=FALSE, include=FALSE}
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
 # tietenkään, mutta rivit eri järjestyksessä (2.2.20).
 simpleCA1$rowdist

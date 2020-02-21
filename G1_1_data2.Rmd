@@ -115,11 +115,17 @@ issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot",
                   "Maittain sovellettava kyselylomake", "substanssikysymykset taulukkona")
 issp_docfile <- c("ZA5900_cdb.pdf", "ZA5900_mr.pdf", "ZA5900_bq.pdf","ZA5900_overview.pdf")
 
-ISSPdocsT.df <- data_frame(issp_docname, issp_docdesc, issp_docfile)
-col_isspdocs <- c("dokumentti","sisältö","tiedosto")
-colnames(ISSPdocsT.df) <- col_isspdocs
 
-knitr::kable(ISSPdocsT.df, booktab=TRUE)
+col_isspdocs <- c("dokumentti","sisältö","tiedosto")
+# colnames(ISSPdocsT.df) <- col_isspdocs
+# Vanha df-koodi
+# ISSPdocsT.df <- data_frame(issp_docname, issp_docdesc, issp_docfile)
+# knitr::kable(ISSPdocsT.df, booktab=TRUE)
+
+# varoituksia data_framen käytöstä, toimisiko tibble()? (21.2.20)
+ISSPdocsT.tbl <- tibble(issp_docname, issp_docdesc, issp_docfile)
+colnames(ISSPdocsT.tbl) <- col_isspdocs
+knitr::kable(ISSPdocsT.tbl, booktab=TRUE)
 ```
 
 
@@ -572,12 +578,14 @@ tabVarDesc <- c("Q1a Working mother can have warm relation with child ",
 
 # Taulukko
 
-# luodaan df - varoitus: data_frame() is deprecated, use tibble” (4.2.20)
+# luodaan df - varoitus: data_frame() is deprecated, use tibble” (4.2.20), 
+# vaihdetaan tibbleen (21.2.20)
 
-jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc)
-cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, lyhennetty kysymys")
-colnames(jhVarTable1.df) <- cols_jhVarTable1
-# str(jhVarTable1.df)
+# jhVarTable1.df <- data_frame(tabVarnames,tabVarDesc) OLD
+jhVarTable1.tbl <- tibble(tabVarnames,tabVarDesc)
+cols_jhVarTable1 <- c("muuttuja","kysymyksen tunnus, lyhennetty kysymys")
+colnames(jhVarTable1.tbl) <- cols_jhVarTable1
+str(jhVarTable1.tbl)
 
 # Suomalaiset pitkät kysymykset
 vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän 
@@ -598,21 +606,29 @@ vastf9 <- c("Q3b Millä tavoin naisten pitäisi mielestäsi käydä työssä seu
 tabVarDesc_fi <- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7, vastf8,vastf9)
 #tabVarDesc_fi
 tabVarnames_subst <- c(substvars1)
-jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi)
+# jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi) OLD
+jhVarTable1_fi.tbl <- tibble(tabVarnames_subst,tabVarDesc_fi)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, suomenkielisen lomakkeen kysymys")
-colnames(jhVarTable1_fi.df) <- cols_jhVarTable1
+colnames(jhVarTable1_fi.tbl) <- cols_jhVarTable1
 
 # TAULUKODEN TULOSTUS
 
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
 
-knitr::kable(jhVarTable1.df, booktab=TRUE,
-                fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
+# OLD
+# knitr::kable(jhVarTable1.df, booktab=TRUE,
+#                fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
+knitr::kable(jhVarTable1.tbl, booktab=TRUE,
+               fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
 
- knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
+# OLD
+# knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
+#              fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
+ 
+knitr::kable(jhVarTable1_fi.tbl, booktab=TRUE,
               fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
  
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
