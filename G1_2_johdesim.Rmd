@@ -1,6 +1,6 @@
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 
-```{r paketit_g12, include=FALSE}
+```{r paketit-g12, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 # paketit.R - kopioidaan Rmd-tiedostojen alkuun
 
@@ -33,78 +33,146 @@ library(testthat)
 
 **Vanhaa jäsennystä**  
 
-Yksinkertainen esimerkki, yksi kysymys (V6/Q1b) ja kuusi maata ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili, massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua vastaaviin keskiarvoprofiileihin.
+Yksinkertainen esimerkki, yksi kysymys (V6/Q1b) ja kuusi maata
+ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili,
+massa ja reunajakauma. Havainnollistetaan rivi- ja sarakeprofiilien vertailua
+vastaaviin keskiarvoprofiileihin.
 
-Taulukoita tarkastella ensin rivien ja sitten sarakkeiden suhteen. Miten ne poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitan hahmottaa maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan. Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja Fisher (ehkä turhaa tässä?).
+Taulukoita tarkastella ensin rivien ja sitten sarakkeiden suhteen. Miten ne
+poikkeavat keskiarvostaan, miten toisistaan saman kategorian profiilista. Usein
+taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitan hahmottaa
+maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden
+vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan.
+Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja
+Fisher (ehkä turhaa tässä?).
 
 
-Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus - on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi ehdollisena todennäköisyytenä reunajakauman suhteen. 
+Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus -
+on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi
+ehdollisena todennäköisyytenä reunajakauman suhteen. Riippumattomuustulkinta ei
+aina päde, jos aggregoidut havainnot / rivi-tai sarakeprofiilit / "samples" MG:n
+terminologiassa eivät ole riippumattomia. Esimerkki Barentsin merenpohjan 
+havainnot öljylauttojen liepeiltä (eli havainnot ryväksiä).
+
 **zxy** Tämä puuttuu kaavoista!
 
-**zxy**
 
-**Tarvitaanko käsitteellistä täsmentämistä, tai selkiinnyttämistä?**
+**Käsitteitä**
 
-1. Taulukon käsite
+1. Taulukko
 
 Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai havaintoyksiköiden pilveä ja muuttujien pilvelä (nominaaliasteikko). Taulukot saadaan yksinkertaisen CA:n tapauksessa aggregoimalla "cloud of individuals". 
 **#V** MOOC, LeReoux
 
-2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"), frekvenssitaulu, ristiintaulukointi
-- dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt. "data ei löydy kadulta", ja vaikka siitä ei ole epäilystäkään ISSP-datan tapauksessa, niin siitäkin jatketaan eteenpäin.
+2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"),
+frekvenssitaulu, ristiintaulukointi
 
-3. Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
+- dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt.
+"data ei löydy kadulta", ja vaikka siitä ei ole epäilystäkään ISSP-datan 
+tapauksessa, niin siitäkin jatketaan eteenpäin. (**edit 24.2.20** Epäselvä
+muistiinpano?)
 
-3. CA:ssa hämäävä juttu (Blasius, "vizualisation - verkkokirja") rivien ja sarakkeiden **tekninen**
-symmetria. No ei se nyt niin hämäävä ehkä ole, oleellinen juttu (21.2.20)
+Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
 
+3. CA:ssa hämäävä juttu (Blasius, "vizualisation - verkkokirja") rivien ja
+sarakkeiden **tekninen** symmetria. No ei se nyt niin hämäävä ehkä ole,
+oleellinen juttu (21.2.20).
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
-Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole ihan ilmeinen. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana (karttana).
+Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole
+ihan ilmeinen. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana
+(karttana).
 
-Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä "pistepilvessä".
+Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan
+riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan
+ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua.
+Menetelmän ydin on tarkastella molempien muuttujien -- taulukon rivien ja
+sarakkeiden -- riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös
+kartaksi, ja tulkinnan ensimmäinen askel on kartan "koordinaatiston" tulkinta.
+Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden
+etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta
+aloitetaan "katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja
+alhaalla" (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä
+edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita
+(approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana
+toisistaan myös alkuperäisessä "pistepilvessä".
 
-Akseleiden tulkinta "ääripäiden" kautta ("kontrasti" ?). Huom "ääripää" ei välttämättä Likert-asteikolla tarkoita "äärimielipidettä", vaan se voi tarkoittaa myös selvää tai varmaa mielipidettä.(3.10.18).
+Akseleiden tulkinta "ääripäiden" kautta ("kontrasti" ?). Huom "ääripää" ei
+välttämättä Likert-asteikolla tarkoita "äärimielipidettä", vaan se voi
+tarkoittaa myös selvää tai varmaa mielipidettä.(3.10.18).
 
 **Vanha lista - tehty jo**
 
-1. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit, khii2 - riippumattomuustesti ja etäisyysmitta
+1. Ensimmäinen taulukko: profiilit, massat, keskiarvoprofiilit,
+khii2 - riippumattomuustesti ja etäisyysmitta
 
-2. Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä kolmiulotteisia kuvia (niitä on jo)
+2. Hyvin tiivis esitys CA:n perusideasta, mutta ilman aivan simppeleitä
+kolmiulotteisia kuvia (niitä on jo).
 
-3. Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa, mitä ei)
+3. Ensimmäinen symmetrinen kartta, perustulkinta (mitä kuvasta voidaan sanoa,
+mitä ei)
 
-4.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin pahoja. CA-kartta kaksoiskuvana (ts. informaatio voidaan palauttaa, skalaaritulo)? 
+4.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin
+pahoja. CA-kartta kaksoiskuvana (ts. informaatio voidaan palauttaa, skalaaritulo)? 
 
 5. Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely
 
-Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala kerrallaan tuoda esimerkkien kautta tekstiin. Käsittteistä oma Rmd (ja Excel jos osoittautuu kätevämmäksi), kaavaliite Dispo-repossa ja myös Rmd-muodossa. **edit** Kaavaliitteessä pieniä eroja, ja tekstiä on LateX-versiossa enemmän.
+Haaste: käsitteet ja niiden suhteet ovat abstraktien matemaattisten rakenteiden
+tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala
+kerrallaan tuoda esimerkkien kautta tekstiin. Käsittteistä oma Rmd (ja Excel jos
+osoittautuu kätevämmäksi), kaavaliite Dispo-repossa ja myös Rmd-muodossa.
+
+**edit** Kaavaliitteessä pieniä eroja, ja tekstiä on LateX-versiossa enemmän.
 
 **Ensimmäinen symmetrinen kartta**
 
-Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat prosentit akseleilla?
+Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon
+alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin,
+akseleiden tulkinta ("mitä on oikealla ja vasemmalla"). Jos pisteet ovat
+alkuperäisessä "pilvessä" kaukana toisistaan, ne ovat sitä myös projektiossa.
+Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon.
+Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat
+prosentit akseleilla?
 
-Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja sarakepisteistä koostuvien ryhmien. 
-**zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä. MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
+Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja
+sarakepisteistä koostuvien ryhmien.
 
-**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden "correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
+**zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole
+suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio).
+Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin
+keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä.
+MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde.
+Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
 
-**zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
+**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa
+käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden
+"correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
+
+**zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa
+muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan
+esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
 
 ## Äiti työssä
 
-**zxy** Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi kysymys.
+**zxy** Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi
+kysymys.
 
-**zxy** Suhde data-lukuun, siellä pitäisi esitellä aineisto sisällöllisesti. Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
+**zxy** Suhde data-lukuun, siellä pitäisi esitellä aineisto sisällöllisesti.
+Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
 
-**zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b) kuviin ja taulukoihin.
+**zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b)
+kuviin ja taulukoihin.
+
+Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e,
+arvot 1-5, täysin samaa mieltä - täysin eri mieltä). 
 
 
-Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e, arvot 1-5, täysin samaa mieltä - täysin eri mieltä). 
-
-
-(V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei vielä tee kuvista ahtaita kun sarakkeita ja rivejä on vähän. Pudotetaan tarvittaessa turha Q-kirjain pois. Alkuperäisessä muuttujassa metatieto säilyy varmemmin, ja tarkistuksia on helpompi tehdä.
+(V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy
+työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei
+vielä tee kuvista ahtaita kun sarakkeita ja rivejä on vähän. Pudotetaan
+tarvittaessa turha Q-kirjain pois. Alkuperäisessä muuttujassa metatieto säilyy
+varmemmin, ja tarkistuksia on helpompi tehdä.
 
 ```{r esim1data1OLD, eval=FALSE, include=FALSE}
 #
@@ -343,7 +411,7 @@ ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
 **Frekvenssitaulukko**
 
-```{r simpeCAfrekTa1}
+```{r simpeCA-frekTa1}
 
 # Esimerkki - siisti tuloste (20.2.20)
 
@@ -354,7 +422,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 
 **Riviprosentit**
 
-```{r simpeCArprosTa1}
+```{r simpeCA-rprosTa1}
 taulu3 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
 knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
@@ -363,7 +431,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 
 **Sarakeprosentit**
 
-```{r simpeCAcprosTa1}
+```{r simpeCA-cprosTa1}
 taulu4 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "col_perc")
 
 knitr::kable(taulu4,digits = 2, booktabs = TRUE,
@@ -371,7 +439,14 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 ```
 
 
-Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni, mutta havaintoja 8143. Alemman suhteellisten frekvenssien taulukon rivejä voi verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin, sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
+Taulukoissa on kuuden maan vastausten jakauma kysymykseen "Alle kouluikäinen
+lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä". Taulukko on pieni,
+mutta havaintoja 8143. Alemman suhteellisten frekvenssien taulukon rivejä voi
+verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin,
+sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita
+voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia
+on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
+**edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot samat (= 1).
 
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. 
 Isommissa aineistoissa (enemmän muuttujia) ei onnistu.
@@ -432,7 +507,7 @@ Bookdownissa. Ei taida onnistua? (4.9.18)
 
 Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla.
 
-```{r g1_2_kuva1}
+```{r g1-2kuva1}
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
@@ -456,7 +531,7 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 
 Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
 
-```{r g1_2_kuva1test}
+```{r g1-2kuva1test}
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
@@ -481,7 +556,7 @@ ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
 **TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
 
 
-```{r g1_2_kuva2, echo=TRUE}
+```{r g1-2kuva2, echo=TRUE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
 apu2_df <- as.data.frame(apu1)
 apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
@@ -518,7 +593,7 @@ ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
 
 Ja sama testaus kuin sarakeprofiilikuvilla
 
-```{r g1_2_kuva2test, echo=TRUE}
+```{r g1-2kuva2test, echo=TRUE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
 apu2_dftest <- as.data.frame(apu1test)
 apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))

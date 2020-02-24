@@ -1,6 +1,6 @@
 ## Perusmuunnokset ISSP2012 - datalle
 
-```{r paketit_g11_fct, include=FALSE}
+```{r paketit-g11_fct, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 # paketit.R - kopioidaan Rmd-tiedostojen alkuun
 

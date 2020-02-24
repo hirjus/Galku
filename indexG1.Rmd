@@ -25,7 +25,7 @@ output:
 ---
 
 **Versiot - vanha Galku - 5.6.2019 versio 1.5.1**
-**Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6 **
+**Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6, 24.2.2020 versio 1.5.7**
 
 Siivotaan datan käsittelyn koodilohkot, kopiodaan mahdollisesti hyödylliset 
 koodipätkät tiedostoon siivous1.R (30.1.2020).
@@ -40,8 +40,8 @@ myös maakoodi jossa Saksan ja Belgian jako (V3).
 
 (4.2.20) Versio 1.5.6 - Galku toimii loppuun asti, tarkistettava ja editoitava.
 Poistetaan tarpeetonta tekstiä, vanha koodi voi jäädä selvästi merkittynä.
-**TODO** Galkun jatko? 1.6 nykyisen siistitty (sopivasti, ei liikaa) versio. 
-Viimeisen luvun jatkoanalyysit - nyt vai vähän myöhemmin?
+
+(24.2.20) Versio 1.5.7. Pieniä ja isompiakin korjailuja, kaavan siistimistä jne.
 
 **HISTORIAA**
 

@@ -107,3 +107,6 @@ hieman siitimmäksi, mutta ei turhaan hiota. Poistetaan tarpeetonta tekstiä,
 vanha koodi voi jäädä.
 
 **6.2.2020** Kommentoitu pois osa tarkistustaulukoista.
+
+**24.2.2020** Versio 1.5.7 - pieniä ja isompia korjailuja, siistimistä ja vanhan
+koodin (koodilohkojen) asetuksia passiivisiksi (eval=FALSE, include=FALSE).
