@@ -1,7 +1,7 @@
 
 # Tulkinnan perusteita
 
-```{r paketit_g13, include=FALSE}
+```{r paketit-g13, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
@@ -47,9 +47,10 @@ Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa j
 (@) Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
 (@) Pisteiden koko kuvaa rivin tai sarakkeen massaa.
 
-```{r G1_3_asymm1}
+```{r G1-3asymm1, eval=FALSE, include=FALSE}
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
+#  (19.2.20) Käytetään "nuoliversiota"- tämä passiiviseksi
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
 
 plot(simpleCA1, map = "rowprincipal", 
@@ -58,17 +59,13 @@ plot(simpleCA1, map = "rowprincipal",
 
 ```
 
-**HUOM (1.2.20)** Kuva on kääntynyt x-akselin ympäri? (1.2.20) Maat ovat eri järjestuksessä,
-johtuisiko siitä? Tarkista myös edellisen luvun rivi- ja sarakeprofiilikuvat, 
-niissä on muokkailtu taulukkoa...
-
 Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaatistoa, ja niiden yhteys.
 
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
 
 Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
      
-```{r G1_3_asymm2}
+```{r G1-3asymm2}
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
@@ -79,20 +76,39 @@ plot(simpleCA1, map = "rowprincipal",
 
 ```
 
-Tärkein havainto on sarakkeen "Eri mieltä" (e) ja toisen ulottuvuuden yhteys. Myös sarake "täysin samaa mieltä" (ts) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä.
+Sarakkeen "Eri mieltä" (e) määrittää toisen ulottuvuuden, jonka voisi tulkita 
+erottelevan "maltilliset" mielipiteen tiukemmista. Sarake "täysin samaa mieltä" 
+(S) määrittää toista ulottuvuutta lähes yhtä paljon kuin ensimmäistä, mutta "täysin 
+eri mieltä" (E) on vasemmalla ja kolme vastausvaihtoehtoa oikealla. Kovin terävästi
+dimensiot eivät eroa toisistaan?
 
-```{r G1_3_asymm_contrib1}
+
+```{r G1-3asymmContrib1}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
      contrib= c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2" )
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
+     sub = "sarakevektorin värin tummuus = kontribuutio(absolute)")
 
 ```
 
 
+
 Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
+
+Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
+```{r G1-3asymmContrib2}
+#X11() komentoriville ja plot-komento
+plot(simpleCA1, map = "rowgreen",
+     contrib= c("relative", "relative"),
+     mass = c(TRUE,TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
+     sub = "sarakevektorin värin tummuus = kontribuutio(relative)")
+
+```
 
 **Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
@@ -103,9 +119,42 @@ Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja väris
 # CA:n numeeriset tulokset
 summary(simpleCA1)
 
+# vertailun vuoksi numeeriset tulokset, kun maiden massat vakiot
+summary(simpleCA3)
+
+# Rivi- ja sarake-etäisyydet (keskiarvosta/sentroidista)
+
+simpleCA1$rownames
+simpleCA1$rowdist
+simpleCA3$rowdist
+
+simpleCA1$colnames
+simpleCA1$coldist
+simpleCA3$coldist
 ```
+Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
+CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
+ykkösiä.
 
+**TODO** (21.2.20)
 
-**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun.
+(@)Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+
+(@)Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+mutta ei kovin radikaalisti.
+
+(@)Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
+
+Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
+
+Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
+Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
+kontribuutiot ovat niin pieniä (24.2.20)
+
+(@) Miksi sarakemassat muuttuvat? Hieman on hämärä, edelleen! Teknisiä tuloksia
+ei ehkä pidä käyttää mihinkään muuhun kuin kartan laadulliseen arviointiin ja
+kuvan tulkintojen varmistamiseen?(24.2.20)
+
+**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 
 MG & Blasius, "vihreä kirja": kontribuutiot inertiaan
