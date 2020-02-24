@@ -487,11 +487,13 @@ str(ISSP2012esim2.dat)
 
 ```
 
-**TARKISTA - ja maat voisi lisätä täydentävinä pisteinä (26.9.2018)** 
+**Maa - ikäluokka - sukupuoli - interaktiomuuttuja maaga**
+
+Tehty jo 26.9.2018
 
 ```{r maagaCA1}
 
-maagaTestCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
+maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 # par("cex"= 0.5, "offset" = 0.5) #ei toimi ja plot-komennossa offset tuottaa
 # saman varoituksen: "offset is not a graphical parameter"
 
@@ -500,20 +502,37 @@ maagaTestCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 # "asp" is not a graphical parameter"offset" is not a graphical parameter
 # par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
 
-plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
                 sub = "symmetrinen kartta")
 
-# str(maagaTestCA1)
-
-ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
-maagasummary(maagaTestCA1) 
-
+```
+Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri
+vaikutus akseleihin.
+```{r maagaStabi1}
 # (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei 
 # vaikuta (kontribuutiot) liikaa karttaan?
+#str(maagaTestCA1)
 
-str(maagaTestCA1)
+ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
+maagaCA1num <- summary(maagaCA1) 
+maagaCA1num
+
+# Hieman hankalaa kätevästi järjestää numeerisia tuloksia massan mukaan
+
+#str(maagaCA1num)
+#maagaCA1num$rows
+#maagaRows.df <- maagaCA1num$rows
+# sarakenimet eivät yksikäsitteisiä
+#maagaRows.df
+#str(maagaRows.df)
+#names(maagaRows.df)
+#str(maagaRows.df$mass)
+# ei toimi AscmaagaRows.df <- maagaRows.df[order(mass),]
 
 ```
+
+Maapisteet täydentäviksi pisteiksi
+
 ```{r maagaCA2}
 # Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
 # Miten labelit hieman lähemmäkis pistettä? offset-jotenkin toimii...
@@ -523,19 +542,20 @@ str(maagaTestCA1)
 # karttaa on helpompi tulkita, kun nähdään miten ikä-sukupuoli-ryhmät sijatsevat keskiarvonsa ympärillä
 
 #ikäluokka - sukupuoli ja maa - maaga-muuttuja
-testTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
+maagaTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
 #dim(testTab1) #72 riviä,  5 saraketta
 
 
 # maa-rivit
-testTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$Q1b)
-#testTab_sr
+maagaTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$Q1b)
+#maagaTab_sr
 
-testTab1 <- rbind(testTab1,testTab_sr)
-#dim(testTab1)
-#dim(testTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
+maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
+# str(maagaTab1)
+# maagaTab1
+# dim(maagaTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
 
-spCAmaaga1 <- ca(testTab1[,1:5], suprow = 73:78)
+spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
 #X11()
 
 # Plot toimii (4.2.20), mutta par() ei, sama virheilmoitus (varoitus) 
@@ -555,6 +575,17 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
 #                  mass = c(TRUE,TRUE),
 #                  arrows = c(FALSE,TRUE)
 #                  )
+
+# Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
+# EI TOIMI 
+
+plot(spCAmaaga1, xlim=c(-0.75,0.37), ylim=c(-0.4,0.05),
+                main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+                sub = "osa symmetristä karttaa"
+                    )
+
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+# grafiikkaikkunaan tulostukseen ?
 
 ```
 

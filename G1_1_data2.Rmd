@@ -219,17 +219,26 @@ mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 2. Poistetaan havainnot, joissa puuttuva tieto sukupuolesta tai iästä 
 (tai molemmista)
 
-Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
+Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja
+uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
 **zxy 3.10.18** 
 R-spesifiä:
 R-koodissa tarkemmin, kaikki yksityiskohdat.
 
-Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. matriisiksi, taulukoksi jne) metadata katoaa. Siksi muuttujien tyyppimuunnokset (yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy vanhassa muuttujassa.
+Kun SPSS-tiedosto luetaan R:n data frame - tiedostoksi, mukana tulee myös
+metadata. Uusien muuttujien luonnissa tai data-formaatin vaihtuessa (esim. 
+matriisiksi, taulukoksi jne) metadata katoaa. Siksi muuttujien tyyppimuunnokset
+(yleensä faktorointi) tallennetaan uusiksi muuttujiksi, metatieto säilyy
+vanhassa muuttujassa.
 
-Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan selkeä (ja lyhyt jos mahdollista).
+Helposti toistettava tutkimus: polku alkuperäisestä datasta analyysien dataan
+selkeä (ja lyhyt jos mahdollista).
 
-Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS (datan jakelutiedosto) sallii kolme koodia puuttuville tiedoille. Ne voi lukea R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detaljit R-koodissa (haven-paketin read_spss-funktion user_na -optio).
+Puuttuva tieto voidaan koodata monella tavalla (ei halua vastata jne), ja SPSS
+(datan jakelutiedosto) sallii kolme koodia puuttuville tiedoille. Ne voi lukea
+R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detaljit
+R-koodissa (haven-paketin read_spss-funktion user_na -optio, ei käytetä tässä).
 
 
 **Tiedostonimistä ** (10.10.18, 30.1.20, 11.2.20)

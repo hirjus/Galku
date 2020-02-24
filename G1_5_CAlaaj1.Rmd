@@ -33,19 +33,20 @@ library(testthat)
 havainnollistaa taulukoiden pinoamista / liittämistä (concate, stack). Ja voisi 
 jatkaa ehkä pari pointtia pienellä aineistolla?
 
-```{r G1_5_isodata}
+```{r G1-5-isodat1}
 
-#str(ISSP2012jh1d.dat)
+# str(ISSP2012jh1d.dat)
 # Yksinkertaisuuden vuoksi muuttujat tähän
 
-#isodataVars1 <- ISSP2012jh1d.dat %>% names()
-#isodataVars1 <- isodataVars1[24:73]
-#demogrVars1 <- c("maa","maa3","sp","ika")
-#isodataVars1 <- isodataVars1[21:50]
-#isodataVars1 <- c(demogrVars1, isodataVars1)
-#isodataVars1
+isodatVars1 <- ISSP2012jh1d.dat %>% names()
+isodatVars1 <- isodatVars1[24:73]
+demogrVars1 <- c("maa","maa3","sp","ika")
+isodatVars1 <- isodatVars1[21:50]
+isodatVars1 <- c(demogrVars1, isodatVars1)
+isodatVars1
 
-ISSP2012jh1d.dat %>% select(all_of(isodataVars1)) %>% summary()
+ISSP2012jh1d.dat %>% select(all_of(isodatVars1)) %>% 
+    summary()
 
 ```
 
