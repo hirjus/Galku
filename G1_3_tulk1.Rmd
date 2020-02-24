@@ -106,7 +106,7 @@ plot(simpleCA1, map = "rowgreen",
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
-     sub = "sarakevektorin värin tummuus = kontribuutio(absolute)")
+     sub = "sarakevektorin värin tummuus = kontribuutio(relative)")
 
 ```
 
@@ -133,16 +133,28 @@ simpleCA1$coldist
 simpleCA3$coldist
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
-CA-funktiolle on annettu dataksi riviprofiilit, joiden summat ovat ykkösiä.
+CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
+ykkösiä.
 
 **TODO** (21.2.20)
 
-Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+(@)Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
-Huomioita: kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu mutta ei
-kovin radikaalisti. 
-Kvaliteetti, kontribuutiot?
+(@)Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+mutta ei kovin radikaalisti.
 
-**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun.
+(@)Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
+
+Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
+
+Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
+Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
+kontribuutiot ovat niin pieniä (24.2.20)
+
+(@) Miksi sarakemassat muuttuvat? Hieman on hämärä, edelleen! Teknisiä tuloksia
+ei ehkä pidä käyttää mihinkään muuhun kuin kartan laadulliseen arviointiin ja
+kuvan tulkintojen varmistamiseen?(24.2.20)
+
+**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 
 MG & Blasius, "vihreä kirja": kontribuutiot inertiaan

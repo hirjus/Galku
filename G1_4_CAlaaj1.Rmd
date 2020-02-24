@@ -165,14 +165,15 @@ sarakemuuttuja, jossa kovin vähän havaintoja)
 **EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty 
 täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
-```{r G1_4_suppoints_BeDe}
+```{r G1-4suppoints-BeDe}
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
 #head(ISSP2012esim1.dat)
 
 # HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
-plot(suppointCA1, main = "Belgian ja Saksan ositteet")
+plot(suppointCA1, main = "Belgian ja Saksan ositteet",
+                sub = "symmetrinen kartta")
 
 # VANHAA 21.2.20
 #
@@ -202,7 +203,9 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet")
 suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 #str(suppoint1_df1)
 #head(suppoint1_df1)
-str(suppoint1_tab1)
+
+# str(suppoint1_tab1) - tarkistuksiin jos koodi suoritetaan rivi kerrallaan
+
 suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
 suppoint1_tab1 
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
@@ -242,18 +245,19 @@ plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
 # suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
 # suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
 
-# plot(suppointCA2b,main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
-#     sub = "Passiiviset pisteet DE ja BE" )
+# plot(suppointCA2b,main = "Saksan ja Belgian ositteet",
+#     sub = "Symmetrinen kartta, passiiviset pisteet DE ja BE" )
 # ca- output
 #names(suppointCA2b)
 #str(suppointCA2b)
 #str(suppointCA2b$rowcoord)
-#uppointCA2b
+#suppointCA2b
 #suppointCA2b$rowcoord
 #apply(suppointCA2b$rowcoord, 2, sum)
 #suppointCA2b$rowdist
 #suppointCA2b$coldist
-# summary(suppointCA2b)
+# summary(suppointCA2)
+
 ```
 Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mukana maiden jaot)
 
@@ -261,7 +265,7 @@ Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroide
 
 Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
 
-```{r G1_4_BeDe_asymmContrib1}
+```{r G1-4-BeDe-asymmContrib1}
 #X11()
 plot(suppointCA2, map = "rowgreen",
      contrib= c("absolute", "absolute"),
@@ -289,18 +293,45 @@ on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE) peittyy läntisen S
 
 Tulostetaan numeeriset taulukot.
 
-```{r G1_4_castats1}
-# summary(suppointCA1b)
-summary(suppointCA2b)
+```{r G1-4-castats1}
+# CA - numeeriset tulokset
+
+summary(suppointCA2)
+
 ```
 
-```{r G1_4_3d}
+```{r G1-4-3dCA}
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
 # Toimii, mutta siistittävä, samoin koko maajakoskripti!
 
 suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
-# summary(suppointCA3) - virheilmoitus? (21.2.20)
+# (24.2.20)
+# Tulostetaan kaksi karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
+
+plot(suppointCA3, dim = c(1,3), 
+                main = "Belgian ja Saksan ositteet - kolme dimensiota",
+                sub = "symmetrinen kartta - 1. ja 3. dimensio")
+
+plot(suppointCA3, dim = c(2,3),
+                main = "Belgian ja Saksan ositteet - kolme dimensiota",
+                sub = "symmetrinen kartta - 2. ja 3. dimensio")
+
+
+
+# summary(suppointCA3) - virheilmoitus (21.2.20)
+
+# Virheilmoitus "Error in rsc %*% diag(sv) : non-conformable arguments" ?!
+# onko vika täydentävissä pisteissä? Ei ole, eivät ole mukana
+# ISSP2012esim1.dat %>% tableX(maa3, Q1b)
+
 suppointCA3
+
+# Virheilmoituksen selvittelyä (24.2.20)
+# str(suppointCA3)
+# diag(suppointCA3$sv)
+
+
+
 # plot3d(suppointCA3, c(1,2,3))
 
 # Hyödyllinen, mutta aika vaikea
@@ -317,7 +348,7 @@ suppointCA3
 Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
 
 
-```{r G1_4_agecat}
+```{r G1-4agecat}
 # Iän ja sukupuolen vuorovaikutusmuuttujia 1
 #
 # Uusi R-data: ISSP2012esim2.dat - MIKSI, TARVITAANKO? *esim1.dat kelpaisi?(4.2.20)
@@ -326,21 +357,24 @@ Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interak
 #AGE 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
 #
 #summary(ISSP2012esim1.dat$AGE)
-#hist(ISSP2012esim1.dat$AGE)
+hist(ISSP2012esim1.dat$ika)
+
 ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, "1",
                         ifelse(ika %in% 26:35, "2",
                         ifelse(ika %in% 36:45, "3",
                         ifelse(ika %in% 46:55, "4",
                         ifelse(ika %in% 56:65, "5", "6"))))))
-#ISSP2012esim2.dat$age_cat <- factor(ISSP2012esim2.dat$age_cat) vanha 
+
 
 ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
         mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
-str(ISSP2012esim2.dat$age_cat)
-levels(ISSP2012esim2.dat$age_cat)
-ISSP2012esim2.dat$age_cat %>% summary()
+# Tarkistuksia 
 
-# Järjestetään
+# str(ISSP2012esim2.dat$age_cat)
+# levels(ISSP2012esim2.dat$age_cat)
+# ISSP2012esim2.dat$age_cat %>% summary()
+
+# Järjestetään ikäluokat uudelleen
 
 ISSP2012esim2.dat <- ISSP2012esim2.dat %>% 
         mutate(age_cat =
@@ -355,14 +389,14 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
     
 # Tarkistuksia
 
-# VANHA, POIS? (4.2.20)
-# test6 %>% tableX(AGE, age_cat, type = "count") aika iso taulukko, voi tarkistaa että muunnos ok.
-
+# Iso taulukko, voi tarkistaa että muunnos ok.
+# test6 %>% tableX(AGE, age_cat, type = "count")
 # taulu42 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "count")
 # kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
 #
 
 # UUdet taulukot (4.2.20) 
+
 ISSP2012esim2.dat %>% 
     tableX(maa,age_cat,type = "count") %>%
     kable(digits = 2, caption = "Ikäluokka age_cat")
@@ -380,7 +414,7 @@ Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuo
 **zxy** Siistimmät versioit muuttujien luonnista (case_when - rakenne) (19.9.2018).
 
 
-```{r G1_4_ga2}
+```{r G1-4ga2}
 # ga - ikäluokka ja sukupuoli
 
 # case_when: ikä ja sukupuoli
@@ -425,7 +459,8 @@ CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
 ```{r ga1CA1}
 gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
-plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli")
+plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
+     sub = "symmetrinen kartta")
 summary(gaTestCA1)              
 ```
 
@@ -457,15 +492,26 @@ str(ISSP2012esim2.dat)
 ```{r maagaCA1}
 
 maagaTestCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
-#par("cex"= 0.5, "offset" = 0.5) #ei toimi
-par("cex"= 0.5)
-plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "offset" = 0.5)
-# varoitus: "offset is not a graphical parameter"
-str(maagaTestCA1)
-# lisätään maapisteet frekvenssitaulukkoon maagaTestCA1$N (26.9.18)? Aika hankalaa...
-# maagaTestCA1$N
-#maagaTestCA1$rownames
+# par("cex"= 0.5, "offset" = 0.5) #ei toimi ja plot-komennossa offset tuottaa
+# saman varoituksen: "offset is not a graphical parameter"
+
+# (24.2.20) Hyvin outoa! Tämä par-komento toimii seuraavassa koodilohkossa,
+# tässä tulee virheilmoitus 
+# "asp" is not a graphical parameter"offset" is not a graphical parameter
+# par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+
+plot(maagaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta")
+
+# str(maagaTestCA1)
+
 ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
+maagasummary(maagaTestCA1) 
+
+# (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei 
+# vaikuta (kontribuutiot) liikaa karttaan?
+
+str(maagaTestCA1)
 
 ```
 ```{r maagaCA2}
@@ -491,8 +537,12 @@ testTab1 <- rbind(testTab1,testTab_sr)
 
 spCAmaaga1 <- ca(testTab1[,1:5], suprow = 73:78)
 #X11()
-par("cex"= 0.75, "asp" = 1, "offset" = 0.5) # Tämä toimii! (4.2.20)
-plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2 - maat täydentävinä pisteinä"
+
+# Plot toimii (4.2.20), mutta par() ei, sama virheilmoitus (varoitus) 
+# kuin edellisessä koodilohkossa (24.2.20)
+# par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+                sub = "symmetrinen kartta, maat täydentävinä pisteinä"
                     )
 #par()
 
@@ -505,8 +555,6 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2 - ma
 #                  mass = c(TRUE,TRUE),
 #                  arrows = c(FALSE,TRUE)
 #                  )
-#numeeriset tulokset
-summary(spCAmaaga1)
 
 ```
 
