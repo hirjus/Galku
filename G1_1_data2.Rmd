@@ -59,13 +59,15 @@ Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketis
 
 4. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (ekologia ja biologia, arkeologia, kielen tutkimus)
+5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (esim. ekologia ja biologia, arkeologia, kielen tutkimus)
 
  
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 
-Hieman historiaa datasta, sosiaalisesti määräytyneen sukupuoliroolit (gender) tutkimusaiheena neljässä kansainvälisessä kyselytutkimuksessa. **luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
+**luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
+
+Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
 
 **Tärkeät linkit**
 
@@ -78,7 +80,8 @@ www.gesis.org - tutkimuksen "sihteeristö", dokumentaatio ja datat.
 data ja dokumentaatio (selattavissa): zacat.gesis.org
 
 **edit** tässä järkevä viite ISSP - dataan
-ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, doi:10.4232/1.12661 **tämä doi-linkki ei toimi**
+ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, [doi:10.4232/1.12661](https://doi.org/10.4232/1.12661)
+Alla myös suora linkki
 
 **Linkitys on hankalaa**
 
@@ -168,20 +171,25 @@ tavalla eri maissa.)
 
 **1. Eurooppa ja samankaltaiset maat (25)**
 
-(Pois 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina,
-Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.)
+Pois 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina,
+Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
 
 Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain,
 Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain,
 Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States,
 Belgium, Hungary, Netherlands, Portugal 
-**(28)** - Espanja, Great Britain, USA pois -> **25 (11.10.18)**
+**(28)** - Espanja, Great Britain, USA pois -> **25 maata (11.10.18)**
 
 
 Espanja jätettiin pois, koska siellä kysymyksissä jätettiin pois neutraali 
 vaihtoehto ("en puolesta enkä vastaan / en osaa sanoa"). USA ja GB pois koska 
 kiinnostava TOPBOT-muuttuja puuttuu (puuttui 11.10.18, sittemmin USA:n ainestoa
 on täydennetty).
+
+(24.2.20) Aineistosta valittiin ensin joukko suhteellisen samankaltaisia kehittyneitä
+teollisuusmaita. Sitten valittiin osa kysymyksistä, ja vielä suppeampi valikoima
+kiinnostavia taustamuuttujia. Muutama maa pudotettiin pois tämän valinnan jälkeen.
+
 
 **3. kaikki havainnot, joissa on puuttuvia tietoja.** 
 
@@ -207,22 +215,18 @@ MCA edellyttävt yleensä useamman muuttujan analyyseissä sitä. Jokaisen kahde
 muuttujan parittaisen ristiintaulukoinnin reunajakaumien pitää olla samoja.
 
 
-4. Datan hallinta **liittyy reproducible research- periaatteeseen**
+**4. Datan hallinta - reproducible research- periaate**
 
 **edit 24.2.20** Vanhoja perusideoita
 
 Aineistoa käsitellään ja muokataan niin, että jokaisen analyysin voi 
 mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 
-1. Valitaan maat ja muuttujat
-
-2. Poistetaan havainnot, joissa puuttuva tieto sukupuolesta tai iästä 
-(tai molemmista)
-
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja
 uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
 **zxy 3.10.18** 
+
 R-spesifiä:
 R-koodissa tarkemmin, kaikki yksityiskohdat.
 
@@ -379,7 +383,9 @@ ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 
 
 **DATAN RAJAAMISTA - MUUTTUJAT** (5.10.2018)
-Kolme ensimmäistä muuttujaa ovat datan metatietoja.
+
+SPSS-tiedostosta saadaan luettua haven-paketin read_spss-funktiolla paljon
+metatietoja.
 
 ```{r datasel-vars1}
 

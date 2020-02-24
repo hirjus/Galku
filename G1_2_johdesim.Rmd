@@ -67,7 +67,7 @@ Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöide
 2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"),
 frekvenssitaulu, ristiintaulukointi
 
-- dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt.
+Dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt.
 "data ei löydy kadulta", ja vaikka siitä ei ole epäilystäkään ISSP-datan 
 tapauksessa, niin siitäkin jatketaan eteenpäin. (**edit 24.2.20** Epäselvä
 muistiinpano?)
@@ -164,8 +164,8 @@ Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
 **zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b)
 kuviin ja taulukoihin.
 
-Aineisto muuttujat V5-V9 ovat vastauksia ensimmäiseen kysymyspatteriin (Q1a-Q1e,
-arvot 1-5, täysin samaa mieltä - täysin eri mieltä). 
+Aineisto muuttujat Q1a-Q1e (arvot 1-5, täysin samaa mieltä - täysin eri mieltä) 
+ovat vastauksia ensimmäiseen kysymyspatteriin (kts. lomake). 
 
 
 (V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy
@@ -198,7 +198,11 @@ varmemmin, ja tarkistuksia on helpompi tehdä.
 
 ```
 
-Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.data (df). Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta, mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019).
+Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1d.dat).
+Ihan yhtä hyvin voisi aina lukea suoraan alkuperäisestä spss-tiedostosta,
+mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019). Kun havaintoja
+ja maita jätetään pois, uuteen dataan jää tyhjiä luokittelumuuttujien luokkia,
+ne poistetaan.
 
 ```{r esim1data1}
 # UUSI DATA 30.1.20
@@ -208,13 +212,14 @@ Valitaan esimerkin data edellisessä luvussa luodusta R-datasta ISSP2012jh1c.dat
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata.
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
-# Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys (V6/Q1b) 
+# Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys
+# (V6/Q1b) 
 
 # Kuusi maata
 
 countries_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU
 ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
-str(ISSP2012esim3.dat)
+# str(ISSP2012esim3.dat) - pitkä listaus pois (24.2.20)
 
 #neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
 
@@ -356,7 +361,7 @@ str(ISSP2012esim1.dat)
 
 
 ```{r esim1data2}
-# Taulukoita (31.1.2020)
+# Taulukoita (31.1.2020) ja tarkistuksia
 
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
@@ -368,7 +373,7 @@ str(ISSP2012esim1.dat)
 
 # Tarkastuksia
 
-# nämä ehkä tarpeettomia - expect_equivalet testaa levelien
+# assert_that ehkä tarpeeton - expect_equivalet testaa levelien
 # järjestyksen ja määrän (20.2.20)
 
 assert_that(length(levels(ISSP2012esim1.dat$maa)) == 6)
@@ -406,7 +411,7 @@ ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
 ```
 
-**Taulukot ja kuvat omina koodilohkoina**
+**Taulukot ja kuvat omina koodilohkoina bookdown-versioon**
 
 
 **Frekvenssitaulukko**
@@ -505,7 +510,8 @@ simpleCA3 <- ca(johdesim1_rowproc.tab)
 Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen 
 Bookdownissa. Ei taida onnistua? (4.9.18)
 
-Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla.
+Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla. Faktoreiden järjestys
+voi tuottaa yllätyksiä, kun dataa muokataan ggplot - grafiikaksi.
 
 ```{r g1-2kuva1}
 
@@ -637,7 +643,7 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
-**TODO 19.2.20** Siiti taulukko.
+**TODO 19.2.20** Siistiksi taulukoksi.
 
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
@@ -646,7 +652,7 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 #str(simpleCA1$rowdist)
 #tablRowDist <- simpleCA1$rowdist
 #rownames(tablRowDist) <- simpleCA1$rownames
-simpleCA1$rowdist
+simpleCA1$rowdist 
 simpleCA1$coldist
 
 ```
@@ -677,6 +683,11 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 ```
 
 **zxy** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
+Kolme karttaa. Kartan kääntyminen ei ole ongelma, mutta vähän kiusallista. Tässä
+se on seurausmaiden järjestyksestä. Maiden vertailussa on järkevää vakioida 
+niiden massat (kolmas kartta). Massan käsite on CA:n ydinasioita, siksi maiden
+massat ovat jatkossa mukana. Kartta määräytyy maiden otoskokojen suuruisilla
+painoilla, mutta ero ei ole kovin suuri.
 
 ```{r simpleCAmap1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä", fig.asp = 1 }
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
@@ -707,7 +718,8 @@ sub = "massat kaikilla mailla 1 (riviprofiilidata)")
 ```
 
 
-Ja toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
+
+Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
 miettiä mikä on järkevää, dataa tutkaillessa piirretään useita kuvia. PDF-muodossa
 ne ovat skaalautuvia, kommentteja voi lisätä jne.
 
@@ -722,7 +734,10 @@ include_graphics(img_path)
 
 ```
 
-
+Grafiikan hienosäätö on hieman haastavaa: analyysivaiheessa kannattaa tallentaa
+kuvia RStudion grafiikkaikkunasta pdf-muodossa talteen, graafisessa data-analyysissä
+niitä tietenkin syntyy aika paljon. HTML- ja pdf- formaatin kuvat viimeistellään
+bookdown-ympäristössä.
 
 
 ## Korrespondenssianalyysin käsitteet

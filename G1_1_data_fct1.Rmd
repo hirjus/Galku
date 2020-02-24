@@ -40,13 +40,25 @@ Substanssimuuttujien luokkien tunnukset ( faktorilabelit, levels?) muutetaan
 graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien 
 tunnuksia pohditaan, kun ne otetaan käyttöön.
 
-**TODO 30.1.20** Tarkistukset, varmistukset jne.
+**TODO 30.1.20** Tarkistukset, varmistukset jne. (24.2.20) Lisätty muutama 
+testi, paljon välitulostuksia joita voi tarvittaessa kommentoida koodista pois.
 
 **TODO 2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
-samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä.
+samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä. (24.2.20) tehty,
+muunnetaan heti alussa. Käytännössä kaikenlaisia korjailuja joutuu tekemään myös
+analyyseissä käytettävissä R-datoissa.
 
 **TODO 3.2.20** Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
-G1_2_johdesim.Rmd
+G1_2_johdesim.Rmd. (24.2.20) tehty, järjesteään myös uusi muuttuja
+C_ALPHAN-järjestykseen.
+
+### Vaihe 1 - muuttujat joissa ei ole puuttuvia tietoja
+
+Aineistosta on jätetty pois ne havainnot, joissa ikä (AGE) tai sukupuoli (SEX) 
+on puuttuva tieto. Aika paljon tarkistuksia, kolmen maa-muuttujaa järjestetään
+C_ALPHAN - muuttujan järjestykseen. Ikä-muuttuja säilyy numeerisena. Ensimmäiseen
+faktori-tyypin muuttujaan jää tyhjänä luokkana puuttuva tieto, luokka poistetaan.
+
 
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
@@ -173,13 +185,17 @@ tableC(AGE, ika,cor_type = "pearson", na.rm = FALSE, rounding = 5,
        float = "htb") %>% kable()
 
 ISSP2012jh1d.dat$ika %>% hist(main = "ISSP 2012: vastaajan ikä")
-str(ISSP2012jh1d.dat)
+
+# str(ISSP2012jh1d.dat) - tarkistus
 
 ```
 
+### Vaihe 2
+
 Vaihessa 2 luodaan samalla samalla periaatteella substanssi- ja taustamuuttujille
-kaksi R-factor- tyypin muuttujaa. Toisessa (esim. Q1a) puuttuva tieto on R-ohjelmiston
-sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi luokittelumuuttujan arvo("missing").
+kaksi R-factor- tyypin muuttujaa. Toisessa (esim. Q1a) puuttuva tieto on
+R-ohjelmiston sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi 
+luokittelumuuttujan arvo("missing").
 
 ```{r fct-vaihe21}
 # Substanssi- ja taustamuuttujat R-faktoreiksi

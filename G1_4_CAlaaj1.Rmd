@@ -531,7 +531,7 @@ maagaCA1num
 
 ```
 
-Maapisteet täydentäviksi pisteiksi
+Maapisteet täydentäviksi pisteiksi - tarkistuksia.
 
 ```{r maagaCA2}
 # Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
