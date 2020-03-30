@@ -129,7 +129,7 @@ col_isspdocs <- c("dokumentti","sisältö","tiedosto")
 # varoituksia data_framen käytöstä, toimisiko tibble()? (21.2.20)
 ISSPdocsT.tbl <- tibble(issp_docname, issp_docdesc, issp_docfile)
 colnames(ISSPdocsT.tbl) <- col_isspdocs
-knitr::kable(ISSPdocsT.tbl, booktab=TRUE)
+knitr::kable(ISSPdocsT.tbl, booktab = TRUE)
 ```
 
 

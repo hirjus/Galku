@@ -396,7 +396,7 @@ ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
 # Riviprofiilit
 
 # ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
-ISSP2012esim1.dat %>% tableX(maa,sp ,type= "row_perc")
+ISSP2012esim1.dat %>% tableX(maa,sp ,type = "row_perc")
 
 # Kysymyksen Q1b vastaukset
 
@@ -480,7 +480,7 @@ johdesim1_rowproc.tab <- simpleCA1$N / rowSums(simpleCA1$N)
 # rowSums(johdesim1_rowproc.tab)
 # str(johdesim1_rowproc.tab)
 
-colnames(johdesim1_rowproc.tab)<-c("S" ,"s" ,"?","e", "E")
+colnames(johdesim1_rowproc.tab) <- c("S" ,"s" ,"?","e", "E")
 row.names(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
 
 
@@ -530,14 +530,17 @@ apu1_df$ka_sarake <- rowSums(apu1_df)
 apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
-         geom_bar(position = "fill", stat ="identity") +
+         geom_bar(position = "fill", stat = "identity") +
          scale_y_continuous(labels = percent_format()) 
 #apu1b_df
 ```
 
 Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
+**edit** pois tulosteesta 30.3.20.
 
-```{r g1-2kuva1test}
+```{r g1-2kuva1test,eval=FALSE, include=FALSE}
+
+# Esimerkki faktoroinnin sudenkuopista: muuttujan arvojen järjestys vaihtuu!
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
@@ -554,12 +557,13 @@ apu1_dftest$ka_sarake <- rowSums(apu1_dftest)
 apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = c('ind'))
 
 ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
-         geom_bar(position = "fill", stat ="identity") +
+         geom_bar(position = "fill", stat = "identity") +
          scale_y_continuous(labels = percent_format()) 
 
 ```
 
-**TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun (4.9.2018)
+**TODO 2.2.20 ** Massat saa mukaan vaikka viittaamalla frekvenssitauluun jos ne
+haluaa esittää esim. taulukkona(4.9.2018).
 
 
 ```{r g1-2kuva2, echo=TRUE}
@@ -592,14 +596,14 @@ apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
 #versio2 toimii (18.9.2018)
 
 ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
-       geom_bar(position = "fill", stat ="identity") +
+       geom_bar(position = "fill", stat = "identity") +
        coord_flip() +
         scale_y_continuous(labels = percent_format()) 
 ```
 
-Ja sama testaus kuin sarakeprofiilikuvilla
+Ja sama testaus kuin sarakeprofiilikuvilla. **edit** Pois tulosteesta 30.3.20
 
-```{r g1-2kuva2test, echo=TRUE}
+```{r g1-2kuva2test, ,eval=FALSE, include=FALSE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
 apu2_dftest <- as.data.frame(apu1test)
 apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))
@@ -626,7 +630,7 @@ apu2b_dftest <- melt(cbind(apu2_dftest, ind = rownames(apu2_dftest)), id.vars = 
 #        scale_x_continuous(labels = percent_format()) 
 #versio2 # toimii 18.9.2018
 ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
-       geom_bar(position = "fill", stat ="identity") +
+       geom_bar(position = "fill", stat = "identity") +
        coord_flip() +
         scale_y_continuous(labels = percent_format()) 
 ```
@@ -675,9 +679,10 @@ simpleCA2$coldist
 
 
 CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
+**edit** Algoritmin lähtötieto (30.3.20)
 
 ```{r simpleCArelfrekTa1}
-taulu5 <-ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
+taulu5 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```
@@ -689,7 +694,7 @@ niiden massat (kolmas kartta). Massan käsite on CA:n ydinasioita, siksi maiden
 massat ovat jatkossa mukana. Kartta määräytyy maiden otoskokojen suuruisilla
 painoilla, mutta ero ei ole kovin suuri.
 
-```{r simpleCAmap1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä", fig.asp = 1 }
+```{r simpleCAmap1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan #siinä.
 #symmetrinen kartta
 
@@ -697,10 +702,11 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
      sub = "maa-muuttuja järjestys C_ALPHAN")
 
-plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-     sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
-
+# plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
+#     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+#     sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
+# Kartta kääntyy x-akselin ympäri - esimerkki faktoroinnin arvaamattomista 
+# seurauksista (30.3.20)
 
 plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
 main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
@@ -710,14 +716,14 @@ sub = "massat kaikilla mailla 1 (riviprofiilidata)")
 #str(simpleCA1)
 # 13.5.2018 
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
-# grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu 
+# grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, 
+# jos lopulliseen versioon joutuu 
 # näin tekemään.
 # näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") 
 # (13.5.2018), vaan pdf-konversiossa pandoc failed with error 43
 
 ```
-
-
+Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.
 
 Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
 miettiä mikä on järkevää, dataa tutkaillessa piirretään useita kuvia. PDF-muodossa

@@ -110,3 +110,9 @@ vanha koodi voi jäädä.
 
 **24.2.2020** Versio 1.5.7 - pieniä ja isompia korjailuja, siistimistä ja vanhan
 koodin (koodilohkojen) asetuksia passiivisiksi (eval=FALSE, include=FALSE).
+
+**30.3.2020** Asetettiin karttatulostuksen koodilohkoissa fig.asp=1 ja 
+out.width=90%. Koodilohkon fig.cap tekee kuvasta "kelluvan", voi tulla pulmia 
+plot-komennon kuvatekstien kanssa. Tätä hiotaan myöhemmin.
+Poistettiin tulosteesta testikuvia (C_ALPHAN - merkkijonomuuttujan faktoroinnin 
+sivuvaikutukset, kun järjestys muuttu). Esimerkit ovat koodissa tallessa.

@@ -165,7 +165,8 @@ sarakemuuttuja, jossa kovin vähän havaintoja)
 **EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty 
 täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
-```{r G1-4suppoints-BeDe}
+```{r G1-4suppoints-BeDe, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
 #head(ISSP2012esim1.dat)
@@ -265,10 +266,10 @@ Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroide
 
 Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
 
-```{r G1-4-BeDe-asymmContrib1}
+```{r G1-4-BeDe-asymmContrib1, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11()
 plot(suppointCA2, map = "rowgreen",
-     contrib= c("absolute", "absolute"),
+     contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 1",
@@ -277,7 +278,7 @@ plot(suppointCA2, map = "rowgreen",
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
 
 plot(suppointCA2, map = "rowgreen",
-     contrib= c("relative", "relative"),
+     contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 ",
@@ -300,11 +301,16 @@ summary(suppointCA2)
 
 ```
 
-```{r G1-4-3dCA}
+Kolmiulotteisesta kuvasta voi tulostaa molempien akseleiden ja uuden kolmannen
+akselin kartat. R-ohjelmistossa voi tulostaa näytölle kolmiulotteisen kuvan,
+siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin? 
+**edit** Kannattaako (30.3.20)
+
+```{r G1-4-3dCA,fig.cap = "Belgian ja Saksan aluejako - 3D",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
 # Toimii, mutta siistittävä, samoin koko maajakoskripti!
 
-suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
+suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
 # Tulostetaan kaksi karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
 
@@ -330,7 +336,7 @@ suppointCA3
 # str(suppointCA3)
 # diag(suppointCA3$sv)
 
-
+# Kolmiulottein kuva grafiikkaikkunaan
 
 # plot3d(suppointCA3, c(1,2,3))
 
@@ -457,7 +463,7 @@ kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
-```{r ga1CA1}
+```{r ga1CA1,fig.cap = "Iän ja sukupuolen yhdistetty muuttuja",fig.asp = 1, out.width = "90%",fig.align = "center"}
 gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
      sub = "symmetrinen kartta")
@@ -491,7 +497,7 @@ str(ISSP2012esim2.dat)
 
 Tehty jo 26.9.2018
 
-```{r maagaCA1}
+```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 # par("cex"= 0.5, "offset" = 0.5) #ei toimi ja plot-komennossa offset tuottaa
@@ -504,6 +510,9 @@ maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
                 sub = "symmetrinen kartta")
+#Kuvatiedoston koko säädettävä tarkemmin (30.3.30)
+
+# ggsave("maagaSymMap1.PDF") Tämä tallentaa edellisen ggplot-kuvan! (30.3.20)
 
 ```
 Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri
@@ -533,7 +542,7 @@ maagaCA1num
 
 Maapisteet täydentäviksi pisteiksi - tarkistuksia.
 
-```{r maagaCA2}
+```{r maagaCA2,fig.cap = "Ikä-sukupuoli-maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
 # Miten labelit hieman lähemmäkis pistettä? offset-jotenkin toimii...
 
@@ -579,7 +588,7 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI 
 
-plot(spCAmaaga1, xlim=c(-0.75,0.37), ylim=c(-0.4,0.05),
+plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.4,0.05),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
                 sub = "osa symmetristä karttaa"
                     )
