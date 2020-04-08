@@ -204,7 +204,7 @@ mutta pidemmässä raportissa tämä on siistimpi tapa (23.3.2019). Kun havainto
 ja maita jätetään pois, uuteen dataan jää tyhjiä luokittelumuuttujien luokkia,
 ne poistetaan.
 
-```{r esim1data1}
+```{r esim1data1,eval=TRUE, include=TRUE}
 # UUSI DATA 30.1.20
 #
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
@@ -464,7 +464,7 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 # Maiden järjestys kääntää kuvan (1.2.20) - esimerkki on 
 # vähän kuriositeetti. Kartta voi tietysti "flipata" koordintaattien suhteen ainakin
 # neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
-# (18.2.20).
+# (18.2.20). Tämän maa2-muuttujaa käyttävän kuvan voi jättää pois (8.4.20)
 
 simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
@@ -474,17 +474,22 @@ simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 
 johdesim1_rowproc.tab <- simpleCA1$N / rowSums(simpleCA1$N)
+colnames(johdesim1_rowproc.tab) <- c("S" ,"s" ,"?","e", "E")
+row.names(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
+
+# Miten tibblenä? Ei toimi, ei maa-muuttujaa ollenkaan
+# johdesim1_rowproc.tbl <- as_tibble(johdesim1_rowproc.tab)
+# str(johdesim1_rowproc.tbl)
 
 # TARKISTUKSIA (20.2.20)
 # johdesim1_rowproc.tab
 # rowSums(johdesim1_rowproc.tab)
 # str(johdesim1_rowproc.tab)
 
-colnames(johdesim1_rowproc.tab) <- c("S" ,"s" ,"?","e", "E")
-row.names(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
-
 
 simpleCA3 <- ca(johdesim1_rowproc.tab)
+
+# simpleCA3tbl <- ca()
 
 # Kartta piirretään koodilohkossa simpleCAmap1
 

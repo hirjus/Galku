@@ -22,7 +22,7 @@ output:
     fig_caption: true
     fig_width: 6
     #fig_height: 5 # takaako asp=1? Ei takaa! Mutta aika lähellä pdf:ssä
-    # fig_asp: 1 # virheilmoitus (27.3.20)
+    # fig_asp: 1 # virheilmoitus - miksi? (27.3.20)
     #code_folding: show
 ---
 
@@ -46,6 +46,7 @@ Poistetaan tarpeetonta tekstiä, vanha koodi voi jäädä selvästi merkittynä.
 (24.2.20) Versio 1.5.7. Pieniä ja isompiakin korjailuja, koodin siistimistä jne.
 (27.3.20) Muutetaan hieman karttojen koodilohkoja, html-tulosteessa kuvasuhde 1 
 mutta pdf-tulosteessa ei.
+(8.4.20)
 
 **HISTORIAA**
 

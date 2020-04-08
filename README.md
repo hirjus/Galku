@@ -116,3 +116,6 @@ out.width=90%. Koodilohkon fig.cap tekee kuvasta "kelluvan", voi tulla pulmia
 plot-komennon kuvatekstien kanssa. Tätä hiotaan myöhemmin.
 Poistettiin tulosteesta testikuvia (C_ALPHAN - merkkijonomuuttujan faktoroinnin 
 sivuvaikutukset, kun järjestys muuttu). Esimerkit ovat koodissa tallessa.
+
+**8.4.2020** Pientä editointia. Lisäsin ISSP-dokumentteihin dokkarin lomakkeen 
+laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
