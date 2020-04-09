@@ -360,7 +360,7 @@ str(ISSP2012esim1.dat)
 **TODO** Taulukot erotettava omiksi koodilohkoiksi bookdowniin.
 
 
-```{r esim1data2}
+```{r esim1data2, message=TRUE, warning=TRUE}
 # Taulukoita (31.1.2020) ja tarkistuksia
 
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
@@ -452,6 +452,7 @@ sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita
 voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia
 on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
 **edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot samat (= 1).
+Ei taida olla ihan oiken tehty(9.4.20?
 
 **EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. 
 Isommissa aineistoissa (enemmän muuttujia) ei onnistu.
@@ -466,7 +467,7 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 # neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
 # (18.2.20). Tämän maa2-muuttujaa käyttävän kuvan voi jättää pois (8.4.20)
 
-simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
+# simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi, tässä
 # pikainen kokeilu (20.2.20)
@@ -504,6 +505,8 @@ simpleCA3 <- ca(johdesim1_rowproc.tab)
 # 
 # Ja datan saa leikepöydän kautta, jos on tarve pikatarkistuksiin
 # read <- read.table("clipboard")
+
+# 9.4.2020 CAcalc_1.R - laskentoa ca-funktion tuloksilla (16 objektin lista)
 
 ```
 
