@@ -44,15 +44,14 @@ taulukoissa muuttujilla on selvästi eri rooli, kuten tässä. Koitan hahmottaa
 maiden (=aggregoituja yksilöitä) eroja ja yhtäläisyyksiä. Sarakkeiden
 vertailussa taas näemme, miten muuttujien profiilit poikkeavat keskiarvostaan.
 Monia riippuvuksia ja poikkeamia näyttäisi olevan. Klassinen ongelma, Pearson ja
-Fisher (ehkä turhaa tässä?).
-
+Fisher. Luokittelumuuttujien yhteys ("korrelaatio") on hankala juttu.
 
 Riippumattomuushypoteesi ja $\chi^2$ - riippumattomuustesti (pieni huomautus -
 on monta tapaa testata taulukon riippuvuuksia). Riippumattomuushypoteesi
 ehdollisena todennäköisyytenä reunajakauman suhteen. Riippumattomuustulkinta ei
-aina päde, jos aggregoidut havainnot / rivi-tai sarakeprofiilit / "samples" MG:n
-terminologiassa eivät ole riippumattomia. Esimerkki Barentsin merenpohjan 
-havainnot öljylauttojen liepeiltä (eli havainnot ryväksiä).
+aina päde, jos aggregoidut havainnot/rivi-tai sarakeprofiilit/"samples" MG:n
+terminologiassa eivät ole riippumattomia. Esimerkki Barentsin merenpohjan lajiston
+havainnot (lukumäärät, "abundance") öljylauttojen liepeiltä (havainnot ryväksiä).
 
 **zxy** Tämä puuttuu kaavoista!
 
@@ -61,7 +60,8 @@ havainnot öljylauttojen liepeiltä (eli havainnot ryväksiä).
 
 1. Taulukko
 
-Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai havaintoyksiköiden pilveä ja muuttujien pilvelä (nominaaliasteikko). Taulukot saadaan yksinkertaisen CA:n tapauksessa aggregoimalla "cloud of individuals". 
+Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen CA:n tapauksessa aggregoimalla "cloud of individuals".
+
 **#V** MOOC, LeReoux
 
 2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"),
@@ -74,15 +74,22 @@ muistiinpano?)
 
 Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
 
-3. CA:ssa hämäävä juttu (Blasius, "vizualisation - verkkokirja") rivien ja
+3. CA:ssa vaikea juttu on (Blasius, "vizualisation - verkkokirja") rivien ja
 sarakkeiden **tekninen** symmetria. No ei se nyt niin hämäävä ehkä ole,
-oleellinen juttu (21.2.20).
+oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan "hajontamittarilla" ja painotetaan massoilla.
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
-Dimensioiden vähentämisen idea ("the essence"), joka ei pienessä taulossa ole
-ihan ilmeinen. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana
-(karttana).
+**Muutama versio tiiviiksi kuvaukseksi - toistoa on (10.4.20)**
+
+Dimensioiden vähentäminen tärkein asia ("the essence"), pienessä taulossa ei 
+ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta, 
+mistä on kyse. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana
+(karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden pistejoukon ("pilven") projektiot, jotka säilyttävät maksimimäärän alkuperäisen n-ulotteisen
+pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat saman pilven pisteet
+voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin kaukana toisistaan. Tulkinnassa
+tärkeitä ovat "ääripäät", ja numeeriset tulokset kertovat kuinka hyvin piste on tasossa
+ esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukan on Uudenmaan raja.
 
 Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan
 riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan
@@ -123,7 +130,7 @@ tuloksia (barycentric, sentroidi), ja ne pitää jotenkin johdonmukaisesti pala
 kerrallaan tuoda esimerkkien kautta tekstiin. Käsittteistä oma Rmd (ja Excel jos
 osoittautuu kätevämmäksi), kaavaliite Dispo-repossa ja myös Rmd-muodossa.
 
-**edit** Kaavaliitteessä pieniä eroja, ja tekstiä on LateX-versiossa enemmän.
+**edit(10.4.20): kaavaliitteen lisäksi voi tekstiin upottaa muutaman r-koodi-esimerkin**
 
 **Ensimmäinen symmetrinen kartta**
 
@@ -135,7 +142,7 @@ Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon
 Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat
 prosentit akseleilla?
 
-Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, jopa rivi- ja
+Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, myös pelkästään rivi- tai
 sarakepisteistä koostuvien ryhmien.
 
 **zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole
@@ -145,13 +152,8 @@ keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä.
 MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde.
 Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
 
-**zxy** termi korrespondenssi: "neglected multivariate method" - paperissa
-käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden
+**zxy**(teoria/historia-jaksoon,104.20).Termi korrespondenssi: "neglected multivariate method" - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden
 "correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
-
-**zxy** . Tarina: valitaan edellisessä luvussa esitetyn pohjalta osa
-muuttujista, perustellaan miksi työmarkkia-asenteen ovat kiinnostavia, valitaan
-esimerkkianalyyseihin **yksi** muuttuja ja kuusi maata.
 
 ## Äiti työssä
 
@@ -161,12 +163,11 @@ kysymys.
 **zxy** Suhde data-lukuun, siellä pitäisi esitellä aineisto sisällöllisesti.
 Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
 
-**zxy** Muuttujien nimeäminen vaikuttaa (a) muuttujien faktorointiin ja (b)
-kuviin ja taulukoihin.
-
 Aineisto muuttujat Q1a-Q1e (arvot 1-5, täysin samaa mieltä - täysin eri mieltä) 
-ovat vastauksia ensimmäiseen kysymyspatteriin (kts. lomake). 
+ovat vastauksia ensimmäiseen kysymyspatteriin (kts. lomake).
 
+**edit 10.4.20** Muuttujien "suunta" samaksi, jos monta. Laajemman aineiston käsittelyyn
+tästä huomautus.
 
 (V6/Q1b) Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy
 työssä. V6 muunnetaan uudeksi luokittelumuuttujaksi (R:ssä factor) Q1b. Tämä ei
@@ -357,7 +358,7 @@ str(ISSP2012esim1.dat)
 
 
 
-**TODO** Taulukot erotettava omiksi koodilohkoiksi bookdowniin.
+**TODO** (1) Taulukot erotettava omiksi koodilohkoiksi bookdowniin. (2) Ikä - maa - taulukko vain tarkistuksiin, ihan liian pitkä.
 
 
 ```{r esim1data2, message=TRUE, warning=TRUE}
@@ -452,10 +453,7 @@ sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita
 voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia
 on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
 **edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot samat (= 1).
-Ei taida olla ihan oiken tehty(9.4.20?
-
-**EDIT:** Pienenkin taulukon pyörittely johdattelee hyvin, mihin korrespondenssianalyysiä tarvitaan. Näistähän riippuvuuden rakenteet näkee ilmankin, jos on tarpeeksi nokkela. 
-Isommissa aineistoissa (enemmän muuttujia) ei onnistu.
+Esimerkkilaskelmia CAcalc_1.R.
 
 ```{r EkaCA}
 # CA tässä, jotta saadaan rivi- ja sarakeprofiilikuvat
@@ -647,12 +645,19 @@ ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
 
 Käytänön neuvoja data-analyysiin, kuulunee tekstiin, vai meneekö "ohjelmistoympäristö" -liitteeseen? Tärkeä juttu!
 
-Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
-grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, jos lopulliseen versioon joutuu näin tekemään (13.5.2018 ). Tämä voi olla järkevä tapa analyysivaiheessa? Teksti kopsattu alla olevasta koodilohkosta.
+Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa 
+grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto 
+pdf-ajurilla, jos  lopulliseen versioon joutuu näin tekemään (13.5.2018 ). Tämä 
+voi olla järkevä tapa analyysivaiheessa?  Teksti kopsattu alla olevasta koodilohkosta.
 
-Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
+Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-
+dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä 
+käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus 
+keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla 
+saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 
-**zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
+**zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa 
+luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
 **TODO 19.2.20** Siistiksi taulukoksi.
@@ -664,8 +669,25 @@ Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi out
 #str(simpleCA1$rowdist)
 #tablRowDist <- simpleCA1$rowdist
 #rownames(tablRowDist) <- simpleCA1$rownames
-simpleCA1$rowdist 
+
+simpleCA1$rowdist
+
+rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist))
+colnames(rowdist.tbl) <- simpleCA1$rownames
+# rowdist.tbl <- table(simpleCA1$rowdist)
+# rowdist.tbl <- names(simpleCA1$rownames)
+# str(rowdist.tbl)
+# print(rowdist.tbl)
+
 simpleCA1$coldist
+coldist.tbl <- as_tibble(rbind(simpleCA1$coldist))
+colnames(coldist.tbl) <- simpleCA1$colnames
+# print(coldist.tbl)
+knitr::kable(rowdist.tbl,digits = 3, booktabs = TRUE,
+             caption = "Rivietäisyydet keskiarvosta (khii2)")
+
+knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
+             caption = "Sarake-etäisyydet keskiarvosta (khii2)")
 
 ```
 **TODO**Rivi- ja sarake-etäisyydet (khii2) vaatisivat kommentin.
@@ -762,7 +784,8 @@ bookdown-ympäristössä.
 
 3. Profiilien etäisyydet (khii2)
 
-**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
+**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite 
+muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
 
 
 

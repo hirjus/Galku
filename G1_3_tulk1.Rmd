@@ -123,6 +123,8 @@ summary(simpleCA1)
 summary(simpleCA3)
 
 # Rivi- ja sarake-etäisyydet (keskiarvosta/sentroidista)
+# HUOM! Edellisessä jaksossa taulukko rivi- ja sarake-etäisyyksistä. Tuskin
+# kannattaa tässä toistaa. Muuta analyysiä numeerisista tuloksista. (10.4.20)
 
 simpleCA1$rownames
 simpleCA1$rowdist
@@ -134,7 +136,7 @@ simpleCA3$coldist
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
 CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
-ykkösiä.
+ykkösiä. Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 **TODO** (21.2.20)
 
