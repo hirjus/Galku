@@ -42,25 +42,43 @@ storage.mode(simpleCA1$rowcoord) # what is it? (very sorry)
 length(simpleCA1$rowcoord) # how long is it? What about two dimensional objects?
 attributes(simpleCA1$rowcoord)
 simpleCA1$rowcoord
-# standardikoorinaateista principal-koordinaatteihin
+
+# Standardikoorinaateista principal-koordinaatteihin
 
 #singulaariarvot (sqrt(ominaisarvot))
+
 simpleCA1$sv
-diag(simpleCA1$sv)
+diag(simpleCA1$sv) # (4 x 4)
+
 # 6:4 x 4:4 -> 6x4
 simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
-simpleCA1.rpc
+# Principal coordinates
+simpleCA1.rpc 
 
-# pc -> sc - harjoitus
+# pc -> sc - esimerkki (MG2017 laskarit)
+
 simpleCA1.results <- summary(simpleCA1)
 simpleCA1.results
 str(simpleCA1.results)
-simpleCA1.results$scree # ensimmäinen sarake ominaisarvot
+simpleCA1.results$rows # df 6 obs. of  10 variables - per milles
+str(simpleCA1.results$rows)
+
+str(simpleCA1.results$scree)
+
+simpleCA1.results$scree # ensimmäinen sarake dimensio, toinen ominaisarvot
+# ominaisarvot = principal inertias
 simpleCA1.oarv <- simpleCA1.results$scree[,2]
 simpleCA1.oarv
+
+# ominaisarvojen neliöjuuret = singulaariarvot
+
 sqrt(simpleCA1.oarv)
-diag(sqrt(simpleCA1.oarv)) # ominaisarvojen neliöjuuret l. singulaariarvot
-diag(1/sqrt(simpleCA1.oarv)) #
+diag(sqrt(simpleCA1.oarv)) 
+
+# Tarkistus
+# diag(sqrt(simpleCA1.oarv)) - diag(simpleCA1$sv) 
+
+diag(1/sqrt(simpleCA1.oarv)) # Mikä? (11.4.20)
 
 simpleCA1.rsc <- simpleCA1.rpc %*% diag(1/sqrt(simpleCA1.oarv))
 simpleCA1.rsc

@@ -90,7 +90,7 @@ plot(simpleCA1, map = "rowgreen",
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2a (rowgreen)",
-     sub = "sarakevektorin ja pisteen värin tummuus = kontribuutio(absolute)")
+     sub = "sarakevektorin ja rivipisteiden värin tummuus = kontribuutio(absolute)")
 
 ```
 
@@ -99,6 +99,7 @@ plot(simpleCA1, map = "rowgreen",
 Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
 
 Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
+
 ```{r G1-3asymmContrib2,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
@@ -117,6 +118,9 @@ Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja väris
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
+# (11.4.20) yhdistä koodilohkoon khii2dist1 (G1_2_johdesim.Rmd, r. 665)
+# CA:n numeeristen tulosten käsittelyä myös CAcalc_1.R -skriptissä.
+
 summary(simpleCA1)
 
 # vertailun vuoksi numeeriset tulokset, kun maiden massat vakiot
@@ -133,6 +137,7 @@ simpleCA3$rowdist
 simpleCA1$colnames
 simpleCA1$coldist
 simpleCA3$coldist
+
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
 CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
