@@ -113,7 +113,7 @@ plot(simpleCA1, map = "rowgreen",
 
 **Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
-Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen kontribuutioon (voi olla myös suhteellinen kontribuutio).
+Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen tai suhteelliseen kontribuutioon.
 
 
 ```{r G1_3_castats1}
@@ -145,12 +145,12 @@ ykkösiä. Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 **TODO** (21.2.20)
 
-(@)Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+(@) Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
-(@)Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+(@) Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
 mutta ei kovin radikaalisti.
 
-(@)Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
+(@) Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
 
 Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
 
@@ -158,7 +158,8 @@ Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
 kontribuutiot ovat niin pieniä (24.2.20)
 
-(@) Miksi sarakemassat muuttuvat? Hieman on hämärä, edelleen! Teknisiä tuloksia
+(@) **Miksi sarakemassat muuttuvat?** Joku skaalaus, massojen "kaksoisrooli" painoina
+ja normalisoivina ("varianssin tapaan") muunnoksina. Hieman on hämärä, edelleen! Teknisiä tuloksia
 ei ehkä pidä käyttää mihinkään muuhun kuin kartan laadulliseen arviointiin ja
 kuvan tulkintojen varmistamiseen?(24.2.20)
 

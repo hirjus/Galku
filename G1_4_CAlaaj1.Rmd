@@ -149,9 +149,9 @@ otoskoolla, vaan vakioidaan (jotenkin) sama (suhteellinen) massa kaikille.
 Samalla oikaistaan myös naisten yliedustus aineistossa.
 
 **Käsitteitä:** 
-(@)Active point, aktiivinen piste (aktiivinen havainto tai
+(@) Active point, aktiivinen piste (aktiivinen havainto tai
 muuttuja). 
-(@)Supplementary pointtäydentävä piste (täydentävä havainto).
+(@) Supplementary pointtäydentävä piste (täydentävä havainto).
 
 Täydentävien muuttujien kolme käyttötapaa:
 
@@ -169,7 +169,7 @@ täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
-#head(ISSP2012esim1.dat)
+
 
 # HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
@@ -312,7 +312,12 @@ siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin?
 
 suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
-# Tulostetaan kaksi karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
+# Tulostetaan kolme karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
+
+plot(suppointCA3, dim = c(1,2), 
+                main = "Belgian ja Saksan ositteet - kolme dimensiota",
+                sub = "symmetrinen kartta - 1. ja 2. dimensio")
+
 
 plot(suppointCA3, dim = c(1,3), 
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
@@ -443,8 +448,8 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(
 #ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
 # muuttujien tarkistuksia 19.9.2018
 str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
-str(ISSP2012esim2.dat)
-#str(ISSP2012esim1.dat$ga2)
+# str(ISSP2012esim2.dat)
+# str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
 # str(ISSP2012esim1.dat)
 
@@ -486,16 +491,17 @@ summary(gaTestCA1)
 
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
-ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
+# tarkistus, muunnos ok
+# ISSP2012esim2.dat %>% tableX(maa, maaga) 
 
-#head(ISSP2012esim2.dat)
-str(ISSP2012esim2.dat)
+# head(ISSP2012esim2.dat)
+# str(ISSP2012esim2.dat)
 
 ```
 
 **Maa - ikäluokka - sukupuoli - interaktiomuuttuja maaga**
 
-Tehty jo 26.9.2018
+Tehty jo 26.9.2018!
 
 ```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
@@ -508,11 +514,13 @@ maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 # "asp" is not a graphical parameter"offset" is not a graphical parameter
 # par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
 
-plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta")
-#Kuvatiedoston koko säädettävä tarkemmin (30.3.30)
+# par()
+plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "cex" = 0.3,
+                sub = "symmetrinen kartta cex=0.3")
+#Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
 
-# ggsave("maagaSymMap1.PDF") Tämä tallentaa edellisen ggplot-kuvan! (30.3.20)
+# Tallentaa edellisen ggplot-kuvan! (30.3.20) ei toimi tässä
+# ggsave("maagaSymMap1.PDF") 
 
 ```
 Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri

@@ -207,6 +207,7 @@ ja maita jätetään pois, uuteen dataan jää tyhjiä luokittelumuuttujien luok
 ne poistetaan.
 
 ```{r esim1data1,eval=TRUE, include=TRUE}
+
 # UUSI DATA 30.1.20
 #
 # LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
@@ -519,7 +520,7 @@ Bookdownissa. Ei taida onnistua? (4.9.18)
 Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla. Faktoreiden järjestys
 voi tuottaa yllätyksiä, kun dataa muokataan ggplot - grafiikaksi.
 
-```{r g1-2kuva1, fig.cap = "Q1b:Sarakeprofiilit ja keskiarvoprofiili}
+```{r g1-2kuva1, fig.cap = "Q1b:Sarakeprofiilit ja keskiarvoprofiili"}
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
@@ -768,6 +769,9 @@ sub = "massat kaikilla mailla 1 (riviprofiilidata)")
 # (13.5.2018), vaan pdf-konversiossa pandoc failed with error 43
 
 ```
+
+**edit 2.5.2020** Ovatko massat samat (vakioitu) vai 1? Tulosteessa massa ei ole 1.
+
 Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.
 
 Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
