@@ -265,9 +265,10 @@ Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mu
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
 
 Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
+**edit 3.5.20** Minne katoavat pisteet?
 
 ```{r G1-4-BeDe-asymmContrib1, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
-#X11()
+
 plot(suppointCA2, map = "rowgreen",
      contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
@@ -343,7 +344,7 @@ suppointCA3
 
 # Kolmiulottein kuva grafiikkaikkunaan
 
-# plot3d(suppointCA3, c(1,2,3))
+plot3d(suppointCA3, c(1,2,3))
 
 # Hyödyllinen, mutta aika vaikea
 
@@ -506,21 +507,13 @@ Tehty jo 26.9.2018!
 ```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
-# par("cex"= 0.5, "offset" = 0.5) #ei toimi ja plot-komennossa offset tuottaa
-# saman varoituksen: "offset is not a graphical parameter"
 
-# (24.2.20) Hyvin outoa! Tämä par-komento toimii seuraavassa koodilohkossa,
-# tässä tulee virheilmoitus 
-# "asp" is not a graphical parameter"offset" is not a graphical parameter
-# par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
-
-# par()
+par(cex = 0.5)
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain", "cex" = 0.3,
                 sub = "symmetrinen kartta cex=0.3")
 #Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
 
-# Tallentaa edellisen ggplot-kuvan! (30.3.20) ei toimi tässä
-# ggsave("maagaSymMap1.PDF") 
+# Miten kuvatiedosto talteen?
 
 ```
 Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri
@@ -532,7 +525,15 @@ vaikutus akseleihin.
 
 ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
 maagaCA1num <- summary(maagaCA1) 
-maagaCA1num
+# str(maagaCA1num) numeeriset tulokset tibbleksi - rivit
+maagaCAnum2 <- as_tibble(maagaCA1num$rows, .name_repair = c("unique"))
+# maagaCAnum2
+# str(maagaCAnum2)
+summary(maagaCAnum2)
+
+arrange(maagaCAnum2 ,mass)
+# plot(maagaCAnum2, x = c("mass"), y = c("ctr...7"), xlim = c(0,30), ylim = c(0, 1000))
+
 
 # Hieman hankalaa kätevästi järjestää numeerisia tuloksia massan mukaan
 

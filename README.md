@@ -121,3 +121,5 @@ sivuvaikutukset, kun järjestys muuttu). Esimerkit ovat koodissa tallessa.
 laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
 
 **9.4.2020** CAcalc_1.R - laskentaa ca-tuloksilla.
+
+**3.5.2020** Karttojen parantelua, editointia. Muutamia kommentteja tekstiin.

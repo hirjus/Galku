@@ -82,6 +82,10 @@ erottelevan "maltilliset" mielipiteen tiukemmista. Sarake "täysin samaa mieltä
 eri mieltä" (E) on vasemmalla ja kolme vastausvaihtoehtoa oikealla. Kovin terävästi
 dimensiot eivät eroa toisistaan?
 
+**Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, ideaalipisteitä
+("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla "reilusti" ykköstä suurempia?
+Vastaus: ideaalipisteet esitetään rivipisteiden koordinaatistossa - > skaalaus.
+
 
 ```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
@@ -141,7 +145,9 @@ simpleCA3$coldist
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
 CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
-ykkösiä. Edellisessä jaksossa esimerkki siistimmästä taulukosta.
+ykkösiä. Rivimassat skaalautuvat niin, että niiden summa on 1.
+
+Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 **TODO** (21.2.20)
 

@@ -539,7 +539,8 @@ apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat = "identity") +
          scale_y_continuous(labels = percent_format()) 
-#apu1b_df
+# apu1_df
+# apu1b_df
 ```
 
 Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
@@ -644,7 +645,7 @@ ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
 
 **Graafinen analyysi ja R**
 
-Käytänön neuvoja data-analyysiin, kuulunee tekstiin, vai meneekö "ohjelmistoympäristö" -liitteeseen? Tärkeä juttu!
+Käytänön neuvoja data-analyysiin, kuulunee tekstiin vai meneekö "ohjelmistoympäristö" -liitteeseen? Tärkeä juttu!
 
 Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa 
 grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto 
@@ -743,9 +744,12 @@ painoilla, mutta ero ei ole kovin suuri.
 # Pohditaan kun koodataan capaper-projektia. 
 
 # Symmetrinen kartta
+# Akselien tekstit "käsityönä" - esimerkki (3.5.2020)
 
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
+     xlab = "Dimensio 1: moderni/liberaali - konservatiivinen/perinteinen (76%)",
+     ylab = "Dimensio 2: maltillinen/epävarma - radikaali/jyrkkä/varma (15.1%)",
      sub = "maa-muuttuja järjestys C_ALPHAN")
 
 # plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
@@ -754,9 +758,10 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 # Kartta kääntyy x-akselin ympäri - esimerkki faktoroinnin arvaamattomista 
 # seurauksista (30.3.20)
 
+# par(cex = 0.3) pisteen koko
 plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
 main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-sub = "massat kaikilla mailla 1 (riviprofiilidata)")
+sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
 
 
 #str(simpleCA1)
@@ -770,7 +775,9 @@ sub = "massat kaikilla mailla 1 (riviprofiilidata)")
 
 ```
 
-**edit 2.5.2020** Ovatko massat samat (vakioitu) vai 1? Tulosteessa massa ei ole 1.
+**edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta ca-ratkaisussa
+skaalautuvat eri arvoksi (vakio).
+
 
 Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.
 
