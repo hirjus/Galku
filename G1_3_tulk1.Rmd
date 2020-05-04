@@ -70,9 +70,14 @@ Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepiste
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+# 
+# Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
+# pdf("img/sCA1asymm1.pdf")
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1" )
+# Kuva tiedostoon - suljetaan
+# dev.off()
 
 ```
 

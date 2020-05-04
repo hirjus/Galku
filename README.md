@@ -123,3 +123,6 @@ laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
 **9.4.2020** CAcalc_1.R - laskentaa ca-tuloksilla.
 
 **3.5.2020** Karttojen parantelua, editointia. Muutamia kommentteja tekstiin.
+
+**4.5.2020** Karttojen parantelua, pistekoon säätämistä (par(cex=)), diagnosiikkaa
+ikä-sukupuoli-maa - ca-tuloksilla (laatu, massa ja kontribuutiot).

@@ -692,24 +692,25 @@ knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
 
 ```
 **TODO**Rivi- ja sarake-etäisyydet (khii2) vaatisivat kommentin. Tässä näytetään,
-että muuttu
+että muutu vaikka rivien järjestys vaihtuu kun maa-muuttujan järjestys vaihtuu. 
+Nyt koodi passiivisena.
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
 # mutta rivit eri järjestyksessä (2.2.20).
 # HUOM: simpleCA2-tulosolio luotava ensin!
 
-# simpleCA1$rownames
-# simpleCA1$rowdist
-# simpleCA2$rownames
-# simpleCA2$rowdist
+simpleCA1$rownames
+simpleCA1$rowdist
+simpleCA2$rownames
+simpleCA2$rowdist
 
 # [1] 0.1579735 0.6309909 0.1750128 0.6340627 0.3477331 0.5504040
 # [1] 0.6309909 0.6340627 0.3477331 0.5504040 0.1579735 0.1750128
 
-# simpleCA1$colnames # sarakkeiden järjestys sama
-# simpleCA1$coldist
-# simpleCA2$coldist
+simpleCA1$colnames # sarakkeiden järjestys sama
+simpleCA1$coldist
+simpleCA2$coldist
 
 # sarekeilla khii2-etäisyydet samat ja samassa järjestyksessä
 # [1] 0.5246525 0.3248840 0.3078230 0.2721699 0.6271108
@@ -748,7 +749,7 @@ painoilla, mutta ero ei ole kovin suuri.
 
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
-     xlab = "Dimensio 1: moderni/liberaali - konservatiivinen/perinteinen (76%)",
+     xlab = "Dimensio 1: moderni/liberaali - perinteinen/konservatiivinen (76%)",
      ylab = "Dimensio 2: maltillinen/epävarma - radikaali/jyrkkä/varma (15.1%)",
      sub = "maa-muuttuja järjestys C_ALPHAN")
 
