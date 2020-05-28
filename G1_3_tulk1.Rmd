@@ -64,6 +64,10 @@ Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaati
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
 
 Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
+
+Standardikooridaateissa esitety sarakepisteet ovat fiktiivisiä "maapisteitä", joissa
+kaikki vastaukset ovat yhdessä luokittelumuuttujan arvossa.Alkuperäisessä täydessä avaruudessa
+ne ovat simpleksin kärkipisteet, simpleksin sisällä ovat riviprofiilit.
      
 ```{r G1-3asymm2,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
@@ -87,17 +91,39 @@ erottelevan "maltilliset" mielipiteen tiukemmista. Sarake "täysin samaa mieltä
 eri mieltä" (E) on vasemmalla ja kolme vastausvaihtoehtoa oikealla. Kovin terävästi
 dimensiot eivät eroa toisistaan?
 
+Asymmetrinen kartta - rivipisteet (profiilit) sarakepisteiden standardikoordinaattien 
+keskiarvopisteinä (ns. barysentrinen keskiarvo).
+
+```{r G1-3asymm3,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# asymmetrinen kartta - rivit pc ja sarakkeet sc
+# sarakkeet vektorikuvina
+# HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+# 
+# Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
+# pdf("img/sCA1asymm1.pdf")
+plot(simpleCA1, map = "rowprincipal", 
+     arrows = c(FALSE,FALSE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
+     sub = "Suomen profiili sarakkeiden keskiarvona")
+# Kuva tiedostoon - suljetaan
+# dev.off()
+# Jos plot-komennotoon "MapObj1 <- ", saadaan pisteiden koordinaatit
+# str(MapObj1) 
+# MapObj1
+
+```
+
 **Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, ideaalipisteitä
 ("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla "reilusti" ykköstä suurempia?
 Vastaus: ideaalipisteet esitetään rivipisteiden koordinaatistossa - > skaalaus.
-
 
 ```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
      contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
-     arrows = c(FALSE, TRUE),
+     arrows = c(FALSE, FALSE),
      main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2a (rowgreen)",
      sub = "sarakevektorin ja rivipisteiden värin tummuus = kontribuutio(absolute)")
 

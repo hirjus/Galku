@@ -3,6 +3,8 @@
 # OLETUS: G1_2_johdesim.Rmd ja kaksi edeltävää Rmd-tiedostoa ajettu
 # Johdattelevan esimerkin (kuusi maata, Q1b) tulokset: simpleCA1
 
+# 28.5.20 Miten pisteiden yhdistäminen janoilla kartalla
+
 # str(simpleCA1)
 # List of 16
 # $ sv        : num [1:4] 0.3696 0.1646 0.1003 0.0774
@@ -53,7 +55,19 @@ diag(simpleCA1$sv) # (4 x 4)
 # 6:4 x 4:4 -> 6x4
 simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 # Principal coordinates
-simpleCA1.rpc 
+simpleCA1.rpc
+testMapObj <- plot(simpleCA1, map = "rowprincipal")
+testMapObj$rows
+simpleCA1.rpc[,1:2]
+testMapObj$rows - simpleCA1.rpc[,1:2]
+# yksi rivipiste pc
+FIrpc <- simpleCA1.rpc["FI",1:2]
+Epoint <- simpleCA1$colcoord["S",1:2]
+x <- c(FIrpc[1], Epoint[1])
+y1 <- c(FIrpc[2], Epoint[2])
+plot(simpleCA1, map = "rowprincipal",
+     lines(x,y1, type = "l" ))
+FIrpc
 
 # pc -> sc - esimerkki (MG2017 laskarit)
 
