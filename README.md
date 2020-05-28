@@ -126,3 +126,5 @@ laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
 
 **4.5.2020** Karttojen parantelua, pistekoon säätämistä (par(cex=)), diagnosiikkaa
 ikä-sukupuoli-maa - ca-tuloksilla (laatu, massa ja kontribuutiot).
+
+**28.5.2020** Editointia, kuvien säätämistä.

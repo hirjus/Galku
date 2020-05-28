@@ -493,7 +493,7 @@ rownames(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
 simpleCA3 <- ca(johdesim1_rowproc.tab)
 
 
-# Kartta piirretään koodilohkossa simpleCAmap1, mikä Rmd-tiedosto? #T(11.4.20)
+# Kartta piirretään koodilohkossa simpleCAmap1, r. 773 noin. 
 
 # Riviprosentit tarkistusta varten
 #        S	s	?	e	E
@@ -542,6 +542,14 @@ ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
 # apu1_df
 # apu1b_df
 ```
+**Edit 28.5.20** Idea: ca havainnollistaa rivien ja sarakkaeiden riippuvuuksia
+eroina keskiarvosta, yksinkertainen khii2-tulkinta riippumattomuushypoteesina. 
+Rivi-ja sarakeprofiilit standardoidaan (tulkintaa!) PCA-tyyliin (poikkeama keskiarvosta 
+jaetaan hajonnalla, lukumäärädata ja POisson-jakaumassa hajonta=odotusarvo). Rivi- ja 
+sarakeratkaisuiden symmetria ja sidos esitetään tässä.
+
+Sarakekuvassa näkyy E-sarakkeenselvästi ero (DK), muut erot eivät niinkään. S-sarakkeessa
+HU erottuu, samoin eos(?)-sarakkeessa BE.
 
 Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
 **edit** pois tulosteesta 30.3.20.
@@ -608,8 +616,11 @@ ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
        coord_flip() +
         scale_y_continuous(labels = percent_format()) 
 ```
+**edit 28.5.20** Tanska ja Unkari erottuvat ka-rivistä E-vaihtoehdon ("modaliteetin")
+osuuksissa selvimmin. Bulgarialla S+s on hieman suurempi kuin Unkarilla, mutta s-osuus
+on suurempi. "Ääripäitä" S- ja E-osuuksissa edustavat HU - FI, DK ja BG-HU - DK.
 
-Ja sama testaus kuin sarakeprofiilikuvilla. **edit** Pois tulosteesta 30.3.20
+ **edit Pois tulosteesta 30.3.20**Sama testaus kuin sarakeprofiilikuvilla (maiden järjestys, tekninen juttu).
 
 ```{r g1-2kuva2test, ,eval=FALSE, include=FALSE}
 # riviprofiilit ja keskiarvorivi -  18.9.2018
@@ -691,9 +702,8 @@ knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
              caption = "Sarake-etäisyydet keskiarvosta (khii2)")
 
 ```
-**TODO**Rivi- ja sarake-etäisyydet (khii2) vaatisivat kommentin. Tässä näytetään,
-että muutu vaikka rivien järjestys vaihtuu kun maa-muuttujan järjestys vaihtuu. 
-Nyt koodi passiivisena.
+**Edit 28.5.20** Pois tulosteesta. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys
+muuttuu. Järjestys vaikuttaa kuviin.
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
@@ -760,7 +770,7 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 # seurauksista (30.3.20)
 
 # par(cex = 0.3) pisteen koko
-plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE), 
 main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
 sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
 
