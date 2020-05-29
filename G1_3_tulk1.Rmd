@@ -95,6 +95,17 @@ Asymmetrinen kartta - rivipisteet (profiilit) sarakepisteiden standardikoordinaa
 keskiarvopisteinä (ns. barysentrinen keskiarvo).
 
 ```{r G1-3asymm3,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Barysentrisen keskiarvon  "viivakuviota" kehitelty CA_calc1.R - skriptissä
+# simpleCA1-objektista saa std-koordinaatit, muunnoksella rivien pääkoordinaatit
+# rpc.
+
+# Jos plot-komennotoon "MapObj1 <- ", saadaan pisteiden koordinaatit
+# plot-funktiolla ensin "raamit" ja pisteet talteen, sitten pisteet Suomen
+# pisteestä lines(x,y) sarakevektoreihin? (29.5.20)
+# str(MapObj1)
+
+
+# Ei toimi vielä (29.5.20)
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
@@ -105,12 +116,10 @@ keskiarvopisteinä (ns. barysentrinen keskiarvo).
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,FALSE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
-     sub = "Suomen profiili sarakkeiden keskiarvona")
+     sub = "Suomen profiili sarakkeiden keskiarvona - janat puuttuvat")
 # Kuva tiedostoon - suljetaan
 # dev.off()
-# Jos plot-komennotoon "MapObj1 <- ", saadaan pisteiden koordinaatit
-# str(MapObj1) 
-# MapObj1
+
 
 ```
 

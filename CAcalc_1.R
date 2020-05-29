@@ -36,10 +36,12 @@ simpleCA1$rowcoord
 simpleCA1$colcoord
 simpleCA1$sv
 
+# Yhdistä kaavaliitteeseen? (29.5.20)
+
 
 str(simpleCA1$rowcoord)
 typeof(simpleCA1$rowcoord) # what is it?
-class(simpleCA1$rowcoord) # what is it? (sorry)
+class(simpleCA1$rowcoord) # what is it? (sorry) Huom! matrix (29.5.20)
 storage.mode(simpleCA1$rowcoord) # what is it? (very sorry)
 length(simpleCA1$rowcoord) # how long is it? What about two dimensional objects?
 attributes(simpleCA1$rowcoord)
@@ -53,21 +55,34 @@ simpleCA1$sv
 diag(simpleCA1$sv) # (4 x 4)
 
 # 6:4 x 4:4 -> 6x4
-simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
+#
 # Principal coordinates
+
+simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 simpleCA1.rpc
+# Plot - objekti: pisteiden koordinaatit
+
 testMapObj <- plot(simpleCA1, map = "rowprincipal")
+str(testMapObj)
 testMapObj$rows
-simpleCA1.rpc[,1:2]
+(simpleCA1.rpc[,1:2])
 testMapObj$rows - simpleCA1.rpc[,1:2]
 # yksi rivipiste pc
-FIrpc <- simpleCA1.rpc["FI",1:2]
-Epoint <- simpleCA1$colcoord["S",1:2]
-x <- c(FIrpc[1], Epoint[1])
-y1 <- c(FIrpc[2], Epoint[2])
+
+#Miksi ei enään toimi?? 29.5.20
+
+FIrpc <- simpleCA1$rpc["FI",1:2]
+Spoint <- simpleCA1$colcoord["S",1:2]
+x <- c(FIrpc[1], Spoint[1])
+y1 <- c(FIrpc[2], Spoint[2])
 plot(simpleCA1, map = "rowprincipal",
-     lines(x,y1, type = "l" ))
+     lines(x, y1, type = "l" ))
+
 FIrpc
+Spoint
+Epoint
+x
+y1
 
 # pc -> sc - esimerkki (MG2017 laskarit)
 

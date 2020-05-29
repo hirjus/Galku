@@ -222,7 +222,7 @@ str(suppoint2_df)
 # attr(suppoint2_df, which = "class")
 # attr(suppoint2_df, which = "name")
 # summary(suppoint2_df)
-suppoint2_df %>% table1() # miksi ei tulosta mitään (4.2.20)
+suppoint2_df %>% table1() # miksi ei tulosta mitään konsolille? (4.2.20)
 
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 suppoint2_tab1 # tarkistus
@@ -241,7 +241,8 @@ suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
 plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
      sub = "Passiiviset pisteet DE ja BE" )
-# käännetään kuva VANHAA (21.2.20)
+# VANHAA (21.2.20) KOODIA
+# käännetään kuva
 # suppointCA2b <- suppointCA2
 # suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
 # suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
@@ -625,14 +626,23 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kon
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
 # Piirtää pisteitä koko "plot-alueelle"?
 
+
 par(cex = 0.75)
-plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.4,0.05),
+plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
                 sub = "osa symmetristä karttaa"
                     )
 
 # ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
 # grafiikkaikkunaan tulostukseen ?
+# Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
+# ja sitten vasta pisteet?
+# Kuvasuhde oikein, kun xlim = ylim, miten turhat pisteet pois? (29.5.20).Menevät
+# näköjään kuva-alueen ja ulomman marginaalin väliin.
+
+# Voisiko valita objektista vain osan pisteistä? Tai plot ilman tulostusta, tulos
+# objektiin ja sieltä pisteet kuvaan? (29.5.20)
+# str(spCAmaaga1)
 
 ```
 
