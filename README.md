@@ -111,16 +111,18 @@ vanha koodi voi jäädä.
 **24.2.2020** Versio 1.5.7 - pieniä ja isompia korjailuja, siistimistä ja vanhan
 koodin (koodilohkojen) asetuksia passiivisiksi (eval=FALSE, include=FALSE).
 
-**30.3.2020** Asetettiin karttatulostuksen koodilohkoissa fig.asp=1 ja 
-out.width=90%. Koodilohkon fig.cap tekee kuvasta "kelluvan", voi tulla pulmia 
+**30.3.2020** Asetettiin karttatulostuksen koodilohkoissa fig.asp=1 ja
+out.width=90%. Koodilohkon fig.cap tekee kuvasta "kelluvan", voi tulla pulmia
 plot-komennon kuvatekstien kanssa. Tätä hiotaan myöhemmin.
-Poistettiin tulosteesta testikuvia (C_ALPHAN - merkkijonomuuttujan faktoroinnin 
+Poistettiin tulosteesta testikuvia (C_ALPHAN - merkkijonomuuttujan faktoroinnin
 sivuvaikutukset, kun järjestys muuttu). Esimerkit ovat koodissa tallessa.
 
-**8.4.2020** Pientä editointia. Lisäsin ISSP-dokumentteihin dokkarin lomakkeen 
+**8.4.2020** Pientä editointia. Lisäsin ISSP-dokumentteihin dokkarin lomakkeen
 laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
 
 **9.4.2020** CAcalc_1.R - laskentaa ca-tuloksilla.
+**8.6.2020** Testattu alustavasti toiminta dplyr 1.0.0 - versiolla, näyttäisi toimivan.
+CAcalc_1.R - skriptissä janoja kartan pisteiden välille.
 
 **3.5.2020** Karttojen parantelua, editointia. Muutamia kommentteja tekstiin.
 

@@ -46,6 +46,7 @@ storage.mode(simpleCA1$rowcoord) # what is it? (very sorry)
 length(simpleCA1$rowcoord) # how long is it? What about two dimensional objects?
 attributes(simpleCA1$rowcoord)
 simpleCA1$rowcoord
+simpleCA1$colcoord
 
 # Standardikoorinaateista principal-koordinaatteihin
 
@@ -62,7 +63,25 @@ simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 simpleCA1.rpc
 # Plot - objekti: pisteiden koordinaatit
 
-testMapObj <- plot(simpleCA1, map = "rowprincipal")
+#testMapObj <- 
+x11()
+plot(simpleCA1, map = "rowprincipal")
+# sarakkeet vektoreina origosta
+segments(0,0, simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "red")
+
+# rivipiste sarakkeiden barysentrisenä keskiarvona
+segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "pink")
+#Heh - toimii! Mutta ei ole tarkasti Fi-rpc - pisteessä! (8.6.20)
+
+# Maa-pisteet yhdistettynä (esimerkki) (8.6.20)
+segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],
+         simpleCA1.rpc[4,1],simpleCA1.rpc[4,2]
+         )
+segments(simpleCA1.rpc[4,1],simpleCA1.rpc[4,2],
+         simpleCA1.rpc[3,1],simpleCA1.rpc[3,2]
+        )
+
+
 str(testMapObj)
 testMapObj$rows
 (simpleCA1.rpc[,1:2])

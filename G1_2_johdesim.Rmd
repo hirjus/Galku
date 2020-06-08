@@ -229,7 +229,7 @@ ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
 vars_esim1 <- c("C_ALPHAN", "V3", "maa","maa3", "Q1b", "sp", "ika") 
 ISSP2012esim2.dat <- select(ISSP2012esim3.dat, all_of(vars_esim1))
 
-str(ISSP2012esim2.dat) # 8542 obs. of  7 variables
+str(ISSP2012esim2.dat) # 8542 obs. of  7 variables, ja sama 8.6.2020
 # C_ALPHAN: chr, maa: Factor w/ 25 
 
 # Poistetaan havainnot, joilla Q1b - muuttujassa puuttuva tieto 'NA'

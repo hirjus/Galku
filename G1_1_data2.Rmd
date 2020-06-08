@@ -566,6 +566,8 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, all_of(jhvars1))
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
 
 str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
+# TARKISTUS 8.6.20 dplyr 1.0.0 havaintojen ja muuttujien määrä ok.
+
 # ISSP2012jh1c.data %>% summary() %>% kable()
 
 ```

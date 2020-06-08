@@ -306,7 +306,13 @@ summary(suppointCA2)
 Kolmiulotteisesta kuvasta voi tulostaa molempien akseleiden ja uuden kolmannen
 akselin kartat. R-ohjelmistossa voi tulostaa näytölle kolmiulotteisen kuvan,
 siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin? 
-**edit** Kannattaako (30.3.20)
+**edit** Kommentti 3d-ratkaisusta: tuo esiin Belgian ("belgioiden") erilaisuuden.
+"Belgiat ovat 2-3 - dimension kartassa diagonaalilla, ja 1-3 kartassa hieman samoin kuin 
+2-d - ratkaisun kartassa. Tarvittaessa voi liittää myös 3-d - kuvia, pitäsi saada
+myös dynaamisen pdf-tiedostoon? (8.6.2020). Mutta 2d-approksimaatio on  aika hyvä,
+89 % kokonaisinertiasta. Miten pitäisi jatkaa? Analysoida maiden sisäisiä eroja? Siinä
+erilaiset aluejaot ovat aika herkästi korvikemuuttujia joillekin muille vaikuttaville tekijöile.
+Entäs kaupungit - isot ja pienet - ja maaseutu? Elinkeinorakenne, tulot jne...
 
 ```{r G1-4-3dCA,fig.cap = "Belgian ja Saksan aluejako - 3D",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
