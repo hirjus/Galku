@@ -3,7 +3,7 @@
 # OLETUS: G1_2_johdesim.Rmd ja kaksi edeltävää Rmd-tiedostoa ajettu
 # Johdattelevan esimerkin (kuusi maata, Q1b) tulokset: simpleCA1
 
-# 28.5.20 Miten pisteiden yhdistäminen janoilla kartalla
+# 28.5.20 Miten pisteiden yhdistäminen janoilla kartalla. Ratkaisu segments() (8.6.20).
 
 # str(simpleCA1)
 # List of 16
@@ -45,14 +45,18 @@ class(simpleCA1$rowcoord) # what is it? (sorry) Huom! matrix (29.5.20)
 storage.mode(simpleCA1$rowcoord) # what is it? (very sorry)
 length(simpleCA1$rowcoord) # how long is it? What about two dimensional objects?
 attributes(simpleCA1$rowcoord)
-simpleCA1$rowcoord
-simpleCA1$colcoord
 
 # Standardikoorinaateista principal-koordinaatteihin
 
 #singulaariarvot (sqrt(ominaisarvot))
 
 simpleCA1$sv
+simpleCA1$sv %>% sum() # kokonaisinertia?
+rowsums(simpleCA1$rowcoord)
+rowsums(simpleCA1$rowcoord) %>% sum()
+colSums(simpleCA1$colcoord)
+colSums(simpleCA1$colcoord)
+simpleCA1$colcoord %>% sum()
 diag(simpleCA1$sv) # (4 x 4)
 
 # 6:4 x 4:4 -> 6x4
@@ -61,11 +65,14 @@ diag(simpleCA1$sv) # (4 x 4)
 
 simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 simpleCA1.rpc
+rowsums(simpleCA1.rpc)
+colSums(simpleCA1.rpc)
+simpleCA1.rpc["FI",1:2]
 # Plot - objekti: pisteiden koordinaatit
 
 #testMapObj <- 
-x11()
-plot(simpleCA1, map = "rowprincipal")
+X11()
+testMapObj <- plot(simpleCA1, map = "rowprincipal")
 # sarakkeet vektoreina origosta
 segments(0,0, simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "red")
 
@@ -80,23 +87,27 @@ segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],
 segments(simpleCA1.rpc[4,1],simpleCA1.rpc[4,2],
          simpleCA1.rpc[3,1],simpleCA1.rpc[3,2]
         )
+lines(simpleCA1.rpc[,1],simpleCA1.rpc[,2])
+# tässä kätevä, kun järjestää koordinaatit haluttuun järjestykseen (9.6.20)
 
+# Jospa plot-kuva talteen?
 
 str(testMapObj)
 testMapObj$rows
 (simpleCA1.rpc[,1:2])
 testMapObj$rows - simpleCA1.rpc[,1:2]
+
 # yksi rivipiste pc
 
-#Miksi ei enään toimi?? 29.5.20
-
-FIrpc <- simpleCA1$rpc["FI",1:2]
+#Miksi ei enään toimi?? 29.5.20, onko jo tehty yllä? (9.6.20)
+simpleCA1.rpc["FI",1:2]
+FIrpc <- simpleCA1.rpc["FI",1:2]
 Spoint <- simpleCA1$colcoord["S",1:2]
 x <- c(FIrpc[1], Spoint[1])
 y1 <- c(FIrpc[2], Spoint[2])
-plot(simpleCA1, map = "rowprincipal",
-     lines(x, y1, type = "l" ))
-
+plot(simpleCA1, map = "rowprincipal")
+     lines(x, y1, type = "l" )
+str(FIrpc)
 FIrpc
 Spoint
 Epoint
