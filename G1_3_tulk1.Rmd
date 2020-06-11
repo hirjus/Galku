@@ -102,23 +102,34 @@ keskiarvopisteinä (ns. barysentrinen keskiarvo).
 # Jos plot-komennotoon "MapObj1 <- ", saadaan pisteiden koordinaatit
 # plot-funktiolla ensin "raamit" ja pisteet talteen, sitten pisteet Suomen
 # pisteestä lines(x,y) sarakevektoreihin? (29.5.20)
-# str(MapObj1)
 
-
-# Ei toimi vielä (29.5.20)
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
-# 
+
 # Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
 # pdf("img/sCA1asymm1.pdf")
+
+# Piirretään Suomen riviprofiilista janat sarakepisteisiin - barysentinen keskiarvo
+# Rivipisteet pääkoordinaatteina (principal coordinates)
+
+simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
+
+# ei toimi - onpa hankalaa! segments antaa virheilmoituksen "plot.new has not
+# been called yet" (11.6.20)
+# X11()
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,FALSE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
-     sub = "Suomen profiili sarakkeiden keskiarvona - janat puuttuvat")
+     sub = "Suomen profiili sarakkeiden barysentrisenä keskiarvona")
+     segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],
+         simpleCA1$colcoord[, 2], col = "pink")
+     
 # Kuva tiedostoon - suljetaan
 # dev.off()
+
+
 
 
 ```
@@ -126,6 +137,34 @@ plot(simpleCA1, map = "rowprincipal",
 **Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, ideaalipisteitä
 ("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla "reilusti" ykköstä suurempia?
 Vastaus: ideaalipisteet esitetään rivipisteiden koordinaatistossa - > skaalaus.
+
+**Edit 11.6.20 - tulkinta ja data?TARKISTA** Origo on koko aineiston barysentrinen keskipiste. Janan pituus on kääntäen verrannollinen sarakkeen ("ideaalipisteen") suhteelliseen osuuteen.
+Maapiste (profiilipiste) on saravektoreiden barysentrinen keskiarvo, ja etäisyydet
+kertovat kyseisen sarakkeen suhteellisen osuuden maaprofiliisissa.(? 11.6.20) .
+"In an asymmetric map where the rows, for example, are in principal co-
+ordinates (i.e. the row analysis), distances between displayed row points
+are approximate khii2-distances between row profiles; and distances from the
+row profile points to a column vertex point are, as a general rule, inversely
+related to the row profile elements for that column." CAiP, s. 72., tarkemmin s.62-.
+Pisteiden väliset etäisyydet voidaan optimaalisessa tilanteessa (symm. kuva sama pistejoukko, 
+asymm. kuva myös sarake- ja rivipisteet) tulkita vain approksimaatioina.
+
+Verifying the profile-vertex interpretation (emt., s 68):
+Each row profile point (staff group) is at a weighted average position of the
+column vertex points (smoking categories), where the weights are the elements
+of the respective row profile. As a general rule, assuming that the display
+is of good quality, which is true in this case, the closer a profile is to that
+vertex, the higher its profie value is for that category.
+
+Verifiointi verteksi kerrallaan, kaikki on suhteellista! Suomi on kaikkein lähimpänä
+e-verteksiä. Niinpä Suomen profiilissa e-vastausten suhteellinen osuus on suurempi kuin 
+muilla mailla. Tanska vastaavasti lähimpänä E-verteksiä.
+
+Perusidea: kartta antaa yleiskuvan riippuvuudesta, approksimaation tarkkuuden ja
+laadun rajoissa. Yksityiskohtien etsiskely ei ole oleellista, väärien johtopäätösten
+välttäminen on. Erityisesti symmetrisessä kartassa ei voi tulkita mitenkään (tiukasti
+ottaen) eri pistejoukkojen etäisyyksiä. Ei voi tunnistaa klustereita!
+
 
 ```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento

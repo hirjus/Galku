@@ -3,6 +3,9 @@
 # OLETUS: G1_2_johdesim.Rmd ja kaksi edeltävää Rmd-tiedostoa ajettu
 # Johdattelevan esimerkin (kuusi maata, Q1b) tulokset: simpleCA1
 
+# Jatketaan (A) ca-tulosobjektin ja (B) grafiikan testailuja 11.6.20. Nyt ajetaan
+# kaikki viisi ensimmäistä Rmd-tiedostoa.
+
 # 28.5.20 Miten pisteiden yhdistäminen janoilla kartalla. Ratkaisu segments() (8.6.20).
 
 # str(simpleCA1)
@@ -73,12 +76,15 @@ simpleCA1.rpc["FI",1:2]
 #testMapObj <- 
 X11()
 testMapObj <- plot(simpleCA1, map = "rowprincipal")
+str(testMapObj)
+
+
 # sarakkeet vektoreina origosta
 segments(0,0, simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "red")
 
 # rivipiste sarakkeiden barysentrisenä keskiarvona
 segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "pink")
-#Heh - toimii! Mutta ei ole tarkasti Fi-rpc - pisteessä! (8.6.20)
+#Heh - toimii! (8.6.20)
 
 # Maa-pisteet yhdistettynä (esimerkki) (8.6.20)
 segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],
@@ -90,6 +96,45 @@ segments(simpleCA1.rpc[4,1],simpleCA1.rpc[4,2],
 lines(simpleCA1.rpc[,1],simpleCA1.rpc[,2])
 # tässä kätevä, kun järjestää koordinaatit haluttuun järjestykseen (9.6.20)
 
+#G1_4_CAlaaj1.Rmd - maaga - rivi 537, koodilohko maagaCA1
+#
+# maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
+
+# maapisteiden pääkoordinaatit janojen piirtämiseen
+# HUOM! maagaCA1.rpc on matriisi
+
+maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
+# Nyt menee vaikeaksi! Järjestys BEf1...f6, BEm1...m6 ja maat 
+# BE(1:6, 7:12) BG(13:18, 19:24), 
+# DE (25:30, 31:36), DK(37:42, 43:48),FI(49:54, 55:60) 
+# HU(61:66, 67:72)
+maagaCA1.rpc
+X11()
+par(cex = 0.5)
+plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 1",
+     sub = "symmetrinen kartta cex=0.5")
+     lines(maagaCA1.rpc[49:54,1],maagaCA1.rpc[49:54,2], col="blue") #FIf
+     lines(maagaCA1.rpc[55:60,1],maagaCA1.rpc[55:60,2], col="red")  #FIm
+     lines(maagaCA1.rpc[25:30,1],maagaCA1.rpc[25:30,2], col="blue") #DEf
+     lines(maagaCA1.rpc[31:36,1],maagaCA1.rpc[31:36,2], col="red")  #DEm
+     lines(maagaCA1.rpc[37:42,1],maagaCA1.rpc[37:42,2], col="blue") #DKf
+     lines(maagaCA1.rpc[43:48,1],maagaCA1.rpc[43:48,2], col="red")  #DKm
+
+par(cex = 0.5)
+plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+          sub = "symmetrinen kartta cex=0.5")
+     lines(maagaCA1.rpc[1:6,1],maagaCA1.rpc[1:6,2], col="blue") #BEf
+     lines(maagaCA1.rpc[7:12,1],maagaCA1.rpc[7:12,2], col="red")  #BEm
+     lines(maagaCA1.rpc[13:18,1],maagaCA1.rpc[13:18,2], col="blue") #BGf
+     lines(maagaCA1.rpc[19:24,1],maagaCA1.rpc[19:24,2], col="red")  #BGm
+     lines(maagaCA1.rpc[61:66,1],maagaCA1.rpc[61:66,2], col="blue") #HUf
+     lines(maagaCA1.rpc[67:72,1],maagaCA1.rpc[67:72,2], col="red")  #HUm
+     
+     
+     
+    
+    
+     
 # Jospa plot-kuva talteen?
 
 str(testMapObj)

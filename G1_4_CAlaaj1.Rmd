@@ -478,19 +478,42 @@ CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
 ```{r ga1CA1,fig.cap = "Iän ja sukupuolen yhdistetty muuttuja",fig.asp = 1, out.width = "90%",fig.align = "center"}
 gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
+
+# maapisteiden pääkoordinaatit janojen piirtämiseen
+
+gaTestCA1.rpc <- gaTestCA1$rowcoord %*% diag(gaTestCA1$sv)
+
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
      sub = "symmetrinen kartta")
+# naiset
+lines(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
+#miehet
+lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
+#segments(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
+
+#         ,
+#         gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2]
+#         )
+#segments(gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2],
+#         gaTestCA1.rpc[3,1],gaTestCA1.rpc[3,2]
+#        )
+
 summary(gaTestCA1)              
 ```
+**zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on 
+"as it is", ei ole vakioitu ga-luokkien kokoja.
 
-**zxy** Ei kovin kiinnostava, mutta voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla?
+Järjestys ei toimi, S s-sarakkeen vasemmalla puolella. Miehet konservatiivisempia,
+mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti e,
+sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
+poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos vertaa
+sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet konservatiivisia, naiset
+liberaaleja). Naisista vain vanhin ikäluokka oikealla, miehistä nuorin ja kolme 
+vanhinta.
 
-**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla? Järjestys ei toimi, jotain muuta pelissä?
-
-
-**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). **pisteet voisi yhdistää? (29.9.18)** 
-
-
+**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. 
+MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
 
 ```{r maaga1}
 # Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
@@ -515,13 +538,18 @@ Tehty jo 26.9.2018!
 
 maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
 
+# maapisteiden pääkoordinaatit janojen piirtämiseen
+# HUOM! maagaCA1.rpc on matriisi
+
+maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
+
 par(cex = 0.5)
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
                 sub = "symmetrinen kartta cex=0.5")
 #Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
 
 # Miten kuvatiedosto talteen?
-# Omana koodipätkänä (4.5.2020) - toimii
+# Omana koodipätkänä (4.5.2020)
 
 # pdf("img/maagaCA1_symm1.pdf")
 # par(cex = 0.5)

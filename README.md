@@ -121,8 +121,6 @@ sivuvaikutukset, kun järjestys muuttu). Esimerkit ovat koodissa tallessa.
 laadinnasta. Vakiomassa - ca:n kokeiluja, mikä kelpaa ca-funktiolle dataksi.
 
 **9.4.2020** CAcalc_1.R - laskentaa ca-tuloksilla.
-**8.6.2020** Testattu alustavasti toiminta dplyr 1.0.0 - versiolla, näyttäisi toimivan.
-CAcalc_1.R - skriptissä janoja kartan pisteiden välille.
 
 **3.5.2020** Karttojen parantelua, editointia. Muutamia kommentteja tekstiin.
 
@@ -130,3 +128,9 @@ CAcalc_1.R - skriptissä janoja kartan pisteiden välille.
 ikä-sukupuoli-maa - ca-tuloksilla (laatu, massa ja kontribuutiot).
 
 **28.5.2020** Editointia, kuvien säätämistä.
+
+**8.6.2020** Testattu alustavasti toiminta dplyr 1.0.0 - versiolla, näyttäisi toimivan.
+CAcalc_1.R - skriptissä janoja kartan pisteiden välille.
+
+**11.6.2020** Kuvien parantelua, maaga-kuvat pdf-tiedostoina ja koodi CAcalc_1.R-
+skriptissä. Hieman tekstiä johdattelevan esimerkin asymmetriseen kuvaan.
