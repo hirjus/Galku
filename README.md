@@ -134,3 +134,5 @@ CAcalc_1.R - skriptissä janoja kartan pisteiden välille.
 
 **11.6.2020** Kuvien parantelua, maaga-kuvat pdf-tiedostoina ja koodi CAcalc_1.R-
 skriptissä. Hieman tekstiä johdattelevan esimerkin asymmetriseen kuvaan.
+
+**14.6.2020** Maa-sukupuoli-ikä - karttojen kehittelyä.

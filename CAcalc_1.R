@@ -38,6 +38,7 @@ class(simpleCA1$sv)
 simpleCA1$rowcoord
 simpleCA1$colcoord
 simpleCA1$sv
+summary(simple)
 
 # Yhdistä kaavaliitteeseen? (29.5.20)
 
@@ -54,13 +55,21 @@ attributes(simpleCA1$rowcoord)
 #singulaariarvot (sqrt(ominaisarvot))
 
 simpleCA1$sv
-simpleCA1$sv %>% sum() # kokonaisinertia?
+simpleCA1$sv %>% sum() 
+# Pääakselien inertiat ovat singulaariarvojen neliöitä
+sqrt(simpleCA1$sv)
+simpleCA1.inert <- sqrt(simpleCA1$sv) %>% sum()
+# Maksimi-inertia on dimensioden lukumäärä (tässä 4)
+(4 - simpleCA1.inert)/4
+
+# Mitäs nämäkin ovat? (13.6.20)
 rowsums(simpleCA1$rowcoord)
-rowsums(simpleCA1$rowcoord) %>% sum()
+rowsums(simpleCA1$colcoord)
 colSums(simpleCA1$colcoord)
-colSums(simpleCA1$colcoord)
-simpleCA1$colcoord %>% sum()
+colSums(simpleCA1$rowcoord)
+simpleCA1$colcoord # %>% sum() ei kovin järkevä (13.6.20)
 diag(simpleCA1$sv) # (4 x 4)
+simpleCA1$rowcoord
 
 # 6:4 x 4:4 -> 6x4
 #
@@ -68,22 +77,25 @@ diag(simpleCA1$sv) # (4 x 4)
 
 simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 simpleCA1.rpc
+# Mitäs nämä ovat? (13.6.20)
 rowsums(simpleCA1.rpc)
 colSums(simpleCA1.rpc)
 simpleCA1.rpc["FI",1:2]
-# Plot - objekti: pisteiden koordinaatit
 
-#testMapObj <- 
-X11()
+# Plot - objekti: pisteiden koordinaatit
+#testMapObj <- koordinaatit talteen (pc, sc)
+# X11()
+
 testMapObj <- plot(simpleCA1, map = "rowprincipal")
 str(testMapObj)
-
-
-# sarakkeet vektoreina origosta
+testMapObj$rows
+testMapObj$cols
+# sarakkeet vektoreina origosta - voi lisätä maaga-kuviin! (13.6.20)
 segments(0,0, simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "red")
 
 # rivipiste sarakkeiden barysentrisenä keskiarvona
-segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],simpleCA1$colcoord[, 2], col = "pink")
+segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],
+         simpleCA1$colcoord[, 2], col = "pink")
 #Heh - toimii! (8.6.20)
 
 # Maa-pisteet yhdistettynä (esimerkki) (8.6.20)
@@ -129,10 +141,6 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
      lines(maagaCA1.rpc[19:24,1],maagaCA1.rpc[19:24,2], col="red")  #BGm
      lines(maagaCA1.rpc[61:66,1],maagaCA1.rpc[61:66,2], col="blue") #HUf
      lines(maagaCA1.rpc[67:72,1],maagaCA1.rpc[67:72,2], col="red")  #HUm
-     
-     
-     
-    
     
      
 # Jospa plot-kuva talteen?
