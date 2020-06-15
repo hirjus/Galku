@@ -660,13 +660,18 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kon
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
 # Piirtää pisteitä koko "plot-alueelle"?
 
+#X11()
 
+# Rivi- ja sarakekoordinaatit (principal coordinates) talteen
+maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
+maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
 par(cex = 0.75)
+
 plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
                 sub = "osa symmetristä karttaa"
                     )
-
+# TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
 # ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
 # grafiikkaikkunaan tulostukseen ?
 # Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
@@ -683,11 +688,16 @@ plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
 
 Kuvissa on aika ahdasta. Kuvan voisi rajata johonkin alueeseen erityisesti oikea yläosa on täynnä pisteitä. Maiden täydentävät pisteet ovat ikäluokka-sukupuoli - luokkien keskiarvopisteitä. Maiden väliset erot dominoivat, mutta maiden välillä on isoja eroja.
 
-Kartan herkkyyttä joillekin pienen massan rivipisteille pitää tutkia tarkemmin.
+Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
+huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
+ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
+kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
+nuorimman ikäluokan ero.
 
 Vertailu voi tehdä
 
-1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
+1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
+Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
 
 2.Maiden välillä
 

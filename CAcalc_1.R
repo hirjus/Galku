@@ -52,15 +52,21 @@ attributes(simpleCA1$rowcoord)
 
 # Standardikoorinaateista principal-koordinaatteihin
 
-#singulaariarvot (sqrt(ominaisarvot))
-
 simpleCA1$sv
-simpleCA1$sv %>% sum() 
-# Pääakselien inertiat ovat singulaariarvojen neliöitä
-sqrt(simpleCA1$sv)
-simpleCA1.inert <- sqrt(simpleCA1$sv) %>% sum()
+# simpleCA1$sv %>% sum() - ei ehkä kiinnostava? (15.6.20)
+# Pääakselien inertiat (ominaisarvot?) ovat singulaariarvojen 
+# neliöitä 
+
+simpleCA1.inert <- simpleCA1$sv^2 %>% sum()
+simpleCA1.inert
+
+# Inertia on myös Khii2 - testisuure jaettuna havaintojen lukumäärällä
+
+chisq.test(simpleCA1$N)$statistic / sum(simpleCA1$N)
+
 # Maksimi-inertia on dimensioden lukumäärä (tässä 4)
-(4 - simpleCA1.inert)/4
+# Mutta eipä kai tämäkään kovin kiinnostava luku ole (15.6.20)
+simpleCA1.inert / 4
 
 # Mitäs nämäkin ovat? (13.6.20)
 rowsums(simpleCA1$rowcoord)
@@ -141,7 +147,12 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
      lines(maagaCA1.rpc[19:24,1],maagaCA1.rpc[19:24,2], col="red")  #BGm
      lines(maagaCA1.rpc[61:66,1],maagaCA1.rpc[61:66,2], col="blue") #HUf
      lines(maagaCA1.rpc[67:72,1],maagaCA1.rpc[67:72,2], col="red")  #HUm
-    
+
+#Yritys zoomaukseen, pelkkä kuvakehys type = "n"     
+#     plot(rbind(maagaCA1.rpc,maagaCA1.cpc), type = "n",  xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
+#          main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+#          sub = "osa symmetristä karttaa"
+#     )
      
 # Jospa plot-kuva talteen?
 

@@ -50,16 +50,20 @@ library(testthat)
 
 **10.10.2018 maat ja muuttujat valittu.**
 
-1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä johdantoluvussa.
-Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketissa.
+1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä 
+jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä 
+johdantoluvussa.
 
-2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin, siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. **V** Benzecri:"kun data menee miljoonaan suuntaan".
+2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin,
+siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. 
+**V** Benzecri:"kun data menee miljoonaan suuntaan".
 
 3. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
 
 4. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (esim. ekologia ja biologia, arkeologia, kielen tutkimus)
+5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
+(esim. ekologia ja biologia, arkeologia, kielen tutkimus)
 
  
 
@@ -67,13 +71,16 @@ Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketis
 
 **luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
 
-Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
+Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) 
+tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
 
-**Tärkeät linkit**
+**Tärkeät linkit - ISSP 2012 data**
 
-Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit Rmd-koodissa).
+Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit 
+Rmd-koodissa).
 
-www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista, joissa aineistoja on käytetty.
+www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista,
+joissa aineistoja on käytetty.
 
 www.gesis.org - tutkimuksen "sihteeristö", dokumentaatio ja datat.
 
@@ -86,11 +93,13 @@ Alla myös suora linkki
 **Linkitys dokumentteihin on hankalaa**
 
 * monta portaalia, joista pääsee monien organisaationimien taakse
-* tästä lyhyt selostus
-* tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeä **muuttujakuvaukset ja muut tiedot**
-* käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne kyllä säilyvät, tai jäljille pääsee.
+* tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeät **muuttujakuvaukset ja muut tiedot**
+* käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole
+järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne säilyvät,
+tai jäljille pääsee.
 
-**Edit** Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoittelilla. Voi laittaa taulukon tärkeimmistä dokumenteista, tarvittaessa liitteeksi (tiedostonimet ja kuvaus). Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.
+**Edit** Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoitteilla.
+Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.
 
 [Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
 https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
@@ -98,18 +107,29 @@ https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
 [Muuttujakuvaukset ja muut tiedot]
 (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
-**OK - täältä löytyy oikeastaan kaikki!** Suomenkielinen lomake (ZA5900_q_fi-fi.pdf) löytyy helpoiten täältä, samoin muu dokumnetaati tiedostoina. Veppisivuilla kerrotaan, mitä ne dokumentit ovat.
 
-[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) **vie vain aineiston dokumentoinnin etusivulle** https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e
+Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)
+Suomessa [yhteiskuntatieteellinen tietoarkisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD2820)
 
 
-[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/) **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
+**vie vain aineiston dokumentoinnin etusivulle** 
+https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e
+
+ **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
+[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
 
 Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900.
 **Dokumentointisivusto/katalogi, jossa helppo navigoida** zacat.gesis.org.
 
-Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.
+Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake,
+tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista
+maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset.
+Monitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain.
+"Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille.
+Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen
+laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.
 
 ```{r ISSPdocsTable, fig.cap="ISSP 2012: dokumentit"}
 issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
