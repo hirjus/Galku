@@ -3,6 +3,7 @@
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
 Uusi G1_1_data_fct1.Rmd tekee muunnokset.
+Siistitään tekstiä (**12.8.2020**)
 
 **Historiaa**
 
@@ -48,13 +49,14 @@ library(testthat)
 
 **Datan esittely ja kuvailut - tämä luku täysin uusiksi (24.9.18)**
 
+**edit 12.8.2020** käsitteet määriteltävä ennen käyttöä.
+
 **10.10.2018 maat ja muuttujat valittu.**
 
-1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä 
-jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä 
-johdantoluvussa.
+CA on eksploratiivinen ja graafinen(visuaalinen) menetelmä, peruskäsitteet esitellään
+rajatulla aineistolla. Se on kuitenkin oikea tutkimusaineisto kaikkine ongelmineen.
 
-2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin,
+CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin,
 siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. 
 **V** Benzecri:"kun data menee miljoonaan suuntaan".
 
@@ -63,9 +65,10 @@ siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan.
 4. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
 5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
-(esim. ekologia ja biologia, arkeologia, kielen tutkimus)
+(esim. ekologia ja biologia, arkeologia, kielen tutkimus). Kyselytutkmukset ovat 
+yksi selkeä menetelmän sovelluskohde. Muuttujat ovat usein kvalitatiivisia, ja 
+ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
 
- 
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 

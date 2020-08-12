@@ -8,7 +8,10 @@
 
 # 28.5.20 Miten pisteiden yhdistäminen janoilla kartalla. Ratkaisu segments() (8.6.20).
 
-# str(simpleCA1)
+# 4.7.20 Grafiikka ja taulukot kannattaa tehdä Rmd-versiolla? Tässä ca:n 
+# numeeristen tulosten pyörittelyä.
+
+str(simpleCA1)
 # List of 16
 # $ sv        : num [1:4] 0.3696 0.1646 0.1003 0.0774
 # $ nd        : logi NA
@@ -36,9 +39,48 @@
 str(simpleCA1$sv)
 class(simpleCA1$sv)
 simpleCA1$rowcoord
-simpleCA1$colcoord
+
+# caconv() 12.8.20 - konversioita ca/mca käyttämien datatyyppien välillä
+# rpm "response pattern matrix
+# Burt ei muunnu tyyppeihin ind tai rpm
+
+str(simpleCA1$N)
+simpleCA1$N
+caconv(simpleCA1$N, from = c("freq"), to = c("Burt") )
+# Miten tämä syntyy?
+koe1 <- caconv(simpleCA1$N, from = c("freq"), to = c("ind") )
+str(koe1)
+colSums(koe1)
+#V1.1 V1.2 V1.3 V1.4 V1.5 V1.6 V2.1 V2.2 V2.3 V2.4 V2.5 
+#2013  921 1714 1388 1110  997  810 1935 1367 2125 1906 
+# sarakkeina maat V1 ja vastaukset V2
+#
+# Kysymyksen Q1b vastaukset maittain
+#    S	s	?	e	E	Total
+# BE	191	451	438	552	381	2013
+# BG	118	395	205	190	13	921
+# DE	165	375	198	538	438	1714
+# DK	70	238	152	232	696	1388
+# FI	47	188	149	423	303	1110
+# HU	219	288	225	190	75	997
+# Total	810	1935 367 2125 1906 8143
+
+
+#cacoord() 12.8.20
+cacoordtest1 <- cacoord(simpleCA1, type = c("principal"),dim = c(1,2))
+str(cacoordtest1)
+cacoordtest1$rows
+cacoordtest1$columns
+
+#standardikoordinaattien summa ? (3.8.20)
+
+simpleCA1$rowcoord[1,] %>% sum() #yli dimensioiden (n=4)
+simpleCA1$rowcoord[,1] %>% sum() #yli rivien
+simpleCA1$rowmass %>% sum() # 1
+simpleCA1$N
+simpleCA1$colcoord 
 simpleCA1$sv
-summary(simple)
+summary(simpleCA1)
 
 # Yhdistä kaavaliitteeseen? (29.5.20)
 
@@ -58,8 +100,9 @@ simpleCA1$sv
 # neliöitä 
 
 simpleCA1.inert <- simpleCA1$sv^2 %>% sum()
-simpleCA1.inert
-
+simpleCA1.inert # rivi- ja sarakeinertioiden summat = kokonaisinertia
+simpleCA1$rowinertia %>% sum() 
+simpleCA1$colinertia %>% sum()
 # Inertia on myös Khii2 - testisuure jaettuna havaintojen lukumäärällä
 
 chisq.test(simpleCA1$N)$statistic / sum(simpleCA1$N)
@@ -73,7 +116,7 @@ rowsums(simpleCA1$rowcoord)
 rowsums(simpleCA1$colcoord)
 colSums(simpleCA1$colcoord)
 colSums(simpleCA1$rowcoord)
-simpleCA1$colcoord # %>% sum() ei kovin järkevä (13.6.20)
+
 diag(simpleCA1$sv) # (4 x 4)
 simpleCA1$rowcoord
 
@@ -86,7 +129,7 @@ simpleCA1.rpc
 # Mitäs nämä ovat? (13.6.20)
 rowsums(simpleCA1.rpc)
 colSums(simpleCA1.rpc)
-simpleCA1.rpc["FI",1:2]
+simpleCA1.rpc["FI",1:2] # rivipisteen principal-koordinaatit
 
 # Plot - objekti: pisteiden koordinaatit
 #testMapObj <- koordinaatit talteen (pc, sc)
@@ -122,10 +165,17 @@ lines(simpleCA1.rpc[,1],simpleCA1.rpc[,2])
 # HUOM! maagaCA1.rpc on matriisi
 
 maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
+
 # Nyt menee vaikeaksi! Järjestys BEf1...f6, BEm1...m6 ja maat 
 # BE(1:6, 7:12) BG(13:18, 19:24), 
 # DE (25:30, 31:36), DK(37:42, 43:48),FI(49:54, 55:60) 
 # HU(61:66, 67:72)
+
+# 12.8.2020 Maaga-kuvat Galku-projektiin
+# type = "b" lines-komennossa tuo pisteen
+# plot opitolla type=n piirtää pohjan, mutta pisteet varmaan käsityönä?
+# 
+
 maagaCA1.rpc
 X11()
 par(cex = 0.5)
@@ -149,10 +199,11 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
      lines(maagaCA1.rpc[67:72,1],maagaCA1.rpc[67:72,2], col="red")  #HUm
 
 #Yritys zoomaukseen, pelkkä kuvakehys type = "n"     
-#     plot(rbind(maagaCA1.rpc,maagaCA1.cpc), type = "n",  xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
-#          main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-#          sub = "osa symmetristä karttaa"
-#     )
+    plot(rbind(maagaCA1.rpc,maagaCA1.cpc), type = "n",  xlim = c(-0.75,0.37), 
+         ylim = c(-0.75,0.37),
+          main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+          sub = "osa symmetristä karttaa"
+     )
      
 # Jospa plot-kuva talteen?
 
@@ -178,7 +229,7 @@ Epoint
 x
 y1
 
-# pc -> sc - esimerkki (MG2017 laskarit)
+# pc -> sc - esimerkki (MG2017 laskarit) - hyödyllistä laskentaa
 
 simpleCA1.results <- summary(simpleCA1)
 simpleCA1.results
@@ -188,7 +239,9 @@ str(simpleCA1.results$rows)
 
 str(simpleCA1.results$scree)
 
-simpleCA1.results$scree # ensimmäinen sarake dimensio, toinen ominaisarvot
+# ensimmäinen sarake dimensio, toinen ominaisarvot
+simpleCA1.results$scree 
+
 # ominaisarvot = principal inertias
 simpleCA1.oarv <- simpleCA1.results$scree[,2]
 simpleCA1.oarv

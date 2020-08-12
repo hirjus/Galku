@@ -226,7 +226,7 @@ window.initializeCodeFolding = function(show) {
   var currentIndex = 1;
 
   // select all R code blocks
-  var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia');
+  var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia, pre.foldable');
   rCodeBlocks.each(function() {
 
     // create a collapsable div to wrap the code in
@@ -453,7 +453,7 @@ summary {
 
 <h1 class="title toc-ignore">G Luku 1 Yksinkertainen korrespondenssianalyysi</h1>
 <h4 class="author">Jussi Hirvonen</h4>
-<h4 class="date">versio 1.5.7, tulostettu 2020-06-14</h4>
+<h4 class="date">versio 1.5.7, tulostettu 2020-07-22</h4>
 
 </div>
 
@@ -514,7 +514,7 @@ summary {
 <p><strong>6.12.2018 1.5.1</strong> - as_factor - funktio käyttöön; testaillaan miten toimii kun (a) user_na - arvoja ei lueta ja (b) puuttuvat ovat mukana.</p>
 <p><strong>Muistilista:</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Taulukot ja kuvat luvusta 2. alkaen eivät ole “bookdown-muodossa”. CA-tulokset on tulostettu siiteinä taulukoina Bookdown-demo - dokumentissa. Voi tulostaa myös ca-outputin. Ominaisarvojen taulukko keskeneräinen, samoin “scree plot” kuvana puuttuu.</p></li>
+<li><p>Taulukot ja kuvat luvusta 2. alkaen eivät ole “bookdown-muodossa”. CA-tulokset on tulostettu siisteinä taulukoina Bookdown-demo - dokumentissa. Voi tulostaa myös ca-outputin. Ominaisarvojen taulukko keskeneräinen, samoin “scree plot” kuvana puuttuu.</p></li>
 <li><p>Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja ottaa capaper-dokkariin include_graphics - funktiolla.</p></li>
 <li><p>Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion tuloksista suoraan)</p></li>
 </ol>
@@ -564,7 +564,7 @@ summary {
 <p><strong>Datan esittely ja kuvailut - tämä luku täysin uusiksi (24.9.18)</strong></p>
 <p><strong>10.10.2018 maat ja muuttujat valittu.</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. <strong>edit</strong> Eksp&amp;graaf menetelmät määriteltävä johdantoluvussa. Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketissa.</p></li>
+<li><p>Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. <strong>edit</strong> Eksp&amp;graaf menetelmät määriteltävä johdantoluvussa.</p></li>
 <li><p>CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin, siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. <strong>V</strong> Benzecri:“kun data menee miljoonaan suuntaan”.</p></li>
 <li><p>Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet</p></li>
 <li><p>Laadukkaan ja hyvin dokumentoidun aineiston edut</p></li>
@@ -575,7 +575,7 @@ summary {
 <h2><span class="header-section-number">1.2</span> Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012</h2>
 <p><strong>luvun pitäisi olla mahdollisimman lyhyt (5.12.18)</strong></p>
 <p>Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *</p>
-<p><strong>Tärkeät linkit</strong></p>
+<p><strong>Tärkeät linkit - ISSP 2012 data</strong></p>
 <p>Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit Rmd-koodissa).</p>
 <p>www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista, joissa aineistoja on käytetty.</p>
 <p>www.gesis.org - tutkimuksen “sihteeristö”, dokumentaatio ja datat.</p>
@@ -584,17 +584,17 @@ summary {
 <p><strong>Linkitys dokumentteihin on hankalaa</strong></p>
 <ul>
 <li>monta portaalia, joista pääsee monien organisaationimien taakse</li>
-<li>tästä lyhyt selostus</li>
-<li>tärkeimmät linkit ISSP-tutkimuksen “kotisivu” ja selkeä <strong>muuttujakuvaukset ja muut tiedot</strong></li>
-<li>käytännössä linkittäminen “syvälle” johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne kyllä säilyvät, tai jäljille pääsee.</li>
+<li>tärkeimmät linkit ISSP-tutkimuksen “kotisivu” ja selkeät <strong>muuttujakuvaukset ja muut tiedot</strong></li>
+<li>käytännössä linkittäminen “syvälle” johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne säilyvät, tai jäljille pääsee.</li>
 </ul>
-<p><strong>Edit</strong> Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoittelilla. Voi laittaa taulukon tärkeimmistä dokumenteista, tarvittaessa liitteeksi (tiedostonimet ja kuvaus). Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.</p>
+<p><strong>Edit</strong> Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoitteilla. Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.</p>
 <p><a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e">Aineistot</a> <a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e2012" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e2012</a> <strong>toimii</strong></p>
-<p>[Muuttujakuvaukset ja muut tiedot] (<a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>) <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a> <strong>OK - täältä löytyy oikeastaan kaikki!</strong> Suomenkielinen lomake (ZA5900_q_fi-fi.pdf) löytyy helpoiten täältä, samoin muu dokumnetaati tiedostoina. Veppisivuilla kerrotaan, mitä ne dokumentit ovat.</p>
+<p>[Muuttujakuvaukset ja muut tiedot] (<a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>) <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a></p>
+<p>Suomenkielinen lomake (ZA5900_q_fi-fi.pdf) Suomessa <a href="http://urn.fi/urn:nbn:fi:fsd:T-FSD2820">yhteiskuntatieteellinen tietoarkisto</a></p>
 <p><a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e">Data ja dokumentit</a> <strong>vie vain aineiston dokumentoinnin etusivulle</strong> <a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e" class="uri">https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&amp;db=e</a></p>
-<p><a href="https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/">Käyttöehdot:</a> <strong>GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt</strong></p>
+<p><strong>GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt</strong> <a href="https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/">Käyttöehdot:</a></p>
 <p>Havaintojen lukumäärät voi tarkistaa <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900">täältä</a> <a href="http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900" class="uri">http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900</a>. <strong>Dokumentointisivusto/katalogi, jossa helppo navigoida</strong> zacat.gesis.org.</p>
-<p>Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. “Code book” kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.</p>
+<p>Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. Monitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. “Code book” kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.</p>
 <pre class="r"><code>issp_docname &lt;- c(&quot;Variable Report&quot;, &quot;Study Monitoring Report&quot;,&quot;Basic Questionnaire&quot;, 
                   &quot;Contents of ISSP 2012 module&quot;, &quot;Questionnaire Development&quot;)
 issp_docdesc &lt;- c(&quot;Perusdokumentti, muuttujien kuvaukset ja taulukot&quot;, 
@@ -616,6 +616,11 @@ ISSPdocsT.tbl &lt;- tibble(issp_docname, issp_docdesc, issp_docfile)
 colnames(ISSPdocsT.tbl) &lt;- col_isspdocs
 knitr::kable(ISSPdocsT.tbl, booktab = TRUE)</code></pre>
 <table>
+<colgroup>
+<col width="21%"></col>
+<col width="36%"></col>
+<col width="42%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">dokumentti</th>
@@ -1173,6 +1178,10 @@ colnames(jhVarTable1_fi.tbl) &lt;- cols_jhVarTable1
 knitr::kable(jhVarTable1.tbl, booktab = TRUE,
                fig.cap = &quot;ISSP2012:Työelämä ja perhearvot - valitut muuttujat&quot;)</code></pre>
 <table>
+<colgroup>
+<col width="9%"></col>
+<col width="90%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">muuttuja</th>
@@ -1259,6 +1268,10 @@ knitr::kable(jhVarTable1.tbl, booktab = TRUE,
 knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
               fig.cap = &quot;ISSP2012: suomenkielisen lomakkeen kysymykset&quot;)</code></pre>
 <table>
+<colgroup>
+<col width="6%"></col>
+<col width="93%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">muuttuja</th>
@@ -1271,8 +1284,8 @@ knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
 <td align="left">Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän</td>
 </tr>
 <tr class="even">
-<td align="left"></td>
 <td align="left">ja turvallisen suhteen kuin äiti, joka ei käy työssä</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">V6</td>
@@ -1287,8 +1300,8 @@ knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
 <td align="left">Q1d On hyvä käydä töissä mutta tosiasiassa useimmat naiset haluavat</td>
 </tr>
 <tr class="even">
-<td align="left"></td>
 <td align="left">ensisijaisesti kodin ja lapsia.</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">V9</td>
@@ -1307,16 +1320,16 @@ knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
 <td align="left">Q3a Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?</td>
 </tr>
 <tr class="odd">
-<td align="left"></td>
 <td align="left">Kun perheessä on alle kouluikäinen lapsi</td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">V13</td>
 <td align="left">Q3b Millä tavoin naisten pitäisi mielestäsi käydä työssä seuraavissa tilanteissa?</td>
 </tr>
 <tr class="odd">
-<td align="left"></td>
 <td align="left">Kun nuorin lapsi on aloittanut koulunkäynnin</td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -1649,7 +1662,36 @@ ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriv
 ## $display_width
 ## [1] 22</code></pre>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% tableX(C_ALPHAN, maa)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="9%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="4%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">C_ALPHAN/maa</th>
@@ -2440,6 +2482,39 @@ ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriv
 </table>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% tableX(C_ALPHAN, maa3)</code></pre>
 <table>
+<colgroup>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="10%"></col>
+<col width="12%"></col>
+<col width="1%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">C_ALPHAN/maa3</th>
@@ -3337,7 +3412,40 @@ ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriv
 </tbody>
 </table>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% tableX(maa, maa3)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="10%"></col>
+<col width="12%"></col>
+<col width="1%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">maa/maa3</th>
@@ -4235,7 +4343,40 @@ ISSP2012jh1d.dat$maa3 %&gt;% fct_count() # miksi ei tulosta? Tulostaa komentoriv
 </tbody>
 </table>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% tableX(V3, maa3)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="10%"></col>
+<col width="12%"></col>
+<col width="1%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">V3/maa3</th>
@@ -5496,22 +5637,22 @@ tableC(AGE, ika,cor_type = &quot;pearson&quot;, na.rm = FALSE, rounding = 5,
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th></th>
+<th align="left"></th>
+<th align="left"></th>
 <th align="left">[1]</th>
 <th align="left">[2]</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>[1]AGE</td>
-<td>[1]AGE</td>
+<td align="left">[1]AGE</td>
+<td align="left">[1]AGE</td>
 <td align="left">1.00</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td>[2]ika</td>
-<td>[2]ika</td>
+<td align="left">[2]ika</td>
+<td align="left">[2]ika</td>
 <td align="left">1.00</td>
 <td align="left">1.00</td>
 </tr>
@@ -5560,104 +5701,116 @@ ISSP2012jh1d.dat %&gt;%
     select(Q1a1, Q1b1, Q1c1,Q1d1,Q1e1, Q2a1, Q2b1, Q3a1,Q3b1) %&gt;% 
     summary()</code></pre>
 <table>
+<colgroup>
+<col width="0%"></col>
+<col width="10%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="10%"></col>
+<col width="9%"></col>
+<col width="14%"></col>
+<col width="14%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">Q1a1</th>
-<th align="center">Q1b1</th>
-<th align="center">Q1c1</th>
-<th align="center">Q1d1</th>
-<th align="center">Q1e1</th>
-<th align="center">Q2a1</th>
-<th align="center">Q2b1</th>
-<th align="center">Q3a1</th>
-<th align="center">Q3b1</th>
+<th align="left"></th>
+<th align="left">Q1a1</th>
+<th align="left">Q1b1</th>
+<th align="left">Q1c1</th>
+<th align="left">Q1d1</th>
+<th align="left">Q1e1</th>
+<th align="left">Q2a1</th>
+<th align="left">Q2b1</th>
+<th align="left">Q3a1</th>
+<th align="left">Q3b1</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Agree :12352</td>
-<td align="center">Disagree :9003</td>
-<td align="center">Disagree :8706</td>
-<td align="center">Disagree :7863</td>
-<td align="center">Agree :8342</td>
-<td align="center">Agree :13464</td>
-<td align="center">Disagree :9210</td>
-<td align="center">Work full-time : 5373</td>
-<td align="center">Work full-time :13722</td>
+<td align="left"></td>
+<td align="left">Agree :12352</td>
+<td align="left">Disagree :9003</td>
+<td align="left">Disagree :8706</td>
+<td align="left">Disagree :7863</td>
+<td align="left">Agree :8342</td>
+<td align="left">Agree :13464</td>
+<td align="left">Disagree :9210</td>
+<td align="left">Work full-time : 5373</td>
+<td align="left">Work full-time :13722</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Strongly agree :11116</td>
-<td align="center">Agree :8389</td>
-<td align="center">Agree :8263</td>
-<td align="center">Agree :7672</td>
-<td align="center">Neither agree nor disagree:7841</td>
-<td align="center">Strongly agree :11305</td>
-<td align="center">Strongly disagree :8917</td>
-<td align="center">Work part-time :15655</td>
-<td align="center">Work part-time :13817</td>
+<td align="left"></td>
+<td align="left">Strongly agree :11116</td>
+<td align="left">Agree :8389</td>
+<td align="left">Agree :8263</td>
+<td align="left">Agree :7672</td>
+<td align="left">Neither agree nor disagree:7841</td>
+<td align="left">Strongly agree :11305</td>
+<td align="left">Strongly disagree :8917</td>
+<td align="left">Work part-time :15655</td>
+<td align="left">Work part-time :13817</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Disagree : 4074</td>
-<td align="center">Neither agree nor disagree:5949</td>
-<td align="center">Neither agree nor disagree:6000</td>
-<td align="center">Neither agree nor disagree:7403</td>
-<td align="center">Disagree :7267</td>
-<td align="center">Neither agree nor disagree: 5039</td>
-<td align="center">Neither agree nor disagree:6109</td>
-<td align="center">Stay at home : 8367</td>
-<td align="center">Stay at home : 1762</td>
+<td align="left"></td>
+<td align="left">Disagree : 4074</td>
+<td align="left">Neither agree nor disagree:5949</td>
+<td align="left">Neither agree nor disagree:6000</td>
+<td align="left">Neither agree nor disagree:7403</td>
+<td align="left">Disagree :7267</td>
+<td align="left">Neither agree nor disagree: 5039</td>
+<td align="left">Neither agree nor disagree:6109</td>
+<td align="left">Stay at home : 8367</td>
+<td align="left">Stay at home : 1762</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Neither agree nor disagree: 3382</td>
-<td align="center">Strongly disagree :5547</td>
-<td align="center">Strongly disagree :5960</td>
-<td align="center">Strongly disagree :5016</td>
-<td align="center">Strongly disagree :3462</td>
-<td align="center">Disagree : 1929</td>
-<td align="center">Agree :5164</td>
-<td align="center">TW: women should decide : 0</td>
-<td align="center">TW: women should decide : 0</td>
+<td align="left"></td>
+<td align="left">Neither agree nor disagree: 3382</td>
+<td align="left">Strongly disagree :5547</td>
+<td align="left">Strongly disagree :5960</td>
+<td align="left">Strongly disagree :5016</td>
+<td align="left">Strongly disagree :3462</td>
+<td align="left">Disagree : 1929</td>
+<td align="left">Agree :5164</td>
+<td align="left">TW: women should decide : 0</td>
+<td align="left">TW: women should decide : 0</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Strongly disagree : 1051</td>
-<td align="center">Strongly agree :2747</td>
-<td align="center">Strongly agree :2838</td>
-<td align="center">Strongly agree :2818</td>
-<td align="center">Strongly agree :3357</td>
-<td align="center">Strongly disagree : 403</td>
-<td align="center">Strongly agree :2704</td>
-<td align="center">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
-<td align="center">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
+<td align="left"></td>
+<td align="left">Strongly disagree : 1051</td>
+<td align="left">Strongly agree :2747</td>
+<td align="left">Strongly agree :2838</td>
+<td align="left">Strongly agree :2818</td>
+<td align="left">Strongly agree :3357</td>
+<td align="left">Strongly disagree : 403</td>
+<td align="left">Strongly agree :2704</td>
+<td align="left">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
+<td align="left">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">No answer : 0</td>
-<td align="center">No answer : 0</td>
+<td align="left"></td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">No answer : 0</td>
+<td align="left">No answer : 0</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">NA’s : 848</td>
-<td align="center">NA’s :1188</td>
-<td align="center">NA’s :1056</td>
-<td align="center">NA’s :2051</td>
-<td align="center">NA’s :2554</td>
-<td align="center">NA’s : 683</td>
-<td align="center">NA’s : 719</td>
-<td align="center">NA’s : 3428</td>
-<td align="center">NA’s : 3522</td>
+<td align="left"></td>
+<td align="left">NA’s : 848</td>
+<td align="left">NA’s :1188</td>
+<td align="left">NA’s :1056</td>
+<td align="left">NA’s :2051</td>
+<td align="left">NA’s :2554</td>
+<td align="left">NA’s : 683</td>
+<td align="left">NA’s : 719</td>
+<td align="left">NA’s : 3428</td>
+<td align="left">NA’s : 3522</td>
 </tr>
 </tbody>
 </table>
@@ -5665,80 +5818,89 @@ ISSP2012jh1d.dat %&gt;%
     select(edu1,msta1, sosta1, nchild1, lifsta1, urbru1) %&gt;% 
     summary()</code></pre>
 <table>
+<colgroup>
+<col width="0%"></col>
+<col width="34%"></col>
+<col width="20%"></col>
+<col width="4%"></col>
+<col width="5%"></col>
+<col width="20%"></col>
+<col width="13%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">edu1</th>
-<th align="center">msta1</th>
-<th align="center">sosta1</th>
-<th align="center">nchild1</th>
-<th align="center">lifsta1</th>
-<th align="center">urbru1</th>
+<th align="left"></th>
+<th align="left">edu1</th>
+<th align="left">msta1</th>
+<th align="left">sosta1</th>
+<th align="left">nchild1</th>
+<th align="left">lifsta1</th>
+<th align="left">urbru1</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="center">A town or a small city :9203</td>
+<td align="left"></td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A town or a small city :9203</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="center">A country village :8646</td>
+<td align="left"></td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">A country village :8646</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner: 2997</td>
-<td align="center">A big city :8442</td>
+<td align="left"></td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner: 2997</td>
+<td align="left">A big city :8442</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">3 : 598</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="center">The suburbs or outskirts of a big city:4386</td>
+<td align="left"></td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">3 : 598</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">4 : 117</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="center">A farm or home in the country :1902</td>
+<td align="left"></td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">4 : 117</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">A farm or home in the country :1902</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">(Other) :2022</td>
-<td align="center">(Other) : 1775</td>
-<td align="center">(Other):4758</td>
-<td align="center">(Other) : 45</td>
-<td align="center">(Other) : 486</td>
-<td align="center">(Other) : 0</td>
+<td align="left"></td>
+<td align="left">(Other) :2022</td>
+<td align="left">(Other) : 1775</td>
+<td align="left">(Other):4758</td>
+<td align="left">(Other) : 45</td>
+<td align="left">(Other) : 486</td>
+<td align="left">(Other) : 0</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">NA’s : 308</td>
-<td align="center">NA’s : 370</td>
-<td align="center">NA’s :1777</td>
-<td align="center">NA’s : 940</td>
-<td align="center">NA’s : 434</td>
-<td align="center">NA’s : 244</td>
+<td align="left"></td>
+<td align="left">NA’s : 308</td>
+<td align="left">NA’s : 370</td>
+<td align="left">NA’s :1777</td>
+<td align="left">NA’s : 940</td>
+<td align="left">NA’s : 434</td>
+<td align="left">NA’s : 244</td>
 </tr>
 </tbody>
 </table>
@@ -5787,497 +5949,558 @@ ISSP2012jh1d.dat &lt;- ISSP2012jh1d.dat %&gt;%
 # Tarkistuksia 1
 
 ISSP2012jh1d.dat %&gt;% summary()</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+<col width="6%"></col>
+<col width="3%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="6%"></col>
+<col width="3%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="6%"></col>
+<col width="2%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">V1</th>
-<th align="center">V2</th>
-<th align="center">DOI</th>
-<th align="center">V3</th>
-<th align="right">V4 C</th>
-<th align="left">_ALPHAN</th>
-<th align="center">V5</th>
-<th align="center">V6</th>
-<th align="center">V7</th>
-<th align="center">V8</th>
-<th align="center">V9</th>
-<th align="center">V10</th>
-<th align="center">V11</th>
-<th align="center">V12</th>
-<th align="center">V13</th>
-<th align="center">SEX</th>
-<th align="center">AGE</th>
-<th align="center">DEGREE</th>
+<th align="left"></th>
+<th align="left">V1</th>
+<th align="left">V2</th>
+<th align="left">DOI</th>
+<th align="left">V3</th>
+<th align="left">V4</th>
+<th align="left">C_ALPHAN</th>
+<th align="left">V5</th>
+<th align="left">V6</th>
+<th align="left">V7</th>
+<th align="left">V8</th>
+<th align="left">V9</th>
+<th align="left">V10</th>
+<th align="left">V11</th>
+<th align="left">V12</th>
+<th align="left">V13</th>
+<th align="left">SEX</th>
+<th align="left">AGE</th>
+<th align="left">DEGREE</th>
 <th align="left">MAINSTAT</th>
-<th align="center">TOPBOT</th>
+<th align="left">TOPBOT</th>
 <th align="left">HHCHILDR</th>
 <th align="left">MARITAL</th>
 <th align="left">URBRURAL</th>
-<th align="center">maa</th>
-<th align="center">maa3</th>
-<th align="right">sp1 sp</th>
-<th></th>
-<th align="center">ika</th>
-<th align="center">Q1a1</th>
-<th align="center">Q1b1</th>
-<th align="center">Q1c1</th>
-<th align="center">Q1d1</th>
-<th align="center">Q1e1</th>
-<th align="center">Q2a1</th>
-<th align="center">Q2b1</th>
-<th align="center">Q3a1</th>
-<th align="center">Q3b1</th>
-<th align="center">edu1</th>
-<th align="center">msta1</th>
-<th align="center">sosta1</th>
-<th align="center">nchild1</th>
-<th align="center">lifsta1</th>
-<th align="center">urbru1</th>
-<th align="center">Q1a</th>
-<th align="center">Q1b</th>
-<th align="center">Q1c</th>
-<th align="center">Q1d</th>
-<th align="center">Q1e</th>
-<th align="center">Q2a</th>
-<th align="center">Q2b</th>
-<th align="center">Q3a</th>
-<th align="center">Q3b</th>
-<th align="center">edu</th>
-<th align="center">msta</th>
-<th align="center">sosta</th>
-<th align="center">nchild</th>
-<th align="center">lifsta</th>
-<th align="center">urbru</th>
+<th align="left">maa</th>
+<th align="left">maa3</th>
+<th align="left">sp1</th>
+<th align="left">sp</th>
+<th align="left">ika</th>
+<th align="left">Q1a1</th>
+<th align="left">Q1b1</th>
+<th align="left">Q1c1</th>
+<th align="left">Q1d1</th>
+<th align="left">Q1e1</th>
+<th align="left">Q2a1</th>
+<th align="left">Q2b1</th>
+<th align="left">Q3a1</th>
+<th align="left">Q3b1</th>
+<th align="left">edu1</th>
+<th align="left">msta1</th>
+<th align="left">sosta1</th>
+<th align="left">nchild1</th>
+<th align="left">lifsta1</th>
+<th align="left">urbru1</th>
+<th align="left">Q1a</th>
+<th align="left">Q1b</th>
+<th align="left">Q1c</th>
+<th align="left">Q1d</th>
+<th align="left">Q1e</th>
+<th align="left">Q2a</th>
+<th align="left">Q2b</th>
+<th align="left">Q3a</th>
+<th align="left">Q3b</th>
+<th align="left">edu</th>
+<th align="left">msta</th>
+<th align="left">sosta</th>
+<th align="left">nchild</th>
+<th align="left">lifsta</th>
+<th align="left">urbru</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Min. :5900</td>
-<td align="center">Length:32823</td>
-<td align="center">Length:32823</td>
-<td align="center">Min. : 36</td>
-<td align="right">Min. : 36.0</td>
+<td align="left"></td>
+<td align="left">Min. :5900</td>
 <td align="left">Length:32823</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. : 15.00</td>
-<td align="center">Min. :0.00</td>
+<td align="left">Length:32823</td>
+<td align="left">Min. : 36</td>
+<td align="left">Min. : 36.0</td>
+<td align="left">Length:32823</td>
 <td align="left">Min. :1.000</td>
-<td align="center">Min. : 1.00</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. : 15.00</td>
+<td align="left">Min. :0.00</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. : 1.00</td>
 <td align="left">Min. : 0.0000</td>
 <td align="left">Min. :1.000</td>
 <td align="left">Min. :1.000</td>
-<td align="center">FR : 2409</td>
-<td align="center">FR-France : 2409</td>
-<td align="right">Male :14789</td>
-<td>m:14789</td>
-<td align="center">Min. : 15.00</td>
-<td align="center">Agree :12352</td>
-<td align="center">Disagree :9003</td>
-<td align="center">Disagree :8706</td>
-<td align="center">Disagree :7863</td>
-<td align="center">Agree :8342</td>
-<td align="center">Agree :13464</td>
-<td align="center">Disagree :9210</td>
-<td align="center">Work full-time : 5373</td>
-<td align="center">Work full-time :13722</td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="center">A town or a small city :9203</td>
-<td align="center">Strongly agree :11116</td>
-<td align="center">Strongly agree :2747</td>
-<td align="center">Strongly agree :2838</td>
-<td align="center">Strongly agree :2818</td>
-<td align="center">Strongly agree :3357</td>
-<td align="center">Strongly agree :11305</td>
-<td align="center">Strongly agree :2704</td>
-<td align="center">Work full-time: 5373</td>
-<td align="center">Work full-time:13722</td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="center">A big city :8442</td>
+<td align="left">FR : 2409</td>
+<td align="left">FR-France : 2409</td>
+<td align="left">Male :14789</td>
+<td align="left">m:14789</td>
+<td align="left">Min. : 15.00</td>
+<td align="left">Agree :12352</td>
+<td align="left">Disagree :9003</td>
+<td align="left">Disagree :8706</td>
+<td align="left">Disagree :7863</td>
+<td align="left">Agree :8342</td>
+<td align="left">Agree :13464</td>
+<td align="left">Disagree :9210</td>
+<td align="left">Work full-time : 5373</td>
+<td align="left">Work full-time :13722</td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A town or a small city :9203</td>
+<td align="left">Strongly agree :11116</td>
+<td align="left">Strongly agree :2747</td>
+<td align="left">Strongly agree :2838</td>
+<td align="left">Strongly agree :2818</td>
+<td align="left">Strongly agree :3357</td>
+<td align="left">Strongly agree :11305</td>
+<td align="left">Strongly agree :2704</td>
+<td align="left">Work full-time: 5373</td>
+<td align="left">Work full-time:13722</td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A big city :8442</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">1st Qu.:5900</td>
-<td align="center">Class :character</td>
-<td align="center">Class :character</td>
-<td align="center">1st Qu.: 208</td>
-<td align="right">1st Qu.:203.0</td>
+<td align="left"></td>
+<td align="left">1st Qu.:5900</td>
 <td align="left">Class :character</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:3.000</td>
-<td align="center">1st Qu.:2.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.:1.000</td>
-<td align="center">1st Qu.: 36.00</td>
-<td align="center">1st Qu.:2.00</td>
+<td align="left">Class :character</td>
+<td align="left">1st Qu.: 208</td>
+<td align="left">1st Qu.:203.0</td>
+<td align="left">Class :character</td>
 <td align="left">1st Qu.:1.000</td>
-<td align="center">1st Qu.: 5.00</td>
+<td align="left">1st Qu.:2.000</td>
+<td align="left">1st Qu.:2.000</td>
+<td align="left">1st Qu.:2.000</td>
+<td align="left">1st Qu.:2.000</td>
+<td align="left">1st Qu.:1.000</td>
+<td align="left">1st Qu.:3.000</td>
+<td align="left">1st Qu.:2.000</td>
+<td align="left">1st Qu.:1.000</td>
+<td align="left">1st Qu.:1.000</td>
+<td align="left">1st Qu.: 36.00</td>
+<td align="left">1st Qu.:2.00</td>
+<td align="left">1st Qu.:1.000</td>
+<td align="left">1st Qu.: 5.00</td>
 <td align="left">1st Qu.: 0.0000</td>
 <td align="left">1st Qu.:1.000</td>
 <td align="left">1st Qu.:1.000</td>
-<td align="center">BE : 2192</td>
-<td align="center">CZ-Czech Republic: 1804</td>
-<td align="right">Female :18034</td>
-<td>f:18034</td>
-<td align="center">1st Qu.: 36.00</td>
-<td align="center">Strongly agree :11116</td>
-<td align="center">Agree :8389</td>
-<td align="center">Agree :8263</td>
-<td align="center">Agree :7672</td>
-<td align="center">Neither agree nor disagree:7841</td>
-<td align="center">Strongly agree :11305</td>
-<td align="center">Strongly disagree :8917</td>
-<td align="center">Work part-time :15655</td>
-<td align="center">Work part-time :13817</td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="center">A country village :8646</td>
-<td align="center">Agree :12352</td>
-<td align="center">Agree :8389</td>
-<td align="center">Agree :8263</td>
-<td align="center">Agree :7672</td>
-<td align="center">Agree :8342</td>
-<td align="center">Agree :13464</td>
-<td align="center">Agree :5164</td>
-<td align="center">Work part-time:15655</td>
-<td align="center">Work part-time:13817</td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="center">The suburbs or outskirts of a big city:4386</td>
+<td align="left">BE : 2192</td>
+<td align="left">CZ-Czech Republic: 1804</td>
+<td align="left">Female :18034</td>
+<td align="left">f:18034</td>
+<td align="left">1st Qu.: 36.00</td>
+<td align="left">Strongly agree :11116</td>
+<td align="left">Agree :8389</td>
+<td align="left">Agree :8263</td>
+<td align="left">Agree :7672</td>
+<td align="left">Neither agree nor disagree:7841</td>
+<td align="left">Strongly agree :11305</td>
+<td align="left">Strongly disagree :8917</td>
+<td align="left">Work part-time :15655</td>
+<td align="left">Work part-time :13817</td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">A country village :8646</td>
+<td align="left">Agree :12352</td>
+<td align="left">Agree :8389</td>
+<td align="left">Agree :8263</td>
+<td align="left">Agree :7672</td>
+<td align="left">Agree :8342</td>
+<td align="left">Agree :13464</td>
+<td align="left">Agree :5164</td>
+<td align="left">Work part-time:15655</td>
+<td align="left">Work part-time:13817</td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Median :5900</td>
-<td align="center">Mode :character</td>
-<td align="center">Mode :character</td>
-<td align="center">Median : 428</td>
-<td align="right">Median :276.0</td>
+<td align="left"></td>
+<td align="left">Median :5900</td>
 <td align="left">Mode :character</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :4.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median :2.000</td>
-<td align="center">Median : 50.00</td>
-<td align="center">Median :3.00</td>
+<td align="left">Mode :character</td>
+<td align="left">Median : 428</td>
+<td align="left">Median :276.0</td>
+<td align="left">Mode :character</td>
+<td align="left">Median :2.000</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :2.000</td>
+<td align="left">Median :4.000</td>
+<td align="left">Median :2.000</td>
+<td align="left">Median :2.000</td>
+<td align="left">Median :2.000</td>
+<td align="left">Median : 50.00</td>
+<td align="left">Median :3.00</td>
 <td align="left">Median :1.000</td>
-<td align="center">Median : 6.00</td>
+<td align="left">Median : 6.00</td>
 <td align="left">Median : 0.0000</td>
 <td align="left">Median :1.000</td>
 <td align="left">Median :3.000</td>
-<td align="center">CZ : 1804</td>
-<td align="center">AU-Australia : 1557</td>
-<td align="right">No answer: 0</td>
-<td>NA</td>
-<td align="center">Median : 50.00</td>
-<td align="center">Disagree : 4074</td>
-<td align="center">Neither agree nor disagree:5949</td>
-<td align="center">Neither agree nor disagree:6000</td>
-<td align="center">Neither agree nor disagree:7403</td>
-<td align="center">Disagree :7267</td>
-<td align="center">Neither agree nor disagree: 5039</td>
-<td align="center">Neither agree nor disagree:6109</td>
-<td align="center">Stay at home : 8367</td>
-<td align="center">Stay at home : 1762</td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner: 2997</td>
-<td align="center">A big city :8442</td>
-<td align="center">Neither agree nor disagree: 3382</td>
-<td align="center">Neither agree nor disagree:5949</td>
-<td align="center">Neither agree nor disagree:6000</td>
-<td align="center">Neither agree nor disagree:7403</td>
-<td align="center">Neither agree nor disagree:7841</td>
-<td align="center">Neither agree nor disagree: 5039</td>
-<td align="center">Neither agree nor disagree:6109</td>
-<td align="center">Stay at home : 8367</td>
-<td align="center">Stay at home : 1762</td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
-<td align="center">A town or a small city :9203</td>
+<td align="left">CZ : 1804</td>
+<td align="left">AU-Australia : 1557</td>
+<td align="left">No answer: 0</td>
+<td align="left">NA</td>
+<td align="left">Median : 50.00</td>
+<td align="left">Disagree : 4074</td>
+<td align="left">Neither agree nor disagree:5949</td>
+<td align="left">Neither agree nor disagree:6000</td>
+<td align="left">Neither agree nor disagree:7403</td>
+<td align="left">Disagree :7267</td>
+<td align="left">Neither agree nor disagree: 5039</td>
+<td align="left">Neither agree nor disagree:6109</td>
+<td align="left">Stay at home : 8367</td>
+<td align="left">Stay at home : 1762</td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner: 2997</td>
+<td align="left">A big city :8442</td>
+<td align="left">Neither agree nor disagree: 3382</td>
+<td align="left">Neither agree nor disagree:5949</td>
+<td align="left">Neither agree nor disagree:6000</td>
+<td align="left">Neither agree nor disagree:7403</td>
+<td align="left">Neither agree nor disagree:7841</td>
+<td align="left">Neither agree nor disagree: 5039</td>
+<td align="left">Neither agree nor disagree:6109</td>
+<td align="left">Stay at home : 8367</td>
+<td align="left">Stay at home : 1762</td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
+<td align="left">A town or a small city :9203</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Mean :5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">Mean : 4063</td>
-<td align="right">Mean :362.1</td>
+<td align="left"></td>
+<td align="left">Mean :5900</td>
 <td align="left">NA</td>
-<td align="center">Mean :2.112</td>
-<td align="center">Mean :3.196</td>
-<td align="center">Mean :3.211</td>
-<td align="center">Mean :3.149</td>
-<td align="center">Mean :2.971</td>
-<td align="center">Mean :1.963</td>
-<td align="center">Mean :3.513</td>
-<td align="center">Mean :2.102</td>
-<td align="center">Mean :1.592</td>
-<td align="center">Mean :1.549</td>
-<td align="center">Mean : 49.52</td>
-<td align="center">Mean :3.55</td>
+<td align="left">NA</td>
+<td align="left">Mean : 4063</td>
+<td align="left">Mean :362.1</td>
+<td align="left">NA</td>
+<td align="left">Mean :2.112</td>
+<td align="left">Mean :3.196</td>
+<td align="left">Mean :3.211</td>
+<td align="left">Mean :3.149</td>
+<td align="left">Mean :2.971</td>
+<td align="left">Mean :1.963</td>
+<td align="left">Mean :3.513</td>
+<td align="left">Mean :2.102</td>
+<td align="left">Mean :1.592</td>
+<td align="left">Mean :1.549</td>
+<td align="left">Mean : 49.52</td>
+<td align="left">Mean :3.55</td>
 <td align="left">Mean :2.887</td>
-<td align="center">Mean : 5.68</td>
+<td align="left">Mean : 5.68</td>
 <td align="left">Mean : 0.3832</td>
 <td align="left">Mean :2.844</td>
 <td align="left">Mean :2.729</td>
-<td align="center">DE : 1761</td>
-<td align="center">RU-Russia : 1525</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td align="center">Mean : 49.52</td>
-<td align="center">Neither agree nor disagree: 3382</td>
-<td align="center">Strongly disagree :5547</td>
-<td align="center">Strongly disagree :5960</td>
-<td align="center">Strongly disagree :5016</td>
-<td align="center">Strongly disagree :3462</td>
-<td align="center">Disagree : 1929</td>
-<td align="center">Agree :5164</td>
-<td align="center">TW: women should decide : 0</td>
-<td align="center">TW: women should decide : 0</td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">3 : 598</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="center">The suburbs or outskirts of a big city:4386</td>
-<td align="center">Disagree : 4074</td>
-<td align="center">Disagree :9003</td>
-<td align="center">Disagree :8706</td>
-<td align="center">Disagree :7863</td>
-<td align="center">Disagree :7267</td>
-<td align="center">Disagree : 1929</td>
-<td align="center">Disagree :9210</td>
-<td align="center">NA’s : 3428</td>
-<td align="center">NA’s : 3522</td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">3 : 598</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner : 2997</td>
-<td align="center">A country village :8646</td>
+<td align="left">DE : 1761</td>
+<td align="left">RU-Russia : 1525</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Mean : 49.52</td>
+<td align="left">Neither agree nor disagree: 3382</td>
+<td align="left">Strongly disagree :5547</td>
+<td align="left">Strongly disagree :5960</td>
+<td align="left">Strongly disagree :5016</td>
+<td align="left">Strongly disagree :3462</td>
+<td align="left">Disagree : 1929</td>
+<td align="left">Agree :5164</td>
+<td align="left">TW: women should decide : 0</td>
+<td align="left">TW: women should decide : 0</td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">3 : 598</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
+<td align="left">Disagree : 4074</td>
+<td align="left">Disagree :9003</td>
+<td align="left">Disagree :8706</td>
+<td align="left">Disagree :7863</td>
+<td align="left">Disagree :7267</td>
+<td align="left">Disagree : 1929</td>
+<td align="left">Disagree :9210</td>
+<td align="left">NA’s : 3428</td>
+<td align="left">NA’s : 3522</td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">3 : 598</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner : 2997</td>
+<td align="left">A country village :8646</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">3rd Qu.:5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">3rd Qu.: 705</td>
-<td align="right">3rd Qu.:578.0</td>
+<td align="left"></td>
+<td align="left">3rd Qu.:5900</td>
 <td align="left">NA</td>
-<td align="center">3rd Qu.:3.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:4.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.:5.000</td>
-<td align="center">3rd Qu.:3.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.:2.000</td>
-<td align="center">3rd Qu.: 63.00</td>
-<td align="center">3rd Qu.:5.00</td>
+<td align="left">NA</td>
+<td align="left">3rd Qu.: 705</td>
+<td align="left">3rd Qu.:578.0</td>
+<td align="left">NA</td>
+<td align="left">3rd Qu.:3.000</td>
+<td align="left">3rd Qu.:4.000</td>
+<td align="left">3rd Qu.:4.000</td>
+<td align="left">3rd Qu.:4.000</td>
+<td align="left">3rd Qu.:4.000</td>
+<td align="left">3rd Qu.:2.000</td>
+<td align="left">3rd Qu.:5.000</td>
+<td align="left">3rd Qu.:3.000</td>
+<td align="left">3rd Qu.:2.000</td>
+<td align="left">3rd Qu.:2.000</td>
+<td align="left">3rd Qu.: 63.00</td>
+<td align="left">3rd Qu.:5.00</td>
 <td align="left">3rd Qu.:6.000</td>
-<td align="center">3rd Qu.: 7.00</td>
+<td align="left">3rd Qu.: 7.00</td>
 <td align="left">3rd Qu.: 0.0000</td>
 <td align="left">3rd Qu.:5.000</td>
 <td align="left">3rd Qu.:4.000</td>
-<td align="center">AU : 1557</td>
-<td align="center">NO-Norway : 1444</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td align="center">3rd Qu.: 63.00</td>
-<td align="center">Strongly disagree : 1051</td>
-<td align="center">Strongly agree :2747</td>
-<td align="center">Strongly agree :2838</td>
-<td align="center">Strongly agree :2818</td>
-<td align="center">Strongly agree :3357</td>
-<td align="center">Strongly disagree : 403</td>
-<td align="center">Strongly agree :2704</td>
-<td align="center">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
-<td align="center">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">4 : 117</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="center">A farm or home in the country :1902</td>
-<td align="center">Strongly disagree : 1051</td>
-<td align="center">Strongly disagree :5547</td>
-<td align="center">Strongly disagree :5960</td>
-<td align="center">Strongly disagree :5016</td>
-<td align="center">Strongly disagree :3462</td>
-<td align="center">Strongly disagree : 403</td>
-<td align="center">Strongly disagree :8917</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">4 : 117</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="center">A farm or home in the country :1902</td>
+<td align="left">AU : 1557</td>
+<td align="left">NO-Norway : 1444</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">3rd Qu.: 63.00</td>
+<td align="left">Strongly disagree : 1051</td>
+<td align="left">Strongly agree :2747</td>
+<td align="left">Strongly agree :2838</td>
+<td align="left">Strongly agree :2818</td>
+<td align="left">Strongly agree :3357</td>
+<td align="left">Strongly disagree : 403</td>
+<td align="left">Strongly agree :2704</td>
+<td align="left">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
+<td align="left">Can’t choose, CA:+NA, KR:DK,ref., NL:DK: 0</td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">4 : 117</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">A farm or home in the country :1902</td>
+<td align="left">Strongly disagree : 1051</td>
+<td align="left">Strongly disagree :5547</td>
+<td align="left">Strongly disagree :5960</td>
+<td align="left">Strongly disagree :5016</td>
+<td align="left">Strongly disagree :3462</td>
+<td align="left">Strongly disagree : 403</td>
+<td align="left">Strongly disagree :8917</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">4 : 117</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">A farm or home in the country :1902</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Max. :5900</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">Max. :62002</td>
-<td align="right">Max. :756.0</td>
+<td align="left"></td>
+<td align="left">Max. :5900</td>
 <td align="left">NA</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :5.000</td>
-<td align="center">Max. :3.000</td>
-<td align="center">Max. :3.000</td>
-<td align="center">Max. :2.000</td>
-<td align="center">Max. :102.00</td>
-<td align="center">Max. :6.00</td>
+<td align="left">NA</td>
+<td align="left">Max. :62002</td>
+<td align="left">Max. :756.0</td>
+<td align="left">NA</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :5.000</td>
+<td align="left">Max. :3.000</td>
+<td align="left">Max. :3.000</td>
+<td align="left">Max. :2.000</td>
+<td align="left">Max. :102.00</td>
+<td align="left">Max. :6.00</td>
 <td align="left">Max. :9.000</td>
-<td align="center">Max. :10.00</td>
+<td align="left">Max. :10.00</td>
 <td align="left">Max. :21.0000</td>
 <td align="left">Max. :6.000</td>
 <td align="left">Max. :5.000</td>
-<td align="center">RU : 1525</td>
-<td align="center">DK-Denmark : 1403</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td align="center">Max. :102.00</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">(Other) : 0</td>
-<td align="center">No answer : 0</td>
-<td align="center">No answer : 0</td>
-<td align="center">(Other) :2022</td>
-<td align="center">(Other) : 1775</td>
-<td align="center">(Other):4758</td>
-<td align="center">(Other) : 45</td>
-<td align="center">(Other) : 486</td>
-<td align="center">(Other) : 0</td>
-<td align="center">NA’s : 848</td>
-<td align="center">NA’s :1188</td>
-<td align="center">NA’s :1056</td>
-<td align="center">NA’s :2051</td>
-<td align="center">NA’s :2554</td>
-<td align="center">NA’s : 683</td>
-<td align="center">NA’s : 719</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">(Other) :2022</td>
-<td align="center">(Other) : 1775</td>
-<td align="center">(Other):4758</td>
-<td align="center">(Other) : 45</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="center">NA’s : 244</td>
+<td align="left">RU : 1525</td>
+<td align="left">DK-Denmark : 1403</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Max. :102.00</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">(Other) : 0</td>
+<td align="left">No answer : 0</td>
+<td align="left">No answer : 0</td>
+<td align="left">(Other) :2022</td>
+<td align="left">(Other) : 1775</td>
+<td align="left">(Other):4758</td>
+<td align="left">(Other) : 45</td>
+<td align="left">(Other) : 486</td>
+<td align="left">(Other) : 0</td>
+<td align="left">NA’s : 848</td>
+<td align="left">NA’s :1188</td>
+<td align="left">NA’s :1056</td>
+<td align="left">NA’s :2051</td>
+<td align="left">NA’s :2554</td>
+<td align="left">NA’s : 683</td>
+<td align="left">NA’s : 719</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">(Other) :2022</td>
+<td align="left">(Other) : 1775</td>
+<td align="left">(Other):4758</td>
+<td align="left">(Other) : 45</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">NA’s : 244</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="right">NA</td>
+<td align="left"></td>
 <td align="left">NA</td>
-<td align="center">NA’s :848</td>
-<td align="center">NA’s :1188</td>
-<td align="center">NA’s :1056</td>
-<td align="center">NA’s :2051</td>
-<td align="center">NA’s :2554</td>
-<td align="center">NA’s :683</td>
-<td align="center">NA’s :719</td>
-<td align="center">NA’s :3428</td>
-<td align="center">NA’s :3522</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA’s :308</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA’s :848</td>
+<td align="left">NA’s :1188</td>
+<td align="left">NA’s :1056</td>
+<td align="left">NA’s :2051</td>
+<td align="left">NA’s :2554</td>
+<td align="left">NA’s :683</td>
+<td align="left">NA’s :719</td>
+<td align="left">NA’s :3428</td>
+<td align="left">NA’s :3522</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA’s :308</td>
 <td align="left">NA’s :370</td>
-<td align="center">NA’s :1777</td>
+<td align="left">NA’s :1777</td>
 <td align="left">NA’s :940</td>
 <td align="left">NA’s :434</td>
 <td align="left">NA’s :244</td>
-<td align="center">(Other):21575</td>
-<td align="center">(Other) :22681</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td align="center">NA</td>
-<td align="center">NA’s : 848</td>
-<td align="center">NA’s :1188</td>
-<td align="center">NA’s :1056</td>
-<td align="center">NA’s :2051</td>
-<td align="center">NA’s :2554</td>
-<td align="center">NA’s : 683</td>
-<td align="center">NA’s : 719</td>
-<td align="center">NA’s : 3428</td>
-<td align="center">NA’s : 3522</td>
-<td align="center">NA’s : 308</td>
-<td align="center">NA’s : 370</td>
-<td align="center">NA’s :1777</td>
-<td align="center">NA’s : 940</td>
-<td align="center">NA’s : 434</td>
-<td align="center">NA’s : 244</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA’s : 308</td>
-<td align="center">NA’s : 370</td>
-<td align="center">NA’s :1777</td>
-<td align="center">NA’s : 940</td>
-<td align="center">NA’s : 434</td>
-<td align="center">NA</td>
+<td align="left">(Other):21575</td>
+<td align="left">(Other) :22681</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA’s : 848</td>
+<td align="left">NA’s :1188</td>
+<td align="left">NA’s :1056</td>
+<td align="left">NA’s :2051</td>
+<td align="left">NA’s :2554</td>
+<td align="left">NA’s : 683</td>
+<td align="left">NA’s : 719</td>
+<td align="left">NA’s : 3428</td>
+<td align="left">NA’s : 3522</td>
+<td align="left">NA’s : 308</td>
+<td align="left">NA’s : 370</td>
+<td align="left">NA’s :1777</td>
+<td align="left">NA’s : 940</td>
+<td align="left">NA’s : 434</td>
+<td align="left">NA’s : 244</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA’s : 308</td>
+<td align="left">NA’s : 370</td>
+<td align="left">NA’s :1777</td>
+<td align="left">NA’s : 940</td>
+<td align="left">NA’s : 434</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -6410,92 +6633,104 @@ ISSP2012jh1d.dat %&gt;%
     select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %&gt;%
     summary()</code></pre>
 <table>
+<colgroup>
+<col width="1%"></col>
+<col width="12%"></col>
+<col width="11%"></col>
+<col width="11%"></col>
+<col width="11%"></col>
+<col width="11%"></col>
+<col width="12%"></col>
+<col width="11%"></col>
+<col width="7%"></col>
+<col width="7%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">Q1am</th>
-<th align="center">Q1bm</th>
-<th align="center">Q1cm</th>
-<th align="center">Q1dm</th>
-<th align="center">Q1em</th>
-<th align="center">Q2am</th>
-<th align="center">Q2bm</th>
-<th align="center">Q3am</th>
-<th align="center">Q3bm</th>
+<th align="left"></th>
+<th align="left">Q1am</th>
+<th align="left">Q1bm</th>
+<th align="left">Q1cm</th>
+<th align="left">Q1dm</th>
+<th align="left">Q1em</th>
+<th align="left">Q2am</th>
+<th align="left">Q2bm</th>
+<th align="left">Q3am</th>
+<th align="left">Q3bm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Strongly agree :11116</td>
-<td align="center">Strongly agree :2747</td>
-<td align="center">Strongly agree :2838</td>
-<td align="center">Strongly agree :2818</td>
-<td align="center">Strongly agree :3357</td>
-<td align="center">Strongly agree :11305</td>
-<td align="center">Strongly agree :2704</td>
-<td align="center">Work full-time: 5373</td>
-<td align="center">Work full-time:13722</td>
+<td align="left"></td>
+<td align="left">Strongly agree :11116</td>
+<td align="left">Strongly agree :2747</td>
+<td align="left">Strongly agree :2838</td>
+<td align="left">Strongly agree :2818</td>
+<td align="left">Strongly agree :3357</td>
+<td align="left">Strongly agree :11305</td>
+<td align="left">Strongly agree :2704</td>
+<td align="left">Work full-time: 5373</td>
+<td align="left">Work full-time:13722</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Agree :12352</td>
-<td align="center">Agree :8389</td>
-<td align="center">Agree :8263</td>
-<td align="center">Agree :7672</td>
-<td align="center">Agree :8342</td>
-<td align="center">Agree :13464</td>
-<td align="center">Agree :5164</td>
-<td align="center">Work part-time:15655</td>
-<td align="center">Work part-time:13817</td>
+<td align="left"></td>
+<td align="left">Agree :12352</td>
+<td align="left">Agree :8389</td>
+<td align="left">Agree :8263</td>
+<td align="left">Agree :7672</td>
+<td align="left">Agree :8342</td>
+<td align="left">Agree :13464</td>
+<td align="left">Agree :5164</td>
+<td align="left">Work part-time:15655</td>
+<td align="left">Work part-time:13817</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Neither agree nor disagree: 3382</td>
-<td align="center">Neither agree nor disagree:5949</td>
-<td align="center">Neither agree nor disagree:6000</td>
-<td align="center">Neither agree nor disagree:7403</td>
-<td align="center">Neither agree nor disagree:7841</td>
-<td align="center">Neither agree nor disagree: 5039</td>
-<td align="center">Neither agree nor disagree:6109</td>
-<td align="center">Stay at home : 8367</td>
-<td align="center">Stay at home : 1762</td>
+<td align="left"></td>
+<td align="left">Neither agree nor disagree: 3382</td>
+<td align="left">Neither agree nor disagree:5949</td>
+<td align="left">Neither agree nor disagree:6000</td>
+<td align="left">Neither agree nor disagree:7403</td>
+<td align="left">Neither agree nor disagree:7841</td>
+<td align="left">Neither agree nor disagree: 5039</td>
+<td align="left">Neither agree nor disagree:6109</td>
+<td align="left">Stay at home : 8367</td>
+<td align="left">Stay at home : 1762</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Disagree : 4074</td>
-<td align="center">Disagree :9003</td>
-<td align="center">Disagree :8706</td>
-<td align="center">Disagree :7863</td>
-<td align="center">Disagree :7267</td>
-<td align="center">Disagree : 1929</td>
-<td align="center">Disagree :9210</td>
-<td align="center">missing : 3428</td>
-<td align="center">missing : 3522</td>
+<td align="left"></td>
+<td align="left">Disagree : 4074</td>
+<td align="left">Disagree :9003</td>
+<td align="left">Disagree :8706</td>
+<td align="left">Disagree :7863</td>
+<td align="left">Disagree :7267</td>
+<td align="left">Disagree : 1929</td>
+<td align="left">Disagree :9210</td>
+<td align="left">missing : 3428</td>
+<td align="left">missing : 3522</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Strongly disagree : 1051</td>
-<td align="center">Strongly disagree :5547</td>
-<td align="center">Strongly disagree :5960</td>
-<td align="center">Strongly disagree :5016</td>
-<td align="center">Strongly disagree :3462</td>
-<td align="center">Strongly disagree : 403</td>
-<td align="center">Strongly disagree :8917</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">Strongly disagree : 1051</td>
+<td align="left">Strongly disagree :5547</td>
+<td align="left">Strongly disagree :5960</td>
+<td align="left">Strongly disagree :5016</td>
+<td align="left">Strongly disagree :3462</td>
+<td align="left">Strongly disagree : 403</td>
+<td align="left">Strongly disagree :8917</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">missing : 848</td>
-<td align="center">missing :1188</td>
-<td align="center">missing :1056</td>
-<td align="center">missing :2051</td>
-<td align="center">missing :2554</td>
-<td align="center">missing : 683</td>
-<td align="center">missing : 719</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">missing : 848</td>
+<td align="left">missing :1188</td>
+<td align="left">missing :1056</td>
+<td align="left">missing :2051</td>
+<td align="left">missing :2554</td>
+<td align="left">missing : 683</td>
+<td align="left">missing : 719</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -6503,80 +6738,89 @@ ISSP2012jh1d.dat %&gt;%
     select(edum,mstam, sostam,nchildm,lifstam, urbrum) %&gt;%
     summary()</code></pre>
 <table>
+<colgroup>
+<col width="0%"></col>
+<col width="30%"></col>
+<col width="18%"></col>
+<col width="3%"></col>
+<col width="5%"></col>
+<col width="29%"></col>
+<col width="12%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">edum</th>
-<th align="center">mstam</th>
-<th align="center">sostam</th>
-<th align="center">nchildm</th>
-<th align="center">lifstam</th>
-<th align="center">urbrum</th>
+<th align="left"></th>
+<th align="left">edum</th>
+<th align="left">mstam</th>
+<th align="left">sostam</th>
+<th align="left">nchildm</th>
+<th align="left">lifstam</th>
+<th align="left">urbrum</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="center">A big city :8442</td>
+<td align="left"></td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A big city :8442</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="center">The suburbs or outskirts of a big city:4386</td>
+<td align="left"></td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
-<td align="center">A town or a small city :9203</td>
+<td align="left"></td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
+<td align="left">A town or a small city :9203</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">missing : 940</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner : 2997</td>
-<td align="center">A country village :8646</td>
+<td align="left"></td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">missing : 940</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner : 2997</td>
+<td align="left">A country village :8646</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">3 : 598</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="center">A farm or home in the country :1902</td>
+<td align="left"></td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">3 : 598</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">A farm or home in the country :1902</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Primary school (elementary school) :1531</td>
-<td align="center">Permanently sick or disabled : 1093</td>
-<td align="center">03 :2221</td>
-<td align="center">4 : 117</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="center">missing : 244</td>
+<td align="left"></td>
+<td align="left">Primary school (elementary school) :1531</td>
+<td align="left">Permanently sick or disabled : 1093</td>
+<td align="left">03 :2221</td>
+<td align="left">4 : 117</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">missing : 244</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">(Other) : 799</td>
-<td align="center">(Other) : 1052</td>
-<td align="center">(Other):4314</td>
-<td align="center">(Other) : 45</td>
-<td align="center">missing : 434</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">(Other) : 799</td>
+<td align="left">(Other) : 1052</td>
+<td align="left">(Other):4314</td>
+<td align="left">(Other) : 45</td>
+<td align="left">missing : 434</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -6707,89 +6951,89 @@ ISSP2012jh1d.dat %&gt;%
 <table>
 <thead>
 <tr class="header">
-<th align="right">Q</th>
-<th>1a Q</th>
-<th>1b Q</th>
-<th>1c Q</th>
-<th>1d Q</th>
-<th>1e Q</th>
-<th>2a Q</th>
-<th>2b Q</th>
-<th>3a Q</th>
-<th align="left">3b</th>
+<th align="left"></th>
+<th align="left">Q1a</th>
+<th align="left">Q1b</th>
+<th align="left">Q1c</th>
+<th align="left">Q1d</th>
+<th align="left">Q1e</th>
+<th align="left">Q2a</th>
+<th align="left">Q2b</th>
+<th align="left">Q3a</th>
+<th align="left">Q3b</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"></td>
-<td>S :11116</td>
-<td>S :2747</td>
-<td>S :2838</td>
-<td>S :2818</td>
-<td>S :3357</td>
-<td>S :11305</td>
-<td>S :2704</td>
-<td>W : 5373</td>
+<td align="left"></td>
+<td align="left">S :11116</td>
+<td align="left">S :2747</td>
+<td align="left">S :2838</td>
+<td align="left">S :2818</td>
+<td align="left">S :3357</td>
+<td align="left">S :11305</td>
+<td align="left">S :2704</td>
+<td align="left">W : 5373</td>
 <td align="left">W :13722</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>s :12352</td>
-<td>s :8389</td>
-<td>s :8263</td>
-<td>s :7672</td>
-<td>s :8342</td>
-<td>s :13464</td>
-<td>s :5164</td>
-<td>w :15655</td>
+<td align="left"></td>
+<td align="left">s :12352</td>
+<td align="left">s :8389</td>
+<td align="left">s :8263</td>
+<td align="left">s :7672</td>
+<td align="left">s :8342</td>
+<td align="left">s :13464</td>
+<td align="left">s :5164</td>
+<td align="left">w :15655</td>
 <td align="left">w :13817</td>
 </tr>
 <tr class="odd">
-<td align="right"></td>
-<td>? : 3382</td>
-<td>? :5949</td>
-<td>? :6000</td>
-<td>? :7403</td>
-<td>? :7841</td>
-<td>? : 5039</td>
-<td>? :6109</td>
-<td>H : 8367</td>
+<td align="left"></td>
+<td align="left">? : 3382</td>
+<td align="left">? :5949</td>
+<td align="left">? :6000</td>
+<td align="left">? :7403</td>
+<td align="left">? :7841</td>
+<td align="left">? : 5039</td>
+<td align="left">? :6109</td>
+<td align="left">H : 8367</td>
 <td align="left">H : 1762</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>e : 4074</td>
-<td>e :9003</td>
-<td>e :8706</td>
-<td>e :7863</td>
-<td>e :7267</td>
-<td>e : 1929</td>
-<td>e :9210</td>
-<td>NA’s: 3428</td>
+<td align="left"></td>
+<td align="left">e : 4074</td>
+<td align="left">e :9003</td>
+<td align="left">e :8706</td>
+<td align="left">e :7863</td>
+<td align="left">e :7267</td>
+<td align="left">e : 1929</td>
+<td align="left">e :9210</td>
+<td align="left">NA’s: 3428</td>
 <td align="left">NA’s: 3522</td>
 </tr>
 <tr class="odd">
-<td align="right"></td>
-<td>E : 1051</td>
-<td>E :5547</td>
-<td>E :5960</td>
-<td>E :5016</td>
-<td>E :3462</td>
-<td>E : 403</td>
-<td>E :8917</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">E : 1051</td>
+<td align="left">E :5547</td>
+<td align="left">E :5960</td>
+<td align="left">E :5016</td>
+<td align="left">E :3462</td>
+<td align="left">E : 403</td>
+<td align="left">E :8917</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>NA’s: 848</td>
-<td>NA’s:1188</td>
-<td>NA’s:1056</td>
-<td>NA’s:2051</td>
-<td>NA’s:2554</td>
-<td>NA’s: 683</td>
-<td>NA’s: 719</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">NA’s: 848</td>
+<td align="left">NA’s:1188</td>
+<td align="left">NA’s:1056</td>
+<td align="left">NA’s:2051</td>
+<td align="left">NA’s:2554</td>
+<td align="left">NA’s: 683</td>
+<td align="left">NA’s: 719</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
 </tbody>
@@ -6865,89 +7109,89 @@ ISSP2012jh1d.dat %&gt;%
 <table>
 <thead>
 <tr class="header">
-<th align="right">Q1a</th>
-<th>m Q1b</th>
-<th>m Q1c</th>
-<th>m Q1d</th>
-<th>m Q1e</th>
-<th>m Q2a</th>
-<th>m Q2b</th>
-<th>m Q3a</th>
-<th>m Q3b</th>
-<th align="left">m</th>
+<th align="left"></th>
+<th align="left">Q1am</th>
+<th align="left">Q1bm</th>
+<th align="left">Q1cm</th>
+<th align="left">Q1dm</th>
+<th align="left">Q1em</th>
+<th align="left">Q2am</th>
+<th align="left">Q2bm</th>
+<th align="left">Q3am</th>
+<th align="left">Q3bm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"></td>
-<td>S:11116</td>
-<td>S:2747</td>
-<td>S:2838</td>
-<td>S:2818</td>
-<td>S:3357</td>
-<td>S:11305</td>
-<td>S:2704</td>
-<td>W: 5373</td>
+<td align="left"></td>
+<td align="left">S:11116</td>
+<td align="left">S:2747</td>
+<td align="left">S:2838</td>
+<td align="left">S:2818</td>
+<td align="left">S:3357</td>
+<td align="left">S:11305</td>
+<td align="left">S:2704</td>
+<td align="left">W: 5373</td>
 <td align="left">W:13722</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>s:12352</td>
-<td>s:8389</td>
-<td>s:8263</td>
-<td>s:7672</td>
-<td>s:8342</td>
-<td>s:13464</td>
-<td>s:5164</td>
-<td>w:15655</td>
+<td align="left"></td>
+<td align="left">s:12352</td>
+<td align="left">s:8389</td>
+<td align="left">s:8263</td>
+<td align="left">s:7672</td>
+<td align="left">s:8342</td>
+<td align="left">s:13464</td>
+<td align="left">s:5164</td>
+<td align="left">w:15655</td>
 <td align="left">w:13817</td>
 </tr>
 <tr class="odd">
-<td align="right"></td>
-<td>?: 3382</td>
-<td>?:5949</td>
-<td>?:6000</td>
-<td>?:7403</td>
-<td>?:7841</td>
-<td>?: 5039</td>
-<td>?:6109</td>
-<td>H: 8367</td>
+<td align="left"></td>
+<td align="left">?: 3382</td>
+<td align="left">?:5949</td>
+<td align="left">?:6000</td>
+<td align="left">?:7403</td>
+<td align="left">?:7841</td>
+<td align="left">?: 5039</td>
+<td align="left">?:6109</td>
+<td align="left">H: 8367</td>
 <td align="left">H: 1762</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>e: 4074</td>
-<td>e:9003</td>
-<td>e:8706</td>
-<td>e:7863</td>
-<td>e:7267</td>
-<td>e: 1929</td>
-<td>e:9210</td>
-<td>P: 3428</td>
+<td align="left"></td>
+<td align="left">e: 4074</td>
+<td align="left">e:9003</td>
+<td align="left">e:8706</td>
+<td align="left">e:7863</td>
+<td align="left">e:7267</td>
+<td align="left">e: 1929</td>
+<td align="left">e:9210</td>
+<td align="left">P: 3428</td>
 <td align="left">P: 3522</td>
 </tr>
 <tr class="odd">
-<td align="right"></td>
-<td>E: 1051</td>
-<td>E:5547</td>
-<td>E:5960</td>
-<td>E:5016</td>
-<td>E:3462</td>
-<td>E: 403</td>
-<td>E:8917</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">E: 1051</td>
+<td align="left">E:5547</td>
+<td align="left">E:5960</td>
+<td align="left">E:5016</td>
+<td align="left">E:3462</td>
+<td align="left">E: 403</td>
+<td align="left">E:8917</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="right"></td>
-<td>P: 848</td>
-<td>P:1188</td>
-<td>P:1056</td>
-<td>P:2051</td>
-<td>P:2554</td>
-<td>P: 683</td>
-<td>P: 719</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">P: 848</td>
+<td align="left">P:1188</td>
+<td align="left">P:1056</td>
+<td align="left">P:2051</td>
+<td align="left">P:2554</td>
+<td align="left">P: 683</td>
+<td align="left">P: 719</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
 </tbody>
@@ -7748,7 +7992,19 @@ ISSP2012jh1d.dat %&gt;%
 
 ISSP2012jh1d.dat %&gt;% 
     tableX(edu, edum)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="2%"></col>
+<col width="4%"></col>
+<col width="7%"></col>
+<col width="20%"></col>
+<col width="12%"></col>
+<col width="23%"></col>
+<col width="17%"></col>
+<col width="7%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">edu/edum</th>
@@ -7877,6 +8133,20 @@ ISSP2012jh1d.dat %&gt;%
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% 
     tableX(msta, mstam)</code></pre>
 <table>
+<colgroup>
+<col width="4%"></col>
+<col width="5%"></col>
+<col width="24%"></col>
+<col width="5%"></col>
+<col width="9%"></col>
+<col width="12%"></col>
+<col width="3%"></col>
+<col width="5%"></col>
+<col width="21%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">msta/mstam</th>
@@ -8052,7 +8322,22 @@ ISSP2012jh1d.dat %&gt;%
 </table>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% 
     tableX(sosta, sostam)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="12%"></col>
+<col width="18%"></col>
+<col width="3%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="3%"></col>
+<col width="16%"></col>
+<col width="7%"></col>
+<col width="5%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">sosta/sostam</th>
@@ -8256,6 +8541,22 @@ ISSP2012jh1d.dat %&gt;%
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% 
     tableX(nchild,nchildm)</code></pre>
 <table>
+<colgroup>
+<col width="15%"></col>
+<col width="12%"></col>
+<col width="10%"></col>
+<col width="11%"></col>
+<col width="4%"></col>
+<col width="4%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="3%"></col>
+<col width="12%"></col>
+<col width="8%"></col>
+<col width="6%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">nchild/nchildm</th>
@@ -8487,7 +8788,18 @@ ISSP2012jh1d.dat %&gt;%
 </table>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% 
     tableX(lifsta, lifstam)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="5%"></col>
+<col width="2%"></col>
+<col width="6%"></col>
+<col width="33%"></col>
+<col width="20%"></col>
+<col width="9%"></col>
+<col width="17%"></col>
+<col width="2%"></col>
+<col width="2%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">lifsta/lifstam</th>
@@ -8595,6 +8907,16 @@ ISSP2012jh1d.dat %&gt;%
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% 
     tableX(urbru, urbrum)</code></pre>
 <table>
+<colgroup>
+<col width="8%"></col>
+<col width="7%"></col>
+<col width="26%"></col>
+<col width="15%"></col>
+<col width="12%"></col>
+<col width="20%"></col>
+<col width="5%"></col>
+<col width="4%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">urbru/urbrum</th>
@@ -8707,7 +9029,7 @@ ISSP2012jh1d.dat %&gt;%
 </ol>
 <p><span class="math inline">\(\chi^2\)</span> - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.</p>
 <p><strong>Muutama versio tiiviiksi kuvaukseksi - toistoa on (10.4.20)</strong></p>
-<p>Dimensioiden vähentäminen tärkein asia (“the essence”), pienessä taulossa ei ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta, mistä on kyse. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana (karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden pistejoukon (“pilven”) projektiot, jotka säilyttävät maksimimäärän alkuperäisen n-ulotteisen pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat saman pilven pisteet voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin kaukana toisistaan. Tulkinnassa tärkeitä ovat “ääripäät”, ja numeeriset tulokset kertovat kuinka hyvin piste on tasossa esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukan on Uudenmaan raja.</p>
+<p>Dimensioiden vähentäminen tärkein asia (“the essence”), pienessä taulossa ei ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta, mistä on kyse. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana (karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden pistejoukon (“pilven”) projektiot, jotka säilyttävät maksimimäärän alkuperäisen n-ulotteisen pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat saman pilven pisteet voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin kaukana toisistaan. Tulkinnassa tärkeitä ovat “ääripäät”, ja numeeriset tulokset kertovat kuinka hyvin piste on tasossa esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukana on Uudenmaan raja.</p>
 <p>Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan ristiintaulukointi, alkuperäinen data voi olla muillakin asteikoilla mitattua. Menetelmän ydin on tarkastella molempien muuttujien – taulukon rivien ja sarakkeiden – riippuvuuksia kaksiulotteisena kuvana. Kuvaa kutsutaan myös kartaksi, ja tulkinnan ensimmäinen askel on kartan “koordinaatiston” tulkinta. Kaikki etäisyydet kuvassa ovat suhteellisia, vain rivi- ja sarakepisteiden etäisyydet kuvan origosta voidaan tulkita tarkasti. Koordinaatiston tulkinta aloitetaan “katsomalla mitä on oikealla ja vasemmalla, ja mitä on ylhäällä ja alhaalla” (viite LeRoux et.al, Bezecri-sitaatti). Vaikka pisteiden etäisyyksiä edes rivi- ja sarakepisteiden välillä ei voi tarkkaan tulkita (approksimaatioita), projektiossa kaukana toisistaan olevat pisteet ovat kaukana toisistaan myös alkuperäisessä “pistepilvessä”.</p>
 <p>Akseleiden tulkinta “ääripäiden” kautta (“kontrasti” ?). Huom “ääripää” ei välttämättä Likert-asteikolla tarkoita “äärimielipidettä”, vaan se voi tarkoittaa myös selvää tai varmaa mielipidettä.(3.10.18).</p>
 <p><strong>Vanha lista - tehty jo</strong></p>
@@ -8724,7 +9046,7 @@ ISSP2012jh1d.dat %&gt;%
 <p>Tulkinnat ja yksinkertaisimmat perussäännöt. Dimensiot ja kuinka paljon alkuperäisen taulukon inertiaa saadaan esitettyä kartalla. Sitten asian ydin, akseleiden tulkinta (“mitä on oikealla ja vasemmalla”). Jos pisteet ovat alkuperäisessä “pilvessä” kaukana toisistaan, ne ovat sitä myös projektiossa. Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon. Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat prosentit akseleilla?</p>
 <p>Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, myös pelkästään rivi- tai sarakepisteistä koostuvien ryhmien.</p>
 <p><strong>zxy</strong> Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole suoraa tulkintaa, mutta on “vetovoima” (attraktio) ja “työntövoima” (repulsio). Jos profiilissa sarakemuuttujan osuus on suuri (siis suurempi kuin keskiarvopisteessä, suhteellinen ero), se “ajautuu” lähelle sarekepistettä. MG: “loose ends” - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde. Tätä koitetaan selventää myös MG:n JASA-artikkelissa.</p>
-<p><strong>zxy</strong>(teoria/historia-jaksoon,104.20).Termi korrespondenssi: “neglected multivariate method” - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden “correspondence” eli yhteys/“riippuvuus”/vastaavuus tms.</p>
+<p><strong>zxy</strong>(teoria/historia-jaksoon,104.20).Termi korrespondenssi: “neglected multivariate method” - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden “correspondence” eli yhteys, “riippuvuus”, vastaavuus tms. <strong>edit 4.7.20</strong> Kts. myös Funmooc-muistiinpanot, opk! Mitä kartta esittää? Kaikki edellä kuvattu esitetään suhteellisina eroina koko aineiston keskiarvosta, riippumattomuushypoteesi.</p>
 <div id="äiti-työssä" class="section level2">
 <h2><span class="header-section-number">2.1</span> Äiti työssä</h2>
 <p><strong>zxy</strong> Perustellaan aineiston valinnan vaiheet. Esimerkiksi otetaan yksi kysymys.</p>
@@ -9643,7 +9965,94 @@ expect_equivalent(levels(ISSP2012esim1.dat$Q1b),
                   c(&quot;S&quot;, &quot;s&quot;, &quot;?&quot;, &quot;e&quot;, &quot;E&quot;))
 
 ISSP2012esim1.dat %&gt;% tableX(maa,ika,type = &quot;row_perc&quot;)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">maa/ika</th>
@@ -10605,7 +11014,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <caption>Kysymyksen Q1b vastaukset maittain</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">S</th>
 <th align="left">s</th>
 <th align="left">?</th>
@@ -10616,7 +11025,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">191</td>
 <td align="left">451</td>
 <td align="left">438</td>
@@ -10625,7 +11034,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">2013</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">118</td>
 <td align="left">395</td>
 <td align="left">205</td>
@@ -10634,7 +11043,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">921</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">165</td>
 <td align="left">375</td>
 <td align="left">198</td>
@@ -10643,7 +11052,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">1714</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">70</td>
 <td align="left">238</td>
 <td align="left">152</td>
@@ -10652,7 +11061,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">1388</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">47</td>
 <td align="left">188</td>
 <td align="left">149</td>
@@ -10661,7 +11070,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">1110</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">219</td>
 <td align="left">288</td>
 <td align="left">225</td>
@@ -10670,7 +11079,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 <td align="left">997</td>
 </tr>
 <tr class="odd">
-<td>Total</td>
+<td align="left">Total</td>
 <td align="left">810</td>
 <td align="left">1935</td>
 <td align="left">1367</td>
@@ -10689,7 +11098,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <caption>Kysymyksen Q1b vastaukset, riviprosentit</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">S</th>
 <th align="left">s</th>
 <th align="left">?</th>
@@ -10700,7 +11109,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">9.49</td>
 <td align="left">22.40</td>
 <td align="left">21.76</td>
@@ -10709,7 +11118,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">12.81</td>
 <td align="left">42.89</td>
 <td align="left">22.26</td>
@@ -10718,7 +11127,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">9.63</td>
 <td align="left">21.88</td>
 <td align="left">11.55</td>
@@ -10727,7 +11136,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">5.04</td>
 <td align="left">17.15</td>
 <td align="left">10.95</td>
@@ -10736,7 +11145,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">4.23</td>
 <td align="left">16.94</td>
 <td align="left">13.42</td>
@@ -10745,7 +11154,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">21.97</td>
 <td align="left">28.89</td>
 <td align="left">22.57</td>
@@ -10754,7 +11163,7 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>All</td>
+<td align="left">All</td>
 <td align="left">9.95</td>
 <td align="left">23.76</td>
 <td align="left">16.79</td>
@@ -10773,7 +11182,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <caption>Kysymyksen Q1b vastaukset, sarakeprosentit</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">S</th>
 <th align="left">s</th>
 <th align="left">?</th>
@@ -10784,7 +11193,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">23.58</td>
 <td align="left">23.31</td>
 <td align="left">32.04</td>
@@ -10793,7 +11202,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">24.72</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">14.57</td>
 <td align="left">20.41</td>
 <td align="left">15.00</td>
@@ -10802,7 +11211,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">11.31</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">20.37</td>
 <td align="left">19.38</td>
 <td align="left">14.48</td>
@@ -10811,7 +11220,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">21.05</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">8.64</td>
 <td align="left">12.30</td>
 <td align="left">11.12</td>
@@ -10820,7 +11229,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">17.05</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">5.80</td>
 <td align="left">9.72</td>
 <td align="left">10.90</td>
@@ -10829,7 +11238,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">13.63</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">27.04</td>
 <td align="left">14.88</td>
 <td align="left">16.46</td>
@@ -10838,7 +11247,7 @@ knitr::kable(taulu4,digits = 2, booktabs = TRUE,
 <td align="left">12.24</td>
 </tr>
 <tr class="odd">
-<td>Total</td>
+<td align="left">Total</td>
 <td align="left">100.00</td>
 <td align="left">100.00</td>
 <td align="left">100.00</td>
@@ -10984,7 +11393,7 @@ Q1b: riviprofiilit ja keskiarvorivi
 simpleCA1$rowdist</code></pre>
 <pre><code>## [1] 0.1579735 0.6309909 0.1750128 0.6340627 0.3477331 0.5504040</code></pre>
 <pre class="r"><code>rowdist.tbl &lt;- as_tibble(rbind(simpleCA1$rowdist))</code></pre>
-<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
 ## Using compatibility `.name_repair`.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
@@ -11045,22 +11454,9 @@ knitr::kable(rowdist.tbl,digits = 3, booktabs = TRUE,
 <td align="right">0.272</td>
 <td align="right">0.627</td>
 </tr>
-<tr class="even">
-<td align="right">**Edit 2</td>
-<td align="right">8.5.20**</td>
-<td align="right">Pois tu</td>
-<td align="right">losteest</td>
-<td align="right">a. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys</td>
-</tr>
-<tr class="odd">
-<td align="right">muuttuu.</td>
-<td align="right">Järjest</td>
-<td align="right">ys vaiku</td>
-<td align="right">ttaa kuv</td>
-<td align="right">iin.</td>
-</tr>
 </tbody>
 </table>
+<p><strong>Edit 28.5.20</strong> Pois tulosteesta. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys muuttuu. Järjestys vaikuttaa kuviin.</p>
 <p>CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P) <strong>edit</strong> Algoritmin lähtötieto (30.3.20)</p>
 <pre class="r"><code>taulu5 &lt;- ISSP2012esim1.dat %&gt;% tableX(maa,Q1b,type = &quot;cell_perc&quot;)
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
@@ -11069,7 +11465,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <caption>Kysymyksen V6 vastaukset maittain (%)</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">S</th>
 <th align="left">s</th>
 <th align="left">?</th>
@@ -11080,7 +11476,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">2.35</td>
 <td align="left">5.54</td>
 <td align="left">5.38</td>
@@ -11089,7 +11485,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">24.72</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">1.45</td>
 <td align="left">4.85</td>
 <td align="left">2.52</td>
@@ -11098,7 +11494,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">11.31</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">2.03</td>
 <td align="left">4.61</td>
 <td align="left">2.43</td>
@@ -11107,7 +11503,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">21.05</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">0.86</td>
 <td align="left">2.92</td>
 <td align="left">1.87</td>
@@ -11116,7 +11512,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">17.05</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">0.58</td>
 <td align="left">2.31</td>
 <td align="left">1.83</td>
@@ -11125,7 +11521,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">13.63</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">2.69</td>
 <td align="left">3.54</td>
 <td align="left">2.76</td>
@@ -11134,7 +11530,7 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
 <td align="left">12.24</td>
 </tr>
 <tr class="odd">
-<td>Total</td>
+<td align="left">Total</td>
 <td align="left">9.95</td>
 <td align="left">23.76</td>
 <td align="left">16.79</td>
@@ -11711,102 +12107,102 @@ suppoint1_tab1</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th align="left">S</th>
-<th align="left">s</th>
-<th align="left">?</th>
-<th align="left">e</th>
-<th align="left">E</th>
+<th align="left"></th>
+<th align="right">S</th>
+<th align="right">s</th>
+<th align="right">?</th>
+<th align="right">e</th>
+<th align="right">E</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>bF</td>
-<td align="left">51</td>
-<td align="left">241</td>
-<td align="left">262</td>
-<td align="left">312</td>
-<td align="left">146</td>
+<td align="left">bF</td>
+<td align="right">51</td>
+<td align="right">241</td>
+<td align="right">262</td>
+<td align="right">312</td>
+<td align="right">146</td>
 </tr>
 <tr class="even">
-<td>bW</td>
-<td align="left">53</td>
-<td align="left">103</td>
-<td align="left">91</td>
-<td align="left">118</td>
-<td align="left">125</td>
+<td align="left">bW</td>
+<td align="right">53</td>
+<td align="right">103</td>
+<td align="right">91</td>
+<td align="right">118</td>
+<td align="right">125</td>
 </tr>
 <tr class="odd">
-<td>bB</td>
-<td align="left">87</td>
-<td align="left">107</td>
-<td align="left">85</td>
-<td align="left">122</td>
-<td align="left">110</td>
+<td align="left">bB</td>
+<td align="right">87</td>
+<td align="right">107</td>
+<td align="right">85</td>
+<td align="right">122</td>
+<td align="right">110</td>
 </tr>
 <tr class="even">
-<td>BG</td>
-<td align="left">118</td>
-<td align="left">395</td>
-<td align="left">205</td>
-<td align="left">190</td>
-<td align="left">13</td>
+<td align="left">BG</td>
+<td align="right">118</td>
+<td align="right">395</td>
+<td align="right">205</td>
+<td align="right">190</td>
+<td align="right">13</td>
 </tr>
 <tr class="odd">
-<td>dW</td>
-<td align="left">133</td>
-<td align="left">313</td>
-<td align="left">138</td>
-<td align="left">375</td>
-<td align="left">208</td>
+<td align="left">dW</td>
+<td align="right">133</td>
+<td align="right">313</td>
+<td align="right">138</td>
+<td align="right">375</td>
+<td align="right">208</td>
 </tr>
 <tr class="even">
-<td>dE</td>
-<td align="left">32</td>
-<td align="left">62</td>
-<td align="left">60</td>
-<td align="left">163</td>
-<td align="left">230</td>
+<td align="left">dE</td>
+<td align="right">32</td>
+<td align="right">62</td>
+<td align="right">60</td>
+<td align="right">163</td>
+<td align="right">230</td>
 </tr>
 <tr class="odd">
-<td>DK</td>
-<td align="left">70</td>
-<td align="left">238</td>
-<td align="left">152</td>
-<td align="left">232</td>
-<td align="left">696</td>
+<td align="left">DK</td>
+<td align="right">70</td>
+<td align="right">238</td>
+<td align="right">152</td>
+<td align="right">232</td>
+<td align="right">696</td>
 </tr>
 <tr class="even">
-<td>FI</td>
-<td align="left">47</td>
-<td align="left">188</td>
-<td align="left">149</td>
-<td align="left">423</td>
-<td align="left">303</td>
+<td align="left">FI</td>
+<td align="right">47</td>
+<td align="right">188</td>
+<td align="right">149</td>
+<td align="right">423</td>
+<td align="right">303</td>
 </tr>
 <tr class="odd">
-<td>HU</td>
-<td align="left">219</td>
-<td align="left">288</td>
-<td align="left">225</td>
-<td align="left">190</td>
-<td align="left">75</td>
+<td align="left">HU</td>
+<td align="right">219</td>
+<td align="right">288</td>
+<td align="right">225</td>
+<td align="right">190</td>
+<td align="right">75</td>
 </tr>
 <tr class="even">
-<td>BE</td>
-<td align="left">191</td>
-<td align="left">451</td>
-<td align="left">438</td>
-<td align="left">552</td>
-<td align="left">381</td>
+<td align="left">BE</td>
+<td align="right">191</td>
+<td align="right">451</td>
+<td align="right">438</td>
+<td align="right">552</td>
+<td align="right">381</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
-<td align="left">165</td>
-<td align="left">375</td>
-<td align="left">198</td>
-<td align="left">538</td>
-<td align="left">438</td>
+<td align="left">DE</td>
+<td align="right">165</td>
+<td align="right">375</td>
+<td align="right">198</td>
+<td align="right">538</td>
+<td align="right">438</td>
 </tr>
 </tbody>
 </table>
@@ -12047,7 +12443,7 @@ ISSP2012esim2.dat %&gt;%
 <caption>Ikäluokka age_cat</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">1</th>
 <th align="left">2</th>
 <th align="left">3</th>
@@ -12059,7 +12455,7 @@ ISSP2012esim2.dat %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">208</td>
 <td align="left">333</td>
 <td align="left">336</td>
@@ -12069,7 +12465,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">2013</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">77</td>
 <td align="left">115</td>
 <td align="left">159</td>
@@ -12079,7 +12475,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">921</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">205</td>
 <td align="left">223</td>
 <td align="left">274</td>
@@ -12089,7 +12485,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">1714</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">207</td>
 <td align="left">213</td>
 <td align="left">245</td>
@@ -12099,7 +12495,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">1388</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">152</td>
 <td align="left">166</td>
 <td align="left">165</td>
@@ -12109,7 +12505,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">1110</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">103</td>
 <td align="left">161</td>
 <td align="left">198</td>
@@ -12119,7 +12515,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">997</td>
 </tr>
 <tr class="odd">
-<td>Total</td>
+<td align="left">Total</td>
 <td align="left">952</td>
 <td align="left">1211</td>
 <td align="left">1377</td>
@@ -12137,7 +12533,7 @@ ISSP2012esim2.dat %&gt;%
 <caption>age_cat: suhteelliset frekvenssit</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">1</th>
 <th align="left">2</th>
 <th align="left">3</th>
@@ -12149,7 +12545,7 @@ ISSP2012esim2.dat %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">10.33</td>
 <td align="left">16.54</td>
 <td align="left">16.69</td>
@@ -12159,7 +12555,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">8.36</td>
 <td align="left">12.49</td>
 <td align="left">17.26</td>
@@ -12169,7 +12565,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">11.96</td>
 <td align="left">13.01</td>
 <td align="left">15.99</td>
@@ -12179,7 +12575,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">14.91</td>
 <td align="left">15.35</td>
 <td align="left">17.65</td>
@@ -12189,7 +12585,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">13.69</td>
 <td align="left">14.95</td>
 <td align="left">14.86</td>
@@ -12199,7 +12595,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">10.33</td>
 <td align="left">16.15</td>
 <td align="left">19.86</td>
@@ -12209,7 +12605,7 @@ ISSP2012esim2.dat %&gt;%
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>All</td>
+<td align="left">All</td>
 <td align="left">11.69</td>
 <td align="left">14.87</td>
 <td align="left">16.91</td>
@@ -12258,7 +12654,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <caption>Ikäluokka ja sukupuoli ga</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">f1</th>
 <th align="left">f2</th>
 <th align="left">f3</th>
@@ -12276,7 +12672,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">116</td>
 <td align="left">198</td>
 <td align="left">174</td>
@@ -12292,7 +12688,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">2013</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">40</td>
 <td align="left">64</td>
 <td align="left">94</td>
@@ -12308,7 +12704,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">921</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">102</td>
 <td align="left">120</td>
 <td align="left">152</td>
@@ -12324,7 +12720,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">1714</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">83</td>
 <td align="left">110</td>
 <td align="left">136</td>
@@ -12340,7 +12736,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">1388</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">94</td>
 <td align="left">95</td>
 <td align="left">94</td>
@@ -12356,7 +12752,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">1110</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">54</td>
 <td align="left">86</td>
 <td align="left">95</td>
@@ -12372,7 +12768,7 @@ kable(digits = 2, caption = &quot;Ikäluokka ja sukupuoli ga&quot;)</code></pre>
 <td align="left">997</td>
 </tr>
 <tr class="odd">
-<td>Total</td>
+<td align="left">Total</td>
 <td align="left">489</td>
 <td align="left">673</td>
 <td align="left">745</td>
@@ -12395,7 +12791,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <caption>ga: suhteelliset frekvenssit</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">f1</th>
 <th align="left">f2</th>
 <th align="left">f3</th>
@@ -12413,7 +12809,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 </thead>
 <tbody>
 <tr class="odd">
-<td>BE</td>
+<td align="left">BE</td>
 <td align="left">5.76</td>
 <td align="left">9.84</td>
 <td align="left">8.64</td>
@@ -12429,7 +12825,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>BG</td>
+<td align="left">BG</td>
 <td align="left">4.34</td>
 <td align="left">6.95</td>
 <td align="left">10.21</td>
@@ -12445,7 +12841,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>DE</td>
+<td align="left">DE</td>
 <td align="left">5.95</td>
 <td align="left">7.00</td>
 <td align="left">8.87</td>
@@ -12461,7 +12857,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>DK</td>
+<td align="left">DK</td>
 <td align="left">5.98</td>
 <td align="left">7.93</td>
 <td align="left">9.80</td>
@@ -12477,7 +12873,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>FI</td>
+<td align="left">FI</td>
 <td align="left">8.47</td>
 <td align="left">8.56</td>
 <td align="left">8.47</td>
@@ -12493,7 +12889,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="even">
-<td>HU</td>
+<td align="left">HU</td>
 <td align="left">5.42</td>
 <td align="left">8.63</td>
 <td align="left">9.53</td>
@@ -12509,7 +12905,7 @@ kable(digits = 2, caption = &quot;ga: suhteelliset frekvenssit&quot;)</code></pr
 <td align="left">100.00</td>
 </tr>
 <tr class="odd">
-<td>All</td>
+<td align="left">All</td>
 <td align="left">6.01</td>
 <td align="left">8.26</td>
 <td align="left">9.15</td>
@@ -13322,111 +13718,124 @@ maagaCAnum2 &lt;- as_tibble(maagaCA1num$rows, .name_repair = c(&quot;unique&quot
 <pre class="r"><code># maagaCAnum2
 # str(maagaCAnum2)
 summary(maagaCAnum2)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="2%"></col>
+<col width="7%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="10%"></col>
+<col width="9%"></col>
+<col width="9%"></col>
+<col width="11%"></col>
+<col width="10%"></col>
+<col width="9%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">name</th>
-<th align="center">mass</th>
-<th align="center">qlt</th>
-<th align="center">inr</th>
-<th align="center">k=1</th>
+<th align="left"></th>
+<th align="left">name</th>
+<th align="left">mass</th>
+<th align="left">qlt</th>
+<th align="left">inr</th>
+<th align="left">k=1</th>
 <th align="left">cor…6</th>
 <th align="left">ctr…7</th>
-<th align="center">k=2</th>
+<th align="left">k=2</th>
 <th align="left">cor…9</th>
 <th align="left">ctr…10</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">BEf1 : 1</td>
-<td align="center">Min. : 5.00</td>
-<td align="center">Min. :108.0</td>
-<td align="center">Min. : 1.00</td>
-<td align="center">Min. :-895.00</td>
+<td align="left"></td>
+<td align="left">BEf1 : 1</td>
+<td align="left">Min. : 5.00</td>
+<td align="left">Min. :108.0</td>
+<td align="left">Min. : 1.00</td>
+<td align="left">Min. :-895.00</td>
 <td align="left">Min. : 0.0</td>
 <td align="left">Min. : 0.00</td>
-<td align="center">Min. :-347.000</td>
+<td align="left">Min. :-347.000</td>
 <td align="left">Min. : 0.00</td>
 <td align="left">Min. : 0.00</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">BEf2 : 1</td>
-<td align="center">1st Qu.:10.00</td>
-<td align="center">1st Qu.:704.8</td>
-<td align="center">1st Qu.: 6.75</td>
-<td align="center">1st Qu.:-330.00</td>
+<td align="left"></td>
+<td align="left">BEf2 : 1</td>
+<td align="left">1st Qu.:10.00</td>
+<td align="left">1st Qu.:704.8</td>
+<td align="left">1st Qu.: 6.75</td>
+<td align="left">1st Qu.:-330.00</td>
 <td align="left">1st Qu.:351.2</td>
 <td align="left">1st Qu.: 4.50</td>
-<td align="center">1st Qu.:-156.000</td>
+<td align="left">1st Qu.:-156.000</td>
 <td align="left">1st Qu.: 42.75</td>
 <td align="left">1st Qu.: 2.75</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">BEf3 : 1</td>
-<td align="center">Median :13.00</td>
-<td align="center">Median :838.0</td>
-<td align="center">Median :11.00</td>
-<td align="center">Median : 82.50</td>
+<td align="left"></td>
+<td align="left">BEf3 : 1</td>
+<td align="left">Median :13.00</td>
+<td align="left">Median :838.0</td>
+<td align="left">Median :11.00</td>
+<td align="left">Median : 82.50</td>
 <td align="left">Median :667.5</td>
 <td align="left">Median :11.00</td>
-<td align="center">Median : -13.500</td>
+<td align="left">Median : -13.500</td>
 <td align="left">Median :141.50</td>
 <td align="left">Median :10.00</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">BEf4 : 1</td>
-<td align="center">Mean :13.97</td>
-<td align="center">Mean :772.6</td>
-<td align="center">Mean :13.88</td>
-<td align="center">Mean : 46.49</td>
+<td align="left"></td>
+<td align="left">BEf4 : 1</td>
+<td align="left">Mean :13.97</td>
+<td align="left">Mean :772.6</td>
+<td align="left">Mean :13.88</td>
+<td align="left">Mean : 46.49</td>
 <td align="left">Mean :573.3</td>
 <td align="left">Mean :13.92</td>
-<td align="center">Mean : 1.653</td>
+<td align="left">Mean : 1.653</td>
 <td align="left">Mean :199.28</td>
 <td align="left">Mean :13.86</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">BEf5 : 1</td>
-<td align="center">3rd Qu.:17.00</td>
-<td align="center">3rd Qu.:953.2</td>
-<td align="center">3rd Qu.:15.00</td>
-<td align="center">3rd Qu.: 472.50</td>
+<td align="left"></td>
+<td align="left">BEf5 : 1</td>
+<td align="left">3rd Qu.:17.00</td>
+<td align="left">3rd Qu.:953.2</td>
+<td align="left">3rd Qu.:15.00</td>
+<td align="left">3rd Qu.: 472.50</td>
 <td align="left">3rd Qu.:830.2</td>
 <td align="left">3rd Qu.:17.00</td>
-<td align="center">3rd Qu.: 173.500</td>
+<td align="left">3rd Qu.: 173.500</td>
 <td align="left">3rd Qu.:265.50</td>
 <td align="left">3rd Qu.:21.25</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">BEf6 : 1</td>
-<td align="center">Max. :26.00</td>
-<td align="center">Max. :999.0</td>
-<td align="center">Max. :57.00</td>
-<td align="center">Max. : 701.00</td>
+<td align="left"></td>
+<td align="left">BEf6 : 1</td>
+<td align="left">Max. :26.00</td>
+<td align="left">Max. :999.0</td>
+<td align="left">Max. :57.00</td>
+<td align="left">Max. : 701.00</td>
 <td align="left">Max. :982.0</td>
 <td align="left">Max. :66.00</td>
-<td align="center">Max. : 389.000</td>
+<td align="left">Max. : 389.000</td>
 <td align="left">Max. :834.00</td>
 <td align="left">Max. :61.00</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">(Other):66</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">(Other):66</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
-<td align="center">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
@@ -15565,8 +15974,13 @@ Ikä-sukupuoli-maa
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
 # Piirtää pisteitä koko &quot;plot-alueelle&quot;?
 
+#X11()
 
+# Rivi- ja sarakekoordinaatit (principal coordinates) talteen
+maagaCA1.rpc &lt;- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
+maagaCA1.cpc &lt;- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
 par(cex = 0.75)
+
 plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
                 main = &quot;Äiti töissä: ikäluokka ja sukupuoli maittain 2&quot;,
                 sub = &quot;osa symmetristä karttaa&quot;
@@ -15577,7 +15991,8 @@ plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
 Ikä-sukupuoli-maa
 </p>
 </div>
-<pre class="r"><code># ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+<pre class="r"><code># TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
 # grafiikkaikkunaan tulostukseen ?
 # Vai pitääkö ensin piirtää kuvan &quot;kehys&quot; ilman pisteitä xlim- ja ylim- parametreilla
 # ja sitten vasta pisteet?
@@ -15588,7 +16003,7 @@ Ikä-sukupuoli-maa
 # objektiin ja sieltä pisteet kuvaan? (29.5.20)
 # str(spCAmaaga1)</code></pre>
 <p>Kuvissa on aika ahdasta. Kuvan voisi rajata johonkin alueeseen erityisesti oikea yläosa on täynnä pisteitä. Maiden täydentävät pisteet ovat ikäluokka-sukupuoli - luokkien keskiarvopisteitä. Maiden väliset erot dominoivat, mutta maiden välillä on isoja eroja.</p>
-<p>Kartan herkkyyttä joillekin pienen massan rivipisteille pitää tutkia tarkemmin.</p>
+<p>Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi nuorimman ikäluokan ero.</p>
 <p>Vertailu voi tehdä</p>
 <p>1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?</p>
 <p>2.Maiden välillä</p>
@@ -15618,305 +16033,342 @@ isodatVars1</code></pre>
 ## [29] &quot;edum&quot;    &quot;mstam&quot;   &quot;sostam&quot;  &quot;nchildm&quot; &quot;lifstam&quot; &quot;urbrum&quot;</code></pre>
 <pre class="r"><code>ISSP2012jh1d.dat %&gt;% select(all_of(isodatVars1)) %&gt;% 
     summary()</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="0%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="11%"></col>
+<col width="6%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="11%"></col>
+<col width="4%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="0%"></col>
+<col width="11%"></col>
+<col width="6%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="11%"></col>
+<col width="4%"></col>
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">maa</th>
-<th align="right">maa3 sp</th>
-<th></th>
-<th align="right">ika Q</th>
-<th>1a Q</th>
-<th>1b Q</th>
-<th>1c Q</th>
-<th>1d Q</th>
-<th>1e Q</th>
-<th>2a Q</th>
-<th>2b Q</th>
-<th>3a Q</th>
-<th align="left">3b</th>
-<th align="center">edu</th>
-<th align="center">msta</th>
-<th align="center">sosta</th>
-<th align="center">nchild</th>
-<th align="center">lifsta</th>
-<th align="right">urbru Q1a</th>
-<th>m Q1b</th>
-<th>m Q1c</th>
-<th>m Q1d</th>
-<th>m Q1e</th>
-<th>m Q2a</th>
-<th>m Q2b</th>
-<th>m Q3a</th>
-<th>m Q3b</th>
-<th align="left">m</th>
-<th align="center">edum</th>
-<th align="center">mstam</th>
-<th align="center">sostam</th>
-<th align="center">nchildm</th>
-<th align="center">lifstam</th>
-<th align="center">urbrum</th>
+<th align="left"></th>
+<th align="left">maa</th>
+<th align="left">maa3</th>
+<th align="left">sp</th>
+<th align="left">ika</th>
+<th align="left">Q1a</th>
+<th align="left">Q1b</th>
+<th align="left">Q1c</th>
+<th align="left">Q1d</th>
+<th align="left">Q1e</th>
+<th align="left">Q2a</th>
+<th align="left">Q2b</th>
+<th align="left">Q3a</th>
+<th align="left">Q3b</th>
+<th align="left">edu</th>
+<th align="left">msta</th>
+<th align="left">sosta</th>
+<th align="left">nchild</th>
+<th align="left">lifsta</th>
+<th align="left">urbru</th>
+<th align="left">Q1am</th>
+<th align="left">Q1bm</th>
+<th align="left">Q1cm</th>
+<th align="left">Q1dm</th>
+<th align="left">Q1em</th>
+<th align="left">Q2am</th>
+<th align="left">Q2bm</th>
+<th align="left">Q3am</th>
+<th align="left">Q3bm</th>
+<th align="left">edum</th>
+<th align="left">mstam</th>
+<th align="left">sostam</th>
+<th align="left">nchildm</th>
+<th align="left">lifstam</th>
+<th align="left">urbrum</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">FR : 2409</td>
-<td align="right">FR-France : 2409</td>
-<td>m:14789</td>
-<td align="right">Min. : 15.00</td>
-<td>S :11116</td>
-<td>S :2747</td>
-<td>S :2838</td>
-<td>S :2818</td>
-<td>S :3357</td>
-<td>S :11305</td>
-<td>S :2704</td>
-<td>W : 5373</td>
+<td align="left"></td>
+<td align="left">FR : 2409</td>
+<td align="left">FR-France : 2409</td>
+<td align="left">m:14789</td>
+<td align="left">Min. : 15.00</td>
+<td align="left">S :11116</td>
+<td align="left">S :2747</td>
+<td align="left">S :2838</td>
+<td align="left">S :2818</td>
+<td align="left">S :3357</td>
+<td align="left">S :11305</td>
+<td align="left">S :2704</td>
+<td align="left">W : 5373</td>
 <td align="left">W :13722</td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="right">A big city :8442</td>
-<td>S:11116</td>
-<td>S:2747</td>
-<td>S:2838</td>
-<td>S:2818</td>
-<td>S:3357</td>
-<td>S:11305</td>
-<td>S:2704</td>
-<td>W: 5373</td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A big city :8442</td>
+<td align="left">S:11116</td>
+<td align="left">S:2747</td>
+<td align="left">S:2838</td>
+<td align="left">S:2818</td>
+<td align="left">S:3357</td>
+<td align="left">S:11305</td>
+<td align="left">S:2704</td>
+<td align="left">W: 5373</td>
 <td align="left">W:13722</td>
-<td align="center">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
-<td align="center">In paid work :17967</td>
-<td align="center">06 :6889</td>
-<td align="center">No children:24102</td>
-<td align="center">Married :17573</td>
-<td align="center">A big city :8442</td>
+<td align="left">Lower secondary (secondary completed does not allow entry to university: obligatory school) :7811</td>
+<td align="left">In paid work :17967</td>
+<td align="left">06 :6889</td>
+<td align="left">No children:24102</td>
+<td align="left">Married :17573</td>
+<td align="left">A big city :8442</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">BE : 2192</td>
-<td align="right">CZ-Czech Republic: 1804</td>
-<td>f:18034</td>
-<td align="right">1st Qu.: 36.00</td>
-<td>s :12352</td>
-<td>s :8389</td>
-<td>s :8263</td>
-<td>s :7672</td>
-<td>s :8342</td>
-<td>s :13464</td>
-<td>s :5164</td>
-<td>w :15655</td>
+<td align="left"></td>
+<td align="left">BE : 2192</td>
+<td align="left">CZ-Czech Republic: 1804</td>
+<td align="left">f:18034</td>
+<td align="left">1st Qu.: 36.00</td>
+<td align="left">s :12352</td>
+<td align="left">s :8389</td>
+<td align="left">s :8263</td>
+<td align="left">s :7672</td>
+<td align="left">s :8342</td>
+<td align="left">s :13464</td>
+<td align="left">s :5164</td>
+<td align="left">w :15655</td>
 <td align="left">w :13817</td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="right">The suburbs or outskirts of a big city:4386</td>
-<td>s:12352</td>
-<td>s:8389</td>
-<td>s:8263</td>
-<td>s:7672</td>
-<td>s:8342</td>
-<td>s:13464</td>
-<td>s:5164</td>
-<td>w:15655</td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
+<td align="left">s:12352</td>
+<td align="left">s:8389</td>
+<td align="left">s:8263</td>
+<td align="left">s:7672</td>
+<td align="left">s:8342</td>
+<td align="left">s:13464</td>
+<td align="left">s:5164</td>
+<td align="left">w:15655</td>
 <td align="left">w:13817</td>
-<td align="center">Upper secondary (programs that allows entry to university :7115</td>
-<td align="center">Retired : 7999</td>
-<td align="center">05 :6798</td>
-<td align="center">One child : 4378</td>
-<td align="center">Civil partnership : 1035</td>
-<td align="center">The suburbs or outskirts of a big city:4386</td>
+<td align="left">Upper secondary (programs that allows entry to university :7115</td>
+<td align="left">Retired : 7999</td>
+<td align="left">05 :6798</td>
+<td align="left">One child : 4378</td>
+<td align="left">Civil partnership : 1035</td>
+<td align="left">The suburbs or outskirts of a big city:4386</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">CZ : 1804</td>
-<td align="right">AU-Australia : 1557</td>
-<td>NA</td>
-<td align="right">Median : 50.00</td>
-<td>? : 3382</td>
-<td>? :5949</td>
-<td>? :6000</td>
-<td>? :7403</td>
-<td>? :7841</td>
-<td>? : 5039</td>
-<td>? :6109</td>
-<td>H : 8367</td>
+<td align="left"></td>
+<td align="left">CZ : 1804</td>
+<td align="left">AU-Australia : 1557</td>
+<td align="left">NA</td>
+<td align="left">Median : 50.00</td>
+<td align="left">? : 3382</td>
+<td align="left">? :5949</td>
+<td align="left">? :6000</td>
+<td align="left">? :7403</td>
+<td align="left">? :7841</td>
+<td align="left">? : 5039</td>
+<td align="left">? :6109</td>
+<td align="left">H : 8367</td>
 <td align="left">H : 1762</td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
-<td align="right">A town or a small city :9203</td>
-<td>?: 3382</td>
-<td>?:5949</td>
-<td>?:6000</td>
-<td>?:7403</td>
-<td>?:7841</td>
-<td>?: 5039</td>
-<td>?:6109</td>
-<td>H: 8367</td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
+<td align="left">A town or a small city :9203</td>
+<td align="left">?: 3382</td>
+<td align="left">?:5949</td>
+<td align="left">?:6000</td>
+<td align="left">?:7403</td>
+<td align="left">?:7841</td>
+<td align="left">?: 5039</td>
+<td align="left">?:6109</td>
+<td align="left">H: 8367</td>
 <td align="left">H: 1762</td>
-<td align="center">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
-<td align="center">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
-<td align="center">07 :5778</td>
-<td align="center">2 children : 2643</td>
-<td align="center">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
-<td align="center">A town or a small city :9203</td>
+<td align="left">Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation):5658</td>
+<td align="left">Unemployed and looking for a job, HR: incl never had a job: 1769</td>
+<td align="left">07 :5778</td>
+<td align="left">2 children : 2643</td>
+<td align="left">Separated from spouse/ civil partner (still legally married/ still legally in a civil partnership): 486</td>
+<td align="left">A town or a small city :9203</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">DE : 1761</td>
-<td align="right">RU-Russia : 1525</td>
-<td>NA</td>
-<td align="right">Mean : 49.52</td>
-<td>e : 4074</td>
-<td>e :9003</td>
-<td>e :8706</td>
-<td>e :7863</td>
-<td>e :7267</td>
-<td>e : 1929</td>
-<td>e :9210</td>
-<td>NA’s: 3428</td>
+<td align="left"></td>
+<td align="left">DE : 1761</td>
+<td align="left">RU-Russia : 1525</td>
+<td align="left">NA</td>
+<td align="left">Mean : 49.52</td>
+<td align="left">e : 4074</td>
+<td align="left">e :9003</td>
+<td align="left">e :8706</td>
+<td align="left">e :7863</td>
+<td align="left">e :7267</td>
+<td align="left">e : 1929</td>
+<td align="left">e :9210</td>
+<td align="left">NA’s: 3428</td>
 <td align="left">NA’s: 3522</td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">3 : 598</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner : 2997</td>
-<td align="right">A country village :8646</td>
-<td>e: 4074</td>
-<td>e:9003</td>
-<td>e:8706</td>
-<td>e:7863</td>
-<td>e:7267</td>
-<td>e: 1929</td>
-<td>e:9210</td>
-<td>P: 3428</td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">3 : 598</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner : 2997</td>
+<td align="left">A country village :8646</td>
+<td align="left">e: 4074</td>
+<td align="left">e:9003</td>
+<td align="left">e:8706</td>
+<td align="left">e:7863</td>
+<td align="left">e:7267</td>
+<td align="left">e: 1929</td>
+<td align="left">e:9210</td>
+<td align="left">P: 3428</td>
 <td align="left">P: 3522</td>
-<td align="center">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
-<td align="center">In education : 1763</td>
-<td align="center">08 :3477</td>
-<td align="center">missing : 940</td>
-<td align="center">Divorced from spouse/ legally separated from civil partner : 2997</td>
-<td align="center">A country village :8646</td>
+<td align="left">Lower level tertiary, first stage (also technical schools at a tertiary level) :5147</td>
+<td align="left">In education : 1763</td>
+<td align="left">08 :3477</td>
+<td align="left">missing : 940</td>
+<td align="left">Divorced from spouse/ legally separated from civil partner : 2997</td>
+<td align="left">A country village :8646</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">AU : 1557</td>
-<td align="right">NO-Norway : 1444</td>
-<td>NA</td>
-<td align="right">3rd Qu.: 63.00</td>
-<td>E : 1051</td>
-<td>E :5547</td>
-<td>E :5960</td>
-<td>E :5016</td>
-<td>E :3462</td>
-<td>E : 403</td>
-<td>E :8917</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">AU : 1557</td>
+<td align="left">NO-Norway : 1444</td>
 <td align="left">NA</td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">4 : 117</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="right">A farm or home in the country :1902</td>
-<td>E: 1051</td>
-<td>E:5547</td>
-<td>E:5960</td>
-<td>E:5016</td>
-<td>E:3462</td>
-<td>E: 403</td>
-<td>E:8917</td>
-<td>NA</td>
+<td align="left">3rd Qu.: 63.00</td>
+<td align="left">E : 1051</td>
+<td align="left">E :5547</td>
+<td align="left">E :5960</td>
+<td align="left">E :5016</td>
+<td align="left">E :3462</td>
+<td align="left">E : 403</td>
+<td align="left">E :8917</td>
 <td align="left">NA</td>
-<td align="center">Upper level tertiary (Master, Dr.) :4762</td>
-<td align="center">Domestic work : 1180</td>
-<td align="center">04 :3346</td>
-<td align="center">3 : 598</td>
-<td align="center">Widowed/ civil partner died : 2763</td>
-<td align="center">A farm or home in the country :1902</td>
+<td align="left">NA</td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">4 : 117</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">A farm or home in the country :1902</td>
+<td align="left">E: 1051</td>
+<td align="left">E:5547</td>
+<td align="left">E:5960</td>
+<td align="left">E:5016</td>
+<td align="left">E:3462</td>
+<td align="left">E: 403</td>
+<td align="left">E:8917</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Upper level tertiary (Master, Dr.) :4762</td>
+<td align="left">Domestic work : 1180</td>
+<td align="left">04 :3346</td>
+<td align="left">3 : 598</td>
+<td align="left">Widowed/ civil partner died : 2763</td>
+<td align="left">A farm or home in the country :1902</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">RU : 1525</td>
-<td align="right">DK-Denmark : 1403</td>
-<td>NA</td>
-<td align="right">Max. :102.00</td>
-<td>NA’s: 848</td>
-<td>NA’s:1188</td>
-<td>NA’s:1056</td>
-<td>NA’s:2051</td>
-<td>NA’s:2554</td>
-<td>NA’s: 683</td>
-<td>NA’s: 719</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">RU : 1525</td>
+<td align="left">DK-Denmark : 1403</td>
 <td align="left">NA</td>
-<td align="center">(Other) :2022</td>
-<td align="center">(Other) : 1775</td>
-<td align="center">(Other):4758</td>
-<td align="center">(Other) : 45</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="right">NA’s : 244</td>
-<td>P: 848</td>
-<td>P:1188</td>
-<td>P:1056</td>
-<td>P:2051</td>
-<td>P:2554</td>
-<td>P: 683</td>
-<td>P: 719</td>
-<td>NA</td>
+<td align="left">Max. :102.00</td>
+<td align="left">NA’s: 848</td>
+<td align="left">NA’s:1188</td>
+<td align="left">NA’s:1056</td>
+<td align="left">NA’s:2051</td>
+<td align="left">NA’s:2554</td>
+<td align="left">NA’s: 683</td>
+<td align="left">NA’s: 719</td>
 <td align="left">NA</td>
-<td align="center">Primary school (elementary school) :1531</td>
-<td align="center">Permanently sick or disabled : 1093</td>
-<td align="center">03 :2221</td>
-<td align="center">4 : 117</td>
-<td align="center">Never married/ never in a civil partnership, single : 7535</td>
-<td align="center">missing : 244</td>
+<td align="left">NA</td>
+<td align="left">(Other) :2022</td>
+<td align="left">(Other) : 1775</td>
+<td align="left">(Other):4758</td>
+<td align="left">(Other) : 45</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">NA’s : 244</td>
+<td align="left">P: 848</td>
+<td align="left">P:1188</td>
+<td align="left">P:1056</td>
+<td align="left">P:2051</td>
+<td align="left">P:2554</td>
+<td align="left">P: 683</td>
+<td align="left">P: 719</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Primary school (elementary school) :1531</td>
+<td align="left">Permanently sick or disabled : 1093</td>
+<td align="left">03 :2221</td>
+<td align="left">4 : 117</td>
+<td align="left">Never married/ never in a civil partnership, single : 7535</td>
+<td align="left">missing : 244</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">(Other):21575</td>
-<td align="right">(Other) :22681</td>
-<td>NA</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
+<td align="left"></td>
+<td align="left">(Other):21575</td>
+<td align="left">(Other) :22681</td>
 <td align="left">NA</td>
-<td align="center">NA’s : 308</td>
-<td align="center">NA’s : 370</td>
-<td align="center">NA’s :1777</td>
-<td align="center">NA’s : 940</td>
-<td align="center">NA’s : 434</td>
-<td align="right">NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
 <td align="left">NA</td>
-<td align="center">(Other) : 799</td>
-<td align="center">(Other) : 1052</td>
-<td align="center">(Other):4314</td>
-<td align="center">(Other) : 45</td>
-<td align="center">missing : 434</td>
-<td align="center">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA’s : 308</td>
+<td align="left">NA’s : 370</td>
+<td align="left">NA’s :1777</td>
+<td align="left">NA’s : 940</td>
+<td align="left">NA’s : 434</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">(Other) : 799</td>
+<td align="left">(Other) : 1052</td>
+<td align="left">(Other):4314</td>
+<td align="left">(Other) : 45</td>
+<td align="left">missing : 434</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>

@@ -60,7 +60,9 @@ havainnot (lukumäärät, "abundance") öljylauttojen liepeiltä (havainnot ryv�
 
 1. Taulukko
 
-Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen CA:n tapauksessa aggregoimalla "cloud of individuals".
+Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai 
+havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen 
+CA:n tapauksessa aggregoimalla "cloud of individuals".
 
 **#V** MOOC, LeReoux
 
@@ -72,11 +74,13 @@ Dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt.
 tapauksessa, niin siitäkin jatketaan eteenpäin. (**edit 24.2.20** Epäselvä
 muistiinpano?)
 
-Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** Siellä tästäkin on sananen: substanssiero usein on.
+Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** 
+Siellä tästäkin on sananen: substanssiero usein on.
 
 3. CA:ssa vaikea juttu on (Blasius, "vizualisation - verkkokirja") rivien ja
 sarakkeiden **tekninen** symmetria. No ei se nyt niin hämäävä ehkä ole,
-oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan "hajontamittarilla" ja painotetaan massoilla.
+oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan 
+"hajontamittarilla" ja painotetaan massoilla.
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
@@ -85,11 +89,16 @@ $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 Dimensioiden vähentäminen tärkein asia ("the essence"), pienessä taulossa ei 
 ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta, 
 mistä on kyse. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana
-(karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden pistejoukon ("pilven") projektiot, jotka säilyttävät maksimimäärän alkuperäisen n-ulotteisen
-pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat saman pilven pisteet
-voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin kaukana toisistaan. Tulkinnassa
-tärkeitä ovat "ääripäät", ja numeeriset tulokset kertovat kuinka hyvin piste on tasossa
- esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukan on Uudenmaan raja.
+(karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden 
+pistejoukon ("pilven") projektiot, jotka säilyttävät maksimimäärän alkuperäisen 
+n-ulotteisen pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat 
+saman pilven pisteet voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin 
+kaukana toisistaan. Tulkinnassa
+tärkeitä ovat "ääripäät", ja numeeriset tulokset kertovat kuinka hyvin piste on
+tasossa esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri 
+pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei 
+oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukana on 
+Uudenmaan raja.
 
 Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan
 riippuvuuksien geometrista analyysiä. Lähtökohta on kahden muuttujan
@@ -153,8 +162,13 @@ MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde.
 Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
 
 **zxy**(teoria/historia-jaksoon,104.20).Termi korrespondenssi: "neglected 
-multivariate method" - paperissa käännetty näin englanniksi ransk. termi (Benzecri) rivien ja sarakkeiden
-"correspondence" eli yhteys/"riippuvuus"/vastaavuus tms.
+multivariate method" - paperissa käännetty näin englanniksi ransk. termi 
+(Benzecri) rivien ja sarakkeiden "correspondence" eli yhteys, "riippuvuus", 
+vastaavuus tms.
+**edit 4.7.20** Kts. myös Funmooc-muistiinpanot, opk! Mitä kartta esittää? Kaikki
+edellä kuvattu esitetään suhteellisina eroina koko aineiston keskiarvosta, 
+riippumattomuushypoteesi.
+
 
 ## Äiti työssä
 
