@@ -501,19 +501,26 @@ lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
 summary(gaTestCA1)              
 ```
 **zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on 
-"as it is", ei ole vakioitu ga-luokkien kokoja.
+"as it is", ei ole vakioitu ga-luokkien kokoja (massat max(f4 101), min (m1 57)).
 
 **zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla?
 Järjestys ei toimi, S s-sarakkeen vasemmalla puolella. Miehet konservatiivisempia,
-mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti e,
-sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
-poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos vertaa
-sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet konservatiivisia, naiset
-liberaaleja). Naisista vain vanhin ikäluokka oikealla, miehistä nuorin ja kolme 
-vanhinta.
+mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti
+e, sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
+poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos 
+vertaa sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet 
+konservatiivisia, naiset liberaaleja). Naisista vain vanhin ikäluokka oikealla,
+miehistä nuorin ja kolme vanhinta.
 
-**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. 
-MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä 
+edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan 
+tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että 
+(a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+**edit 14.8.20 Viite?**
+
+**edit 14.8.20** Numeeriset tulokset: nuorimpien miesten (qlt 659) ja erityisesti
+keski-ikäisten miestén m3 (qlt 457) pisteet huonosti esitetty kartalla. Tulkitaan
+myös cor ja ctr, riveille ja sarakkeille.
 
 ```{r maaga1}
 # Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
@@ -537,6 +544,8 @@ Tehty jo 26.9.2018!
 ```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
+
+
 
 # maapisteiden pääkoordinaatit janojen piirtämiseen
 # HUOM! maagaCA1.rpc on matriisi
@@ -603,6 +612,13 @@ head(arrange(maagaCAnum2, qlt))
 #str(maagaRows.df$mass)
 # ei toimi AscmaagaRows.df <- maagaRows.df[order(mass),]
 
+#31.8.20 Testataan subset ca
+#31.8.20 Testataan subset ca
+ISSP2012esim2.dat %>% tableX(maaga, Q1b)
+maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
+plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta - rivit 1-24")
+
 ```
 Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja
 suuri kontribuutio ei näytä olevan.
@@ -636,7 +652,7 @@ maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
 # dim(maagaTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
 
 spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
-#X11()
+X11()
 
 # Plot toimii (4.2.20), ja par() (4.5.20)
 par(cex = 0.5)
@@ -653,7 +669,21 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kon
                   map = "rowgreen", 
                  contrib = c("absolute", "absolute"),
                   mass = c(TRUE,TRUE),
-                  arrows = c(FALSE,TRUE)                  )
+                  arrows = c(FALSE,TRUE) 
+     )
+
+#
+#asymmetrinen kartta - testataan subset-analyysiä (14.8.20)
+
+par(cex = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
+                sub = "Liian tukkoinen kuva, cex=0.5?",
+                  map = "rowgreen", 
+                 contrib = c("absolute", "absolute"),
+                  mass = c(TRUE,TRUE),
+                  arrows = c(FALSE,TRUE) 
+     )
+
 
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).

@@ -165,13 +165,16 @@ laadun rajoissa. Yksityiskohtien etsiskely ei ole oleellista, väärien johtopä
 välttäminen on. Erityisesti symmetrisessä kartassa ei voi tulkita mitenkään (tiukasti
 ottaen) eri pistejoukkojen etäisyyksiä. Ei voi tunnistaa klustereita!
 
+**edit 14.8.20** Barysentrinen koordinaatisto on ideaalipisteiden simpleksin 
+kärkipisteiden koordinaatisto.
+
 
 ```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
      contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
-     arrows = c(FALSE, FALSE),
+     arrows = c(FALSE, TRUE),
      main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2a (rowgreen)",
      sub = "sarakevektorin ja rivipisteiden värin tummuus = kontribuutio(absolute)")
 

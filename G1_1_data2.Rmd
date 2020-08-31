@@ -608,6 +608,9 @@ Vastausvaihtoehdot:
 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 
 4 = eri mieltä, 5 = täysin eri mieltä
 
+**edit 14.8.20** Kysymyksissä Q1a ja Q2a vastausten järjestys on tulkinnan 
+(moderni vs.perinteinen tai liberaali vs. konsertavi) erilainen.
+
 
 Q1a Working mother can have warm relation with child
 Q1b Pre-school child suffers through working mother

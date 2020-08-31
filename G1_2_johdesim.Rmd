@@ -833,7 +833,9 @@ bookdown-ympäristössä.
 
 2. Massat
 
-3. Profiilien etäisyydet (khii2)
+3. Profiilien etäisyydet (khii2): 
+        (a) saman pistejoukon pisteiden
+        (b) eri pistejoukkon pisteiden
 
 **zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite 
 muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
