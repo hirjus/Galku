@@ -140,3 +140,5 @@ skriptissä. Hieman tekstiä johdattelevan esimerkin asymmetriseen kuvaan.
 
 **12.8.2020** Siistittiin tekstiä. Testattiin ca-paketin caconv- ja cacoord-funktioita.
 Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
+**5.9.2020** Pientä editointia, lisättiin riviprofiili-ca:n ja perus-ca:n
+khii2-etäisyyksien ja massojen vertailuja.

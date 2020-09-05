@@ -687,7 +687,8 @@ saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
-**TODO 19.2.20** Siistiksi taulukoksi. as_tibble antaa varoituksen, mutta toimii (11.4.20).
+**TODO 19.2.20** Siistiksi taulukoksi. as_tibble antaa varoituksen, mutta toimii 
+(11.4.20). 
 
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
@@ -695,8 +696,36 @@ luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 #simpleCA1$rowdist
 #str(simpleCA1$rowdist)
 
+# verrataan "tavallisen" ca:n ja riviprofiili-ca:n khii2-etäisyyksiä origosta
+# 5.9.2020
 
+# khii2 - etäisyydet origosta
+
+simpleCA1$rownames
 simpleCA1$rowdist
+simpleCA3$rowdist
+
+simpleCA3$colnames
+simpleCA1$coldist
+simpleCA3$coldist
+
+# massat - huom! Riviprofiilien ca: rivimassojen summa on 1 !(5.9.20)
+
+# rivit
+
+simpleCA1$rownames
+simpleCA1$rowmass
+simpleCA3$rowmass
+sum(simpleCA1$rowmass)
+sum(simpleCA3$rowmass)
+
+# sarakkeet
+
+simpleCA3$colnames
+simpleCA1$colmass
+simpleCA3$colmass
+sum(simpleCA1$colmass)
+sum(simpleCA3$colmass)
 
 rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist))
 colnames(rowdist.tbl) <- simpleCA1$rownames
@@ -712,8 +741,10 @@ colnames(coldist.tbl) <- simpleCA1$colnames
 knitr::kable(rowdist.tbl,digits = 3, booktabs = TRUE,
              caption = "Rivietäisyydet keskiarvosta (khii2)")
 
+
 knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
              caption = "Sarake-etäisyydet keskiarvosta (khii2)")
+simpleCA3$coldist
 
 ```
 **Edit 28.5.20** Pois tulosteesta. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys
@@ -800,8 +831,12 @@ sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
 
 ```
 
-**edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta ca-ratkaisussa
-skaalautuvat eri arvoksi (vakio).
+**edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta 
+ca-ratkaisussa skaalautuvat eri arvoksi (vakio). Oleellinen vaikututus karttaan
+on pienen massan pisteiden (BG, FI, HU) siirtymien kohti origoa. Ei kyllä
+ole kovin selvä, ja näkyy selvimmin "ääripäissä" (? 5.9.20) Entäs sarakepisteet,
+niiden massat eivät muutu? **TODO 5.9.20** Ylempänä taulukko khii2-etäisyyksistä,
+tässä kaksi pilveä projisoitu samaan kuvaan.
 
 
 Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.

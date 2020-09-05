@@ -182,7 +182,11 @@ plot(simpleCA1, map = "rowgreen",
 
 
 
-Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
+Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa 
+standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. 
+Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee 
+sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä 
+oleelliset yhteydet, mutta mielellään vain ne.
 
 Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
 
@@ -199,7 +203,8 @@ plot(simpleCA1, map = "rowgreen",
 
 **Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
-Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen tai suhteelliseen kontribuutioon.
+Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja 
+värisävy absoluuttiseen tai suhteelliseen kontribuutioon.
 
 
 ```{r G1_3_castats1}
@@ -246,10 +251,10 @@ Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
 kontribuutiot ovat niin pieniä (24.2.20)
 
-(@) **Miksi sarakemassat muuttuvat?** Joku skaalaus, massojen "kaksoisrooli" painoina
-ja normalisoivina ("varianssin tapaan") muunnoksina. Hieman on hämärä, edelleen! Teknisiä tuloksia
-ei ehkä pidä käyttää mihinkään muuhun kuin kartan laadulliseen arviointiin ja
-kuvan tulkintojen varmistamiseen?(24.2.20)
+(@) **Miksi sarakemassat muuttuvat?** Joku skaalaus, massojen "kaksoisrooli" 
+painoina ja normalisoivina ("varianssin tapaan") muunnoksina. Hieman on hämärä,
+edelleen! Teknisiä tuloksia ei ehkä pidä käyttää mihinkään muuhun kuin kartan 
+laadulliseen arviointiin ja kuvan tulkintojen varmistamiseen?(24.2.20)
 
 **zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 

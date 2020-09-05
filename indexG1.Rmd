@@ -45,7 +45,7 @@ Poistetaan tarpeetonta tekstiä, vanha koodi voi jäädä selvästi merkittynä.
 
 (24.2.20) Versio 1.5.7. Pieniä ja isompiakin korjailuja, koodin siistimistä jne.
 (27.3.20) Muutetaan hieman karttojen koodilohkoja, html-tulosteessa kuvasuhde 1 
-mutta pdf-tulosteessa ei.
+mutta pdf-tulosteessa ei. Ero on pieni.
 (8.4.20)
 
 **HISTORIAA**
