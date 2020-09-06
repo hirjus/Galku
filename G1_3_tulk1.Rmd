@@ -64,15 +64,24 @@ Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaati
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
 
 Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
+
+Standardikooridaateissa esitety sarakepisteet ovat fiktiivisiä "maapisteitä", joissa
+kaikki vastaukset ovat yhdessä luokittelumuuttujan arvossa.Alkuperäisessä täydessä avaruudessa
+ne ovat simpleksin kärkipisteet, simpleksin sisällä ovat riviprofiilit.
      
-```{r G1-3asymm2}
+```{r G1-3asymm2,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+# 
+# Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
+# pdf("img/sCA1asymm1.pdf")
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1" )
+# Kuva tiedostoon - suljetaan
+# dev.off()
 
 ```
 
@@ -82,47 +91,135 @@ erottelevan "maltilliset" mielipiteen tiukemmista. Sarake "täysin samaa mieltä
 eri mieltä" (E) on vasemmalla ja kolme vastausvaihtoehtoa oikealla. Kovin terävästi
 dimensiot eivät eroa toisistaan?
 
+Asymmetrinen kartta - rivipisteet (profiilit) sarakepisteiden standardikoordinaattien 
+keskiarvopisteinä (ns. barysentrinen keskiarvo).
 
-```{r G1-3asymmContrib1}
+```{r G1-3asymm3,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Barysentrisen keskiarvon  "viivakuviota" kehitelty CA_calc1.R - skriptissä
+# simpleCA1-objektista saa std-koordinaatit, muunnoksella rivien pääkoordinaatit
+# rpc.
+
+# Jos plot-komennotoon "MapObj1 <- ", saadaan pisteiden koordinaatit
+# plot-funktiolla ensin "raamit" ja pisteet talteen, sitten pisteet Suomen
+# pisteestä lines(x,y) sarakevektoreihin? (29.5.20)
+
+
+# asymmetrinen kartta - rivit pc ja sarakkeet sc
+# sarakkeet vektorikuvina
+# HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+
+# Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
+# pdf("img/sCA1asymm1.pdf")
+
+# Piirretään Suomen riviprofiilista janat sarakepisteisiin - barysentinen keskiarvo
+# Rivipisteet pääkoordinaatteina (principal coordinates)
+
+simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
+
+# ei toimi - onpa hankalaa! segments antaa virheilmoituksen "plot.new has not
+# been called yet" (11.6.20)
+# X11()
+plot(simpleCA1, map = "rowprincipal", 
+     arrows = c(FALSE,FALSE),
+     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
+     sub = "Suomen profiili sarakkeiden barysentrisenä keskiarvona")
+     segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],
+         simpleCA1$colcoord[, 2], col = "pink")
+     
+# Kuva tiedostoon - suljetaan
+# dev.off()
+
+
+
+
+```
+
+**Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, ideaalipisteitä
+("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla "reilusti" ykköstä suurempia?
+Vastaus: ideaalipisteet esitetään rivipisteiden koordinaatistossa - > skaalaus.
+
+**Edit 11.6.20 - tulkinta ja data?TARKISTA** Origo on koko aineiston barysentrinen keskipiste. Janan pituus on kääntäen verrannollinen sarakkeen ("ideaalipisteen") suhteelliseen osuuteen.
+Maapiste (profiilipiste) on saravektoreiden barysentrinen keskiarvo, ja etäisyydet
+kertovat kyseisen sarakkeen suhteellisen osuuden maaprofiliisissa.(? 11.6.20) .
+"In an asymmetric map where the rows, for example, are in principal co-
+ordinates (i.e. the row analysis), distances between displayed row points
+are approximate khii2-distances between row profiles; and distances from the
+row profile points to a column vertex point are, as a general rule, inversely
+related to the row profile elements for that column." CAiP, s. 72., tarkemmin s.62-.
+Pisteiden väliset etäisyydet voidaan optimaalisessa tilanteessa (symm. kuva sama pistejoukko, 
+asymm. kuva myös sarake- ja rivipisteet) tulkita vain approksimaatioina.
+
+Verifying the profile-vertex interpretation (emt., s 68):
+Each row profile point (staff group) is at a weighted average position of the
+column vertex points (smoking categories), where the weights are the elements
+of the respective row profile. As a general rule, assuming that the display
+is of good quality, which is true in this case, the closer a profile is to that
+vertex, the higher its profie value is for that category.
+
+Verifiointi verteksi kerrallaan, kaikki on suhteellista! Suomi on kaikkein lähimpänä
+e-verteksiä. Niinpä Suomen profiilissa e-vastausten suhteellinen osuus on suurempi kuin 
+muilla mailla. Tanska vastaavasti lähimpänä E-verteksiä.
+
+Perusidea: kartta antaa yleiskuvan riippuvuudesta, approksimaation tarkkuuden ja
+laadun rajoissa. Yksityiskohtien etsiskely ei ole oleellista, väärien johtopäätösten
+välttäminen on. Erityisesti symmetrisessä kartassa ei voi tulkita mitenkään (tiukasti
+ottaen) eri pistejoukkojen etäisyyksiä. Ei voi tunnistaa klustereita!
+
+**edit 14.8.20** Barysentrinen koordinaatisto on ideaalipisteiden simpleksin 
+kärkipisteiden koordinaatisto.
+
+
+```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
-     contrib= c("absolute", "absolute"),
+     contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
-     sub = "sarakevektorin värin tummuus = kontribuutio(absolute)")
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2a (rowgreen)",
+     sub = "sarakevektorin ja rivipisteiden värin tummuus = kontribuutio(absolute)")
 
 ```
 
 
 
-Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä oleelliset yhteydet, mutta mielellään vain ne.
+Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa 
+standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. 
+Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee 
+sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä 
+oleelliset yhteydet, mutta mielellään vain ne.
 
 Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
-```{r G1-3asymmContrib2}
+
+```{r G1-3asymmContrib2,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
 plot(simpleCA1, map = "rowgreen",
-     contrib= c("relative", "relative"),
+     contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
-     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2 (rowgreen)",
-     sub = "sarakevektorin värin tummuus = kontribuutio(relative)")
+     main = "Lapsi kärsii jos äiti on töissä - asymmetrinen kartta 2b (rowgreen)",
+     sub = "sarakevektorin ja pisteen värin tummuus = kontribuutio(relative)")
 
 ```
 
 **Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
-Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja värisävy absoluuttiseen kontribuutioon (voi olla myös suhteellinen kontribuutio).
+Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja 
+värisävy absoluuttiseen tai suhteelliseen kontribuutioon.
 
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
+# (11.4.20) yhdistä koodilohkoon khii2dist1 (G1_2_johdesim.Rmd, r. 665)
+# CA:n numeeristen tulosten käsittelyä myös CAcalc_1.R -skriptissä.
+
 summary(simpleCA1)
 
 # vertailun vuoksi numeeriset tulokset, kun maiden massat vakiot
 summary(simpleCA3)
 
 # Rivi- ja sarake-etäisyydet (keskiarvosta/sentroidista)
+# HUOM! Edellisessä jaksossa taulukko rivi- ja sarake-etäisyyksistä. Tuskin
+# kannattaa tässä toistaa. Muuta analyysiä numeerisista tuloksista. (10.4.20)
 
 simpleCA1$rownames
 simpleCA1$rowdist
@@ -131,19 +228,22 @@ simpleCA3$rowdist
 simpleCA1$colnames
 simpleCA1$coldist
 simpleCA3$coldist
+
 ```
 Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
 CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
-ykkösiä.
+ykkösiä. Rivimassat skaalautuvat niin, että niiden summa on 1.
+
+Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 **TODO** (21.2.20)
 
-(@)Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+(@) Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
-(@)Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+(@) Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
 mutta ei kovin radikaalisti.
 
-(@)Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
+(@) Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
 
 Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
 
@@ -151,9 +251,10 @@ Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
 kontribuutiot ovat niin pieniä (24.2.20)
 
-(@) Miksi sarakemassat muuttuvat? Hieman on hämärä, edelleen! Teknisiä tuloksia
-ei ehkä pidä käyttää mihinkään muuhun kuin kartan laadulliseen arviointiin ja
-kuvan tulkintojen varmistamiseen?(24.2.20)
+(@) **Miksi sarakemassat muuttuvat?** Joku skaalaus, massojen "kaksoisrooli" 
+painoina ja normalisoivina ("varianssin tapaan") muunnoksina. Hieman on hämärä,
+edelleen! Teknisiä tuloksia ei ehkä pidä käyttää mihinkään muuhun kuin kartan 
+laadulliseen arviointiin ja kuvan tulkintojen varmistamiseen?(24.2.20)
 
 **zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 

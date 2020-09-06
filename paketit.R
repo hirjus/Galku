@@ -24,3 +24,4 @@ library(testthat)
 #
 #r-skripteillä riittää, kun ajaa tämän
 sessionInfo()
+

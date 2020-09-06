@@ -3,6 +3,7 @@
 **edit 30.1.20** 
 Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
 Uusi G1_1_data_fct1.Rmd tekee muunnokset.
+Siistitään tekstiä (**12.8.2020**)
 
 **Historiaa**
 
@@ -48,32 +49,41 @@ library(testthat)
 
 **Datan esittely ja kuvailut - tämä luku täysin uusiksi (24.9.18)**
 
+**edit 12.8.2020** käsitteet määriteltävä ennen käyttöä.
+
 **10.10.2018 maat ja muuttujat valittu.**
 
-1. Eksploratiivinen ja graafinen menetelmä tarvitseen aineiston, hankalaa esitellä jollain synteettisellä esimerkkiaineistolla. **edit** Eksp&graaf menetelmät määriteltävä johdantoluvussa.
-Esimerkkiaineistoja (synteettisiä kuten smoke, myös muita) on mm. ca - paketissa.
+CA on eksploratiivinen ja graafinen(visuaalinen) menetelmä, peruskäsitteet esitellään
+rajatulla aineistolla. Se on kuitenkin oikea tutkimusaineisto kaikkine ongelmineen.
 
-2. CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin, siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. **V** Benzecri:"kun data menee miljoonaan suuntaan".
+CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysiin,
+siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. 
+**V** Benzecri:"kun data menee miljoonaan suuntaan".
 
 3. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
 
 4. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin (esim. ekologia ja biologia, arkeologia, kielen tutkimus)
+5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
+(esim. ekologia ja biologia, arkeologia, kielen tutkimus). Kyselytutkmukset ovat 
+yksi selkeä menetelmän sovelluskohde. Muuttujat ovat usein kvalitatiivisia, ja 
+ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
 
- 
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
 
 **luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
 
-Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
+Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) 
+tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
 
-**Tärkeät linkit**
+**Tärkeät linkit - ISSP 2012 data**
 
-Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit Rmd-koodissa).
+Toimivat html-tulosteessa, PDFtiedostoissa saa toimimaan (vaati tarkat formatoinnit 
+Rmd-koodissa).
 
-www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista, joissa aineistoja on käytetty.
+www.issp.org, tutkimushankkeen historiaa. Löytyy myös bibliografia tutkimuksista,
+joissa aineistoja on käytetty.
 
 www.gesis.org - tutkimuksen "sihteeristö", dokumentaatio ja datat.
 
@@ -83,14 +93,16 @@ data ja dokumentaatio (selattavissa): zacat.gesis.org
 ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, [doi:10.4232/1.12661](https://doi.org/10.4232/1.12661)
 Alla myös suora linkki
 
-**Linkitys on hankalaa**
+**Linkitys dokumentteihin on hankalaa**
 
 * monta portaalia, joista pääsee monien organisaationimien taakse
-* tästä lyhyt selostus
-* tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeä **muuttujakuvaukset ja muut tiedot**
-* käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne kyllä säilyvät, tai jäljille pääsee.
+* tärkeimmät linkit ISSP-tutkimuksen "kotisivu" ja selkeät **muuttujakuvaukset ja muut tiedot**
+* käytännössä linkittäminen "syvälle" johonkin sivustoon tai www-palveluun ei ole
+järkevää, parempi antaa selkeät viitetiedot ja tiedot organisaatioista. Ne säilyvät,
+tai jäljille pääsee.
 
-**Edit** Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoittelilla. Voi laittaa taulukon tärkeimmistä dokumenteista, tarvittaessa liitteeksi (tiedostonimet ja kuvaus). Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.
+**Edit** Refworksiin on kerätty viitteitä, tässä pärjätään kolmen saitin osoitteilla.
+Alla linkkejä jotka eivät näy PDF-tulosteessa, lisätty tekstinä.
 
 [Aineistot](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
 https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
@@ -98,26 +110,39 @@ https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
 [Muuttujakuvaukset ja muut tiedot]
 (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
-**OK - täältä löytyy oikeastaan kaikki!** Suomenkielinen lomake (ZA5900_q_fi-fi.pdf) löytyy helpoiten täältä, samoin muu dokumnetaati tiedostoina. Veppisivuilla kerrotaan, mitä ne dokumentit ovat.
 
-[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) **vie vain aineiston dokumentoinnin etusivulle** https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e
+Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)
+Suomessa [yhteiskuntatieteellinen tietoarkisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD2820)
 
 
-[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/) **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
+[Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
+**vie vain aineiston dokumentoinnin etusivulle** 
+https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e
+
+ **GESIS-palvelun datan yleiset käyttöehdot, viittauskäytännöt**
+[Käyttöehdot:](https://www.gesis.org/en/services/data-analysis/more-data-to-analyze/data-archive-service/)
 
 Havaintojen lukumäärät voi tarkistaa [täältä](http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900.
 **Dokumentointisivusto/katalogi, jossa helppo navigoida** zacat.gesis.org.
 
-Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake, tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset. MOnitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain. "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille. Kaikista muuttujista on taulukko maittain.
+Dokumentointi on hyvin tarkka, tiedot löytyvät haastattelumenetelmista (parerilomake,
+tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoinnista
+maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset.
+Monitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain.
+"Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille.
+Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen
+laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.
 
 ```{r ISSPdocsTable, fig.cap="ISSP 2012: dokumentit"}
 issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
-                  "Contents of ISSP 2012 module")
+                  "Contents of ISSP 2012 module", "Questionnaire Development")
 issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot", 
                   "tiedokeruun toteutus eri maissa", 
-                  "Maittain sovellettava kyselylomake", "substanssikysymykset taulukkona")
-issp_docfile <- c("ZA5900_cdb.pdf", "ZA5900_mr.pdf", "ZA5900_bq.pdf","ZA5900_overview.pdf")
+                  "Maittain sovellettava kyselylomake", "substanssikysymykset taulukkona",
+                  "kyselylomakkeen laatiminen")
+issp_docfile <- c("ZA5900_cdb.pdf", "ZA5900_mr.pdf", "ZA5900_bq.pdf","ZA5900_overview.pdf",
+                  "ssoar-2014-scholz_et_al-ISSP_2012_Family_and_Changing.pdf")
 
 
 col_isspdocs <- c("dokumentti","sisältö","tiedosto")
@@ -129,7 +154,7 @@ col_isspdocs <- c("dokumentti","sisältö","tiedosto")
 # varoituksia data_framen käytöstä, toimisiko tibble()? (21.2.20)
 ISSPdocsT.tbl <- tibble(issp_docname, issp_docdesc, issp_docfile)
 colnames(ISSPdocsT.tbl) <- col_isspdocs
-knitr::kable(ISSPdocsT.tbl, booktab=TRUE)
+knitr::kable(ISSPdocsT.tbl, booktab = TRUE)
 ```
 
 
@@ -178,7 +203,7 @@ Bulgaria, Czech Republic, Denmark, Finland,France, Germany, Great Britain,
 Ireland, Latvia, Lithuania, Norway, Poland, Sweden, Slovakia, Slovenia,Spain,
 Switzerland, Australia, Austria, Canada, Croatia, Iceland, Russia, United States,
 Belgium, Hungary, Netherlands, Portugal 
-**(28)** - Espanja, Great Britain, USA pois -> **25 maata (11.10.18)**
+**(28)** - Espanja, Iso-Britannia, USA pois -> **25 maata (11.10.18)**
 
 
 Espanja jätettiin pois, koska siellä kysymyksissä jätettiin pois neutraali 
@@ -262,7 +287,7 @@ samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
 
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
-```{r datasel-country1}
+```{r datasel-country1, warning=TRUE}
 # Aineiston rajaamisen kolme vaihetta (10.2018)
 # 
 # TIEDOSTOJEN NIMEÄMINEN
@@ -564,6 +589,8 @@ ISSP2012jh1b.data <- select(ISSP2012jh1a.data, all_of(jhvars1))
 ISSP2012jh1c.data <- filter(ISSP2012jh1b.data, (!is.na(SEX) & !is.na(AGE)))
 
 str(ISSP2012jh1c.data) # 32823 obs. of  23 variables, 32969-32823 = 146
+# TARKISTUS 8.6.20 dplyr 1.0.0 havaintojen ja muuttujien määrä ok.
+
 # ISSP2012jh1c.data %>% summary() %>% kable()
 
 ```
@@ -580,6 +607,9 @@ Vastausvaihtoehdot:
 
 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä, 
 4 = eri mieltä, 5 = täysin eri mieltä
+
+**edit 14.8.20** Kysymyksissä Q1a ja Q2a vastausten järjestys on tulkinnan 
+(moderni vs.perinteinen tai liberaali vs. konsertavi) erilainen.
 
 
 Q1a Working mother can have warm relation with child
@@ -669,8 +699,8 @@ colnames(jhVarTable1_fi.tbl) <- cols_jhVarTable1
 # OLD
 # knitr::kable(jhVarTable1.df, booktab=TRUE,
 #                fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
-knitr::kable(jhVarTable1.tbl, booktab=TRUE,
-               fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
+knitr::kable(jhVarTable1.tbl, booktab = TRUE,
+               fig.cap = "ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
 
@@ -678,8 +708,8 @@ knitr::kable(jhVarTable1.tbl, booktab=TRUE,
 # knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
 #              fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
  
-knitr::kable(jhVarTable1_fi.tbl, booktab=TRUE,
-              fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
+knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
+              fig.cap = "ISSP2012: suomenkielisen lomakkeen kysymykset")
  
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
 # monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
@@ -762,7 +792,7 @@ mukana tässä (24.2.20).
 
 Koko aineistossa (valitut 25 maata) kysymyksen Q1b (muuttuja V6) vastauksista 
 puuttuvia tietoja on 3,5 prosenttia (1219/34271).
-**Huom:** kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823! 
+**Huom:** kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823.
 On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R).
 
 ```{r muut2old, eval=FALSE, include=FALSE}

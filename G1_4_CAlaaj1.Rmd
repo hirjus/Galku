@@ -1,4 +1,5 @@
 
+
 ```{r paketit-g14, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
@@ -149,9 +150,9 @@ otoskoolla, vaan vakioidaan (jotenkin) sama (suhteellinen) massa kaikille.
 Samalla oikaistaan myös naisten yliedustus aineistossa.
 
 **Käsitteitä:** 
-(@)Active point, aktiivinen piste (aktiivinen havainto tai
+(@) Active point, aktiivinen piste (aktiivinen havainto tai
 muuttuja). 
-(@)Supplementary pointtäydentävä piste (täydentävä havainto).
+(@) Supplementary pointtäydentävä piste (täydentävä havainto).
 
 Täydentävien muuttujien kolme käyttötapaa:
 
@@ -165,10 +166,11 @@ sarakemuuttuja, jossa kovin vähän havaintoja)
 **EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty 
 täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
-```{r G1-4suppoints-BeDe}
+```{r G1-4suppoints-BeDe, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
-#head(ISSP2012esim1.dat)
+
 
 # HUOM! Tässä ei vielä supp.points mukana!
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
@@ -190,7 +192,7 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet",
 # suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
 # suppointCA1b$rowcoord
 # suppointCA1b$colcoord
-# plot(suppointCA1b, main = "Belgian ja Saksan ositteet - käännetty kartta")
+# plot(suppointCA1b, main = "Belgian ja Saksan  - käännetty kartta")
 
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
@@ -201,10 +203,9 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet",
 # attributes(ISSP2012esim1.dat$maa3)
 
 suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
-#str(suppoint1_df1)
-#head(suppoint1_df1)
 
-# str(suppoint1_tab1) - tarkistuksiin jos koodi suoritetaan rivi kerrallaan
+#  tarkistuksiin jos koodi suoritetaan rivi kerrallaan
+# str(suppoint1_tab1)
 
 suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
 suppoint1_tab1 
@@ -221,7 +222,7 @@ str(suppoint2_df)
 # attr(suppoint2_df, which = "class")
 # attr(suppoint2_df, which = "name")
 # summary(suppoint2_df)
-suppoint2_df %>% table1() # miksi ei tulosta mitään (4.2.20)
+suppoint2_df %>% table1() # miksi ei tulosta mitään konsolille? (4.2.20)
 
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 suppoint2_tab1 # tarkistus
@@ -240,7 +241,8 @@ suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
 plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
      sub = "Passiiviset pisteet DE ja BE" )
-# käännetään kuva VANHAA (21.2.20)
+# VANHAA (21.2.20) KOODIA
+# käännetään kuva
 # suppointCA2b <- suppointCA2
 # suppointCA2b$rowcoord <- suppointCA2b$rowcoord[,] * (-1)
 # suppointCA2b$colcoord <- suppointCA2b$colcoord[,] * (-1)
@@ -264,11 +266,12 @@ Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mu
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
 
 Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
+**edit 3.5.20** Minne katoavat pisteet?
 
-```{r G1-4-BeDe-asymmContrib1}
-#X11()
+```{r G1-4-BeDe-asymmContrib1, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
 plot(suppointCA2, map = "rowgreen",
-     contrib= c("absolute", "absolute"),
+     contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 1",
@@ -277,7 +280,7 @@ plot(suppointCA2, map = "rowgreen",
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
 
 plot(suppointCA2, map = "rowgreen",
-     contrib= c("relative", "relative"),
+     contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 ",
@@ -300,13 +303,29 @@ summary(suppointCA2)
 
 ```
 
-```{r G1-4-3dCA}
+Kolmiulotteisesta kuvasta voi tulostaa molempien akseleiden ja uuden kolmannen
+akselin kartat. R-ohjelmistossa voi tulostaa näytölle kolmiulotteisen kuvan,
+siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin? 
+**edit** Kommentti 3d-ratkaisusta: tuo esiin Belgian ("belgioiden") erilaisuuden.
+"Belgiat ovat 2-3 - dimension kartassa diagonaalilla, ja 1-3 kartassa hieman samoin kuin 
+2-d - ratkaisun kartassa. Tarvittaessa voi liittää myös 3-d - kuvia, pitäsi saada
+myös dynaamisen pdf-tiedostoon? (8.6.2020). Mutta 2d-approksimaatio on  aika hyvä,
+89 % kokonaisinertiasta. Miten pitäisi jatkaa? Analysoida maiden sisäisiä eroja? Siinä
+erilaiset aluejaot ovat aika herkästi korvikemuuttujia joillekin muille vaikuttaville tekijöile.
+Entäs kaupungit - isot ja pienet - ja maaseutu? Elinkeinorakenne, tulot jne...
+
+```{r G1-4-3dCA,fig.cap = "Belgian ja Saksan aluejako - 3D",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
 # Toimii, mutta siistittävä, samoin koko maajakoskripti!
 
-suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd=3)
+suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
-# Tulostetaan kaksi karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
+# Tulostetaan kolme karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
+
+plot(suppointCA3, dim = c(1,2), 
+                main = "Belgian ja Saksan ositteet - kolme dimensiota",
+                sub = "symmetrinen kartta - 1. ja 2. dimensio")
+
 
 plot(suppointCA3, dim = c(1,3), 
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
@@ -330,7 +349,7 @@ suppointCA3
 # str(suppointCA3)
 # diag(suppointCA3$sv)
 
-
+# Kolmiulottein kuva grafiikkaikkunaan
 
 # plot3d(suppointCA3, c(1,2,3))
 
@@ -437,8 +456,8 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(
 #ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
 # muuttujien tarkistuksia 19.9.2018
 str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
-str(ISSP2012esim2.dat)
-#str(ISSP2012esim1.dat$ga2)
+# str(ISSP2012esim2.dat)
+# str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
 # str(ISSP2012esim1.dat)
 
@@ -457,21 +476,51 @@ kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
-```{r ga1CA1}
+```{r ga1CA1,fig.cap = "Iän ja sukupuolen yhdistetty muuttuja",fig.asp = 1, out.width = "90%",fig.align = "center"}
 gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
+
+# maapisteiden pääkoordinaatit janojen piirtämiseen
+
+gaTestCA1.rpc <- gaTestCA1$rowcoord %*% diag(gaTestCA1$sv)
+
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
      sub = "symmetrinen kartta")
+# naiset
+lines(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
+#miehet
+lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
+#segments(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
+
+#         ,
+#         gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2]
+#         )
+#segments(gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2],
+#         gaTestCA1.rpc[3,1],gaTestCA1.rpc[3,2]
+#        )
+
 summary(gaTestCA1)              
 ```
+**zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on 
+"as it is", ei ole vakioitu ga-luokkien kokoja (massat max(f4 101), min (m1 57)).
 
-**zxy** Ei kovin kiinnostava, mutta voi verrata sekä edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla?
+Järjestys ei toimi, S s-sarakkeen vasemmalla puolella. Miehet konservatiivisempia,
+mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti
+e, sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
+poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos 
+vertaa sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet 
+konservatiivisia, naiset liberaaleja). Naisista vain vanhin ikäluokka oikealla,
+miehistä nuorin ja kolme vanhinta.
 
-**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla? Järjestys ei toimi, jotain muuta pelissä?
+**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä 
+edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan 
+tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että 
+(a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
+**edit 14.8.20 Viite?**
 
-
-**zxy** On kiinnostava, mutta aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). **pisteet voisi yhdistää? (29.9.18)** 
-
-
+**edit 14.8.20** Numeeriset tulokset: nuorimpien miesten (qlt 659) ja erityisesti
+keski-ikäisten miestén m3 (qlt 457) pisteet huonosti esitetty kartalla. Tulkitaan
+myös cor ja ctr, riveille ja sarakkeille.
 
 ```{r maaga1}
 # Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
@@ -480,30 +529,42 @@ summary(gaTestCA1)
 
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
-ISSP2012esim2.dat %>% tableX(maa, maaga) # tarkistus, muunnos ok
+# tarkistus, muunnos ok
+# ISSP2012esim2.dat %>% tableX(maa, maaga) 
 
-#head(ISSP2012esim2.dat)
-str(ISSP2012esim2.dat)
+# head(ISSP2012esim2.dat)
+# str(ISSP2012esim2.dat)
 
 ```
 
 **Maa - ikäluokka - sukupuoli - interaktiomuuttuja maaga**
 
-Tehty jo 26.9.2018
+Tehty jo 26.9.2018!
 
-```{r maagaCA1}
+```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
-# par("cex"= 0.5, "offset" = 0.5) #ei toimi ja plot-komennossa offset tuottaa
-# saman varoituksen: "offset is not a graphical parameter"
 
-# (24.2.20) Hyvin outoa! Tämä par-komento toimii seuraavassa koodilohkossa,
-# tässä tulee virheilmoitus 
-# "asp" is not a graphical parameter"offset" is not a graphical parameter
-# par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
 
+
+# maapisteiden pääkoordinaatit janojen piirtämiseen
+# HUOM! maagaCA1.rpc on matriisi
+
+maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
+
+par(cex = 0.5)
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta")
+                sub = "symmetrinen kartta cex=0.5")
+#Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
+
+# Miten kuvatiedosto talteen?
+# Omana koodipätkänä (4.5.2020)
+
+# pdf("img/maagaCA1_symm1.pdf")
+# par(cex = 0.5)
+# plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+#                sub = "symmetrinen kartta cex=0.5")
+# dev.off()
 
 ```
 Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri
@@ -514,8 +575,30 @@ vaikutus akseleihin.
 #str(maagaTestCA1)
 
 ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
-maagaCA1num <- summary(maagaCA1) 
-maagaCA1num
+maagaCA1num <- summary(maagaCA1)
+# maagaCA1num
+# str(maagaCA1num) numeeriset tulokset tibbleksi - rivit
+maagaCAnum2 <- as_tibble(maagaCA1num$rows, .name_repair = c("unique"))
+# maagaCAnum2
+# str(maagaCAnum2)
+summary(maagaCAnum2)
+colnames(maagaCAnum2) # välilyötejä nimen alussa
+names(maagaCAnum2)[3] <- "qlt"
+# maagaCAnum2 %>% rename( qlt, qlt)
+
+
+arrange(maagaCAnum2 , mass)
+
+
+# maagaCAnum2
+# plot(maagaCAnum2, x = c("mass"), y = c("ctr...7"), xlim = c(0,30), ylim = c(0, 1000))
+with(maagaCAnum2, plot(mass, ctr...7))
+tail(arrange(maagaCAnum2 ,ctr...7))
+with(maagaCAnum2, plot(mass, ctr...10))
+tail(arrange(maagaCAnum2 ,ctr...10))
+str(maagaCAnum2)
+arrange(maagaCAnum2, qlt)
+head(arrange(maagaCAnum2, qlt)) 
 
 # Hieman hankalaa kätevästi järjestää numeerisia tuloksia massan mukaan
 
@@ -529,11 +612,24 @@ maagaCA1num
 #str(maagaRows.df$mass)
 # ei toimi AscmaagaRows.df <- maagaRows.df[order(mass),]
 
+#31.8.20 Testataan subset ca
+#31.8.20 Testataan subset ca
+ISSP2012esim2.dat %>% tableX(maaga, Q1b)
+maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
+plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta - rivit 1-24")
+
 ```
+Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja
+suuri kontribuutio ei näytä olevan.
+
+Huonosti esitetettyjä pisteitä on erityisesti Belgiasta, myös Saksan (DEf6,DEf1 ja DEm4), 
+Tanskan vanhat miehet (DKm6) ja Unkarin nuorehkot miehet (HUm2) kuuluvat tähän joukkon.
+
 
 Maapisteet täydentäviksi pisteiksi - tarkistuksia.
 
-```{r maagaCA2}
+```{r maagaCA2,fig.cap = "Ikä-sukupuoli-maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
 # Miten labelit hieman lähemmäkis pistettä? offset-jotenkin toimii...
 
@@ -556,47 +652,82 @@ maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
 # dim(maagaTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
 
 spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
-#X11()
+X11()
 
-# Plot toimii (4.2.20), mutta par() ei, sama virheilmoitus (varoitus) 
-# kuin edellisessä koodilohkossa (24.2.20)
-# par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
+# Plot toimii (4.2.20), ja par() (4.5.20)
+par(cex = 0.5)
 plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "symmetrinen kartta, maat täydentävinä pisteinä"
+                sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.75"
                     )
-#par()
+
 
 #asymmetrinen kartta
 #X11()
-#par("cex"= 0.75, "asp" = 1, "offset" = 0.5)
-#plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot) - liian tukkoinen kuva",
-#                  map = "rowgreen", 
-#                  contrib= c("absolute", "absolute"),
-#                  mass = c(TRUE,TRUE),
-#                  arrows = c(FALSE,TRUE)
-#                  )
+par(cex = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
+                sub = "Liian tukkoinen kuva, cex=0.5?",
+                  map = "rowgreen", 
+                 contrib = c("absolute", "absolute"),
+                  mass = c(TRUE,TRUE),
+                  arrows = c(FALSE,TRUE) 
+     )
+
+#
+#asymmetrinen kartta - testataan subset-analyysiä (14.8.20)
+
+par(cex = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
+                sub = "Liian tukkoinen kuva, cex=0.5?",
+                  map = "rowgreen", 
+                 contrib = c("absolute", "absolute"),
+                  mass = c(TRUE,TRUE),
+                  arrows = c(FALSE,TRUE) 
+     )
+
 
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
-# EI TOIMI 
+# EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
+# MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
+# Piirtää pisteitä koko "plot-alueelle"?
 
-plot(spCAmaaga1, xlim=c(-0.75,0.37), ylim=c(-0.4,0.05),
+#X11()
+
+# Rivi- ja sarakekoordinaatit (principal coordinates) talteen
+maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
+maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
+par(cex = 0.75)
+
+plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
                 sub = "osa symmetristä karttaa"
                     )
-
+# TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
 # ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
 # grafiikkaikkunaan tulostukseen ?
+# Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
+# ja sitten vasta pisteet?
+# Kuvasuhde oikein, kun xlim = ylim, miten turhat pisteet pois? (29.5.20).Menevät
+# näköjään kuva-alueen ja ulomman marginaalin väliin.
+
+# Voisiko valita objektista vain osan pisteistä? Tai plot ilman tulostusta, tulos
+# objektiin ja sieltä pisteet kuvaan? (29.5.20)
+# str(spCAmaaga1)
 
 ```
 
 
 Kuvissa on aika ahdasta. Kuvan voisi rajata johonkin alueeseen erityisesti oikea yläosa on täynnä pisteitä. Maiden täydentävät pisteet ovat ikäluokka-sukupuoli - luokkien keskiarvopisteitä. Maiden väliset erot dominoivat, mutta maiden välillä on isoja eroja.
 
-Kartan herkkyyttä joillekin pienen massan rivipisteille pitää tutkia tarkemmin.
+Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
+huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
+ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
+kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
+nuorimman ikäluokan ero.
 
 Vertailu voi tehdä
 
-1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
+1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
+Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
 
 2.Maiden välillä
 
