@@ -60,19 +60,21 @@ havainnot (lukumäärät, "abundance") öljylauttojen liepeiltä (havainnot ryv�
 
 1. Taulukko
 
-Erityisesti CA, jossa "ranskalaisella terminologialla" käsitellään yksilöiden tai 
+"Ranskalaisella terminologia": käsitellään yksilöiden tai 
 havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen 
-CA:n tapauksessa aggregoimalla "cloud of individuals".
+CA:n tapauksessa aggregoimalla "cloud of individuals". MG:n termi "sample".
 
 **#V** MOOC, LeReoux
 
 2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"),
 frekvenssitaulu, ristiintaulukointi
 
-Dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja. Blasius emt.
-"data ei löydy kadulta", ja vaikka siitä ei ole epäilystäkään ISSP-datan 
-tapauksessa, niin siitäkin jatketaan eteenpäin. (**edit 24.2.20** Epäselvä
-muistiinpano?)
+Dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja Blasius emt.
+"data ei löydy kadulta", taulukot vielä vähemmän.
+
+ISSP-datan etu: hyvin dokumentoitu ja editoitu, laadukas aineisto. Iso (ja kallis)
+työvaihe on jo tehty. Aineistoa on myös käytetty useissa tutkimuksissa, mm. MG:n
+oppikirjoissa.
 
 Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** 
 Siellä tästäkin on sananen: substanssiero usein on.
@@ -81,6 +83,8 @@ Siellä tästäkin on sananen: substanssiero usein on.
 sarakkeiden **tekninen** symmetria. No ei se nyt niin hämäävä ehkä ole,
 oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan 
 "hajontamittarilla" ja painotetaan massoilla.
+**edit 6.9.20** Tätä havainnosllistetaan teorian esittelyn yhteydessä johdattelevan
+aineiston datalla. Pienellä taulukolla helpompaa.
 
 $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 

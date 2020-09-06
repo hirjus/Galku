@@ -1,9 +1,8 @@
 # Data
 
 **edit 30.1.20** 
-Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle.
-Uusi G1_1_data_fct1.Rmd tekee muunnokset.
-Siistitään tekstiä (**12.8.2020**)
+Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle (G1_1_data_fct1.Rmd).
+
 
 **Historiaa**
 
@@ -47,11 +46,10 @@ library(testthat)
 
 ## Luvun 1 tavoitteet
 
-**Datan esittely ja kuvailut - tämä luku täysin uusiksi (24.9.18)**
+**Datan esittely ja kuvailut - uusi versio (24.9.18)**
+**10.10.2018** Maat ja muuttujat valittu.
 
-**edit 12.8.2020** käsitteet määriteltävä ennen käyttöä.
-
-**10.10.2018 maat ja muuttujat valittu.**
+**edit 12.8.2020 käsitteet määriteltävä ennen käyttöä.**
 
 CA on eksploratiivinen ja graafinen(visuaalinen) menetelmä, peruskäsitteet esitellään
 rajatulla aineistolla. Se on kuitenkin oikea tutkimusaineisto kaikkine ongelmineen.
@@ -112,7 +110,8 @@ https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
 
 Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)
-Suomessa [yhteiskuntatieteellinen tietoarkisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD2820)
+Suomessa tutkimusta koordinoi 
+[yhteiskuntatieteellinen tietoarkisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD2820)
 
 
 [Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 

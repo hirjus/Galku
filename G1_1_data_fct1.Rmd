@@ -59,7 +59,6 @@ on puuttuva tieto. Aika paljon tarkistuksia, kolmen maa-muuttujaa järjestetää
 C_ALPHAN - muuttujan järjestykseen. Ikä-muuttuja säilyy numeerisena. Ensimmäiseen
 faktori-tyypin muuttujaan jää tyhjänä luokkana puuttuva tieto, luokka poistetaan.
 
-
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
 

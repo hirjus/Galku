@@ -617,7 +617,7 @@ head(arrange(maagaCAnum2, qlt))
 ISSP2012esim2.dat %>% tableX(maaga, Q1b)
 maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
 plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta - rivit 1-24")
+                sub = "symmetrinen kartta - rivit 1-24 (subset ca")
 
 ```
 Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja

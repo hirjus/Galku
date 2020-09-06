@@ -1,4 +1,3 @@
-
 # Tulkinnan perusteita
 
 ```{r paketit-g13, include=FALSE}
@@ -238,12 +237,12 @@ Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 **TODO** (21.2.20)
 
-(@) Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
+1. Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
-(@) Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+2. Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
 mutta ei kovin radikaalisti.
 
-(@) Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
+3. Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
 
 Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
 
@@ -251,10 +250,8 @@ Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
 kontribuutiot ovat niin pieniä (24.2.20)
 
-(@) **Miksi sarakemassat muuttuvat?** Joku skaalaus, massojen "kaksoisrooli" 
-painoina ja normalisoivina ("varianssin tapaan") muunnoksina. Hieman on hämärä,
-edelleen! Teknisiä tuloksia ei ehkä pidä käyttää mihinkään muuhun kuin kartan 
-laadulliseen arviointiin ja kuvan tulkintojen varmistamiseen?(24.2.20)
+4. Sarakemassojen muutos: sarakkeiden ja rivien yhteys. Kaavaliitteessä eksplisiittisesti
+rivi- ja sarakeratkaisujen yhteys, massat mukana.
 
 **zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 
