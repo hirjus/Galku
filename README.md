@@ -145,3 +145,6 @@ Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
 khii2-etäisyyksien ja massojen vertailuja.
 
 **6.9.2020** Versio 1.5.8 - kevään ja kesän muutokset.
+
+**7.9.2020** Uusi R-skripti Subset_ca1.R, kehitelty osajoukko-CA:n kuvia
+G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.

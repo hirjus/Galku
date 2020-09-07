@@ -250,9 +250,9 @@ Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
 kontribuutiot ovat niin pieniä (24.2.20)
 
-4. Sarakemassojen muutos: sarakkeiden ja rivien yhteys. Kaavaliitteessä eksplisiittisesti
-rivi- ja sarakeratkaisujen yhteys, massat mukana.
+4. Sarakemassojen muutos: sarakkeiden ja rivien yhteys. Kaavaliitteessä 
+eksplisiittisesti rivi- ja sarakeratkaisujen yhteys, massat mukana.
 
 **zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
 
-MG & Blasius, "vihreä kirja": kontribuutiot inertiaan
+MG & Blasius, "vihreä kirja" ja monta muuta lähdettä: kontribuutiot inertiaan

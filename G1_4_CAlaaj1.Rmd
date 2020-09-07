@@ -567,8 +567,10 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
 # dev.off()
 
 ```
-Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni massa mutta suuri
-vaikutus akseleihin.
+
+Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni 
+massa mutta suuri vaikutus akseleihin.
+
 ```{r maagaStabi1}
 # (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei 
 # vaikuta (kontribuutiot) liikaa karttaan?
@@ -612,12 +614,6 @@ head(arrange(maagaCAnum2, qlt))
 #str(maagaRows.df$mass)
 # ei toimi AscmaagaRows.df <- maagaRows.df[order(mass),]
 
-#31.8.20 Testataan subset ca
-#31.8.20 Testataan subset ca
-ISSP2012esim2.dat %>% tableX(maaga, Q1b)
-maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
-plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta - rivit 1-24 (subset ca")
 
 ```
 Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja
@@ -637,6 +633,7 @@ Maapisteet täydentäviksi pisteiksi - tarkistuksia.
 # otetaan karttaan mukaan täydentävinä pisteinä
 # karttaa on helpompi tulkita, kun nähdään miten ikä-sukupuoli-ryhmät sijatsevat keskiarvonsa ympärillä
 
+# HUOM! maagaTab1 integer matriisi, dimnames-attribuutilla kaksi arvoa
 #ikäluokka - sukupuoli ja maa - maaga-muuttuja
 maagaTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
 #dim(testTab1) #72 riviä,  5 saraketta
@@ -734,4 +731,22 @@ Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla pu
 a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
 
 b. mikä on niiden järjestys
+
+## Subset CA
+
+Teoria esitetään myöhemnmin, käytännön hyödyllisyys osoitetaan tässä. CA-kartoissa
+on usein aivan liian paljon pisteitä, vain karkeat yleispiirteet näkyvät. Ovatko
+kiinnostavat asia piilossa? "Poikkeavat havainnot ovat ainoita todella kiinnostavia 
+havaintoja".
+
+```{r subsetCA-1}
+#31.8.20 Testataan subset ca
+#31.8.20 Testataan subset ca
+ISSP2012esim2.dat %>% tableX(maaga, Q1b)
+maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
+plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta - rivit 1-24 (subset ca")
+
+```
+
 
