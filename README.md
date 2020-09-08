@@ -148,3 +148,6 @@ khii2-etäisyyksien ja massojen vertailuja.
 
 **7.9.2020** Uusi R-skripti Subset_ca1.R, kehitelty osajoukko-CA:n kuvia
 G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.
+
+**8.9.2020** Subset_ca1.R: lisää subsetca - karttoja eri optioilla. Asymmetrinen
+"rowgreen" näyttäisi toimivan parhaiten.

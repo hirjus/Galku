@@ -649,7 +649,7 @@ maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
 # dim(maagaTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
 
 spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
-X11()
+# X11()
 
 # Plot toimii (4.2.20), ja par() (4.5.20)
 par(cex = 0.5)

@@ -133,20 +133,24 @@ plot(simpleCA1, map = "rowprincipal",
 
 ```
 
-**Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, ideaalipisteitä
-("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla "reilusti" ykköstä suurempia?
-Vastaus: ideaalipisteet esitetään rivipisteiden koordinaatistossa - > skaalaus.
+**Edit 3.5.20** Selvennä: sarakevektroit ovat standardikoordinaateissa, 
+ideaalipisteitä ("maa jossa kaikki samaa mieltä"). Miksi ne ovat kartalla 
+"reilusti" ykköstä suurempia? Vastaus: ideaalipisteet esitetään rivipisteiden 
+koordinaatistossa - > skaalaus.
 
-**Edit 11.6.20 - tulkinta ja data?TARKISTA** Origo on koko aineiston barysentrinen keskipiste. Janan pituus on kääntäen verrannollinen sarakkeen ("ideaalipisteen") suhteelliseen osuuteen.
-Maapiste (profiilipiste) on saravektoreiden barysentrinen keskiarvo, ja etäisyydet
-kertovat kyseisen sarakkeen suhteellisen osuuden maaprofiliisissa.(? 11.6.20) .
-"In an asymmetric map where the rows, for example, are in principal co-
+**Edit 11.6.20 - tulkinta ja data?TARKISTA** Origo on koko aineiston barysentrinen
+keskipiste. Janan pituus on kääntäen verrannollinen sarakkeen ("ideaalipisteen")
+suhteelliseen osuuteen. Maapiste (profiilipiste) on saravektoreiden barysentrinen
+keskiarvo, ja etäisyydet kertovat kyseisen sarakkeen suhteellisen osuuden
+maaprofiliisissa.(? 11.6.20).
+" In an asymmetric map where the rows, for example, are in principal co-
 ordinates (i.e. the row analysis), distances between displayed row points
 are approximate khii2-distances between row profiles; and distances from the
 row profile points to a column vertex point are, as a general rule, inversely
 related to the row profile elements for that column." CAiP, s. 72., tarkemmin s.62-.
-Pisteiden väliset etäisyydet voidaan optimaalisessa tilanteessa (symm. kuva sama pistejoukko, 
-asymm. kuva myös sarake- ja rivipisteet) tulkita vain approksimaatioina.
+Pisteiden väliset etäisyydet voidaan optimaalisessa tilanteessa (symm. kuva sama
+pistejoukko, asymm. kuva myös sarake- ja rivipisteet) tulkita vain
+approksimaatioina.
 
 Verifying the profile-vertex interpretation (emt., s 68):
 Each row profile point (staff group) is at a weighted average position of the
@@ -157,7 +161,8 @@ vertex, the higher its profie value is for that category.
 
 Verifiointi verteksi kerrallaan, kaikki on suhteellista! Suomi on kaikkein lähimpänä
 e-verteksiä. Niinpä Suomen profiilissa e-vastausten suhteellinen osuus on suurempi kuin 
-muilla mailla. Tanska vastaavasti lähimpänä E-verteksiä.
+muilla mailla. Tanska vastaavasti lähimpänä E-verteksiä. Projisoidaan rivipisteet
+sarakevektoreille -> järjestys.
 
 Perusidea: kartta antaa yleiskuvan riippuvuudesta, approksimaation tarkkuuden ja
 laadun rajoissa. Yksityiskohtien etsiskely ei ole oleellista, väärien johtopäätösten
