@@ -1,4 +1,4 @@
-# Korrespondenssianalyysin laajennuksia 2: vuorovaikutusmuuttuja ja osajoukon CA
+## Korrespondenssianalyysin laajennuksia: vuorovaikutusmuuttuja ja osajoukon CA
 
 **zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki 
 yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä 
@@ -217,6 +217,32 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
 
 ```
 
+## Kvaliteetti ja stabiilius
+
+maaga-talukossa on paljon pieniä frekvenssejä (alle 5). Periaatteessa pienen 
+frekvenssin rivejä tai sarakkeita voi yhdistää (distr. equivivalece), ja näin 
+kannattaa tehdä jotta kartta ei mene tukkoon. **9.9.20** Pienet solufrekvenssin
+vs. pienet reunajakauman frekvenssin, miten edellisen kanssa pitäisi toimia?
+
+Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
+huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
+ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
+kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
+nuorimman ikäluokan ero.
+
+Vertailu voi tehdä
+
+1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
+Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
+
+2.Maiden välillä
+
+
+a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
+
+b. mikä on niiden järjestys
+
+
 Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni 
 massa mutta suuri vaikutus akseleihin.
 
@@ -301,9 +327,9 @@ spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
 # X11()
 
 # Plot toimii (4.2.20), ja par() (4.5.20)
-par(cex = 0.75)
+par(cex = 0.5)
 plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.75"
+                sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.5"
                     )
 
 
@@ -314,22 +340,21 @@ plot(spCAmaaga1, map = "rowgreen",
         contrib = c("absolute", "absolute"),
         mass = c(TRUE,TRUE),
         arrows = c(FALSE,TRUE), 
-        main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
-                sub = "cex=0.5"
+        main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3",
+        sub ="absoluuttiset kontribuutiot ('rowgreen'),cex=0.5",
                   )
 
-#
-#asymmetrinen kartta - testataan subset-analyysiä (14.8.20)
 
-par(cex = 0.7)
+#asymmetrinen kartta (14.8.20)
+
+par(cex = 0.5)
 plot(spCAmaaga1, map = "rowgreen", 
         contrib = c("absolute", "absolute"),
          mass = c(TRUE,TRUE),
         arrows = c(FALSE,TRUE), 
-        main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
-                sub = "cex=0.7"
-                
-     )
+        main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3",
+                sub = "suhteelliset kontribuutiot ('rowgreen') ,cex=0.5"
+                )
 
 
 ```
@@ -348,6 +373,10 @@ pelkkiä plot-komentoja.
 
 3. Osajoukon korrespondenssianalyysi (subset ca)
 
+*zxy** Tässä vain lyhyt kuvaus subset ca:n perusideasta
+
+### Kuva-alueen rajaaminen
+
 ```{r maagaCA2zoom1,fig.cap = "Ikä-sukupuoli-maa", fig.asp =1, out.width = "90%",fig.align = "center"}
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
@@ -359,11 +388,11 @@ pelkkiä plot-komentoja.
 # Rivi- ja sarakekoordinaatit (principal coordinates) talteen
 maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
 maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
-par(cex = 0.6)
+par(cex = 0.5)
 
-plot(spCAmaaga1, xlim = c(-0.75,0.50), ylim = c(-0.75,0.50),
+plot(spCAmaaga1, xlim = c(-0.75,0.75), ylim = c(-0.75,0.75),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "osa symmetristä karttaa"
+                sub = "osa symmetristä karttaa, cex=0.5"
                     )
 # TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
 # ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
@@ -380,7 +409,8 @@ plot(spCAmaaga1, xlim = c(-0.75,0.50), ylim = c(-0.75,0.50),
 
 
 ```
-Tuo ei oikein toimi, eikä tämäkään (9.9.20), kuvasuhde taitaa olla väärä?
+Ei toimi ihan odotetulla tavalla, mutta kuvasuhde näyttäisi olevan molemmissa oikea.
+Hieman hankala menetelmä. 
 
 ```{r maagaCA2zoom2,fig.cap = "Ikä-sukupuoli-maa",out.width = "90%",fig.align = "center"}
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
@@ -388,14 +418,13 @@ Tuo ei oikein toimi, eikä tämäkään (9.9.20), kuvasuhde taitaa olla väärä
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
 # Piirtää pisteitä koko "plot-alueelle"?
 
-#X11()
 
 # Rivi- ja sarakekoordinaatit (principal coordinates) talteen
 maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
 maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
-par(cex = 0.6)
+par(cex = 0.5)
 
-plot(spCAmaaga1, xlim = c(-0.75,0.50), ylim = c(-0.75,0.50),
+plot(spCAmaaga1, xlim = c(0,0.75), ylim = c(-0.75,0.75),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
                 sub = "osa symmetristä karttaa"
                     )
@@ -411,35 +440,46 @@ plot(spCAmaaga1, xlim = c(-0.75,0.50), ylim = c(-0.75,0.50),
 # objektiin ja sieltä pisteet kuvaan? (29.5.20)
 # str(spCAmaaga1)
 
-
-
 ```
 
+Rivipisteiden inertia on suurempi kuin sarakkeiden. Asymmetrinen kartta näyttää
+sarakkeet selvemmin.
 
-## Kvaliteetti ja stabiilius
-
-maaga-talukossa on paljon pieniä frekvenssejä (alle 5). Periaatteessa pienen 
-frekvenssin rivejä tai sarakkeita voi yhdistää (distr. equivivalece), ja näin 
-kannattaa tehdä jotta kartta ei mene tukkoon. **9.9.20** Pienet solufrekvenssin
-vs. pienet reunajakauman frekvenssin, miten edellisen kanssa pitäisi toimia?
-
-Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
-huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
-ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
-kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
-nuorimman ikäluokan ero.
-
-Vertailu voi tehdä
-
-1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
-Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
-
-2.Maiden välillä
+```{r maagaCA2zoom3,fig.cap = "Ikä-sukupuoli-maa"}
+# Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
+# EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
+# MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
+# Piirtää pisteitä koko "plot-alueelle"?
 
 
-a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
+# Rivi- ja sarakekoordinaatit (principal coordinates) talteen
+# maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
+# maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
 
-b. mikä on niiden järjestys
+par(cex = 0.5)
+plot(spCAmaaga1, map = "rowgreen",
+        contrib = c("absolute", "absolute"),
+        mass = c(TRUE,TRUE),
+        arrows = c(FALSE,TRUE),
+        xlim = c(0,0.75), ylim = c(0,0.75),
+        main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+        sub = "osa asymmetristä karttaa"
+        )
+# TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+# grafiikkaikkunaan tulostukseen ?
+# Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
+# ja sitten vasta pisteet?
+# Kuvasuhde oikein, kun xlim = ylim, miten turhat pisteet pois? (29.5.20).Menevät
+# näköjään kuva-alueen ja ulomman marginaalin väliin.
+
+# Voisiko valita objektista vain osan pisteistä? Tai plot ilman tulostusta, tulos
+# objektiin ja sieltä pisteet kuvaan? (29.5.20)
+# str(spCAmaaga1)
+
+```
+Edellinen kartta on vähän epäilyttävä, asettuvatkohan skaalatut sarakevektorin 
+oikein? (9.9.20)
 
 ## Subset CA
 
@@ -462,7 +502,7 @@ kun riveistä otetaan analyysiin vain osa.
 #31.8.20 Testataan subset ca
 #ISSP2012esim2.dat %>% tableX(maaga, Q1b)
 maagaCA2subset1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
-par(cex = 0.7)
+par(cex = 0.5)
 plot(maagaCA2subset1, 
                 sub = "symmetrinen kartta:Belgia,osajoukon ca (subset ca)"
         )
@@ -480,7 +520,7 @@ Kartan tulkintaa, kokonaisinertia voidaan esittää maa kerrallaan. (9.9.20)
 # Datana maagaTab1 - viimeisinä riveinä maarivit
 
 maagaCA2sub1 <- ca(maagaTab1[,1:5], subsetrow = 1:24)
-par(cex = 0.7)
+par(cex = 0.5)
 plot(maagaCA2sub1, map = "rowgreen",
      contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),
@@ -490,3 +530,21 @@ plot(maagaCA2sub1, map = "rowgreen",
         )
 ```
 
+Lisätään kuvaan täydentävänä (passiivisena) pisteenä Belgian maapiste, tarkistettava
+tuleeko se "oikeaan" kohtaa. Jostain syystä
+```{r subsetCA-1c, fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# Datana maagaTab1 - viimeisinä riveinä maarivit
+
+maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24, suprow = 73)
+par(cex = 0.4)
+plot(maagaCA2sub2, map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen(rowgreen) kartta:Belgia,osajoukon ca (subset ca)"
+        )
+```
+
+Belgian kolme aluetta täydentäviksi pisteiksi.
