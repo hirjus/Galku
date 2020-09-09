@@ -57,7 +57,7 @@ plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
     )
 
 ## saako subsetrow - asetuksen kahdessa "pätkässä"? TOIMII!
-#osajoukot1 <- c(13:14,61:72)
+# osajoukot1 <- c(13:14,61:72)
 #spCAmaagasub2 <- ca(maagaTab1[,1:5], suprow = 73:78,subsetrow = osajoukot1)
 #par(cex = 0.5)
 #plot(spCAmaagasub2, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
@@ -78,23 +78,23 @@ plot(spCAmaagasub3, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maitta
     )
 
 spCAmaagasub4 <- ca(maagaTab1[,1:5], subsetrow = BEDEDKFIsubset)
-par(cex = 0.7)
+par(cex = 0.6)
 plot(spCAmaagasub4,
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta, osajoukko-ca, cex=0.07"
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
 )
 
 spCAmaagasub5 <- ca(maagaTab1[,1:5], subsetrow = DEDKFIsubset)
-par(cex = 0.7)
+par(cex = 0.6)
 plot(spCAmaagasub5, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta, osajoukko-ca, cex=0.07"
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
 )
 
 spCAmaagasub6 <- ca(maagaTab1[,1:5], subsetrow = BEBGHUsubset)
-par(cex = 0.7)
+par(cex = 0.6)
 plot(spCAmaagasub6, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta, osajoukko-ca, cex=0.07"
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
 )
 
 #Tämä ei toimi (8.9.20)

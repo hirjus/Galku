@@ -55,7 +55,7 @@ ikä-sukupuoli- maa muuttujien luontia voi harkita.
 
 **edit** Tässä keskityttävä data-analyysin **tutkimusongelmiin**, johdantoa MCA-lukuun.
 
-## Päällekkäiset matriisit (stacked matices)
+## Matriisien yhdistäminen (stacked and concatenated matices)
 
 Ref:CAip, CA_Week2.pdf (kalvot MCA-kurssilta 2017)
 
