@@ -1,4 +1,4 @@
-
+# Yksinkertaisen korrespondenssianalyysin laajennuksia 1
 
 ```{r paketit-g14, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
@@ -26,25 +26,61 @@ library(assertthat)
 library(testthat)
 #
 #r-skripteillä riittää, kun ajaa tämän
-sessionInfo()
+#sessionInfo()
 
 ```
 
-# Yksinkertaisen korrespondenssianalyysin laajennuksia 1
+
 
 Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai
 "jakamisen". Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla
-eri maiden vastausksia useampaan ryhmään.
+eri maiden vastausksia useampaan ryhmään. Kartalle voidaan myös lisätä apumuuttujia
+tai täydentäviä muuttujia (supplementary points). Ne eivät vaikuta ca:n tuloksiin,
+vaan esittävät lisäinformaatiota.
 
-Sen avulla voi myös tarkastella ja vertailla erilaisia ryhmien välisiä tai
-ryhmien sisäisiä (within groups - between groups) eroja hieman. Teknisesti
-yksinkertaista korrespondenssianalyysiä sovelletaan muokattuun matriisiin. 
-Datamatriisi rakennetaan useammasta alimatriisista, joko "pinoamalla"
-osamatriiseja (stacked matrices) tai muodostamalla symmetrinen lohkomatriisi
-(ABBA).
+**edit 9.9.20 - vähän vanhentunuttta**Sen avulla voi myös tarkastella ja
+vertailla erilaisia ryhmien välisiä tai ryhmien sisäisiä (within groups -
+between groups) eroja hieman. Teknisesti yksinkertaista korrespondenssianalyysiä
+sovelletaan muokattuun matriisiin. Datamatriisi rakennetaan useammasta
+alimatriisista, joko "pinoamalla" osamatriiseja (stacked matrices) tai
+muodostamalla symmetrinen lohkomatriisi (ABBA).
+
+**edit 9.9.20 Uusi johdanto**
+1. Saksan ja Belgian jako
+
+- jakaumaekvivalenssi(?) (distributional equivalence)), voidaan jakaa ja yhdistää
+rivejä
+
+2. Täydentävät pistee (supplementary points)
+ 
+ - eivät vaikuta karttaan (koordinaatistoon, rivi- tai sarakepisteiden sijaintiin)
+ - useita tapoja käyttää, tässä Saksan ja Belgian maapisteet
+ - barysentrinen keskiarvo
+
+3. Lisämuuttujat - yksinkertainen ca useamman muuttujan analyysissä
+
+3.1 Yksinkeraisin malli: vuorovaikutusmuuttuja (interactive coding)
+- yksi rivi (sample) jaetaan useammaksi, sama idea kuin edellisessä esimerkissä
+- käytännön raja yleensä kolmen muuttujan vuorovaikutusmuuttuja, esimerkkinä maan,
+iän ja sukupuolen yhdistetty muuttuja
+
+3.2 Kartta on data-analyysin väline - miten sitä voi selkeyttää?
+
+Hyvässä kartassa on vain tarpeellinen määrä informaatiota, epäselvä tukkoinen kuva
+ei toimi. Yksinkertainen keino analyysivaiheessa on "leikata ja liimata" kuvia ja
+tallentaa ne pdf-muodossa. Voi tehdä muistiinpanoja, lisätä kommentteja jne.
+
+Tässä esitellään kaksi muuta: kuva-alan rajaaminen BaseR-grafiikan plot-funktion
+parametreilla ja paljon yleispätevämpi osajoukon korrespondenssianalyysi. 
+Jälkimmäisessä valitaan joku osajoukko aineistosta, ja tehdään sille 
+korrespondenssianalyysi siten, että reunajakaumat (massat) ja valitun datan 
+profiilit pidetään vakioina. Paljon parempi idea kuin suoraviivainen aineiston
+rajaaminen.
 
 Nyt käytetään johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
 tehty.
+
+G1_4_CAlaaj1.Rmd jaettu kahdeksi tiedostoksi, uusi G1_4_CAlaaj2.Rmd
 
 **Vanhaa koodia kolme koodilohkoa**
 ```{r G1_4_CAlaaj1DataOLD, eval=FALSE, include=FALSE}
@@ -356,397 +392,5 @@ suppointCA3
 # Hyödyllinen, mutta aika vaikea
 
 ```
-
-
-
-## Lisämuuttujat: ikäluokka ja sukupuoli
-
-**zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki. Menetelmää taivutetaan sen jälkeen moneen suuntaan.
-
-
-Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta, monessa maassa se on hieman korkeampi. Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi). Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet kannattaa pitää mahdollisimman lyhyinä.
-
-
-```{r G1-4agecat}
-# Iän ja sukupuolen vuorovaikutusmuuttujia 1
-#
-# Uusi R-data: ISSP2012esim2.dat - MIKSI, TARVITAANKO? *esim1.dat kelpaisi?(4.2.20)
-#
-#age_cat
-#AGE 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
-#
-#summary(ISSP2012esim1.dat$AGE)
-hist(ISSP2012esim1.dat$ika)
-
-ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, "1",
-                        ifelse(ika %in% 26:35, "2",
-                        ifelse(ika %in% 36:45, "3",
-                        ifelse(ika %in% 46:55, "4",
-                        ifelse(ika %in% 56:65, "5", "6"))))))
-
-
-ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
-        mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
-# Tarkistuksia 
-
-# str(ISSP2012esim2.dat$age_cat)
-# levels(ISSP2012esim2.dat$age_cat)
-# ISSP2012esim2.dat$age_cat %>% summary()
-
-# Järjestetään ikäluokat uudelleen
-
-ISSP2012esim2.dat <- ISSP2012esim2.dat %>% 
-        mutate(age_cat =
-                fct_relevel(age_cat,
-                            "1",
-                            "2",
-                            "3",
-                            "4",
-                            "5",
-                            "6")
-               )
-    
-# Tarkistuksia
-
-# Iso taulukko, voi tarkistaa että muunnos ok.
-# test6 %>% tableX(AGE, age_cat, type = "count")
-# taulu42 <- ISSP2012esim2.dat %>% tableX(maa,age_cat,type = "count")
-# kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
-#
-
-# UUdet taulukot (4.2.20) 
-
-ISSP2012esim2.dat %>% 
-    tableX(maa,age_cat,type = "count") %>%
-    kable(digits = 2, caption = "Ikäluokka age_cat")
-
-ISSP2012esim2.dat %>% 
-    tableX(maa,age_cat,type = "row_perc") %>%
-    kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
-
-```
-
-Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin. Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat) varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
-
-
-
-**zxy** Siistimmät versioit muuttujien luonnista (case_when - rakenne) (19.9.2018).
-
-
-```{r G1-4ga2}
-# ga - ikäluokka ja sukupuoli
-
-# case_when: ikä ja sukupuoli
-ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
-                                       (age_cat == "2")&(sp == "m") ~ "m2",
-                                       (age_cat == "3")&(sp == "m") ~ "m3",
-                                       (age_cat == "4")&(sp == "m") ~ "m4",
-                                       (age_cat == "5")&(sp == "m") ~ "m5",
-                                       (age_cat == "6")&(sp == "m") ~ "m6",
-                                       (age_cat == "1")&(sp == "f") ~ "f1",
-                                       (age_cat == "2")&(sp == "f") ~ "f2",
-                                       (age_cat == "3")&(sp == "f") ~ "f3",
-                                       (age_cat == "4")&(sp == "f") ~ "f4",
-                                       (age_cat == "4")&(sp == "f") ~ "f4",
-                                       (age_cat == "5")&(sp == "f") ~ "f5",
-                                       (age_cat == "6")&(sp == "f") ~ "f6",
-                                       TRUE ~ "missing"
-                                  ))
-
-#ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
-# muuttujien tarkistuksia 19.9.2018
-str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
-# str(ISSP2012esim2.dat)
-# str(ISSP2012esim1.dat$ga2)
-# ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
-# str(ISSP2012esim1.dat)
-
-#Tulostetaan taulukkoina ga2 - muuttuja.
-
-ISSP2012esim2.dat %>% tableX(maa,ga,type = "count") %>%
-kable(digits = 2, caption = "Ikäluokka ja sukupuoli ga")
-
-ISSP2012esim2.dat %>% tableX(maa,ga,type = "row_perc") %>%
-kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
-
-
-```
-
-**edit** Vain tarkistuksiin, toisen voi poistaa (19.9.2018)!
-
-CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
-
-```{r ga1CA1,fig.cap = "Iän ja sukupuolen yhdistetty muuttuja",fig.asp = 1, out.width = "90%",fig.align = "center"}
-gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
-
-# maapisteiden pääkoordinaatit janojen piirtämiseen
-
-gaTestCA1.rpc <- gaTestCA1$rowcoord %*% diag(gaTestCA1$sv)
-
-plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
-     sub = "symmetrinen kartta")
-# naiset
-lines(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
-#miehet
-lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
-#segments(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
-
-#         ,
-#         gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2]
-#         )
-#segments(gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2],
-#         gaTestCA1.rpc[3,1],gaTestCA1.rpc[3,2]
-#        )
-
-summary(gaTestCA1)              
-```
-**zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on 
-"as it is", ei ole vakioitu ga-luokkien kokoja (massat max(f4 101), min (m1 57)).
-
-**zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla?
-Järjestys ei toimi, S s-sarakkeen vasemmalla puolella. Miehet konservatiivisempia,
-mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti
-e, sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
-poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos 
-vertaa sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet 
-konservatiivisia, naiset liberaaleja). Naisista vain vanhin ikäluokka oikealla,
-miehistä nuorin ja kolme vanhinta.
-
-**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä 
-edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan 
-tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että 
-(a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
-**edit 14.8.20 Viite?**
-
-**edit 14.8.20** Numeeriset tulokset: nuorimpien miesten (qlt 659) ja erityisesti
-keski-ikäisten miestén m3 (qlt 457) pisteet huonosti esitetty kartalla. Tulkitaan
-myös cor ja ctr, riveille ja sarakkeille.
-
-```{r maaga1}
-# Luodaan aineistoon kolmen muuttujan yhdysvaikutusmuuttuja maaga, maa, ikäluokka ja sukupuoli.
-# Yleensä ei yhdysvaikuksissa mennä yli kolmen luokittelumuuttujan, ja tässäkin vain maiden pieni lukumää
-# tekee tarkastelun aika helpoksi.
-
-ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
-
-# tarkistus, muunnos ok
-# ISSP2012esim2.dat %>% tableX(maa, maaga) 
-
-# head(ISSP2012esim2.dat)
-# str(ISSP2012esim2.dat)
-
-```
-
-**Maa - ikäluokka - sukupuoli - interaktiomuuttuja maaga**
-
-Tehty jo 26.9.2018!
-
-```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
-
-maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
-
-
-
-# maapisteiden pääkoordinaatit janojen piirtämiseen
-# HUOM! maagaCA1.rpc on matriisi
-
-maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
-
-par(cex = 0.5)
-plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta cex=0.5")
-#Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
-
-# Miten kuvatiedosto talteen?
-# Omana koodipätkänä (4.5.2020)
-
-# pdf("img/maagaCA1_symm1.pdf")
-# par(cex = 0.5)
-# plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-#                sub = "symmetrinen kartta cex=0.5")
-# dev.off()
-
-```
-
-Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni 
-massa mutta suuri vaikutus akseleihin.
-
-```{r maagaStabi1}
-# (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei 
-# vaikuta (kontribuutiot) liikaa karttaan?
-#str(maagaTestCA1)
-
-ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
-maagaCA1num <- summary(maagaCA1)
-# maagaCA1num
-# str(maagaCA1num) numeeriset tulokset tibbleksi - rivit
-maagaCAnum2 <- as_tibble(maagaCA1num$rows, .name_repair = c("unique"))
-# maagaCAnum2
-# str(maagaCAnum2)
-summary(maagaCAnum2)
-colnames(maagaCAnum2) # välilyötejä nimen alussa
-names(maagaCAnum2)[3] <- "qlt"
-# maagaCAnum2 %>% rename( qlt, qlt)
-
-
-arrange(maagaCAnum2 , mass)
-
-
-# maagaCAnum2
-# plot(maagaCAnum2, x = c("mass"), y = c("ctr...7"), xlim = c(0,30), ylim = c(0, 1000))
-with(maagaCAnum2, plot(mass, ctr...7))
-tail(arrange(maagaCAnum2 ,ctr...7))
-with(maagaCAnum2, plot(mass, ctr...10))
-tail(arrange(maagaCAnum2 ,ctr...10))
-str(maagaCAnum2)
-arrange(maagaCAnum2, qlt)
-head(arrange(maagaCAnum2, qlt)) 
-
-# Hieman hankalaa kätevästi järjestää numeerisia tuloksia massan mukaan
-
-#str(maagaCA1num)
-#maagaCA1num$rows
-#maagaRows.df <- maagaCA1num$rows
-# sarakenimet eivät yksikäsitteisiä
-#maagaRows.df
-#str(maagaRows.df)
-#names(maagaRows.df)
-#str(maagaRows.df$mass)
-# ei toimi AscmaagaRows.df <- maagaRows.df[order(mass),]
-
-
-```
-Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja
-suuri kontribuutio ei näytä olevan.
-
-Huonosti esitetettyjä pisteitä on erityisesti Belgiasta, myös Saksan (DEf6,DEf1 ja DEm4), 
-Tanskan vanhat miehet (DKm6) ja Unkarin nuorehkot miehet (HUm2) kuuluvat tähän joukkon.
-
-
-Maapisteet täydentäviksi pisteiksi - tarkistuksia.
-
-```{r maagaCA2,fig.cap = "Ikä-sukupuoli-maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
-# Miten maa-rivit täydentäviksi riveiksi - alla siisti ratkaisu
-# Miten labelit hieman lähemmäkis pistettä? offset-jotenkin toimii...
-
-# rakennetaan taulukko, jossa alimpina riveinä "maa-rivit"
-# otetaan karttaan mukaan täydentävinä pisteinä
-# karttaa on helpompi tulkita, kun nähdään miten ikä-sukupuoli-ryhmät sijatsevat keskiarvonsa ympärillä
-
-# HUOM! maagaTab1 integer matriisi, dimnames-attribuutilla kaksi arvoa
-#ikäluokka - sukupuoli ja maa - maaga-muuttuja
-maagaTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
-#dim(testTab1) #72 riviä,  5 saraketta
-
-
-# maa-rivit
-maagaTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$Q1b)
-#maagaTab_sr
-
-maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
-# str(maagaTab1)
-# maagaTab1
-# dim(maagaTab1) #78 riviä, 5 saraketta, 1-72 data ja 73-78 täydentävät rivit
-
-spCAmaaga1 <- ca(maagaTab1[,1:5], suprow = 73:78)
-# X11()
-
-# Plot toimii (4.2.20), ja par() (4.5.20)
-par(cex = 0.5)
-plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.75"
-                    )
-
-
-#asymmetrinen kartta
-#X11()
-par(cex = 0.5)
-plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
-                sub = "Liian tukkoinen kuva, cex=0.5?",
-                  map = "rowgreen", 
-                 contrib = c("absolute", "absolute"),
-                  mass = c(TRUE,TRUE),
-                  arrows = c(FALSE,TRUE) 
-     )
-
-#
-#asymmetrinen kartta - testataan subset-analyysiä (14.8.20)
-
-par(cex = 0.5)
-plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
-                sub = "Liian tukkoinen kuva, cex=0.5?",
-                  map = "rowgreen", 
-                 contrib = c("absolute", "absolute"),
-                  mass = c(TRUE,TRUE),
-                  arrows = c(FALSE,TRUE) 
-     )
-
-
-# Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
-# EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
-# MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
-# Piirtää pisteitä koko "plot-alueelle"?
-
-#X11()
-
-# Rivi- ja sarakekoordinaatit (principal coordinates) talteen
-maagaCA1.rpc <- spCAmaaga1$rowcoord %*% diag(simpleCA1$sv)
-maagaCA1.cpc <- spCAmaaga1$colcoord %*% diag(simpleCA1$sv)
-par(cex = 0.75)
-
-plot(spCAmaaga1, xlim = c(-0.75,0.37), ylim = c(-0.75,0.37),
-                main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "osa symmetristä karttaa"
-                    )
-# TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
-# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
-# grafiikkaikkunaan tulostukseen ?
-# Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
-# ja sitten vasta pisteet?
-# Kuvasuhde oikein, kun xlim = ylim, miten turhat pisteet pois? (29.5.20).Menevät
-# näköjään kuva-alueen ja ulomman marginaalin väliin.
-
-# Voisiko valita objektista vain osan pisteistä? Tai plot ilman tulostusta, tulos
-# objektiin ja sieltä pisteet kuvaan? (29.5.20)
-# str(spCAmaaga1)
-
-```
-
-
-Kuvissa on aika ahdasta. Kuvan voisi rajata johonkin alueeseen erityisesti oikea yläosa on täynnä pisteitä. Maiden täydentävät pisteet ovat ikäluokka-sukupuoli - luokkien keskiarvopisteitä. Maiden väliset erot dominoivat, mutta maiden välillä on isoja eroja.
-
-Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
-huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
-ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
-kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
-nuorimman ikäluokan ero.
-
-Vertailu voi tehdä
-
-1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
-Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
-
-2.Maiden välillä
-
-a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
-
-b. mikä on niiden järjestys
-
-## Subset CA
-
-Teoria esitetään myöhemnmin, käytännön hyödyllisyys osoitetaan tässä. CA-kartoissa
-on usein aivan liian paljon pisteitä, vain karkeat yleispiirteet näkyvät. Ovatko
-kiinnostavat asia piilossa? "Poikkeavat havainnot ovat ainoita todella kiinnostavia 
-havaintoja".
-
-```{r subsetCA-1}
-#31.8.20 Testataan subset ca
-#31.8.20 Testataan subset ca
-ISSP2012esim2.dat %>% tableX(maaga, Q1b)
-maagaCA2sub1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
-plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-                sub = "symmetrinen kartta - rivit 1-24 (subset ca")
-
-```
-
+**edit 9.9.20** Tällä datalla ABBA stacked-jaksossa?
 

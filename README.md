@@ -151,3 +151,7 @@ G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.
 
 **8.9.2020** Subset_ca1.R: lisää subsetca - karttoja eri optioilla. Asymmetrinen
 "rowgreen" näyttäisi toimivan parhaiten.
+
+**9.9.2020** Jatkettiin subsetca- kuvine ja BaseR-plot - funktion avulla
+"zoomattujen" kuvien kehitttelyä. Pilkotaan liian pitkät Rmd-tiedostot pienemmiksi,
+ensimmäisenä G1_4_CAlaaj1.Rmd, loppuosa on nyt G1_4_CAlaaj2.Rmd.

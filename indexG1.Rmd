@@ -49,6 +49,8 @@ Poistetaan tarpeetonta tekstiä, vanha koodi voi jäädä selvästi merkittynä.
 mutta pdf-tulosteessa ei. Ero on pieni.
 (8.4.20)
 
+(9.9.20) Pilkotaan liian pitkiä Rmd - tiedostoja pienemmiksi.
+
 **HISTORIAA**
 
 **6.8.2018 versio 1.0**
@@ -166,6 +168,10 @@ Vanhoja kommentteja
 
 ***
 ```{r child="G1_4_CAlaaj1.Rmd"}
+
+```
+***
+```{r child="G1_4_CAlaaj2.Rmd"}
 
 ```
 
