@@ -154,4 +154,5 @@ G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.
 
 **9.9.2020** Jatkettiin subsetca- kuvine ja BaseR-plot - funktion avulla
 "zoomattujen" kuvien kehitttelyä. Pilkotaan liian pitkät Rmd-tiedostot pienemmiksi,
-ensimmäisenä G1_4_CAlaaj1.Rmd, loppuosa on nyt G1_4_CAlaaj2.Rmd.
+ensimmäisenä G1_4_CAlaaj1.Rmd, loppuosa on nyt G1_4_CAlaaj2.Rmd ja subset CA on
+G1_4_CAlaaj1.Rmd.

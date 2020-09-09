@@ -51,7 +51,7 @@ Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa j
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 #  (19.2.20) Käytetään "nuoliversiota"- tämä passiiviseksi
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
-
+par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 
      mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta" )
@@ -76,6 +76,7 @@ ne ovat simpleksin kärkipisteet, simpleksin sisällä ovat riviprofiilit.
 # 
 # Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
 # pdf("img/sCA1asymm1.pdf")
+par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1" )
@@ -118,6 +119,7 @@ simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 # ei toimi - onpa hankalaa! segments antaa virheilmoituksen "plot.new has not
 # been called yet" (11.6.20)
 # X11()
+par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,FALSE),
      main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
@@ -174,7 +176,8 @@ kärkipisteiden koordinaatisto.
 
 
 ```{r G1-3asymmContrib1,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
-#X11() komentoriville ja plot-komento
+# X11() komentoriville ja plot-komento -> grafiikkaikkuna
+par(cex = 0.6)
 plot(simpleCA1, map = "rowgreen",
      contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
@@ -196,6 +199,7 @@ Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
 
 ```{r G1-3asymmContrib2,fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #X11() komentoriville ja plot-komento
+par(cex = 0.6)
 plot(simpleCA1, map = "rowgreen",
      contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),

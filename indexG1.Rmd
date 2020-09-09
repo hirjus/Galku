@@ -27,7 +27,7 @@ output:
 ---
 
 **Versiot - vanha Galku - 5.6.2019 versio 1.5.1**
-**Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6, 24.2.2020 versio 1.5.7**
+**Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6, 24.2.2020 versio 1.5.7**,
 **6.9.2020 versio 1.5.8**
 
 Siivotaan datan käsittelyn koodilohkot, kopiodaan mahdollisesti hyödylliset 

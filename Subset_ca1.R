@@ -7,7 +7,7 @@
 # ISSP2012esim2.dat 
 # spCAmaaga1    maaga-ca-objekti (täydentävillä maa-pisteillö)
 # maagaTab1     taulukko  jossa maaga-rivit ja maat täydentävinä pisteinä
-
+maagaTab1
 
 # Koodilohko subsetCA-1
  X11()
@@ -33,7 +33,7 @@ plot(maagaCA2sub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
 # BE 1-12, BG 13-24, DE 25-36, DK 37-48, FI 49-60, HU 61-72
 
 
-#Ongelma 2: subsetrow hyväksyy vain yhden parametrin -> maagaTab1 on lajiteltava?
+#Ongelma 2: subsetrow, ratkeaa kun käytetään merkkijonomuuttujaa (9.9.20)
 # maapisteet suprow = 73:78 toimivat
 str(maagaTab1)
 typeof(maagaTab1)#integer

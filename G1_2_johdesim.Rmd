@@ -569,12 +569,11 @@ sarakeratkaisuiden symmetria ja sidos esitetään tässä.
 Sarakekuvassa näkyy E-sarakkeenselvästi ero (DK), muut erot eivät niinkään. S-sarakkeessa
 HU erottuu, samoin eos(?)-sarakkeessa BE.
 
-Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
-**edit** pois tulosteesta 30.3.20.
 
 ```{r g1-2kuva1test,eval=FALSE, include=FALSE}
-
 # Esimerkki faktoroinnin sudenkuopista: muuttujan arvojen järjestys vaihtuu!
+# Testaus: maa2, eri järjestys kuin C_ALPHAN (joka oli käytössä vanhemmissa Galku-versioissa)
+# pois raportista 30.3.20.
 
 #mutkikas kuvan piirto - sarakeprofiilit vertailussa
 #ggplot vaatii df-rakenteen ja 'long data' - muotoon
@@ -638,9 +637,11 @@ ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
 osuuksissa selvimmin. Bulgarialla S+s on hieman suurempi kuin Unkarilla, mutta s-osuus
 on suurempi. "Ääripäitä" S- ja E-osuuksissa edustavat HU - FI, DK ja BG-HU - DK.
 
- **edit Pois tulosteesta 30.3.20**Sama testaus kuin sarakeprofiilikuvilla (maiden järjestys, tekninen juttu).
 
 ```{r g1-2kuva2test, ,eval=FALSE, include=FALSE}
+# Pois tulosteesta 30.3.20. Sama testaus kuin sarakeprofiilikuvilla,
+# maiden järjestys eri muuttujissa C_ALPHAN ja maa2.
+
 # riviprofiilit ja keskiarvorivi -  18.9.2018
 apu2_dftest <- as.data.frame(apu1test)
 apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))
@@ -748,13 +749,17 @@ knitr::kable(rowdist.tbl,digits = 3, booktabs = TRUE,
 
 knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
              caption = "Sarake-etäisyydet keskiarvosta (khii2)")
-simpleCA3$coldist
+
+# (28.5.20) Pois tulosteesta. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys
+# muuttuu. Järjestys vaikuttaa kuviin
+
+# simpleCA3$coldist
 
 ```
-**Edit 28.5.20** Pois tulosteesta. Tarkistus, khii2-etäisyydet eivät muutu vaikka maiden järjestys
-muuttuu. Järjestys vaikuttaa kuviin.
+
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
+# Tarkistuksia: mihin rivien järjestys vaikuttaa?
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
 # mutta rivit eri järjestyksessä (2.2.20).
 # HUOM: simpleCA2-tulosolio luotava ensin!
@@ -777,9 +782,8 @@ simpleCA2$coldist
 
 ```
 
-
-CA-ratkaisun lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
-**edit** Algoritmin lähtötieto (30.3.20)
+CA-ratkaisun (algoritmin) lähtötieto: suhteelliset frekvenssit (korrespondenssimatriisi P)
+(30.3.20)
 
 ```{r simpleCArelfrekTa1}
 taulu5 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
@@ -787,14 +791,13 @@ knitr::kable(taulu5,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen V6 vastaukset maittain (%)")
 ```
 
-**zxy** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
-Kolme karttaa. Kartan kääntyminen ei ole ongelma, mutta vähän kiusallista. Tässä
-se on seurausmaiden järjestyksestä. Maiden vertailussa on järkevää vakioida 
-niiden massat (kolmas kartta). Massan käsite on CA:n ydinasioita, siksi maiden
-massat ovat jatkossa mukana. Kartta määräytyy maiden otoskokojen suuruisilla
-painoilla, mutta ero ei ole kovin suuri.
+**Massat  ja skaalaus** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
+Kolme karttaa. Maiden vertailussa on järkevää vakioida niiden massat (kolmas kartta).
+Massan käsite on CA:n ydinasioita, siksi maiden massat ovat jatkossa mukana.
+Kartta määräytyy maiden otoskokojen suuruisilla painoilla, mutta ero ei ole kovin
+suuri.
 
-```{r simpleCAmap1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
+```{r simpleCA1map1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan 
 #siinä.
 
@@ -806,6 +809,7 @@ painoilla, mutta ero ei ole kovin suuri.
 # Symmetrinen kartta
 # Akselien tekstit "käsityönä" - esimerkki (3.5.2020)
 
+par(cex = 0.6)
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
      main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
      xlab = "Dimensio 1: moderni/liberaali - perinteinen/konservatiivinen (76%)",
@@ -818,21 +822,11 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 # Kartta kääntyy x-akselin ympäri - esimerkki faktoroinnin arvaamattomista 
 # seurauksista (30.3.20)
 
-# par(cex = 0.3) pisteen koko
-plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE), 
-main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
-
-
-#str(simpleCA1)
 # 13.5.2018 
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
 # grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, 
 # jos lopulliseen versioon joutuu 
 # näin tekemään.
-# näitä kokeiln chunk-optioissa mutta ei toimineet (out.width = "6", out.hight = "6") 
-# (13.5.2018), vaan pdf-konversiossa pandoc failed with error 43
-
 ```
 
 **edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta 
@@ -841,6 +835,17 @@ on pienen massan pisteiden (BG, FI, HU) siirtymien kohti origoa. Ei kyllä
 ole kovin selvä, ja näkyy selvimmin "ääripäissä" (? 5.9.20) Entäs sarakepisteet,
 niiden massat eivät muutu? **TODO 5.9.20** Ylempänä taulukko khii2-etäisyyksistä,
 tässä kaksi pilveä projisoitu samaan kuvaan.
+```{r simpleCA3map1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Sama kartta - maiden massat vakiotu
+# CA:n lähtötietona riviprofiilit
+
+par(cex = 0.6) 
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE), 
+main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
+sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
+
+```
+
 
 
 Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.

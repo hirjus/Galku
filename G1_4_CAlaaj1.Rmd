@@ -170,7 +170,7 @@ str(ISSP2012esim1.dat)
 ## Täydentävät muuttujat (supplementary points)
 
 **zxy** Piste sinne piirretään, mutta muuttujassa on se tieto.
-"Täydentävät piste"" kuulostaa huonolta. Lisämuuttujat, havainnot, lisäpisteet?
+"Täydentäv piste" kuulostaa huonolta. Lisämuuttujat, havainnot, lisäpisteet?
 
 **Viite:CAip ss 89, HY2017_MCA.**
 
@@ -259,7 +259,7 @@ suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 
-suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
+# suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
 
 #lisätään rivit maa3-muuttujan taulukkoon
 
