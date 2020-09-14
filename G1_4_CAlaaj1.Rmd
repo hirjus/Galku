@@ -209,6 +209,7 @@ täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 
 # HUOM! Tässä ei vielä supp.points mukana!
+par(cex = 0.6)
 suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
 plot(suppointCA1, main = "Belgian ja Saksan ositteet",
                 sub = "symmetrinen kartta")
@@ -266,6 +267,7 @@ suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
 suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
+par(cex = 0.6)
 plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
      sub = "Passiiviset pisteet DE ja BE" )
 
@@ -278,7 +280,7 @@ Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta,
 **edit 3.5.20** Minne katoavat pisteet?
 
 ```{r G1-4-BeDe-asymmContrib1, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
-
+par(cex = 0.6)
 plot(suppointCA2, map = "rowgreen",
      contrib = c("absolute", "absolute"),
      mass = c(TRUE,TRUE),
@@ -287,7 +289,7 @@ plot(suppointCA2, map = "rowgreen",
      sub = "kontribuutiokartta (rowgreen, absolute)")
 
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
-
+par(cex = 0.6)
 plot(suppointCA2, map = "rowgreen",
      contrib = c("relative", "relative"),
      mass = c(TRUE,TRUE),
@@ -330,16 +332,16 @@ Entäs kaupungit - isot ja pienet - ja maaseutu? Elinkeinorakenne, tulot jne...
 suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
 # Tulostetaan kolme karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
-
+par(cex = 0.6)
 plot(suppointCA3, dim = c(1,2), 
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
                 sub = "symmetrinen kartta - 1. ja 2. dimensio")
 
-
+par(cex = 0.6)
 plot(suppointCA3, dim = c(1,3), 
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
                 sub = "symmetrinen kartta - 1. ja 3. dimensio")
-
+par(cex = 0.6)
 plot(suppointCA3, dim = c(2,3),
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
                 sub = "symmetrinen kartta - 2. ja 3. dimensio")

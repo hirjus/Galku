@@ -111,11 +111,11 @@ plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
 
 **Osajoukko-ca neljälle ryhmälle**
 Belgia on vähän rajatapaus, kokeillaan osajoukko-ca:ta neljällä maaryhmällä.
-BG-HU, BE-DE-DK-FI,DEDKFI ja BEBGHUsubset <- c(1:12,13:14,61:72)
+BG-HU, BE-DE-DK-FI,DEDKFI ja BEBGHUsubset <- c(1:12,13:24,61:72)
 
 ```{r  subsetCA-1f, fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Neljä maaryhmää
-BGHUsubset <- c(13:14,61:72)
+BGHUsubset <- c(13:24,61:72)
 BEDEDKFIsubset <- c(1:12, 25:36, 37:48, 49:60)
 DEDKFIsubset <- c(25:36, 37:48, 49:60)
 BEBGHUsubset <- c(1:12,13:14,61:72)
@@ -136,6 +136,17 @@ plot(spCAmaagasub4,
      main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
      sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
 )
+
+# asymmetrinen kartta
+par(cex = 0.6)
+plot(spCAmaagasub4,map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
+)
+ 
 ```
 
 ```{r subsetCA-1h, fig.asp = 1, out.width = "90%",fig.align = "center"}
@@ -143,6 +154,15 @@ spCAmaagasub5 <- ca(maagaTab1[,1:5], subsetrow = DEDKFIsubset)
 par(cex = 0.6)
 plot(spCAmaagasub5, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
      sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+)
+# asymmetrinen kartta
+par(cex = 0.6)
+plot(spCAmaagasub5,map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
 )
 ```
 

@@ -132,6 +132,7 @@ gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
 
 gaTestCA1.rpc <- gaTestCA1$rowcoord %*% diag(gaTestCA1$sv)
 
+par(cex = 0.6)
 plot(gaTestCA1, main = "Äiti töissä: ikäluokka ja sukupuoli",
      sub = "symmetrinen kartta")
 # naiset
@@ -426,7 +427,7 @@ par(cex = 0.5)
 
 plot(spCAmaaga1, xlim = c(0,0.75), ylim = c(-0.75,0.75),
                 main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-                sub = "osa symmetristä karttaa"
+                sub = "osa symmetristä karttaa - tämä ei oikein toimi (14.9.20)"
                     )
 # TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
 # ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
