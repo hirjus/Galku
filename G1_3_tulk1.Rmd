@@ -208,12 +208,38 @@ plot(simpleCA1, map = "rowgreen",
      sub = "sarakevektorin ja pisteen värin tummuus = kontribuutio(relative)")
 
 ```
-
-**Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
-
 Asymmetrisessä kartassa 2 pisteiden koko on suhteessa niiden massaan, ja 
 värisävy absoluuttiseen tai suhteelliseen kontribuutioon.
 
+Sarakevektorin kulma akseliin - mitä pienempi sitä enemmän määrittää. Jos lähellä
+45 asteen lävistäjää, kontribuutiota on molempiin akseleihin
+
+**Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
+
+Rivipisteet voidaan projisoida ortogonaalisesti (ns. suora kulma) sarakevektorille
+ja sen pisteillä merkitylle jatkeelle. Järjestys on sama kuin sarakkeen modaliteetin
+suhteellinen osuus rivipisteen profiilissa. Ensimmäisessä kartassa on käsivaralla
+piirretty suurinpiirtein kohtisuorat projektiot lievempää erimielisyyttä edustavalle
+s- ideaalipisteeseen (0,1,0,0,0) origosta piirretylle suoralle.
+
+Toisessa kuvassa sama E-vektorille. Maiden suhteellinen järjestys on oikea, mutta
+jos vertaa taulkkoon X (edellä), huomaa että absoluuttiset erot eivät täsmällisesti
+toistu kuvassa.
+
+**todo 15.9.20** Voiko tämän tehdä myös skaalatulle (rowgreen) asymmetriselle kuvalle?
+
+
+```{r G1_3_asymmtulk1, out.width='100%', fig.align='center',fig.cap='Asymmetrinen kuva - sarakevektorin tulkinta 1'}
+
+knitr::include_graphics('img/simpleCAasymmTulk1.png')
+
+```
+
+```{r G1_3_asymmtulk2, out.width='100%', fig.align='center',fig.cap='Asymmetrinen kuva - sarakevektorin tulkinta 2'}
+
+knitr::include_graphics('img/simpleCAasymmTulk2.png')
+
+```
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
@@ -229,18 +255,15 @@ summary(simpleCA3)
 # HUOM! Edellisessä jaksossa taulukko rivi- ja sarake-etäisyyksistä. Tuskin
 # kannattaa tässä toistaa. Muuta analyysiä numeerisista tuloksista. (10.4.20)
 
-simpleCA1$rownames
-simpleCA1$rowdist
-simpleCA3$rowdist
+# simpleCA1$rownames
+# simpleCA1$rowdist
+# simpleCA3$rowdist
 
-simpleCA1$colnames
-simpleCA1$coldist
-simpleCA3$coldist
+# simpleCA1$colnames
+# simpleCA1$coldist
+# simpleCA3$coldist
 
 ```
-Ensimmäinen tuloste on CA maapainoilla, ja toisessa maapainot on vakioitu. 
-CA-funktiolle on siinä annettu dataksi riviprofiilit, rivisummat ovat
-ykkösiä. Rivimassat skaalautuvat niin, että niiden summa on 1.
 
 Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 

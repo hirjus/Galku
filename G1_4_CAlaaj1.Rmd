@@ -50,6 +50,16 @@ muodostamalla symmetrinen lohkomatriisi (ABBA).
 
 - jakaumaekvivalenssi(?) (distributional equivalence)), voidaan jakaa ja yhdistää
 rivejä
+- Belgia leviää pystysuuntaan, Saksa vaakasuuntaan
+
+```{r G1-4-BeDeSplit, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# HUOM! Tässä ei vielä supp.points mukana!
+par(cex = 0.6)
+suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
+plot(suppointCA1, main = "Belgian ja Saksan ositteet",
+                sub = "symmetrinen kartta")
+
+```
 
 2. Täydentävät pistee (supplementary points)
  
@@ -80,7 +90,8 @@ rajaaminen.
 Nyt käytetään johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
 tehty.
 
-G1_4_CAlaaj1.Rmd jaettu kahdeksi tiedostoksi, uusi G1_4_CAlaaj2.Rmd
+**(14.9.20)**G1_4_CAlaaj1.Rmd jaettu kolmeksi tiedostoksi, uusia G1_4_CAlaaj2.Rmd ja
+G1_4_CAlaaj3.Rmd
 
 **Vanhaa koodia kolme koodilohkoa**
 ```{r G1_4_CAlaaj1DataOLD, eval=FALSE, include=FALSE}
@@ -170,7 +181,7 @@ str(ISSP2012esim1.dat)
 ## Täydentävät muuttujat (supplementary points)
 
 **zxy** Piste sinne piirretään, mutta muuttujassa on se tieto.
-"Täydentäv piste" kuulostaa huonolta. Lisämuuttujat, havainnot, lisäpisteet?
+"Täydentävä piste" kuulostaa huonolta. Lisämuuttujat, havainnot, lisäpisteet?
 
 **Viite:CAip ss 89, HY2017_MCA.**
 
@@ -206,21 +217,8 @@ täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
 # Belgian ja Sakasan jako lisäpisteinä 24.5.2018
+# Data suppointCA1
 
-
-# HUOM! Tässä ei vielä supp.points mukana!
-par(cex = 0.6)
-suppointCA1 <- ca(~maa3 + Q1b,ISSP2012esim1.dat)
-plot(suppointCA1, main = "Belgian ja Saksan ositteet",
-                sub = "symmetrinen kartta")
-
-# VANHAA 21.2.20
-# tarvittiin, kun maa-muuttujan järjestys muuttui, käyttökelpoinen tarvittaessa
-#Jos kuva kääntyy ympäri, kerrotaan koordinaattivektorit luvulla -1
-#
-# suppointCA1b <- suppointCA1
-# suppointCA1b$rowcoord <- suppointCA1b$rowcoord[,] * (-1)
-# suppointCA1b$colcoord <- suppointCA1b$colcoord[,] * (-1)
 
 # Miten lisärivit? (24.5.2018)
 # Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
@@ -253,7 +251,7 @@ str(suppoint2_df)
 suppoint2_df %>% table1() # miksi ei tulosta mitään konsolille? (4.2.20)
 
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
-suppoint2_tab1 # tarkistus
+# suppoint2_tab1 # tarkistus
 suppoint2_tab1 <- suppoint2_tab1[-2,]
 # kömpelösti kolme kertaa
 suppoint2_tab1 <- suppoint2_tab1[-3,]
@@ -261,7 +259,7 @@ suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 
 # suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
-
+suppoint2_tab1
 #lisätään rivit maa3-muuttujan taulukkoon
 
 suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
@@ -299,11 +297,11 @@ plot(suppointCA2, map = "rowgreen",
 
 ```
 
-Kaksi konrtibuutio-karttaa (MG:n keksintö) osoittavat, että tulkinnan hankaluuksista
-huolimatta symmetrinen kartta on usein selkeämpi. Molemmissa ideaalipisteet sijatsevat
-kaukana (vaikka ne on skaalattu hieman lähemmäs origoa), ja maapisteiden hajontaa
-on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE) peittyy läntisen Saksan 
-(dW) alle.
+Kaksi asymmetristä konrtibuutio-karttaa (MG:n keksintö) osoittavat, että tulkinnan
+hankaluuksista huolimatta symmetrinen kartta on usein selkeämpi. Molemmissa
+ideaalipisteet sijatsevat kaukana, vaikka ne on skaalattu hieman lähemmäs origoa.
+Maapisteiden hajontaa on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE)
+peittyy läntisen Saksan (dW) alle.
 
 Tulostetaan numeeriset taulukot.
 
@@ -348,20 +346,31 @@ plot(suppointCA3, dim = c(2,3),
 
 
 
-# summary(suppointCA3) - virheilmoitus (21.2.20)
+# summary(suppointCA3) - KUMMALLINEN JUTTU, summary() EI TOIMI KUN 3d-ratkaisu!
+#
 
 # Virheilmoitus "Error in rsc %*% diag(sv) : non-conformable arguments" ?!
 # onko vika täydentävissä pisteissä? Ei ole, eivät ole mukana
 # ISSP2012esim1.dat %>% tableX(maa3, Q1b)
 
-suppointCA3
+# suppointCA3
 
 # Virheilmoituksen selvittelyä (24.2.20)
 # str(suppointCA3)
+# tämä matriisikertolasku ei onnistu - 3d-ratkaisussa on vain kolme koordinaattia!
+# suppointCA3$rowcoord
 # diag(suppointCA3$sv)
+# suppointCA1$rowcoord %*% diag(suppointCA1$sv)
 
+#Tämä toimii
+# 
+# suppointCA1$rowcoord
+# suppointCA1$sv
+# suppointCA1$rowcoord %*% diag(suppointCA1$sv)
+# summary(suppointCA1)
+# 
 # Kolmiulottein kuva grafiikkaikkunaan
-
+# X11()
 # plot3d(suppointCA3, c(1,2,3))
 
 # Hyödyllinen, mutta aika vaikea

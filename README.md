@@ -156,3 +156,6 @@ G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.
 "zoomattujen" kuvien kehitttelyä. Pilkotaan liian pitkät Rmd-tiedostot pienemmiksi,
 ensimmäisenä G1_4_CAlaaj1.Rmd, loppuosa on nyt G1_4_CAlaaj2.Rmd ja subset CA on
 G1_4_CAlaaj1.Rmd.
+
+**15.9.2020** Hiottiin kuvia ja tauloukoita, lisättiin Powerpointilla käsitelty
+asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
