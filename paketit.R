@@ -20,7 +20,7 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+# library(testthat) pois 16.9.20
 #
 #r-skripteillä riittää, kun ajaa tämän
 sessionInfo()

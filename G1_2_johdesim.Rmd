@@ -25,7 +25,7 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+#library(testthat) pois 16.9.20
 
 # sessionInfo()
 
@@ -258,7 +258,7 @@ str(ISSP2012esim1.dat) # 8143 obs. of  6 variable
 
 # Tarkistuksia - miksi nämä eivät tulosta mitään? (3.2.20)
 
-fct_count(ISSP2012esim1.dat$sp) %>% table1()
+fct_count(ISSP2012esim1.dat$sp)
 fct_count(ISSP2012esim1.dat$Q1b)
 fct_count(ISSP2012esim1.dat$maa)
 fct_count(ISSP2012esim1.dat$maa3)

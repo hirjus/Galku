@@ -197,9 +197,10 @@ otoskoolla, vaan vakioidaan (jotenkin) sama (suhteellinen) massa kaikille.
 Samalla oikaistaan myös naisten yliedustus aineistossa.
 
 **Käsitteitä:** 
-(@) Active point, aktiivinen piste (aktiivinen havainto tai
-muuttuja). 
-(@) Supplementary pointtäydentävä piste (täydentävä havainto).
+(a) Active point, aktiivinen piste (aktiivinen havainto tai
+muuttuja).
+
+(b) Supplementary pointtäydentävä piste (täydentävä havainto).
 
 Täydentävien muuttujien kolme käyttötapaa:
 
@@ -274,10 +275,10 @@ Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mu
 
 Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
 
-Piirretään vertailun vuoksi vielä asymmettrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
-**edit 3.5.20** Minne katoavat pisteet?
+Piirretään vertailun vuoksi vielä asymmetrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
+**edit 3.5.20** Minne katoavat pisteet, outoa?
 
-```{r G1-4-BeDe-asymmContrib1, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
+```{r G1-4-BeDe-asymmContrib1a, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
 par(cex = 0.6)
 plot(suppointCA2, map = "rowgreen",
      contrib = c("absolute", "absolute"),
@@ -286,6 +287,11 @@ plot(suppointCA2, map = "rowgreen",
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 1",
      sub = "kontribuutiokartta (rowgreen, absolute)")
 
+```
+
+Maapisteet täydentävinä pisteinä
+
+```{r r G1-4-BeDe-asymmContrib1b, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Sama kuva, maasummat lisäpisteinä (4.2.20)
 par(cex = 0.6)
 plot(suppointCA2, map = "rowgreen",
@@ -294,14 +300,14 @@ plot(suppointCA2, map = "rowgreen",
      arrows = c(FALSE, TRUE),
      main = "Saksan ja Belgian alueet - asymmetrinen kartta 2 ",
      sub = "kontribuutiokartta (rowgreen,relative)")
-
 ```
 
 Kaksi asymmetristä konrtibuutio-karttaa (MG:n keksintö) osoittavat, että tulkinnan
 hankaluuksista huolimatta symmetrinen kartta on usein selkeämpi. Molemmissa
 ideaalipisteet sijatsevat kaukana, vaikka ne on skaalattu hieman lähemmäs origoa.
 Maapisteiden hajontaa on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE)
-peittyy läntisen Saksan (dW) alle.
+peittyy läntisen Saksan (dW) alle. "rowgreen-kartoista" puuttuvat jostain syystä
+pisteet.
 
 Tulostetaan numeeriset taulukot.
 
@@ -376,5 +382,13 @@ plot(suppointCA3, dim = c(2,3),
 # Hyödyllinen, mutta aika vaikea
 
 ```
+Kolmiulotteisesta kuvasta Belgian ja Saksan alueiden hajonta tasosta näkyy hieman
+selvemmin.
+```{r 3dklippi1}
+knitr::include_graphics('img/3dSymMap_1.PNG')
+
+```
+
+
 **edit 9.9.20** Tällä datalla ABBA stacked-jaksossa?
 

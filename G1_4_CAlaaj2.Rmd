@@ -218,6 +218,10 @@ plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
 
 ```
 
+Kartta on aika tukkoinen, yhdistetään muuttujat janoilla.
+
+
+
 ## Kvaliteetti ja stabiilius
 
 maaga-talukossa on paljon pieniä frekvenssejä (alle 5). Periaatteessa pienen 
@@ -359,6 +363,39 @@ plot(spCAmaaga1, map = "rowgreen",
 
 
 ```
+
+Asymmetrinen kontribuutiokartta on hyödyllinen sarakkeiden ja niiden avulla
+akseleiden tulkinnassa. Rivipisteet pakkautuvat kuitenkin tiiviimmin kartan
+keskelle kuin symmetrisessä kuvassa.
+```{r spCAmaaga-lines1, fig.cap = "Ikä-sukupuoli-maa", fig.asp =1, out.width = "90%",fig.align = "center" }
+# pisteiden koordinaatit (symmetrinen kartta, pääkoordinaatit)
+maagaLines1 <-cacoord(spCAmaaga1, type = "symmetric")
+#maagaLines1
+#str(maagaLines1)
+#class(maagaLines1)
+# vain kaksi ensimmäistä dimensiota
+maagaLines1 <- maagaLines1$rows[ ,1:2]
+par(cex = 0.5)
+plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.5"
+                    )
+     lines(maagaLines1[49:54,1],maagaLines1[49:54,2], col="blue") #FIf
+     lines(maagaLines1[55:60,1],maagaLines1[55:60,2], col="red")  #FIm
+     lines(maagaLines1[25:30,1],maagaLines1[25:30,2], col="blue") #DEf
+     lines(maagaLines1[31:36,1],maagaLines1[31:36,2], col="red")  #DEm
+     lines(maagaLines1[37:42,1],maagaLines1[37:42,2], col="blue") #DKf
+     lines(maagaLines1[43:48,1],maagaLines1[43:48,2], col="red")  #DKm
+     lines(maagaLines1[1:6,1],maagaLines1[1:6,2], col="blue") #BEf
+     lines(maagaLines1[7:12,1],maagaLines1[7:12,2], col="red")  #BEm
+     lines(maagaLines1[13:18,1],maagaLines1[13:18,2], col="blue") #BGf
+     lines(maagaLines1[19:24,1],maagaLines1[19:24,2], col="red")  #BGm
+     lines(maagaLines1[61:66,1],maagaLines1[61:66,2], col="blue") #HUf
+     lines(maagaLines1[67:72,1],maagaLines1[67:72,2], col="red")  #HUm
+
+```
+
+
+
 ## Kartan rajaaminen
 0. Analyysin voi tehdä vain osalle dataa - vähän kehno ratkaisu, ei yhteyttä koko
 aineiston antamaan yleiskuvaan muuttujien yhteyksistä.

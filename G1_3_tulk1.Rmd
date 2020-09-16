@@ -229,17 +229,20 @@ toistu kuvassa.
 **todo 15.9.20** Voiko tämän tehdä myös skaalatulle (rowgreen) asymmetriselle kuvalle?
 
 
-```{r G1_3_asymmtulk1, out.width='100%', fig.align='center',fig.cap='Asymmetrinen kuva - sarakevektorin tulkinta 1'}
+```{r G1_3_asymmtulk1, out.width='90%', fig.align='center'}
 
 knitr::include_graphics('img/simpleCAasymmTulk1.png')
 
 ```
 
-```{r G1_3_asymmtulk2, out.width='100%', fig.align='center',fig.cap='Asymmetrinen kuva - sarakevektorin tulkinta 2'}
+```{r G1_3_asymmtulk2, out.width='90%', fig.align='center'}
 
 knitr::include_graphics('img/simpleCAasymmTulk2.png')
 
 ```
+
+Numeeriset tulokset, jälkimmäisessä rivimassat vakioitu yhtä suuriksi
+("riviprofiilitaulukon ca").
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
@@ -271,7 +274,7 @@ Edellisessä jaksossa esimerkki siistimmästä taulukosta.
 
 1. Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
-2. Kokonaisinertia kasvaa (0,18 -> 0,26), koordinaatisto muuttuu
+2. Kokonaisinertia kasvaa (0,18 -> 0,22), koordinaatisto muuttuu
 mutta ei kovin radikaalisti.
 
 3. Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?

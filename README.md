@@ -159,6 +159,5 @@ G1_4_CAlaaj1.Rmd.
 **15.9.2020** Hiottiin kuvia ja tauloukoita, lisättiin Powerpointilla käsitelty
 asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
 
-**16.9.2020** Siistitään Galkua, aika maltillisesti poistoja. Lisätään pinotut
-taulut yksinkertaisella esimerkkidatalla, mahdollisesti ABBA. Lisätään
-maaga-kuviin rivipisteitä yhdistäviä janaoja. Tägätään versioon 1.5.9.
+**16.9.2020** Siistittiin Galkua, aika maltillisesti poistoja. Lisättiin
+yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin versioon 1.5.9., lisätään pinotut taulut yksinkertaisella esimerkkidatalla, mahdollisesti ABBA. 

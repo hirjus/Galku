@@ -177,7 +177,7 @@ maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
 # 
 
 maagaCA1.rpc
-X11()
+# X11()
 par(cex = 0.5)
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 1",
      sub = "symmetrinen kartta cex=0.5")
