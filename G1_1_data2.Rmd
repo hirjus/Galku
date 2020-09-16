@@ -58,11 +58,11 @@ CA (ja MCA) sopivat isojen moniulotteisten ja mutkikkaiden aineistojen analyysii
 siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan. 
 **V** Benzecri:"kun data menee miljoonaan suuntaan".
 
-3. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
+1. Aineiston esittely, laajan kyselytutkimusaineiston tyypilliset ominaisuudet
 
-4. Laadukkaan ja hyvin dokumentoidun aineiston edut
+2. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-5. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
+3. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
 (esim. ekologia ja biologia, arkeologia, kielen tutkimus). Kyselytutkmukset ovat 
 yksi selkeä menetelmän sovelluskohde. Muuttujat ovat usein kvalitatiivisia, ja 
 ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
@@ -73,7 +73,9 @@ ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
 **luvun pitäisi olla mahdollisimman lyhyt (5.12.18)**
 
 Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) 
-tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. *
+tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. Avainsana "cross-cultural
+compararative studies", "cross country" ehkä myös? Tämä on varsinainen
+teollisuuden ala! Maiden väliset vertailut ovat aina hyvin hankalia.
 
 **Tärkeät linkit - ISSP 2012 data**
 
@@ -88,7 +90,11 @@ www.gesis.org - tutkimuksen "sihteeristö", dokumentaatio ja datat.
 data ja dokumentaatio (selattavissa): zacat.gesis.org
 
 **edit** tässä järkevä viite ISSP - dataan
-ISSP Research Group (2016): International Social Survey Programme: Family and Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne. ZA5900 Data file Version 4.0.0, [doi:10.4232/1.12661](https://doi.org/10.4232/1.12661)
+ISSP Research Group (2016): International Social Survey Programme: Family and
+Changing Gender Roles IV - ISSP 2012. GESIS Data Archive, Cologne.
+ZA5900 Data file Version 4.0.0,
+[doi:10.4232/1.12661](https://doi.org/10.4232/1.12661)
+
 Alla myös suora linkki
 
 **Linkitys dokumentteihin on hankalaa**
@@ -109,10 +115,8 @@ https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e2012 **toimii**
 (http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900) 
 http://zacat.gesis.org/webview/index.jsp?object=http://zacat.gesis.org/obj/fStudy/ZA5900
 
-Suomenkielinen lomake (ZA5900_q_fi-fi.pdf)
-Suomessa tutkimusta koordinoi 
+Suomenkielinen lomake (ZA5900_q_fi-fi.pdf),Suomessa tutkimusta koordinoi 
 [yhteiskuntatieteellinen tietoarkisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD2820)
-
 
 [Data ja dokumentit](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=5900&db=e) 
 **vie vain aineiston dokumentoinnin etusivulle** 
@@ -133,7 +137,7 @@ Monitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne mait
 Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen
 laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.
 
-```{r ISSPdocsTable, fig.cap="ISSP 2012: dokumentit"}
+```{r ISSPdocsTable }
 issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
                   "Contents of ISSP 2012 module", "Questionnaire Development")
 issp_docdesc <- c("Perusdokumentti, muuttujien kuvaukset ja taulukot", 
@@ -153,7 +157,8 @@ col_isspdocs <- c("dokumentti","sisältö","tiedosto")
 # varoituksia data_framen käytöstä, toimisiko tibble()? (21.2.20)
 ISSPdocsT.tbl <- tibble(issp_docname, issp_docdesc, issp_docfile)
 colnames(ISSPdocsT.tbl) <- col_isspdocs
-knitr::kable(ISSPdocsT.tbl, booktab = TRUE)
+knitr::kable(ISSPdocsT.tbl, booktab = TRUE,
+             caption = ' ISSP 2012: tärkeimmät dokumentit')
 ```
 
 
@@ -215,7 +220,9 @@ teollisuusmaita. Sitten valittiin osa kysymyksistä, ja vielä suppeampi valikoi
 kiinnostavia taustamuuttujia. Muutama maa pudotettiin pois tämän valinnan jälkeen.
 
 
-**3. kaikki havainnot, joissa on puuttuvia tietoja.** 
+**2. Havainnot, joissa on puuttuvia tietoja.**
+
+**Vastauskato on kyselytutkimusten suurin ongelma.**
 
 Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
 
@@ -628,7 +635,7 @@ Vastausvaihtoehdot:
 vastausvaihtoehto, 8 = en osaa sanoa ja 9 = no answer.
 
 
-```{r vartable1, fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat"}
+```{r vartable1 }
 
 # Muuttuja taulukkona - karkea tapa
 
@@ -695,26 +702,18 @@ colnames(jhVarTable1_fi.tbl) <- cols_jhVarTable1
 #  kable(booktab = T) # booktab = T gives us a pretty APA-ish table
 # Lyhyet kysymykset englanniksi
 
-# OLD
-# knitr::kable(jhVarTable1.df, booktab=TRUE,
-#                fig.cap="ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 knitr::kable(jhVarTable1.tbl, booktab = TRUE,
                fig.cap = "ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
 
-# OLD
-# knitr::kable(jhVarTable1_fi.df, booktab=TRUE,
-#              fig.cap="ISSP2012: suomenkielisen lomakkeen kysymykset")
- 
+
 knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
               fig.cap = "ISSP2012: suomenkielisen lomakkeen kysymykset")
  
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat 
 # monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
 
-# Kokeillaan taulukoiden yhdistämistä, jos aikaa jää. Ei luultavasti kannata, kun halutaan pdf- ja 
-# html-tulostus samalla koodilla (26.12.18).
 
 ```
 

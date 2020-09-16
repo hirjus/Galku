@@ -174,8 +174,8 @@ ISSP2012jh1d.dat$sp %>% summary()
 ISSP2012jh1d.dat$ika <- ISSP2012jh1d.dat$AGE
 
 # Tarkistuksia
-attributes(ISSP2012jh1d.dat$ika) # tyhjä level "No answer
-
+attributes(ISSP2012jh1d.dat$ika) # tyhjä level "No answer"
+# str(ISSP2012jh1d.dat$ika)
 ISSP2012jh1d.dat$ika %>% summary()
 
 ISSP2012jh1d.dat %>%
@@ -186,6 +186,7 @@ tableC(AGE, ika,cor_type = "pearson", na.rm = FALSE, rounding = 5,
 ISSP2012jh1d.dat$ika %>% hist(main = "ISSP 2012: vastaajan ikä")
 
 # str(ISSP2012jh1d.dat) - tarkistus
+
 
 ```
 
@@ -581,6 +582,24 @@ ISSP2012jh1d.dat %>%
     tableX(lifsta, lifstam)
 ISSP2012jh1d.dat %>% 
     tableX(urbru, urbrum)
+
+```
+
+Muunnosten testaus, varmistetaan että muuttujat säilyvät samanlaisina. Muunnosten
+jälkeen on koodilohkossa passiivisina riveinä taulukointeja ja muita testauksia.
+(16.9.2020)
+
+```{r fct-testaus1}
+# (16.9.2020) Testaus uusille muuttujille
+# Koodilohkoissa on jo testattu taulukoimalla muuttujia. Tässä varmistetaan, että
+# muuttujat pysyvät sellaisina millaisiksi ne on luotu.
+
+# ika - onpas hankala testata !
+# Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+# 15.00   36.00   50.00   49.52   63.00  102.00
+# ikatest <- ISSP2012jh1d.dat$ika %>% summary()
+#   ikatest <- ikatest[2,]
+#validate_that(are_equal(ikatest, c(15, 36, 50, 49.5, 63, 102)))
 
 ```
 

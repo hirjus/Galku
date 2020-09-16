@@ -138,8 +138,7 @@ skriptissä. Hieman tekstiä johdattelevan esimerkin asymmetriseen kuvaan.
 
 **14.6.2020** Maa-sukupuoli-ikä - karttojen kehittelyä.
 
-**12.8.2020** Siistittiin tekstiä. Testattiin ca-paketin caconv- ja cacoord-funktioita.
-Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
+**12.8.2020** Siistittiin tekstiä. Testattiin ca-paketin caconv- ja cacoord-funktioita. Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
 
 **5.9.2020** Pientä editointia, lisättiin riviprofiili-ca:n ja perus-ca:n
 khii2-etäisyyksien ja massojen vertailuja.
@@ -159,3 +158,7 @@ G1_4_CAlaaj1.Rmd.
 
 **15.9.2020** Hiottiin kuvia ja tauloukoita, lisättiin Powerpointilla käsitelty
 asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
+
+**16.9.2020** Siistitään Galkua, aika maltillisesti poistoja. Lisätään pinotut
+taulut yksinkertaisella esimerkkidatalla, mahdollisesti ABBA. Lisätään
+maaga-kuviin rivipisteitä yhdistäviä janaoja. Tägätään versioon 1.5.9.

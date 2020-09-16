@@ -397,22 +397,37 @@ str(ISSP2012esim1.dat)
 # assert_that ehkä tarpeeton - expect_equivalet testaa levelien
 # järjestyksen ja määrän (20.2.20)
 
-assert_that(length(levels(ISSP2012esim1.dat$maa)) == 6)
-assert_that(length(levels(ISSP2012esim1.dat$maa3)) == 9)
-assert_that(length(levels(ISSP2012esim1.dat$Q1b)) == 5)
+validate_that(length(levels(ISSP2012esim1.dat$sp)) == 2)
+validate_that(are_equal(levels(ISSP2012esim1.dat$sp),
+                c("m", "f")))
 
+validate_that(length(levels(ISSP2012esim1.dat$maa)) == 6)
+
+validate_that(are_equal(levels(ISSP2012esim1.dat$maa), 
+                  c("BE", "BG", "DE", "DK", "FI", "HU")))
+
+validate_that(length(levels(ISSP2012esim1.dat$maa3)) == 9)
+
+validate_that(are_equal(levels(ISSP2012esim1.dat$maa3), 
+                 c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU")))
+
+validate_that(length(levels(ISSP2012esim1.dat$Q1b)) == 5)
+validate_that(are_equal(levels(ISSP2012esim1.dat$Q1b), 
+               c("S", "s", "?", "e", "E")))
+
+# testthat - paketti - pois käytöstä 16.9.20
 # expect_ ei anna ok-ilmoitusta, ainoastaan virheilmoituksen? (11.4.20)
 
-expect_equivalent(levels(ISSP2012esim1.dat$maa), 
-                  c("BE", "BG", "DE", "DK", "FI", "HU"))
+# expect_equivalent(levels(ISSP2012esim1.dat$maa), 
+#                  c("BE", "BG", "DE", "DK", "FI", "HU"))
 
-expect_equivalent(levels(ISSP2012esim1.dat$maa3), 
-                  c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU"))
+# expect_equivalent(levels(ISSP2012esim1.dat$maa3), 
+#                  c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU"))
 
-expect_equivalent(levels(ISSP2012esim1.dat$sp), c("m", "f"))
+# expect_equivalent(levels(ISSP2012esim1.dat$sp), c("m", "f"))
 
-expect_equivalent(levels(ISSP2012esim1.dat$Q1b), 
-                  c("S", "s", "?", "e", "E"))
+# expect_equivalent(levels(ISSP2012esim1.dat$Q1b), 
+#                  c("S", "s", "?", "e", "E"))
 
 ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
 
@@ -692,12 +707,15 @@ saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
-**TODO 19.2.20** Siistiksi taulukoksi. as_tibble antaa varoituksen, mutta toimii 
-(11.4.20). 
+
+TODO 19.2.20 Siistiksi taulukoksi. as_tibble antaa varoituksen, mutta toimii 
+(11.4.20). Korjattu 15.9.20, taulukko ok.
 
 Rivimassat skaalautuvat ca-ratkaisussa vakioksi 1/6 (0.167), kun lähtötietona
 on riviprofiilien taulukko jossa rivimassat ovat 1. Sarakemassat skaalautuvat
 uudelleen. Massojen summa on 1.
+**TODO 16.9.20** knittr::kabble nimeää taulukot koodilohkon nimen mukaan, siis
+vain yksi taulukko? Omiksi koodilohkoiksi?
 
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
