@@ -31,7 +31,7 @@ library(assertthat)
 
 ```
 
-**Vanhaa jäsennystä**  
+**Vanhaa jäsennystä**
 
 Yksinkertainen esimerkki, yksi kysymys (V6/Q1b) ja kuusi maata
 ristiintaulukoituna. Johdatteluna aiheeseen esitellään ca-käsitteet profiili,
@@ -60,8 +60,8 @@ havainnot (lukumäärät, "abundance") öljylauttojen liepeiltä (havainnot ryv�
 
 1. Taulukko
 
-"Ranskalaisella terminologia": käsitellään yksilöiden tai 
-havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen 
+"Ranskalaisella terminologia": käsitellään yksilöiden tai
+havaintoyksiköiden pilveä ja muuttujien pilveä . Taulukot saadaan yksinkertaisen
 CA:n tapauksessa aggregoimalla "cloud of individuals". MG:n termi "sample".
 
 **#V** MOOC, LeReoux
@@ -76,12 +76,12 @@ ISSP-datan etu: hyvin dokumentoitu ja editoitu, laadukas aineisto. Iso (ja kalli
 työvaihe on jo tehty. Aineistoa on myös käytetty useissa tutkimuksissa, mm. MG:n
 oppikirjoissa.
 
-Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V** 
+Peruskäsitteiden yksinkertaisessa esityksessä tärkein lähde MG:n CAiP **#V**
 Siellä tästäkin on sananen: substanssiero usein on.
 
 3. CA:ssa vaikea juttu on (Blasius, "vizualisation - verkkokirja") rivien ja
 sarakkeiden **tekninen** symmetria. No ei se nyt niin hämäävä ehkä ole,
-oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan 
+oleellinen juttu (21.2.20). Kts. myös MG:n didaktiset esittelyt, skaalataan
 "hajontamittarilla" ja painotetaan massoilla.
 **edit 6.9.20** Tätä havainnosllistetaan teorian esittelyn yhteydessä johdattelevan
 aineiston datalla. Pienellä taulukolla helpompaa.
@@ -90,18 +90,18 @@ $\chi^2$ - etäisyys, yhteys hajontaan eli inertiaan ca-terminologiassa.
 
 **Muutama versio tiiviiksi kuvaukseksi - toistoa on (10.4.20)**
 
-Dimensioiden vähentäminen tärkein asia ("the essence"), pienessä taulossa ei 
-ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta, 
+Dimensioiden vähentäminen tärkein asia ("the essence"), pienessä taulossa ei
+ihan ilmeinen. Esimerkin pienissä taulukoissa on toisaalta helppo katsoa datasta,
 mistä on kyse. Toinen tavoite on visualisointi, yleensä kaksiulotteisena kuvana
-(karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden 
-pistejoukon ("pilven") projektiot, jotka säilyttävät maksimimäärän alkuperäisen 
-n-ulotteisen pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat 
-saman pilven pisteet voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin 
+(karttana). Kartta on metaforana hieman hankala. Kartalla esitetään kahden
+pistejoukon ("pilven") projektiot, jotka säilyttävät maksimimäärän alkuperäisen
+n-ulotteisen pistejoukon hajonnasta (inertiasta). Projektiossa lähekkäin olevat
+saman pilven pisteet voivat kuitenkin olla n-ulotteisessa pilvessä hyvinkin
 kaukana toisistaan. Tulkinnassa
 tärkeitä ovat "ääripäät", ja numeeriset tulokset kertovat kuinka hyvin piste on
-tasossa esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri 
-pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei 
-oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukana on 
+tasossa esitetty. Pisteiden väliset etäisyydet suhteellisia, ja eri
+pistejoukkojen välisillä etäisyyksillä ei ole suoraan mitään tulkintaa. Tämä ei
+oikein vastaa mielikuvaa kartasta, josta helposti näkee kuinka kaukana on
 Uudenmaan raja.
 
 Yksinkertainen korrespondenssianalyysi on kahden luokitteluasteikon muuttujan
@@ -134,7 +134,7 @@ kolmiulotteisia kuvia (niitä on jo).
 mitä ei)
 
 4.  Lyhyt viittaus graafisen esityksen tulkintapulmiin, jotka eivät ole kovin
-pahoja. CA-kartta kaksoiskuvana (ts. informaatio voidaan palauttaa, skalaaritulo)? 
+pahoja. CA-kartta kaksoiskuvana (ts. informaatio voidaan palauttaa, skalaaritulo)?
 
 5. Tulkinnan syventäminen - CA-käsitteiden tarkempi esittely
 
@@ -165,12 +165,12 @@ keskiarvopisteessä, suhteellinen ero), se "ajautuu" lähelle sarekepistettä.
 MG: "loose ends" - paperi, symmetrinen kuva eräs suurin sekaannuksen lähde.
 Tätä koitetaan selventää myös MG:n JASA-artikkelissa.
 
-**zxy**(teoria/historia-jaksoon,104.20).Termi korrespondenssi: "neglected 
-multivariate method" - paperissa käännetty näin englanniksi ransk. termi 
-(Benzecri) rivien ja sarakkeiden "correspondence" eli yhteys, "riippuvuus", 
+**zxy**(teoria/historia-jaksoon,104.20).Termi korrespondenssi: "neglected
+multivariate method" - paperissa käännetty näin englanniksi ransk. termi
+(Benzecri) rivien ja sarakkeiden "correspondence" eli yhteys, "riippuvuus",
 vastaavuus tms.
 **edit 4.7.20** Kts. myös Funmooc-muistiinpanot, opk! Mitä kartta esittää? Kaikki
-edellä kuvattu esitetään suhteellisina eroina koko aineiston keskiarvosta, 
+edellä kuvattu esitetään suhteellisina eroina koko aineiston keskiarvosta,
 riippumattomuushypoteesi.
 
 
@@ -182,7 +182,7 @@ kysymys.
 **zxy** Suhde data-lukuun, siellä pitäisi esitellä aineisto sisällöllisesti.
 Tässä vain valitan esimerkkiä varten yksi kysymys ja kuusi maata.
 
-Aineisto muuttujat Q1a-Q1e (arvot 1-5, täysin samaa mieltä - täysin eri mieltä) 
+Aineisto muuttujat Q1a-Q1e (arvot 1-5, täysin samaa mieltä - täysin eri mieltä)
 ovat vastauksia ensimmäiseen kysymyspatteriin (kts. lomake).
 
 **edit 10.4.20** Muuttujien "suunta" samaksi, jos monta. Laajemman aineiston käsittelyyn
@@ -205,13 +205,13 @@ varmemmin, ja tarkistuksia on helpompi tehdä.
 # Yksi kysymys ja kuusi maata
 # incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
-# ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1) 
+# ISSP2012esim1.dat <- filter(ISSP2012.data, V4 %in% incl_esim1)
 # str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
 # mukaan muuttujat, V3 jos halutaan jakaa Saksa ja Belgia
 # SEX 1=male, 2=female AGE haastateltava ikä haastatteluhetkellä
 #
-#  C_ALPHAN, V3,V4, V6, SEX, AGE) 
+#  C_ALPHAN, V3,V4, V6, SEX, AGE)
 
 # str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
@@ -228,13 +228,13 @@ ne poistetaan.
 
 # UUSI DATA 30.1.20
 #
-# LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat 
-# G1_1_data_fct1.Rmd-tiedostossa -> ISSP2012jh1d.dat (df) 
+# LUETAAN DATA G1_1_data2.Rmd - tiedostossa, luodaan faktorimuuttujat
+# G1_1_data_fct1.Rmd-tiedostossa -> ISSP2012jh1d.dat (df)
 # 23 muuttujaa (9 substanssimuuttujaa, 8 taustamuuttujaa, 3 maa-muuttujaa, 3 metadatamuuttujaa)
 # 25 maata.
 # Poistettu 146 havaintoa, joilla SEX tai AGE puuttuu
 # Johdattelevassa esimerkissä kuusi maata, kaksi taustamuuttujaa ja yksi kysymys
-# (V6/Q1b) 
+# (V6/Q1b)
 
 # Kuusi maata
 
@@ -244,11 +244,11 @@ ISSP2012esim3.dat <- filter(ISSP2012jh1d.dat, V4 %in% countries_esim1)
 
 #neljä maamuuttujaa, kysymys Q1b, ikä ja sukupuoli
 
-vars_esim1 <- c("C_ALPHAN", "V3", "maa","maa3", "Q1b", "sp", "ika") 
+vars_esim1 <- c("C_ALPHAN", "V3", "maa","maa3", "Q1b", "sp", "ika")
 ISSP2012esim2.dat <- select(ISSP2012esim3.dat, all_of(vars_esim1))
 
 str(ISSP2012esim2.dat) # 8542 obs. of  7 variables, ja sama 8.6.2020
-# C_ALPHAN: chr, maa: Factor w/ 25 
+# C_ALPHAN: chr, maa: Factor w/ 25
 
 # Poistetaan havainnot, joilla Q1b - muuttujassa puuttuva tieto 'NA'
 
@@ -267,7 +267,7 @@ fct_count(ISSP2012esim1.dat$maa3)
 summary(ISSP2012esim1.dat$sp)
 #sp: 3799 + 4344 = 8143
 summary(ISSP2012esim1.dat$Q1b)
-#  S      s      ?     e      E 
+#  S      s      ?     e      E
 # 810 + 1935 + 1367 + 2125 + 1906 = 8143
 
 
@@ -280,7 +280,7 @@ summary(ISSP2012esim1.dat$Q1b)
 
 # Tyhjät "faktorilabelit" on poistettava
 
- ISSP2012esim1.dat <- ISSP2012esim1.dat %>% 
+ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
      mutate(maa = fct_drop(maa),
             maa3 = fct_drop(maa3)
             )
@@ -370,7 +370,7 @@ ISSP2012esim1.dat <- ISSP2012esim1.dat %>%
                         "HU"))
 
 # Tarkistus
-ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count") 
+ISSP2012esim1.dat %>% tableX(maa2,maa, type = "count")
 ISSP2012esim1.dat %>% tableX(maa,C_ALPHAN, type = "count")
 str(ISSP2012esim1.dat)
 
@@ -403,30 +403,30 @@ validate_that(are_equal(levels(ISSP2012esim1.dat$sp),
 
 validate_that(length(levels(ISSP2012esim1.dat$maa)) == 6)
 
-validate_that(are_equal(levels(ISSP2012esim1.dat$maa), 
+validate_that(are_equal(levels(ISSP2012esim1.dat$maa),
                   c("BE", "BG", "DE", "DK", "FI", "HU")))
 
 validate_that(length(levels(ISSP2012esim1.dat$maa3)) == 9)
 
-validate_that(are_equal(levels(ISSP2012esim1.dat$maa3), 
+validate_that(are_equal(levels(ISSP2012esim1.dat$maa3),
                  c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU")))
 
 validate_that(length(levels(ISSP2012esim1.dat$Q1b)) == 5)
-validate_that(are_equal(levels(ISSP2012esim1.dat$Q1b), 
+validate_that(are_equal(levels(ISSP2012esim1.dat$Q1b),
                c("S", "s", "?", "e", "E")))
 
 # testthat - paketti - pois käytöstä 16.9.20
 # expect_ ei anna ok-ilmoitusta, ainoastaan virheilmoituksen? (11.4.20)
 
-# expect_equivalent(levels(ISSP2012esim1.dat$maa), 
+# expect_equivalent(levels(ISSP2012esim1.dat$maa),
 #                  c("BE", "BG", "DE", "DK", "FI", "HU"))
 
-# expect_equivalent(levels(ISSP2012esim1.dat$maa3), 
+# expect_equivalent(levels(ISSP2012esim1.dat$maa3),
 #                  c("bF","bW","bB", "BG","dW","dE","DK", "FI", "HU"))
 
 # expect_equivalent(levels(ISSP2012esim1.dat$sp), c("m", "f"))
 
-# expect_equivalent(levels(ISSP2012esim1.dat$Q1b), 
+# expect_equivalent(levels(ISSP2012esim1.dat$Q1b),
 #                  c("S", "s", "?", "e", "E"))
 
 ISSP2012esim1.dat %>% tableX(maa,ika,type = "row_perc")
@@ -444,8 +444,8 @@ ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
 ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
-# str(ISSP2012esim1.dat) # 8143 obs. of  7 variable, 
-# sama kuin vanhassa Galku-koodissa. 
+# str(ISSP2012esim1.dat) # 8143 obs. of  7 variable,
+# sama kuin vanhassa Galku-koodissa.
 
 ```
 
@@ -459,7 +459,7 @@ ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 # Esimerkki - siisti tuloste (20.2.20)
 
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
-knitr::kable(taulu2,digits = 2, booktabs = TRUE, 
+knitr::kable(taulu2,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen Q1b vastaukset maittain")
 ```
 
@@ -468,7 +468,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 ```{r simpeCA-rprosTa1}
 taulu3 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
-knitr::kable(taulu3,digits = 2, booktabs = TRUE, 
+knitr::kable(taulu3,digits = 2, booktabs = TRUE,
              caption = "Kysymyksen Q1b vastaukset, riviprosentit")
 ```
 
@@ -497,7 +497,7 @@ Esimerkkilaskelmia CAcalc_1.R.
 
 simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 
-# Maiden järjestys kääntää kuvan (1.2.20) - esimerkki on 
+# Maiden järjestys kääntää kuvan (1.2.20) - esimerkki on
 # vähän kuriositeetti. Kartta voi tietysti "flipata" koordintaattien suhteen ainakin
 # neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
 # (18.2.20). Tämän maa2-muuttujaa käyttävän kuvan voi jättää pois (8.4.20)
@@ -526,7 +526,7 @@ rownames(johdesim1_rowproc.tab) <- c("BE", "BG", "DE", "DK", "FI", "HU")
 simpleCA3 <- ca(johdesim1_rowproc.tab)
 
 
-# Kartta piirretään koodilohkossa simpleCAmap1, r. 773 noin. 
+# Kartta piirretään koodilohkossa simpleCAmap1, r. 773 noin.
 
 # Riviprosentit tarkistusta varten
 #        S	s	?	e	E
@@ -536,7 +536,7 @@ simpleCA3 <- ca(johdesim1_rowproc.tab)
 #DK	5.04	17.15	10.95	16.71	50.14
 #FI	4.23	16.94	13.42	38.11	27.30
 #HU	21.97	28.89	22.57	19.06	7.52
-# 
+#
 # Ja datan saa leikepöydän kautta, jos on tarve pikatarkistuksiin
 # read <- read.table("clipboard")
 
@@ -545,9 +545,9 @@ simpleCA3 <- ca(johdesim1_rowproc.tab)
 ```
 
 
-**TODO 2.2.20** 
+**TODO 2.2.20**
 
-Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen 
+Onko tämä kuva tallennettava kuvatiedostoksi, vai onnistuuko sen tuottaminen
 Bookdownissa. Ei taida onnistua? (4.9.18)
 
 Sarakeprofiilit, oikea järjestys maa-muuttujan tasoilla. Faktoreiden järjestys
@@ -571,14 +571,14 @@ apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat = "identity") +
-         scale_y_continuous(labels = percent_format()) 
+         scale_y_continuous(labels = percent_format())
 # apu1_df
 # apu1b_df
 ```
 **Edit 28.5.20** Idea: ca havainnollistaa rivien ja sarakkaeiden riippuvuuksia
-eroina keskiarvosta, yksinkertainen khii2-tulkinta riippumattomuushypoteesina. 
-Rivi-ja sarakeprofiilit standardoidaan (tulkintaa!) PCA-tyyliin (poikkeama keskiarvosta 
-jaetaan hajonnalla, lukumäärädata ja POisson-jakaumassa hajonta=odotusarvo). Rivi- ja 
+eroina keskiarvosta, yksinkertainen khii2-tulkinta riippumattomuushypoteesina.
+Rivi-ja sarakeprofiilit standardoidaan (tulkintaa!) PCA-tyyliin (poikkeama keskiarvosta
+jaetaan hajonnalla, lukumäärädata ja POisson-jakaumassa hajonta=odotusarvo). Rivi- ja
 sarakeratkaisuiden symmetria ja sidos esitetään tässä.
 
 Sarakekuvassa näkyy E-sarakkeenselvästi ero (DK), muut erot eivät niinkään. S-sarakkeessa
@@ -606,11 +606,11 @@ apu1b_dftest <- melt(cbind(apu1_dftest, ind = rownames(apu1_dftest)), id.vars = 
 
 ggplot(apu1b_dftest, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat = "identity") +
-         scale_y_continuous(labels = percent_format()) 
+         scale_y_continuous(labels = percent_format())
 
 ```
 
-**TODO 2.2.20 ** Voisi harkita taulukoiden (rivi- ja sarakeprosentit) sijoittamista 
+**TODO 2.2.20 ** Voisi harkita taulukoiden (rivi- ja sarakeprosentit) sijoittamista
 kuvien viereen?
 
 
@@ -624,9 +624,9 @@ apu2_df <- rbind(apu2_df, ka_rivi = colSums(apu2_df))
 ## typeof(apu2_df) # what is it?
 ## class(apu2_df) # what is it? (sorry)
 ## storage.mode(apu2_df) # what is it? (very sorry)
-## length(apu2_df) # how long is it? What about two dimensional 
+## length(apu2_df) # how long is it? What about two dimensional
 ## objects?
-# attributes(apu2_df) 
+# attributes(apu2_df)
 
 # temp1 <- cbind(apu2_df, ind = rownames(apu2_df))
 # temp1
@@ -639,14 +639,14 @@ apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
 #ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
 #       geom_bar(position = "fill", stat ="identity") +
 #       #coord_flip() +
-#        scale_x_continuous(labels = percent_format()) 
+#        scale_x_continuous(labels = percent_format())
 
 #versio2 toimii (18.9.2018)
 
 ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
        geom_bar(position = "fill", stat = "identity") +
        coord_flip() +
-        scale_y_continuous(labels = percent_format()) 
+        scale_y_continuous(labels = percent_format())
 ```
 **edit 28.5.20** Tanska ja Unkari erottuvat ka-rivistä E-vaihtoehdon ("modaliteetin")
 osuuksissa selvimmin. Bulgarialla S+s on hieman suurempi kuin Unkarilla, mutta s-osuus
@@ -666,9 +666,9 @@ apu2_dftest <- rbind(apu2_dftest, ka_rivi = colSums(apu2_dftest))
 ## typeof(apu2_df) # what is it?
 ## class(apu2_df) # what is it? (sorry)
 ## storage.mode(apu2_df) # what is it? (very sorry)
-## length(apu2_df) # how long is it? What about two dimensional 
+## length(apu2_df) # how long is it? What about two dimensional
 ## objects?
-# attributes(apu2_df) 
+# attributes(apu2_df)
 
 # temp1 <- cbind(apu2_df, ind = rownames(apu2_df))
 # temp1
@@ -680,36 +680,34 @@ apu2b_dftest <- melt(cbind(apu2_dftest, ind = rownames(apu2_dftest)), id.vars = 
 #ggplot(apu2b_df, aes(x = value, y = ind, fill = variable)) +
 #       geom_bar(position = "fill", stat ="identity") +
 #       #coord_flip() +
-#        scale_x_continuous(labels = percent_format()) 
+#        scale_x_continuous(labels = percent_format())
 #versio2 # toimii 18.9.2018
 ggplot(apu2b_dftest, aes(x = ind, y = value, fill = variable)) +
        geom_bar(position = "fill", stat = "identity") +
        coord_flip() +
-        scale_y_continuous(labels = percent_format()) 
+        scale_y_continuous(labels = percent_format())
 ```
 
 **Graafinen analyysi ja R**
 
 Käytänön neuvoja data-analyysiin, kuulunee tekstiin vai meneekö "ohjelmistoympäristö" -liitteeseen? Tärkeä juttu!
 
-Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa 
-grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto 
-pdf-ajurilla, jos  lopulliseen versioon joutuu näin tekemään (13.5.2018 ). Tämä 
+Kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
+grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto
+pdf-ajurilla, jos  lopulliseen versioon joutuu näin tekemään (13.5.2018 ). Tämä
 voi olla järkevä tapa analyysivaiheessa?  Teksti kopsattu alla olevasta koodilohkosta.
 
 Ensimmäinen korrespondenssianalyysi - kokeiluja kuvasuhteen säätämiseksi output-
-dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä 
-käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus 
-keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla 
+dokumentissa. RStudiossa voi avata komentokehoitteessa grafiikka-ikkunan. Siitä
+käsin tallennettu pdf-kuva on ladattu alla Rmarkdownin omalla komennolla, kohdistus
+keskelle. Parhaiten näyttäisi toimivan knitrin funktio, mutta oletuskuvakoolla
 saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 
-**zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa 
+**zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa
 luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 **Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
 
-TODO 19.2.20 Siistiksi taulukoksi. as_tibble antaa varoituksen, mutta toimii 
-(11.4.20). Korjattu 15.9.20, taulukko ok.
 
 Rivimassat skaalautuvat ca-ratkaisussa vakioksi 1/6 (0.167), kun lähtötietona
 on riviprofiilien taulukko jossa rivimassat ovat 1. Sarakemassat skaalautuvat
@@ -757,9 +755,15 @@ vain yksi taulukko? Omiksi koodilohkoiksi?
 
 # rivien khii2 - etäisyydet, massat ja vakioidut massat
 rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist, simpleCA3$rowdist),.name_repair = c("unique"))
+str(rowdist.tbl)
 colnames(rowdist.tbl) <- simpleCA1$rownames
-knitr::kable(rowdist.tbl,digits = 3, booktabs = TRUE,
-             caption = "Rivietäisyydet keskiarvosta (khii2) - toisella rivilla massat 1")
+
+# rownames(rowdist.tbl) <- c("perus-CA", "rivimassat vakioitu") ei toimi, ei sovi
+# tibbleen (17.9.20). Ei tarvita.
+
+knitr::kable(rowdist.tbl,digits = 3,
+             caption = "Rivietäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret",
+             booktabs = TRUE)
 # rowdist.tbl ok 15.9.20
 
 # sarakkeiden khii2 - etäisyydet, massat ja vakioidut massat
@@ -770,23 +774,24 @@ colnames(coldist.tbl) <- simpleCA1$colnames
 # print(coldist.tbl)
 
 knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
-             caption = "Sarake-etäisyydet keskiarvosta (khii2) - - toisella rivilla massat 1")
+             caption = "Sarake-etäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret")
 
 colmass.tbl <- as_tibble(rbind(simpleCA1$coldist, simpleCA3$coldist),.name_repair = c("unique"))
 colnames(colmass.tbl) <- simpleCA1$colnames
 knitr::kable(colmass.tbl,digits = 3, booktabs = TRUE,
-             caption = "Sarakkeiden massat - toisella rivilla rivimassat 1")
+             caption = "Sarakkeiden massat - toisella rivilla rivimassat yhtä suuret")
 
 ```
 Rivi- ja sarake-etäisyydet (khii2) keskiarvosta rivien massoilla ja vakioiduilla
-massoilla (=1). Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollista)
+massoilla . Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollista)
 pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. Niin
-on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta.
+on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
+**Erot kuitenkin pieniä (17.9.20)**
 
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
 # Tarkistuksia: mihin rivien järjestys vaikuttaa?
-# Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole, 
+# Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole,
 # mutta rivit eri järjestyksessä (2.2.20).
 # HUOM: simpleCA2-tulosolio luotava ensin!
 
@@ -824,13 +829,13 @@ Kartta määräytyy maiden otoskokojen suuruisilla painoilla, mutta ero ei ole k
 suuri.
 
 ```{r simpleCA1map1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
-#simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan 
+#simpleCA1 <- ca(~maa + V6,ISSP2012esim1.dat) suoritetaan ennen värikuvaa, tuloksia tarvitaan
 #siinä.
 
 # TODO(11.4.20) fig.cap koodilohkossa tekee kuvasta "kelluvan", ja kuvat numeroidaan.
 # Miten plot-komennon kuvaotsikot vaikuttavat?
 # Pitäiskö (a) jokaiselle kuvalle oma koodilohko (b) esittää nämä kaksi yhdessä vierekkäin
-# Pohditaan kun koodataan capaper-projektia. 
+# Pohditaan kun koodataan capaper-projektia.
 
 # Symmetrinen kartta
 # Akselien tekstit "käsityönä" - esimerkki (3.5.2020)
@@ -845,17 +850,17 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 # plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
 #     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
 #     sub = "maa-muuttuja maa2,järjestys as_factor(C_ALPHAN)")
-# Kartta kääntyy x-akselin ympäri - esimerkki faktoroinnin arvaamattomista 
+# Kartta kääntyy x-akselin ympäri - esimerkki faktoroinnin arvaamattomista
 # seurauksista (30.3.20)
 
-# 13.5.2018 
+# 13.5.2018
 # kuvasuhteen saa oikeaksi, kun avaa g-ikkunan (X11()) ja sitten plot. Voi tallentaa pdf-muodossa
-# grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla, 
-# jos lopulliseen versioon joutuu 
+# grafiikkaikkunasta, ja ladata outputiin knitr-vaiheessa. Parempi tulostaa kuvatdsto pdf-ajurilla,
+# jos lopulliseen versioon joutuu
 # näin tekemään.
 ```
 
-**edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta 
+**edit 2.5.2020** Riviprofiilitaulukossa rivimassat ovat vakioita (=1), mutta
 ca-ratkaisussa skaalautuvat eri arvoksi (vakio). Oleellinen vaikututus karttaan
 on pienen massan pisteiden (BG, FI, HU) siirtymien kohti origoa. Ei kyllä
 ole kovin selvä, ja näkyy selvimmin "ääripäissä" (? 5.9.20) Entäs sarakepisteet,
@@ -865,8 +870,8 @@ tässä kaksi pilveä projisoitu samaan kuvaan.
 # Sama kartta - maiden massat vakiotu
 # CA:n lähtötietona riviprofiilit
 
-par(cex = 0.6) 
-plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE), 
+par(cex = 0.6)
+plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
 main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
 sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
 
@@ -876,7 +881,7 @@ sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
 
 Näitä karttoja vertaillaan seuraavassa luvussa tarkemmin.
 
-Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää 
+Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää
 miettiä mikä on järkevää, dataa tutkaillessa piirretään useita kuvia. PDF-muodossa
 ne ovat skaalautuvia, kommentteja voi lisätä jne.
 
@@ -907,14 +912,9 @@ khii2-etäisyyksiä ja sarakemassojen skaalautumista kun rivimassat vakioidaan.
 
 2. Massat
 
-3. Profiilien etäisyydet (khii2): 
+3. Profiilien etäisyydet (khii2):
         (a) saman pistejoukon pisteiden
         (b) eri pistejoukkon pisteiden
 
-**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite 
+**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite
 muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
-
-
-
-
-

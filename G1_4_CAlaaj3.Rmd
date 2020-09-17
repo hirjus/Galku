@@ -2,7 +2,7 @@
 
 Teoria esitetään myöhemnmin, käytännön hyödyllisyys osoitetaan tässä. CA-kartoissa
 on usein aivan liian paljon pisteitä, vain karkeat yleispiirteet näkyvät. Ovatko
-kiinnostavat asia piilossa? "Poikkeavat havainnot ovat ainoita todella kiinnostavia 
+kiinnostavat asia piilossa? "Poikkeavat havainnot ovat ainoita todella kiinnostavia
 havaintoja".
 
 **Data** Ensimmäinen osajoukko-ca käyttää datan perustiedostoa (ISSP2012esim2.dat).
@@ -20,11 +20,11 @@ kun riveistä otetaan analyysiin vain osa.
 #ISSP2012esim2.dat %>% tableX(maaga, Q1b)
 maagaCA2subset1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
 par(cex = 0.5)
-plot(maagaCA2subset1, 
+plot(maagaCA2subset1,
                 sub = "symmetrinen kartta:Belgia,osajoukon ca (subset ca)"
         )
 # main = "Äiti töissä: ikäluokka ja sukupuoli maittain" mikä on plot-funktion
-# title-asetusten ja koodilohkon asetusten suhde? Ainakin plot-funkiton 
+# title-asetusten ja koodilohkon asetusten suhde? Ainakin plot-funkiton
 # main = "Äiti töissä: ikäluokka ja sukupuoli maittain" korvaa koodilohkossa
 # määritellyn (9.9.20). R-markdownissa kuvan pääotsikko putoaa kokonaan pois,
 # mitenköhän tulosteissa?
@@ -48,7 +48,9 @@ plot(maagaCA2sub1, map = "rowgreen",
 ```
 
 Lisätään kuvaan täydentävänä (passiivisena) pisteenä Belgian maapiste, tarkistettava
-tuleeko se "oikeaan" kohtaa. Jostain syystä
+tuleeko se "oikeaan" kohtaan. Maapisteiden osajoukon keskiarvopiste ei ole origo,
+mutta sarakepisteiden on.
+
 ```{r subsetCA-1c, fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 # Datana maagaTab1 - viimeisinä riveinä maarivit
@@ -60,14 +62,14 @@ plot(maagaCA2sub2, map = "rowgreen",
      mass = c(FALSE, TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen(rowgreen) kartta:Belgia,osajoukon ca (subset ca)"
+     sub = "asymmetrinen(rowgreen) kartta:Belgia,osajoukon ca, Belgian maapiste täydentävänä pisteenä "
         )
 ```
 
 Belgian kolme aluetta täydentäviksi pisteiksi? **Ei tehdä, aika iso duuni.(9.9.20)**
 
 ```{r subsetCA-1d, fig.asp = 1, out.width = "90%",fig.align = "center"}
-# ISSP2012esim2.dat 
+# ISSP2012esim2.dat
 # spCAmaaga1    maaga-ca-objekti (täydentävillä maa-pisteillä)
 # maagaTab1     taulukko  jossa maaga-rivit ja maat täydentävinä pisteinä
 #
@@ -111,14 +113,14 @@ plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
 
 **Osajoukko-ca neljälle ryhmälle**
 Belgia on vähän rajatapaus, kokeillaan osajoukko-ca:ta neljällä maaryhmällä.
-BG-HU, BE-DE-DK-FI,DEDKFI ja BEBGHUsubset <- c(1:12,13:24,61:72)
+BG-HU, BE-DE-DK-FI,DEDKFI ja BEBGHUsubset
 
 ```{r  subsetCA-1f, fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Neljä maaryhmää
 BGHUsubset <- c(13:24,61:72)
 BEDEDKFIsubset <- c(1:12, 25:36, 37:48, 49:60)
 DEDKFIsubset <- c(25:36, 37:48, 49:60)
-BEBGHUsubset <- c(1:12,13:14,61:72)
+BEBGHUsubset <- c(1:12,13:24,61:72)
 
 spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
 par(cex = 0.6)
@@ -146,7 +148,7 @@ plot(spCAmaagasub4,map = "rowgreen",
      main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
      sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
 )
- 
+
 ```
 
 ```{r subsetCA-1h, fig.asp = 1, out.width = "90%",fig.align = "center"}

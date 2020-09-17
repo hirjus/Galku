@@ -320,7 +320,8 @@ summary(suppointCA2)
 
 Kolmiulotteisesta kuvasta voi tulostaa molempien akseleiden ja uuden kolmannen
 akselin kartat. R-ohjelmistossa voi tulostaa näytölle kolmiulotteisen kuvan,
-siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin? 
+siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin?
+
 **edit** Kommentti 3d-ratkaisusta: tuo esiin Belgian ("belgioiden") erilaisuuden.
 "Belgiat ovat 2-3 - dimension kartassa diagonaalilla, ja 1-3 kartassa hieman samoin kuin 
 2-d - ratkaisun kartassa. Tarvittaessa voi liittää myös 3-d - kuvia, pitäsi saada
@@ -330,8 +331,10 @@ erilaiset aluejaot ovat aika herkästi korvikemuuttujia joillekin muille vaikutt
 Entäs kaupungit - isot ja pienet - ja maaseutu? Elinkeinorakenne, tulot jne...
 
 ```{r G1-4-3dCA,fig.cap = "Belgian ja Saksan aluejako - 3D",fig.asp = 1, out.width = "90%",fig.align = "center"}
-# Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20)
-# Toimii, mutta siistittävä, samoin koko maajakoskripti!
+# Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20). Näkyy, ja
+# kaksiulotteisen ratkaisun numeerisista tuloksista näkee myös pisteet joiden 
+# kvalitetti on heikko.
+
 
 suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
@@ -351,9 +354,10 @@ plot(suppointCA3, dim = c(2,3),
                 sub = "symmetrinen kartta - 2. ja 3. dimensio")
 
 
-
-# summary(suppointCA3) - KUMMALLINEN JUTTU, summary() EI TOIMI KUN 3d-ratkaisu!
-#
+# KUMMALLINEN JUTTU, summary() EI TOIMI KUN 3d-ratkaisu!# KUMMALLINEN JUTTU,
+# summary() EI TOIMI KUN 3d-ratkaisu!
+# summary(suppointCA3)
+# Error in rsc %*% diag(sv) : non-conformable arguments
 
 # Virheilmoitus "Error in rsc %*% diag(sv) : non-conformable arguments" ?!
 # onko vika täydentävissä pisteissä? Ei ole, eivät ole mukana
@@ -383,9 +387,15 @@ plot(suppointCA3, dim = c(2,3),
 
 ```
 Kolmiulotteisesta kuvasta Belgian ja Saksan alueiden hajonta tasosta näkyy hieman
-selvemmin.
+selvemmin jos kuva olisi dynaaminen. On mahdollista, mutta tätä ei nyt tehdä (17.9.20).
+Kolmannen dimension osuus on noin seitsemän prosenttia kokonaisinertiasta,
+kaksiulotteisten karttojen tulkinta ei ole ihan helppoa.
+**TODO 3d-numeeriset tulokset, summary() ei toimi?**
+
+
 ```{r 3dklippi1}
 knitr::include_graphics('img/3dSymMap_1.PNG')
+knitr::include_graphics('img/3dSymMap_2.PNG')
 
 ```
 

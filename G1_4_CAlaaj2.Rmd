@@ -1,14 +1,14 @@
 ## Korrespondenssianalyysin laajennuksia: vuorovaikutusmuuttuja ja osajoukon CA
 
-**zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki 
-yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä 
+**zxy** Otsikkoa pitää harkita, CAip - kirjassa tämä on ensimmäinen esimerkki
+yksinkertaisen CA:n laajennuksesta. Otsikkona on "multiway tables", ja tästä
 yhteisvaikutusmuuttujan (interactive coding) luominen on ensimmäinen esimerkki.
 Menetelmää taivutetaan sen jälkeen moneen suuntaan.
 
 Luodaan luokiteltu ikämuuttua age_cat, ja sen avulla iän ja sukupuolen
 interaktiomuuttuja ga. Maiden välillä on hieman eroja siinä, kuinka nuoria
 vastaajia on otettu tutkimuksen kohteeksi. Suomessa alaikäraja on 15 vuotta,
-monessa maassa se on hieman korkeampi. 
+monessa maassa se on hieman korkeampi.
 Ikäluokat ovat (1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 tai vanhempi).
 Vuorovaikutusmuuttuja ga koodataan f1,..., f6 ja m1,...,m6. Muuttujien nimet
 kannattaa pitää mahdollisimman lyhyinä.
@@ -34,7 +34,7 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, 
 
 ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
         mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
-# Tarkistuksia 
+# Tarkistuksia
 
 # str(ISSP2012esim2.dat$age_cat)
 # levels(ISSP2012esim2.dat$age_cat)
@@ -42,7 +42,7 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
 
 # Järjestetään ikäluokat uudelleen
 
-ISSP2012esim2.dat <- ISSP2012esim2.dat %>% 
+ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
         mutate(age_cat =
                 fct_relevel(age_cat,
                             "1",
@@ -52,7 +52,7 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
                             "5",
                             "6")
                )
-    
+
 # Tarkistuksia
 
 # Iso taulukko, voi tarkistaa että muunnos ok.
@@ -61,13 +61,13 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
 # kable(taulu42,digits = 2, caption = "Ikäluokka age_cat")
 #
 
-# UUdet taulukot (4.2.20) 
+# UUdet taulukot (4.2.20)
 
-ISSP2012esim2.dat %>% 
+ISSP2012esim2.dat %>%
     tableX(maa,age_cat,type = "count") %>%
     kable(digits = 2, caption = "Ikäluokka age_cat")
 
-ISSP2012esim2.dat %>% 
+ISSP2012esim2.dat %>%
     tableX(maa,age_cat,type = "row_perc") %>%
     kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 
@@ -140,7 +140,6 @@ lines(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
 #miehet
 lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
 #segments(gaTestCA1.rpc[1:6,1],gaTestCA1.rpc[1:6,2])
-
 #         ,
 #         gaTestCA1.rpc[4,1],gaTestCA1.rpc[4,2]
 #         )
@@ -148,23 +147,23 @@ lines(gaTestCA1.rpc[7:12,1],gaTestCA1.rpc[7:12,2], col = "red")
 #         gaTestCA1.rpc[3,1],gaTestCA1.rpc[3,2]
 #        )
 
-summary(gaTestCA1)              
+summary(gaTestCA1)
 ```
-**zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on 
+**zxy** Aika yksiuloitteinen (87 prosenttia ensimmäisellä dimensiolla!). Data on
 "as it is", ei ole vakioitu ga-luokkien kokoja (massat max(f4 101), min (m1 57)).
 
 **zxy** miten pitäisi tulkita "oikealle kaatunut U - muoto" miehillä ja naisilla?
 Järjestys ei toimi, S s-sarakkeen vasemmalla puolella. Miehet konservatiivisempia,
 mutta maltillisempia? Nuorin ikäluokka on poikkeava. Epävarmoja tai maltillisesti
 e, sitten loikka vasemmalle ja sieltä konservatiiviseen suuntaa oikealle. Naisilla
-poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos 
-vertaa sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet 
+poikkeama f3 - f4. VAnhimmat ikäluokat tiukemmin konservatiivisa (f6, m6). Jos
+vertaa sukupuolten eroja samassa ikäluokassa, on aika samanlainen (miehet
 konservatiivisia, naiset liberaaleja). Naisista vain vanhin ikäluokka oikealla,
 miehistä nuorin ja kolme vanhinta.
 
-**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä 
-edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan 
-tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että 
+**zxy** Tulkinnassa muistettava, että ikäluokat yli maiden. Voi verrata sekä
+edellisiin maa-vertailuihin että maan, ikäluokan ja sukupuolen yhteisvaikutusmuuttujan
+tuloksiin. MG tutkailee eri kysymyksellä tätä samaa asiaa, ja havaitsee että
 (a) maiden erot suuria ja sukupuolten pieniä (b) naiset liberaalimpia kuin miehet.
 **edit 14.8.20 Viite?**
 
@@ -180,7 +179,7 @@ myös cor ja ctr, riveille ja sarakkeille.
 ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
 
 # tarkistus, muunnos ok
-# ISSP2012esim2.dat %>% tableX(maa, maaga) 
+# ISSP2012esim2.dat %>% tableX(maa, maaga)
 
 # head(ISSP2012esim2.dat)
 # str(ISSP2012esim2.dat)
@@ -224,12 +223,12 @@ Kartta on aika tukkoinen, yhdistetään muuttujat janoilla.
 
 ## Kvaliteetti ja stabiilius
 
-maaga-talukossa on paljon pieniä frekvenssejä (alle 5). Periaatteessa pienen 
-frekvenssin rivejä tai sarakkeita voi yhdistää (distr. equivivalece), ja näin 
+maaga-talukossa on paljon pieniä frekvenssejä (alle 5). Periaatteessa pienen
+frekvenssin rivejä tai sarakkeita voi yhdistää (distr. equivivalece), ja näin
 kannattaa tehdä jotta kartta ei mene tukkoon. **9.9.20** Pienet solufrekvenssin
 vs. pienet reunajakauman frekvenssin, miten edellisen kanssa pitäisi toimia?
 
-Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä 
+Kartan herkkyyttä joillekin pienen massan rivipisteille on tutkittu. Ei ilmeistä syytä
 huoleen, mutta (a) joidenkin pisteiden huono kvaliteetti ja (b) pienet solufrekvenssit
 ovat huono juttu. Jälkimmäisen voisi korjata yhdistelemättä luokkia, hyöty olisi
 kuvan selkeytyminen ja haitta kiinnostavien piirteiden peittymine. Erityisesti nuorimman ja toiseksi
@@ -237,7 +236,7 @@ nuorimman ikäluokan ero.
 
 Vertailu voi tehdä
 
-1.Maiden sisällä, ikä-sukupuoli - luokkien välillä. 
+1.Maiden sisällä, ikä-sukupuoli - luokkien välillä.
 Ovatko naiset kaikissa ikäluokissa mies-ikäluokkien oikealla vai vasemmalla puolella?
 
 2.Maiden välillä
@@ -248,11 +247,11 @@ a. miten ikä-sukupuoliluokat sijaitsevat suhteessa maiden keskiarvopisteisiin
 b. mikä on niiden järjestys
 
 
-Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni 
+Ratkaisun numeerisia tuloksia voi katsoa, löytyykö profiileja joilla on pieni
 massa mutta suuri vaikutus akseleihin.
 
 ```{r maagaStabi1}
-# (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei 
+# (24.2.20) Miten voisi kätevästi tarkistaa, että mikään pienen massa piste ei
 # vaikuta (kontribuutiot) liikaa karttaan?
 #str(maagaTestCA1)
 
@@ -280,7 +279,7 @@ with(maagaCAnum2, plot(mass, ctr...10))
 tail(arrange(maagaCAnum2 ,ctr...10))
 str(maagaCAnum2)
 arrange(maagaCAnum2, qlt)
-head(arrange(maagaCAnum2, qlt)) 
+head(arrange(maagaCAnum2, qlt))
 
 # Hieman hankalaa kätevästi järjestää numeerisia tuloksia massan mukaan
 
@@ -299,7 +298,7 @@ head(arrange(maagaCAnum2, qlt))
 Massa ja kontribuutiot akseleille 1 ja 2: epäilyttäviä havaintoja joilla pieni massa ja
 suuri kontribuutio ei näytä olevan.
 
-Huonosti esitetettyjä pisteitä on erityisesti Belgiasta, myös Saksan (DEf6,DEf1 ja DEm4), 
+Huonosti esitetettyjä pisteitä on erityisesti Belgiasta, myös Saksan (DEf6,DEf1 ja DEm4),
 Tanskan vanhat miehet (DKm6) ja Unkarin nuorehkot miehet (HUm2) kuuluvat tähän joukkon.
 
 
@@ -341,10 +340,10 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
 #asymmetrinen kartta
 #X11()
 par(cex = 0.5)
-plot(spCAmaaga1, map = "rowgreen", 
+plot(spCAmaaga1, map = "rowgreen",
         contrib = c("absolute", "absolute"),
         mass = c(TRUE,TRUE),
-        arrows = c(FALSE,TRUE), 
+        arrows = c(FALSE,TRUE),
         main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3",
         sub ="absoluuttiset kontribuutiot ('rowgreen'),cex=0.5",
                   )
@@ -353,10 +352,10 @@ plot(spCAmaaga1, map = "rowgreen",
 #asymmetrinen kartta (14.8.20)
 
 par(cex = 0.5)
-plot(spCAmaaga1, map = "rowgreen", 
+plot(spCAmaaga1, map = "rowgreen",
         contrib = c("absolute", "absolute"),
          mass = c(TRUE,TRUE),
-        arrows = c(FALSE,TRUE), 
+        arrows = c(FALSE,TRUE),
         main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3",
                 sub = "suhteelliset kontribuutiot ('rowgreen') ,cex=0.5"
                 )
@@ -370,13 +369,36 @@ keskelle kuin symmetrisessä kuvassa.
 ```{r spCAmaaga-lines1, fig.cap = "Ikä-sukupuoli-maa", fig.asp =1, out.width = "90%",fig.align = "center" }
 # pisteiden koordinaatit (symmetrinen kartta, pääkoordinaatit)
 maagaLines1 <-cacoord(spCAmaaga1, type = "symmetric")
+
+# vain kaksi ensimmäistä dimensiota
+maagaLines1 <- maagaLines1$rows[ ,1:2]
+
+# Tarkistuksia
 #maagaLines1
 #str(maagaLines1)
 #class(maagaLines1)
-# vain kaksi ensimmäistä dimensiota
-maagaLines1 <- maagaLines1$rows[ ,1:2]
+# Onko yhtään vähemmän tukkoinen? Eipä juuri (17.9.20)
 par(cex = 0.5)
 plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta (cex=0.5), miesten (punainen) ja naisten (sininen) ikäluokat "
+                    )
+     lines(maagaLines1[49:54,1],maagaLines1[49:54,2], col="blue") #FIf
+     lines(maagaLines1[55:60,1],maagaLines1[55:60,2], col="red")  #FIm
+     lines(maagaLines1[25:30,1],maagaLines1[25:30,2], col="blue") #DEf
+     lines(maagaLines1[31:36,1],maagaLines1[31:36,2], col="red")  #DEm
+     lines(maagaLines1[37:42,1],maagaLines1[37:42,2], col="blue") #DKf
+     lines(maagaLines1[43:48,1],maagaLines1[43:48,2], col="red")  #DKm
+     lines(maagaLines1[1:6,1],maagaLines1[1:6,2], col="blue") #BEf
+     lines(maagaLines1[7:12,1],maagaLines1[7:12,2], col="red")  #BEm
+     lines(maagaLines1[13:18,1],maagaLines1[13:18,2], col="blue") #BGf
+     lines(maagaLines1[19:24,1],maagaLines1[19:24,2], col="red")  #BGm
+     lines(maagaLines1[61:66,1],maagaLines1[61:66,2], col="blue") #HUf
+     lines(maagaLines1[67:72,1],maagaLines1[67:72,2], col="red")  #HUm
+
+
+# Onko yhtään vähemmän tukkoinen? Eipä juuri (17.9.20)
+par(cex = 0.5)
+plot(spCAmaaga1, labels = c(0,2) , main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
                 sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.5"
                     )
      lines(maagaLines1[49:54,1],maagaLines1[49:54,2], col="blue") #FIf
@@ -393,14 +415,24 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
      lines(maagaLines1[67:72,1],maagaLines1[67:72,2], col="red")  #HUm
 
 ```
-
+Rivipisteiden tunnisteiden (label) poistaminen tuo pisteparvien ominaisuuden
+hieman selvemmin esiin. Suomi alimpana ja Tanska ylimpänä vasemmalla ovat melko
+samanlaisia. Vaihtelu on lähes täysin ensimäisen dimension suuntaan, Molemmilla 
+mailla miesten pisteet ovat oikealla ja alempana. Keskellä Saksan ja Belgian
+pistejoukoissa vaihtelu toisen dimension suunnassa on jo suurempaa ja miesten
+pisteet ovat selvästi oikealla verrattuna naisten pisteisiin. Bulgarian ja Unkarin
+pisteet sijaitsevat kauimpana oikealla, ja vaihtelu on suurimmalta osin toisen
+dimensio suuntaan, ja pisteet ovat tiukemmin lähellä toisiaan. Kaikissa maissa
+vanhemmat ikäluokat ovat nuoria konservatiivimsempia, ja kaikissa nuorin ikäluokka
+on melko konservatiivinen. Keskimmäiset ikäluokat ovat liberaaleimpia.
+Unkari ja Bulgaria poikkeavat muista selvästi.
 
 
 ## Kartan rajaaminen
 0. Analyysin voi tehdä vain osalle dataa - vähän kehno ratkaisu, ei yhteyttä koko
 aineiston antamaan yleiskuvaan muuttujien yhteyksistä.
 
-1. Kartasta voi suurentaa osan käsityönä ("leikkaa ja liimaa"). Toimii, 
+1. Kartasta voi suurentaa osan käsityönä ("leikkaa ja liimaa"). Toimii,
 yksinkertainen ja ehkä siksi paras? Mutta ei voi koodata! Sopii eksploratiiviseen
 vaiheeseen, pdf-kuviin voi liittää kommenteja ja tekstiä jne.
 
@@ -415,7 +447,7 @@ pelkkiä plot-komentoja.
 
 ### Kuva-alueen rajaaminen
 
-```{r maagaCA2zoom1,fig.cap = "Ikä-sukupuoli-maa", fig.asp =1, out.width = "90%",fig.align = "center"}
+```{r maagaCA2zoom1,fig.cap = "Ikä-sukupuoli-maa", fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
@@ -433,7 +465,7 @@ plot(spCAmaaga1, xlim = c(-0.75,0.75), ylim = c(-0.75,0.75),
                 sub = "osa symmetristä karttaa, cex=0.5"
                     )
 # TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
-# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä
 # grafiikkaikkunaan tulostukseen ?
 # Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
 # ja sitten vasta pisteet?
@@ -447,10 +479,11 @@ plot(spCAmaaga1, xlim = c(-0.75,0.75), ylim = c(-0.75,0.75),
 
 
 ```
-Ei toimi ihan odotetulla tavalla, mutta kuvasuhde näyttäisi olevan molemmissa oikea.
-Hieman hankala menetelmä. 
 
-```{r maagaCA2zoom2,fig.cap = "Ikä-sukupuoli-maa",out.width = "90%",fig.align = "center"}
+Ei toimi ihan odotetulla tavalla, mutta kuvasuhde näyttäisi olevan molemmissa oikea.
+Hieman hankala menetelmä.
+
+```{r maagaCA2zoom2,fig.cap = "Ikä-sukupuoli-maa",out.width = "90%", fig.asp = 1,fig.align = "center"}
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
 # MG2017 laskarit - day3: mca:n tuloslistaa käytetty luottamusellipseissä ja toimii?
@@ -467,7 +500,7 @@ plot(spCAmaaga1, xlim = c(0,0.75), ylim = c(-0.75,0.75),
                 sub = "osa symmetristä karttaa - tämä ei oikein toimi (14.9.20)"
                     )
 # TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
-# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä
 # grafiikkaikkunaan tulostukseen ?
 # Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
 # ja sitten vasta pisteet?
@@ -504,7 +537,7 @@ plot(spCAmaaga1, map = "rowgreen",
         sub = "osa asymmetristä karttaa"
         )
 # TÄTÄ KEHITELLÄÄ CAcalc_1.R - skriptissä (15.6.20)
-# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä 
+# ei toimi ihan toivotulla tavalla - tarkoitettu komentoriviltä
 # grafiikkaikkunaan tulostukseen ?
 # Vai pitääkö ensin piirtää kuvan "kehys" ilman pisteitä xlim- ja ylim- parametreilla
 # ja sitten vasta pisteet?
@@ -516,6 +549,5 @@ plot(spCAmaaga1, map = "rowgreen",
 # str(spCAmaaga1)
 
 ```
-Edellinen kartta on vähän epäilyttävä, asettuvatkohan skaalatut sarakevektorin 
+Edellinen kartta on vähän epäilyttävä, asettuvatkohan skaalatut sarakevektorin
 oikein? (9.9.20)
-

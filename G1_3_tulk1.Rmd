@@ -222,9 +222,11 @@ suhteellinen osuus rivipisteen profiilissa. Ensimmäisessä kartassa on käsivar
 piirretty suurinpiirtein kohtisuorat projektiot lievempää erimielisyyttä edustavalle
 s- ideaalipisteeseen (0,1,0,0,0) origosta piirretylle suoralle.
 
-Toisessa kuvassa sama E-vektorille. Maiden suhteellinen järjestys on oikea, mutta
-jos vertaa taulkkoon X (edellä), huomaa että absoluuttiset erot eivät täsmällisesti
-toistu kuvassa.
+**Onko näin? (17.9.20)** Toisessa kuvassa sama E-vektorille. Maiden suhteellinen järjestys on oikea, mutta tarkasti etäisyydet eivät (välimatka-asteikolla) ole vertailukelpoisia. 
+
+Vertailun vuoksi riviprofiilien sarakkeita vastavat arvot suuruusjärjestyksessä:
+
+e:   FI 38, DE 31, BE 27, BG 21, HU 19, DK 17 (%-yksikköä)
 
 **todo 15.9.20** Voiko tämän tehdä myös skaalatulle (rowgreen) asymmetriselle kuvalle?
 
@@ -234,6 +236,7 @@ toistu kuvassa.
 knitr::include_graphics('img/simpleCAasymmTulk1.png')
 
 ```
+E:  DK 50, FI 27, DE 26,  BE 19, HU 8, BG 1 (%-yksiköä)
 
 ```{r G1_3_asymmtulk2, out.width='90%', fig.align='center'}
 
