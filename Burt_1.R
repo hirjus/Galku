@@ -1,4 +1,6 @@
-#Burt? MCA_day2_new_JH.R - esimerkki - aika sähläystä vielä...(27.9.18) -> r-tiedosto Burt_1.R
+#Burt? MCA_day2_new_JH.R - esimerkki - aika sähläystä vielä...
+# (27.9.18) -> r-tiedosto Burt_1.R
+
 str(ISSP2012esim2.dat)
 head(ISSP2012esim2.dat)
 test1 <- select(ISSP2012esim2.dat, V6, maa,maaga)
@@ -33,7 +35,7 @@ plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2")
 X11()
 par("cex"= 0.75, "asp" = 1)
 plot(spCAmaaga1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 3 (kontribuutiot)",
-                  map = "rowgreen", 
+                  map = "rowgreen",
                   contrib= c("absolute", "absolute"),
                   mass = c(TRUE,TRUE),
                   arrows = c(FALSE,TRUE)

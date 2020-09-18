@@ -706,87 +706,6 @@ saa ca-kuvasta näköjään aika lähelle oikeanlaisen ilman mitään temppuja.
 **zxy** Selventäisikö vielä khii2-etäisyyksien taulukko, tai ehkä seuraavassa
 luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
-**Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
-
-
-Rivimassat skaalautuvat ca-ratkaisussa vakioksi 1/6 (0.167), kun lähtötietona
-on riviprofiilien taulukko jossa rivimassat ovat 1. Sarakemassat skaalautuvat
-uudelleen. Massojen summa on 1.
-**TODO 16.9.20** knittr::kabble nimeää taulukot koodilohkon nimen mukaan, siis
-vain yksi taulukko? Omiksi koodilohkoiksi?
-
-```{r khii2dist1}
-# khii2 - etäisyyksien taulukko
-#str(simpleCA1)
-#simpleCA1$rowdist
-#str(simpleCA1$rowdist)
-
-# verrataan "tavallisen" ca:n ja riviprofiili-ca:n khii2-etäisyyksiä origosta
-# 5.9.2020
-
-# khii2 - etäisyydet origosta
-
-# simpleCA1$rownames
-# simpleCA1$rowdist
-# simpleCA3$rowdist
-
-# simpleCA3$colnames
-# simpleCA1$coldist
-# simpleCA3$coldist
-
-# massat - huom! Riviprofiilien ca: rivimassojen summa on 1 !(5.9.20)
-# sum(simpleCA1$rowmass)
-# sum(simpleCA3$rowmass)
-# rivit
-
-# simpleCA1$rownames
-# simpleCA1$rowmass
- simpleCA3$rowmass
-# sum(simpleCA1$rowmass)
-# sum(simpleCA3$rowmass)
-
-# sarakkeet
-
-# simpleCA3$colnames
-# simpleCA1$colmass
-# simpleCA3$colmass
-# sum(simpleCA1$colmass)
-# sum(simpleCA3$colmass)
-
-# rivien khii2 - etäisyydet, massat ja vakioidut massat
-rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist, simpleCA3$rowdist),.name_repair = c("unique"))
-str(rowdist.tbl)
-colnames(rowdist.tbl) <- simpleCA1$rownames
-
-# rownames(rowdist.tbl) <- c("perus-CA", "rivimassat vakioitu") ei toimi, ei sovi
-# tibbleen (17.9.20). Ei tarvita.
-
-knitr::kable(rowdist.tbl,digits = 3,
-             caption = "Rivietäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret",
-             booktabs = TRUE)
-# rowdist.tbl ok 15.9.20
-
-# sarakkeiden khii2 - etäisyydet, massat ja vakioidut massat
-
-coldist.tbl <- as_tibble(rbind(simpleCA1$coldist, simpleCA3$coldist),.name_repair = c("unique"))
-# coldist.tbl
-colnames(coldist.tbl) <- simpleCA1$colnames
-# print(coldist.tbl)
-
-knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
-             caption = "Sarake-etäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret")
-
-colmass.tbl <- as_tibble(rbind(simpleCA1$coldist, simpleCA3$coldist),.name_repair = c("unique"))
-colnames(colmass.tbl) <- simpleCA1$colnames
-knitr::kable(colmass.tbl,digits = 3, booktabs = TRUE,
-             caption = "Sarakkeiden massat - toisella rivilla rivimassat yhtä suuret")
-
-```
-Rivi- ja sarake-etäisyydet (khii2) keskiarvosta rivien massoilla ja vakioiduilla
-massoilla . Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollista)
-pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. Niin
-on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
-**Erot kuitenkin pieniä (17.9.20)**
 
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
@@ -819,7 +738,7 @@ CA-ratkaisun (algoritmin) lähtötieto: suhteelliset frekvenssit (korrespondenss
 ```{r simpleCArelfrekTa1}
 taulu5 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "cell_perc")
 knitr::kable(taulu5,digits = 2, booktabs = TRUE,
-             caption = "Kysymyksen V6 vastaukset maittain (%)")
+             caption = "Kysymyksen Q1b vastaukset maittain (%)")
 ```
 
 **Massat  ja skaalaus** Tätä ensimmäistä kuvaa on muistiinpanoissa kommentoitu (löytyy printattuna)
@@ -885,6 +804,91 @@ Toinen tapa - kuvatiedoston lataaminen include_graphics - funktiolla. Pitää
 miettiä mikä on järkevää, dataa tutkaillessa piirretään useita kuvia. PDF-muodossa
 ne ovat skaalautuvia, kommentteja voi lisätä jne.
 
+**Rivien (1) ja sarakkeiden (2) khii2-etäisyydet keskiarvosta.**
+
+Rivimassat skaalautuvat ca-ratkaisussa vakioksi 1/6 (0.167), kun lähtötietona
+on riviprofiilien taulukko jossa rivimassat ovat 1. Sarakemassat skaalautuvat
+uudelleen. Massojen summa on 1.
+**TODO 16.9.20** knittr::kabble nimeää taulukot koodilohkon nimen mukaan, siis
+vain yksi taulukko? Omiksi koodilohkoiksi?
+
+```{r khii2dist1}
+# khii2 - etäisyyksien taulukko
+#str(simpleCA1)
+#simpleCA1$rowdist
+#str(simpleCA1$rowdist)
+
+# verrataan "tavallisen" ca:n ja riviprofiili-ca:n khii2-etäisyyksiä origosta
+# 5.9.2020
+
+# khii2 - etäisyydet origosta
+
+# simpleCA1$rownames
+# simpleCA1$rowdist
+# simpleCA3$rowdist
+
+# simpleCA3$colnames
+# simpleCA1$coldist
+# simpleCA3$coldist
+
+# massat - huom! Riviprofiilien ca: rivimassojen summa on 1 !(5.9.20)
+# sum(simpleCA1$rowmass)
+# sum(simpleCA3$rowmass)
+# rivit
+
+# simpleCA1$rownames
+# simpleCA1$rowmass
+ simpleCA3$rowmass
+# sum(simpleCA1$rowmass)
+# sum(simpleCA3$rowmass)
+
+# sarakkeet
+
+# simpleCA3$colnames
+# simpleCA1$colmass
+# simpleCA3$colmass
+# sum(simpleCA1$colmass)
+# sum(simpleCA3$colmass)
+
+# rivien khii2 - etäisyydet, massat ja vakioidut massat
+rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist, simpleCA3$rowdist),.name_repair = c("unique"))
+str(rowdist.tbl)
+colnames(rowdist.tbl) <- simpleCA1$rownames
+
+# rownames(rowdist.tbl) <- c("perus-CA", "rivimassat vakioitu") ei toimi, ei sovi
+# tibbleen (17.9.20). Ei tarvita.
+
+knitr::kable(rowdist.tbl,digits = 3,
+             caption = "Rivietäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret",
+             booktabs = TRUE)
+# rowdist.tbl ok 15.9.20
+
+# sarakkeiden khii2 - etäisyydet, massat ja vakioidut massat
+
+coldist.tbl <- as_tibble(rbind(simpleCA1$coldist, simpleCA3$coldist),.name_repair = c("unique"))
+# coldist.tbl
+colnames(coldist.tbl) <- simpleCA1$colnames
+rowid_to_column(coldist.tbl)
+# print(coldist.tbl)
+
+knitr::kable(coldist.tbl,digits = 3, booktabs = TRUE,
+             caption = "Sarake-etäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret")
+
+colmass.tbl <- as_tibble(rbind(simpleCA1$coldist, simpleCA3$coldist),.name_repair = c("unique"))
+colnames(colmass.tbl) <- simpleCA1$colnames
+rowid_to_column(colmass.tbl)
+
+knitr::kable(colmass.tbl,digits = 3, booktabs = TRUE,
+             caption = "Sarakkeiden massat - toisella rivilla rivimassat yhtä suuret")
+
+```
+Rivi- ja sarake-etäisyydet (khii2) keskiarvosta rivien massoilla ja vakioiduilla
+massoilla . Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollista)
+pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. Niin
+on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
+**Erot kuitenkin pieniä (17.9.20)**
+
+
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}
 #tämä toimii
 img_path <- "img/1CAmap_sy.pdf"
@@ -917,4 +921,5 @@ khii2-etäisyyksiä ja sarakemassojen skaalautumista kun rivimassat vakioidaan.
         (b) eri pistejoukkon pisteiden
 
 **zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite
-muistiinpanoissa. **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.
+muistiinpanoissa. 
+**#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.

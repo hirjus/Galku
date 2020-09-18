@@ -16,13 +16,13 @@ kun riveistä otetaan analyysiin vain osa.
 
 ```{r subsetCA-1a, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #31.8.20 Testataan subset ca
-#31.8.20 Testataan subset ca
 #ISSP2012esim2.dat %>% tableX(maaga, Q1b)
-maagaCA2subset1 <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
+maagaCA2subset1BEBG <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
 par(cex = 0.5)
-plot(maagaCA2subset1,
-                sub = "symmetrinen kartta:Belgia,osajoukon ca (subset ca)"
+plot(maagaCA2subset1BEBG,
+                sub = "symmetrinen kartta:Belgia ja Bulgaria,osajoukon ca (subset ca)"
         )
+
 # main = "Äiti töissä: ikäluokka ja sukupuoli maittain" mikä on plot-funktion
 # title-asetusten ja koodilohkon asetusten suhde? Ainakin plot-funkiton
 # main = "Äiti töissä: ikäluokka ja sukupuoli maittain" korvaa koodilohkossa
@@ -30,7 +30,29 @@ plot(maagaCA2subset1,
 # mitenköhän tulosteissa?
 ```
 
+Yhdistetään pisteitä.
+
+```{r subsetCA-1aL, fig.cap = "Ikä, sukupuoli ja maa - Belgia",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# CA- tulosobjekti maagaCA2subset1
+
+maagaLinesBEBG <- cacoord(maagaCA2subset1BEBG, type = "symmetric")
+maagaLinesBEBG <- maagaLinesBEBG$rows[ , 1:2]
+par(cex = 0.5)
+plot(maagaCA2subset1BEBG,main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+                sub = "symmetrinen kartta:Belgia,osajoukon ca (subset ca)"
+        )
+lines(maagaLinesBEBG[1:6,1],maagaLinesBEBG[1:6,2], col="blue") #BEf
+lines(maagaLinesBEBG[7:12,1],maagaLinesBEBG[7:12,2], col="red")  #BEm
+lines(maagaLinesBEBG[13:18,1],maagaLinesBEBG[13:18,2], col="blue") #BBGf
+lines(maagaLinesBEBG[19:24,1],maagaLinesBEBG[19:24,2], col="red")  #BEm
+
+
+```
+
+
 Kartan tulkintaa, kokonaisinertia voidaan esittää maa kerrallaan. (9.9.20)
+
 
 ```{r subsetCA-1b, fig.asp = 1, out.width = "90%",fig.align = "center"}
 
@@ -43,7 +65,7 @@ plot(maagaCA2sub1, map = "rowgreen",
      mass = c(TRUE,TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen(rowgreen) kartta:Belgia,osajoukon ca (subset ca)"
+     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca (subset ca)"
         )
 ```
 
@@ -54,15 +76,15 @@ mutta sarakepisteiden on.
 ```{r subsetCA-1c, fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 # Datana maagaTab1 - viimeisinä riveinä maarivit
-
-maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24, suprow = 73)
+maagaTab1
+maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24, suprow = 73:74)
 par(cex = 0.4)
 plot(maagaCA2sub2, map = "rowgreen",
      contrib = c("relative", "relative"),
      mass = c(FALSE, TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen(rowgreen) kartta:Belgia,osajoukon ca, Belgian maapiste täydentävänä pisteenä "
+     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca, maapisteet täydentävänä pisteenä "
         )
 ```
 
@@ -95,9 +117,30 @@ Belgian kolme aluetta täydentäviksi pisteiksi? **Ei tehdä, aika iso duuni.(9.
 maagaCA2sub2 <- ca(~maaga + Q1b,ISSP2012esim2.dat,subsetrow = 25:60)
 par(cex = 0.6)
 plot(maagaCA2sub2, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta - rivit 25-60 (subset ca)")
+     sub = "symmetrinen kartta - Tanska, Saksa ja Suomi (subset ca)")
 
 ```
+Sama kuva - yhdistetään pisteitä janoilla.
+
+```{r subsetCA-1dL, fig.cap = "Ikä, sukupuoli ja maa:Tanska-Saksa-Suomi",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# ca-tulosobjekti maagaCA2sub2, DK DE FI
+
+maagaLinesDKDEFI <- cacoord(maagaCA2sub2, type = "symmetric")
+maagaLinesDKDEFI <- maagaLinesDKDEFI$rows[ , 1:2]
+maagaLinesDKDEFI
+par(cex = 0.6)
+plot(maagaCA2sub2, 
+     sub = "symmetrinen kartta - Tanska, Saksa ja Suomi (subset ca)")
+lines(maagaLinesDKDEFI[1:6,1],maagaLinesDKDEFI[1:6,2], col="blue") #DEf
+lines(maagaLinesDKDEFI[7:12,1],maagaLinesDKDEFI[7:12,2], col="red")  #DEm
+lines(maagaLinesDKDEFI[13:18,1],maagaLinesDKDEFI[13:18,2], col="blue") #DKf
+lines(maagaLinesDKDEFI[19:24,1],maagaLinesDKDEFI[19:24,2], col="red")  #DKm
+lines(maagaLinesDKDEFI[25:30,1],maagaLinesDKDEFI[25:30,2], col="blue") #FIf
+lines(maagaLinesDKDEFI[31:36,1],maagaLinesDKDEFI[31:36,2], col="red")  #FIm
+
+
+```
+
 
 Täydentävät maapisteet hieman epäilyttäviä, tarkistettava ovatko oikein.
 ```{r subsetCA-1e, fig.asp = 1, out.width = "90%",fig.align = "center"}

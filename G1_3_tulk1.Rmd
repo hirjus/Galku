@@ -222,7 +222,9 @@ suhteellinen osuus rivipisteen profiilissa. Ensimmäisessä kartassa on käsivar
 piirretty suurinpiirtein kohtisuorat projektiot lievempää erimielisyyttä edustavalle
 s- ideaalipisteeseen (0,1,0,0,0) origosta piirretylle suoralle.
 
-**Onko näin? (17.9.20)** Toisessa kuvassa sama E-vektorille. Maiden suhteellinen järjestys on oikea, mutta tarkasti etäisyydet eivät (välimatka-asteikolla) ole vertailukelpoisia. 
+**Onko näin? (17.9.20)** Toisessa kuvassa sama E-vektorille. Maiden suhteellinen
+järjestys on oikea, mutta tarkasti etäisyydet eivät (välimatka-asteikolla)
+ole vertailukelpoisia. 
 
 Vertailun vuoksi riviprofiilien sarakkeita vastavat arvot suuruusjärjestyksessä:
 

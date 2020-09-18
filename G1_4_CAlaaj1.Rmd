@@ -30,8 +30,6 @@ library(testthat)
 
 ```
 
-
-
 Korrespondenssianalyysi sallii rivien tai sarakkeiden yhdistelyn tai
 "jakamisen". Tämä onnistuu esimerkkiaineistossa lisäämällä rivejä eli jakamalla
 eri maiden vastausksia useampaan ryhmään. Kartalle voidaan myös lisätä apumuuttujia
@@ -249,8 +247,7 @@ str(suppoint2_df)
 # attr(suppoint2_df, which = "class")
 # attr(suppoint2_df, which = "name")
 # summary(suppoint2_df)
-suppoint2_df %>% table1() # miksi ei tulosta mitään konsolille? (4.2.20)
-
+suppoint2_df %>% table1()
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 # suppoint2_tab1 # tarkistus
 suppoint2_tab1 <- suppoint2_tab1[-2,]
@@ -271,9 +268,26 @@ plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
      sub = "Passiiviset pisteet DE ja BE" )
 
 ```
-Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3 (mukana maiden jaot)
+Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3
+(mukana maiden jaot).
 
-Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja (sentroideja), läntisen ja itäisen Saksan rivipisteiden välisellä janalla on koko maan summapiste DE.
+Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja
+(sentroideja), esim.läntisen ja itäisen Saksan rivipisteiden välisellä janalla
+on koko maan summapiste DE.
+
+**18.9.20** Hajonta kasvaa, ja kartan oikealla puolella sarakkeiden etäisyydet
+kasvavat. Erityisest S-piste nousee toisen dimension suuntaan ylöspäin. Muiden
+maiden pisteet eivät juuri muuta suhteellisia sijaintejaan, mutta "Belgia leviää
+pystysuuntaan ja Saksa vaakasuuntaan." Bryssel (bB) ja Flanders (bF) ovan
+konservatiivisempiä kuin lievästi liberaalimpi Wallonia (bW). Flandersin ja
+Brysselin ero on mielipiteen varmuudessa tai tiukkuudussa, ja Bryssel saattaa olla
+polarisoitunut (lievä Guttman-efekti).
+```{r suppoint-rprof1}
+# riviprofiilitaulukko joteskin (18.9.20)
+ISSP2012esim1.dat %>% tableX(maa3, Q1b, type = "row_perc")
+
+```
+
 
 Piirretään vertailun vuoksi vielä asymmetrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
 **edit 3.5.20** Minne katoavat pisteet, outoa?

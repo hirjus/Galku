@@ -447,6 +447,7 @@ pelkkiä plot-komentoja.
 
 ### Kuva-alueen rajaaminen
 
+
 ```{r maagaCA2zoom1,fig.cap = "Ikä-sukupuoli-maa", fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Zoomaus - esimerkki (24.2.20) xlim=c(-0.5,0.5), ylim=c(-0.6,0.4)
 # EI TOIMI - PISTEET piirrettävä, ei voi käyttää ca.plot - funktiota? (4.5.20).
