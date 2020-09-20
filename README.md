@@ -162,3 +162,5 @@ asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
 **16.9.2020** Siistittiin Galkua, aika maltillisesti poistoja. Lisättiin
 yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin versioon 1.5.9., lisätään pinotut taulut yksinkertaisella esimerkkidatalla, mahdollisesti ABBA.
 **18.9.2020** Lisää maaga-kuvia, maapisteiden yhdistelyä.
+
+**20.9.2020** Pientä editointia, Burt_1.R - skriptissä pinottu taulukko.

@@ -251,6 +251,7 @@ str(ISSP2012esim2.dat) # 8542 obs. of  7 variables, ja sama 8.6.2020
 # C_ALPHAN: chr, maa: Factor w/ 25
 
 # Poistetaan havainnot, joilla Q1b - muuttujassa puuttuva tieto 'NA'
+# sum(is.na(ISSP2012esim2.dat$Q1b)) = 399
 
 ISSP2012esim1.dat <- filter(ISSP2012esim2.dat, !is.na(Q1b))
 
