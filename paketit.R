@@ -22,6 +22,5 @@ library(tinytex)
 library(assertthat)
 # library(testthat) pois 16.9.20
 #
-#r-skripteillä riittää, kun ajaa tämän
-sessionInfo()
-
+# r-skripteillä riittää, kun ajaa tämän
+# sessionInfo()

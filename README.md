@@ -164,3 +164,5 @@ yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin ve
 **18.9.2020** Lisää maaga-kuvia, maapisteiden yhdistelyä.
 
 **20.9.2020** Pientä editointia, Burt_1.R - skriptissä pinottu taulukko.
+
+**21.9.2020** Ensimmäinen pinottu taulu Burt_1.R-skriptissä.
