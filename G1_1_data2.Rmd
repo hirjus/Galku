@@ -62,10 +62,10 @@ siksi iso aineisto. Samalla analyysiä voi laajentaa moneen suuntaan.
 
 2. Laadukkaan ja hyvin dokumentoidun aineiston edut
 
-3. Huom! CA sopii ja sitä on käytetty myös hyvin toisen tyyppisiin aineistoihin 
-(esim. ekologia ja biologia, arkeologia, kielen tutkimus). Kyselytutkmukset ovat 
-yksi selkeä menetelmän sovelluskohde. Muuttujat ovat usein kvalitatiivisia, ja 
-ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
+3. CA on käytetty monenlaisten aineistojen analyysiin (esim. ekologia ja 
+biologia, arkeologia, kielen tutkimus). Kyselytutkmukset ovat 
+yksi suosittu sovelluskohde. Muuttujat ovat usein kvalitatiivisia, ja 
+ainestojen peruspulma on puuttuvissa havainnoissa.
 
 
 ## Perhe ja muuttuvat sukupuoliroolit - ISSP:n kyselytutkimuksen data 2012
@@ -75,7 +75,11 @@ ainestojen peruspulma on puuttuvissa havainnoissa. CA soveltuu hyvin.
 Hieman historiaa datasta, sosiaalisesti määräytyneet sukupuoliroolit (gender) 
 tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. Avainsana "cross-cultural
 compararative studies", "cross country" ehkä myös? Tämä on varsinainen
-teollisuuden ala! Maiden väliset vertailut ovat aina hyvin hankalia.
+teollisuuden ala! Maiden väliset vertailut ovat aina hyvin hankalia. 
+
+**#V**Ajankohtainen tutkimusaihe!
+(https://www.economist.com/finance-and-economics/2020/10/03/why-east-and-west-german-women-still-work-vastly-different-hours)
+(https://www.diw.de/documents/publikationen/73/diw_01.c.799295.de/dwr-20-38.pdf)
 
 **Tärkeät linkit - ISSP 2012 data**
 
@@ -220,7 +224,8 @@ teollisuusmaita. Sitten valittiin osa kysymyksistä, ja vielä suppeampi valikoi
 kiinnostavia taustamuuttujia. Muutama maa pudotettiin pois tämän valinnan jälkeen.
 
 
-**2. Havainnot, joissa on puuttuvia tietoja.**
+**2. Havainnot, joissa on puuttuvia tietoja **
+**edit 7.10.20** Vanhoja muistiinpanoja
 
 **Vastauskato on kyselytutkimusten suurin ongelma.**
 
@@ -246,7 +251,7 @@ MCA edellyttävt yleensä useamman muuttujan analyyseissä sitä. Jokaisen kahde
 muuttujan parittaisen ristiintaulukoinnin reunajakaumien pitää olla samoja.
 
 
-**4. Datan hallinta - reproducible research- periaate**
+**3. Datan hallinta - reproducible research- periaate**
 
 **edit 24.2.20** Vanhoja perusideoita
 
@@ -256,7 +261,7 @@ mahdollisman yksinkertaisesti toistaa suoraan alkuperäisestä datasta.
 Aineiston muokkauksen (muuttujien ja havaintojen valikointi, muunnokset ja
 uusien muuttujien luonti jne.) dokumentoidaan r-koodiin.
 
-**zxy 3.10.18** 
+**Kommnetti 3.10.18** 
 
 R-spesifiä:
 R-koodissa tarkemmin, kaikki yksityiskohdat.
@@ -276,8 +281,9 @@ R-dataan, mutta puuttuneisuutta ei tässä työssä tutkita sen tarkemmin. Detal
 R-koodissa (haven-paketin read_spss-funktion user_na -optio, ei käytetä tässä).
 
 
-**Tiedostonimistä ** (10.10.18, 30.1.20, 11.2.20)
+**Tiedostonimistä ** (10.10.18, 30.1.20, 11.2.20,22.9.20)
 
+**edit 22.9.20** Tarkista kun valmista.
 
 ISSP2012*.data - täysi aineisto, luetaan SPSS-tiedostosta
 ISSP2012*jh1.data - valittu osa aineistosta (maat, muuttujat)
@@ -286,10 +292,34 @@ ISSP2012*.jh1.dat - valittu osa aineistosta, luotu uusia muuttujia ja muunnettu
                         tarkistaa ja verrata.
 ISSP2012esim1, 2 jne, tarkenne .dat rajattuja aineistoja joissa uusia muuttujia
                         ja muuttujien nimiä. Näitä luodaan analyysin eri vaiheissa.
+                        
+**Datan luonti: **
+
+**1. Data r-dataksi**
+
+**ISSP2012jh.data** <- read_spss("data/**ZA5900_v4-0-0.sav**") 
+
+**2. valitaan maat(25)**
+
+**ISSP2012jh1a.data** <- filter(**ISSP2012jh.data**, V4 %in% incl_countries25)
+
+**3. valitaan muuttujat**
+
+**ISSP2012jh1b.data** <- select(**ISSP2012jh1a.data**, all_of(jhvars1)
+
+Poistetaan havainnot joilla tieto sukupuolesta tai ikä puuttuu.
+
+**ISSP2012jh1c.data** <- filter(**ISSP2012jh1b.data**, (!is.na(SEX) & !is.na(AGE)))
+
+**Perusmuunnokset**
+
+** Perusmuunnokset (G1_1_data_fct1.Rmd) **
+
+**ISSP2012jh1.data**  <- **ISSP2012jh1c.data**
 
  
-**zxy** R-koodiin jätetään myös tarkistuksia yms. joita ei raportoida tässä, 
-samoin niiden tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
+R-koodiin jätetään tarkistuksia yms. joita ei raportoida tässä, samoin niiden
+tuloksia. Voiko R-koodi olla fingelskaa? Olkoon toistaiseksi.
 
 **DATA RAJAAMISTA - maat(5.10.2018)**
 
@@ -761,15 +791,16 @@ ikä puuttu) havainnot jätetään pois, muuten mietitään.
 
 **Miten puuttuvia tietoja (erävastuskato, havainnossa puuttu joku tieto) käsitellään?**
 
-**edit** Tämä on vähän hämärää, ehkä pois? (30.1.20)
-
-1. Miksi tieto puuttuu, mitä "puuttuva tieto" tarkoittaa?
+1. Miksi tieto puuttuu, mitä "puuttuva tieto" tarkoittaa? Lavea kysymys! 
 
 Joissain kysymyksissä (V12, V13) puuttuvaksi tiedoksi kirjautuu vastaus 
 ("en osaa sanoa") "ei vastausta" - vaihtoehdon lisäksi. Nämä mukaan.
 
 Ikä ja sukupuoli: ilmeinen virhe, joten jätetään havainnot pois 
 (näitä ei ole paljon).
+
+"Listwise delete" on raaka ratkaisu, kun muuttujia on paljon.Imputointi, mutta CA:lla voi
+analysoida puuttuvaa arvoa yhtenä luokittelumuuttujan "modaliteettina".
 
 2. Puuttuvien tietojen jakauma?
 
@@ -778,9 +809,12 @@ analyysiin loppuluvuissa, vilkaistaa pikaisesti erävastauskadon rakennetta.
 
 3. Onko puuttuvia tietoja tasaisesti eri maissa, vai vaihteleeko niiden suhteellinen osuus?
 
+Vaihtelee, ja jo tästäkin syystä puuttuvien käsittely on oleellinen asia. Ensimmäisenä
+ratkaisuna ne voi pitää mukana ca/mca - analyyseissä, reunajakaumat pysyvät samoina.
+
 4. Onko joissain tai jossain maassa huomattava määrä puuttuvia tietoja?
 
-5. Onko puuttuvia tietoja paljon vai vähän?
+Joissain muuttujissa on kohtalaisen paljon puuttuvia tietoja joissain maissa.
 
 
 Tarkemmin puuttuneisuutta ei analysoida. Esimerkkejä löytyy (MG, CAiP ja 

@@ -155,8 +155,8 @@ Kartta, mutta etäisyyksillä ei suoraa tulkintaa paitsi eteisyyksinllä origoon
 Rivipisteiden suhteelliset etäisyydet, samoin sarakepisteidet. Mitä tarkoittavat
 prosentit akseleilla?
 
-Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi, myös pelkästään rivi- tai
-sarakepisteistä koostuvien ryhmien.
+Varoitus virhetulkinnasta: ryhmien tunnistaminen rivi- ja sarakepisteiden
+läheisyyden avulla, myös pelkästään rivi- tai sarakepisteistä koostuvien ryhmien.
 
 **zxy** Ja silti tavallaan voi. Sarake- ja rivipisteiden etäisyyksille ei ole
 suoraa tulkintaa, mutta on "vetovoima" (attraktio) ja "työntövoima" (repulsio).
@@ -505,7 +505,7 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 # neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
 # (18.2.20). Tämän maa2-muuttujaa käyttävän kuvan voi jättää pois (8.4.20)
 
-# simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
+simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi, tässä
 # pikainen kokeilu (20.2.20)
@@ -892,6 +892,14 @@ massoilla . Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollis
 pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. Niin
 on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
 **Erot kuitenkin pieniä (17.9.20)**
+```{r massPlot1, fig.cap="Massojen vakiointi ja khii2-etäisyys keskiarvosta", fig.asp= 1}
+# Tarpeeton - ja ei toimi (3.10.20). Kuva olis kiva, kuitenkin.
+
+# colmass_b.tbl
+# str(colmass.tbl)
+# plot(colmass.tbl$rowid[1],colmass.tbl$rowid[1])
+# hist(colmass.tbl[, 1:5])
+```
 
 
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}

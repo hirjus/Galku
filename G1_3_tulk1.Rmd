@@ -23,10 +23,10 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+# library(testthat) #ei käytetä (7.10.20)
 #
 
-sessionInfo()
+# sessionInfo()
 
 ```
 Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? **Ydinluku**.

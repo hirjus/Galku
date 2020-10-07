@@ -39,7 +39,9 @@ maagaBurt2 <- maagaBurt[6:11,1:5]
 str(maagaBurt2)
 head(maagaBurt2)
 maagaBurt2
+# sukupuoli ja vastaukset
 maagaBurt2 <- rbind(maagaBurt2, maagaBurt[12:13 ,1:5])
+# ikäluokka ja vastaukset
 maagaBurt2 <- rbind(maagaBurt2, maagaBurt[14:19 ,1:5])
 
 # Toimii!

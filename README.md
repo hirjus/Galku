@@ -166,3 +166,5 @@ yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin ve
 **20.9.2020** Pientä editointia, Burt_1.R - skriptissä pinottu taulukko.
 
 **21.9.2020** Ensimmäinen pinottu taulu Burt_1.R-skriptissä.
+
+**7.10.2020** Editointia, muunnsten testaus G1_data_fct1.Rmd - tiedostoon.
