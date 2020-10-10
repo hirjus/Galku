@@ -1,6 +1,6 @@
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 1
 
-```{r paketit-g14, include=FALSE}
+```{r paketit-g14,eval = FALSE, include = FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
@@ -23,7 +23,7 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+#library(testthat)
 #
 #r-skripteillä riittää, kun ajaa tämän
 #sessionInfo()

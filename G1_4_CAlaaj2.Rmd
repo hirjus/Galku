@@ -17,22 +17,22 @@ kannattaa pitää mahdollisimman lyhyinä.
 ```{r G1-4agecat}
 # Iän ja sukupuolen vuorovaikutusmuuttujia 1
 #
-# Uusi R-data: ISSP2012esim2.dat - MIKSI, TARVITAANKO? *esim1.dat kelpaisi?(4.2.20)
-#
+# Uusi R-data: ISSP2012esim1b.dat - MIKSI, TARVITAANKO? *esim1.dat kelpaisi?(4.2.20)
+# Vaihdetaan tiedoston nimi (ISSP2012esim2 - > ISSP2012esim1b), ensimmäistä käytetään jo aiemmin.
 #age_cat
 #AGE 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
 #
 #summary(ISSP2012esim1.dat$AGE)
 hist(ISSP2012esim1.dat$ika)
 
-ISSP2012esim2.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, "1",
+ISSP2012esim1b.dat <- mutate(ISSP2012esim1.dat, age_cat = ifelse(ika %in% 15:25, "1",
                         ifelse(ika %in% 26:35, "2",
                         ifelse(ika %in% 36:45, "3",
                         ifelse(ika %in% 46:55, "4",
                         ifelse(ika %in% 56:65, "5", "6"))))))
 
 
-ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
+ISSP2012esim1b.dat <- ISSP2012esim1b.dat %>%   # uusi (4.2.20)
         mutate(age_cat = as_factor(age_cat)) # järjestys omituinen! (4.2.20)
 # Tarkistuksia
 
@@ -42,7 +42,7 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%   # uusi (4.2.20)
 
 # Järjestetään ikäluokat uudelleen
 
-ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
+ISSP2012esim1b.dat <- ISSP2012esim1b.dat %>%
         mutate(age_cat =
                 fct_relevel(age_cat,
                             "1",
@@ -63,11 +63,11 @@ ISSP2012esim2.dat <- ISSP2012esim2.dat %>%
 
 # UUdet taulukot (4.2.20)
 
-ISSP2012esim2.dat %>%
+ISSP2012esim1b.dat %>%
     tableX(maa,age_cat,type = "count") %>%
     kable(digits = 2, caption = "Ikäluokka age_cat")
 
-ISSP2012esim2.dat %>%
+ISSP2012esim1b.dat %>%
     tableX(maa,age_cat,type = "row_perc") %>%
     kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 
@@ -84,9 +84,10 @@ varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
 
 ```{r G1-4ga2}
 # ga - ikäluokka ja sukupuoli
+# Uusi tiedostonimi ISSP2012esim2.dat -> ISSP2012esim1b.dat (10.10.20)
 
 # case_when: ikä ja sukupuoli
-ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
+ISSP2012esim1b.dat <- mutate(ISSP2012esim1b.dat, ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
                                        (age_cat == "2")&(sp == "m") ~ "m2",
                                        (age_cat == "3")&(sp == "m") ~ "m3",
                                        (age_cat == "4")&(sp == "m") ~ "m4",
@@ -104,7 +105,7 @@ ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, ga = case_when((age_cat == "1")&(
 
 #ISSP2012esim1.dat %>% tableX(ga,ga2) # tarkistus uudelle muuttujan luontikoodille
 # muuttujien tarkistuksia 19.9.2018
-str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
+str(ISSP2012esim1b.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
 # str(ISSP2012esim2.dat)
 # str(ISSP2012esim1.dat$ga2)
 # ga on merkkijono, samoin ga2, pitäisikö muuttaa faktoriksi?
@@ -112,10 +113,10 @@ str(ISSP2012esim2.dat$ga) # chr-muuttuja, mutta toimii (4.2.20)
 
 #Tulostetaan taulukkoina ga2 - muuttuja.
 
-ISSP2012esim2.dat %>% tableX(maa,ga,type = "count") %>%
+ISSP2012esim1b.dat %>% tableX(maa,ga,type = "count") %>%
 kable(digits = 2, caption = "Ikäluokka ja sukupuoli ga")
 
-ISSP2012esim2.dat %>% tableX(maa,ga,type = "row_perc") %>%
+ISSP2012esim1b.dat %>% tableX(maa,ga,type = "row_perc") %>%
 kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
 
 
@@ -126,7 +127,7 @@ kable(digits = 2, caption = "ga: suhteelliset frekvenssit")
 CAiP, ch16, täällä myös maa- ja sukupuoli- uudelleenpainotus.
 
 ```{r ga1CA1,fig.cap = "Iän ja sukupuolen yhdistetty muuttuja",fig.asp = 1, out.width = "90%",fig.align = "center"}
-gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim2.dat)
+gaTestCA1 <- ca(~ga + Q1b,ISSP2012esim1b.dat)
 
 # maapisteiden pääkoordinaatit janojen piirtämiseen
 
@@ -176,11 +177,10 @@ myös cor ja ctr, riveille ja sarakkeille.
 # Yleensä ei yhdysvaikuksissa mennä yli kolmen luokittelumuuttujan, ja tässäkin vain maiden pieni lukumää
 # tekee tarkastelun aika helpoksi.
 
-ISSP2012esim2.dat <- mutate(ISSP2012esim2.dat, maaga = paste(maa, ga, sep = ""))
+ISSP2012esim1b.dat <- mutate(ISSP2012esim1b.dat, maaga = paste(maa, ga, sep = ""))
 
 # tarkistus, muunnos ok
-# ISSP2012esim2.dat %>% tableX(maa, maaga)
-
+# ISSP2012esim1b.dat %>% tableX(maa, maaga)
 # head(ISSP2012esim2.dat)
 # str(ISSP2012esim2.dat)
 
@@ -192,22 +192,19 @@ Tehty jo 26.9.2018!
 
 ```{r maagaCA1, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
-maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim2.dat)
+maagaCA1 <- ca(~maaga + Q1b,ISSP2012esim1b.dat)
 
 
 
 # maapisteiden pääkoordinaatit janojen piirtämiseen
 # HUOM! maagaCA1.rpc on matriisi
 
-maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv)
+maagaCA1.rpc <- maagaCA1$rowcoord %*% diag(maagaCA1$sv) #Missä käytetään? (10.10.20)
 
 par(cex = 0.5)
 plot(maagaCA1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
                 sub = "symmetrinen kartta cex=0.5")
 #Kuvatiedoston koko säädettävä tarkemmin (30.3.20)
-
-# Miten kuvatiedosto talteen?
-# Omana koodipätkänä (4.5.2020)
 
 # pdf("img/maagaCA1_symm1.pdf")
 # par(cex = 0.5)
@@ -255,7 +252,7 @@ massa mutta suuri vaikutus akseleihin.
 # vaikuta (kontribuutiot) liikaa karttaan?
 #str(maagaTestCA1)
 
-ISSP2012esim2.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
+ISSP2012esim1b.dat %>% tableX(maaga, Q1b) # aika pieniä frekvenssejä soluissa!
 maagaCA1num <- summary(maagaCA1)
 # maagaCA1num
 # str(maagaCA1num) numeeriset tulokset tibbleksi - rivit
@@ -314,12 +311,12 @@ Maapisteet täydentäviksi pisteiksi - tarkistuksia.
 
 # HUOM! maagaTab1 integer matriisi, dimnames-attribuutilla kaksi arvoa
 #ikäluokka - sukupuoli ja maa - maaga-muuttuja
-maagaTab1 <- table(ISSP2012esim2.dat$maaga, ISSP2012esim2.dat$Q1b)
+maagaTab1 <- table(ISSP2012esim1b.dat$maaga, ISSP2012esim1b.dat$Q1b)
 #dim(testTab1) #72 riviä,  5 saraketta
 
 
 # maa-rivit
-maagaTab_sr <- table(ISSP2012esim2.dat$maa, ISSP2012esim2.dat$Q1b)
+maagaTab_sr <- table(ISSP2012esim1b.dat$maa, ISSP2012esim1b.dat$Q1b)
 #maagaTab_sr
 
 maagaTab1 <- rbind(maagaTab1,maagaTab_sr)
@@ -366,6 +363,7 @@ plot(spCAmaaga1, map = "rowgreen",
 Asymmetrinen kontribuutiokartta on hyödyllinen sarakkeiden ja niiden avulla
 akseleiden tulkinnassa. Rivipisteet pakkautuvat kuitenkin tiiviimmin kartan
 keskelle kuin symmetrisessä kuvassa.
+
 ```{r spCAmaaga-lines1, fig.cap = "Ikä-sukupuoli-maa", fig.asp =1, out.width = "90%",fig.align = "center" }
 # pisteiden koordinaatit (symmetrinen kartta, pääkoordinaatit)
 maagaLines1 <-cacoord(spCAmaaga1, type = "symmetric")

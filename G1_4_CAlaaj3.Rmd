@@ -17,7 +17,7 @@ kun riveistä otetaan analyysiin vain osa.
 ```{r subsetCA-1a, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
 #31.8.20 Testataan subset ca
 #ISSP2012esim2.dat %>% tableX(maaga, Q1b)
-maagaCA2subset1BEBG <- ca(~maaga + Q1b,ISSP2012esim2.dat, subsetrow = 1:24)
+maagaCA2subset1BEBG <- ca(~maaga + Q1b,ISSP2012esim1b.dat, subsetrow = 1:24)
 par(cex = 0.5)
 plot(maagaCA2subset1BEBG,
                 sub = "symmetrinen kartta:Belgia ja Bulgaria,osajoukon ca (subset ca)"
@@ -71,20 +71,21 @@ plot(maagaCA2sub1, map = "rowgreen",
 
 Lisätään kuvaan täydentävänä (passiivisena) pisteenä Belgian maapiste, tarkistettava
 tuleeko se "oikeaan" kohtaan. Maapisteiden osajoukon keskiarvopiste ei ole origo,
-mutta sarakepisteiden on.
+mutta sarakepisteiden on. **edit 10.10.20** Ei toimi, maapisteen koordinaatit pitäisi 
+laskea uudelleen. Syy: ca rivien osajoukolle.
 
 ```{r subsetCA-1c, fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 # Datana maagaTab1 - viimeisinä riveinä maarivit
 maagaTab1
-maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24, suprow = 73:74)
+maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24)
 par(cex = 0.4)
 plot(maagaCA2sub2, map = "rowgreen",
      contrib = c("relative", "relative"),
      mass = c(FALSE, TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca, maapisteet täydentävänä pisteenä "
+     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca"
         )
 ```
 
@@ -114,7 +115,7 @@ Belgian kolme aluetta täydentäviksi pisteiksi? **Ei tehdä, aika iso duuni.(9.
 # subsetCA:ssa? Sarakepisteiden keskiarvo on origossa, mutta rivien osajoukon
 # keskiarvo ei ole ja tämä pitäisi korjata.
 
-maagaCA2sub2 <- ca(~maaga + Q1b,ISSP2012esim2.dat,subsetrow = 25:60)
+maagaCA2sub2 <- ca(~maaga + Q1b,ISSP2012esim1b.dat,subsetrow = 25:60)
 par(cex = 0.6)
 plot(maagaCA2sub2, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
      sub = "symmetrinen kartta - Tanska, Saksa ja Suomi (subset ca)")
@@ -142,14 +143,14 @@ lines(maagaLinesDKDEFI[31:36,1],maagaLinesDKDEFI[31:36,2], col="red")  #FIm
 ```
 
 
-Täydentävät maapisteet hieman epäilyttäviä, tarkistettava ovatko oikein.
+
 ```{r subsetCA-1e, fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Osajoukko-ca ja täydentävät maapisteet
-# maapisteet suprow = 73:78 toimivat
-spCAmaagasub1 <- ca(maagaTab1[,1:5], suprow = 73:78,subsetrow = 25:60 )
+# maapisteet suprow = 73:78 toimivat - mutta väärät koordinaatit, jätetään pois (10.10.20)
+spCAmaagasub1 <- ca(maagaTab1[,1:5], subsetrow = 25:60 )
 par(cex = 0.6)
 plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
-     sub = "symmetrinen kartta, maat täydentävinä pisteinä, cex=0.06"
+     sub = "symmetrinen kartta, cex=0.06"
     )
 
 ```

@@ -788,7 +788,8 @@ plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
 ca-ratkaisussa skaalautuvat eri arvoksi (vakio). Oleellinen vaikututus karttaan
 on pienen massan pisteiden (BG, FI, HU) siirtymien kohti origoa. Ei kyllä
 ole kovin selvä, ja näkyy selvimmin "ääripäissä" (? 5.9.20) Entäs sarakepisteet,
-niiden massat eivät muutu? **TODO 5.9.20** Ylempänä taulukko khii2-etäisyyksistä,
+niiden massat eivät muutu?
+**TODO 5.9.20** Alempana taulukko khii2-etäisyyksistä,
 tässä kaksi pilveä projisoitu samaan kuvaan.
 ```{r simpleCA3map1, fig.cap= "Q1b: lapsi kärsii jos äiti on töissä",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Sama kartta - maiden massat vakiotu
@@ -815,7 +816,7 @@ Rivimassat skaalautuvat ca-ratkaisussa vakioksi 1/6 (0.167), kun lähtötietona
 on riviprofiilien taulukko jossa rivimassat ovat 1. Sarakemassat skaalautuvat
 uudelleen. Massojen summa on 1.
 **TODO 16.9.20** knittr::kabble nimeää taulukot koodilohkon nimen mukaan, siis
-vain yksi taulukko? Omiksi koodilohkoiksi?
+vain yksi taulukko? Taulukot omiksi koodilohkoiksi.
 
 ```{r khii2dist1}
 # khii2 - etäisyyksien taulukko
@@ -860,8 +861,6 @@ rowdist.tbl <- as_tibble(rbind(simpleCA1$rowdist, simpleCA3$rowdist),.name_repai
 str(rowdist.tbl)
 colnames(rowdist.tbl) <- simpleCA1$rownames
 
-# rownames(rowdist.tbl) <- c("perus-CA", "rivimassat vakioitu") ei toimi, ei sovi
-# tibbleen (17.9.20). Ei tarvita.
 
 knitr::kable(rowdist.tbl,digits = 3,
              caption = "Rivietäisyydet keskiarvosta (khii2) - toisella rivilla rivimassat yhtä suuret",
@@ -887,11 +886,13 @@ knitr::kable(colmass.tbl,digits = 3, booktabs = TRUE,
              caption = "Sarakkeiden massat - toisella rivilla rivimassat yhtä suuret")
 
 ```
+
 Rivi- ja sarake-etäisyydet (khii2) keskiarvosta rivien massoilla ja vakioiduilla
 massoilla . Massoiltaan (havaintojen lukumäärä tai jotain siihen verrannollista)
 pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. Niin
 on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
 **Erot kuitenkin pieniä (17.9.20)**
+
 ```{r massPlot1, fig.cap="Massojen vakiointi ja khii2-etäisyys keskiarvosta", fig.asp= 1}
 # Tarpeeton - ja ei toimi (3.10.20). Kuva olis kiva, kuitenkin.
 
@@ -925,6 +926,8 @@ bookdown-ympäristössä.
 vakioiduilla rivimassoilla (riviprofiileilla) laskettuja ca-ratkaisuja,
 khii2-etäisyyksiä ja sarakemassojen skaalautumista kun rivimassat vakioidaan.
 
+**Triplet**
+
 1. Profiilit
 
 2. Massat
@@ -933,6 +936,6 @@ khii2-etäisyyksiä ja sarakemassojen skaalautumista kun rivimassat vakioidaan.
         (a) saman pistejoukon pisteiden
         (b) eri pistejoukkon pisteiden
 
-**zxy** Ja tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite
+Tätä "triplettiä" täydentää neljä siitä johdettua käsitettä, viite
 muistiinpanoissa. 
 **#V** Tässäkin CAiP ja  MG2017HY-luentokalvot.

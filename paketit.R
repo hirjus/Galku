@@ -23,4 +23,4 @@ library(assertthat)
 # library(testthat) pois 16.9.20, ei käytetä
 #
 # r-skripteillä riittää, kun ajaa tämän
- sessionInfo()
+ # sessionInfo()

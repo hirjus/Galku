@@ -37,7 +37,7 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+# library(testthat)
 
 #sessionInfo()
 
@@ -737,6 +737,13 @@ Kysymyslomakkeen kuva, vai kuva liitteisiin? **Liitteisiin.**
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 
 ```
+
+
+**edit 10.10.20** "En osaa sanoa" on mielipide, mutta tässä tutkielmassa se tulkitaan puuttuvaksi vastaukseksi. Puuttuvia vastauksia voisi SPSS-datasta analysoida tarkemminkin (kolme SPSS-koodia).
+Kysymyksessä 25 on jätetty neutraali vaihtoehto pois, antaa mahdollisuuden arvioida neutraalien vastausten ja "en osaa sanoa"- vastausten tai puuttuvat vastauksen yhteyksiä.
+
+**edit 10.10.20** Kysymysten suunta vaihtelee. Vaihtoehto "täysin samaa mieltä (1)" on vahvasti liberaali/moderni  kysymyksissä 23a ja 24a ja vahvasti konservatiivinen/perinteinen kysymyksissä 23b ja 24b.  Kolme Kysymystä (23c - 23e) ovat hieman monimerkityksisiä ("double barreld"), miten "samaa mieltä" - vastaukset pitäisi tulkita? Samaa mieltä voi olla myös siksi, että "näin nämä asiat nyt ovat", omasta mielipiteestä riippumatta, realistisena arviona.
+
 
 ## Datan valinnan vaiheet ja puuttuvat tiedot
 

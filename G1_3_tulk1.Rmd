@@ -41,16 +41,16 @@ Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ra
 
 Asymmetrinen kartta, jossa riviprofiilit ovat pääkomponentti-koordinaateissa ja sarakeprofiilit standardikoordinaateissa.
 
-(@) Sarakkeet ideaalipisteinä, edustavat kuvittellisia maita joissa kaikki ovat vastanneet vain yhdellä tavalla.
+(@) Sarakkeet ideaalipisteinä, edustavat kuvittellisia maita joissa kaikki ovat vastanneet vain yhdellä tavalla. Sarakepisteet ovat barysentrisen koordinaatisto akseleita.
 
-(@) Sarakepisteet kaukana origosta, koska skaalattu
+(@) Sarakepisteet kaukana origosta, koska skaalattu ja
 
-(@) Rivipisteet kasautuneet keskiarvopisteen ympärille
+(@) Rivipisteet kasautuneet keskiarvopisteen ympärille. Symmetrinen kuva on usein hyvä oletus tästä syystä.
 
 (@) Rivi-ja sarakepisteiden suhteelliset sijannit samat kuin symmetrisessä kuvassa
 
 (@) Tässäkin kuvassa pisteen koko kuvaa sen massaa. Sarakkeista "täysin samaa mieltä" (ts) ja "ei samaa eikä eri mieltä" ovat massoiltaan pienimmät.
-(@) Pisteiden koko kuvaa rivin tai sarakkeen massaa.
+
 
 ```{r G1-3asymm1, eval=FALSE, include=FALSE}
 
@@ -68,7 +68,7 @@ Tarinaa voi tarvittaessa jatkaa, tämä on CA:n hankalin asia. Kaksi koordinaati
 
 (@) Asymmetrinen kuva ja akseleiden / dimensioiden tulkinta
 
-Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia.
+Piirretään sama asymmetrinen kartta uudelleen, mutta yhdistetään sarakepisteet keskiarvopisteeseen (sentroidiin) suorilla. Mitä terävämpi on sarakesuoran (vektorin?) ja akselin kulma, sitä enemmän sarake määrittää tätä ulottuvuutta. Jos vektori on lähettä 45 asteen kulmaa, sarake määrittää yhtä paljon molempia ulottuvuuksia. **#V lähde?**
 
 Standardikooridaateissa esitety sarakepisteet ovat fiktiivisiä "maapisteitä", joissa
 kaikki vastaukset ovat yhdessä luokittelumuuttujan arvossa.Alkuperäisessä täydessä avaruudessa
@@ -79,13 +79,16 @@ ne ovat simpleksin kärkipisteet, simpleksin sisällä ovat riviprofiilit.
 # asymmetrinen kartta - rivit pc ja sarakkeet sc
 # sarakkeet vektorikuvina
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
+#
+#
 # 
 # Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
 # pdf("img/sCA1asymm1.pdf")
 par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 
-     arrows = c(FALSE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1" )
+     arrows = c(FALSE,TRUE), 
+     # main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 1
+     sub = "asymmetrinen kartta")
 # Kuva tiedostoon - suljetaan
 # dev.off()
 
@@ -126,7 +129,7 @@ simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 
      arrows = c(FALSE,FALSE),
-     main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
+     # main = "Lapsi kärsii jos äiti on töissä -asymmetrinen kartta 2",
      sub = "Suomen profiili sarakkeiden barysentrisenä keskiarvona")
      segments(simpleCA1.rpc[5,1],simpleCA1.rpc[5,2],simpleCA1$colcoord[, 1],
          simpleCA1$colcoord[, 2], col = "pink")
@@ -168,7 +171,7 @@ vertex, the higher its profie value is for that category.
 Verifiointi verteksi kerrallaan, kaikki on suhteellista! Suomi on kaikkein lähimpänä
 e-verteksiä. Niinpä Suomen profiilissa e-vastausten suhteellinen osuus on suurempi kuin 
 muilla mailla. Tanska vastaavasti lähimpänä E-verteksiä. Projisoidaan rivipisteet
-sarakevektoreille -> järjestys.
+sarakevektoreille -> järjestys. **todo 10.10.20** Tarkista tämä tulkinta!
 
 Perusidea: kartta antaa yleiskuvan riippuvuudesta, approksimaation tarkkuuden ja
 laadun rajoissa. Yksityiskohtien etsiskely ei ole oleellista, väärien johtopäätösten
@@ -197,7 +200,8 @@ Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa
 standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. 
 Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee 
 sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä 
-oleelliset yhteydet, mutta mielellään vain ne.
+oleelliset yhteydet, mutta mielellään vain ne.**todo 10.10.20** Inertian maksimi on ratkaisun dimensioiden
+suurin lukumäärä. Tämä teoria-jaksossa.
 
 Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
 
@@ -252,6 +256,9 @@ knitr::include_graphics('img/simpleCAasymmTulk2.png')
 
 Numeeriset tulokset, jälkimmäisessä rivimassat vakioitu yhtä suuriksi
 ("riviprofiilitaulukon ca").
+
+**todo** Tässä "kaikki on suhteellista", Tanskan riviprofiilissa E-vastauksien suhteellinen osuus 
+on suurempi kuin koko aineiston keskiarvopisteessä origossa. 
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
