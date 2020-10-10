@@ -1,6 +1,6 @@
 # Tulkinnan perusteita
 
-```{r paketit-g13, include=FALSE}
+```{r paketit-g13,eval = FALSE, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 library(rgl)
 library(ca)
@@ -29,7 +29,13 @@ library(assertthat)
 # sessionInfo()
 
 ```
-Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto, siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? **Ydinluku**.
+Luvussa syvennetään esimerkin tulkinnan perusteita. Miksi symmetrinen kartta on yleensä paras vaihtoehto,
+siksi se oletusarvoisesti esitetäänkin. Milloin voi käyttää vaihtoehtoisia esitystapoja? **Ydinluku**.
+
+**Tärkein asia** CA:ssa kaikki on suhteellista
+
+**Tärkeä asia 1** Symmetrinen kuva, kaksi pistepilveä samassa koordinaatistossa.
+**Tärkeä asia 2** Rivi- ja sarakeratkaisun duaalisuus (vai käsitelläänkö jo johdattelevassa esimerkissä?)
 
 Esimerkkiaineistossa tulee jo pohdittavaa, Guttman (arc, horseshoe) - efekti, ratkaisun dimensiot jne.
 
@@ -109,15 +115,13 @@ keskiarvopisteinä (ns. barysentrinen keskiarvo).
 # HUOM! simpleCA1 luodaan G1_2_johdesim.Rmd - tiedostossa
 
 # Kuva tiedostoon - ennen plot-komentoa avataan tiedosto
-# pdf("img/sCA1asymm1.pdf")
+# pdf("img/sCA1asymm1.pdf") ja lopuksi suljetaan tiedosto
 
 # Piirretään Suomen riviprofiilista janat sarakepisteisiin - barysentinen keskiarvo
 # Rivipisteet pääkoordinaatteina (principal coordinates)
 
 simpleCA1.rpc <- simpleCA1$rowcoord %*% diag(simpleCA1$sv)
 
-# ei toimi - onpa hankalaa! segments antaa virheilmoituksen "plot.new has not
-# been called yet" (11.6.20)
 # X11()
 par(cex = 0.6)
 plot(simpleCA1, map = "rowprincipal", 

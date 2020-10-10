@@ -56,7 +56,6 @@ olioita voi monipuolisesti muokata monipuolisesti ja jakaa tuloksia takaisin mui
 ohjelmistojen tiedostoformaatteihin. Tässä ensimmäinen vaihtoehto käytössä.
 
 
-
 **TODO 30.1.20** Tarkistukset, varmistukset jne. (24.2.20) Lisätty muutama
 testi, paljon välitulostuksia joita voi tarvittaessa kommentoida koodista pois.
 
@@ -214,6 +213,8 @@ kaksi R-factor- tyypin muuttujaa. Toisessa (esim. Q1a) puuttuva tieto on
 R-ohjelmiston sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi
 luokittelumuuttujan arvo("missing").
 
+### Vaihe 2.1
+
 ```{r fct-vaihe21}
 # Substanssi- ja taustamuuttujat R-faktoreiksi
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
@@ -273,14 +274,17 @@ ISSP2012jh1d.dat %>%
 # ISSP2012jh1d.dat$lifsta1 %>% fct_count()
 # ISSP2012jh1d.dat$urbru1 %>% fct_count()
 
-
 ```
 
 Taustamuuttujien luokitteluja (esim. luokkien yhdistäminen) pohditaan tarkemmin,
 kun muuttujat otetaan käyttöön.
 
+### Vaihe 2.2
+
 Poistetaan muuuttujista luokittelumuuttujien arvot, joissa ei ole havaintoja. Näitä
 tyhjiä luokkia siirtyy SPSS-tiedostosta haven_labelled -luokan tietohin.
+
+
 ```{r fct-vaihe22}
 # Poistetaan tyhjät luokat muuttujista
 
@@ -345,6 +349,8 @@ ISSP2012jh1d.dat %>%
 
 ```
 
+
+### Vaihe 2.3
 Luodaan uusi muuttuja, jossa puuttuva tieto (NA) on mukana luokittelumuuttujan
 uutena arvona ("missing").
 
@@ -410,8 +416,9 @@ ISSP2012jh1d.dat %>%
 
 ```
 
-Lopuksi luodaan uudet "faktorilabelit" substanssimuuttujille. Ne tulostetaan komennolla levels(). Graafisessa analyysissä kuviin on saatava mukaan kaikki oleellinen, mutta ei mitään sen lisäksi. 
-Näitä muuttujan arvojen tunnuksia muokataan tarvittaessa.
+### Vaihe 2.4
+
+Lopuksi luodaan uudet "faktorilabelit" substanssimuuttujille. Näkyvät komennolla levels(). Graafisessa analyysissä kuviin on saatava mukaan kaikki oleellinen, mutta ei mitään sen lisäksi. Näitä muuttujan arvojen tunnuksia muokataan tarvittaessa.
 
 Taustamuuttujien "faktorilabeleita" säädetään kun ne otetaan käyttöön.
 

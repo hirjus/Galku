@@ -77,9 +77,11 @@ tutkimusaiheena neljässä ISSP:n kyselytutkimuksessa. Avainsana "cross-cultural
 compararative studies", "cross country" ehkä myös? Tämä on varsinainen
 teollisuuden ala! Maiden väliset vertailut ovat aina hyvin hankalia. 
 
-**#V**Ajankohtainen tutkimusaihe!
+**#V**Ajankohtainen tutkimusaihe (ei ISSP-dataa mutta samoja kysymyksiä, Saksassa kerätty useana vuonna).
 (https://www.economist.com/finance-and-economics/2020/10/03/why-east-and-west-german-women-still-work-vastly-different-hours)
+
 (https://www.diw.de/documents/publikationen/73/diw_01.c.799295.de/dwr-20-38.pdf)
+
 
 **Tärkeät linkit - ISSP 2012 data**
 
@@ -138,8 +140,8 @@ tietokoneavusteinen haastattelu, jne), maakohtaisten taustamuuttujien harmonisoi
 maittain, otantamenetelmistä jne. Esittelen vain aineiston tärkeimmät rajaukset.
 Monitorointiraportti kertoo puuttuneisuuden määrän, otantamenetlmät jne maittain.
 "Code book" kertoo muuttujien määritelmät sekä yhteisille että maakohtaisille muuttujille.
-Kaikista muuttujista on taulukko maittain. Lisätään vielä raportti kyselylomakkeen
-laadinnasta ja linkki Yhteiskunnalliseen tietoarkistoon.
+Kaikista muuttujista on taulukko maittain. Lisäksi raportti kyselylomakkeen
+laadinnasta.
 
 ```{r ISSPdocsTable }
 issp_docname <- c("Variable Report", "Study Monitoring Report","Basic Questionnaire", 
@@ -204,6 +206,11 @@ tavalla eri maissa.)
 
 **1. Eurooppa ja samankaltaiset maat (25)**
 
+
+(24.2.20) Aineistosta valittiin ensin joukko suhteellisen samankaltaisia kehittyneitä
+teollisuusmaita. Sitten valittiin osa kysymyksistä, ja vielä suppeampi valikoima
+kiinnostavia taustamuuttujia. Muutama maa pudotettiin pois tämän valinnan jälkeen.
+
 Pois 13: Argentiina,Turkki, Venezuela, Etelä-Afrikka, Korea, Intia, Kiina,
 Taiwan, Filippiinit, Meksiko, Israel, Japani, Chile.
 
@@ -219,39 +226,9 @@ vaihtoehto ("en puolesta enkä vastaan / en osaa sanoa"). USA ja GB pois koska
 kiinnostava TOPBOT-muuttuja puuttuu (puuttui 11.10.18, sittemmin USA:n ainestoa
 on täydennetty).
 
-(24.2.20) Aineistosta valittiin ensin joukko suhteellisen samankaltaisia kehittyneitä
-teollisuusmaita. Sitten valittiin osa kysymyksistä, ja vielä suppeampi valikoima
-kiinnostavia taustamuuttujia. Muutama maa pudotettiin pois tämän valinnan jälkeen.
-
-
-**2. Havainnot, joissa on puuttuvia tietoja **
-**edit 7.10.20** Vanhoja muistiinpanoja
-
-**Vastauskato on kyselytutkimusten suurin ongelma.**
-
-Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
-
-Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. 
-Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Tämä 
-erävastauskato ei ole tutkielman ydinaihe, mutta laajemman aineiston käytössä 
-se täytyy ottaa huomioon. Yksikkövastauskatoa ei käsitellä, tutkimuksen 
-toteutuksen raporteissa on kerrottu tarkemmin miten kyselyn toteuttajat ovat 
-tämän huomioineet. Yksikkövastauskato eli otokseen poimitut joita ei ole 
-tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu 
-vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. 
-Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden 
-vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, 
-kts. monitoring report. (**edit** toistoa! 24.2.20)
-
-
-CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon 
-(nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. 
-Puuttuvat havainnot otetaan mukaan laajemmassa aineistossa myös siksi, että CA ja
-MCA edellyttävt yleensä useamman muuttujan analyyseissä sitä. Jokaisen kahden 
-muuttujan parittaisen ristiintaulukoinnin reunajakaumien pitää olla samoja.
-
-
 **3. Datan hallinta - reproducible research- periaate**
+
+Helposti toistettava analyysi, ei "haurasta" datan muokkauksen koodia.
 
 **edit 24.2.20** Vanhoja perusideoita
 
@@ -293,7 +270,7 @@ ISSP2012*.jh1.dat - valittu osa aineistosta, luotu uusia muuttujia ja muunnettu
 ISSP2012esim1, 2 jne, tarkenne .dat rajattuja aineistoja joissa uusia muuttujia
                         ja muuttujien nimiä. Näitä luodaan analyysin eri vaiheissa.
                         
-**Datan luonti: **
+**Datan perusmuokkauksen vaiheet **
 
 **1. Data r-dataksi**
 
@@ -301,19 +278,18 @@ ISSP2012esim1, 2 jne, tarkenne .dat rajattuja aineistoja joissa uusia muuttujia
 
 **2. valitaan maat(25)**
 
-**ISSP2012jh1a.data** <- filter(**ISSP2012jh.data**, V4 %in% incl_countries25)
+ISSP2012jh1a.data <- filter(ISSP2012jh.data, V4 %in% incl_countries25)
 
 **3. valitaan muuttujat**
 
-**ISSP2012jh1b.data** <- select(**ISSP2012jh1a.data**, all_of(jhvars1)
+ISSP2012jh1b.data <- select(ISSP2012jh1a.data, all_of(jhvars1)
 
 Poistetaan havainnot joilla tieto sukupuolesta tai ikä puuttuu.
 
 **ISSP2012jh1c.data** <- filter(**ISSP2012jh1b.data**, (!is.na(SEX) & !is.na(AGE)))
 
-**Perusmuunnokset**
 
-** Perusmuunnokset (G1_1_data_fct1.Rmd) **
+**Perusmuunnokset (G1_1_data_fct1.Rmd)**
 
 **ISSP2012jh1.data**  <- **ISSP2012jh1c.data**
 
@@ -766,6 +742,30 @@ knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 
 **edit 24.2.20 Toistoa**
 
+**1. Vastauskato on kyselytutkimusten suurin ongelma.**
+
+Johdattelevassa esimerkissä on kolme muuttujaa, ei ongelma, aika vähän puuuttuvia.
+
+Isomman 25 aineiston osalta tarkistetaan, mitä "listwise deletion" saa aikaan. 
+Aineisto pienenee nopeasti, ja vaikeasti hahmotettavalla tavalla. Tämä 
+erävastauskato ei ole tutkielman ydinaihe, mutta laajemman aineiston käytössä 
+se täytyy ottaa huomioon. Yksikkövastauskatoa ei käsitellä, tutkimuksen 
+toteutuksen raporteissa on kerrottu tarkemmin miten kyselyn toteuttajat ovat 
+tämän huomioineet. Yksikkövastauskato eli otokseen poimitut joita ei ole 
+tavoitettu ollenkaan on kansallisen tason ongelma, joka on ratkaistu 
+vaihtelevin tavoin. Tiedot löytyvät aineiston dokumentaatiosta. 
+Aineistossa on myös mukana maakohtaiset painomuuttujat, mutta ei painoja maiden 
+vertailuun. Vastausprosentit (response rate) vaihtelevat maittain, 
+kts. monitoring report. (**edit** toistoa! 24.2.20)
+
+
+CA:n eräs etu on se, että muuttujien oletetaan olevan luokitteluasteikon 
+(nominaaliasteikon) muuttujia, ja puuttuva havainto on yksi luokka lisää. 
+Puuttuvat havainnot otetaan mukaan laajemmassa aineistossa myös siksi, että CA ja
+MCA edellyttävt yleensä useamman muuttujan analyyseissä sitä. Jokaisen kahden 
+muuttujan parittaisen ristiintaulukoinnin reunajakaumien pitää olla samoja.
+
+
 **ks** Perusasiat havaintojen puuttellisuudesta kyselytutkimusissa. 
 Yksikkövastauskato (unit non-response), eräsvastauskato (item non-response).
 Mitä on raportoitava, kun käytetään valmista aineistoa? Erävastauskatoa
@@ -827,6 +827,8 @@ puuttuvia tietoja on 3,5 prosenttia (1219/34271).
 **Huom:** kun pudotetaan havainnot joilta SEX tai AGE puuttuu, N = 32823.
 On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R).
 
+**edit** kaksi vanhaa koodilohkoa, olkoon toistaiseksi mukana (11.2.20)
+
 ```{r muut2old, eval=FALSE, include=FALSE}
 
 # TÄSSÄ MAINSTAT JA TOPBOT eri muuttujanimillä (11.1.2019) - show nothing 23.3.2019
@@ -876,7 +878,6 @@ On oikea määrä (5.7.2019, kts. treeni2- projekti, Data_iso1.R).
 
 ```
 
-**edit** Vanhoja koodilohkoja, olkoon toistaiseksi mukana (11.2.20)
 
 ```{r muut3OLD, eval=FALSE, include=FALSE}
 

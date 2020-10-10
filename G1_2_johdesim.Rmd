@@ -1,6 +1,6 @@
 # Yksinkertainen korrespondenssianalyysi - kahden luokittelumuuttujan taulukko
 
-```{r paketit-g12, include=FALSE}
+```{r paketit-g12, eval = FALSE, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 # paketit.R - kopioidaan Rmd-tiedostojen alkuun
 
@@ -67,7 +67,7 @@ CA:n tapauksessa aggregoimalla "cloud of individuals". MG:n termi "sample".
 **#V** MOOC, LeReoux
 
 2. Kontingenssitaulu (kts. viite, jossa ohje "yhteys aina riviä pitkin"),
-frekvenssitaulu, ristiintaulukointi
+frekvenssitaulu, ristiintaulukointi. Kahden luokiteluasteikon muuttujan taulukko.
 
 Dataa valitaan, aggregoidaan, ryhmitellään. Aktiivisia valintoja Blasius emt.
 "data ei löydy kadulta", taulukot vielä vähemmän.
@@ -459,7 +459,7 @@ ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
 ```{r simpeCA-frekTa1}
 
-# Esimerkki - siisti tuloste (20.2.20)
+# Esimerkki - siisti taulukko (20.2.20)
 
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE,
@@ -492,7 +492,7 @@ verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin,
 sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita
 voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia
 on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
-**edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot samat (= 1).
+**edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot skaalattu yhtä suuriksi.
 Esimerkkilaskelmia CAcalc_1.R.
 
 ```{r EkaCA}
@@ -505,7 +505,7 @@ simpleCA1 <- ca(~maa + Q1b,ISSP2012esim1.dat)
 # neljällä tavalla (? 180 astetta molempien akseleiden ympäri molempiin suuntiin?)
 # (18.2.20). Tämän maa2-muuttujaa käyttävän kuvan voi jättää pois (8.4.20)
 
-simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
+# simpleCA2 <- ca(~maa2 + Q1b,ISSP2012esim1.dat)
 
 # Oikeastaan maiden vertailussa pitäisi niiden massat skaalata yhtä suuriksi, tässä
 # pikainen kokeilu (20.2.20)
@@ -714,7 +714,7 @@ luvussa? **#V** MG&Blasius, "vihreän kirja", johdanto.
 
 
 ```{r khii2dist2, eval=FALSE, include=FALSE}
-# Tarkistuksia: mihin rivien järjestys vaikuttaa?
+# Tarkistuksia: mihin rivien järjestys vaikuttaa? TARPEETON (10.10.20)
 # Onko maiden järjestyksellä vaikutusta khii2-etäisyyksiin? Ei ole,
 # mutta rivit eri järjestyksessä (2.2.20).
 # HUOM: simpleCA2-tulosolio luotava ensin!
@@ -766,10 +766,10 @@ painoilla, mutta ero ei ole kovin suuri.
 
 par(cex = 0.6)
 plot(simpleCA1, map = "symmetric", mass = c(TRUE,TRUE),
-     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta",
+     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta 1",
      xlab = "Dimensio 1: moderni/liberaali - perinteinen/konservatiivinen (76%)",
      ylab = "Dimensio 2: maltillinen/epävarma - radikaali/jyrkkä/varma (15.1%)",
-     sub = "maa-muuttuja järjestys C_ALPHAN")
+     sub = "Maiden massat eri suuruisia (otoskoko)")
 
 # plot(simpleCA2, map = "symmetric", mass = c(TRUE,TRUE),
 #     main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
@@ -796,8 +796,8 @@ tässä kaksi pilveä projisoitu samaan kuvaan.
 
 par(cex = 0.6)
 plot(simpleCA3, map = "symmetric", mass = c(TRUE,TRUE),
-main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta ",
-sub = "massat kaikilla mailla sama vakio (riviprofiilidata)")
+main = "Lapsi kärsii jos äiti on töissä -symmetrinen kartta 2 ",
+sub = "Maidet massat vakioitu (riviprofiilidata)")
 
 ```
 

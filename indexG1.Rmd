@@ -50,8 +50,10 @@ mutta pdf-tulosteessa ei. Ero on pieni.
 (8.4.20)
 
 (9.9.20) Pilkotaan liian pitkiä Rmd - tiedostoja pienemmiksi.
+
 (7.10.20) Vanhat tekstit koodilohkoon "piiloon". Tarkistetaan, että jokaisella taulukolla ja 
 kartalla on otsikkotiedot, tavalla tai toisella.
+(10.10.20) Koodilohkon fig.cap ja plot-komennon main; jos main jätetään pois tulostuuko fig.cap? Ei tulostu html-versiossa!
 
 **HISTORIAA - kooodilohkoon piiloon 7.10.20**
 ```{r hist1}
