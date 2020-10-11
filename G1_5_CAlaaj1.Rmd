@@ -64,9 +64,16 @@ sum(!complete.cases(testIsodat1.dat))
 
 # 14789+18034 = 32823 (miehet + naiset)
 
+# Puuttuvat tiedot aineistossa - viite datan dokumentointiin. Vaihtelee maittain ja muuttujittain, paljon.
 sum(complete.cases(testIsodat1.dat)) / 32823
 
+# Ei toimi 11.10.20
+#
+# testIsodat1.dat %>%
+#    group_by(maa)
+#    summarise(countNA = sum(is.na(all_of(isodatVars3))))
 
+# testIsodat1.dat %>% tableX(maa, isodatVars3)
 ```
 Yllä havainnot joissa ei ole puuttuvia tietona, havainnoit joissa on ja täydellisten tietojen osuus (71%).
 
@@ -100,31 +107,75 @@ Luokittelu voi olla myös kahden indikaattorimuuttujan avulla jako neljään tau
 Esimerkkinä "Attitudes to women working in 2012".
 
 ## MCA
-```{r mca1, fig.asp = 1, fig.cap="MCA-kartta: viiden vastausvaihtoehdon kysymykset, out.width = "90%",fig.align = "center"}
+```{r mca1, fig.asp = 1, fig.cap="MCA-kartta: viiden vastausvaihtoehdon kysymykset", out.width = "90%",fig.align = "center"}
 # Ensimmäinen MCA - viiden vastausvaihtoehdon kysymykset ja puuttuvat tiedot
 mcaDataJH1.dat <- ISSP2012jh1d.dat %>% select(all_of(isodatVars3))
-mca1Qmuuttujat <- mjca(mcaDataJH1.dat)
+
+# labelit tiiviimmiksi? Kaksi merkkiä voisi pudottaa Q1am -> 1a
+mcaDataJH1.dat <- mcaDataJH1.dat %>% mutate(a1 = Q1am,
+                                            b1 = Q1bm, 
+                                            c1 = Q1cm,
+                                            d1 = Q1dm,
+                                            e1 = Q1em,
+                                            a2 = Q2am,
+                                            b2 = Q2bm)
+
+#Tarkistus
+
+mcaDataJH1.dat %>% tableX (a1, Q1am)
+mcaDataJH1.dat %>% tableX (b1, Q1bm)
+mcaDataJH1.dat %>% tableX (c1, Q1cm)
+mcaDataJH1.dat %>% tableX (d1, Q1dm)
+mcaDataJH1.dat %>% tableX (e1, Q1em)
+mcaDataJH1.dat %>% tableX (a2, Q2am)
+mcaDataJH1.dat %>% tableX (b2, Q2bm)
+
+# glimpse((mcaDataJH1.dat))
+mcaDataJH2.dat <- mcaDataJH1.dat %>% select(a1,b1,c1, d1, e1,a2,b2)
+ glimpse((mcaDataJH2.dat))
+
+mca1Qmuuttujat <- mjca(mcaDataJH2.dat, ps="")
+
+# ps="" muuttujan ja sen kategorian eroitinmerkki
+
 plot.mjca(mca1Qmuuttujat,
           main = "Viiden vastausvaihtoehdot 7 kysymystä",
           sub = "vastausten koodausta ei käännetty")
+plot.mjca(mca1Qmuuttujat, labels = c(2,1),
+          main = "Viiden vastausvaihtoehdot 7 kysymystä",
+          sub = "vastausten koodausta ei käännetty")
+plot.mjca(mca1Qmuuttujat, labels = c(1,2),
+          main = "Viiden vastausvaihtoehdot 7 kysymystä",
+          sub = "vastausten koodausta ei käännetty")
+summary(mca1Qmuuttujat)
 # X11()
 # subsetcat = (6,12,18,24,30,36,42) - väärä formaatti
 # subsetcat=(1:42)[-c(1:5,7:11,13:17,19:23,24:29,31:35, 37:41)]) väärä formaatti
 
-head(mcaDataJH1.dat)
+head(mcaDataJH2.dat)
+glimpse(mcaDataJH2.dat)
+str(mcaDataJH2.dat)
 str(mca1Qmuuttujat)
 mca1Qmuuttujat$Burt
-mca1Qmuuttujat2 <- mjca(mcaDataJH1.dat, subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
+str(mca1Qmuuttujat$Burt)
+mca1Qmuuttujat2 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
 
 plot.mjca(mca1Qmuuttujat2,
           main="Ilman puuttuvia",
           sub = "vastausten koodausta ei käännetty")
+summary(mca1Qmuuttujat2)
 
-#mca1Qmuuttujat3 <- mjca(mcaDataJH1.dat, subsetcat=(1:42)[c(6,12,18,24,30,36,4)]) alla toimii, 
-# mutta ei hyväksy viimeisiä sarakkeita
-mca1Qmuuttujat3 <- mjca(mcaDataJH1.dat, subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35)])
+#mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, subsetcat=(1:42)[c(6,12,18,24,30,36,4)]) alla toimii, 
+# mutta ei hyväksy viimeisiä sarakkeita poistettaviksi (37:41)
+mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35)])
 
 plot.mjca(mca1Qmuuttujat3)
+summary(mca1Qmuuttujat3)
+
+#mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35, 37:41)])
+
+
+
 ```
 
 
