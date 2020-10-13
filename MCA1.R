@@ -29,14 +29,21 @@ levels(ISSP2012jh1d.dat$edum)
 # substCols
 # MCAtest1 <- mjca(ISSP2012jh.data[ ,59:65]) ei toimi alkuunkaan
 
+# Paljonko listwisw delete poistaa havaintoja? Koko datassa noin 30%.
+
+missingVars1 <- c("Q1a", "Q1b", "Q1c","Q1d","Q1e", "Q2a", "Q2b","edu")
+missingTest1 <- select(ISSP2012jh1d.dat, all_of(missingVars1))
+dim(missingTest1) #32823
+sum(!complete.cases(missingTest1)) #4775
+# 4775/32823 = 0.145
+
 isodatVars3 <- c("Q1am","Q1bm", "Q1cm", "Q1dm","Q1em","Q2am","Q2bm", "edum", "maa")
+
 MCAtestdata121020.dat <- ISSP2012jh1d.dat %>% select(all_of(isodatVars3))
+names(MCAtestdata121020.dat)
 
 glimpse(MCAtestdata121020.dat)
 str(MCAtestdata121020.dat$edu)
-MCAtestdata121020.dat$edum %>% fct_count()
-MCAtestdata121020.dat$E %>% fct_count()
-MCAtestdata121020.dat %>%  tableX(edum, E)
 
 # Labelit järkeviksi - vai vasta MCA-objektissa ? (13.10.20)
 
@@ -62,71 +69,106 @@ mutate(E = fct_recode(edum,
         "7" = "Upper level tertiary (Master, Dr.)",
         "P" = "missing"
         ))
+names(MCAtestdata121020.dat)
+dim(MCAtestdata121020.dat)
+
+MCAtestdata121020.dat$edum %>% fct_count()
+MCAtestdata121020.dat$E %>% fct_count()
+MCAtestdata121020.dat %>%  tableX(edum, E)
+MCAtestdata121020.dat %>%  tableX(maa, E)
+
 levels(MCAtestdata121020.dat$E)
+
 str(MCAtestdata121020.dat$E)
 
 levels(MCAtestdata121020.dat$edum)
 str(MCAtestdata121020.dat$E)
 str(MCAtestdata121020.dat)
 glimpse(MCAtestdata121020.dat)
+MCAvars1 <- c("a1", "b1", "c1", "d1", "e1","a2", "b2", "E", "maa")
+MCAtest2data.dat <- select(MCAtestdata121020.dat,all_of(MCAvars1) )
+glimpse(MCAtest2data.dat)
 
-MCAtest1 <- mjca(MCAtestdata121020.dat[,11:17], ps="")
+MCAtestdata121020.dat[,1:7]
+
+
+MCAtest1 <- mjca(MCAtest2data.dat[,1:7], ps="")
 str(MCAtest1)
 MCAtest1$levelnames
-MCAtes1$levelnames
+par(cex = 0.6)
 plot(MCAtest1, 
      main = "Seitsemän kysymystä - symmetrinen kuva 1",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
 X11()
 summary(MCAtest1)
 
-MCAtestdata121020.dat[, 10:17]
+
+# toimii 13.10.20 - ja nyt toimii supcol!
+
+# Täydentävä sarake koulutustaso E
+MCAtest3a <- mjca(MCAtest2data.dat[,1:8], ps="", supcol = 8)
+par(cex = 0.6)
+plot(MCAtest2, 
+     main = "Seitsemän kysymystä, lisämuuttuja E - symmetrinen kuva 1",
+     sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
+
+#  Täydentävät sarakkeet koulutustaso ja maa
+
+MCAtest3b <- mjca(MCAtest2data.dat[,1:9], ps="", supcol = 8:9)
+par(cex = 0.6)
+plot(MCAtest3, 
+     main = "Seitsemän kysymystä, lisämuuttuja E - symmetrinen kuva 1",
+     sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
+summary(MCAtest3b)
+
+
+# ei toimi - taitaa vaatia peräkkäiset täydentävät sarakkeet ? 13.10.20
+
+#MCAtest3c <- mjca(MCAtest2data.dat[,1:9], ps="", supcol = 51:75,
+#                  subsetcat = (1:75)[-c(43:50)])
+# summary(MCAtest3c)
+
+#Pelkät maapisteet karkealla tavalla 13.10.20
+isodatVars3b <- c("a1","b1", "c1", "d1","e1","a2","b2", "maa")
+MCAtest3temp.dat <- select(MCAtest2data.dat, all_of(isodatVars3b))
+glimpse((MCAtest3temp.dat))
+
+MCAtest3c <- mjca(MCAtest3temp.dat[,1:8], ps="", supcol = 8)
+summary(MCAtest3c)
+par(cex = 0.6)
+plot(MCAtest3c, 
+     main = "Seitsemän kysymystä, lisämuuttuja maa",
+     sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
+
+# Vain maapisteet
+par(cex = 0.6)
+plot(MCAtest3c, what= c("passive", "passive"),
+     main = "Seitsemän kysymystä, lisämuuttuja maa")
+     #sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P"
+
+plot(MCAtest3b, what = c("passive","passive"),
+     main = "Lisämuuttujat E ja maa - 7 kysymyksen kartta",
+     sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P"
+     )
 
 #MIKÄ TÄSSÄ ON VIKANA? 13.10.20 - colsup toimii, supcol ei
-# ja viitattava Burt/indikaattorimatriisin sarakkeisiin
+# ja viitattava Burt/indikaattorimatriisin sarakkeisiin. Yllä supcol toimii,
+# colsup ei taida tehdä yhtään mitään?
 
 
+## VANHEMPAA KOODIA VÄHÄN EPÄSIISTILLÄ DATALLA###
 # Toimii ! 13.10.20 colsup on Burtin/indikaattorimatriisin sarakkeiden määrittely
 # mutta mikä ihme on ca-manuaalin mjca-optio supcol? Ei toimi, colsup toimii?
-
-MCAtest2a <- mjca(MCAtestdata121020.dat[, 10:17], ps = "", colsup = (1:50)[c(1:8)])
-plot(MCAtest2a,
-     main = "Kysymykset Q1a-Q2b ja koulutustaso E ",
-     sub = "muuttujat Q1a -> a1..., E täydentävä sarake"
-     )
+# NO JOTENKIN TOIMII, MUTTA EI OLE PASSIIVISIA PISTEITÄ! 
+# summary(MCAtest2a)
+# MCAtest2a <- mjca(MCAtestdata121020.dat[, 10:17], ps = "", colsup = (1:50)[c(1:8)])
+# plot(MCAtest2a,
+#     main = "Kysymykset Q1a-Q2b ja koulutustaso E ",
+#     sub = "muuttujat Q1a -> a1..., E täydentävä sarake"
+#     )
+#summary(MCAtest2a)
      
-# Vain täydentävä sarake E - aika hullu kuva, kaikki rivipisteet!
-plot(MCAtest2a, what = c("all","passive"),
-     main = "Koulutustaso E ",
-     sub = "E täydentävä sarake"
-        )
-# Vain täydentävä sarake E - miksiköhän ei toimi? (13.10.20)
-plot(MCAtest2a, what = c("none","passive"),
-     main = "Koulutustaso E ",
-     sub = "E täydentävä sarake"
-        )
 
-X11()
-# Ei toimi 2
-MCAtest2a <- mjca(MCAtestdata121020.dat[, 10:17], ps = "", supcol = 10)
-
-# Ei toimi 3
-MCAtest2a <- mjca(MCAtestdata121020.dat[, 10:17], ps = "", supcol = 10:10)
-
-# Ei toimi 4
-# MCAtest2a <- mjca(MCAtestdata121020.dat[, 10:17], ps = "", supcol = (1:50)[-c(9:50)])
-
-
-plot(MCAtest2a)
-summary(MCAtest2a)
-
-# Toimii, mutta ei saa E(ducation) - saraketta täydentäväksi?
-
-MCAtest2b <- mjca(MCAtestdata121020.dat[, 10:17], ps = "")
-plot(MCAtest2b)
-summary(MCAtest2b)
-# täydentävä rivi
-dim(MCAtestdata121020.dat)
 
 # osajoukko ilma P-arvoja subsetcat=(1:42)[-c(6,12,18,24,30,36,42)]
 MCAtest3 <- mjca(MCAtestdata121020.dat[,11:17], ps = "", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)] )
