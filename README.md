@@ -160,7 +160,8 @@ G1_4_CAlaaj1.Rmd.
 asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
 
 **16.9.2020** Siistittiin Galkua, aika maltillisesti poistoja. Lisättiin
-yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin versioon 1.5.9., lisätään pinotut taulut yksinkertaisella esimerkkidatalla, mahdollisesti ABBA.
+yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin versioon 1.5.9.,
+ lisätään pinotut taulut yksinkertaisella esimerkkidatalla.
 **18.9.2020** Lisää maaga-kuvia, maapisteiden yhdistelyä.
 
 **20.9.2020** Pientä editointia, Burt_1.R - skriptissä pinottu taulukko.
@@ -169,5 +170,9 @@ yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin ve
 
 **7.10.2020** Editointia, muunnsten testaus G1_data_fct1.Rmd - tiedostoon.
 
-**10.10.2020** Editoidaan kolmea ensimmäistä Rmd-tiedostoa. Koodilohkon kuva-otsikko ja plot-komennon otsikko, kumpi tulostuu? 
-Ensimmäiset MCA-kokeilut, ja ison aineiston puuttuneisuuden kuvailua lyhyesti.
+**10.10.2020** Editoidaan kolmea ensimmäistä Rmd-tiedostoa. Koodilohkon kuva-otsikko
+ ja plot-komennon otsikko, kumpi tulostuu? Ensimmäiset MCA-kokeilut, ja ison
+aineiston puuttuneisuuden kuvailua lyhyesti. Puuttuvia tietoja ei kuvailla tarkemmin,
+viitataan ISSP-dokumentteihin.
+
+**13.10.2020** MCA1.R - skriptissä kehitelty MCA-kuvia.
