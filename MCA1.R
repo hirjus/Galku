@@ -31,13 +31,28 @@ levels(ISSP2012jh1d.dat$edum)
 
 # Paljonko listwisw delete poistaa havaintoja? Koko datassa noin 30%.
 
-missingVars1 <- c("Q1a", "Q1b", "Q1c","Q1d","Q1e", "Q2a", "Q2b","edu")
+#Substanssimuuttujat (7)
+
+missingVars1 <- c("Q1a", "Q1b", "Q1c","Q1d","Q1e", "Q2a", "Q2b")
 missingTest1 <- select(ISSP2012jh1d.dat, all_of(missingVars1))
 dim(missingTest1) #32823
 sum(!complete.cases(missingTest1)) #4775
-# 4775/32823 = 0.145
+# 4553/32823 = 0.1387137
 
-isodatVars3 <- c("Q1am","Q1bm", "Q1cm", "Q1dm","Q1em","Q2am","Q2bm", "edum", "maa")
+# taustamuuttujat mukaan - ei puuttuvia muuttujissa maa, ika ja sp
+
+missingVars2 <- c("Q1a", "Q1b", "Q1c","Q1d","Q1e", "Q2a", "Q2b",
+                  "edu", "sosta", "urbru" )
+missingTest2 <- select(ISSP2012jh1d.dat, all_of(missingVars2))
+dim(missingTest2) #32823
+sum(!complete.cases(missingTest2)) # 6101
+# 6101/32823 = 0.1858758
+
+#sostam TOPBOT, puuttuvat mukana
+#urbrum URBRURAL, puuttuvat mukana
+
+isodatVars3 <- c("Q1am","Q1bm", "Q1cm", "Q1dm","Q1em","Q2am","Q2bm",
+                 "edum",  "sostam", "urbrum", "maa", "ika", "sp")
 
 MCAtestdata121020.dat <- ISSP2012jh1d.dat %>% select(all_of(isodatVars3))
 names(MCAtestdata121020.dat)
@@ -57,6 +72,17 @@ MCAtestdata121020.dat <- MCAtestdata121020.dat %>%
            b2 = Q2bm)
 glimpse((MCAtestdata121020.dat))
 
+levels(MCAtestdata121020.dat$sostam)
+str(MCAtestdata121020.dat$sostam)
+
+
+levels(MCAtestdata121020.dat$urbrum)
+# [1] "A big city",[2]"The suburbs or outskirts of a big city",
+#[3]"A town or a small city", [4] "A country village",   
+# [5]"A farm or home in the country", "missing" 
+
+
+# KOKO MCA-DATA (15.10.20) - muunnos ei toimi
 
 MCAtestdata121020.dat <- MCAtestdata121020.dat %>%
 mutate(E = fct_recode(edum,
@@ -67,8 +93,27 @@ mutate(E = fct_recode(edum,
         "5" = "Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation)",
         "6" = "Lower level tertiary, first stage (also technical schools at a tertiary level)",
         "7" = "Upper level tertiary (Master, Dr.)",
-        "P" = "missing"
-        ))
+        "P" = "missing"),
+       S = fct_recode(sostam,
+         "1" = "Lowest, Bottom, 01",
+         "2" = "02",
+         "3" = "03",
+         "4" = "04",
+         "5" = "05",
+         "6" = "06",
+         "7" = "07",
+         "8" = "08",
+         "9" = "09",
+         "10"= "Highest, Top, 10",
+         "P" = "missing"),
+       U = fct_recode(urbrum,
+        "1" = "A big city",
+        "2" = "The suburbs or outskirts of a big city",
+        "3" = "A town or a small city",
+        "4" = "A country village",
+        "5" = "A farm or home in the country", 
+        "P" = "missing")
+        )
 names(MCAtestdata121020.dat)
 dim(MCAtestdata121020.dat)
 
@@ -85,7 +130,7 @@ levels(MCAtestdata121020.dat$edum)
 str(MCAtestdata121020.dat$E)
 str(MCAtestdata121020.dat)
 glimpse(MCAtestdata121020.dat)
-MCAvars1 <- c("a1", "b1", "c1", "d1", "e1","a2", "b2", "E", "maa")
+MCAvars1 <- c("a1", "b1", "c1", "d1", "e1","a2", "b2", "E","S","U", "maa")
 MCAtest2data.dat <- select(MCAtestdata121020.dat,all_of(MCAvars1) )
 glimpse(MCAtest2data.dat)
 
@@ -114,10 +159,21 @@ plot(MCAtest2,
 
 #  Täydentävät sarakkeet koulutustaso ja maa
 
+
 MCAtest3b <- mjca(MCAtest2data.dat[,1:9], ps="", supcol = 8:9)
 par(cex = 0.6)
-plot(MCAtest3, 
+plot(MCAtest3b, 
      main = "Seitsemän kysymystä, lisämuuttuja E - symmetrinen kuva 1",
+     sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
+summary(MCAtest3b)
+
+x11()
+#kaikki taustamuuttuta
+dim(MCAtest2data.dat)
+MCAtest3c <- mjca(MCAtest2data.dat[,1:11], ps="", supcol = 8:11)
+par(cex = 0.5)
+plot(MCAtest3c, what = c("all", "all"),
+     main = "Seitsemän kysymystä, lisämuuttujat E, S, U, maa",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
 summary(MCAtest3b)
 

@@ -224,7 +224,7 @@ Sarakevektorin kulma akseliin - mitä pienempi sitä enemmän määrittää. Jos
 
 **Tulkinta: rivipisteiden ortogonaalinen projektio "sarakevektorille"**
 
-Rivipisteet voidaan projisoida ortogonaalisesti (ns. suora kulma) sarakevektorille
+Rivipisteet voidaan projisoida ortogonaalisesti sarakevektorille
 ja sen pisteillä merkitylle jatkeelle. Järjestys on sama kuin sarakkeen modaliteetin
 suhteellinen osuus rivipisteen profiilissa. Ensimmäisessä kartassa on käsivaralla
 piirretty suurinpiirtein kohtisuorat projektiot lievempää erimielisyyttä edustavalle
@@ -232,7 +232,8 @@ s- ideaalipisteeseen (0,1,0,0,0) origosta piirretylle suoralle.
 
 **Onko näin? (17.9.20)** Toisessa kuvassa sama E-vektorille. Maiden suhteellinen
 järjestys on oikea, mutta tarkasti etäisyydet eivät (välimatka-asteikolla)
-ole vertailukelpoisia. 
+ole vertailukelpoisia. Kartta on approksimaatio. Asymmetrinen kartta on kuitenkin
+kaksoiskuva (biplot).
 
 Vertailun vuoksi riviprofiilien sarakkeita vastavat arvot suuruusjärjestyksessä:
 
@@ -257,8 +258,9 @@ knitr::include_graphics('img/simpleCAasymmTulk2.png')
 Numeeriset tulokset, jälkimmäisessä rivimassat vakioitu yhtä suuriksi
 ("riviprofiilitaulukon ca").
 
-**todo** Tässä "kaikki on suhteellista", Tanskan riviprofiilissa E-vastauksien suhteellinen osuus 
-on suurempi kuin koko aineiston keskiarvopisteessä origossa. 
+**todo - "kaikki on suhteellista"** Esimerkiksi Tanskan riviprofiilissa 
+E-vastauksien suhteellinen osuus poikkeaa eniten keskiarvopisteestä (origossa).
+Asymmetisessä kuvassa voimme projisoida rivipisteet sarakepisteen vektorille.
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset

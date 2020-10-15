@@ -893,15 +893,6 @@ pienet rivit HU ja BG  ovat vakiomassojen ratkaisussa lähempänä keskiarvoa. N
 on myös Belgia. Saksa, Tanska ja Suomi ovat kauempan origosta. 
 **Erot kuitenkin pieniä (17.9.20)**
 
-```{r massPlot1, fig.cap="Massojen vakiointi ja khii2-etäisyys keskiarvosta", fig.asp= 1}
-# Tarpeeton - ja ei toimi (3.10.20). Kuva olis kiva, kuitenkin.
-
-# colmass_b.tbl
-# str(colmass.tbl)
-# plot(colmass.tbl$rowid[1],colmass.tbl$rowid[1])
-# hist(colmass.tbl[, 1:5])
-```
-
 
 ```{r kuvatdsto1, eval=FALSE, include=FALSE}
 #tämä toimii

@@ -36,11 +36,11 @@ muunnetaan R:n factor- muuttujaksi.
 Jokaisesta muuttujasta on kaksi versiota, toisessa puuttuvat tiedot ovat R:n
 "NA"- arvoja ja toisessa "NA"-arvo on eksplisiittinen muuttuja ("missing").
 
-Substanssimuuttujien luokkien tunnukset ( faktorilabelit) muutetaan
+Substanssimuuttujien luokkien tunnukset ( "faktorilabelit") muutetaan
 graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien
 tunnuksia pohditaan, kun ne otetaan käyttöön.
 
-**#V** Tärkein lähde McNamara&Horton(2017) "Wrangilin with categocal data in R".
+**Factor: määritelmä**
 
 ”Very short : levels are the input, labels are the output in the
 factor() function. A factor has only a level attribute, which is set by the
@@ -56,17 +56,24 @@ olioita voi monipuolisesti muokata monipuolisesti ja jakaa tuloksia takaisin mui
 ohjelmistojen tiedostoformaatteihin. Tässä ensimmäinen vaihtoehto käytössä.
 
 
-**TODO 30.1.20** Tarkistukset, varmistukset jne. (24.2.20) Lisätty muutama
-testi, paljon välitulostuksia joita voi tarvittaessa kommentoida koodista pois.
+**#V** Tärkein lähde McNamara&Horton(2017) "Wrangilin with categorical data in R".
 
-(TODO 2.2.20) Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
-samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä. (24.2.20) tehty,
-muunnetaan heti alussa. Käytännössä kaikenlaisia korjailuja joutuu tekemään myös
-analyyseissä käytettävissä R-datoissa.
+R-maailmassa on monta tapaa tehdä asioita. Tässä käytetään forcats-paketin
+funktioita, ei dplyr-paketin kuten em. artikkelissa.
 
-(TODO 3.2.20) Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
-G1_2_johdesim.Rmd. (24.2.20) tehty, järjesteään myös uusi muuttuja
-C_ALPHAN-järjestykseen.
+**Muunnokset: mutate**
+(https://suzan.rbind.io/2018/02/dplyr-tutorial-2/#changing-column-names-after-mutation)
+
+**Faktorit - recode**
+
+**dplyr**
+
+”You can use recode() directly with factors; it will preserve the existing order of levels while changing the values. Alternatively, you can use recode_factor(), which will change the order of levels to match the order of replacements. See the forcats package for more tools for working with factors and their levels.”
+”This is a vectorised version of switch(): you can replace numeric values based on their position or their name, and character or factor values only by their name. This is an S3 generic: dplyr provides methods for numeric, character, and factors. For logical vectors, use if_else(). For more complicated criteria, use case_when().”
+(https://dplyr.tidyverse.org/reference/recode.html)
+
+**forcats::fct_recode** (https://r4ds.had.co.nz/factors.html)
+
 
 ### Vaihe 1 - muuttujat joissa ei ole puuttuvia tietoja
 
