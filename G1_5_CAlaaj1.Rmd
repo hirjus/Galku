@@ -120,7 +120,7 @@ MCAdata1jh.dat <- mutate(MCAdata1jh.dat, age_cat = ifelse(ika %in% 15:25, "1",
 MCAdata1jh.dat <- MCAdata1jh.dat %>%        
         mutate(age_cat = as_factor(age_cat))
 #tarkastuksia - outo järjestys
-# levels(MCAdata1jh.dat$age_cat)
+#levels(MCAdata1jh.dat$age_cat)
 # str(MCAdata1jh.dat$age_cat)
 MCAdata1jh.dat<- MCAdata1jh.dat %>%
         mutate(age_cat = fct_relevel(age_cat,
@@ -161,10 +161,6 @@ MCAdata1jh.dat <- mutate(MCAdata1jh.dat,
                                 ))
 
 
-names(MCAdata1jh.dat)
-dim(MCAdata1jh.dat)
-
-
 #Sosiaalinen status: oma arvio "Top-Bottom self-placement"
 str(ISSP2012jh1d.dat$sosta)
 
@@ -174,51 +170,123 @@ str(ISSP2012jh1d.dat$edu)
 #Asuipaikka
 str(ISSP2012jh1d.dat$urbru)
 
-# ikäluokka
+# Muunnetaan faktorimuuttujia, mahdollisimman lyhyet tunnisteet kategorioille
+MCAdata1jh.dat <- MCAdata1jh.dat %>%
+mutate(E = fct_recode(edum,
+        "1" = "No formal education",
+        "2" = "Primary school (elementary school)",
+        "3" = "Lower secondary (secondary completed does not allow entry to university: obligatory school)",
+        "4" = "Upper secondary (programs that allows entry to university",
+        "5" = "Post secondary, non-tertiary (other upper secondary programs toward labour market or technical formation)",
+        "6" = "Lower level tertiary, first stage (also technical schools at a tertiary level)",
+        "7" = "Upper level tertiary (Master, Dr.)",
+        "P" = "missing"),
+       S = fct_recode(sostam,
+         "1" = "Lowest, Bottom, 01",
+         "2" = "02",
+         "3" = "03",
+         "4" = "04",
+         "5" = "05",
+         "6" = "06",
+         "7" = "07",
+         "8" = "08",
+         "9" = "09",
+         "10"= "Highest, Top, 10",
+         "P" = "missing"),
+       U = fct_recode(urbrum,
+        "1" = "A big city",
+        "2" = "The suburbs or outskirts of a big city",
+        "3" = "A town or a small city",
+        "4" = "A country village",
+        "5" = "A farm or home in the country", 
+        "P" = "missing")
+        )
 
-# ikäluokka ja sukupuoli - yhteisvaikutusmuuttuja
+names(MCAdata1jh.dat)
+dim(MCAdata1jh.dat)
+MCAdata1jh.dat$E %>% levels()
+MCAdata1jh.dat$S %>% levels()
+MCAdata1jh.dat$U %>% levels()
+MCAdata1jh.dat$age_cat %>% levels()
+str(MCAdata1jh.dat$ga) # toimiikohan - chr-muuttuja? (16.10.20)
 
+MCAdata1jh.dat <- MCAdata1jh.dat %>%
+mutate(gaf = as_factor(ga))
 
+str(MCAdata1jh.dat$gaf)
+levels(MCAdata1jh.dat$gaf) # järjestyksellä ei liene väliä? (16.10.20)
 
-#Perustietoja
+# gaf ja ga: sama järjestys
 
-ISSP2012jh1d.dat %>% tableX(maa, sosta)
-ISSP2012jh1d.dat %>% tableX(maa, urbru)
-ISSP2012jh1d.dat %>% tableX(maa, edu)
+MCAdata1jh.dat <- MCAdata1jh.dat %>%
+       mutate(gaf = fct_relevel(gaf,
+                                 "f1",
+                                 "f2",
+                                 "f3",
+                                 "f4",
+                                 "f5",
+                                 "f6",
+                                 "m1",
+                                 "m2",
+                                 "m3",
+                                 "m4",
+                                 "m5",
+                                 "m6"))
 
-ISSP2012jh1d.dat %>% tableX(maa, sosta, type = "row_perc")
-ISSP2012jh1d.dat %>% tableX(maa, urbru, type = "row_perc")
-ISSP2012jh1d.dat %>% tableX(maa, edu, type = "row_perc")
+# Perustietoja 
 
+MCAdata1jh.dat %>% tableX(gaf, ga)
 
+MCAdata1jh.dat %>% tableX(maa, sosta)
+MCAdata1jh.dat %>% tableX(maa, urbru)
+MCAdata1jh.dat %>% tableX(maa, edu)
+
+MCAdata1jh.dat %>% tableX(maa, sosta, type = "row_perc")
+MCAdata1jh.dat %>% tableX(maa, urbru, type = "row_perc")
+MCAdata1jh.dat %>% tableX(maa, edu, type = "row_perc")
+
+# 
 
 ```
 
 Taustamuuttujien taulukoissa on yllättävän isoja eroja, jotkut taulukoiden luokat
 ovat nollia tai hyvin vähän havaintoja. Luokkia pitäisi ehkä yhdistellä,jo pelkästään
-"kuvaroskan" takia.
+"kuvaroskan" takia. Ei tehdä.
 
 **Puuttuneisuuden yleiskuva**
-```{r MCAmissing}
+```{r MCAmissing, eval = FALSE, include = FALSE, echo = TRUE}
 # Puuttuvien tietojen yleiskuva
 
-# Puuttuvat tiedot aineistossa - viite datan dokumentointiin.
+# Puuttuvat tiedot aineistossa - viite datan dokumentointiin jossa taulukot.
 # Vaihtelee maittain ja muuttujittain, paljon.
 
+# Koko data (G1_1_data2.Rmd - skriptissä valitut muuttujat ja 25 maata)
+#
 #sum(!complete.cases(ISSP2012jh1d.dat)) = 9455
 #dim(ISSP2012jh1d.dat) = 32823
 #9455/32823 = 0.2880602
-names(MCAdata1jh.dat)
-# Puuttuvat tiedot valitussa aineistossa
-sum(!complete.cases(MCAdata1jh.dat))
-#dim(ISSP2012jh1d.dat) = 32823
 
+# Puuttuvat tiedot valitussa MCA-aineistossa
 
+#missingMCAvars1 <-  c("Q1a","Q1b", "Q1c", "Q1d","Q1e","Q2a","Q2b","edu",
+#                 "sosta", "urbru", "maa", "ika", "sp" )
+#missingTestMCA1.dat <- ISSP2012jh1d.dat %>% select(all_of(missingMCAvars1))
+
+#sum(!complete.cases(missingTestMCA1.dat)) = 6101
+#dim(missingTestMCA1.dat) = 32823
+#6101/32823 = 0.1858758 Puuttellisten havaintojen osuus.
 
 ```
 
 
-Yllä havainnot joissa ei ole puuttuvia tietona, havainnoit joissa on ja täydellisten tietojen osuus (71%).
+Koko tähän tutkimukseen valitussa aineistossa (25 maata ja muuttujat, poistettu
+havainnot joissa ikä tai sukupuoli puuttuu) 71% havainnoista on kaikki tiedot.
+
+MCA-analyyseihin valitun 7 + 3 = 10 muuttujan aineiston havainnoista 81% on
+vailla puuttuvia tietoja. Jos puuttuvat tiedot poistetaan (ns. "listwise delete"
+poistetaan jos yksi tai useampi tieto puuttuu) viidesosa datasta jää pois.
+Kannattaako puuttuvia tietoja hieman analysoida?
+
 
 Data on valmiina, edellisen luvun ikäluokka, ikä-sukupuoli- muuttuja ja 
 ikä-sukupuoli- maa muuttujien luontia voi harkita.
