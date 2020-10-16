@@ -114,6 +114,61 @@ mutate(E = fct_recode(edum,
         "5" = "A farm or home in the country", 
         "P" = "missing")
         )
+# ikäluokka ja sukupuoli
+#age_cat
+#ikä 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
+MCAtestdata121020.dat <- mutate(MCAtestdata121020.dat, age_cat = ifelse(ika %in% 15:25, "1",
+                                ifelse(ika %in% 26:35, "2",
+                                ifelse(ika %in% 36:45, "3",
+                                ifelse(ika %in% 46:55, "4",
+                                ifelse(ika %in% 56:65, "5", "6"))))))
+
+# str(MCAtestdata121020.dat$age_cat)
+ # uusi (4.2.20)
+MCAtestdata121020.dat <- MCAtestdata121020.dat %>%        
+        mutate(age_cat = as_factor(age_cat))
+#tarkastuksia - outo järjestys
+# levels(MCAtestdata121020.dat$age_cat)
+# str(MCAtestdata121020.dat$age_cat)
+MCAtestdata121020.dat<- MCAtestdata121020.dat %>%
+        mutate(age_cat = fct_relevel(age_cat,
+                                   "1",
+                                   "2",
+                                   "3",
+                                   "4",
+                                   "5",
+                                   "6"))
+       
+# Tarkistuksia ehkä? (16.10.20)
+
+MCAtestdata121020.dat %>%
+        tableX(maa,age_cat,type = "count") #%>%
+        #kable(digits = 2, caption = "Ikäluokka age_cat")
+
+MCAtestdata121020.dat %>%
+        tableX(maa,age_cat,type = "row_perc") #%>%
+        #kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
+
+
+# Ikäluokka-sukupuoli - muuttuja
+MCAtestdata121020.dat <- mutate(MCAtestdata121020.dat,
+                             ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
+                                (age_cat == "2")&(sp == "m") ~ "m2",
+                                (age_cat == "3")&(sp == "m") ~ "m3",
+                                (age_cat == "4")&(sp == "m") ~ "m4",
+                                (age_cat == "5")&(sp == "m") ~ "m5",
+                                (age_cat == "6")&(sp == "m") ~ "m6",
+                                (age_cat == "1")&(sp == "f") ~ "f1",
+                                (age_cat == "2")&(sp == "f") ~ "f2",
+                                (age_cat == "3")&(sp == "f") ~ "f3",
+                                (age_cat == "4")&(sp == "f") ~ "f4",
+                                (age_cat == "4")&(sp == "f") ~ "f4",
+                                (age_cat == "5")&(sp == "f") ~ "f5",
+                                (age_cat == "6")&(sp == "f") ~ "f6",
+                                TRUE ~ "missing"
+                                ))
+
+
 names(MCAtestdata121020.dat)
 dim(MCAtestdata121020.dat)
 

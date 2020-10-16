@@ -29,52 +29,195 @@ library(assertthat)
 
 # Yksinkertaisen korrespondenssianalyysin laajennuksia 2
 
-**TODO** Vielä kuuden maan aineistolla ilman puuttuvia havaintoja? Helpompi 
-havainnollistaa taulukoiden pinoamista / liittämistä (concate, stack). Ja voisi 
-jatkaa ehkä pari pointtia pienellä aineistolla?
+Kaksi ensimmäistä lukua ehkä omaksi kokonaisuudeksi, ohitetaan aika kevyesti.
+
+
+## Matriisien yhdistäminen (stacked and concatenated matices)
+
+Pinotuista tauluista yksinkertainen esimerkki rajatulla aineistolla, selitetään
+periaate. Ei laajenneta aineistoa, sillä puuttuvat tiedot aiheuttavat pulmia joihin
+sopii parhaiten MCA. MCA on muuttujien välisten suhteiden analyysiä, näin puuttuvista
+tiedosta saadan otetta.
+
+Ref:CAip, CA_Week2.pdf (kalvot MCA-kurssilta 2017)
+
+
+Concatenated tables (yhdistetyt taulut tai matriisit):
+(a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan").
+
+MCA 2017 laskareissa ja kalvoissa esitetään, miten nämä saadaan kätevästi
+CA-paketin MJCA-funktion BURT-optiolla.
+
+
+### Matched matrices
+
+Jos ja kun ei tehdä analyysiä, ei tarvitse omaa jaksoa. Kannattaa mainita, ehkä
+vain teoriajaksossa? Idea: matriisien yhdistämisellä saadaan ote monenlaiseen
+tutkimusongelmaan. Benzecri: data-analyysissä on vain löydettävä oikea matriisi
+joka diagonalisoidaan-
+
+
+Ref:CAip ss. 177, HY2017_MCA, Greenacre JAS 2013 (sovellus ISSP 1989,4 kysymystä
+'pitäisikö äidin olla kotona', 8 maata), tässä artikkelissa "SVD-based methods",
+joista yksi CA (muut biplots, PCA, compositional data/log ratios).
+
+Edellisen menetelmän variantti, jossa ryhmien väliset ja sisäiset erot saadaan
+esiin. Inertian jakaminen.
+Samanlaisten rivien ja sarakkeiden kaksi samankokoista taulua, esimerkiksi
+sukupuolivaikutusten arviointi. Alkuperäinen taulukko jaetaan kahdeksi tauluksi
+sukupuolen mukaan. Matriisien yhdistäminen (concatenation) riveittäin tai
+sarakkeittain ei näytä optimaalisesti mm - matriisien eroja.
+
+Ryhmien välisen ja ryhmien sisäinen inertian erottaminen, **ABBA**
+on yksi ratkaisu (ABBA matrix, teknisesti block circular matrix).
+
+Luokittelu voi olla myös kahden indikaattorimuuttujan avulla jako neljään
+taulukkoon (esim. miehet vs. naiset länsieuroopassa verratuna samaan asetelmaan
+itä-Euroopassa). Samaa ideaa laajennetaan.
+
+Esimerkkinä "Attitudes to women working in 2012".
+
+
+Substanssimuuttujien (kysymysten) ja taustamuuttujien (demografiset, koulutus,
+asuinpaikka) analyysissä ydin on substanssimuuttujien välisissä suhteissa.
+
+Subsanssimuuttujista valitaan seitsemän kysymystä (naisten rooli työmarkkinoilla)
+joissa vastausvaihtoehtoja on viisi. Tämä on suositus tai yleinen käytäntö, joka
+yksinkertaistaa analyysiä.
+
+Taustamuuttujista valitaan kolme: koulutustaso edu ja asuinpaikka urbru ovat (jos
+tiedokeruun erot unohdetaan) taustatietoja.Kolmas muuttujasosta/"Top-Bottom self-placement") 
+on kysymys mutta ei pohdita tätä enempää.
+
+Lisämuuttujina ovat sukupuoli (sp), maa ja ikä. Ikä luokitellaan kuuteen ryhmään
+ja luodaan ikäluokan ja sukupuolen yhteisvaikutusmuuttuja ga.
+
 
 ```{r G1-5-isodat1}
 
-# str(ISSP2012jh1d.dat)
-# Yksinkertaisuuden vuoksi muuttujat tähän
+# str(ISSP2012jh1d.dat) - luotu skripteissä G1_1_data2.Rmd ja G1_1_data_fct1.Rmd
 
-isodatVars1 <- ISSP2012jh1d.dat %>% names()
-isodatVars1 <- isodatVars1[24:73]
-demogrVars1 <- c("maa","maa3","sp","ika")
-isodatVars1 <- isodatVars1[21:50]
-isodatVars1 <- c(demogrVars1, isodatVars1)
-isodatVars1
+#Valitaan muuttujat joissa puuttuva tieto on koodattu muuttujan arvoksi
 
-ISSP2012jh1d.dat %>% select(all_of(isodatVars1)) %>% 
-    summary()
+MCAvars1 <-  c("Q1am","Q1bm", "Q1cm", "Q1dm","Q1em","Q2am","Q2bm","edum",
+                 "sostam", "urbrum", "maa", "ika", "sp" )
 
-# Muuttujat joissa puuttuvia tietoja (NA), lisäksi maa, maa3, sp ja ika
+MCAdata1jh.dat <- ISSP2012jh1d.dat %>% select(all_of(MCAvars1))
+dim(MCAdata1jh.dat)
+names(MCAdata1jh.dat)
 
-isodatVars2 <- c("maa","maa3", "sp", "ika","Q1a", "Q1b", "Q1c", "Q1d", "Q1e", "Q2a",
-    "Q2b", "Q3a", "Q3b", "edu", "msta", "sosta", "nchild", "lifsta", "urbru")
+# luodaan ikaluokka-muuttuja ja ikäluokka-sukupuoli - muuttuja
+#age_cat
+#ikä 1=15-25, 2 =26-35, 3=36-45, 4=46-55, 5=56-65, 6= 66 and older
+MCAdata1jh.dat <- mutate(MCAdata1jh.dat, age_cat = ifelse(ika %in% 15:25, "1",
+                                ifelse(ika %in% 26:35, "2",
+                                ifelse(ika %in% 36:45, "3",
+                                ifelse(ika %in% 46:55, "4",
+                                ifelse(ika %in% 56:65, "5", "6"))))))
 
-# muuttujat joissa puuttuvat koodattu arvoksi
-isodatVars3 <- c("Q1am","Q1bm", "Q1cm", "Q1dm","Q1em","Q2am","Q2bm" )
+# str(MCAdata1jh.dat$age_cat)
+ # uusi (4.2.20)
+MCAdata1jh.dat <- MCAdata1jh.dat %>%        
+        mutate(age_cat = as_factor(age_cat))
+#tarkastuksia - outo järjestys
+# levels(MCAdata1jh.dat$age_cat)
+# str(MCAdata1jh.dat$age_cat)
+MCAdata1jh.dat<- MCAdata1jh.dat %>%
+        mutate(age_cat = fct_relevel(age_cat,
+                                   "1",
+                                   "2",
+                                   "3",
+                                   "4",
+                                   "5",
+                                   "6"))
+       
+# Tarkistuksia ehkä? (16.10.20)
 
-testIsodat1.dat <- ISSP2012jh1d.dat %>% select(all_of(isodatVars2))
+MCAdata1jh.dat %>%
+        tableX(maa,age_cat,type = "count") #%>%
+        #kable(digits = 2, caption = "Ikäluokka age_cat")
 
-sum(complete.cases(testIsodat1.dat)) 
-sum(!complete.cases(testIsodat1.dat))
-# sum(complete.cases(testIsodat1.dat)) + sum(!complete.cases(testIsodat1.dat)) = 32823
+MCAdata1jh.dat %>%
+        tableX(maa,age_cat,type = "row_perc") #%>%
+        #kable(digits = 2, caption = "age_cat: suhteelliset frekvenssit")
 
-# 14789+18034 = 32823 (miehet + naiset)
 
-# Puuttuvat tiedot aineistossa - viite datan dokumentointiin. Vaihtelee maittain ja muuttujittain, paljon.
-sum(complete.cases(testIsodat1.dat)) / 32823
+# Ikäluokka-sukupuoli - muuttuja
+MCAdata1jh.dat <- mutate(MCAdata1jh.dat,
+                             ga = case_when((age_cat == "1")&(sp == "m") ~ "m1",
+                                (age_cat == "2")&(sp == "m") ~ "m2",
+                                (age_cat == "3")&(sp == "m") ~ "m3",
+                                (age_cat == "4")&(sp == "m") ~ "m4",
+                                (age_cat == "5")&(sp == "m") ~ "m5",
+                                (age_cat == "6")&(sp == "m") ~ "m6",
+                                (age_cat == "1")&(sp == "f") ~ "f1",
+                                (age_cat == "2")&(sp == "f") ~ "f2",
+                                (age_cat == "3")&(sp == "f") ~ "f3",
+                                (age_cat == "4")&(sp == "f") ~ "f4",
+                                (age_cat == "4")&(sp == "f") ~ "f4",
+                                (age_cat == "5")&(sp == "f") ~ "f5",
+                                (age_cat == "6")&(sp == "f") ~ "f6",
+                                TRUE ~ "missing"
+                                ))
 
-# Ei toimi 11.10.20
-#
-# testIsodat1.dat %>%
-#    group_by(maa)
-#    summarise(countNA = sum(is.na(all_of(isodatVars3))))
 
-# testIsodat1.dat %>% tableX(maa, isodatVars3)
+names(MCAdata1jh.dat)
+dim(MCAdata1jh.dat)
+
+
+#Sosiaalinen status: oma arvio "Top-Bottom self-placement"
+str(ISSP2012jh1d.dat$sosta)
+
+#Koulutustaso
+str(ISSP2012jh1d.dat$edu)
+
+#Asuipaikka
+str(ISSP2012jh1d.dat$urbru)
+
+# ikäluokka
+
+# ikäluokka ja sukupuoli - yhteisvaikutusmuuttuja
+
+
+
+#Perustietoja
+
+ISSP2012jh1d.dat %>% tableX(maa, sosta)
+ISSP2012jh1d.dat %>% tableX(maa, urbru)
+ISSP2012jh1d.dat %>% tableX(maa, edu)
+
+ISSP2012jh1d.dat %>% tableX(maa, sosta, type = "row_perc")
+ISSP2012jh1d.dat %>% tableX(maa, urbru, type = "row_perc")
+ISSP2012jh1d.dat %>% tableX(maa, edu, type = "row_perc")
+
+
+
 ```
+
+Taustamuuttujien taulukoissa on yllättävän isoja eroja, jotkut taulukoiden luokat
+ovat nollia tai hyvin vähän havaintoja. Luokkia pitäisi ehkä yhdistellä,jo pelkästään
+"kuvaroskan" takia.
+
+**Puuttuneisuuden yleiskuva**
+```{r MCAmissing}
+# Puuttuvien tietojen yleiskuva
+
+# Puuttuvat tiedot aineistossa - viite datan dokumentointiin.
+# Vaihtelee maittain ja muuttujittain, paljon.
+
+#sum(!complete.cases(ISSP2012jh1d.dat)) = 9455
+#dim(ISSP2012jh1d.dat) = 32823
+#9455/32823 = 0.2880602
+names(MCAdata1jh.dat)
+# Puuttuvat tiedot valitussa aineistossa
+sum(!complete.cases(MCAdata1jh.dat))
+#dim(ISSP2012jh1d.dat) = 32823
+
+
+
+```
+
+
 Yllä havainnot joissa ei ole puuttuvia tietona, havainnoit joissa on ja täydellisten tietojen osuus (71%).
 
 Data on valmiina, edellisen luvun ikäluokka, ikä-sukupuoli- muuttuja ja 
@@ -82,29 +225,6 @@ ikä-sukupuoli- maa muuttujien luontia voi harkita.
 
 **edit** Tässä keskityttävä data-analyysin **tutkimusongelmiin**, johdantoa MCA-lukuun.
 
-## Matriisien yhdistäminen (stacked and concatenated matices)
-
-Ref:CAip, CA_Week2.pdf (kalvot MCA-kurssilta 2017)
-
-
-Concatenated tables (yhdistetyt taulut tai matriisit): (a) kaksi luokittelumuuttujaa (b) useita muuttujia stacked ("pinotaan").
-
-MCA 2017 laskareissa ja kalvoissa esitetään, miten nämä saadaan kätevästi CA-paketin MJCA-funktion BURT-optiolla.
-
-
-
-## Matched matrices
-
-Ref:CAip ss. 177, HY2017_MCA, Greenacre JAS 2013 (sovellus ISSP 1989, 4 kysymystä 'pitäisikö äidin olla kotona', 8 maata), tässä artikkelissa "SVD-based methods", joista yksi CA (muut biplots, PCA, compositional data/log ratios).
-
-Edellisen menetelmän variantti, jossa ryhmien väliset ja sisäiset erot saadaan esiin. Inertian jakaminen.
-Samanlaisten rivien ja sarakkeiden kaksi samankokoista taulua, esimerkiksi sukupuolivaikutusten arviointi. Alkuperäinen taulukko jaetaan kahdeksi tauluksi sukupuolen mukaan. Matriisien yhdistäminen (concatenation) riveittäin tai sarakkeittain ei näytä optimaalisesti mm - matriisien eroja.
-
-Ryhmien välisen ja ryhmien sisäinen inertian erottaminen, **ABBA** on yksi ratkaisu (ABBA matrix, teknisesti block circulanMat matrix).
-
-Luokittelu voi olla myös kahden indikaattorimuuttujan avulla jako neljään taulukkoon (esim. miehet vs. naiset länsieuroopassa verratuna samaan asetelmaan itä-Euroopassa). Samaa ideaa laajennetaan.
-
-Esimerkkinä "Attitudes to women working in 2012".
 
 ## MCA
 ```{r mca1, fig.asp = 1, fig.cap="MCA-kartta: viiden vastausvaihtoehdon kysymykset", out.width = "90%",fig.align = "center"}

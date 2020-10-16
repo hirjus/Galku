@@ -59,11 +59,12 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet",
 
 ```
 
-2. Täydentävät pistee (supplementary points)
+2. Täydentävät pisteet (supplementary points)
  
  - eivät vaikuta karttaan (koordinaatistoon, rivi- tai sarakepisteiden sijaintiin)
  - useita tapoja käyttää, tässä Saksan ja Belgian maapisteet
  - barysentrinen keskiarvo
+ - laajempi esittely capaper-projektissa
 
 3. Lisämuuttujat - yksinkertainen ca useamman muuttujan analyysissä
 
@@ -79,13 +80,20 @@ ei toimi. Yksinkertainen keino analyysivaiheessa on "leikata ja liimata" kuvia j
 tallentaa ne pdf-muodossa. Voi tehdä muistiinpanoja, lisätä kommentteja jne.
 
 Tässä esitellään kaksi muuta: kuva-alan rajaaminen BaseR-grafiikan plot-funktion
-parametreilla ja paljon yleispätevämpi osajoukon korrespondenssianalyysi. 
-Jälkimmäisessä valitaan joku osajoukko aineistosta, ja tehdään sille 
-korrespondenssianalyysi siten, että reunajakaumat (massat) ja valitun datan 
-profiilit pidetään vakioina. Paljon parempi idea kuin suoraviivainen aineiston
-rajaaminen.
+parametreilla. Tässä esitellään yleisempi osajoukon korrespondenssianalyysi (subset ca). 
+Osajoukko CA:ssa reunajakaumat (massat) ja valitun datan profiilit eivät muutu.
+Idea on tavallaan tehdä ensin CA-kalkyylit ja valita sitten tarkasteltava joukko.
 
-Nyt käytetään johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
+Paljon parempi idea kuin suoraviivainen aineiston rajaaminen,jossa "kaikki
+muuttuisi" jokaisella aineiston rajauksella. Yhteys suhteelisten
+osuuksien/koostumusdatan (compositional DA) analyysiin: ca ei ole "subcompositionally
+coherent".
+
+Täyden aineiston inertia voidaan dekompoida l. jakaa osajoukoille, eräs CA:n
+perusideoita yleisemminkin. 
+
+
+Käytetään tässäkin johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
 tehty.
 
 **(14.9.20)**G1_4_CAlaaj1.Rmd jaettu kolmeksi tiedostoksi, uusia G1_4_CAlaaj2.Rmd ja
@@ -196,9 +204,11 @@ Samalla oikaistaan myös naisten yliedustus aineistossa.
 
 **Käsitteitä:** 
 (a) Active point, aktiivinen piste (aktiivinen havainto tai
-muuttuja).
+muuttuja). Pistettä käytetään CA-laskennassa.
 
-(b) Supplementary pointtäydentävä piste (täydentävä havainto).
+(b) Supplementary point,täydentävä piste (täydentävä havainto), täydentävä rivi-
+tai sarakeprofiili. Pistettä ei käytetä CA-ratkaisun laskennassa, mutta sille
+lasketaan koordinaatit ratkaisuun.
 
 Täydentävien muuttujien kolme käyttötapaa:
 
@@ -215,15 +225,10 @@ täydentävät/lisäpisteet tarkemmin (18.9.2018).
 ```{r G1-4suppoints-BeDe, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
 
 # Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
-# Belgian ja Sakasan jako lisäpisteinä 24.5.2018
+# Belgian ja Sakasan jako, maapisteet lisäpisteinä 24.5.2018
 # Data suppointCA1
 
-
-# Miten lisärivit? (24.5.2018)
-# Luetaan data tauluksi - ei toimi, char-table.Toimisiko nyt, ei chr? (4.2.20)
-# yritetään uudestaan table-funktiolla
-
-# data maa3-muuttujassa
+# Be ja De jako maa3-muuttujassa
 # str(ISSP2012esim1.dat$maa3)
 # attributes(ISSP2012esim1.dat$maa3)
 
@@ -242,12 +247,13 @@ suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
 suppoint2_df <- select(suppoint2_df, maa, Q1b)
 #head(suppoint2_df)
 #tail(suppoint2_df)
-str(suppoint2_df)
+# str(suppoint2_df)
 # attributes(suppoint2_df) # korvaa attr(x, which) tms. liian pitkä tulostus
 # attr(suppoint2_df, which = "class")
 # attr(suppoint2_df, which = "name")
 # summary(suppoint2_df)
-suppoint2_df %>% table1()
+# suppoint2_df %>% table1()
+suppoint2_df %>% tableX(maa, Q1b)
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 # suppoint2_tab1 # tarkistus
 suppoint2_tab1 <- suppoint2_tab1[-2,]
@@ -257,7 +263,7 @@ suppoint2_tab1 <- suppoint2_tab1[-3,]
 suppoint2_tab1 <- suppoint2_tab1[-3,]
 
 # suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
-suppoint2_tab1
+# suppoint2_tab1
 #lisätään rivit maa3-muuttujan taulukkoon
 
 suppoint1_tab1 <- rbind(suppoint1_tab1, suppoint2_tab1)
@@ -265,15 +271,14 @@ suppoint1_tab1
 suppointCA2 <- ca(suppoint1_tab1[,1:5], suprow = 10:11)
 par(cex = 0.6)
 plot(suppointCA2, main = "Symmetrinen kartta: Saksan(2) Belgian(3) aluejako",
-     sub = "Passiiviset pisteet DE ja BE" )
+     sub = "Täydentävät pisteet DE ja BE" )
 
 ```
-Kääntöä ei tarvita, kun maiden järjestys on sama myös muuttujassa maa3
-(mukana maiden jaot).
 
-Saksan ja Belgian summarivit ovat ositteiden painotettuja keskiarvoja
-(sentroideja), esim.läntisen ja itäisen Saksan rivipisteiden välisellä janalla
-on koko maan summapiste DE.
+Saksan ja Belgian summarivit ovat ositteiden painotettuja (barysentrisiä)
+keskiarvoja (sentroideja), esim.läntisen ja itäisen Saksan rivipisteiden välisellä
+janalla on koko maan summapiste DE. Entisen länsi-Saksan piste on keskiarvopistettä
+lähempänä, etäisyys on käänteisessä suhteessa massaan.
 
 **18.9.20** Hajonta kasvaa, ja kartan oikealla puolella sarakkeiden etäisyydet
 kasvavat. Erityisest S-piste nousee toisen dimension suuntaan ylöspäin. Muiden
@@ -282,7 +287,8 @@ pystysuuntaan ja Saksa vaakasuuntaan." Bryssel (bB) ja Flanders (bF) ovan
 konservatiivisempiä kuin lievästi liberaalimpi Wallonia (bW). Flandersin ja
 Brysselin ero on mielipiteen varmuudessa tai tiukkuudussa, ja Bryssel saattaa olla
 polarisoitunut (lievä Guttman-efekti).
-```{r suppoint-rprof1}
+
+```{r suppoint-rprof1, fig.cap=Saksan ja Belgian alueet}
 # riviprofiilitaulukko joteskin (18.9.20)
 ISSP2012esim1.dat %>% tableX(maa3, Q1b, type = "row_perc")
 
@@ -404,6 +410,9 @@ Kolmiulotteisesta kuvasta Belgian ja Saksan alueiden hajonta tasosta näkyy hiem
 selvemmin jos kuva olisi dynaaminen. On mahdollista, mutta tätä ei nyt tehdä (17.9.20).
 Kolmannen dimension osuus on noin seitsemän prosenttia kokonaisinertiasta,
 kaksiulotteisten karttojen tulkinta ei ole ihan helppoa.
+
+
+
 **TODO 3d-numeeriset tulokset, summary() ei toimi?**
 
 
@@ -414,5 +423,4 @@ knitr::include_graphics('img/3dSymMap_2.PNG')
 ```
 
 
-**edit 9.9.20** Tällä datalla ABBA stacked-jaksossa?
 

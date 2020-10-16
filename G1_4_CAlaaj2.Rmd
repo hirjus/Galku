@@ -443,7 +443,7 @@ pelkkiä plot-komentoja.
 
 *zxy** Tässä vain lyhyt kuvaus subset ca:n perusideasta
 
-### Kuva-alueen rajaaminen
+### Kuva-alueen rajaaminen - ei oikein toimi (16.10.20)
 
 
 ```{r maagaCA2zoom1,fig.cap = "Ikä-sukupuoli-maa", fig.asp = 1, out.width = "90%",fig.align = "center"}
