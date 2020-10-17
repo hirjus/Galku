@@ -200,8 +200,8 @@ Greenacre (2006, "loose ends -artikkeli") ehdotti asymmetrisessä kuvassa
 standardikoordinaattien skaalaamista niin, että ne kerrotaan massan neliöjuurella. 
 Tämä skaalaus toimii hyvin pienen ja suuren inertian tapauksessa. Kartoissa pätee 
 sama sääntö kuin muussakin graafisessa data-analyyisissä, kuvien on esitettävä 
-oleelliset yhteydet, mutta mielellään vain ne.**todo 10.10.20** Inertian maksimi on ratkaisun dimensioiden
-suurin lukumäärä. Tämä teoria-jaksossa.
+oleelliset yhteydet, mutta mielellään vain ne.**todo 10.10.20** Inertian maksimi
+on ratkaisun dimensioiden suurin lukumäärä. **teoria-jaksoon.**
 
 Sama kuva, kontribuutiot "relative". **edit 24.2.20** Ero selitettävä!
 
@@ -255,12 +255,16 @@ knitr::include_graphics('img/simpleCAasymmTulk2.png')
 
 ```
 
+**"kaikki on suhteellista"** Esimerkiksi Tanskan riviprofiilissa 
+E-vastauksien suhteellinen osuus poikkeaa eniten keskiarvopisteestä (origossa).
+Asymmetisessä kuvassa voimme projisoida rivipisteet sarakepisteen vektorille.
+
+Korrespondenssianalyysin ratkaisun yksityiskohdat: ca-funkton tuloste ja "tulosobjekti".
+**Tulosobjekti "teoriajaksoon", vai viitataako siellä tähän kohtaan?**
+
 Numeeriset tulokset, jälkimmäisessä rivimassat vakioitu yhtä suuriksi
 ("riviprofiilitaulukon ca").
 
-**todo - "kaikki on suhteellista"** Esimerkiksi Tanskan riviprofiilissa 
-E-vastauksien suhteellinen osuus poikkeaa eniten keskiarvopisteestä (origossa).
-Asymmetisessä kuvassa voimme projisoida rivipisteet sarakepisteen vektorille.
 
 ```{r G1_3_castats1}
 # CA:n numeeriset tulokset
@@ -284,11 +288,120 @@ summary(simpleCA3)
 # simpleCA1$coldist
 # simpleCA3$coldist
 
+# Hieman laskentaa
+
+# Massojen summat 1 - onko ero ca-tulosten massoissa pyöristysvirhe? (17.10.20)
+#sum(simpleCA1$colmass)
+#sum(simpleCA3$colmass)
+#testMassDiff <- simpleCA3$colmass - simpleCA1$colmass
+#testMassDiff
+# 0.005812145  0.012608847  0.002977493 -0.005426916 -0.015971569
+
 ```
 
-Edellisessä jaksossa esimerkki siistimmästä taulukosta.
+**edit**Edellisessä jaksossa esimerkki siistimmästä taulukosta,samoin
+bookdown-testiprojektissa.
 
-**TODO** (21.2.20)
+Tulkinta:
+- ensin ratkaisu alkuperäisillä massoilla (otoskoot), sitten vertaillaan
+ratkaisuun vakiomassoilla -> massojen vaikutus.
+
+1. Pääakselien inertiat - ratkaisun yleinen laatu (ne prosentit kuvissa!)
+
+- maksimi-inertia (teoreettinen) on 4, yleisesti min(J-1, K-1), J on rivien ja K sarakkeiden
+lukumäärä
+
+- alkuperäisten "pistepilvien" inertia jaetaan ca-ratkaisussa pääakseleille
+suurimmasta pienimpään (esim. Rows:inr - sarakkeen summa on 1)
+
+- kokonaisinertia 0.18 (vertailu teoreettiseen maksimiin ei kovin kiinnostava?)
+- ensimmäinen akseli ei täysin dominoi, mutta kaksi ensimmäistä kuvaavat jo 91 prosenttia
+aineiston kokonaishajonnasta (käytän termejä hajonta ja inertia vaihtelevasti)
+- 9 prosenttia jää kuitenkin 3. ja 4. dimensiolle
+
+2. Kartta tulkitaan katseella - numeerisista tuloksista tarkistetaan
+ja varmistetaan
+
+Mitä on vasemmalla ja oikealla (1. dimensio 76 % inertiasta), ylhäällä ja
+alhaalla (15 % inertiasta) - > sarakkeet ja niiden avulla akselien tulkinta
+(etäisyydet appr. khii2).
+
+Pisteet ja niiden (suhteellinen sijanti) origoon ja toisiinsa ( samassa pilvessä)
+appr. khii2 jos kvalitetti kelvollinen. Muuten "lähellä voi olla kaukana", kaukana
+on kuitenkin aika kaukana.
+
+Numeerista tuloksista katsotaan:
+
+**Sarakkeet** ja akseleiden tulkinnan tarkistus (ensin):
+
+
+1. Kvalitetti kaikilla ok (>785): sarakkeet ja niiden etäisyydet hyvin esitetty
+
+2. Sarakkeiden osuudet kokonaisinertiasta: E-sarake yli puolet (524), eos-sarake
+pienin (73).
+
+3. Akselien tulkinnan varmistaminen (pääakselit ja koordinaatit), koordinaattien
+suunta (+ vai -)
+
+**cor**: relative contributions (out of 1000) of each dimension to the inertia of
+individual points. These are also interpreted as squared correlations (1000)
+
+CA-ratkaisun ulottuvuuksien (yleensä 2) suhteellinen kontribuution pisteen
+inertialle; kuinka "kaukana" tai "lähellä" piste on akseleiden määrämäästä tasosta?
+CA-ratkaisu minimoi massoilla painotetut poikkeamat.
+
+cor1 + cor2 = qlt
+
+**ctr**: contributions (out of 1000) of each point to the principal inertia of a
+dimension - pisteen suhteellinen kontribuutio akselin (pää) inertialle. Huom!
+suhteellinen, akselin osuus pilven inertiasta huomioitava.
+
+**ensimmäinen akseli** (76% kokonaisinertiasta); E "tasossa kiinni" (cor=966) ja
+osuus akselin kontribuutiosta yli puolet (651), koordinaatin etumerkistä näkyy suunta (-).
+- oikealle (+) S ja s yht neljännes (265), eos("?") hieman ja e mitään (2)
+- ensimmäinen akseli "selittää" kaikkien muiden pisteiden inertiasta suurimman
+osan, e poikkeus (cor 11)
+
+- hyvin selkeä, visuaalinen tulkinta on oikea
+E vasemmalla - kontrastina oikealla S ja s, eos-kategoria hieman.
+
+**toinen akseli** (15% kokonaisinertiasta): e "tasossa kiinni" (cor 971) ja
+osuus akselin inertiasta n. 70% (mutta akselin osuus kokonaisinertiasta 15%),
+suunta (-). eos ei vaikuta akseliin(ctr 7) eikä akseli eos-pisteen inertiaan(cor.
+
+Positiiviseen suuntaan akselin inertiaan vaikuttavat tiukat mielipiteet E
+(ctr 114) ja S (ctr 132), s jonkin verran (53)
+
+Maltillinen "eri mieltä" määrittää yksin toisen dimension, hieman yllättäen
+neutraalilla (eos) vaihtoehdolla ei ole yhteyttä dimensioon. Sen ainoa vaikutus
+ratkaisuun (kun inertia näin dekomponoidaan) on pieni S-suuntaan ensimmäisellä
+akselilla.
+
+
+ctr/cor - epäsymmetrinen suhde (teoriajaksoon).
+
+
+**Rivit** 
+
+1. kvaliteeetti (qlt): onko joku piste huonosti edustettu ratkaisussa
+(projektiossa)?
+
+- Belgia qlt kehnoin, Saksan toiseksi kehnoin. Belgialla suurin massa, Saksalla
+toiseksi suurin, ja silti niiden vaikutus karttaan (ctr molemmille akseleille)
+on heikko
+
+2. inr: part of total inertia of the point in the full space (rows or columns)
+
+- pisteen suhteellinen osuus (1000) koko alkuperäisen pilven inertiasta
+- DK suurin (381), BG ja HU lähes puolet (yht. 457), kolme muuta yhteensä 16 %
+- taas hämmentää Saksan ja Belgian pieni osuus kokonaisinertiasta
+- vai onko seuraus siitä, että massa molemmilla suuri?
+Lähellä aineiston keskiarvopistettä? Tämä nähdään kun verrataan CA-ratkaisuun
+jossa mailla sama paino!
+
+
+**Vertailu vakioitujen rivimassojen ca-ratkaisuun**
+
 
 1. Tätä voisi käyttää esimerkkinä numeeristen tulosten vertailussa?
 
@@ -297,15 +410,20 @@ mutta ei kovin radikaalisti.
 
 3. Kvaliteetti, kontribuutiot? Miten vertailla oleellisia asioita?
 
-Belgian laatu putoavat merkittävästi,ja kontribuutiot pienenevät entisestään.
+Belgian laatu putoavaa,ja kontribuutiot pienenevät entisestään.
 
 Saksan laatu paranee aika paljon, ja kontribuutiotkin jonkin verran.
 Aika outoa,että suurimman massan maiden (DE,BE lähes puolet datasta)
-kontribuutiot ovat niin pieniä (24.2.20)
+kontribuutiot ovat niin pieniä (24.2.20).
 
-4. Sarakemassojen muutos: sarakkeiden ja rivien yhteys. Kaavaliitteessä 
-eksplisiittisesti rivi- ja sarakeratkaisujen yhteys, massat mukana.
+Saksa siirtyy x-akselilla vasemmalle (x-koordinaatti -94 -> -144). Belgia siiryy
+x-akselilla lähemmäs origoa (93 -> 46) ja y-akselilla vähän kauemmas. Eihän tässä
+näin pitänyt käydä!
 
-**zxy** Taulukon käsitteiden läpikäynti ja pureskelu kuulunee seuraavaan lukuun?
+Kuvasta näkee muutoksen vähäisyyden. Aineisto on pieni, mutta kuva on selvästi
+tehokkaampi tapa kuvata taulukon rivien ja sarakkeiden yhteyksiä.
 
-MG & Blasius, "vihreä kirja" ja monta muuta lähdettä: kontribuutiot inertiaan
+4. **Sarakemassojen muutos?** Kaavaliitteessä eksplisiittisesti rivi-
+ja sarakeratkaisujen yhteys, massat mukana. Sarake- ja rivmassojen summat ovat 1.
+Sarekemassat ja inr muuttuvat hieman. Onko pyöristysvirhettä?
+

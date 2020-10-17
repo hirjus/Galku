@@ -223,10 +223,10 @@ sarakemuuttuja, jossa kovin vähän havaintoja)
 täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 ```{r G1-4suppoints-BeDe, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
-
-# Kömpelöä koodia, harjoitellaan taulukoiden yhdistelyä (CAtest1.Rmd)
+# 17.10.20 Muutin hieman koodia, aluejako-taulukon rivien järjestys muuttui.
+# 
 # Belgian ja Sakasan jako, maapisteet lisäpisteinä 24.5.2018
-# Data suppointCA1
+# CA-tulos: suppointCA2
 
 # Be ja De jako maa3-muuttujassa
 # str(ISSP2012esim1.dat$maa3)
@@ -245,22 +245,13 @@ suppoint1_tab1
 #
 suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
 suppoint2_df <- select(suppoint2_df, maa, Q1b)
-#head(suppoint2_df)
-#tail(suppoint2_df)
-# str(suppoint2_df)
-# attributes(suppoint2_df) # korvaa attr(x, which) tms. liian pitkä tulostus
-# attr(suppoint2_df, which = "class")
-# attr(suppoint2_df, which = "name")
-# summary(suppoint2_df)
-# suppoint2_df %>% table1()
-suppoint2_df %>% tableX(maa, Q1b)
+
+glimpse(suppoint2_df)
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
-# suppoint2_tab1 # tarkistus
-suppoint2_tab1 <- suppoint2_tab1[-2,]
-# kömpelösti kolme kertaa
-suppoint2_tab1 <- suppoint2_tab1[-3,]
-suppoint2_tab1 <- suppoint2_tab1[-3,]
-suppoint2_tab1 <- suppoint2_tab1[-3,]
+suppoint2_tab1 # tarkistus 1
+# Huom! tämä komento vain kerran - tai koko Rmd-tiedosto uudestaan (17.10.20)
+suppoint2_tab1 <- suppoint2_tab1[-c(2,4:6) ,]
+suppoint2_tab1 # tarkistus 2
 
 # suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
 # suppoint2_tab1
@@ -328,6 +319,8 @@ ideaalipisteet sijatsevat kaukana, vaikka ne on skaalattu hieman lähemmäs orig
 Maapisteiden hajontaa on aika vaikeaa nähdä. Belgian täydentävä maapiste (BE)
 peittyy läntisen Saksan (dW) alle. "rowgreen-kartoista" puuttuvat jostain syystä
 pisteet.
+
+**(17.10.20)** Kontribuutiokartoista riittää toinen, absolute tai relative.
 
 Tulostetaan numeeriset taulukot.
 

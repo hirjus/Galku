@@ -176,3 +176,5 @@ aineiston puuttuneisuuden kuvailua lyhyesti. Puuttuvia tietoja ei kuvailla tarke
 viitataan ISSP-dokumentteihin.
 
 **13.10.2020** MCA1.R - skriptissä kehitelty MCA-kuvia.
+
+**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä.

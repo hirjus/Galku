@@ -49,13 +49,64 @@ MCA 2017 laskareissa ja kalvoissa esitetään, miten nämä saadaan kätevästi
 CA-paketin MJCA-funktion BURT-optiolla.
 
 ```{r concatDat1}
-#Data
+# Data
+ISSP2012Concat1jh.dat <- select(ISSP2012esim1b.dat, Q1b, maa,sp, age_cat)
+
+# mjca-funktiota ->  Burt-matriisi
+Concat1jh.Burt <- mjca(ISSP2012Concat1jh.dat, ps="")$Burt
+
+# Burt-matriisi symmetrinen
+#dim(Concat1jh.Burt)
+# 19 x 19
+#rownames(Concat1jh.Burt)
+#[1] "Q1bS"     "Q1bs"     "Q1b?"     "Q1be"     "Q1bE"     "maaBE"    "maaBG"    "maaDE"    "maaDK"   
+#[10] "maaFI"    "maaHU"    "spm"      "spf"      "age_cat1" "age_cat2" "age_cat3" "age_cat4" "age_cat5"
+#[19] "age_cat6"
+
+# maat - vastaukset
+ISSP2012Concat2jh.dat <- Concat1jh.Burt[6:11, 1:5]
+# ISSP2012Concat2jh.dat
+# sukupuoli ja vastaukset
+ISSP2012Concat2jh.dat <- rbind(ISSP2012Concat2jh.dat, Concat1jh.Burt[12:13 ,1:5])
+# ISSP2012Concat2jh.dat
+# ikäluokka ja vastaukset
+ISSP2012Concat2jh.dat <- rbind(ISSP2012Concat2jh.dat, Concat1jh.Burt[14:19 ,1:5])
+# ISSP2012Concat2jh.dat
+
+Concat1jh.CA1 <- ca(ISSP2012Concat2jh.dat)
+# plot(Concat1jh.CA1)
+
+# Siistitään muuttujien nimet
+
+Concat1jh.CA1$colnames <- c("S", "s", "?", "e", "E")
+Concat1jh.CA1$rownames <- c("BE", "BG", "DE", "DK", "FI", "HU", "m", "f",
+                            "a1", "a2", "a3", "a4", "a5", "a6")
+# Käännetään kuva x-akselin ympäri
+Concat1jh.CA1$rowcoord[, 2] <- -Concat1jh.CA1$rowcoord[, 2]
+Concat1jh.CA1$colcoord[, 2] <- -Concat1jh.CA1$colcoord[, 2]
 
 ```
 
 Piirretään karttoja.
 
 ```{r concatplot1, fig.asp=1,fig.cap="Pinottu matriisi - kartta 1"}
+plot(Concat1jh.CA1, 
+     main = "Pinottu taulukko - symmetrinen kuva1",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
+
+# Tukkoinen kuva - rajataan pois HU ja BG (rivit 2, 6)
+dim(ISSP2012Concat2jh.dat) 
+
+subConcat1jh.CA1 <- ca(ISSP2012Concat2jh.dat[,1:5], subsetrow = c(1:1, 3:5, 7:14))
+subConcat1jh.CA1$colnames <- c("S", "s", "?", "e", "E")
+subConcat1jh.CA1$rownames <- c("BE", "DE", "DK", "FI", "m", "f",
+                           "a1", "a2", "a3", "a4", "a5", "a6")
+
+plot(subConcat1jh.CA1, 
+     main = "Pinottu taulukko - subsetCA",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
 
 ```
 
@@ -64,6 +115,7 @@ Kartan tulkinta; miten eroaa yhteisvaikutusmuuttujan analyysistä.
 Inertian dekomponointi alimatriiseille.
 
 Tärkeä oletus: reunajakaumat tauluissa samat, ei puuttuvia tietoja muuttujissa.
+
 
 ### Matched matrices
 

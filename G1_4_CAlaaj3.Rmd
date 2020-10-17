@@ -154,6 +154,20 @@ plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
     )
 
 ```
+Sama kartta kuin edellinen, mutta kontribuutiokarttana.
+```{r subsetCA-1e2, fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Osajoukko-ca ja täydentävät maapisteet
+
+par(cex = 0.6)
+plot(spCAmaagasub1, map = "rowgreen",
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+     sub = "Kontribuutiokartta, cex=0.06"
+    )
+
+
+```
+**17.10.20** Kontribuutiokartta näyttää paremmalta.
 
 **Osajoukko-ca neljälle ryhmälle**
 Belgia on vähän rajatapaus, kokeillaan osajoukko-ca:ta neljällä maaryhmällä.
@@ -172,7 +186,19 @@ plot(spCAmaagasub3, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maitta
     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
     )
 
+spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
+par(cex = 0.6)
+plot(spCAmaagasub3, map = "rowgreen",
+     arrows = c(FALSE,TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+    sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+    )
+# xlim=c(-0.1,0.8), ylim=c(-0.,0.4) kuvaa voisi säätää, mutta tärkein E-sarake
+# jäisi pois
+summary(spCAmaagasub3)
 ```
+
+
 
 ```{r subsetCA-1g, fig.asp = 1, out.width = "90%",fig.align = "center"}
 spCAmaagasub4 <- ca(maagaTab1[,1:5], subsetrow = BEDEDKFIsubset)
@@ -193,7 +219,18 @@ plot(spCAmaagasub4,map = "rowgreen",
      sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
 )
 
+par(cex = 0.6)
+plot(spCAmaagasub4,map = "rowprincipal",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowprincipal, relative contr.), osajoukko-ca, cex=0.06"
+)
+
+
 ```
+**17.10.20** Kontribuutiokartta on paras.
 
 ```{r subsetCA-1h, fig.asp = 1, out.width = "90%",fig.align = "center"}
 spCAmaagasub5 <- ca(maagaTab1[,1:5], subsetrow = DEDKFIsubset)
@@ -218,4 +255,11 @@ par(cex = 0.6)
 plot(spCAmaagasub6, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
      sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
 )
+
+plot(spCAmaagasub6, map = "rowgreen",
+    arrows = c(FALSE, TRUE),
+    main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+    sub = "kontribuutiokartta, osajoukko-ca, cex=0.06"
+)
+
 ```
