@@ -12,7 +12,7 @@ Siivotaan, luodaan faktori-muuttujat heti alussa koko datalle (G1_1_data_fct1.Rm
 **edit 24.9.18** Poistettiin turhaa, uusi versio tiedostosta (G1_1_data1.Rmd -> 
 G1_1_data2.Rmd).
 
-```{r paketit-g11, eval = FALSE, include=FALSE}
+```{r paketit-g11, eval = TRUE, include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 # paketit.R - kopioidaan Rmd-tiedostojen alkuun
 

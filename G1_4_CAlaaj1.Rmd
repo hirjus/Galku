@@ -279,7 +279,7 @@ konservatiivisempiä kuin lievästi liberaalimpi Wallonia (bW). Flandersin ja
 Brysselin ero on mielipiteen varmuudessa tai tiukkuudussa, ja Bryssel saattaa olla
 polarisoitunut (lievä Guttman-efekti).
 
-```{r suppoint-rprof1, fig.cap=Saksan ja Belgian alueet}
+```{r suppoint-rprof1}
 # riviprofiilitaulukko joteskin (18.9.20)
 ISSP2012esim1.dat %>% tableX(maa3, Q1b, type = "row_perc")
 

@@ -94,9 +94,22 @@ plot(Concat1jh.CA1,
      main = "Pinottu taulukko - symmetrinen kuva1",
      sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
      )
+plot(Concat1jh.CA1, 
+     main = "Pinottu taulukko - symmetrinen kuva1",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
+plot(Concat1jh.CA1, map = "rowgreen",
+     arrows = c(FALSE, TRUE),
+     main = "Pinottu taulukko - kontribuutiokartta",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
+plot(Concat1jh.CA1, map = "rowgreen",
+     main = "Pinottu taulukko - kontribuutiokartta",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
 
 # Tukkoinen kuva - rajataan pois HU ja BG (rivit 2, 6)
-dim(ISSP2012Concat2jh.dat) 
+# dim(ISSP2012Concat2jh.dat) 
 
 subConcat1jh.CA1 <- ca(ISSP2012Concat2jh.dat[,1:5], subsetrow = c(1:1, 3:5, 7:14))
 subConcat1jh.CA1$colnames <- c("S", "s", "?", "e", "E")
@@ -107,10 +120,28 @@ plot(subConcat1jh.CA1,
      main = "Pinottu taulukko - subsetCA",
      sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
      )
+# Kokeillaan kontribuutiokuvaa
+plot(subConcat1jh.CA1, map = "rowgreen",
+     main = "Pinottu taulukko - subsetCA - kontrib.kartta",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
 
+summary(Concat1jh.CA1)
 ```
 
-Kartan tulkinta; miten eroaa yhteisvaikutusmuuttujan analyysistä.
+Kartan tulkinta; miten eroaa yhteisvaikutusmuuttujan analyysistä?
+
+Mikä on  maapisteiden ja kahden täydentävän pisteen yhteys sarakepisteisiin?
+Ikäluokkapisteet ovat koko aineiston keskiarvopisteitä, niiden sijantia voi
+tulkita pistejoukko kerrallaan kuten maapisteidenkin. Mitään yhteisvaikutuksia ei
+analysoida eksplisiittisesti. Karttaa voi siis verrata sukupuoli-ikäluokka
+yhteisvaikutusmuuttujan analyysin aiemmin. Naispiste on tiukassa nipussa
+ikäluokkien a3 ja a4 kanssa aivan origon vasemmalla puolella.
+
+Koko aineistonkartassa ikäluokkapisteet ja sukupuolipisteet ovat pakkautuneet maapisteitä
+tiiviimmin origon ympärille. Ikäluokkapisteet 
+
+**edit 17.10.20** Barysentrisen ominaisuudet?
 
 Inertian dekomponointi alimatriiseille.
 
@@ -356,7 +387,7 @@ ovat nollia tai hyvin vähän havaintoja. Luokkia pitäisi ehkä yhdistellä,jo 
 "kuvaroskan" takia. Ei tehdä.
 
 **Puuttuneisuuden yleiskuva**
-```{r MCAmissing, eval = FALSE, include = FALSE, echo = TRUE}
+```{r MCAmissing, eval = FALSE, include = TRUE, echo = TRUE}
 # Puuttuvien tietojen yleiskuva
 
 # Puuttuvat tiedot aineistossa - viite datan dokumentointiin jossa taulukot.
@@ -407,7 +438,7 @@ mcaDat11jh.dat <- MCAdata1jh.dat %>% select(a1,b1,c1, d1, e1,a2,b2)
 Qmuuttujat1.mca <- mjca(mcaDat11jh.dat, ps="")
 
 # ps="" muuttujan ja sen kategorian eroitinmerkki
-
+par(cex=0.6)
 plot.mjca(Qmuuttujat1.mca,
           main = "Seitsemän kysymystä MCA 1",
           sub = "vastaukset S-s-?-e-E-P ")
@@ -420,6 +451,8 @@ plot.mjca(Qmuuttujat1.mca, labels = c(1,2),
           )
 
 # EI TOIMI pch = c(19, 1, 17,24)(pisteen symboli) 16.10.20
+# pch Vector of length 4 giving the type of points to be used for row active and
+# supplementary, column active and supplementary points
 par(cex=0.6)
 plot.mjca(Qmuuttujat1.mca, what = c("all","all"),labels = c(0,2),
           col = c("lightblue", "red"),
@@ -428,33 +461,39 @@ plot.mjca(Qmuuttujat1.mca, what = c("all","all"),labels = c(0,2),
           )
 
 
-summary(mca1Qmuuttujat)
+summary(Qmuuttujat1.mca)
 #X11()
 # subsetcat = (6,12,18,24,30,36,42) - väärä formaatti
 # subsetcat=(1:42)[-c(1:5,7:11,13:17,19:23,24:29,31:35, 37:41)]) väärä formaatti
 
-head(mcaDataJH2.dat)
-glimpse(mcaDataJH2.dat)
-str(mcaDataJH2.dat)
-str(mca1Qmuuttujat)
-mca1Qmuuttujat$Burt
-str(mca1Qmuuttujat$Burt)
-mca1Qmuuttujat2 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
 
-plot.mjca(mca1Qmuuttujat2,
-          main="Ilman puuttuvia",
-          sub = "vastausten koodausta ei käännetty")
-summary(mca1Qmuuttujat2)
+Qmuuttujat2.mca <- mjca(mcaDat11jh.dat, ps="", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
 
-#mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, subsetcat=(1:42)[c(6,12,18,24,30,36,4)]) alla toimii, 
+plot.mjca(Qmuuttujat2.mca,
+          main="Seitsemän kysymystä, viisi vastausvaihtoehtoa",
+          sub = "subset: ei puuttuvien vastausten kategoriaa (*P)")
+
+plot.mjca(Qmuuttujat2.mca,what = c("all","all"),labels = c(0,2),
+          col = c("lightblue", "red"),
+          main="Seitsemän kysymystä, viisi vastausvaihtoehtoa",
+          sub = "subset: ei puuttuvien vastausten kategoriaa (*P)")
+
+summary(Qmuuttujat2.mca)
+
+
 # mutta ei hyväksy viimeisiä sarakkeita poistettaviksi (37:41)
-mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35)])
+#Qmuuttujat3.mca <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35)])
 
-plot.mjca(mca1Qmuuttujat3)
-summary(mca1Qmuuttujat3)
+#plot.mjca(mca1Qmuuttujat3)
+#summary(mca1Qmuuttujat3)
 
 #mca1Qmuuttujat3 <- mjca(mcaDataJH2.dat, ps="", subsetcat=(1:42)[-c(1:5, 7:11, 13:17, 19:23,25:29,31:35, 37:41)])
 
+#pchlist()
+
+```
+```{r MCAmap2}
+# Täydentävät sarakkeet
 
 
 ```

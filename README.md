@@ -177,4 +177,4 @@ viitataan ISSP-dokumentteihin.
 
 **13.10.2020** MCA1.R - skriptissä kehitelty MCA-kuvia.
 
-**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä.
+**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä. MCA-karttoja viimeisessä Rmd-skriptissä, koko aineistolla ja osajoukko-MCA ilman puuttuvia vastauskategorioita.
