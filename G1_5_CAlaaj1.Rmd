@@ -502,14 +502,35 @@ summary(Qmuuttujat2.mca)
 
 ### subset MCA ja täydentävät sarakkeet (19.10.20)
 
-```{r MCAmap2}
-# Täydentävät sarakkeet
+```{r MCAmap2, echo=TRUE}
+# Täydentävät sarakkeet - ei toimi! (19.20.20)
 # dim(mcaDat11jh.dat) 7 kysymystä
 dim(MCAdata1jh.dat)
 str(MCAdata1jh.dat)
 # Data: 7 kysymystä, täydentävät muuttujat maa, sp, S (status), U (asuinpaikka),
 # E (koulutustaso)
 
-#mcaDat21jh.dt <- MCAdata1jh.dat %>% select(a1,b1,c1, d1, e1,a2,b2,maa,)
+mcaDat21jh.dat <- MCAdata1jh.dat %>% select(a1,b1,c1, d1, e1,a2,b2,E,S,U,maa,gaf)
+str(mcaDat21jh.dat)
+dim(mcaDat21jh.dat)
+glimpse(mcaDat21jh.dat)
 
+# kysymysten puuttuvat pois subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
+# maa ja gaf - ei puuttuvia tietoja
+#
+mcaDat21jh.dat$E %>% fct_count() # P-kategoria 50
+mcaDat21jh.dat$S %>% fct_count() # P-kategoria 61
+mcaDat21jh.dat$U %>% fct_count() # P-kategoria 67
+
+# tämä ei toimi colsup = (1:50)[c(43:50)], supcol
+# mcaDat21jh.dat[1:10,1:8]
+# test1QjaMuut1.mca <- mjca(mcaDat21jh.dat[,1:8], ps = "",
+#               what = c("none", "passive"),
+#                subsetcat=(1:50)[-c(6,12,18,24,30,36,42,50,61)],
+#                supcol = 8:9
+#                )
+# QjaMuut1.mca
+# summary(QjaMuut1.mca)
+# plot(test1QjaMuut1.mca)
+#X11()
 ```
