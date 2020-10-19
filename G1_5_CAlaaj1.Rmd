@@ -59,7 +59,7 @@ Concat1jh.Burt <- mjca(ISSP2012Concat1jh.dat, ps="")$Burt
 #dim(Concat1jh.Burt)
 # 19 x 19
 #rownames(Concat1jh.Burt)
-#[1] "Q1bS"     "Q1bs"     "Q1b?"     "Q1be"     "Q1bE"     "maaBE"    "maaBG"    "maaDE"    "maaDK"   
+#[1] "Q1bS"     "Q1bs"     "Q1b?"     "Q1be"     "Q1bE"     "maaBE"    "maaBG"    "maaDE"    "maaDK"
 #[10] "maaFI"    "maaHU"    "spm"      "spf"      "age_cat1" "age_cat2" "age_cat3" "age_cat4" "age_cat5"
 #[19] "age_cat6"
 
@@ -90,11 +90,12 @@ Concat1jh.CA1$colcoord[, 2] <- -Concat1jh.CA1$colcoord[, 2]
 Piirretään karttoja.
 
 ```{r concatplot1, fig.asp=1,fig.cap="Pinottu matriisi - kartta 1"}
-plot(Concat1jh.CA1, 
+par(cex = 0.6)
+plot(Concat1jh.CA1,
      main = "Pinottu taulukko - symmetrinen kuva1",
-     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b (cex=0.6)"
      )
-plot(Concat1jh.CA1, 
+plot(Concat1jh.CA1,
      main = "Pinottu taulukko - symmetrinen kuva1",
      sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
      )
@@ -109,14 +110,14 @@ plot(Concat1jh.CA1, map = "rowgreen",
      )
 
 # Tukkoinen kuva - rajataan pois HU ja BG (rivit 2, 6)
-# dim(ISSP2012Concat2jh.dat) 
+# dim(ISSP2012Concat2jh.dat)
 
 subConcat1jh.CA1 <- ca(ISSP2012Concat2jh.dat[,1:5], subsetrow = c(1:1, 3:5, 7:14))
 subConcat1jh.CA1$colnames <- c("S", "s", "?", "e", "E")
 subConcat1jh.CA1$rownames <- c("BE", "DE", "DK", "FI", "m", "f",
                            "a1", "a2", "a3", "a4", "a5", "a6")
 
-plot(subConcat1jh.CA1, 
+plot(subConcat1jh.CA1,
      main = "Pinottu taulukko - subsetCA",
      sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
      )
@@ -131,15 +132,20 @@ summary(Concat1jh.CA1)
 
 Kartan tulkinta; miten eroaa yhteisvaikutusmuuttujan analyysistä?
 
-Mikä on  maapisteiden ja kahden täydentävän pisteen yhteys sarakepisteisiin?
+Mikä on  maapisteiden ja kahden selittävän (eksogeenisen) muuttujan pisteiden yhteys sarakepisteisiin?
+
 Ikäluokkapisteet ovat koko aineiston keskiarvopisteitä, niiden sijantia voi
 tulkita pistejoukko kerrallaan kuten maapisteidenkin. Mitään yhteisvaikutuksia ei
-analysoida eksplisiittisesti. Karttaa voi siis verrata sukupuoli-ikäluokka
+analysoida eksplisiittisesti. Karttaa voi verrata sukupuoli-ikäluokka
 yhteisvaikutusmuuttujan analyysin aiemmin. Naispiste on tiukassa nipussa
-ikäluokkien a3 ja a4 kanssa aivan origon vasemmalla puolella.
+ikäluokkien a3 ja a4 kanssa aivan origon vasemmalla puolella. Miesten keskiarvopiste on hieman origosta oikealle, yhdessä ikäluokan a5 kanssa.
 
-Koko aineistonkartassa ikäluokkapisteet ja sukupuolipisteet ovat pakkautuneet maapisteitä
-tiiviimmin origon ympärille. Ikäluokkapisteet 
+Koko aineiston kartassa ikäluokkapisteet ja sukupuolipisteet ovat pakkautuneet maapisteitä tiiviimmin origon ympärille. Lisäpisteet on hyvin esitetty, niiden
+etäisyyksiä voi luotettavasti arvioida kuvasta. Poikkeus on nuorin ikäluokka (a1, qlt = 501). Inertian osuudet (inr) ovat yhtä vaatimattomia kuin Belgian (28) ja
+Saksan (29), (m =20, f = 17, a2 = 40, a6 = 83), samoin kontribuutiot akseleiden inertiaan. 1. dimension kontribuutio (cor) on suuri (>800) kaikilla paitsi nuorimmalla ikäryhmällä (a1) jolla 2. dimension selittää lähes puolet sen inertiasta (470).
+
+Kun Bulgaria ja Unkari jätetään pois, origon lähelle pakkautuneet pistet erottuvat
+hieman paremmin (osajoukon CA).
 
 **edit 17.10.20** Barysentrisen ominaisuudet?
 
@@ -180,7 +186,7 @@ Esimerkkinä "Attitudes to women working in 2012".
 
 ## MCA - multiple correspondence analysis
 
-MCA on samantyyppisten luokitteluasteikon muuttujien välisten yhteyksien analyysiä. 
+MCA on samantyyppisten luokitteluasteikon muuttujien välisten yhteyksien analyysiä.
 
 **Data**
 Substanssimuuttujien (kysymysten) ja taustamuuttujien (demografiset, koulutus,
@@ -191,7 +197,7 @@ joissa vastausvaihtoehtoja on viisi. Tämä on suositus tai yleinen käytäntö,
 yksinkertaistaa analyysiä.
 
 Taustamuuttujista valitaan kolme: koulutustaso edu ja asuinpaikka urbru ovat (jos
-tiedokeruun erot unohdetaan) taustatietoja.Kolmas muuttujasosta/"Top-Bottom self-placement") 
+tiedokeruun erot unohdetaan) taustatietoja.Kolmas muuttujasosta/"Top-Bottom self-placement")
 on kysymys mutta ei pohdita tätä enempää.
 
 Lisämuuttujina ovat sukupuoli (sp), maa ja ikä. Ikä luokitellaan kuuteen ryhmään
@@ -220,7 +226,7 @@ MCAdata1jh.dat <- mutate(MCAdata1jh.dat, age_cat = ifelse(ika %in% 15:25, "1",
 
 # str(MCAdata1jh.dat$age_cat)
  # uusi (4.2.20)
-MCAdata1jh.dat <- MCAdata1jh.dat %>%        
+MCAdata1jh.dat <- MCAdata1jh.dat %>%
         mutate(age_cat = as_factor(age_cat))
 #tarkastuksia - outo järjestys
 #levels(MCAdata1jh.dat$age_cat)
@@ -233,7 +239,7 @@ MCAdata1jh.dat<- MCAdata1jh.dat %>%
                                    "4",
                                    "5",
                                    "6"))
-       
+
 # Tarkistuksia ehkä? (16.10.20)
 
 MCAdata1jh.dat %>%
@@ -301,7 +307,7 @@ mutate(E = fct_recode(edum,
         "2" = "The suburbs or outskirts of a big city",
         "3" = "A town or a small city",
         "4" = "A country village",
-        "5" = "A farm or home in the country", 
+        "5" = "A farm or home in the country",
         "P" = "missing")
         )
 
@@ -339,7 +345,7 @@ MCAdata1jh.dat <- MCAdata1jh.dat %>%
 # Lopuksi substanssimuuttutien nimet lyhyiksi
 
 MCAdata1jh.dat <- MCAdata1jh.dat %>% mutate(a1 = Q1am,
-                                            b1 = Q1bm, 
+                                            b1 = Q1bm,
                                             c1 = Q1cm,
                                             d1 = Q1dm,
                                             e1 = Q1em,
@@ -421,15 +427,14 @@ poistetaan jos yksi tai useampi tieto puuttuu) viidesosa datasta jää pois.
 Kannattaako puuttuvia tietoja hieman analysoida?
 
 
-Data on valmiina, edellisen luvun ikäluokka, ikä-sukupuoli- muuttuja ja 
-ikä-sukupuoli- maa muuttujien luontia voi harkita.
+Datassa edellisen luvun ikäluokka-sukupuoli - muuttuja.
 
 **edit** Tässä keskityttävä data-analyysin **tutkimusongelmiin**, johdantoa MCA-lukuun.
 
 
 ## MCA
 ```{r MCAmap1, fig.asp = 1, fig.cap="MCA-kartta: viiden vastausvaihtoehdon kysymykset", out.width = "90%",fig.align = "center"}
-# Ensimmäinen MCA - viiden vastausvaihtoehdon kysymykset ja puuttuvat tiedot
+# Ensimmäiset MCA-kartat - viiden vastausvaihtoehdon kysymykset ja puuttuvat tiedot
 
 # glimpse((MCAdata1jh.dat))
 mcaDat11jh.dat <- MCAdata1jh.dat %>% select(a1,b1,c1, d1, e1,a2,b2)
@@ -451,8 +456,10 @@ plot.mjca(Qmuuttujat1.mca, labels = c(1,2),
           )
 
 # EI TOIMI pch = c(19, 1, 17,24)(pisteen symboli) 16.10.20
+#
 # pch Vector of length 4 giving the type of points to be used for row active and
 # supplementary, column active and supplementary points
+
 par(cex=0.6)
 plot.mjca(Qmuuttujat1.mca, what = c("all","all"),labels = c(0,2),
           col = c("lightblue", "red"),
@@ -492,10 +499,17 @@ summary(Qmuuttujat2.mca)
 #pchlist()
 
 ```
+
+### subset MCA ja täydentävät sarakkeet (19.10.20)
+
 ```{r MCAmap2}
 # Täydentävät sarakkeet
+# dim(mcaDat11jh.dat) 7 kysymystä
+dim(MCAdata1jh.dat)
+str(MCAdata1jh.dat)
+# Data: 7 kysymystä, täydentävät muuttujat maa, sp, S (status), U (asuinpaikka),
+# E (koulutustaso)
 
+#mcaDat21jh.dt <- MCAdata1jh.dat %>% select(a1,b1,c1, d1, e1,a2,b2,maa,)
 
 ```
-
-

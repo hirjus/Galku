@@ -1,6 +1,6 @@
 ---
 title: "G Luku 1 Yksinkertainen korrespondenssianalyysi"
-date: "versio 1.5.8, tulostettu `r Sys.Date()` "
+date: "versio 1.5.9, tulostettu `r Sys.Date()` "
 author: Jussi Hirvonen
 documentclass: article
 lang: fi
@@ -25,6 +25,8 @@ output:
     # fig_asp: 1 # virheilmoitus - miksi? (27.3.20)
     #code_folding: show
 ---
+
+**Versio 1.5.9** - lisätty MCA-analyysejä, niitä ennen yksi pinottu taulu - analyysi.
 
 **Versiot - vanha Galku - 5.6.2019 versio 1.5.1**
 **Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6, 24.2.2020 versio 1.5.7**,
