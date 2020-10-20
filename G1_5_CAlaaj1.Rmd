@@ -273,7 +273,7 @@ MCAdata1jh.dat <- mutate(MCAdata1jh.dat, age_cat = ifelse(ika %in% 15:25, "1",
                                 ifelse(ika %in% 56:65, "5", "6"))))))
 
 # str(MCAdata1jh.dat$age_cat)
- # uusi (4.2.20)
+
 MCAdata1jh.dat <- MCAdata1jh.dat %>%
         mutate(age_cat = as_factor(age_cat))
 #tarkastuksia - outo järjestys
@@ -288,7 +288,7 @@ MCAdata1jh.dat<- MCAdata1jh.dat %>%
                                    "5",
                                    "6"))
 
-# Tarkistuksia ehkä? (16.10.20)
+# Tarkistuksia(16.10.20)
 
 MCAdata1jh.dat %>%
         tableX(maa,age_cat,type = "count") #%>%
@@ -320,7 +320,8 @@ MCAdata1jh.dat <- mutate(MCAdata1jh.dat,
 
 #Sosiaalinen status: oma arvio "Top-Bottom self-placement"
 str(ISSP2012jh1d.dat$sosta)
-
+str(ISSP2012jh1d.dat$urbru)
+str(ISSP2012jh1d.dat$edu)
 #Koulutustaso
 str(ISSP2012jh1d.dat$edu)
 
@@ -418,21 +419,15 @@ MCAdata1jh.dat %>% tableX (maa,b1, type = "row_perc")
 MCAdata1jh.dat %>% tableX (maa,c1, type = "row_perc")
 MCAdata1jh.dat %>% tableX (maa,d1, type = "row_perc")
 MCAdata1jh.dat %>% tableX (maa,e1, type = "row_perc")
-MCAdata1jh.dat %>% tableX (maa,a2)
-MCAdata1jh.dat %>% tableX (maa,b2)
+MCAdata1jh.dat %>% tableX (maa,a2,type = "row_perc")
+MCAdata1jh.dat %>% tableX (maa,b2,type = "row_perc")
 
-MCAdata1jh.dat %>% tableX(gaf, ga)
-MCAdata1jh.dat %>% tableX(maa, age_cat)
-MCAdata1jh.dat %>% tableX(maa, gaf)
-MCAdata1jh.dat %>% tableX(maa, S)
-MCAdata1jh.dat %>% tableX(maa, U)
-MCAdata1jh.dat %>% tableX(maa, E)
-
-
+MCAdata1jh.dat %>% tableX(gaf, ga,type = "row_perc")
+MCAdata1jh.dat %>% tableX(maa, age_cat,type = "row_perc")
+MCAdata1jh.dat %>% tableX(maa, gaf,type = "row_perc")
 MCAdata1jh.dat %>% tableX(maa, S, type = "row_perc")
 MCAdata1jh.dat %>% tableX(maa, U, type = "row_perc")
 MCAdata1jh.dat %>% tableX(maa, E, type = "row_perc")
-MCAdata1jh.dat %>% tableX(maa, age_cat,type = "row_perc")
 
 ```
 
@@ -521,14 +516,25 @@ summary(Qmuuttujat1.mca)
 # subsetcat = (6,12,18,24,30,36,42) - väärä formaatti
 # subsetcat=(1:42)[-c(1:5,7:11,13:17,19:23,24:29,31:35, 37:41)]) väärä formaatti
 
+#subsetcat viittaa muuttujan luokkien indeksiin
 
-Qmuuttujat2.mca <- mjca(mcaDat11jh.dat, ps="", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
+eiPvastaukset <- (1:42)[-c(6,12,18,24,30,36,42)]
+# eiPvastaukset
+#  puuttuva tieto on kuudes kategora kaikilla kysymyksillä
+# 1  2  3  4  5  7  8  9 10 11 13 14 15 16 17 19 20 21 22 23 25 26 27 28 29 31
+# 32 33 34 35 37 38 39 40 41
+
+mcaDat11jh.dat[1:5,]
+
+Qmuuttujat2.mca <- mjca(mcaDat11jh.dat, ps="", subsetcat=eiPvastaukset)
 
 plot.mjca(Qmuuttujat2.mca,
           main="Seitsemän kysymystä, viisi vastausvaihtoehtoa",
           sub = "subset: ei puuttuvien vastausten kategoriaa (*P)")
+                
 
-plot.mjca(Qmuuttujat2.mca,what = c("all","all"),labels = c(0,2),
+plot.mjca(Qmuuttujat2.mca,
+          what = c("all","all"),labels = c(0,2),
           col = c("lightblue", "red"),
           main="Seitsemän kysymystä, viisi vastausvaihtoehtoa",
           sub = "subset: ei puuttuvien vastausten kategoriaa (*P)")
@@ -550,6 +556,17 @@ summary(Qmuuttujat2.mca)
 
 ### subset MCA ja täydentävät sarakkeet (19.10.20)
 
+**Jostain syystä en saa toimimaan mjca-funktiossa subsecat - parametrin kanssa
+täydentäviä muuttujia supcol. Niinpä kartat ovat vähän kehnoja, sillä puuttuvien
+tietojen kategoriat määrittävät omalta osaltaan koordinaatistoa**
+
+Niiden kontribuutiot ovat isot, ja massat aika pieniä. Esimerkkitapaus, jossa
+jotkut havainnot vaikuttavat karttaan aivan liikaa!
+
+Käsityönä voisi lisäillä pisteitä karttaan, joka on piirretty ilman puuttuvia
+tietoja.
+
+
 ```{r MCAmap2, echo=TRUE}
 # Täydentävät sarakkeet - ei toimi! (19.20.20)
 # dim(mcaDat11jh.dat) 7 kysymystä
@@ -563,7 +580,9 @@ str(mcaDat21jh.dat)
 dim(mcaDat21jh.dat)
 glimpse(mcaDat21jh.dat)
 
-# kysymysten puuttuvat pois subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
+# kysymysten puuttuvat pois subsetcat=(1:42)[-c(6,12,18,24,30,36,42)]
+# subset2 <- (1:50)[-c(6,12,18,24,30,36,42)]
+# eiPvastvastaukset : vastauskategorioiden indeksit ilman P-luokkaa
 # subsetcat=(1:50)[-c(6,12,18,24,30,36,42,50)],
 # maa ja gaf - ei puuttuvia tietoja
 #
@@ -574,31 +593,92 @@ mcaDat21jh.dat$U %>% fct_count() # P-kategoria 67
 
 # Täydäntävät sarakkeet, koko aineisto
 
- # mcaDat21jh.dat[1:10,]
+ # mcaDat21jh.dat[1:10,1:8]
 
- QjaMuut1.mca <- mjca(mcaDat21jh.dat[,1:12], ps = "",
-               supcol = 8:12,
-               main = "Kysymykset Q1a-Q1e ja Q2a-Q2b, viisi täydentävää muuttujaa",
-               sub = "Täydentävät muuttujat E, S, U, maa, gaf")
-# QjaMuut1.mca
+ QjaMuut1.mca <- mjca(mcaDat21jh.dat, ps = "",
+               supcol = 8:12
+               )
+           
+plot(QjaMuut1.mca)
+# QjaMuut1.mca - ei toimi
 summary(QjaMuut1.mca)
+par(cex = 0.6)
+plot(QjaMuut1.mca,
+     what = c("none", "passive"),
+     labels = c(1,1),
+     collabels = c("both"),
+     main = "Täydentävät muuttujat E, S, U, maa, gaf",
+     sub = "kaikki")
+
 
 par(cex = 0.6)
-plot(test1QjaMuut1.mca,
+plot(QjaMuut1.mca, 
      what = c("none", "passive"),
+     labels = c(0,1),
+     collabels = c("both"),
      main = "Täydentävät muuttujat E, S, U, maa, gaf",
      sub = "Vain passiiviset sarakkeet")
 
+#str(eiPvastaukset)
+
+# Täydentävät pisteet kuva kerrallaan E ja S
+QjaMuut2.mca <- mjca(mcaDat21jh.dat, ps = "",
+               supcol = 8:9)
+               
+plot(QjaMuut2.mca, 
+     what = c("none", "passive"),
+     labels = c(0,1),
+     collabels = c("both"),
+     main = "Kysymykset Q1a-Q1e ja Q2a-Q2b",
+     sub = "Täydentävät muuttujat E, S"
+     )
+# Täydentävät pisteet kuva kerrallaan: asuinpaikka U
+QjaMuut3.mca <- mjca(mcaDat21jh.dat, ps = "",
+               supcol = 10)
+               
+plot(QjaMuut3.mca, 
+     what = c("none", "passive"),
+     labels = c(0,1),
+     collabels = c("both"),
+     main = "Kysymykset Q1a-Q1e ja Q2a-Q2b",
+     sub = "Asuinpaikka U"
+     )
+dim(mcaDat21jh.dat)
+
+# Täydentävät pisteet kuva kerrallaan: maa
+
+QjaMuut4.mca <- mjca(mcaDat21jh.dat[,c(1:7,11)], ps = "",
+               supcol = 8)
+plot(QjaMuut4.mca, 
+     what = c("none", "passive"),
+     labels = c(0,1),
+     collabels = c("level"),
+     main = "Kysymykset Q1a-Q1e ja Q2a-Q2b",
+     sub = "maa"
+     )
+# Täydentävät pisteet kuva kerrallaan: maa
+
+QjaMuut5.mca <- mjca(mcaDat21jh.dat[,c(1:7,12)], ps = "",
+               supcol = 8)
+plot(QjaMuut5.mca, 
+     what = c("none", "passive"),
+     labels = c(0,1),
+     collabels = c("level"),
+     main = "Kysymykset Q1a-Q1e ja Q2a-Q2b",
+     sub = "ikäluokka ja sukupuoli"
+     )
+
 
 # Osajoukon analyysi ja täydentävät sarakkeet supcol = 8:12 ei toiminut
-# eikä toimi tämä
-subQjaMuut1.mca <- mjca(mcaDat21jh.dat[, 1:12], ps="",
-                        subsetcat=(1:67)[-c(6,12,18,24,30,36,42,50,61,67)],
-                        )
+#eikä toimi tämä
+#TestsubQjaMuut1.mca <- mjca(mcaDat21jh.dat[,c(1:7, 8)], ps="",
+#                       subsetcat = c(eiPvastaukset),
+#                       supcol=8
+#                       )
+#plot(TestsubQjaMuut1.mca)
+#TestsubQjaMuut1.mca
 
-
-#str(subConcat1jh.CA1)
-plot(subQjaMuut1.mca)
-summary(subQjaMuut1.mca)
+# plot(subQjaMuut1.mca)
+# summary(subQjaMuut1.mca)
 
 ```

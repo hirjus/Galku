@@ -177,6 +177,11 @@ viitataan ISSP-dokumentteihin.
 
 **13.10.2020** MCA1.R - skriptissä kehitelty MCA-kuvia.
 
-**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä. MCA-karttoja viimeisessä Rmd-skriptissä, koko aineistolla ja osajoukko-MCA ilman puuttuvia vastauskategorioita.
+**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä.
+ MCA-karttoja viimeisessä Rmd-skriptissä, koko aineistolla ja osajoukko-MCA
+ ilman puuttuvia vastauskategorioita.
 
-**19.10.20** Lisätään muutama MCA-kartta ja päivitetään **versioon 1.5.9.**
+**19.10.2020** Lisätään muutama MCA-kartta, versio 1.5.9
+**20.10.2020** **Versio 1.6.0** En saanut mjca-funktiossa toimimaan yhtä aikaa
+subsetcat- ja supcol - parametreja. Analyysissä on vain todettu puuttuvien tietojen
+iso vaikutus ja esitetty kysymysmuuttujien osajoukko - MCA ilman puuttuvia tietoja.
