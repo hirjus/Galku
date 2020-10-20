@@ -74,13 +74,15 @@ cacoordtest1$columns
 
 #standardikoordinaattien summa ? (3.8.20)
 
-simpleCA1$rowcoord[1,] %>% sum() #yli dimensioiden (n=4)
-simpleCA1$rowcoord[,1] %>% sum() #yli rivien
+simpleCA1$rowcoord[1:6,] %>% sum() #yli dimensioiden (n=4)
+simpleCA1$colcoord[1 ,1:4] %>% sum()
 simpleCA1$rowmass %>% sum() # 1
 simpleCA1$N
 simpleCA1$colcoord 
 simpleCA1$sv
 summary(simpleCA1)
+simpleCA1$rowcoord
+simpleCA1$colcoord
 
 # Yhdistä kaavaliitteeseen? (29.5.20)
 
@@ -109,6 +111,7 @@ chisq.test(simpleCA1$N)$statistic / sum(simpleCA1$N)
 
 # Maksimi-inertia on dimensioden lukumäärä (tässä 4)
 # Mutta eipä kai tämäkään kovin kiinnostava luku ole (15.6.20)
+
 simpleCA1.inert / 4
 
 # Mitäs nämäkin ovat? (13.6.20)

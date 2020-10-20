@@ -1,6 +1,6 @@
 ## Perusmuunnokset ISSP2012 - datalle
 
-```{r paketit-g11_fct, include=FALSE}
+```{r paketit-g11_fct, eval = FALSE,include=FALSE}
 # Paketit 1.2.20, kommentoin pois ne joita ei ole käytetty (likert, stargazer)
 # paketit.R - kopioidaan Rmd-tiedostojen alkuun
 
@@ -24,41 +24,71 @@ library(bookdown)
 library(tinytex)
 # Uusia 1/2020
 library(assertthat)
-library(testthat)
+# library(testthat)
 
 # sessionInfo()
 
 ```
 
-Datatiedosto on ISSP2012jh1.data, ja luokittelumuuttujat muunnetaan R:n 
-factor- muuttujaksi.
+Datatiedosto on muunnosten jälkeen **ISSP2012jh1d.data**,luokittelumuuttujat
+muunnetaan R:n factor- muuttujaksi.
 
-Jokaisesta muuttujasta on kaksi versiota, toisessa puuttuvat tiedot ovat R:n 
+Jokaisesta muuttujasta on kaksi versiota, toisessa puuttuvat tiedot ovat R:n
 "NA"- arvoja ja toisessa "NA"-arvo on eksplisiittinen muuttuja ("missing").
 
-Substanssimuuttujien luokkien tunnukset ( faktorilabelit, levels?) muutetaan
-graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien 
+Substanssimuuttujien luokkien tunnukset ( "faktorilabelit") muutetaan
+graafisiin analyyseihin sopivan lyhyiksi. Taustamuuttujien luokittelua ja luokkien
 tunnuksia pohditaan, kun ne otetaan käyttöön.
 
-**TODO 30.1.20** Tarkistukset, varmistukset jne. (24.2.20) Lisätty muutama 
-testi, paljon välitulostuksia joita voi tarvittaessa kommentoida koodista pois.
+**Factor: määritelmä**
 
-**TODO 2.2.20** Muunnetaanko muuttujan maa (C_ALPHAN as_factor) järjestys heti
-samaksi kuin C_ALPHAN? Nyt tehdään G1_2_johdesim.Rmd:ssä. (24.2.20) tehty,
-muunnetaan heti alussa. Käytännössä kaikenlaisia korjailuja joutuu tekemään myös
-analyyseissä käytettävissä R-datoissa.
+”Very short : levels are the input, labels are the output in the
+factor() function. A factor has only a level attribute, which is set by the
+labels argument in the factor() function. This is different from the concept
+of labels in statistical packages like SPSS, and can be confusing in the beginning."
+(https://stackoverflow.com/questions/5869539/confusion-between-factor-levels-and-factor-labels)
 
-**TODO 3.2.20** Aluejaon maakoodi V3 mukaan, pohditaan järjestykset jne luvussa
-G1_2_johdesim.Rmd. (24.2.20) tehty, järjesteään myös uusi muuttuja
-C_ALPHAN-järjestykseen.
+
+Haven-paketin labelled_spss-luokka (https://github.com/tidyverse/haven/issues/172) ,
+kaksi toisiaan täydentävää käyttötapaa. Se on yksi "välimuoto" kun dataa luetaan
+SPSS/SAS/Stata  formaatista R-formaattiin. Toisaalta labelled-paketin avulla luokan
+olioita voi monipuolisesti muokata monipuolisesti ja jakaa tuloksia takaisin muiden 
+ohjelmistojen tiedostoformaatteihin. Tässä ensimmäinen vaihtoehto käytössä.
+
+
+**#V** Tärkein lähde McNamara&Horton(2017) "Wrangilin with categorical data in R".
+
+R-maailmassa on monta tapaa tehdä asioita. Tässä käytetään forcats-paketin
+funktioita, ei dplyr-paketin kuten em. artikkelissa.
+
+**Muunnokset: mutate**
+(https://suzan.rbind.io/2018/02/dplyr-tutorial-2/#changing-column-names-after-mutation)
+
+**Faktorit - recode**
+
+**dplyr**
+
+”You can use recode() directly with factors; it will preserve the existing order 
+of levels while changing the values. Alternatively, you can use recode_factor(),
+which will change the order of levels to match the order of replacements. See
+the forcats package for more tools for working with factors and their levels.”
+
+”This is a vectorised version of switch(): you can replace numeric values based
+on their position or their name, and character or factor values only by their
+name. This is an S3 generic: dplyr provides methods for numeric, character, and
+factors. For logical vectors, use if_else(). For more complicated criteria,
+use case_when().”
+(https://dplyr.tidyverse.org/reference/recode.html)
+
+**forcats::fct_recode** (https://r4ds.had.co.nz/factors.html)
+
 
 ### Vaihe 1 - muuttujat joissa ei ole puuttuvia tietoja
 
-Aineistosta on jätetty pois ne havainnot, joissa ikä (AGE) tai sukupuoli (SEX) 
-on puuttuva tieto. Aika paljon tarkistuksia, kolmen maa-muuttujaa järjestetään
+Aineistosta on jätetty pois ne havainnot, joissa ikä (AGE) tai sukupuoli (SEX)
+on puuttuva tieto. Aika paljon tarkistuksia, kolme maa-muuttujaa järjestetään
 C_ALPHAN - muuttujan järjestykseen. Ikä-muuttuja säilyy numeerisena. Ensimmäiseen
 faktori-tyypin muuttujaan jää tyhjänä luokkana puuttuva tieto, luokka poistetaan.
-
 
 ```{r fct-vaihe1}
 # VAIHE 1 - muuttujat joissa ei ole puuttuvia tietoja
@@ -68,14 +98,14 @@ faktori-tyypin muuttujaan jää tyhjänä luokkana puuttuva tieto, luokka poiste
 ISSP2012jh1d.dat <- ISSP2012jh1c.data %>%
     mutate(maa = as_factor(C_ALPHAN), # ei puuttuvia, ei tyhjiä leveleitä
            maa3 = as_factor(V3),  # maakoodi, jossa aluejako joillan mailla
-           sp1 = as_factor(SEX), # ei puuttuvia, tyhjä level "no answer" 999 
+           sp1 = as_factor(SEX), # ei puuttuvia, tyhjä level "no answer" 999
          )
 
 
 # C_ALPHAN - maa - maa3 tarkistuksia
 
-# V3 
-# "Pulma" on järjestys. C_ALPHAN ("chr") on aakkosjärjestyksessä, kun luodaan 
+# V3
+# "Pulma" on järjestys. C_ALPHAN ("chr") on aakkosjärjestyksessä, kun luodaan
 # maa = as_factor(C_ALPHAN) järjestys muuttuu (esiintymisjärjestys datassa?)
 # maa3 muunnetaan maakoodista (haven_labelled' num), jonka
 
@@ -86,10 +116,10 @@ str(ISSP2012jh1d.dat$maa) #Country Prefix ISO 3166 Code - alphanumeric
 # sum(is.na(ISSP2012jh1d.dat$maa)) # ei puuttuvia tietoja
 ISSP2012jh1d.dat$maa %>% summary() # mukana vain valitut 25 maata
 
-str(ISSP2012jh1d.dat$maa3)  #"Country/ Sample ISO 3166 Code 
+# str(ISSP2012jh1d.dat$maa3)  #"Country/ Sample ISO 3166 Code
                             #(see V4 for codes for whole nation states)"
                             # 29 levels
-str(ISSP2012jh1d.dat$V3)
+# str(ISSP2012jh1d.dat$V3)
 
 # attributes(ISSP2012jh1d.dat$maa3) # ei tyhiä levels-arvoja, 29 levels
 # sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
@@ -97,17 +127,17 @@ str(ISSP2012jh1d.dat$V3)
 # ISSP2012jh1d.dat$maa3 %>% fct_count()
 # Vain näissä on jaettu maan havainnot (3.2.20)
 #
-# [38] BE-FLA-Belgium/ Flanders                                       
-# [39] BE-WAL-Belgium/ Wallonia                                       
-# [40] BE-BRU-Belgium/ Brussels                                       
-# [41] DE-W-Germany-West                                              
-# [42] DE-E-Germany-East                                              
-# [43] PT-Portugal 2012: first fieldwork round (main sample)          
+# [38] BE-FLA-Belgium/ Flanders
+# [39] BE-WAL-Belgium/ Wallonia
+# [40] BE-BRU-Belgium/ Brussels
+# [41] DE-W-Germany-West
+# [42] DE-E-Germany-East
+# [43] PT-Portugal 2012: first fieldwork round (main sample)
 # [44] PT-Portugal 2012: second fieldwork round (complementary sample)
 
 # ISSP2012jh1d.dat$maa3 %>% fct_count() #miksi ei tulosta mitään? (3.2.2020)
 
-# ISSP2012jh1d.dat$maa3 %>% summary() 
+# ISSP2012jh1d.dat$maa3 %>% summary()
 # ISSP2012jh1d.dat$maa3 %>% fct_unique()
 # maa3: 25 maata, havaintojen määrä. Poisjätetyissä havaintoja 0.
 # glimpse(ISSP2012jh1d.dat$maa3)
@@ -133,7 +163,7 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 
 # str(ISSP2012jh1d.dat$maa3)  # 29 levels
 
-attributes(ISSP2012jh1d.dat$maa3) # 
+attributes(ISSP2012jh1d.dat$maa3) #
 #sum(is.na(ISSP2012jh1d.dat$maa3)) # nolla ei ole puuttuva tieto! (3.2.20)
 # ISSP2012jh1d.dat$maa3 %>% summary()
 # ISSP2012jh1d.dat$maa3 %>% fct_unique()
@@ -175,8 +205,8 @@ ISSP2012jh1d.dat$sp %>% summary()
 ISSP2012jh1d.dat$ika <- ISSP2012jh1d.dat$AGE
 
 # Tarkistuksia
-attributes(ISSP2012jh1d.dat$ika) # tyhjä level "No answer
-
+attributes(ISSP2012jh1d.dat$ika) # tyhjä level "No answer"
+# str(ISSP2012jh1d.dat$ika)
 ISSP2012jh1d.dat$ika %>% summary()
 
 ISSP2012jh1d.dat %>%
@@ -188,20 +218,23 @@ ISSP2012jh1d.dat$ika %>% hist(main = "ISSP 2012: vastaajan ikä")
 
 # str(ISSP2012jh1d.dat) - tarkistus
 
+
 ```
 
 ### Vaihe 2
 
 Vaihessa 2 luodaan samalla samalla periaatteella substanssi- ja taustamuuttujille
 kaksi R-factor- tyypin muuttujaa. Toisessa (esim. Q1a) puuttuva tieto on
-R-ohjelmiston sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi 
+R-ohjelmiston sisäinen NA-arvo. Toisessa (Q1am) puuttuva tieto on yksi
 luokittelumuuttujan arvo("missing").
+
+### Vaihe 2.1
 
 ```{r fct-vaihe21}
 # Substanssi- ja taustamuuttujat R-faktoreiksi
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
     mutate(Q1a1 = as_factor(V5), #labels
-            Q1b1 = as_factor(V6), 
+            Q1b1 = as_factor(V6),
             Q1c1 = as_factor(V7),
             Q1d1 = as_factor(V8),
             Q1e1 = as_factor(V9),
@@ -209,29 +242,29 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
             Q2b1 = as_factor(V11),
             Q3a1 = as_factor(V12), #labels = vastQ3_labels (W,w,H)
             Q3b1 = as_factor(V13), #labels = vastQ3_labels
-            edu1 = as_factor(DEGREE), 
-            msta1 = as_factor(MAINSTAT), 
-            sosta1 = as_factor(TOPBOT), 
+            edu1 = as_factor(DEGREE),
+            msta1 = as_factor(MAINSTAT),
+            sosta1 = as_factor(TOPBOT),
             nchild1 = as_factor(HHCHILDR),
-            lifsta1 = as_factor(MARITAL),  
+            lifsta1 = as_factor(MARITAL),
             urbru1 = as_factor(URBRURAL)
-        
+
     )
 
 # Muuttujat Q1a1...urbru1 ovat apumuuttujia, joissa on periaatteessa kaikki SPSS-
-# tiedostosta siirtyvä metatieto. Poikkeus on SPSS:n kolme tarkentavaa koodia 
+# tiedostosta siirtyvä metatieto. Poikkeus on SPSS:n kolme tarkentavaa koodia
 # puuttuvalle tiedolle, ne saisi mukaan read_spss - parametrin avulla (user_na=TRUE)
-# 
+#
 
 # Tarkistusksia
 # ISSP2012jh1d.dat %>% summary()
 
-ISSP2012jh1d.dat %>% 
-    select(Q1a1, Q1b1, Q1c1,Q1d1,Q1e1, Q2a1, Q2b1, Q3a1,Q3b1) %>% 
+ISSP2012jh1d.dat %>%
+    select(Q1a1, Q1b1, Q1c1,Q1d1,Q1e1, Q2a1, Q2b1, Q3a1,Q3b1) %>%
     summary()
 
-ISSP2012jh1d.dat %>% 
-    select(edu1,msta1, sosta1, nchild1, lifsta1, urbru1) %>% 
+ISSP2012jh1d.dat %>%
+    select(edu1,msta1, sosta1, nchild1, lifsta1, urbru1) %>%
     summary()
 
 
@@ -256,20 +289,23 @@ ISSP2012jh1d.dat %>%
 # ISSP2012jh1d.dat$lifsta1 %>% fct_count()
 # ISSP2012jh1d.dat$urbru1 %>% fct_count()
 
-
 ```
 
 Taustamuuttujien luokitteluja (esim. luokkien yhdistäminen) pohditaan tarkemmin,
 kun muuttujat otetaan käyttöön.
 
+### Vaihe 2.2
+
 Poistetaan muuuttujista luokittelumuuttujien arvot, joissa ei ole havaintoja. Näitä
 tyhjiä luokkia siirtyy SPSS-tiedostosta haven_labelled -luokan tietohin.
+
+
 ```{r fct-vaihe22}
 # Poistetaan tyhjät luokat muuttujista
 
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
     mutate(Q1a = fct_drop(Q1a1),
-           Q1b = fct_drop(Q1b1), 
+           Q1b = fct_drop(Q1b1),
            Q1c = fct_drop(Q1c1),
            Q1d = fct_drop(Q1d1),
            Q1e = fct_drop(Q1e1),
@@ -278,27 +314,27 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
            Q3a = fct_drop(Q3a1),
            Q3b = fct_drop(Q3b1),
            edu = fct_drop(edu1),
-           msta = fct_drop(msta1), 
-           sosta = fct_drop(sosta1), 
+           msta = fct_drop(msta1),
+           sosta = fct_drop(sosta1),
            nchild = fct_drop(nchild1),
-           lifsta = fct_drop(lifsta1),  
+           lifsta = fct_drop(lifsta1),
            urbru = fct_drop(urbru1)
-           
+
     )
 # Tarkistuksia 1
 
 ISSP2012jh1d.dat %>% summary()
-ISSP2012jh1d.dat %>% 
-    select(Q1a, Q1b, Q1c, Q1d, Q1e,Q2a,Q2b,Q3a, Q3b) %>% 
+ISSP2012jh1d.dat %>%
+    select(Q1a, Q1b, Q1c, Q1d, Q1e,Q2a,Q2b,Q3a, Q3b) %>%
     str()
-ISSP2012jh1d.dat %>% 
-    select(Q1a1, Q1b1, Q1c1, Q1d1, Q1e1,Q2a1,Q2b1,Q3a1, Q3b1) %>% 
+ISSP2012jh1d.dat %>%
+    select(Q1a1, Q1b1, Q1c1, Q1d1, Q1e1,Q2a1,Q2b1,Q3a1, Q3b1) %>%
     str()
-ISSP2012jh1d.dat %>% 
-    select(edu, msta, sosta, nchild,lifsta, urbru) %>% 
+ISSP2012jh1d.dat %>%
+    select(edu, msta, sosta, nchild,lifsta, urbru) %>%
     str()
-ISSP2012jh1d.dat %>% 
-    select(edu1, msta1, sosta1, nchild1,lifsta1, urbru1) %>% 
+ISSP2012jh1d.dat %>%
+    select(edu1, msta1, sosta1, nchild1,lifsta1, urbru1) %>%
     str()
 
 
@@ -328,7 +364,9 @@ ISSP2012jh1d.dat %>%
 
 ```
 
-Luodaan uusi muuttuja, jossa puuttuva tieto (NA) on mukana luokittelumuuttujan 
+
+### Vaihe 2.3
+Luodaan uusi muuttuja, jossa puuttuva tieto (NA) on mukana luokittelumuuttujan
 uutena arvona ("missing").
 
 ```{r fct-vaihe23}
@@ -393,14 +431,18 @@ ISSP2012jh1d.dat %>%
 
 ```
 
-Lopuksi luodaan uuden "faktorilabelit" substanssimuuttujille. Graafisessa analyysissä kuviin on
-saatava mukaan kaikki oleellinen, mutta ei mitään sen lisäksi. Näitä muuttujan arvojen tunnuksia muokataan tarvittaessa.
+### Vaihe 2.4
+
+Lopuksi luodaan uudet "faktorilabelit" substanssimuuttujille. Näkyvät komennolla levels(). Graafisessa analyysissä kuviin on saatava mukaan kaikki oleellinen, mutta ei mitään sen lisäksi. Näitä muuttujan arvojen tunnuksia muokataan tarvittaessa.
+
+Taustamuuttujien "faktorilabeleita" säädetään kun ne otetaan käyttöön.
+
 
 ```{r fct-vaihe24}
-# Vaihe 2.4.1 
+# Vaihe 2.4.1
 
-# Viisi vastausvaihtoehtoa - ei eksplisiittistä NA-tietoa("missing")
-# Q3a - Q3b kolme vastausvaihtoehtoa
+# Q1a - Q1e,Q2a, Q2b  Viisi vastausvaihtoehtoa - ei eksplisiittistä NA-tietoa("missing")
+# Q3a - Q3b  kolme vastausvaihtoehtoa
 
 ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
     mutate(Q1a = fct_recode(Q1a,
@@ -457,8 +499,8 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 
 
 # Tarkistuksia 1
-ISSP2012jh1d.dat %>% 
-    select(Q1a, Q1b, Q1c, Q1d, Q1e, Q2a, Q2b, Q3a, Q3b) %>% 
+ISSP2012jh1d.dat %>%
+    select(Q1a, Q1b, Q1c, Q1d, Q1e, Q2a, Q2b, Q3a, Q3b) %>%
     summary()
 
 
@@ -527,39 +569,39 @@ ISSP2012jh1d.dat <- ISSP2012jh1d.dat %>%
 
 # Tarkistuksia 4
 
-ISSP2012jh1d.dat %>% 
-    select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>% 
+ISSP2012jh1d.dat %>%
+    select(Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm) %>%
     summary()
 
 # Tarkistuksia 5
 
 # Substanssimuuttuja
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q1a,Q1am)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q1b,Q1bm)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q1c,Q1cm)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q1d,Q1dm)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q1e,Q1em)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q2a,Q2am)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q2b,Q2bm)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q3a,Q3am)
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(Q3b,Q3bm)
 
 ISSP2012jh1d.dat %>%  # tableX muotoilee taulukkoa!
@@ -570,18 +612,134 @@ ISSP2012jh1d.dat$Q3am %>% levels()
 
 # Taustamuuttujat
 
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(edu, edum)
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(msta, mstam)
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(sosta, sostam)
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(nchild,nchildm)
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(lifsta, lifstam)
-ISSP2012jh1d.dat %>% 
+ISSP2012jh1d.dat %>%
     tableX(urbru, urbrum)
 
 ```
 
+Muunnosten testaus, varmistetaan että muuttujat säilyvät samanlaisina. Muunnosten
+jälkeen on koodilohkossa passiivisina riveinä taulukointeja ja muita testauksia.
+(16.9.2020)
+
+```{r fct-testaus1}
+# (16.9.2020) Testaus uusille muuttujille
+# Koodilohkoissa on jo testattu taulukoimalla muuttujia. Tässä varmistetaan, että
+# muuttujat pysyvät sellaisina millaisiksi ne on luotu.
+
+# ika - onpas hankala testata !
+# Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+# 15.00   36.00   50.00   49.52   63.00  102.00
+# ikatest <- ISSP2012jh1d.dat$ika %>% summary()
+#   ikatest <- ikatest[2,]
+#validate_that(are_equal(ikatest, c(15, 36, 50, 49.5, 63, 102)))
+#str(ISSP2012jh1d.dat)
+#ISSP2012jh1d.dat %>% 
+
+# substanssimuuttujat 1
+# Q1a, Q1b, Q1c, Q1d, Q1e, Q2a, Q2b, Q3a, Q3b (r. 423->)
+
+validate_that(length(levels(ISSP2012jh1d.dat$Q1a)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1a),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1b)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1b),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1c)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1c),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1d)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1d),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1e)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1e),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q2a)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q2a),
+               c("S", "s", "?", "e", "E")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q2b)) == 5)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q2b),
+               c("S", "s", "?", "e", "E")))
+
+# substanssimuuttujat 2
+
+validate_that(length(levels(ISSP2012jh1d.dat$Q3a)) == 3)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q3a),
+               c("W", "w", "H")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q3b)) == 3)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q3b),
+               c("W", "w", "H")))
+
+
+
+# substanssimuuttujat, puuttuva tieto muuttujan arvona
+# Q1am, Q1bm, Q1cm, Q1dm, Q1em, Q2am, Q2bm, Q3am, Q3bm
+
+validate_that(length(levels(ISSP2012jh1d.dat$Q1am)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1am),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1bm)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1bm),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1cm)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1cm),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1dm)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1dm),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q1em)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q1em),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q2am)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q2am),
+               c("S", "s", "?", "e", "E", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q2bm)) == 6)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q2bm),
+               c("S", "s", "?", "e", "E", "P")))
+
+validate_that(length(levels(ISSP2012jh1d.dat$Q3am)) == 4)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q3am),
+               c("W", "w", "H", "P")))
+validate_that(length(levels(ISSP2012jh1d.dat$Q3bm)) == 4)
+validate_that(are_equal(levels(ISSP2012jh1d.dat$Q3bm),
+               c("W", "w", "H", "P")))
+
+# taustamuuttujat puuttuvilla tiedoilla ja ilman
+# testataan vain tasojen määrä, ei labeleita jotka ovat 
+# alkuperäisestä datasta.
+
+# edu, edum
+validate_that(length(levels(ISSP2012jh1d.dat$edu)) == 7)
+validate_that(length(levels(ISSP2012jh1d.dat$edum)) == 8)
+
+# msta, mstam
+validate_that(length(levels(ISSP2012jh1d.dat$msta)) == 9)
+validate_that(length(levels(ISSP2012jh1d.dat$mstam)) == 10)
+
+# sosta, sostam
+validate_that(length(levels(ISSP2012jh1d.dat$sosta)) == 10)
+validate_that(length(levels(ISSP2012jh1d.dat$sostam)) == 11)
+
+# nchild, ncildm
+validate_that(length(levels(ISSP2012jh1d.dat$nchild)) == 11)
+validate_that(length(levels(ISSP2012jh1d.dat$nchildm)) == 12)
+
+# lifsta, lifstam
+validate_that(length(levels(ISSP2012jh1d.dat$lifsta)) == 6)
+validate_that(length(levels(ISSP2012jh1d.dat$lifstam)) == 7)
+
+# urbru, urbrum
+validate_that(length(levels(ISSP2012jh1d.dat$urbru)) == 5)
+validate_that(length(levels(ISSP2012jh1d.dat$urbrum)) == 6)
+
+
+```

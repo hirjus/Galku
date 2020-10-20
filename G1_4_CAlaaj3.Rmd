@@ -1,0 +1,297 @@
+## Subset CA
+
+Teoria esitetään myöhemnmin, käytännön hyödyllisyys osoitetaan tässä. CA-kartoissa
+on usein aivan liian paljon pisteitä, vain karkeat yleispiirteet näkyvät. Ovatko
+kiinnostavat asia piilossa? "Poikkeavat havainnot ovat ainoita todella kiinnostavia
+havaintoja".
+
+**Data** Ensimmäinen osajoukko-ca käyttää datan perustiedostoa (ISSP2012esim2.dat).
+Maa-rivit ovat mukana kokonaislukumatriisissa maagaTab1.
+
+Datassa maa-sukupuoli-ikäluokkarivit ovat näillä riveillä:
+BE 1-12, BG 13-24, DE 25-36, DK 37-48, FI 49-60, HU 61-72 .
+Maa-profiilit ovat taulukon(matriisin) maagaTab1 riveillä 73-78 samassa järjestyksessä.
+**edit 9.9.20** Tarkistettava, miten ca-funktio laskee täydentävien rivien koordinaatit,
+kun riveistä otetaan analyysiin vain osa.
+
+```{r subsetCA-1a, fig.cap = "Ikä, sukupuoli ja maa",fig.asp = 1, out.width = "90%",fig.align = "center"}
+#31.8.20 Testataan subset ca
+#ISSP2012esim2.dat %>% tableX(maaga, Q1b)
+maagaCA2subset1BEBG <- ca(~maaga + Q1b,ISSP2012esim1b.dat, subsetrow = 1:24)
+par(cex = 0.5)
+plot(maagaCA2subset1BEBG,
+                sub = "symmetrinen kartta:Belgia ja Bulgaria,osajoukon ca (subset ca)"
+        )
+
+# main = "Äiti töissä: ikäluokka ja sukupuoli maittain" mikä on plot-funktion
+# title-asetusten ja koodilohkon asetusten suhde? Ainakin plot-funkiton
+# main = "Äiti töissä: ikäluokka ja sukupuoli maittain" korvaa koodilohkossa
+# määritellyn (9.9.20). R-markdownissa kuvan pääotsikko putoaa kokonaan pois,
+# mitenköhän tulosteissa?
+```
+
+Yhdistetään pisteitä.
+
+```{r subsetCA-1aL, fig.cap = "Ikä, sukupuoli ja maa - Belgia",fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# CA- tulosobjekti maagaCA2subset1
+
+maagaLinesBEBG <- cacoord(maagaCA2subset1BEBG, type = "symmetric")
+maagaLinesBEBG <- maagaLinesBEBG$rows[ , 1:2]
+par(cex = 0.5)
+plot(maagaCA2subset1BEBG,main = "Äiti töissä, BE ja BG: ikäluokka ja sukupuoli",
+                sub = "symmetrinen kartta, osajoukon ca (subset ca)"
+        )
+lines(maagaLinesBEBG[1:6,1],maagaLinesBEBG[1:6,2], col="blue") #BEf
+lines(maagaLinesBEBG[7:12,1],maagaLinesBEBG[7:12,2], col="red")  #BEm
+lines(maagaLinesBEBG[13:18,1],maagaLinesBEBG[13:18,2], col="blue") #BBGf
+lines(maagaLinesBEBG[19:24,1],maagaLinesBEBG[19:24,2], col="red")  #BEm
+
+
+```
+
+
+Kartan tulkintaa, kokonaisinertia voidaan esittää maa kerrallaan. (9.9.20)
+
+
+```{r subsetCA-1b, fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# Datana maagaTab1 - viimeisinä riveinä maarivit
+
+maagaCA2sub1 <- ca(maagaTab1[,1:5], subsetrow = 1:24)
+par(cex = 0.5)
+plot(maagaCA2sub1, map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(TRUE,TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca (subset ca)"
+        )
+```
+
+Lisätään kuvaan täydentävänä (passiivisena) pisteenä Belgian maapiste, tarkistettava
+tuleeko se "oikeaan" kohtaan. 
+**edit 10.10.20** Ei toimi, maapisteen koordinaatit pitäisi 
+laskea uudelleen. Syy: ca rivien osajoukolle.Maapisteiden osajoukon keskiarvopiste
+ei ole origo,mutta sarakepisteiden on.
+
+```{r subsetCA-1c, fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+# Datana maagaTab1 - viimeisinä riveinä maarivit
+maagaTab1
+maagaCA2sub2 <- ca(maagaTab1[,1:5], subsetrow = 1:24)
+par(cex = 0.4)
+plot(maagaCA2sub2, map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen(rowgreen) kartta:Belgia ja Bulgaria,osajoukon ca"
+        )
+```
+
+Belgian kolme aluetta täydentäviksi pisteiksi? **Ei tehdä, aika iso duuni.(9.9.20)**
+
+```{r subsetCA-1d, fig.asp = 1, out.width = "90%",fig.align = "center"}
+# ISSP2012esim2.dat
+# spCAmaaga1    maaga-ca-objekti (täydentävillä maa-pisteillä)
+# maagaTab1     taulukko  jossa maaga-rivit ja maat täydentävinä pisteinä
+#
+# Ongelma 1: miten saa maarivit kätevästi? Tässä tapauksessa näin
+# maagaTab1
+# Taulukon viimeisillä riveillä maa-profiilit frekvensseinä
+# maaga-rivit ovat samassa järjestyksessä, kuusi naisten ja kuusi miesten
+# ikäryhmää
+# ISSP2012esim2.dat %>% tableX(maaga, Q1b)
+#
+# BE   191 451 438 552 381
+# BG   118 395 205 190  13
+# DE   165 375 198 538 438
+# DK    70 238 152 232 696
+# FI    47 188 149 423 303
+# HU   219 288 225 190  75
+#
+# BE 1-12, BG 13-24, DE 25-36, DK 37-48, FI 49-60, HU 61-72, maarivi
+# Hoitaako ca-paketti automaattisesti täydentävien pisteiden "skaalauksen
+# subsetCA:ssa? Sarakepisteiden keskiarvo on origossa, mutta rivien osajoukon
+# keskiarvo ei ole ja tämä pitäisi korjata.
+
+maagaCA2sub2 <- ca(~maaga + Q1b,ISSP2012esim1b.dat,subsetrow = 25:60)
+par(cex = 0.6)
+plot(maagaCA2sub2, main = "Äiti töissä: ikäluokka ja sukupuoli maittain",
+     sub = "symmetrinen kartta - Tanska, Saksa ja Suomi (subset ca)")
+
+```
+Sama kuva - yhdistetään pisteitä janoilla.
+
+```{r subsetCA-1dL, fig.cap = "Ikä, sukupuoli ja maa:Tanska-Saksa-Suomi",fig.asp = 1, out.width = "90%",fig.align = "center"}
+# ca-tulosobjekti maagaCA2sub2, DK DE FI
+
+maagaLinesDKDEFI <- cacoord(maagaCA2sub2, type = "symmetric")
+maagaLinesDKDEFI <- maagaLinesDKDEFI$rows[ , 1:2]
+maagaLinesDKDEFI
+par(cex = 0.6)
+plot(maagaCA2sub2, 
+     sub = "symmetrinen kartta - Tanska, Saksa ja Suomi (subset ca)")
+lines(maagaLinesDKDEFI[1:6,1],maagaLinesDKDEFI[1:6,2], col="blue") #DEf
+lines(maagaLinesDKDEFI[7:12,1],maagaLinesDKDEFI[7:12,2], col="red")  #DEm
+lines(maagaLinesDKDEFI[13:18,1],maagaLinesDKDEFI[13:18,2], col="blue") #DKf
+lines(maagaLinesDKDEFI[19:24,1],maagaLinesDKDEFI[19:24,2], col="red")  #DKm
+lines(maagaLinesDKDEFI[25:30,1],maagaLinesDKDEFI[25:30,2], col="blue") #FIf
+lines(maagaLinesDKDEFI[31:36,1],maagaLinesDKDEFI[31:36,2], col="red")  #FIm
+
+
+```
+
+
+
+```{r subsetCA-1e, fig.asp = 1, out.width = "90%",fig.align = "center"}
+
+spCAmaagasub1 <- ca(maagaTab1[,1:5], subsetrow = 25:60 )
+par(cex = 0.6)
+plot(spCAmaagasub1, main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+     sub = "symmetrinen kartta, cex=0.06"
+    )
+
+```
+Sama kartta kuin edellinen, mutta kontribuutiokarttana.
+```{r subsetCA-1e2, fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Osajoukko-ca ja täydentävät maapisteet
+
+par(cex = 0.6)
+plot(spCAmaagasub1, map = "rowgreen",
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä: ikäluokka ja sukupuoli maittain 2",
+     sub = "Kontribuutiokartta, cex=0.06"
+    )
+
+
+```
+**17.10.20** Kontribuutiokartta näyttää paremmalta.
+
+Tutkitaan CA-ratkaisun tuloksia.
+
+```{r  subsetCA1num1}
+summary(spCAmaagasub1)
+```
+
+Kolmen maan osajoukon ratkaisussa 2. dimensiolla (maltillinen liberaali?) on
+inertiasta 17 prosenttia, edellä ollut paljon yksiulotteisempia ratkaisuja. Huono kvaliteetti
+on DEf1 (467) ja DEf6 (48!), DEm4 (285). Tanskan havainnoista vanhimmat miehet
+(DKm6,291) ovat kaikkein huonoimmin esitettyjä ratkaisussa, ja hieman nuoremmatkin
+(DKm5, 682). Suomen aineistossa vain nuoret miehet (FIm1, 624) on esitetty kartalla
+huonosti. Kaksi dimensiot selittävät osajoukon kokonaishajonnasta 92%, mutta muutaman
+ryhmän hajonta on muissa dimensioissa. Saksan naisten iäkkäin ikäluokka (DEf6)
+ja keski-ikäisen miehet (DEm4) vain näyttävät olevan lähekkäin origon tuntumassa,
+samoin muutama muu huonosti tasoon sijoitettu piste.
+
+Huonosti kuvatuista pisteistä ei kuva ei siis kerro oikeastaan mitään muuta.
+
+Sarakkeet on esitetty kohtalaisen hyvin, ja symmetrisessä kartassa tärkeimmälle
+dimensioille projisodut sarakepisteet ovat odotetussa järjestyksessä.
+
+Kontribuutiokartasta nähdään, että tärkein kontrasti on tiukan erimielisyyden (E)
+ja kaikkien muiden vastausvaihtoehtojen välillä. Epävarmojen tai maltillisten (e)
+kontrasti hallitsee toista dimensiota, erityisesti S- ja s- kategorioiden kanssa.
+Samalla kuvasta näkee (ja numeerisist tuloksista voi vahvistaa), että S-piste on
+on lähempänä (kulma on pienempi) pystyakselia. Kontribuutio on suurempi (147 vs.
+71 x-akselille). Toisaalta x-akseli selittää selvästi suurimman osan kaikkien muiden
+sarakepisteiden inertiasta, ja y-akseli taas lähes täysin e-pisteen inertian.
+
+
+
+
+**Osajoukko-ca neljälle ryhmälle**
+Belgia on vähän rajatapaus, kokeillaan osajoukko-ca:ta neljällä maaryhmällä.
+BG-HU, BE-DE-DK-FI,DEDKFI ja BEBGHUsubset
+
+```{r  subsetCA-1f, fig.asp = 1, out.width = "90%",fig.align = "center"}
+# Neljä maaryhmää
+BGHUsubset <- c(13:24,61:72)
+BEDEDKFIsubset <- c(1:12, 25:36, 37:48, 49:60)
+DEDKFIsubset <- c(25:36, 37:48, 49:60)
+BEBGHUsubset <- c(1:12,13:24,61:72)
+
+spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
+par(cex = 0.6)
+plot(spCAmaagasub3, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+    sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+    )
+
+spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
+par(cex = 0.6)
+plot(spCAmaagasub3, map = "rowgreen",
+     arrows = c(FALSE,TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+    sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+    )
+# xlim=c(-0.1,0.8), ylim=c(-0.,0.4) kuvaa voisi säätää, mutta tärkein E-sarake
+# jäisi pois
+summary(spCAmaagasub3)
+```
+
+
+
+```{r subsetCA-1g, fig.asp = 1, out.width = "90%",fig.align = "center"}
+spCAmaagasub4 <- ca(maagaTab1[,1:5], subsetrow = BEDEDKFIsubset)
+par(cex = 0.6)
+plot(spCAmaagasub4,
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+)
+
+# asymmetrinen kartta
+par(cex = 0.6)
+plot(spCAmaagasub4,map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
+)
+
+par(cex = 0.6)
+plot(spCAmaagasub4,map = "rowprincipal",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowprincipal, relative contr.), osajoukko-ca, cex=0.06"
+)
+
+
+```
+**17.10.20** Kontribuutiokartta on paras. Asymmetrinen on liian tukkoinen.
+
+```{r subsetCA-1h, fig.asp = 1, out.width = "90%",fig.align = "center"}
+spCAmaagasub5 <- ca(maagaTab1[,1:5], subsetrow = DEDKFIsubset)
+par(cex = 0.6)
+plot(spCAmaagasub5, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+)
+# asymmetrinen kartta
+par(cex = 0.6)
+plot(spCAmaagasub5,map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(FALSE, TRUE),
+     arrows = c(FALSE, TRUE),
+     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
+)
+```
+
+```{r subsetCA-1i, fig.asp = 1, out.width = "90%",fig.align = "center"}
+spCAmaagasub6 <- ca(maagaTab1[,1:5], subsetrow = BEBGHUsubset)
+par(cex = 0.6)
+plot(spCAmaagasub6, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+)
+
+plot(spCAmaagasub6, map = "rowgreen",
+    arrows = c(FALSE, TRUE),
+    main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
+    sub = "kontribuutiokartta, osajoukko-ca, cex=0.06"
+)
+
+```

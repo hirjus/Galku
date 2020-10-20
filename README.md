@@ -138,7 +138,50 @@ skriptissä. Hieman tekstiä johdattelevan esimerkin asymmetriseen kuvaan.
 
 **14.6.2020** Maa-sukupuoli-ikä - karttojen kehittelyä.
 
-**12.8.2020** Siistittiin tekstiä. Testattiin ca-paketin caconv- ja cacoord-funktioita.
-Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
+**12.8.2020** Siistittiin tekstiä. Testattiin ca-paketin caconv- ja cacoord-funktioita. Hiottiin maaga-kuvia valmiiksi (CAcalc_1.R).
+
 **5.9.2020** Pientä editointia, lisättiin riviprofiili-ca:n ja perus-ca:n
 khii2-etäisyyksien ja massojen vertailuja.
+
+**6.9.2020** Versio 1.5.8 - kevään ja kesän muutokset.
+
+**7.9.2020** Uusi R-skripti Subset_ca1.R, kehitelty osajoukko-CA:n kuvia
+G1_4_CAlaaj1.Rmd - skriptin maa-sukupuoli-ikäluokka - muuttujan kartoille.
+
+**8.9.2020** Subset_ca1.R: lisää subsetca - karttoja eri optioilla. Asymmetrinen
+"rowgreen" näyttäisi toimivan parhaiten.
+
+**9.9.2020** Jatkettiin subsetca- kuvine ja BaseR-plot - funktion avulla
+"zoomattujen" kuvien kehitttelyä. Pilkotaan liian pitkät Rmd-tiedostot pienemmiksi,
+ensimmäisenä G1_4_CAlaaj1.Rmd, loppuosa on nyt G1_4_CAlaaj2.Rmd ja subset CA on
+G1_4_CAlaaj1.Rmd.
+
+**15.9.2020** Hiottiin kuvia ja tauloukoita, lisättiin Powerpointilla käsitelty
+asymmetrinen kartta (2 kpl). Siistimistä ja editointia.
+
+**16.9.2020** Siistittiin Galkua, aika maltillisesti poistoja. Lisättiin
+yhteen maaga-kuvaan rivipisteitä yhdistäviä janaoja. Tägätään piakkoin versioon 1.5.9.,
+ lisätään pinotut taulut yksinkertaisella esimerkkidatalla.
+**18.9.2020** Lisää maaga-kuvia, maapisteiden yhdistelyä.
+
+**20.9.2020** Pientä editointia, Burt_1.R - skriptissä pinottu taulukko.
+
+**21.9.2020** Ensimmäinen pinottu taulu Burt_1.R-skriptissä.
+
+**7.10.2020** Editointia, muunnsten testaus G1_data_fct1.Rmd - tiedostoon.
+
+**10.10.2020** Editoidaan kolmea ensimmäistä Rmd-tiedostoa. Koodilohkon kuva-otsikko
+ ja plot-komennon otsikko, kumpi tulostuu? Ensimmäiset MCA-kokeilut, ja ison
+aineiston puuttuneisuuden kuvailua lyhyesti. Puuttuvia tietoja ei kuvailla tarkemmin,
+viitataan ISSP-dokumentteihin.
+
+**13.10.2020** MCA1.R - skriptissä kehitelty MCA-kuvia.
+
+**17.10.2020** MCA-datan luonti, lisätty pinotun taulun kuva, editoitu tekstipätkiä.
+ MCA-karttoja viimeisessä Rmd-skriptissä, koko aineistolla ja osajoukko-MCA
+ ilman puuttuvia vastauskategorioita.
+
+**19.10.2020** Lisätään muutama MCA-kartta, versio 1.5.9
+**20.10.2020** **Versio 1.6.0** En saanut mjca-funktiossa toimimaan yhtä aikaa
+subsetcat- ja supcol - parametreja. Analyysissä on vain todettu puuttuvien tietojen
+iso vaikutus ja esitetty kysymysmuuttujien osajoukko - MCA ilman puuttuvia tietoja.
