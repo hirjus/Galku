@@ -193,7 +193,7 @@ MCAtestdata121020.dat[,1:7]
 
 
 MCAtest1 <- mjca(MCAtest2data.dat[,1:7], ps="")
-str(MCAtest1)
+summary(MCAtest1)
 MCAtest1$levelnames
 par(cex = 0.6)
 plot(MCAtest1, 
@@ -212,7 +212,7 @@ plot(MCAtest2,
      main = "Seitsemän kysymystä, lisämuuttuja E - symmetrinen kuva 1",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
 
-#  Täydentävät sarakkeet koulutustaso ja maa
+#  Täydentävät sarakkeet koulutustaso ja maa TOIMIVAT (20.10.20)
 
 
 MCAtest3b <- mjca(MCAtest2data.dat[,1:9], ps="", supcol = 8:9)
@@ -223,14 +223,15 @@ plot(MCAtest3b,
 summary(MCAtest3b)
 
 x11()
-#kaikki taustamuuttuta
+#kaikki taustamuuttujat
 dim(MCAtest2data.dat)
+names(MCAtest2data.dat)
 MCAtest3c <- mjca(MCAtest2data.dat[,1:11], ps="", supcol = 8:11)
-par(cex = 0.5)
-plot(MCAtest3c, what = c("all", "all"),
+par(cex = 0.6)
+plot(MCAtest3c, what = c("none", "all"),
      main = "Seitsemän kysymystä, lisämuuttujat E, S, U, maa",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
-summary(MCAtest3b)
+summary(MCAtest3c)
 
 
 # ei toimi - taitaa vaatia peräkkäiset täydentävät sarakkeet ? 13.10.20
@@ -244,10 +245,9 @@ isodatVars3b <- c("a1","b1", "c1", "d1","e1","a2","b2", "maa")
 MCAtest3temp.dat <- select(MCAtest2data.dat, all_of(isodatVars3b))
 glimpse((MCAtest3temp.dat))
 
-MCAtest3c <- mjca(MCAtest3temp.dat[,1:8], ps="", supcol = 8)
-summary(MCAtest3c)
-par(cex = 0.6)
-plot(MCAtest3c, 
+MCAtest3d <- mjca(MCAtest3temp.dat[,1:8], ps="", supcol = 8)
+summary(MCAtest3)
+plot(MCAtest3d, 
      main = "Seitsemän kysymystä, lisämuuttuja maa",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
 
@@ -261,6 +261,7 @@ plot(MCAtest3b, what = c("passive","passive"),
      main = "Lisämuuttujat E ja maa - 7 kysymyksen kartta",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P"
      )
+summary(MCAtest3d)
 
 #MIKÄ TÄSSÄ ON VIKANA? 13.10.20 - colsup toimii, supcol ei
 # ja viitattava Burt/indikaattorimatriisin sarakkeisiin. Yllä supcol toimii,
@@ -282,13 +283,14 @@ plot(MCAtest3b, what = c("passive","passive"),
 
 
 # osajoukko ilma P-arvoja subsetcat=(1:42)[-c(6,12,18,24,30,36,42)]
-MCAtest3 <- mjca(MCAtestdata121020.dat[,11:17], ps = "", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)] )
-plot(MCAtest3,
+MCAtestP1 <- mjca(MCAtestdata121020.dat[,11:17], ps = "", subsetcat=(1:42)[-c(6,12,18,24,30,36,42)] )
+plot(pCAtestP1,
      main = "Seitsemän kysymystä ilman puuttuvia tietoja (subset) - symmetrinen kuva 1",
      sub = "Muuttujien nimet: Q1a = a1,...,Q2a = a2, vastaukset S,s,?,e,E,P")
 summary(MCAtest3)
 
 # EI TOIMI
+glimpse(MCAtestdata121020.dat)
 # osajoukko ilma P-arvoja subsetcat=(1:42)[-c(6,12,18,24,30,36,42)] - täydentävä sarake?
 levels(MCAtestdata121020.dat$E)
 MCAtest3b <- mjca(MCAtestdata121020.dat[,10:17], ps = "",  

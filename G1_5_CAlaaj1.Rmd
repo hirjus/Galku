@@ -90,6 +90,9 @@ Concat1jh.CA1$colcoord[, 2] <- -Concat1jh.CA1$colcoord[, 2]
 Piirretään karttoja.
 
 ```{r concatplot1, fig.asp=1,fig.cap="Pinottu matriisi - kartta 1"}
+# Kooridnaatit käännetty edellisessä koodilohkossa
+# Symmetrinen kartta paras, kontribuutiokartta vektoireilla myös aika hyvä
+
 par(cex = 0.6)
 plot(Concat1jh.CA1,
      main = "Pinottu taulukko - symmetrinen kuva1",
@@ -104,49 +107,94 @@ plot(Concat1jh.CA1, map = "rowgreen",
      main = "Pinottu taulukko - kontribuutiokartta",
      sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
      )
-plot(Concat1jh.CA1, map = "rowgreen",
-     main = "Pinottu taulukko - kontribuutiokartta",
-     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
-     )
+
+# Muutama rivipiste ja taustamuuttujat tiukkana nippuna origon ympärillä
+#plot(Concat1jh.CA1, map = "rowgreen",
+#     main = "Pinottu taulukko - kontribuutiokartta",
+#     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+#     )
 
 # Tukkoinen kuva - rajataan pois HU ja BG (rivit 2, 6)
 # dim(ISSP2012Concat2jh.dat)
-
-subConcat1jh.CA1 <- ca(ISSP2012Concat2jh.dat[,1:5], subsetrow = c(1:1, 3:5, 7:14))
-subConcat1jh.CA1$colnames <- c("S", "s", "?", "e", "E")
-subConcat1jh.CA1$rownames <- c("BE", "DE", "DK", "FI", "m", "f",
-                           "a1", "a2", "a3", "a4", "a5", "a6")
-
-plot(subConcat1jh.CA1,
-     main = "Pinottu taulukko - subsetCA",
-     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
-     )
-# Kokeillaan kontribuutiokuvaa
-plot(subConcat1jh.CA1, map = "rowgreen",
-     main = "Pinottu taulukko - subsetCA - kontrib.kartta",
-     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
-     )
-
 summary(Concat1jh.CA1)
 ```
 
 Kartan tulkinta; miten eroaa yhteisvaikutusmuuttujan analyysistä?
 
-Mikä on  maapisteiden ja kahden selittävän (eksogeenisen) muuttujan pisteiden yhteys sarakepisteisiin?
+1. Perustulkinta akseleille ei muutu, mutta s-sarake on kiusallisesti enemmän
+oikealla kuin S. Maapisteiden sijaiti ei juuri muutu.
+
+Mikä on  maapisteiden ja kahden selittävän (eksogeenisen) muuttujan pisteiden
+yhteys sarakepisteisiin?
+
+Koko aineiston kartassa ikäluokkapisteet ja sukupuolipisteet ovat pakkautuneet
+maapisteitä tiiviimmin origon ympärille. Ikäluokkapisteiden (koko aineiston
+keskiarvot) selvä kontrasti on vanhimman (a6)ja toiseksi nuorimman välillä
+1. dimenision suuntaan.
 
 Ikäluokkapisteet ovat koko aineiston keskiarvopisteitä, niiden sijantia voi
 tulkita pistejoukko kerrallaan kuten maapisteidenkin. Mitään yhteisvaikutuksia ei
 analysoida eksplisiittisesti. Karttaa voi verrata sukupuoli-ikäluokka
 yhteisvaikutusmuuttujan analyysin aiemmin. Naispiste on tiukassa nipussa
-ikäluokkien a3 ja a4 kanssa aivan origon vasemmalla puolella. Miesten keskiarvopiste on hieman origosta oikealle, yhdessä ikäluokan a5 kanssa.
+ikäluokkien a3 ja a4 kanssa aivan origon vasemmalla puolella. Miesten
+keskiarvopiste on hieman origosta oikealle, yhdessä ikäluokan a5 kanssa.
 
-Koko aineiston kartassa ikäluokkapisteet ja sukupuolipisteet ovat pakkautuneet maapisteitä tiiviimmin origon ympärille. Lisäpisteet on hyvin esitetty, niiden
-etäisyyksiä voi luotettavasti arvioida kuvasta. Poikkeus on nuorin ikäluokka (a1, qlt = 501). Inertian osuudet (inr) ovat yhtä vaatimattomia kuin Belgian (28) ja
-Saksan (29), (m =20, f = 17, a2 = 40, a6 = 83), samoin kontribuutiot akseleiden inertiaan. 1. dimension kontribuutio (cor) on suuri (>800) kaikilla paitsi nuorimmalla ikäryhmällä (a1) jolla 2. dimension selittää lähes puolet sen inertiasta (470).
+**Taustamuuttujat: numeeristen tulosten tarkastelua**
+
+Lisäpisteet on hyvin esitetty, niiden etäisyyksiä voi luotettavasti arvioida
+kuvasta. Poikkeus on nuorin ikäluokka (a1, qlt = 501). Inertian osuudet (inr)
+ovat yhtä vaatimattomia kuin Belgian (28) ja Saksan (29),
+(m =20, f = 17, a2 = 40, a6 = 83), samoin kontribuutiot akseleiden
+inertiaan. 1. dimension kontribuutio (cor) on suuri (>800) kaikilla paitsi
+nuorimmalla ikäryhmällä (a1) jolla 2. dimension selittää lähes puolet sen
+inertiasta (470).
+
+```{r concatplot2, fig.asp=1,fig.cap="Pinottu matriisi - osajoukko (HU, BG pois)"}
+
+subConcat2jh.CA1 <- ca(ISSP2012Concat2jh.dat[,1:5], subsetrow = c(1:1, 3:5, 7:14))
+subConcat2jh.CA1$colnames <- c("S", "s", "?", "e", "E")
+subConcat2jh.CA1$rownames <- c("BE", "DE", "DK", "FI", "m", "f",
+                           "a1", "a2", "a3", "a4", "a5", "a6")
+par(cex = 0.6)
+plot(subConcat2jh.CA1,
+     main = "Pinottu taulukko - subsetCA",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
+
+# Kontribuutiokuva
+par(cex = 0.6)
+plot(subConcat2jh.CA1, map = "rowgreen",
+     arrows = c(FALSE, TRUE),
+     main = "Pinottu taulukko - subsetCA - kontrib.kartta",
+     sub = "a1-a6 ikäluokat, m = miehet, f = naiset, Q1b"
+     )
+
+summary(subConcat2jh.CA1)
+
+```
+
 
 Kun Bulgaria ja Unkari jätetään pois, origon lähelle pakkautuneet pistet erottuvat
-hieman paremmin (osajoukon CA).
+hieman paremmin (osajoukon CA). 
 
+Osajoukon analyysin kontribuutiokartta muuttuu:
+
+- sarakevektorit kääntyvät vasemmalle
+- S ja s päällekkäin, neutraali katgoria lähes x-akselin suuntainen
+- nyt S- ja s-pisteet ovat oikeassa järjestyksessä, mutta s-sarakkeen
+kontribuutio on suurempi. S-sarakkeen kontribuutio on hieman suurempi y- akselilla
+kuin x-akselilla. Vekt
+- maltillisesen erimielidyyden sarake e on nyt oikealla, konservatiivisella
+puolella
+
+Numeerisista tuloksista kartalla hyvin esitetettyjen taustamuuttujapisteiden
+(poikkeuksena nuorin ikäluokka a1) kontribuutiot akseleille ovat vaatimattomia.
+Sukupuolimuuttujat selittävät vain x-akselia, samoin viisi nuorinta ikäluokkaa.
+Vanhin ikäluokka a6 on poikeava, sen kontribuutiot molemmille akseleille ovat
+eri suuruusluokkaa kuin muilla (x 132, y 165). Nuorin ikäluokka selittää vain
+y-akselin hajontaa, a2 ja a6 molempia ja keskimmäiset vain x-akselia.
+
+Iän ja sukupuolen erilliset vaikutukset eivät ole aivan yksinkertaisia.
 **edit 17.10.20** Barysentrisen ominaisuudet?
 
 Inertian dekomponointi alimatriiseille.
@@ -156,10 +204,10 @@ Tärkeä oletus: reunajakaumat tauluissa samat, ei puuttuvia tietoja muuttujissa
 
 ### Matched matrices
 
-**Huom! (16.10.20** Jos ja kun ei tehdä analyysiä, ei tarvitse omaa jaksoa. Kannattaa mainita, ehkä
-vain teoriajaksossa? Idea: matriisien yhdistämisellä saadaan ote monenlaiseen
-tutkimusongelmaan. Benzecri: data-analyysissä on vain löydettävä oikea matriisi
-joka diagonalisoidaan-
+**Huom! (16.10.20** Jos ja kun ei tehdä analyysiä, ei tarvitse omaa jaksoa.
+Kannattaa mainita, ehkävain teoriajaksossa? Idea: matriisien yhdistämisellä
+saadaan ote monenlaiseen tutkimusongelmaan. Benzecri: data-analyysissä on vain
+löydettävä oikea matriisi joka diagonalisoidaan.
 
 
 Ref:CAip ss. 177, HY2017_MCA, Greenacre JAS 2013 (sovellus ISSP 1989,4 kysymystä
@@ -516,21 +564,41 @@ dim(mcaDat21jh.dat)
 glimpse(mcaDat21jh.dat)
 
 # kysymysten puuttuvat pois subsetcat=(1:42)[-c(6,12,18,24,30,36,42)])
+# subsetcat=(1:50)[-c(6,12,18,24,30,36,42,50)],
 # maa ja gaf - ei puuttuvia tietoja
 #
 mcaDat21jh.dat$E %>% fct_count() # P-kategoria 50
 mcaDat21jh.dat$S %>% fct_count() # P-kategoria 61
 mcaDat21jh.dat$U %>% fct_count() # P-kategoria 67
 
-# tämä ei toimi colsup = (1:50)[c(43:50)], supcol
-# mcaDat21jh.dat[1:10,1:8]
-# test1QjaMuut1.mca <- mjca(mcaDat21jh.dat[,1:8], ps = "",
-#               what = c("none", "passive"),
-#                subsetcat=(1:50)[-c(6,12,18,24,30,36,42,50,61)],
-#                supcol = 8:9
-#                )
+
+# Täydäntävät sarakkeet, koko aineisto
+
+ # mcaDat21jh.dat[1:10,]
+
+ QjaMuut1.mca <- mjca(mcaDat21jh.dat[,1:12], ps = "",
+               supcol = 8:12,
+               main = "Kysymykset Q1a-Q1e ja Q2a-Q2b, viisi täydentävää muuttujaa",
+               sub = "Täydentävät muuttujat E, S, U, maa, gaf")
 # QjaMuut1.mca
-# summary(QjaMuut1.mca)
-# plot(test1QjaMuut1.mca)
-#X11()
+summary(QjaMuut1.mca)
+
+par(cex = 0.6)
+plot(test1QjaMuut1.mca,
+     what = c("none", "passive"),
+     main = "Täydentävät muuttujat E, S, U, maa, gaf",
+     sub = "Vain passiiviset sarakkeet")
+
+
+# Osajoukon analyysi ja täydentävät sarakkeet supcol = 8:12 ei toiminut
+# eikä toimi tämä
+subQjaMuut1.mca <- mjca(mcaDat21jh.dat[, 1:12], ps="",
+                        subsetcat=(1:67)[-c(6,12,18,24,30,36,42,50,61,67)],
+                        )
+
+
+#str(subConcat1jh.CA1)
+plot(subQjaMuut1.mca)
+summary(subQjaMuut1.mca)
+
 ```
