@@ -26,8 +26,22 @@ output:
     #code_folding: show
 ---
 
-**Versio 1.6.0** substet MCA ja täydentävät pisteet ei onnistunut mjca-funktiolla
-Vain joko subset tai täydentävät sarakkeet sain toimimaan.
+**Versio 1.6.0**
+
+Substet MCA ja täydentävät pisteet ei onnistunut mjca-funktiolla
+Sain toimimaan vain jomman kumman, en molempia yhdessä.
+
+Laajempaa aineistoa voi analysoida korrespondenssianalyysim kahdella
+"monimuuttujamenetelmällä", pinottujen ja yhdisteltyjen taulujen analyysinä tai
+ usean muuttujan korrespondenssianalyysinä (MCA).
+
+ mjca-funktio luo Burtin matriisin, siitä saa poimittua sopivan datan. Jatkoanalyysit
+ voi tehdä ca- funkitiolla ja sen optioita käyttäen (subset, supcol jne).
+
+ **Viite** M.Greenacre (2017) Correspondence analysis in practice, appendix B.
+ Stacked s. 271, subset MCA s. 276. Jälkimmäisessä esimerkissä MCA-ratkaisun
+ inertioita ei ole korjattu (adjusted), mjca-funktiolla taas oletuksena näin tehdään.
+
 
 **Versio 1.5.9** - lisätty MCA-analyysejä, niitä ennen yksi pinottu taulu - analyysi.
 
@@ -35,7 +49,7 @@ Vain joko subset tai täydentävät sarakkeet sain toimimaan.
 **Uusi Galku - 2.2.2020 versio 1.5.5, 4.2.2020 versio 1.5.6, 24.2.2020 versio 1.5.7**,
 **6.9.2020 versio 1.5.8**, **16.9.2020 versio 1.5.9**.
 
-Siivotaan datan käsittelyn koodilohkot, kopiodaan mahdollisesti hyödylliset 
+Siivotaan datan käsittelyn koodilohkot, kopiodaan mahdollisesti hyödylliset
 koodipätkät tiedostoon siivous1.R (30.1.2020).
 
 Uudet datan luku- ja muunnosskriptit (treeni2-projektista), korjaillaan virheitä
@@ -50,13 +64,13 @@ myös maakoodi jossa Saksan ja Belgian jako (V3).
 Poistetaan tarpeetonta tekstiä, vanha koodi voi jäädä selvästi merkittynä.
 
 (24.2.20) Versio 1.5.7. Pieniä ja isompiakin korjailuja, koodin siistimistä jne.
-(27.3.20) Muutetaan hieman karttojen koodilohkoja, html-tulosteessa kuvasuhde 1 
+(27.3.20) Muutetaan hieman karttojen koodilohkoja, html-tulosteessa kuvasuhde 1
 mutta pdf-tulosteessa ei. Ero on pieni.
 (8.4.20)
 
 (9.9.20) Pilkotaan liian pitkiä Rmd - tiedostoja pienemmiksi.
 
-(7.10.20) Vanhat tekstit koodilohkoon "piiloon". Tarkistetaan, että jokaisella taulukolla ja 
+(7.10.20) Vanhat tekstit koodilohkoon "piiloon". Tarkistetaan, että jokaisella taulukolla ja
 kartalla on otsikkotiedot, tavalla tai toisella.
 (10.10.20) Koodilohkon fig.cap ja plot-komennon main; jos main jätetään pois tulostuuko fig.cap? Ei tulostu html-versiossa!
 
@@ -69,55 +83,55 @@ kartalla on otsikkotiedot, tavalla tai toisella.
 #
 #**Kommentit ja korjaukset -> 4.9.2018 versio 1.1**
 #
-#puuttuva riviprofiilikuva, siistimmät interaktiomuuttujien koodaukset, ensimmäinen 
+#puuttuva riviprofiilikuva, siistimmät interaktiomuuttujien koodaukset, ensimmäinen
 #"pinottu taulu" - analyysi -> 19.9.2018 versio 1.2
 #
-#**25.9.2018 siistitään datan käsittelyä; ei huomioida puuttuvan tiedon tarkempaa 
+#**25.9.2018 siistitään datan käsittelyä; ei huomioida puuttuvan tiedon tarkempaa
 #koodausta (read_spss - funktion user_na = TRUE  #asetus)**
 #
 #**1.10.2018** Versio 1.3
 #
 #Muutokset tarkemmin Readme.md - tiedostossa.
 #
-#Uusi jakso yksinkertaisen CA:n laajennuksille, joissa otetaan analyysiin 
-#useampia muuttujia "pinoamalla" ja/tai yhdistämällä #taulkoita. Tässä jaksossa 
+#Uusi jakso yksinkertaisen CA:n laajennuksille, joissa otetaan analyysiin
+#useampia muuttujia "pinoamalla" ja/tai yhdistämällä #taulkoita. Tässä jaksossa
 #otetaan myös käyttöön isompi aineisto (enemmän maita ja muuttujia). Siisti #
 #koodipätkä täydentävien muuttujien lisäämiseen.
 #
 #**3.10.2018** Versio 1.4
-#Siistitään pois turhat datan listaukset. Aineiston rajaaminen selkeäksi. Ensin 
-#kuusi maata, sitten 27 (Espanja pois). Valitaan myös muuttujat, jotta 
-#käsiteltävän datan listaukset ovat järkevämpiä. Aineistossa esim. Espanjan ja 
-#muutaman Unkarin poikkeavien vastausvaihtoehtojen vastaukset ovat omina 
-#muuttujina, ja niiden arvo muille havainnoille on NAP (Not applicaple). Samoin 
-#paljon maakohtaisia muuttujia, esim. koulutustaso. Mukaan otetaan vain 
-#kv-vertailuihin kelpaavat muuttujat, muutama sellainen on myös aineistoon 
-#rakennettu. Jätetään pois kaikki perhesuhteisiin liittyvät kysymykset (esim. 
-#kotitöiden jakaminen) ja taustatiedot (esim. rahankäyttö, puolison eri tiedot 
-#jne.), koska muuten jouduttaisiin miettimään miten näiden osalta käsitellään 
+#Siistitään pois turhat datan listaukset. Aineiston rajaaminen selkeäksi. Ensin
+#kuusi maata, sitten 27 (Espanja pois). Valitaan myös muuttujat, jotta
+#käsiteltävän datan listaukset ovat järkevämpiä. Aineistossa esim. Espanjan ja
+#muutaman Unkarin poikkeavien vastausvaihtoehtojen vastaukset ovat omina
+#muuttujina, ja niiden arvo muille havainnoille on NAP (Not applicaple). Samoin
+#paljon maakohtaisia muuttujia, esim. koulutustaso. Mukaan otetaan vain
+#kv-vertailuihin kelpaavat muuttujat, muutama sellainen on myös aineistoon
+#rakennettu. Jätetään pois kaikki perhesuhteisiin liittyvät kysymykset (esim.
+#kotitöiden jakaminen) ja taustatiedot (esim. rahankäyttö, puolison eri tiedot
+#jne.), koska muuten jouduttaisiin miettimään miten näiden osalta käsitellään
 #perheettömiä. Muutamia muuttujia otetaan mukaan (lasten lkm jne.).
 #
 #**8.10.2018**
 #
-#Datan valinta. Data-jaksossa aluksi, voi miettiä siirtääkö esimerkki-lukuun ja 
+#Datan valinta. Data-jaksossa aluksi, voi miettiä siirtääkö esimerkki-lukuun ja
 #"pinotut taululut" - luvun alkuun kuvailut. Tavallaan siistiä, jos alussa lyhyesti.
 #
 #**10.10.2018**
 #
-#Maiden ja muuttujien valinta. TOPBOT halutaan mukaan, joten USA ja GB on 
-#jätettävä pois. Muuttuja on kuitenkin hankala, usealla #maalla puuttuva tieto 
-#yli 10 prosentissa, ja muutamalla nolla tai ihan muutamia. Pohditaan aikanaan. 
-#**5.112.18**Puuttuvat tiedot #ovat puuttuvia, ei voi mitään. Jos vähän ja selviä 
+#Maiden ja muuttujien valinta. TOPBOT halutaan mukaan, joten USA ja GB on
+#jätettävä pois. Muuttuja on kuitenkin hankala, usealla #maalla puuttuva tieto
+#yli 10 prosentissa, ja muutamalla nolla tai ihan muutamia. Pohditaan aikanaan.
+#**5.112.18**Puuttuvat tiedot #ovat puuttuvia, ei voi mitään. Jos vähän ja selviä
 #virheitä (ikä, sukupuoli), voidaan pudottaa havainnot.Muuten mukaan, periaatteessa.
 #
-#Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman 
-#muuttujajoukon deskriptiiviset tarkastelu. Taulukko muuttujakuvauksesta jää 
-#data-lukuun. **5.12.18** Puuttuneisuuden taulukointia on, mutta siisti 
+#Data-jaksosta siirretään aineiston laajentamisen yhteyteen laajemman
+#muuttujajoukon deskriptiiviset tarkastelu. Taulukko muuttujakuvauksesta jää
+#data-lukuun. **5.12.18** Puuttuneisuuden taulukointia on, mutta siisti
 #NA-taulukko puuttu.
 #
 #**11.10.2018 Versio 1.4**
 #
-#- paperitulosteessa v1.3 kommentteja karttoihin ja ca:n numeerisiin tuloksiin, 
+#- paperitulosteessa v1.3 kommentteja karttoihin ja ca:n numeerisiin tuloksiin,
 #samoin muuttujalistauksiin.
 #- paperitulosteessa v1.4 samoin, ja puuttuneisuuden taulukointeja
 #
@@ -125,21 +139,21 @@ kartalla on otsikkotiedot, tavalla tai toisella.
 #- pieniä muutoksia ja kommentteja, aloitetaan uusi versio 1.51 5.12.2018
 #
 #**6.12.2018 1.5.1**
-#- as_factor - funktio käyttöön;  testaillaan miten toimii kun 
+#- as_factor - funktio käyttöön;  testaillaan miten toimii kun
 #(a) user_na - arvoja ei lueta ja (b) puuttuvat ovat mukana.
 #
 #
 #**Muistilista:**
 #
-#1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa". 
-#CA-tulokset on tulostettu siisteinä taulukoina Bookdown-demo - dokumentissa. 
-#Voi tulostaa myös ca-outputin. Ominaisarvojen taulukko keskeneräinen, samoin 
+#1. Taulukot ja kuvat luvusta 2. alkaen eivät ole "bookdown-muodossa".
+#CA-tulokset on tulostettu siisteinä taulukoina Bookdown-demo - dokumentissa.
+#Voi tulostaa myös ca-outputin. Ominaisarvojen taulukko keskeneräinen, samoin
 #"scree plot" kuvana puuttuu.
 #
-#2. Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja 
+#2. Osa kuvista (esim. profiilikuva) pitää varmaan tulostaa pdf-muodossa ja
 #ottaa capaper-dokkariin include_graphics - funktiolla.
 #
-#3. Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion 
+#3. Puuttuvia tai mahdollisesti lisättäviä taulukoita (nämä saa ca-funktion
 #tuloksista suoraan)
 #
 # - khii2 - etäisyydet riveille ja sarakkeille - on tulostettu ilman muotoiluja (11.10.18)
@@ -153,7 +167,7 @@ kartalla on otsikkotiedot, tavalla tai toisella.
 #
 #**ISSP2012*jh1.data** - valikoitu aineisto (maat, muuttujat)
 #
-#**ISSP2012*esim1.dat** - muuttujien muunnoksia ja uusia muuttujia; analyyseissä 
+#**ISSP2012*esim1.dat** - muuttujien muunnoksia ja uusia muuttujia; analyyseissä
 #käytettävä data, tarkenne dat.
 #
 #6. kasitteet1.rmd - taulukko käsitteistä ja tärkeimmistä ISSP-dokumenteista
@@ -164,33 +178,33 @@ kartalla on otsikkotiedot, tavalla tai toisella.
 #
 #* kirjastot/paketit ladataan jokaisessa Rmd-dokumentissa
 #* bib-formaatin viitetietokantaa tullaan kokeilemaan
-#* kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa 
+#* kuvasuhde (aspect ratio) edelleen epäselvä juttu! Mutta näyttää PDF-tulosteessa
 #olevan ok.
 #
 #* Datan käsittely ja hallinta
-#  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion 
+#  +SPSS:n sallima kolme puuttuvan tiedon koodia saadaan mukaan read_spss-funktion
 #(haven) parametrilla USER_NA = TRUE (mutta #tarkistettava!) (25.4.18)
 #  + faktoreita ei ainakaan toistaiseksi muuteta ordinaaliasteikolle, CA ei tästä välitä
 #  + pidetään muuttujien ja tiedostojen nimeäminen selkeänä, tarkistetaan aika ajoin
 #
-#* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva 
+#* Taulukot: lisättiin riviprosentti- ja sarakeprosenttitaulut (25.4.18), kuva
 #riviprofiileista puuttu vielä (15.5.2018)
-#* Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html 
+#* Datan esittelyssä on turhaa välitulostusta, ja samoin vähän muuallakin. Html
 #on helpompi lukea, kun koodi on oletuksena piilossa
 #* PDF-tulosteessa koodi pääsääntöisesti näkyy toistaiseksi
-#* kokeiluja CA-karttojen tulostamiseen (a) suoraan koodilla ja 
-#(b) r-grafiikkaikkunasta tallennetun pdf-kuvan avlla. Paras #toistaiseksi (a), 
-#jätin kokeilu näkyviin. Analyysit R:n grafiikkaikkunassa, jotta asp=1, ja 
+#* kokeiluja CA-karttojen tulostamiseen (a) suoraan koodilla ja
+#(b) r-grafiikkaikkunasta tallennetun pdf-kuvan avlla. Paras #toistaiseksi (a),
+#jätin kokeilu näkyviin. Analyysit R:n grafiikkaikkunassa, jotta asp=1, ja
 #tulkintaa varten voi tallentaa #PDF-muodossa.
-#* rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä 
+#* rakenteeseen muutoksia (näkyvät sisällysluettelossa), ei erillistä
 #teorialiitettä vaan sopivina annoksina. Lukuun 3 perusasiat, #kaavat, määritelmät
 #* tehdään käsitetaulukko (kirjoittamista varten)
-#* 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi 
+#* 20.5.2018 (a) tulkita-osuuteen karttakuvia ja ca-tulokset (b) siistimpi
 #taulukoiden tulostus löytyi (c) kaavaliite laajeni (dispo-haarassa)
 #
-#* 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat 
+#* 23.5.2018 lisätään dataan toinen maa-muuttuja maa2, ikäluokkamuuttuja age_cat
 #ja iän ja sukupuolen vuorovaikutusmuuttuja ga.
-# * 24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit  
+# * 24.5.2018 lisättiin ca-kartta, jossa Saksan ja Belgian ositteet ja summarivit
 #täydentävinä (passiivisina)
 
 ```

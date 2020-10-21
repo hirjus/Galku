@@ -185,3 +185,10 @@ viitataan ISSP-dokumentteihin.
 **20.10.2020** **Versio 1.6.0** En saanut mjca-funktiossa toimimaan yhtä aikaa
 subsetcat- ja supcol - parametreja. Analyysissä on vain todettu puuttuvien tietojen
 iso vaikutus ja esitetty kysymysmuuttujien osajoukko - MCA ilman puuttuvia tietoja.
+
+**21.10.2020**
+
+MCA-analyysit (substanssimuuttujat, taustamuuttujat täydentävinä, osajoukko-ca
+havainnoille joilla ei puuttuvia tietoja) voi tehdä myös Burtin matriisin avulla.
+(Correspondence analysis in Practice, Appendix B: Computation of Correspondence
+Analysis, s. 271 pinotut taulut ja 276 subset MCA).
