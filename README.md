@@ -192,3 +192,7 @@ MCA-analyysit (substanssimuuttujat, taustamuuttujat täydentävinä, osajoukko-c
 havainnoille joilla ei puuttuvia tietoja) voi tehdä myös Burtin matriisin avulla.
 (Correspondence analysis in Practice, Appendix B: Computation of Correspondence
 Analysis, s. 271 pinotut taulut ja 276 subset MCA).
+
+**21.10.2020**
+
+Pikku muutoksia. Profiilikuvien labelit ja akselien nimet kuntoon.

@@ -386,7 +386,7 @@ str(ISSP2012esim1.dat)
 
 ```{r esim1data2, message=TRUE, warning=TRUE}
 # Taulukoita (31.1.2020) ja tarkistuksia
-
+#
 # toinen maa-muuttuja, jossa Saksan ja Belgian jako
 #  V3
 #  5601     BE-FLA-Belgium/ Flanders
@@ -454,12 +454,9 @@ ISSP2012esim1.dat %>% tableX(maa3,Q1b,type = "row_perc")
 
 **Taulukot ja kuvat omina koodilohkoina bookdown-versioon**
 
-
 **Frekvenssitaulukko**
 
-```{r simpeCA-frekTa1}
-
-# Esimerkki - siisti taulukko (20.2.20)
+```{r simpeCA-frekTa1 , echo = FALSE}
 
 taulu2 <- ISSP2012esim1.dat %>% tableX(maa, Q1b, type = "count")
 knitr::kable(taulu2,digits = 2, booktabs = TRUE,
@@ -468,7 +465,7 @@ knitr::kable(taulu2,digits = 2, booktabs = TRUE,
 
 **Riviprosentit**
 
-```{r simpeCA-rprosTa1}
+```{r simpeCA-rprosTa1, echo = FALSE}
 taulu3 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "row_perc")
 
 knitr::kable(taulu3,digits = 2, booktabs = TRUE,
@@ -477,7 +474,8 @@ knitr::kable(taulu3,digits = 2, booktabs = TRUE,
 
 **Sarakeprosentit**
 
-```{r simpeCA-cprosTa1}
+```{r simpeCA-cprosTa1, echo = FALSE}
+
 taulu4 <- ISSP2012esim1.dat %>% tableX(maa,Q1b,type = "col_perc")
 
 knitr::kable(taulu4,digits = 2, booktabs = TRUE,
@@ -492,8 +490,8 @@ verrata toisiinsa ja alimpaan ("Total"") keskimääräiseen riviin,
 sarakemuuttujien eli vastausvaihtoehtojen reunajakaumaan. Vastavasti sarakkeita
 voi verrata rivimuuttujien reunajakaumasarakkeeseen ("Total2). Eniten vastaajia
 on Belgiasta (25 %) ja Saksasta (21 %), vähiten Unkarista (12 %).
-**edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot skaalattu yhtä suuriksi.
-Esimerkkilaskelmia CAcalc_1.R.
+**edit 24.2.20** Lisätty ca-karttoihin versio, jossa maiden painot skaalattu yhtä
+suuriksi. Esimerkkilaskelmia CAcalc_1.R.
 
 ```{r EkaCA}
 # CA tässä, jotta saadaan rivi- ja sarakeprofiilikuvat
@@ -572,9 +570,20 @@ apu1_df$ka_sarake <- rowSums(apu1_df)
 #muokataan 'long data' - muotoon
 apu1b_df <- melt(cbind(apu1_df, ind = rownames(apu1_df)), id.vars = c('ind'))
 
+p <- ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
+         geom_bar(position = "fill", stat = "identity") +
+         scale_y_continuous(name = " ",labels = percent_format())
+p <- p + labs(fill = "maa") 
+p + scale_x_discrete(name = "Q1b - vastauskategoriat")
+
+
+
+# Vertaa tähän
 ggplot(apu1b_df, aes(x = variable, y = value, fill = ind)) +
          geom_bar(position = "fill", stat = "identity") +
-         scale_y_continuous(labels = percent_format())
+         scale_y_continuous(name = " ",labels = percent_format())
+
+
 # apu1_df
 # apu1b_df
 ```
@@ -645,7 +654,15 @@ apu2b_df <- melt(cbind(apu2_df, ind = rownames(apu2_df)), id.vars = c('ind'))
 #        scale_x_continuous(labels = percent_format())
 
 #versio2 toimii (18.9.2018)
+p <- ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
+       geom_bar(position = "fill", stat = "identity") +
+       coord_flip() +
+        scale_y_continuous(name = " ", labels = percent_format())
+p <- p + labs(fill = "Q1b") 
+p + scale_x_discrete(name = " ")
 
+
+#vertaa tähän!
 ggplot(apu2b_df, aes(x = ind, y = value, fill = variable)) +
        geom_bar(position = "fill", stat = "identity") +
        coord_flip() +

@@ -602,19 +602,27 @@ Vastausvaihtoehdot:
 1 = täysin samaa mieltä, 2 = samaa mieltä, 3 = ei samaa eikä eri mieltä,
 4 = eri mieltä, 5 = täysin eri mieltä
 
-**edit 14.8.20** Kysymyksissä Q1a ja Q2a vastausten järjestys on tulkinnan
+**edit 14.8.20** Kysymyksissä Q1a ja Q2a vastausten järjestys on tulkinassa
 (moderni vs.perinteinen tai liberaali vs. konsertavi) erilainen.
 
 
 Q1a Working mother can have warm relation with child
+
 Q1b Pre-school child suffers through working mother
+
 Q1c Family life suffers through working mother
+
 Q1d Women’s preference: home and children
+
 Q1e Being housewife is satisfying
+
 Q2a Both should contribute to household income
+
 Q2b Men’s job is earn money, women’s job household
 
+
 Q3a Should women work: Child under school age
+
 Q3b Should women work: Youngest kid at school
 
 Vastausvaihtoehdot:
@@ -662,8 +670,7 @@ colnames(jhVarTable1.tbl) <- cols_jhVarTable1
 str(jhVarTable1.tbl)
 
 # Suomalaiset pitkät kysymykset
-vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän
-            ja turvallisen suhteen kuin äiti, joka ei käy työssä")
+vastf1 <- c("Q1a Työssäkäyvä äiti pystyy luomaan lapsiinsa aivan yhtä lämpimän ja turvallsen suhteen kuin äiti, joka ei käy työssä")
 
 vastf2 <- c("Q1b Alle kouluikäinen lapsi todennäköisesti kärsii, jos hänen äitinsä käy työssä.")
 vastf3 <- c("Q1c Kaiken kaikkiaan perhe-elämä kärsii, kun naisella on kokopäivätyö.")
@@ -679,8 +686,9 @@ vastf9 <- c("Q3b Millä tavoin naisten pitäisi mielestäsi käydä työssä seu
 
 tabVarDesc_fi <- c(vastf1,vastf2,vastf3,vastf4,vastf5,vastf6,vastf7, vastf8,vastf9)
 #tabVarDesc_fi
+
 tabVarnames_subst <- c(substvars1)
-# jhVarTable1_fi.df <- data_frame(tabVarnames_subst,tabVarDesc_fi) OLD
+
 jhVarTable1_fi.tbl <- tibble(tabVarnames_subst,tabVarDesc_fi)
 cols_jhVarTable1 <- c("muuttuja","Kysymyksen tunnus, suomenkielisen lomakkeen kysymys")
 colnames(jhVarTable1_fi.tbl) <- cols_jhVarTable1
@@ -691,17 +699,25 @@ colnames(jhVarTable1_fi.tbl) <- cols_jhVarTable1
 # Lyhyet kysymykset englanniksi
 
 knitr::kable(jhVarTable1.tbl, booktab = TRUE,
-               fig.cap = "ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
+               caption = "ISSP2012:Työelämä ja perhearvot - valitut muuttujat")
 
 # Suomen lomakkeen kysymykset (löytyy myös kuva lomakkeen sivusta)
 
 
 knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
-              fig.cap = "ISSP2012: suomenkielisen lomakkeen kysymykset")
+             caption =  "ISSP2012: suomenkielisen lomakkeen kysymykset")
 
 # Taulukot voivat olla hankalia eristyisesti PDF-tulostuksessa, jos ne ovat
 # monimutkaisia tai solujen "koot" (merkkiä/solu) vaihtelevat paljon.
 
+```
+
+Taulukko ei näytä toimivan pitkissä teksteissä. Ei kikkailla, koska pulma on tulostus
+html- ja pdf-formaattiin. Muutetaan tavalliseksi tekstiksi.
+
+```{r vartable2a}
+knitr::kable(jhVarTable1_fi.tbl, booktab = TRUE,
+           caption =  "ISSP2012: suomenkielisen lomakkeen kysymykset")
 
 ```
 
@@ -709,9 +725,9 @@ Tarkemmat kuvaukset lähes tuhatsivuisessa koodikirjassa ZA5900_cdb.pdf (**refwo
 
 Bookdown-versiossa taulukot omiksi koodilohkoiksi, ja fig.caption - optiolla taulukon otsikko.
 
-Kysymyslomakkeen kuva, vai kuva liitteisiin? **Liitteisiin.**
+**Pitkät tekstit ovat taulukoissa hankalia**, käytetään lomakkeen kuvaa (21.10.20)
 
-```{r suom_kys, out.width='50%', fig.align='center',fig.cap='Suomen lomake'}
+```{r suom-kys, out.width='50%', fig.align='center',fig.cap='Suomenkielinen lomake'}
 
 knitr::include_graphics('img/substvar_fi_Q1Q2.png')
 
