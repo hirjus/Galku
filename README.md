@@ -196,3 +196,5 @@ Analysis, s. 271 pinotut taulut ja 276 subset MCA).
 **21.10.2020**
 
 Pikku muutoksia. Profiilikuvien labelit ja akselien nimet kuntoon.
+
+22.10.20 Käännetään koordinaatisto Bulgarian ja Unkarin maaga-subset - kuvassa.

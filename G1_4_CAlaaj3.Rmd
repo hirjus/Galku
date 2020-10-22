@@ -212,13 +212,23 @@ BEDEDKFIsubset <- c(1:12, 25:36, 37:48, 49:60)
 DEDKFIsubset <- c(25:36, 37:48, 49:60)
 BEBGHUsubset <- c(1:12,13:24,61:72)
 
+
+
 spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
 par(cex = 0.6)
+
+# Käännetään kuva x-akselin ympäri
+spCAmaagasub3$rowcoord[, 2] <- -spCAmaagasub3$rowcoord[, 2]
+spCAmaagasub3$colcoord[, 2] <- -spCAmaagasub3$colcoord[, 2]
+
+
 plot(spCAmaagasub3, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
     )
 
-spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
+
+
+# spCAmaagasub3 <- ca(maagaTab1[,1:5], subsetrow = BGHUsubset)
 par(cex = 0.6)
 plot(spCAmaagasub3, map = "rowgreen",
      arrows = c(FALSE,TRUE),
@@ -254,10 +264,11 @@ plot(spCAmaagasub4,map = "rowgreen",
 par(cex = 0.6)
 plot(spCAmaagasub4,map = "rowprincipal",
      contrib = c("relative", "relative"),
-     mass = c(FALSE, TRUE),
+     mass = c(TRUE, TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen kartta (rowprincipal, relative contr.), osajoukko-ca, cex=0.06"
+     sub = "asymmetrinen kartta (rowprincipal, relative contr.), osajoukko-ca,
+     cex=0.06, myös rivimassat värisävyillä"
 )
 
 
@@ -266,32 +277,38 @@ plot(spCAmaagasub4,map = "rowprincipal",
 
 ```{r subsetCA-1h, fig.asp = 1, out.width = "90%",fig.align = "center"}
 spCAmaagasub5 <- ca(maagaTab1[,1:5], subsetrow = DEDKFIsubset)
-par(cex = 0.6)
+par(cex = 0.7)
 plot(spCAmaagasub5, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+     contrib = c("relative", "relative"),
+     sub = "symmetrinen kartta, osajoukko-ca, kontribuutiot(suht.) värisävyinä,cex=0.07"
 )
 # asymmetrinen kartta
 par(cex = 0.6)
 plot(spCAmaagasub5,map = "rowgreen",
      contrib = c("relative", "relative"),
-     mass = c(FALSE, TRUE),
+     mass = c(TRUE, TRUE),
      arrows = c(FALSE, TRUE),
      main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, cex=0.06"
+     sub = "asymmetrinen kartta (rowgreen, relative contr.), osajoukko-ca, massat värisävyinä, cex=0.06"
 )
 ```
 
 ```{r subsetCA-1i, fig.asp = 1, out.width = "90%",fig.align = "center"}
 spCAmaagasub6 <- ca(maagaTab1[,1:5], subsetrow = BEBGHUsubset)
+
+
 par(cex = 0.6)
 plot(spCAmaagasub6, main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-     sub = "symmetrinen kartta, osajoukko-ca, cex=0.06"
+     mass = c(TRUE, TRUE),
+     sub = "symmetrinen kartta, osajoukko-ca, massat värisävyinä,cex=0.06"
 )
 
 plot(spCAmaagasub6, map = "rowgreen",
+     contrib = c("relative", "relative"),
+     mass = c(TRUE, TRUE),
     arrows = c(FALSE, TRUE),
     main = "Äiti töissä (Q1b): ikäluokka ja sukupuoli maittain",
-    sub = "kontribuutiokartta, osajoukko-ca, cex=0.06"
+    sub = "kontribuutiokartta (rel.), osajoukko-ca, massat värisävyinä,cex=0.06, "
 )
 
 ```
