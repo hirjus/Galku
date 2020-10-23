@@ -77,6 +77,12 @@ Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin.
 Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat)
 varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
 
+Poikkileikkausaineistossa vastaajan ikä kertoo ikäluokan (kohortin), vastaajat ovat 
+kokeen esim. kaksi mullistusten vuotta elämänsä eri vaiheissa. Kaksin nuorinta ikäluokka
+on ollut 1990 alle 14-vuotiaita ja vanhin ikäluokka yli 44-vuotiaita. Finannsikriisin
+vuonna 2008 toiseksi nuorin ikäluokka on ollut 22-31 vuotiaita, ja kaksi vanhinta
+yli 51-vuotiaita.
+
 
 
 **zxy** Siistimmät versioit muuttujien luonnista (case_when - rakenne) (19.9.2018).
