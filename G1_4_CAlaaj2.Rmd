@@ -74,10 +74,10 @@ ISSP2012esim1b.dat %>%
 ```
 
 Ikäjäkauma painottuu kaikissa maissa jonkinverran vanhempiin ikäluokkiin.
-Nuorempien ikäluokkien osuus on (alle 26-vuotiaan ja alle 26-35 - vuotiaat)
+Nuorempien ikäluokkien osuus on (alle 26-vuotiaat ja alle 26-35 - vuotiaat)
 varsinkin Bulgariassa (BG) ja Unkarissa (HU) pieni.
 
-Poikkileikkausaineistossa vastaajan ikä kertoo ikäluokan (kohortin), vastaajat ovat 
+Poikkileikkausaineistossa vastaajan ikä kertoo ikäluokan (kohortin), vastaajat ovat
 kokeen esim. kaksi mullistusten vuotta elämänsä eri vaiheissa. Kaksin nuorinta ikäluokka
 on ollut 1990 alle 14-vuotiaita ja vanhin ikäluokka yli 44-vuotiaita. Finannsikriisin
 vuonna 2008 toiseksi nuorin ikäluokka on ollut 22-31 vuotiaita, ja kaksi vanhinta
@@ -421,7 +421,7 @@ plot(spCAmaaga1, labels = c(0,2) , main = "Äiti töissä: ikäluokka ja sukupuo
 ```
 Rivipisteiden tunnisteiden (label) poistaminen tuo pisteparvien ominaisuuden
 hieman selvemmin esiin. Suomi alimpana ja Tanska ylimpänä vasemmalla ovat melko
-samanlaisia. Vaihtelu on lähes täysin ensimäisen dimension suuntaan, Molemmilla 
+samanlaisia. Vaihtelu on lähes täysin ensimäisen dimension suuntaan, Molemmilla
 mailla miesten pisteet ovat oikealla ja alempana. Keskellä Saksan ja Belgian
 pistejoukoissa vaihtelu toisen dimension suunnassa on jo suurempaa ja miesten
 pisteet ovat selvästi oikealla verrattuna naisten pisteisiin. Bulgarian ja Unkarin

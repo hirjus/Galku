@@ -60,7 +60,7 @@ plot(suppointCA1, main = "Belgian ja Saksan ositteet",
 ```
 
 2. Täydentävät pisteet (supplementary points)
- 
+
  - eivät vaikuta karttaan (koordinaatistoon, rivi- tai sarakepisteiden sijaintiin)
  - useita tapoja käyttää, tässä Saksan ja Belgian maapisteet
  - barysentrinen keskiarvo
@@ -80,20 +80,19 @@ ei toimi. Yksinkertainen keino analyysivaiheessa on "leikata ja liimata" kuvia j
 tallentaa ne pdf-muodossa. Voi tehdä muistiinpanoja, lisätä kommentteja jne.
 
 Tässä esitellään kaksi muuta: kuva-alan rajaaminen BaseR-grafiikan plot-funktion
-parametreilla. Tässä esitellään yleisempi osajoukon korrespondenssianalyysi (subset ca). 
+parametreilla. Tässä esitellään yleisempi osajoukon korrespondenssianalyysi (subset ca).
 Osajoukko CA:ssa reunajakaumat (massat) ja valitun datan profiilit eivät muutu.
 Idea on tavallaan tehdä ensin CA-kalkyylit ja valita sitten tarkasteltava joukko.
 
 Paljon parempi idea kuin suoraviivainen aineiston rajaaminen,jossa "kaikki
 muuttuisi" jokaisella aineiston rajauksella. Yhteys suhteelisten
-osuuksien/koostumusdatan (compositional DA) analyysiin: ca ei ole "subcompositionally
-coherent".
+osuuksien/koostumusdatan (compositional DA) analyysiin: ca ei ole "subcompositionally coherent".
 
 Täyden aineiston inertia voidaan dekompoida l. jakaa osajoukoille, eräs CA:n
-perusideoita yleisemminkin. 
+perusideoita yleisemminkin.
 
 
-Käytetään tässäkin johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti 
+Käytetään tässäkin johdattelevan esimerkin dataa, johon muunnokset on jo alustavasti
 tehty.
 
 **(14.9.20)**G1_4_CAlaaj1.Rmd jaettu kolmeksi tiedostoksi, uusia G1_4_CAlaaj2.Rmd ja
@@ -107,7 +106,7 @@ G1_4_CAlaaj3.Rmd
 # EI KAI KOKO DATAA LUETA ALUSTA ALKAEN UUDESTAAN?? (2.2.20)
 # ISSP2012esim1.data <- read_spss("data/ZA5900_v4-0-0.sav") # Alkuperäinen data, ( user_na = TRUE pois 25.9.2018)
 
-#str(ISSP2012esim1.data) 
+#str(ISSP2012esim1.data)
 #61754 obs. of  420 variables
 #
 # VAHAA KOODIA
@@ -116,7 +115,7 @@ G1_4_CAlaaj3.Rmd
 #
 # incl_esim1 <- c(56, 100, 208, 246, 276, 348) #BE,BG,DK,FI,DE,HU)
 
-# ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1) 
+# ISSP2012esim1.dat <- filter(ISSP2012esim1.data, V4 %in% incl_esim1)
 
 # str(ISSP2012esim1.dat) #8557 obs. of  420 variables
 #
@@ -125,7 +124,7 @@ G1_4_CAlaaj3.Rmd
 
 # MUUTTUJAT
 
-#ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE) 
+#ISSP2012esim1.dat <- select(ISSP2012esim1.dat, C_ALPHAN, V3,V4, V6, SEX, AGE)
 
 #str(ISSP2012esim1.dat) #8557 obs. of  6 variables
 #
@@ -172,7 +171,7 @@ str(ISSP2012esim1.dat)
 #  5603     BE-BRU-Belgium/ Brussels
 # 27601     DE-W-Germany-West
 # 27602     DE-E-Germany-East
-# ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3, 
+# ISSP2012esim1.dat$maa2 <- factor(ISSP2012esim1.dat$V3,
 #                  levels = c("100","208","246","348","5601","5602","5603","27601","27602"),
 #                  labels = c("BG","DK","FI","HU","bF","bW","bB","dW","dE"))
 
@@ -194,7 +193,7 @@ str(ISSP2012esim1.dat)
 Aineistossa on havaintoja (rivejä) tai muuttujia (sarakkeita), joista voi olla
 hyötyä tulosten tulkinnassa. Nämä lisäpisteet voidaan sijoittaa kartalle, jos
 niitä voidaan jotenkin järkevästi vertailla kartan luomisessa käytettyihin
-profiileihin (riveihin ja sarakkeisiin). 
+profiileihin (riveihin ja sarakkeisiin).
 
 **EDIT** Lisätään Belgian ja Saksan aluejako täydentäviksi riveiksi. Sopii
 tarinaan, dimensioiden tulkinta ei ollut esimerkissä kovin kirkas. Viite CAip:n
@@ -202,7 +201,7 @@ lukuun, jossa vain todetaan että maita ei ole järkevää painottaa (massa)
 otoskoolla, vaan vakioidaan (jotenkin) sama (suhteellinen) massa kaikille.
 Samalla oikaistaan myös naisten yliedustus aineistossa.
 
-**Käsitteitä:** 
+**Käsitteitä:**
 (a) Active point, aktiivinen piste (aktiivinen havainto tai
 muuttuja). Pistettä käytetään CA-laskennassa.
 
@@ -219,12 +218,12 @@ sarake
 sarakemuuttuja, jossa kovin vähän havaintoja)
 
 3.  osaryhmät
-**EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty 
+**EDIT** capaper- jäsentelyssä ja bookdown-dokumentissa selitetetty
 täydentävät/lisäpisteet tarkemmin (18.9.2018).
 
 ```{r G1-4suppoints-BeDe, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # 17.10.20 Muutin hieman koodia, aluejako-taulukon rivien järjestys muuttui.
-# 
+#
 # Belgian ja Sakasan jako, maapisteet lisäpisteinä 24.5.2018
 # CA-tulos: suppointCA2
 
@@ -238,7 +237,7 @@ suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 # str(suppoint1_tab1)
 
 suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
-suppoint1_tab1 
+suppoint1_tab1
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
 #
 # Saksan ja Belgian summarivit
@@ -286,7 +285,7 @@ ISSP2012esim1.dat %>% tableX(maa3, Q1b, type = "row_perc")
 ```
 
 
-Piirretään vertailun vuoksi vielä asymmetrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva"). 
+Piirretään vertailun vuoksi vielä asymmetrinen kartta ("kontribuutio-kartta, kontribuutio-kaksoiskuva").
 **edit 3.5.20** Minne katoavat pisteet, outoa?
 
 ```{r G1-4-BeDe-asymmContrib1a, fig.cap = "Belgian ja Saksan aluejako",fig.asp = 1, out.width = "90%",fig.align = "center"}
@@ -336,7 +335,7 @@ akselin kartat. R-ohjelmistossa voi tulostaa näytölle kolmiulotteisen kuvan,
 siitä voisi ehkä ottaa kuvakaappauksena esimerkin raporttiin?
 
 **edit** Kommentti 3d-ratkaisusta: tuo esiin Belgian ("belgioiden") erilaisuuden.
-"Belgiat ovat 2-3 - dimension kartassa diagonaalilla, ja 1-3 kartassa hieman samoin kuin 
+"Belgiat ovat 2-3 - dimension kartassa diagonaalilla, ja 1-3 kartassa hieman samoin kuin
 2-d - ratkaisun kartassa. Tarvittaessa voi liittää myös 3-d - kuvia, pitäsi saada
 myös dynaamisen pdf-tiedostoon? (8.6.2020). Mutta 2d-approksimaatio on  aika hyvä,
 89 % kokonaisinertiasta. Miten pitäisi jatkaa? Analysoida maiden sisäisiä eroja? Siinä
@@ -345,7 +344,7 @@ Entäs kaupungit - isot ja pienet - ja maaseutu? Elinkeinorakenne, tulot jne...
 
 ```{r G1-4-3dCA,fig.cap = "Belgian ja Saksan aluejako - 3D",fig.asp = 1, out.width = "90%",fig.align = "center"}
 # Näkyisikö Belgian aluejako kolmannessa dimensiossa? (19.2.20). Näkyy, ja
-# kaksiulotteisen ratkaisun numeerisista tuloksista näkee myös pisteet joiden 
+# kaksiulotteisen ratkaisun numeerisista tuloksista näkee myös pisteet joiden
 # kvalitetti on heikko.
 
 
@@ -353,12 +352,12 @@ suppointCA3 <- ca(~maa3 + Q1b,ISSP2012esim1.dat, nd = 3)
 # (24.2.20)
 # Tulostetaan kolme karttaa - ensimmäinen ja toinen akseli uuden kolmannen kera
 par(cex = 0.6)
-plot(suppointCA3, dim = c(1,2), 
+plot(suppointCA3, dim = c(1,2),
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
                 sub = "symmetrinen kartta - 1. ja 2. dimensio")
 
 par(cex = 0.6)
-plot(suppointCA3, dim = c(1,3), 
+plot(suppointCA3, dim = c(1,3),
                 main = "Belgian ja Saksan ositteet - kolme dimensiota",
                 sub = "symmetrinen kartta - 1. ja 3. dimensio")
 par(cex = 0.6)
@@ -386,12 +385,12 @@ plot(suppointCA3, dim = c(2,3),
 # suppointCA1$rowcoord %*% diag(suppointCA1$sv)
 
 #Tämä toimii
-# 
+#
 # suppointCA1$rowcoord
 # suppointCA1$sv
 # suppointCA1$rowcoord %*% diag(suppointCA1$sv)
 # summary(suppointCA1)
-# 
+#
 # Kolmiulottein kuva grafiikkaikkunaan
 # X11()
 # plot3d(suppointCA3, c(1,2,3))
@@ -414,6 +413,3 @@ knitr::include_graphics('img/3dSymMap_1.PNG')
 knitr::include_graphics('img/3dSymMap_2.PNG')
 
 ```
-
-
-
