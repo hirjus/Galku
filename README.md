@@ -202,3 +202,5 @@ Pikku muutoksia. Profiilikuvien labelit ja akselien nimet kuntoon.
 **23.10.2020** Kappale tekstiä ikäluokista ja kohorteista.
 
 **25.10.2020** Raporttien järjestelyä.
+
+**26.10.2020** Korjailtiin kirjoitusvirheitä.

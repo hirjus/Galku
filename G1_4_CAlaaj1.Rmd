@@ -371,18 +371,15 @@ plot(suppointCA3, dim = c(2,3),
 # summary(suppointCA3)
 # Error in rsc %*% diag(sv) : non-conformable arguments
 
-# Virheilmoitus "Error in rsc %*% diag(sv) : non-conformable arguments" ?!
-# onko vika täydentävissä pisteissä? Ei ole, eivät ole mukana
-# ISSP2012esim1.dat %>% tableX(maa3, Q1b)
-
-# suppointCA3
-
+suppointCA3
+#summary.mjca(suppointCA3)
 # Virheilmoituksen selvittelyä (24.2.20)
 # str(suppointCA3)
 # tämä matriisikertolasku ei onnistu - 3d-ratkaisussa on vain kolme koordinaattia!
 # suppointCA3$rowcoord
 # diag(suppointCA3$sv)
 # suppointCA1$rowcoord %*% diag(suppointCA1$sv)
+
 
 #Tämä toimii
 #
