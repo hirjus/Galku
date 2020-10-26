@@ -16802,7 +16802,8 @@ Ikä-sukupuoli-maa
 <h2><span class="header-section-number">4.5</span> Subset CA</h2>
 <p>Teoria esitetään myöhemnmin, käytännön hyödyllisyys osoitetaan tässä. CA-kartoissa on usein aivan liian paljon pisteitä, vain karkeat yleispiirteet näkyvät. Ovatko kiinnostavat asia piilossa? “Poikkeavat havainnot ovat ainoita todella kiinnostavia havaintoja”.</p>
 <p><strong>Data</strong> Ensimmäinen osajoukko-ca käyttää datan perustiedostoa (ISSP2012esim1b.dat). Maa-rivit ovat mukana kokonaislukumatriisissa maagaTab1. <strong>Tarkista tämä - tiedostot joita käytetään 26.10.2020</strong></p>
-<p>Datassa maa-sukupuoli-ikäluokkarivit ovat näillä riveillä: BE 1-12, BG 13-24, DE 25-36, DK 37-48, FI 49-60, HU 61-72 . Maa-profiilit ovat taulukon(matriisin) maagaTab1 riveillä 73-78 samassa järjestyksessä. <strong>edit 9.9.20</strong> Tarkistettava, miten ca-funktio laskee täydentävien rivien koordinaatit, kun riveistä otetaan analyysiin vain osa.</p>
+<p>Datassa maa-sukupuoli-ikäluokkarivit ovat näillä riveillä: BE 1-12, BG 13-24, DE 25-36, DK 37-48, FI 49-60, HU 61-72 . Maa-profiilit ovat taulukon(matriisin) maagaTab1 riveillä 73-78 samassa järjestyksessä.</p>
+<p>Täydentävien rivipisteiden koordinaatit laskettava “käsin”, kun osajoukko rivien suhteen.</p>
 <pre class="r"><code>#31.8.20 Testataan subset ca
 #ISSP2012esim2.dat %&gt;% tableX(maaga, Q1b)
 maagaCA2subset1BEBG &lt;- ca(~maaga + Q1b,ISSP2012esim1b.dat, subsetrow = 1:24)
