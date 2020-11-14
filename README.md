@@ -204,3 +204,8 @@ Pikku muutoksia. Profiilikuvien labelit ja akselien nimet kuntoon.
 **25.10.2020** Raporttien järjestelyä.
 
 **26.10.2020** Korjailtiin kirjoitusvirheitä, 6.11.2020 samoin.
+
+**6.11.2020** Kaavat1-Galku.Rmd - muokkausta.
+
+**14.11.2020** Korjasin täydentävien rivipisteiden (Saksa, Belgia) koodia, kun
+rivit lisätään taulukkoon (jakso täydentävistä pisteistä).

@@ -234,23 +234,36 @@ täydentävät/lisäpisteet tarkemmin (18.9.2018).
 suppoint1_df1 <- select(ISSP2012esim1.dat, maa3,Q1b)
 
 #  tarkistuksiin jos koodi suoritetaan rivi kerrallaan
+str(suppoint1_df1)
 # str(suppoint1_tab1)
 
 suppoint1_tab1 <- table(suppoint1_df1$maa3, suppoint1_df1$Q1b)
 suppoint1_tab1
 #plot(ca(~maa2 + V6, suppoint1_df1)) #toimii
-#
+
 # Saksan ja Belgian summarivit
 #
+#  select(ISSP2012esim1.dat, maa,Q1b) 
 suppoint2_df <- filter(ISSP2012esim1.dat, (maa == "BE" | maa == "DE"))
+
+# Poistetaan maa-faktroin tyhjät luokat (14.11.2020)
+suppoint2_df <- suppoint2_df %>%
+    mutate(maa = fct_drop(maa)
+    )
+
+
+glimpse(suppoint2_df)
 suppoint2_df <- select(suppoint2_df, maa, Q1b)
 
 glimpse(suppoint2_df)
+
 suppoint2_tab1 <- table(suppoint2_df$maa, suppoint2_df$Q1b)
 suppoint2_tab1 # tarkistus 1
+
 # Huom! tämä komento vain kerran - tai koko Rmd-tiedosto uudestaan (17.10.20)
-suppoint2_tab1 <- suppoint2_tab1[-c(2,4:6) ,]
-suppoint2_tab1 # tarkistus 2
+# Muutettu 14.11.2020, pudotetaan tyhjiä maa-faktorin arvoja
+#suppoint2_tab1 <- suppoint2_tab1[-c(2,4:6) ,]
+# suppoint2_tab1 # tarkistus 2
 
 # suppoint2_tab1 # Belgian ja Saksan summat yli ositteiden
 # suppoint2_tab1

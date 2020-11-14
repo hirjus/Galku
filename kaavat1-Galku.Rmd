@@ -12,9 +12,11 @@ output:
 ---
 # Kaavat ja matemattiset merkinnät
 
-bookdown vaatii alkuun "first or second level heading", eli yksi tai kaksi risuaitaa. Virheilmoitus tulee Pandocilta.
+bookdown vaatii alkuun "first or second level heading", eli yksi tai kaksi
+risuaitaa. Virheilmoitus tulee Pandocilta.
 
-Ladataan paketit. Herjali tästä YAML-frontmatterissa (#bookdown::html_book: ). Ei toimi html-tulostus, ja välillä toimii. Onpa hankalaa.
+Ladataan paketit. Herjali tästä YAML-frontmatterissa (#bookdown::html_book: ).
+Ei toimi html-tulostus, ja välillä toimii. Onpa hankalaa.
 
 ```{r include=FALSE}
 library(rgl)
@@ -82,13 +84,11 @@ Inertia voidaa esittää rivien ja ``keskiarvorivin `` (sentroidin) $$\chi^{2}$$
  \phi^{2} = \sum_{i} (massa \: m_{i}) \times (profiilin \: i \: \chi^{2} - etaisyys \: sentroidista)^{2}
 \end{equation}
 
-Kaavat.tex - dokumentissa on tässä kohdassa testailtu R:n furniture - paketin taulukoita latex- ja latex2 - output-formaateilla. Ne voi liittää LateX-dokumenttiin, jossa on käytössä paketti booktabs. Bookdownissa luultavasti tämä on tarpeeton, kable riittänee.
+
+Tämän esityksen lähde 
 
 ## Matriisit ja niiden havainnollistaminen
 
-```{r}
-
-```
 
 Tämä toimii, drawmatrixin voi varmaan unohtaa?
 
